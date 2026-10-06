@@ -259,6 +259,17 @@ input[type=range]{width:100%;accent-color:var(--laser);min-width:0}
 .gated{margin-top:18px;border:2px solid var(--ink);padding:12px 14px;background:var(--surface)}
 .gate-form{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:8px 0}
 .gate-form input{border:1px solid var(--rule-strong);background:var(--surface);color:var(--ink);padding:6px 8px;border-radius:2px;min-width:200px}
+.bom-ver{border:1px solid var(--rule);background:var(--surface-2);padding:8px 10px;margin:10px 0}
+.bom-vl{font-size:.9rem;margin-bottom:6px}
+.bom-vrow{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:4px 0}
+.bom-vrow select,.bom-vrow input[type=text]{border:1px solid var(--rule-strong);background:var(--surface);color:var(--ink);padding:5px 7px;border-radius:2px;min-width:220px;flex:1 1 220px}
+.bom-status{font-family:var(--font-mono);font-size:.74rem;color:var(--muted);margin:4px 0 0}
+.bom-status.bad{color:var(--bad)}
+.bom-tot{display:flex;flex-wrap:wrap;gap:6px 18px;font-family:var(--font-mono);font-size:.82rem;margin:8px 0;padding:8px 10px;border:2px solid var(--ink);background:var(--surface)}
+.bom-tot .have{color:var(--muted)}
+.bom-tbl tr.have td{opacity:.55}
+.bom-tbl tr.have td:first-child{opacity:1}
+.bom-tbl input.bomTick{width:18px;height:18px;accent-color:var(--laser)}
 #bomOut .tot{font-family:var(--font-mono);font-weight:600}
 .wire-key{display:flex;flex-wrap:wrap;gap:6px 14px;font:600 .72rem/1.3 var(--font-mono);margin:6px 0 0;color:var(--ink-2)}
 .wire-key i{display:inline-block;width:18px;height:4px;margin-right:5px;vertical-align:middle;border-radius:2px}
@@ -3386,35 +3397,141 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
 
 </script>
 <script>
-/* Costed BOM: fetched from a private Google Apps Script web app after a password check. No prices or password live in this page. */
+/* Costed BOM: fetched from a private Google Apps Script web app after a password check. No prices or password live in this page.
+   Owned/borrowed ticks are kept in this browser (localStorage) and synced to the private database (a Google Sheet) as a working copy and named versions. */
 (function () {
-  var BOM_ENDPOINT = 'https://script.google.com/macros/s/AKfycbzf7xklNDJ5bgLxpbI09A7oD6qLGath35qEceIK33m8HxycpijV6eH2y5VMXlvdEqcD2g/exec'; // paste the Apps Script web-app URL (ends in /exec) here after deploying private/apps-script/code.gs
+  var BOM_ENDPOINT = 'https://script.google.com/macros/s/AKfycbzf7xklNDJ5bgLxpbI09A7oD6qLGath35qEceIK33m8HxycpijV6eH2y5VMXlvdEqcD2g/exec';
   var form = document.getElementById('bomForm'); if (!form) return;
   var out = document.getElementById('bomOut'), pw = document.getElementById('bomPw'), btn = document.getElementById('bomGo');
+  var LS = 'rb87-bom-v1', PW = '', D = null, versions = [], timer = null, dirty = false;
+  var S = { states: {}, verId: '', verName: '' };
+  try { var j = JSON.parse(localStorage.getItem(LS) || 'null'); if (j && j.states) S = { states: j.states, verId: j.verId || '', verName: j.verName || '' }; } catch (e) { }
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
   function fmt(n) { return Number(n).toLocaleString('en-MY'); }
-  function render(d) {
-    var core = 0, opt = 0, cur = null, h = '<div class="scroll-x"><table class="bom-tbl"><thead><tr><th>#</th><th>Item</th><th>Qty</th><th>Market price (MYR, unit)</th><th>Budget price (MYR, unit)</th><th>Line total (MYR)</th><th>Price basis</th></tr></thead><tbody>', csv = ['id,group,item,qty,unit,market_myr_unit,budget_myr_unit,line_myr,status,basis'];
-    d.rows.forEach(function (r) {
-      if (r.g !== cur) { h += '<tr class="grp"><th colspan="7">' + esc(r.g) + '</th></tr>'; cur = r.g; }
-      if (r.status === 'optional') opt += r.line_myr; else core += r.line_myr;
-      h += '<tr><td>' + esc(r.id) + '</td><td>' + esc(r.item) + (r.status === 'optional' ? ' <span class="tag est">optional</span>' : '') + '</td><td class="num">' + r.qty + ' ' + esc(r.unit) + '</td><td class="num">' + fmt(r.market_myr) + '</td><td class="num">' + fmt(r.unit_myr) + '</td><td class="num">' + fmt(r.line_myr) + '</td><td>' + (r.basis === 'web' ? 'seen on vendor page' : '<span class="tag est">estimate</span>') + '</td></tr>';
-      csv.push([r.id, '"' + r.g.replace(/"/g, '""') + '"', '"' + r.item.replace(/"/g, '""') + '"', r.qty, r.unit, r.market_myr, r.unit_myr, r.line_myr, r.status, r.basis].join(','));
+  function local() { try { localStorage.setItem(LS, JSON.stringify(S)); } catch (e) { } }
+  function api(body) {
+    body.pw = PW;
+    return fetch(BOM_ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(body) }).then(function (r) { return r.json(); });
+  }
+  function status(t, bad) { var el = document.getElementById('bomStatus'); if (el) { el.textContent = t; el.className = 'bom-status' + (bad ? ' bad' : ''); } }
+  function now() { var d = new Date(); return d.toLocaleTimeString('en-MY', { hour: '2-digit', minute: '2-digit' }); }
+
+  /* ---- totals ---- */
+  function totals() {
+    var core = 0, opt = 0, have = 0, n = 0;
+    D.rows.forEach(function (r) {
+      if (S.states[r.id]) { have += r.line_myr; n++; } else if (r.status === 'optional') opt += r.line_myr; else core += r.line_myr;
     });
-    h += '</tbody></table></div><p class="tot">Core total: MYR ' + fmt(core) + ' · Optional / shared: MYR ' + fmt(opt) + ' · Everything: MYR ' + fmt(core + opt) + '</p><p>' + esc(d.note) + ' “Estimate” prices are catalogue-range estimates: confirm each with a vendor quote. <button type="button" class="btn" id="bomCsv">Download CSV</button></p>';
-    out.innerHTML = h;
-    document.getElementById('bomCsv').addEventListener('click', function () {
-      var a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([csv.join('\n')], { type: 'text/csv' })); a.download = 'rb87-eit-bom-costed.csv'; document.body.appendChild(a); a.click(); a.remove();
+    return { core: core, opt: opt, have: have, n: n };
+  }
+  function paintTotals() {
+    var t = totals(), el = document.getElementById('bomTotals'); if (!el) return;
+    el.innerHTML = '<span><b>To purchase (core)</b> MYR ' + fmt(t.core) + '</span><span><b>Optional / shared to purchase</b> MYR ' + fmt(t.opt) + '</span><span><b>Everything to purchase</b> MYR ' + fmt(t.core + t.opt) + '</span><span class="have"><b>Not purchased (' + t.n + ' owned / borrowed)</b> MYR ' + fmt(t.have) + '</span>';
+  }
+
+  /* ---- saving: browser now, database shortly after ---- */
+  function changed() {
+    dirty = true; local(); paintTotals(); paintVer(); status('Saved in this browser. Syncing…');
+    clearTimeout(timer); timer = setTimeout(sync, 1200);
+  }
+  function sync() {
+    api({ action: 'save', id: 'current', states: S.states }).then(function (d) {
+      if (d && d.ok) status('Saved in this browser and synced to the database at ' + now() + '.'); else status('Saved in this browser only: ' + ((d && d.error) || 'database error'), true);
+    }).catch(function () { status('Saved in this browser only: database unreachable.', true); });
+  }
+
+  /* ---- versions ---- */
+  function paintVer() {
+    var sel = document.getElementById('bomVer'), lab = document.getElementById('bomVerLabel'); if (!sel) return;
+    sel.innerHTML = '<option value="">Select a saved version…</option>' + versions.map(function (v) { return '<option value="' + esc(v.id) + '"' + (v.id === S.verId ? ' selected' : '') + '>' + esc(v.name) + ' · ' + esc(String(v.updated).slice(0, 16).replace('T', ' ')) + '</option>'; }).join('');
+    lab.innerHTML = S.verId ? 'Working on version: <b>' + esc(S.verName) + '</b>' + (dirty ? ' <span class="tag est">unsaved changes</span>' : ' <span class="tag src">saved</span>') : 'Working copy (not a named version yet)';
+  }
+  function refreshList() { return api({ action: 'list' }).then(function (d) { if (d && d.ok) { versions = d.versions; paintVer(); } return d; }); }
+  function nameVal() { return (document.getElementById('bomVerName').value || '').trim(); }
+  function act(p, okMsg) {
+    status('Working…'); return p.then(function (d) { if (d && d.ok) { status(okMsg + ' ' + now() + '.'); return refreshList(); } status((d && d.error) || 'Error', true); }).catch(function () { status('Database unreachable.', true); });
+  }
+  function bindVer() {
+    document.getElementById('bomSaveNew').addEventListener('click', function () {
+      var nm = nameVal() || ('Version ' + (versions.length + 1));
+      act(api({ action: 'save', name: nm, states: S.states }).then(function (d) { if (d && d.ok) { S.verId = d.id; S.verName = d.name; dirty = false; local(); document.getElementById('bomVerName').value = ''; } return d; }), 'Saved new version.');
     });
+    document.getElementById('bomUpdate').addEventListener('click', function () {
+      if (!S.verId) { status('Load or create a version first (use “Save as new version”).', true); return; }
+      act(api({ action: 'save', id: S.verId, states: S.states }).then(function (d) { if (d && d.ok) { dirty = false; } return d; }), 'Version updated.');
+    });
+    document.getElementById('bomRename').addEventListener('click', function () {
+      if (!S.verId) { status('Select or create a version first.', true); return; }
+      var nm = nameVal(); if (!nm) { status('Type the new name in the box first.', true); return; }
+      act(api({ action: 'rename', id: S.verId, name: nm }).then(function (d) { if (d && d.ok) { S.verName = d.name; local(); document.getElementById('bomVerName').value = ''; } return d; }), 'Renamed.');
+    });
+    document.getElementById('bomDelete').addEventListener('click', function () {
+      var id = document.getElementById('bomVer').value || S.verId; if (!id) { status('Select a version first.', true); return; }
+      if (!window.confirm('Delete this saved version? The current ticks stay as they are.')) return;
+      act(api({ action: 'delete', id: id }).then(function (d) { if (d && d.ok && id === S.verId) { S.verId = ''; S.verName = ''; local(); } return d; }), 'Deleted.');
+    });
+    document.getElementById('bomLoad').addEventListener('click', function () {
+      var id = document.getElementById('bomVer').value; if (!id) { status('Select a version to load.', true); return; }
+      api({ action: 'load', id: id }).then(function (d) {
+        if (d && d.ok && d.found) { S.states = d.states; S.verId = id; S.verName = d.name; dirty = false; local(); paintRows(); status('Loaded “' + d.name + '”.'); clearTimeout(timer); timer = setTimeout(sync, 400); }
+        else status('Could not load that version.', true);
+      }).catch(function () { status('Database unreachable.', true); });
+    });
+    document.getElementById('bomClear').addEventListener('click', function () { S.states = {}; S.verId = ''; S.verName = ''; paintRows(); changed(); dirty = false; paintVer(); });
+    document.getElementById('bomLock').addEventListener('click', function () { PW = ''; D = null; out.innerHTML = ''; });
+    document.getElementById('bomCsv').addEventListener('click', csv);
+  }
+
+  /* ---- table ---- */
+  function paintRows() {
+    var h = '<thead><tr><th title="Tick if we already own it or can borrow it">Have it?</th><th>#</th><th>Item</th><th>Qty</th><th>Market price (MYR, unit)</th><th>Budget price (MYR, unit)</th><th>Line total (MYR)</th><th>Price basis</th></tr></thead><tbody>', cur = null;
+    D.rows.forEach(function (r) {
+      if (r.g !== cur) { h += '<tr class="grp"><th colspan="8">' + esc(r.g) + '</th></tr>'; cur = r.g; }
+      var on = !!S.states[r.id];
+      h += '<tr class="' + (on ? 'have' : '') + '" data-id="' + esc(r.id) + '"><td><input type="checkbox" class="bomTick" data-id="' + esc(r.id) + '"' + (on ? ' checked' : '') + ' aria-label="Owned or borrowed: ' + esc(r.item) + '"></td><td>' + esc(r.id) + '</td><td>' + esc(r.item) + (r.status === 'optional' ? ' <span class="tag est">optional</span>' : '') + '</td><td class="num">' + r.qty + ' ' + esc(r.unit) + '</td><td class="num">' + fmt(r.market_myr) + '</td><td class="num">' + fmt(r.unit_myr) + '</td><td class="num">' + (on ? '<s>' + fmt(r.line_myr) + '</s> 0' : fmt(r.line_myr)) + '</td><td>' + (r.basis === 'web' ? 'seen on vendor page' : '<span class="tag est">estimate</span>') + '</td></tr>';
+    });
+    document.getElementById('bomTable').innerHTML = h + '</tbody>';
+    document.querySelectorAll('#bomTable .bomTick').forEach(function (cb) {
+      cb.addEventListener('change', function () {
+        var id = cb.getAttribute('data-id'); if (cb.checked) S.states[id] = true; else delete S.states[id];
+        var tr = cb.closest('tr'); tr.className = cb.checked ? 'have' : '';
+        var row = D.rows.filter(function (r) { return r.id === id; })[0]; tr.children[6].innerHTML = cb.checked ? '<s>' + fmt(row.line_myr) + '</s> 0' : fmt(row.line_myr);
+        changed();
+      });
+    });
+    paintTotals(); paintVer();
+  }
+  function csv() {
+    var lines = ['id,group,item,qty,unit,market_myr_unit,budget_myr_unit,line_myr,owned_or_borrowed,to_purchase_myr,status,basis'];
+    D.rows.forEach(function (r) {
+      var on = !!S.states[r.id];
+      lines.push([r.id, '"' + r.g.replace(/"/g, '""') + '"', '"' + r.item.replace(/"/g, '""') + '"', r.qty, r.unit, r.market_myr, r.unit_myr, r.line_myr, on ? 'yes' : 'no', on ? 0 : r.line_myr, r.status, r.basis].join(','));
+    });
+    var a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([lines.join('\n')], { type: 'text/csv' })); a.download = 'rb87-eit-bom-costed' + (S.verName ? '-' + S.verName.replace(/[^a-z0-9]+/gi, '_') : '') + '.csv'; document.body.appendChild(a); a.click(); a.remove();
+  }
+  function render() {
+    out.innerHTML = '<div class="bom-ver"><div id="bomVerLabel" class="bom-vl"></div>' +
+      '<div class="bom-vrow"><select id="bomVer" aria-label="Saved versions"></select><button type="button" class="btn" id="bomLoad">Load</button><button type="button" class="btn" id="bomUpdate">Update this version</button><button type="button" class="btn" id="bomDelete">Delete</button></div>' +
+      '<div class="bom-vrow"><input type="text" id="bomVerName" maxlength="80" placeholder="Version name (for save / rename)" aria-label="Version name"><button type="button" class="btn primary" id="bomSaveNew">Save as new version</button><button type="button" class="btn" id="bomRename">Rename current version</button></div>' +
+      '<p id="bomStatus" class="bom-status" aria-live="polite"></p></div>' +
+      '<div class="bom-tot" id="bomTotals"></div>' +
+      '<div class="scroll-x"><table class="bom-tbl" id="bomTable"></table></div>' +
+      '<p>' + esc(D.note) + ' “Estimate” prices are catalogue-range estimates: confirm each with a vendor quote. Tick “Have it?” for anything we already own or can borrow: it drops out of the purchase totals. <button type="button" class="btn" id="bomCsv">Download CSV</button> <button type="button" class="btn" id="bomClear">Clear all ticks</button> <button type="button" class="btn" id="bomLock">Lock</button></p>';
+    bindVer(); paintRows();
   }
   form.addEventListener('submit', function (e) {
     e.preventDefault();
     if (!BOM_ENDPOINT) { out.innerHTML = '<div class="note"><span class="t">Not connected yet</span>The costed-BOM service has not been deployed. See private/README-deploy.md.</div>'; return; }
-    btn.disabled = true; out.textContent = 'Checking…';
-    fetch(BOM_ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify({ pw: pw.value }) })
-      .then(function (r) { return r.json(); })
-      .then(function (d) { if (d && d.ok) { render(d); pw.value = ''; } else out.innerHTML = '<div class="note"><span class="t">Not unlocked</span>' + esc((d && d.error) || 'Unknown error') + '</div>'; })
-      .catch(function () { out.innerHTML = '<div class="note"><span class="t">Error</span>Could not reach the service.</div>'; })
+    btn.disabled = true; out.textContent = 'Checking…'; PW = pw.value;
+    api({ action: 'bom' }).then(function (d) {
+      if (!(d && d.ok)) { PW = ''; out.innerHTML = '<div class="note"><span class="t">Not unlocked</span>' + esc((d && d.error) || 'Unknown error') + '</div>'; return; }
+      D = d; pw.value = ''; render();
+      var hadLocal = Object.keys(S.states).length > 0;
+      return refreshList().then(function () {
+        if (hadLocal) { status('Using the ticks saved in this browser.'); clearTimeout(timer); timer = setTimeout(sync, 400); return; }
+        return api({ action: 'load', id: 'current' }).then(function (c) { if (c && c.ok && c.found) { S.states = c.states; local(); paintRows(); status('Restored your last working copy from the database.'); } else status('Tick items you already own or can borrow.'); });
+      });
+    }).catch(function () { PW = ''; out.innerHTML = '<div class="note"><span class="t">Error</span>Could not reach the service.</div>'; })
       .then(function () { btn.disabled = false; });
   });
 })();
