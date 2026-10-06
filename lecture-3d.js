@@ -278,8 +278,8 @@
         arrowT.visible = ok;
         if (ok) { var from = new T.Vector3(tx.a + 0.38, Y2 + 0.5 * m * B * K, 0), to = new T.Vector3(tx.c - 0.38, YE - (1 / 6) * (m + q2) * B * K, 0), d = to.clone().sub(from); arrowT.position.copy(from); arrowT.setDirection(d.clone().normalize()); arrowT.setLength(d.length(), 0.18, 0.08); }
         var shift = g * m * sh * B, lar = Math.abs(g) * sh * B;
-        var msg = F !== 2 ? 'The D1 arrow is drawn for F = 2 only (the Method A scheme).' : ok ? 'This light drives <b>m_F = ' + m + ' → m_F′ = ' + (m + q2) + '</b> (F = 2 → F′ = 1): allowed.' : '<b style="color:#ff8a8a">m_F = ' + m + ' with ' + (q2 > 0 ? 'σ⁺' : q2 < 0 ? 'σ⁻' : 'π') + ' light is dark on F = 2 → F′ = 1</b>: it would need m_F′ = ' + (m + q2) + ', which F′ = 1 does not have (|m_F′| ≤ 1). That is why σ⁺ light pumps atoms toward the high-m_F end of F = 2.';
-        out.innerHTML = 'g_F = <b>' + (g > 0 ? '+' : '−') + '½</b> → Zeeman shift of this sublevel = g_F m_F μ_B B/h = <b>' + fmt(shift, 3) + ' MHz</b> at B = ' + fmt(B, 2) + ' G.<br>Larmor precession frequency |g_F| μ_B B/h = <b>' + fmt(lar, 3) + ' MHz</b> (vector model: F precesses about B).<br>Splitting between m_F = +2 and 0 in F = 2: 2 × 0.70 kHz/mG × B = <b>' + fmt(1.40 * B * 1000, 0) + ' kHz</b> at this field: the two-photon resonance of Method A.<br>' + msg + '<br><small>Ladder heights are exaggerated and not to scale (the optical gap is ~377 THz; F′ = 1 has g_F = −1/6).</small>';
+        var msg = F !== 2 ? 'The D1 arrow is drawn for F = 2 only (the Zeeman EIT scheme).' : ok ? 'This light drives <b>m_F = ' + m + ' → m_F′ = ' + (m + q2) + '</b> (F = 2 → F′ = 1): allowed.' : '<b style="color:#ff8a8a">m_F = ' + m + ' with ' + (q2 > 0 ? 'σ⁺' : q2 < 0 ? 'σ⁻' : 'π') + ' light is dark on F = 2 → F′ = 1</b>: it would need m_F′ = ' + (m + q2) + ', which F′ = 1 does not have (|m_F′| ≤ 1). That is why σ⁺ light pumps atoms toward the high-m_F end of F = 2.';
+        out.innerHTML = 'g_F = <b>' + (g > 0 ? '+' : '−') + '½</b> → Zeeman shift of this sublevel = g_F m_F μ_B B/h = <b>' + fmt(shift, 3) + ' MHz</b> at B = ' + fmt(B, 2) + ' G.<br>Larmor precession frequency |g_F| μ_B B/h = <b>' + fmt(lar, 3) + ' MHz</b> (vector model: F precesses about B).<br>Splitting between m_F = +2 and 0 in F = 2: 2 × 0.70 kHz/mG × B = <b>' + fmt(1.40 * B * 1000, 0) + ' kHz</b> at this field: the two-photon resonance of Zeeman EIT.<br>' + msg + '<br><small>Ladder heights are exaggerated and not to scale (the optical gap is ~377 THz; F′ = 1 has g_F = −1/6).</small>';
       });
     }
   };
@@ -503,7 +503,7 @@
       ui.select('in', 'Input polarization', [['H', 'H (horizontal)'], ['V', 'V (vertical)'], ['D', 'D (+45°)'], ['A', 'A (−45°)'], ['sp', 'σ⁺ (circular)'], ['sm', 'σ⁻ (circular)']], 'H');
       ui.range('hw', 'Half-wave plate angle θ₁', -90, 90, 0.5, 0, function (x) { return fmt(x, 1) + '°'; });
       ui.range('qw', 'Quarter-wave plate angle θ₂', -90, 90, 0.5, 45, function (x) { return fmt(x, 1) + '°'; });
-      ui.check('orth', 'Also show the orthogonal polarization (e.g. the other arm of Method A)', true);
+      ui.check('orth', 'Also show the orthogonal polarization (e.g. the other arm of Zeeman EIT)', true);
       ui.check('sweep', 'Trace the sweep of the quarter-wave plate angle', true);
       var out = ui.readout();
       st.scene.add(sphereWire(1));
@@ -534,7 +534,7 @@
         var mv1 = mv(hwp(t1), v0), sm = stokes(mv1); mid.position.copy(Pt(sm));
         var sp = swp.geometry.attributes.position; for (var i = 0; i <= 180; i++) { var t = (i - 90) * DEG, s = stokes(mv(qwp(t), mv(hwp(t1), v0))); var P = Pt(s); sp.setXYZ(i, P.x, P.y, P.z); } sp.needsUpdate = true; swp.visible = ui.v.sweep;
         setEll(ell, o1); setEll(ellb, o2); ellb.visible = ui.v.orth;
-        out.innerHTML = 'Input <b>' + ui.v.in + '</b> → HWP at ' + fmt(ui.v.hw, 1) + '° → QWP at ' + fmt(ui.v.qw, 1) + '°.<br>Yellow dot: after the HWP. Red dot: after the QWP = <b>' + name(s1) + '</b> (S₁, S₂, S₃) = (' + fmt(s1[0]) + ', ' + fmt(s1[1]) + ', ' + fmt(s1[2]) + ').<br>' + (ui.v.orth ? 'Blue dot: the orthogonal input, which stays exactly opposite on the sphere: <b>' + name(s2) + '</b>. With H and V into a QWP at 45° the two come out as opposite circular states, the σ⁺/σ⁻ pair of Method A.<br>' : '') + 'A HWP reflects the sphere through an axis in the equatorial plane at 2θ₁; a QWP rotates it by 90° about the axis at 2θ₂ in the equatorial plane. Sign convention: σ⁺ has S₃ > 0 and E rotating counter-clockwise about the beam direction, as in the wave illustration (L1).';
+        out.innerHTML = 'Input <b>' + ui.v.in + '</b> → HWP at ' + fmt(ui.v.hw, 1) + '° → QWP at ' + fmt(ui.v.qw, 1) + '°.<br>Yellow dot: after the HWP. Red dot: after the QWP = <b>' + name(s1) + '</b> (S₁, S₂, S₃) = (' + fmt(s1[0]) + ', ' + fmt(s1[1]) + ', ' + fmt(s1[2]) + ').<br>' + (ui.v.orth ? 'Blue dot: the orthogonal input, which stays exactly opposite on the sphere: <b>' + name(s2) + '</b>. With H and V into a QWP at 45° the two come out as opposite circular states, the σ⁺/σ⁻ pair of Zeeman EIT.<br>' : '') + 'A HWP reflects the sphere through an axis in the equatorial plane at 2θ₁; a QWP rotates it by 90° about the axis at 2θ₂ in the equatorial plane. Sign convention: σ⁺ has S₃ > 0 and E rotating counter-clockwise about the beam direction, as in the wave illustration (L1).';
       }
       ui.onChange = upd; upd(); st.tick.push(function () { });
     }

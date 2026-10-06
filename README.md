@@ -8,13 +8,14 @@ Reading material and interactive 3D optical-bench simulators for building a room
 
 | Page | File | What it covers |
 |---|---|---|
-| Method A · Zeeman EIT (AOM) | `index.html` | The primary configuration. One DFB laser locked by saturated absorption spectroscopy (SAS) with a full servo loop. Control and probe arms each pass a double-pass AOM, with orthogonal circular polarizations. The cell sits in a solenoid inside a mu-metal shield, and a Glan-Taylor separates the probe before detection. |
+| Zeeman EIT (AOM) | `index.html` | The primary configuration. One DFB laser locked by saturated absorption spectroscopy (SAS) with a full servo loop. Control and probe arms each pass a double-pass AOM, with orthogonal circular polarizations. The cell sits in a solenoid inside a mu-metal shield, and a Glan-Taylor separates the probe before detection. |
+| Equipment | `equipment.html` | The equipment list on its own page: 67 line items with quantity, suggested brand and part number, why each is needed, a vendor link and a **3D picture** of every item (click to rotate). Group members can unlock a costed version with ticks and a "cheaper alternative found" field. |
 | Quantum Optics Lectures | `quantum.html` | Six primers (how to use the notes, history, motivation, maths toolkit, basic quantum mechanics, basic quantum optics) and thirteen lectures, from photons and the two-level atom up to EIT, slow and stored light, quantum memories, single photons, strong coupling and the bench itself (polarization, Gaussian beams, AOMs, locking, cells and shielding, detectors, laser safety). |
 
-Both pages share a top navigation bar. The guide includes a **"Why Method A?"** decision record.
+The three pages share a top navigation bar. The guide includes a **"Why Zeeman EIT?"** decision record.
 
-### Method A guide sections
-Project at a glance · Glossary (searchable, about 100 terms) · Physics from scratch · Method A experimental architecture (including the SAS → lock box → laser controller → DFB frequency lock) · Why Method A? · 3D optical-bench simulator · Bring-up & audit protocol · Equipment list · Recommended reading
+### Zeeman EIT guide sections
+Project at a glance · Glossary (searchable, about 100 terms) · Physics from scratch · Zeeman EIT experimental architecture (including the SAS → lock box → laser controller → DFB frequency lock) · Why Zeeman EIT? · 3D optical-bench simulator · Bring-up & audit protocol · Equipment list · Recommended reading
 
 ### Lectures
 P0 Start here · P1 History · P2 Motivation · P3 Maths toolkit · P4 Basic quantum mechanics · P5 Basic quantum optics · L1 Light as waves and photons · L2 Quantum states and measurement · L3 Two-level atom, Rabi oscillations, Bloch sphere · L4 Density matrix, decay and dephasing · L5 Atomic structure for alkalis · L6 Susceptibility, absorption, dispersion · L7 Dark states, CPT, EIT, Autler–Townes · L8 Slow and stopped light · L9 Thermal vapour effects · L10 Quantum memories · L11 Quantum states of light · L12 Strong coupling and polaritons in solids · L13 Lab fundamentals for the project · Appendices (symbols, constants and ⁸⁷Rb data, record of checks and corrections) and a bibliography.
@@ -31,12 +32,12 @@ P0 Start here · P1 History · P2 Motivation · P3 Maths toolkit · P4 Basic qua
   - The light reacts live: rotating, moving, adding or removing a part re-traces the beams, which cross-fade to the new path. Beams glow where they land on an optic and flag stray light leaving the table. A **Beam info** toggle labels each beam with its power and polarization.
   - Camera views (3D, Top, Front, Source, Cell), a Focus button, a "Show" filter for subsystems, a µ-metal shield cutaway, a cable toggle, a pause for the moving light, and a PNG screenshot.
   - A 12-step **guided tour** walks along the beam path from the laser to the function generator.
-  - The inspector gives each component's role in Method A, its place on the reference bench, and an experiment to try.
+  - The inspector gives each component's role in Zeeman EIT, its place on the reference bench, and an experiment to try.
   - The laser frequency lock (SAS, lock box, laser controller) and its error signal are modelled.
   - A scope shows the EIT sweep, the SAS error signal and the pulsed-storage view.
   - Game-style objectives tick off automatically as the setup is built correctly.
 - **Wiring diagram and cable schedule** (Part 07): every electrical connection, with cable type and purpose.
-- **Equipment list** (Part 07): 67 line items with quantity, suggested brand and part number, why each is needed, and a vendor link. Quantities for optics and instruments are checked against the 3D bench. A costed version is available to project members.
+- **Equipment list** (Part 07 and the Equipment tab): 67 line items with quantity, suggested brand and part number, why each is needed, a vendor link and a three.js picture of the item (`parts3d.js`, the same models as the simulator plus cables, tools and safety gear; click a picture for an interactive viewer). Quantities for optics and instruments are checked against the 3D bench. A costed version on the Equipment tab is available to project members: owned / borrowed and remove ticks, and a "cheaper alternative found" tick that reveals an estimated-price field and a product link.
 - **Lecture notes (quantum.html):**
   - Eleven interactive three.js illustrations next to the equations they explain (electromagnetic wave and polarization, Bloch sphere in three modes, Zeeman sublevels, absorption and dispersion, dark and bright states, slow and stored light, Wigner functions, avoided crossing, Poincaré sphere, Gaussian beam).
   - Hover, focus or tap any symbol, in the text or inside an equation, for its name, meaning and units; each equation also has a chip bar listing its symbols.
