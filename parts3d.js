@@ -128,7 +128,7 @@
       var M = mats(); stand(g);
       g.add(bx(46, 28, 32, M.alu, -18, 0, 0)); g.add(bx(46, 4, 33, M.laser, -18, 15, 0));
       for (var f = 0; f < 6; f++) g.add(bx(2.2, 8, 34, M.black, -34 + f * 6, 19, 0));
-      g.add(cy(7, 18, M.black, 12, 0, 0)); g.add(cy(4.2, 10, M.brass, 24, 0, 0)); g.add(cy(3.2, 1.2, M.glass, 29.4, 0, 0));
+      g.add(cy(3.6, 12, M.green, 12, 0, 0, 'x', 14)); g.add(cy(4.8, 3, M.knob, 19, 0, 0, 'x', 14)); g.add(cy(1.5, 20, M.yellow, 30, 0, 0, 'x', 8));
       g.add(bx(8, 3, 6, M.accent, -34, -13, 0)); g.add(sp(1.9, M.on, -38, 13, 17));
     },
     mount14: function (g, p) { // 14-pin butterfly laser mount
@@ -144,10 +144,19 @@
       g.add(cy(4.6, 14, M.green, -14, 0, 0)); g.add(cy(5.4, 3, M.knob, -9, 0, 0)); g.add(cy(1.4, 38, M.yellow, -34, 0, 0));
       for (var i = 0; i < 12; i++) { var a = i * Math.PI / 6; g.add(bx(1.4, 3, 1.4, M.knob, 8, Math.sin(a) * 10.6, Math.cos(a) * 10.6)); }
     },
-    isolator: function (g) {
+    isolator: function (g) { // fibre-inline dual-stage isolator (PM fibre, FC/APC) followed by the collimator, as in the simulator
       var M = mats(); stand(g);
-      g.add(cy(11, 38, M.accent, 0, 0, 0)); g.add(cy(12.4, 4, M.metal, -17, 0, 0)); g.add(cy(12.4, 4, M.metal, 17, 0, 0)); g.add(cy(11.4, 3, M.black, 0, 0, 0));
-      var cone = new T.Mesh(geo('cone', function () { return new T.ConeGeometry(4, 10, 12); }), M.laser); cone.rotation.z = -Math.PI / 2; cone.position.set(8, 15, 0); g.add(cone); g.add(bx(14, 2, 2, M.laser, -2, 15, 0));
+      g.add(cy(1.5, 14, M.yellow, -33, 0, 0, 'x', 8)); g.add(cy(3.6, 9, M.green, -24, 0, 0, 'x', 14)); g.add(cy(4.8, 3, M.knob, -18, 0, 0, 'x', 14));
+      g.add(cy(5.6, 11, M.accent, -10, 0, 0, 'x', 20)); g.add(cy(6.2, 2, M.black, -3.5, 0, 0, 'x', 20)); g.add(cy(5.6, 11, M.accent, 3, 0, 0, 'x', 20));
+      g.add(cy(4.8, 3, M.knob, 10, 0, 0, 'x', 14)); g.add(cy(8, 18, M.black, 20, 0, 0, 'x', 20)); g.add(cy(4.2, 4, M.brass, 31, 0, 0, 'x', 14)); g.add(cy(3.2, 1.2, M.glass, 33.4, 0, 0, 'x', 14));
+      var cone = new T.Mesh(geo('cone', function () { return new T.ConeGeometry(3.4, 9, 12); }), M.laser); cone.rotation.z = -Math.PI / 2; cone.position.set(-2, 10, 0); g.add(cone); g.add(bx(12, 1.8, 1.8, M.laser, -10, 10, 0));
+    },
+    fibiso: function (g) { // the isolator alone: a short steel tube between two FC/APC boots, two Faraday stages, fibre in and out
+      var M = mats(); stand(g);
+      g.add(tube([[-46, 0, 14], [-36, 0, 6], [-26, 0, 0]], 1.4, M.yellow, 20)); g.add(cy(3.6, 9, M.green, -22, 0, 0, 'x', 14)); g.add(cy(4.8, 3, M.knob, -16, 0, 0, 'x', 14));
+      g.add(cy(5.6, 14, M.accent, -7, 0, 0, 'x', 20)); g.add(cy(6.2, 2, M.black, 1, 0, 0, 'x', 20)); g.add(cy(5.6, 14, M.accent, 9, 0, 0, 'x', 20));
+      g.add(cy(4.8, 3, M.knob, 18, 0, 0, 'x', 14)); g.add(cy(3.6, 9, M.green, 24, 0, 0, 'x', 14)); g.add(tube([[28, 0, 0], [38, 0, -6], [48, 0, -14]], 1.4, M.yellow, 20));
+      var cone = new T.Mesh(geo('cone', function () { return new T.ConeGeometry(3.4, 9, 12); }), M.laser); cone.rotation.z = -Math.PI / 2; cone.position.set(0, 10, 0); g.add(cone); g.add(bx(12, 1.8, 1.8, M.laser, -8, 10, 0));
     },
     mirror: function (g) {
       var M = mats(); stand(g);

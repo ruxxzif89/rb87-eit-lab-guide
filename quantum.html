@@ -1357,7 +1357,7 @@ details.deeper p,details.deeper li{font-size:.95rem}
   <div class="scroll-x"><table>
     <thead><tr><th>Stage</th><th>Measure</th><th>What to expect (reference bench)</th><th>If not</th></tr></thead>
     <tbody>
-      <tr><td>Laser and isolator</td><td>power before and after</td><td>≈ 90 % transmission of the 10 mW source (simulator assumption)</td><td>check polarization into the isolator and its direction</td></tr>
+      <tr><td>Laser and isolator</td><td>power before and after</td><td>≈ 80 % transmission of the 10 mW source (≈ 1 dB fibre-isolator loss plus connectors; simulator assumption)</td><td>check polarization into the isolator and its direction</td></tr>
       <tr><td>Pick-off to SAS</td><td>fraction reaching the SAS photodiode</td><td>a few percent, set by the first half-wave plate</td><td>rotate the plate; check the PBS orientation</td></tr>
       <tr><td>Control/probe split</td><td>power in each arm</td><td>probe ≈ 10 %, control the rest</td><td>rotate the second half-wave plate</td></tr>
       <tr><td>AOM efficiency</td><td>first-order power / input power per pass</td><td>tens of percent per pass; η² double-pass</td><td>reoptimize the Bragg angle and RF power; focus in the crystal</td></tr>
@@ -1658,8 +1658,8 @@ details.deeper p,details.deeper li{font-size:.95rem}
     lambdaShift_kHz_per_mG: 1.40,  // m_F=2 <-> m_F=0 splitting = 2 x 0.70 kHz/mG
     pbsLeak: 1e-3,                 // typical PBS extinction (paper Sec. V B)
     glanLeak: 1e-5,                // Glan-Taylor extinction (paper Sec. V B)
-    isolatorBack: 1e-4,            // illustrative 40 dB isolation
-    isolatorFwd: 0.90,             // illustrative forward transmission
+    isolatorBack: 1e-4,            // dual-stage fibre isolator, 40 dB = catalogue minimum (typical 50-55 dB), illustrative
+    isolatorFwd: 0.80,             // about 1 dB isolator loss plus connectors, illustrative
     mirrorR: 0.98,                 // illustrative protected-silver reflectance
     pickoffR: 0.04,                // ~4 % Fresnel reflection, uncoated glass
     controlWaist_cm: 0.255,        // 1/e^2 radius 2.55 mm (paper Fig. 10c control beam)
@@ -1780,7 +1780,7 @@ details.deeper p,details.deeper li{font-size:.95rem}
   /* ---------------- component catalogue ---------------- */
   var KINDS = {
     laser:   { name: 'DFB laser 795 nm', short: 'DFB', cap: 14, rotStep: 90 },
-    isolator:{ name: 'Optical isolator', short: 'ISO', cap: 12, rotStep: 90 },
+    isolator:{ name: 'Fibre isolator + collimator (dual-stage, PM)', short: 'ISO', cap: 12, rotStep: 90 },
     mirror:  { name: 'Mirror', short: 'M', cap: 12, rotStep: 45 },
     pbs:     { name: 'PBS cube', short: 'PBS', cap: 12, rotStep: 90 },
     npbs:    { name: 'NPBS 50:50 cube', short: 'BS', cap: 12, rotStep: 90 },
