@@ -26,6 +26,7 @@ L1 Light as waves and photons · L2 Quantum states and measurement · L3 Two-lev
 - **3D bench simulator (three.js):**
   - You drag optical and electronic components onto a breadboard, and the beam is traced through them, keeping track of polarization (Jones calculus), power and frequency shifts.
   - A complete reference bench of 71 parts on a 1200×750 mm table, laid out as you would build it: master-axis mirrors and irises, a full SAS arm (pump and probe counter-propagating through a Rb reference cell), both double-pass AOM assemblies built from separate PBS, AOM, λ/4, cat's-eye lens, retro mirror and beam dumps, a control beam expander, the recombiner, shielded cell, analyser and detector, and the RF chain, coil/temperature controllers, function generator and oscilloscope with their cables.
+  - **Reset bench & view** restores the full reference bench and the default camera; all cables are drawn and colour-keyed (BNC, SMA RF, trigger, power, coil, heater), including the oscilloscope inputs.
   - Detailed component models (mounted mirrors, PBS cubes, graduated waveplates, double-pass AOM modules, shielded cell with solenoid and heater glow, instruments with screens and LEDs) lit with shadows on a dark-lab table.
   - The light reacts live: rotating, moving, adding or removing a part re-traces the beams, which cross-fade to the new path. Beams glow where they land on an optic and flag stray light leaving the table. A **Beam info** toggle labels each beam with its power and polarization.
   - Camera views (3D, Top, Front, Source, Cell), a Focus button, a "Show" filter for subsystems, a µ-metal shield cutaway, a cable toggle, a pause for the moving light, and a PNG screenshot.
@@ -34,6 +35,8 @@ L1 Light as waves and photons · L2 Quantum states and measurement · L3 Two-lev
   - The laser frequency lock (SAS, lock box, laser controller) and its error signal are modelled.
   - A scope shows the EIT sweep, the SAS error signal and the pulsed-storage view.
   - Game-style objectives tick off automatically as the setup is built correctly.
+- **Wiring diagram and cable schedule** (Part 07): every electrical connection, with cable type and purpose.
+- **Equipment list** (Part 07): 67 line items with quantity, suggested brand and part number, why each is needed, and a vendor link. Quantities for optics and instruments are checked against the 3D bench. A costed version is available to project members.
 - Light and dark themes; works on phones.
 
 ## Run locally
