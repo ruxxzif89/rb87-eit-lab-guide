@@ -1054,7 +1054,7 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
     <p><strong>How to use it.</strong> Drag a component from the palette onto the table, or click or tap it to drop it near the centre. Click a part to select it, then drag it to move it (it snaps to the grid). Rotate with <kbd>R</kbd> (<kbd>Shift</kbd>+<kbd>R</kbd> reverses) or the buttons. Delete with <kbd>Del</kbd>, nudge with the arrow keys while the table has focus. Orbit with the left mouse button or one finger, pan with the right button or two fingers, zoom with the wheel or a pinch. The bench opens with the complete Method A reference layout, so take it apart and see what breaks.</p>
   </div>
   <div class="note"><span class="t">Model honesty</span>
-    The tracer is a 2-D, single-height ray model with ideal Jones optics, plus fixed leakages: PBS 10⁻³, Glan–Taylor 10⁻⁵, isolator 10⁻⁴ (illustrative). The EIT response is <strong>illustrative</strong>. Width = 1.5 kHz + 4.45 kHz/(mW cm⁻²) × I<sub>c</sub> (fit to the paper’s two points), plus ≈52 kHz without buffer gas (transit) and 40 kHz without shield. Control intensity uses a 2.55 mm beam radius. OD is scaled from OD≈10 at 60 °C. Storage efficiency and the 200 µs coherence time are invented placeholders that only respect the paper’s qualitative trends (inefficiency ∝ 1/OD<sub>EIT</sub>, delay = OD<sub>EIT</sub>/γ<sub>EIT</sub>). Two-photon detuning uses δ = (ν<sub>p</sub> − ν<sub>c</sub>) + 1.40 kHz/mG × B × sgn(control helicity). The laser lock is modelled as a chain: SAS photodiode → lock box → laser controller → DFB, with cables drawn automatically. With the loop open (or a wrong slope sign or too much gain) the laser frequency drifts by MHz to tens of MHz <span class="tag est">illustrative</span>. That lowers OD and fades EIT contrast as exp[−(Δ/50 MHz)²] <span class="tag est">illustrative</span>. Use “SAS error signal” on the scope to see the dispersive error curve. Reversing B or swapping helicities mirrors the scheme to m<sub>F</sub> = −2, 0 and m<sub>F′</sub> = −1. The 795 nm beam is near-infrared and invisible to the eye; it is drawn red here.</div>
+    The tracer is a 2-D, single-height ray model with ideal Jones optics, plus fixed leakages: PBS 10⁻³, Glan–Taylor 10⁻⁵, isolator 10⁻⁴ (illustrative). The EIT response is <strong>illustrative</strong>. Width = 1.5 kHz + 4.45 kHz/(mW cm⁻²) × I<sub>c</sub> (fit to the paper’s two points), plus ≈52 kHz without buffer gas (transit) and 40 kHz without shield. The first-order deflection of an AOM is exaggerated to 8° so the orders separate on screen (real: tens of mrad). Control intensity uses a 2.55 mm beam radius. OD is scaled from OD≈10 at 60 °C. Storage efficiency and the 200 µs coherence time are invented placeholders that only respect the paper’s qualitative trends (inefficiency ∝ 1/OD<sub>EIT</sub>, delay = OD<sub>EIT</sub>/γ<sub>EIT</sub>). Two-photon detuning uses δ = (ν<sub>p</sub> − ν<sub>c</sub>) + 1.40 kHz/mG × B × sgn(control helicity). The laser lock is modelled as a chain: SAS photodiode → lock box → laser controller → DFB, with cables drawn automatically. With the loop open (or a wrong slope sign or too much gain) the laser frequency drifts by MHz to tens of MHz <span class="tag est">illustrative</span>. That lowers OD and fades EIT contrast as exp[−(Δ/50 MHz)²] <span class="tag est">illustrative</span>. Use “SAS error signal” on the scope to see the dispersive error curve. Reversing B or swapping helicities mirrors the scheme to m<sub>F</sub> = −2, 0 and m<sub>F′</sub> = −1. The 795 nm beam is near-infrared and invisible to the eye; it is drawn red here.</div>
 
   <div class="sim" id="sim">
     <div class="sim-bar">
@@ -1067,9 +1067,10 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
       <button type="button" class="btn" id="simTop">Top</button>
       <button type="button" class="btn" id="simFront">Front</button>
       <button type="button" class="btn" id="simSource">Source</button>
+      <button type="button" class="btn" id="simSas">SAS</button>
       <button type="button" class="btn" id="simCellV">Cell</button>
       <button type="button" class="btn" id="simFocus" title="Fly the camera to the selected component">Focus</button>
-      <label class="sim-filter" for="simFilter">Show <select id="simFilter"><option value="all">all optics</option><option value="source">source &amp; lock</option><option value="path">beam path</option><option value="cell">cell</option><option value="detect">detection</option></select></label>
+      <label class="sim-filter" for="simFilter">Show <select id="simFilter"><option value="all">all optics</option><option value="source">source &amp; lock</option><option value="path">beam path</option><option value="cell">cell</option><option value="detect">detection</option><option value="electronics">electronics</option></select></label>
       <button type="button" class="btn primary" id="simTour">▶ Guided tour</button>
       <button type="button" class="btn" id="simCut" aria-pressed="true" title="Cut away the µ-metal shield to see the cell">Shield cutaway</button>
       <button type="button" class="btn" id="simCables" aria-pressed="true">Cables</button>
@@ -1386,7 +1387,8 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
     eitDetuneScale_MHz: 50,        // ILLUSTRATIVE: EIT contrast fades as the one-photon detuning grows
     sasWidth_MHz: 12,              // ILLUSTRATIVE width of a sub-Doppler SAS feature (error-signal plot only)
     beamHeight: 40,
-    table: { w: 900, d: 600, pitch: 25 }
+    aomAngle_deg: 8,               // ILLUSTRATIVE: exaggerated 1st-order deflection so the orders separate on screen (real: tens of mrad)
+    table: { w: 1200, d: 750, pitch: 25 }
   };
 
   /* ---------------- complex helpers ---------------- */
@@ -1500,7 +1502,8 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
     iris:    { name: 'Iris', short: 'IR', cap: 12, rotStep: 90 },
     nd:      { name: 'ND filter', short: 'ND', cap: 12, rotStep: 90 },
     cell:    { name: 'Rb-87 vapour cell', short: 'Rb', cap: 12, rotStep: 90 },
-    sas:     { name: 'SAS module', short: 'SAS', cap: 16, rotStep: 90 },
+    sas:     { name: 'SAS photodiode (reference PD)', short: 'SPD', cap: 12, rotStep: 90 },
+    refcell: { name: 'Rb reference cell (SAS)', short: 'RC', cap: 12, rotStep: 90 },
     glan:    { name: 'Glan-Taylor polariser', short: 'GT', cap: 12, rotStep: 90 },
     pd:      { name: 'Photodiode detector', short: 'PD', cap: 12, rotStep: 90 },
     dump:    { name: 'Beam dump', short: 'BD', cap: 12, rotStep: 90 },
@@ -1508,14 +1511,20 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
     fp:      { name: 'Scanning Fabry–Pérot', short: 'FP', cap: 14, rotStep: 90 },
     lctrl:   { name: 'Laser controller (current + TEC)', short: 'LDC', cap: 0, rotStep: 90 },
     lockbox: { name: 'Lock box (lock-in + PID)', short: 'PID', cap: 0, rotStep: 90 },
-    fgen:    { name: 'Dual-ch. function generator', short: 'FG', cap: 0, rotStep: 90 }
+    fgen:    { name: 'Dual-ch. function generator', short: 'FG', cap: 0, rotStep: 90 },
+    rfgen:   { name: 'Dual-ch. RF source (phase-locked)', short: 'RFG', cap: 0, rotStep: 90 },
+    rfatt:   { name: 'RF attenuator / switch', short: 'ATT', cap: 0, rotStep: 90 },
+    rfamp:   { name: 'RF power amplifier', short: 'AMP', cap: 0, rotStep: 90 },
+    csrc:    { name: 'Coil current source', short: 'CSR', cap: 0, rotStep: 90 },
+    tctrl:   { name: 'Cell temperature controller', short: 'TC', cap: 0, rotStep: 90 },
+    scope:   { name: 'Oscilloscope / DAQ', short: 'DAQ', cap: 0, rotStep: 90 }
   };
   function defaultParams(kind) {
     switch (kind) {
       case 'laser': return { power: 10 };
       case 'hwp': return { axis: 0 };
       case 'qwp': return { axis: 45 };
-      case 'aom': return { rf: true, fMHz: 80, eff: 0.6, mode: 'double', order: 1 };
+      case 'aom': return { rf: true, fMHz: 80, eff: 0.6, mode: 'single', order: 1 };
       case 'iris': return { ap: 2 };
       case 'nd': return { od: 1 };
       case 'cell': return { heater: true, T_C: 60, solenoid: true, B_mG: 50, shield: true, buffer: true };
@@ -1673,6 +1682,14 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
       case 'hwp': out.push(child(ray, d, mApply(hwpMatrix(effAxis(c, d, p.axis)), j), ray.P, 0, c)); return out;
       case 'qwp': out.push(child(ray, d, mApply(qwpMatrix(effAxis(c, d, p.axis)), j), ray.P, 0, c)); return out;
       case 'aom': {
+        if (p.mode !== 'double' && fd < -0.7) { // returning pass of a double-pass built from separate parts
+          var onR = !!p.rf, etaR = onR ? p.eff : 0, d1 = rot2(f, -K.aomAngle_deg * p.order);
+          if (dot(d, [-d1[0], -d1[1]]) > 0.9995) { // anti-parallel to the deflected order: diffracts back onto the input axis
+            out.push(child(ray, d, j, ray.P * (1 - etaR), 0, c));
+            if (onR) { var rr = child(ray, [-f[0], -f[1]], j, ray.P * etaR, p.order * p.fMHz * 1000, c); rr.aoms.push(c.id); if (fgen) rr.pulsed = true; out.push(rr); }
+          }
+          return out;
+        }
         if (fd < 0.7) return out; // only accepts light entering along its axis
         var on = !!p.rf, eta = on ? p.eff : 0, fs = p.order * p.fMHz * 1000;
         if (p.mode === 'double') {
@@ -1682,10 +1699,11 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
           return out;
         }
         out.push(child(ray, d, j, ray.P * (1 - eta), 0, c));
-        if (on) { var r1 = child(ray, rot2(d, -2 * p.order), j, ray.P * eta, fs, c); r1.aoms.push(c.id); if (fgen) r1.pulsed = true; out.push(r1); }
+        if (on) { var r1 = child(ray, rot2(d, -K.aomAngle_deg * p.order), j, ray.P * eta, fs, c); r1.aoms.push(c.id); if (fgen) r1.pulsed = true; out.push(r1); }
         return out;
       }
       case 'lens': out.push(child(ray, d, j, ray.P * 0.99, 0, c)); return out;
+      case 'refcell': out.push(child(ray, d, j, ray.P * 0.9, 0, c)); return out;
       case 'iris': if (hit.perp <= p.ap / 2) out.push(child(ray, d, j, ray.P, 0, c)); return out;
       case 'nd': out.push(child(ray, d, j, ray.P * Math.pow(10, -p.od), 0, c)); return out;
       case 'eom': {
@@ -1862,52 +1880,71 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
   function rotPBS(din, dout) { var s = norm2([din[0] + dout[0], din[1] + dout[1]]); var r = Math.round(Math.atan2(s[1], s[0]) * 180 / Math.PI) - 45; return ((r % 360) + 360) % 360; }
   var E = [1, 0], Wd = [-1, 0], S = [0, 1], N = [0, -1];
   function referenceLayout() {
-    var n = 0;
-    function mk(kind, x, z, rot, params) { var p = defaultParams(kind); if (params) for (var k in params) p[k] = params[k]; return { id: kind + (++n), kind: kind, x: x, z: z, rot: rot, params: p }; }
+    var n = 0, A = K.aomAngle_deg * Math.PI / 180;
+    function mk(kind, x, z, rot, params) { var p = defaultParams(kind); if (params) for (var k in params) p[k] = params[k]; return { id: kind + (++n), kind: kind, x: Math.round(x * 10) / 10, z: Math.round(z * 10) / 10, rot: rot, params: p }; }
     function M(x, z, din, dout) { return mk('mirror', x, z, rotMirror(din, dout)); }
-    function B(x, z, din, dout) { return mk('pbs', x, z, rotPBS(din, dout)); }
-    var comps = [
-      // --- source, isolation and master axis ---
-      mk('laser', 50, 200, 0, { power: 10 }),
-      mk('isolator', 100, 200, 0),
-      M(150, 200, E, S), M(150, 250, S, E),          // two steering mirrors set the master axis
-      mk('iris', 200, 250, 0, { ap: 3 }),
-      mk('hwp', 250, 250, 0, { axis: 29 }),          // ~5 % to the SAS reference
-      B(300, 250, E, N),                             // pick-off: V reflected north to the SAS arm
-      // --- SAS reference arm ---
-      M(300, 175, N, E), mk('iris', 350, 175, 0, { ap: 3 }), M(400, 175, E, N),
-      mk('sas', 400, 100, 270),
-      // --- control / probe split ---
-      mk('iris', 350, 250, 0, { ap: 3 }),
-      mk('hwp', 400, 250, 0, { axis: 10 }),          // sets the probe/control split (~12 % probe)
-      B(450, 250, E, S),                             // splitter: H -> control (east), V -> probe (south)
-      // --- control arm ---
-      M(525, 250, E, N), M(525, 175, N, E),
-      B(575, 175, Wd, S),                            // control double-pass input / return separator
-      mk('aom', 625, 175, 0, { fMHz: 80.000, eff: 0.35, mode: 'double', order: 1 }),
-      mk('hwp', 575, 225, 0, { axis: 0 }),           // control output polarization trim
-      mk('lens', 575, 260, 0), mk('lens', 575, 300, 0), // beam expander
-      // --- probe arm ---
-      M(450, 300, S, Wd), M(325, 300, Wd, S),
-      B(325, 350, S, Wd),                            // probe double-pass separator
-      mk('aom', 250, 350, 180, { fMHz: 79.965, eff: 0.5, mode: 'double', order: 1 }),
-      M(375, 350, E, S), M(375, 400, S, E),
-      mk('nd', 425, 400, 0, { od: 2 }),
-      // --- recombine, cell, analyser, detector ---
-      B(575, 400, S, E),                             // recombiner: probe (H) transmits, control (V) reflects
-      mk('iris', 610, 400, 0, { ap: 3 }),
-      mk('qwp', 635, 400, 0, { axis: 45 }),
-      mk('cell', 715, 400, 0),
-      mk('qwp', 795, 400, 0, { axis: -45 }),
-      mk('glan', 830, 400, 0, { axis: 0 }),
-      mk('pd', 870, 400, 0),
-      // --- beam dumps for the PBS leakage and the rejected control ---
-      mk('dump', 830, 475, 270), mk('dump', 575, 125, 90), mk('dump', 450, 200, 90), mk('dump', 325, 400, 270), mk('dump', 575, 450, 270), mk('dump', 300, 300, 270),
-      // --- electronics ---
-      mk('fgen', 775, 540, 180),
-      mk('lctrl', 50, 100, 0),
-      mk('lockbox', 125, 100, 0)
-    ];
+    function B(x, z, din, dout, kind) { return mk(kind || 'pbs', x, z, rotPBS(din, dout)); }
+    // Double-pass AOM built from parts: AOM, λ/4, cat's-eye lens and retro mirror on the deflected 1st order, plus a dump for the 0th order.
+    function dp(x, z, east, fMHz, eff) {
+      var sg = east ? 1 : -1, d1 = [sg * Math.cos(A), east ? -Math.sin(A) : Math.sin(A)], r1 = Math.round(Math.atan2(d1[1], d1[0]) * 1800 / Math.PI) / 10;
+      function at(L) { return [x + L * d1[0], z + L * d1[1]]; }
+      var q = at(40), l = at(80), m = at(150);
+      return [mk('aom', x, z, east ? 0 : 180, { fMHz: fMHz, eff: eff, mode: 'single', order: 1 }),
+        mk('qwp', q[0], q[1], r1, { axis: 45 }), mk('lens', l[0], l[1], r1), mk('mirror', m[0], m[1], r1),
+        mk('dump', x + sg * 180, z, east ? 180 : 0),
+        mk('dump', x - sg * 160 * Math.cos(A), z + (east ? 1 : -1) * 160 * Math.sin(A), east ? 90 : 270)]; // 0th order of the returning pass
+    }
+    var comps = [];
+    function add() { for (var i = 0; i < arguments.length; i++) { if (Array.isArray(arguments[i])) comps.push.apply(comps, arguments[i]); else comps.push(arguments[i]); } }
+    // --- source, isolation and master axis ---
+    add(mk('laser', 50, 150, 0, { power: 10 }), mk('isolator', 110, 150, 0),
+      M(170, 150, E, S), M(170, 225, S, E),            // two steering mirrors set the master axis
+      mk('iris', 230, 225, 0, { ap: 3 }),
+      mk('hwp', 290, 225, 0, { axis: 29 }),            // ~5 % to the SAS reference
+      B(350, 225, E, N),                               // pick-off: V reflected north to the SAS arm
+      mk('iris', 410, 225, 0, { ap: 3 }),
+      mk('hwp', 460, 225, 0, { axis: 10 }),            // sets the probe/control split (~12 % probe)
+      B(520, 225, E, S));                              // splitter: H -> control (east), V -> probe (south)
+    // --- SAS reference: counter-propagating pump and probe through a Rb reference cell ---
+    add(M(350, 150, N, E),
+      B(420, 150, E, N, 'npbs'),                       // pump / probe division
+      M(420, 95, N, E), M(700, 95, E, S),              // pump route, injected from the north
+      mk('hwp', 460, 150, 0, { axis: 45 }),            // probe polarization: V -> H so it crosses the PBSs
+      mk('nd', 500, 150, 0, { od: 0.3 }), mk('iris', 540, 150, 0, { ap: 3 }),
+      B(590, 150, Wd, S),                              // extracts the pump after the cell
+      mk('dump', 590, 200, 270),
+      mk('refcell', 650, 150, 0),
+      B(700, 150, S, Wd),                              // injects the pump against the probe
+      mk('sas', 760, 150, 0),
+      mk('dump', 700, 200, 270));
+    // --- control arm: double-pass AOM, expander ---
+    add(M(570, 225, E, S), M(570, 300, S, E),
+      B(630, 300, Wd, S),                              // double-pass input / return separator
+      dp(730, 300, true, 80.000, 0.35),
+      mk('hwp', 630, 350, 0, { axis: 0 }),             // control output polarization trim
+      mk('lens', 630, 400, 0), mk('lens', 630, 450, 0), // beam expander
+      mk('dump', 630, 255, 90));
+    // --- probe arm: double-pass AOM, folds, attenuator ---
+    add(B(520, 380, S, Wd),                            // double-pass separator
+      dp(420, 380, false, 79.965, 0.5),
+      M(570, 380, E, S), M(570, 520, S, E),
+      mk('nd', 600, 520, 0, { od: 2 }),
+      mk('dump', 520, 190, 90), mk('dump', 520, 430, 270), mk('dump', 350, 280, 90));
+    // --- recombine, cell, analyser, detector ---
+    add(B(630, 520, S, E),                             // recombiner: probe (H) transmits, control (V) reflects
+      mk('iris', 680, 520, 0, { ap: 3 }),
+      mk('qwp', 720, 520, 0, { axis: 45 }),
+      mk('cell', 820, 520, 0),
+      mk('iris', 905, 520, 0, { ap: 3 }),
+      mk('qwp', 935, 520, 0, { axis: -45 }),
+      mk('glan', 985, 520, 0, { axis: 0 }),
+      mk('lens', 1020, 520, 0),
+      mk('pd', 1060, 520, 0),
+      mk('dump', 985, 590, 270), mk('dump', 630, 570, 270));
+    // --- electronics ---
+    add(mk('lctrl', 50, 60, 270), mk('lockbox', 125, 60, 270),
+      mk('rfgen', 90, 690, 270), mk('rfatt', 210, 690, 270), mk('rfamp', 310, 690, 270), mk('rfatt', 430, 690, 270), mk('rfamp', 530, 690, 270),
+      mk('csrc', 690, 690, 270), mk('tctrl', 800, 690, 270), mk('fgen', 930, 690, 270), mk('scope', 1080, 690, 270));
     return { mode: 'A', components: comps, state: { locked: true, tau_us: 20, storageRan: false } };
   }
 
@@ -2209,12 +2246,19 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
     pickoff: 'Uncoated glass plate at an angle. Reflects ~4 % (Fresnel) and transmits the rest. The paper picks off SAS light this way; the project plan uses λ/2 + PBS instead.',
     hwp: 'Half-wave plate. Jones matrix [[cos2θ, sin2θ], [sin2θ, −cos2θ]]: it rotates linear polarization by twice the angle to the fast axis (the line drawn on its face). Before a PBS it sets the split ratio.',
     qwp: 'Quarter-wave plate. At 45° to a linear polarization it produces circular light, and back again. Two orthogonal linear inputs become opposite circular polarizations: the σ⁺/σ⁻ pair Method A needs.',
-    aom: 'Acousto-optic modulator with one RF-driver channel (planned: G&H, TeO₂, 80–110 MHz, 1.5 mm aperture). Single pass: the 0th order goes straight; the ±1st order is deflected (angle exaggerated) and shifted by ±f_RF. Double-pass module (AOM + cat’s-eye + λ/4): the chosen order returns along the input, shifted by 2f_RF, with polarization rotated 90° so the upstream PBS routes it out; the 0th order is blocked. RF off: no output.',
+    aom: 'Acousto-optic modulator with one RF-driver channel (planned: G&H, TeO₂, 80–110 MHz, 1.5 mm aperture). Single pass: the 0th order goes straight; the +1st order is deflected (angle exaggerated to 8° here) and shifted by +f_RF. Built from separate parts, a double pass is: PBS → AOM → λ/4 → cat’s-eye lens → retro mirror on the +1 order. The mirror sends the +1 order straight back; it diffracts a second time back onto the input axis, shifted by 2f_RF, with polarization rotated 90° (two passes of the λ/4) so the PBS routes it out. The undiffracted light of both passes goes to beam dumps. The inspector also offers a compact double-pass module as a shortcut. RF off: no output.',
     lens: 'Lens (cosmetic: the tracer keeps beams collimated). On a real bench: cat’s-eye lenses in the AOM double passes and a telescope to expand the control beam.',
     iris: 'Iris. Passes light within its aperture radius of the axis. Use it to select one AOM order.',
     nd: 'Neutral-density filter, transmission 10^−OD. Keeps the probe weak (Ω_p ≪ Ω_c).',
     cell: 'Quartz ⁸⁷Rb vapour cell with accessories: foil heater under a TC300B (planned; foil rated to 70 °C), solenoid (B along the cell axis, i.e. the beam), triple-layer µ-metal shield, and optional buffer gas (paper example: 10 Torr Ne). Probe and control must co-propagate with opposite circular polarizations.',
-    sas: 'Saturated-absorption spectroscopy module: reference Rb cell, pump/probe and photodiode. The photodiode signal shows sub-Doppler features; it is the “sensor” of the frequency lock. Its output goes by cable to the lock box, which turns it into an error signal. The SAS alone cannot lock anything.',
+    sas: 'Reference photodiode at the end of the SAS probe path. The probe, after crossing the Rb reference cell against the counter-propagating pump, shows sub-Doppler features on this photodiode; that signal is the “sensor” of the frequency lock. Its output goes by cable to the lock box, which turns it into an error signal. The photodiode alone cannot lock anything.',
+    refcell: 'Small Rb reference cell for saturated-absorption spectroscopy. A strong pump and a weak probe cross it in opposite directions: atoms near zero velocity see both beams, the pump saturates the transition, and a narrow transparency appears inside the Doppler-broadened absorption. Pump and probe have orthogonal polarizations so PBSs can inject the pump and extract it afterwards.',
+    rfgen: 'Dual-channel RF source. Both channels share one clock so the two AOM drive signals stay phase-related, which keeps the probe-control beat stable. Channel A drives the control AOM (80.000 MHz), channel B the probe AOM (79.965 MHz).',
+    rfatt: 'Digital attenuator / RF switch in one RF chain. Sets the RF power (and thus the diffraction efficiency) and can gate the channel for pulses. Driven by the function generator for the storage sequence.',
+    rfamp: 'RF power amplifier lifting the synthesiser level to the +30 dBm-class an AOM needs. Cabled from the attenuator and out to the AOM’s RF input. Needs a heat sink and a 50 Ω load at all times.',
+    csrc: 'Low-noise current source for the solenoid. The field along the beams sets the Zeeman splitting (1.4 kHz per mG for the m_F=+2 ↔ 0 pair), so its noise appears directly as two-photon detuning noise.',
+    tctrl: 'PID temperature controller for the cell heater, with a sensor on the cell. The Rb number density, and so the optical depth, rises steeply with temperature (OD ≈ 10 near 60 °C).',
+    scope: 'Oscilloscope / acquisition system on the probe photodiode. Used to record the EIT transmission peak while the two-photon detuning is scanned, and the retrieved pulse in the storage sequence.',
     lctrl: 'Laser controller: a low-noise current source plus a TEC temperature controller for the DFB. Typical connections: the current output and TEC lines to the laser mount, plus a front-panel BNC modulation input that adds a small voltage-controlled current. The lock box drives that input for fast correction; slow drifts are handled by retuning the TEC setpoint, since a DFB has no piezo. Here it also supplies the small current dither used by the lock-in method.',
     lockbox: 'Lock box (servo): demodulates the SAS photodiode signal (lock-in at the dither frequency) to make a dispersive error signal that crosses zero at the chosen line, then applies PI/PID feedback to the laser controller’s modulation input. Typical connections: signal input from the SAS photodiode, reference from the dither oscillator, output to the controller’s BNC modulation input, plus monitor outputs for a scope. Settings: slope sign, gain, integrator. A modulation-free alternative (e.g. DAVLL) can be selected.',
     glan: 'Glan–Taylor calcite polariser. It transmits linear polarization along its axis and rejects the orthogonal one sideways. Extinction ~10⁵ (paper), the right tool to keep the strong control off the detector.',
@@ -2223,41 +2267,49 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
     fgen: 'Dual-channel function generator in burst mode (project plan). It gates both AOM RF channels to slice probe pulses and switch the control off and on. Required for the pulsed-storage sequence. Off-beam: place it anywhere.'
   };
   var INFO2 = {
-    laser: ['Single source for the whole experiment: the control, the probe and the SAS reference are all cut from this one beam.', 'The reference bench uses 10 mW. Typical limit is set by the AOM efficiencies and the control intensity you want in the cell (about 1–6 mW/cm² in the paper).', 'Raise the power and watch the control intensity and EIT width in the cell readout. Remove the isolator and read the warning.'],
+    laser: ['Single source for the whole experiment: the control, the probe and the SAS reference are all cut from this one beam.', 'The reference bench uses 10 mW. The practical limit is the AOM efficiencies and the control intensity you want in the cell (about 1–6 mW/cm² in the paper).', 'Raise the power and watch the control intensity and EIT width in the cell readout. Remove the isolator and read the warning.'],
     isolator: ['Stops light coming back from the AOM double-passes and cell windows from re-entering the DFB, where it would cause mode hops and break the lock.', 'First optic after the laser, arrow pointing away from it.', 'Rotate it 180° and the forward beam is blocked.'],
-    mirror: ['Folds the beam to fit the breadboard. Each mirror adds two adjustment axes, which is why steering is usually done with a pair.', 'Ten on the reference bench: two set the master axis after the isolator, two fold the SAS arm, two fold the control arm and four fold the probe arm so it fits next to the control arm.', 'Rotate in 45° steps: the beam turns 90° and the downstream light leaves its path. A circular polarization flips handedness on reflection.'],
-    pbs: ['Five on the reference bench: the pick-off to the SAS, the control/probe splitter, the two double-pass separators and the recombiner.', 'Horizontal light transmits, vertical light turns 90°. Extinction 10³ is typical, so ~0.1 % leaks into the wrong port.', 'Rotate one and see which arm loses light. A PBS with the wrong orientation sends the beam to the edge of the table (orange glow).'],
-    npbs: ['A polarization-independent splitter: useful for a power tap when you do not want to disturb the polarization.', 'Not on the reference bench.', 'Swap it for a PBS and see the split depend on the polarization.'],
-    pickoff: ['Samples a few percent of the beam for monitoring (about 4 % per surface).', 'Not on the reference bench: the project plan uses λ/2 + PBS instead, which is adjustable.', 'Place one after the laser and compare the SAS power with the λ/2 + PBS version.'],
-    hwp: ['Three on the reference bench. The first (θ ≈ 29°) sends about 5 % of the light to the SAS; the second (θ ≈ 10°) sets the probe/control split, about 12 % to the probe; the third (0°) trims the control polarization before the combiner.', 'A rotation of θ turns the polarization by 2θ. Setting the split by plate angle is far finer than swapping optics.', 'Select the second one and drag its angle slider: the two arms trade brightness through the PBS.'],
-    qwp: ['Two on the reference bench. The one before the cell (45°) turns the H and V arms into σ⁺ and σ⁻. The one after the cell (−45°) turns them back to linear so the Glan–Taylor can reject the control.', 'Fast axis at 45° to the incoming linear polarization gives circular light.', 'Set the first one to 0° and the cell sees linear light: the EIT objective drops out.'],
-    aom: ['Two on the reference bench, one per arm. Each is double-passed so the beam direction does not change when the RF frequency changes, and the shift doubles.', 'Control AOM at 80.000 MHz, probe AOM at 79.965 MHz: a 35 kHz RF difference gives 70 kHz at the atoms, which matches 50 mG.', 'Change the probe AOM frequency by a few kHz and the scope shows the EIT peak moving. Turn the RF off and the arm goes dark.'],
-    lens: ['Cosmetic here. On a real bench the cat’s-eye lens in each double-pass and the control telescope matter a lot: the beam size at the AOM sets the efficiency and the rise time.', 'Two lenses form the control-beam expander before the combiner (the double-pass cat’s-eye lenses are inside the AOM modules).', 'No effect on the trace (the tracer keeps beams collimated).'],
-    iris: ['Selects one diffraction order and cleans up stray light.', 'Four on the reference bench: two on the master axis, one in the SAS arm and one before the cell. Use them to align: centre the beam on two irises and every optic between them is on axis.', 'Close one below the beam diameter and the beam disappears.'],
-    nd: ['Keeps the probe weak (Ω_p ≪ Ω_c) so the EIT window is not power-broadened and the probe does not saturate the medium.', 'OD 2 on the probe arm of the reference bench: 1 % transmission.', 'Change the OD and watch the probe power at the detector. Remove it and the contrast changes.'],
+    mirror: ['Folds the beam to fit the table. Each mirror adds two adjustment axes, which is why steering is done with a pair.', 'Eleven on the bench: two set the master axis, three fold the SAS arm, two fold the control arm, two fold the probe arm, and two are the retro mirrors of the double-passes.', 'Rotate in 45° steps: the beam turns 90° and everything downstream loses it. Rotating a retro mirror breaks that double pass: the AOM output disappears.'],
+    pbs: ['Seven on the bench: the SAS pick-off, the control/probe splitter, the two SAS injection/extraction cubes, the two double-pass separators and the recombiner.', 'Horizontal light transmits, vertical turns 90°. Extinction 10³ is typical, so ~0.1 % leaks into the wrong port; the leak is caught by a dump.', 'Rotate a separator and see the AOM output stop leaving through the right port.'],
+    npbs: ['Divides the SAS beam into a strong pump and a weak probe regardless of polarization.', 'One on the bench, at the start of the SAS arm.', 'Swap it for a PBS and the split now depends on polarization.'],
+    pickoff: ['Samples a few percent of the beam (about 4 % per surface).', 'Not on the reference bench: it uses λ/2 + PBS, which is adjustable.', 'Place one after the laser and compare the SAS power with the λ/2 + PBS version.'],
+    hwp: ['Four on the bench: the first (θ ≈ 29°) sends about 5 % of the light to the SAS; the second (θ ≈ 10°) sets the probe/control split, about 12 % to the probe; one in the SAS probe path (45°) turns V into H so it crosses the PBSs; one trims the control polarization before the combiner.', 'A rotation of θ turns the polarization by 2θ. Setting a split by plate angle is far finer than swapping optics.', 'Select the second one and drag its angle slider: the two arms trade brightness through the PBS.'],
+    qwp: ['Four on the bench: one in each double-pass (so the returning beam is polarized 90° from the input) and one each side of the cell (linear → σ⁺/σ⁻ going in, back to linear going out).', 'The double-pass plates sit on the deflected 1st order, 45° to the input polarization.', 'Set one of the cell plates to 0° and the cell sees linear light: the EIT objective drops out. Rotate a double-pass plate and the return polarization stops matching the PBS.'],
+    aom: ['Two on the bench, one per arm, each in a double pass: PBS → AOM → λ/4 → lens → retro mirror. The beam direction on the way out does not change with RF frequency, and the shift doubles.', 'Control AOM at 80.000 MHz, probe AOM at 79.965 MHz: a 35 kHz RF difference gives 70 kHz at the atoms, which matches 50 mG. The undiffracted 0th orders go to four dumps.', 'Change the probe AOM frequency by a few kHz and the scope shows the EIT peak moving. Turn the RF off and the arm goes dark.'],
+    lens: ['Five on the bench: two cat’s-eye lenses (one per double-pass, between the AOM and the retro mirror), two forming the control-beam expander, and one collecting the probe onto the photodiode.', 'The cat’s-eye lens focuses the diffracted beam onto the mirror, so small angle changes (from changing the RF frequency) do not walk the returning beam.', 'No effect on the trace (the tracer keeps beams collimated), but each one belongs where it is on a real bench.'],
+    iris: ['Five on the bench: two on the master axis, one in the SAS probe path, one before the cell and one after it. Use them to align: centre the beam on two irises and every optic between them is on axis.', 'Aperture 3 mm.', 'Close one below the beam diameter and the beam disappears.'],
+    nd: ['Keeps the probe weak (Ω_p ≪ Ω_c) so the EIT window is not power-broadened. The SAS probe also gets one so the pump saturates.', 'OD 2 on the probe arm (1 % transmission) and OD 0.3 on the SAS probe.', 'Change the OD and watch the probe power at the detector.'],
     cell: ['The heart of the experiment: ⁸⁷Rb vapour in a quartz cell with a heater, a solenoid along the beams and a three-layer µ-metal shield.', 'Reference values: 60 °C (OD ≈ 10), buffer gas, solenoid on, |B| ≈ 50 mG. The cell absorbs unless the control is on and the two-photon detuning is within the EIT width.', 'Turn the shield off: residual field jumps to hundreds of mG and the resonance moves out of the scan. Reverse B and watch δ₀ flip sign.'],
-    sas: ['The frequency ruler for the lock: sub-Doppler lines in a reference cell give a feature narrow enough to hold the DFB near F=2→F′=1.', 'Fed by the first PBS pick-off, 5 % of the beam. Its photodiode output goes to the lock box.', 'Block the pick-off light and the error signal vanishes; the laser then drifts.'],
+    refcell: ['The SAS reference vapour: it produces the narrow sub-Doppler lines the laser is locked to.', 'Between the two SAS PBS cubes, with the pump entering from one side and the probe from the other.', 'Block the pump route (rotate its mirror) and the saturation feature would vanish on a real bench.'],
+    sas: ['The sensor of the frequency lock: its signal has sub-Doppler lines narrow enough to hold the DFB near F=2→F′=1.', 'Fed by the SAS probe after the reference cell. Its output goes to the lock box.', 'Block the SAS light (rotate the pick-off PBS) and the error signal vanishes; the laser then drifts.'],
     lctrl: ['Low-noise current source and temperature controller for the DFB. Temperature sets the coarse wavelength, current the fine one. It also adds a small current dither for the lock-in method.', 'Its BNC modulation input is driven by the lock box.', 'Turn the dither off and see the error signal disappear (lock-in method).'],
     lockbox: ['The servo: it turns the SAS signal into a zero-crossing error signal and feeds the controller. Slope sign, gain and integrator are the three settings.', 'Locked, gain about 1, slope sign +.', 'Flip the sign: the loop pushes the laser away instead of back. Raise the gain too far: oscillation.'],
-    glan: ['Rejects the control beam after the cell. The paper quotes ~10⁵ extinction, far better than a PBS (~10³), which is why it is used here.', 'Follows the second quarter-wave plate. Transmission axis set to pass the probe.', 'Replace it by a PBS and the control leaks onto the detector at a hundred times higher level.'],
-    pd: ['Measures the probe power after the cell. The EIT peak is a small rise in this signal as the two-photon detuning is scanned.', 'Its readout splits the light into probe, control leakage and other.', 'Block the probe arm and the signal drops to the control leakage.'],
-    dump: ['Safely absorbs the control beam rejected by the Glan–Taylor and other stray beams.', 'Six on the reference bench: one at the Glan–Taylor’s reject port and five that catch the ~0.1 % PBS leakage.', 'Remove one and that beam runs on to the table edge (orange glow): a stray-light hazard.'],
-    fgen: ['Dual-channel burst generator that gates both AOM RF channels: it slices the probe pulse and switches the control off for storage and on for retrieval.', 'Off the beam path. Needed for the pulsed-storage scope mode.', 'Open the Pulsed storage scope and change τ to see the retrieved pulse shrink with the coherence time.']
+    glan: ['Rejects the control beam after the cell. The paper quotes ~10⁵ extinction, far better than a PBS (~10³).', 'Follows the second quarter-wave plate. Transmission axis set to pass the probe; the rejected beam goes to a dump.', 'Replace it by a PBS and the control leaks onto the detector at a hundred times higher level.'],
+    pd: ['Measures the probe power after the cell. The EIT peak is a small rise in this signal as the two-photon detuning is scanned.', 'Preceded by a collection lens; cabled to the oscilloscope.', 'Block the probe arm and the signal drops to the control leakage.'],
+    dump: ['Safely absorbs beams you do not want: unused diffraction orders, the rejected control, and the ~0.1 % PBS leakage.', 'Twelve on the bench: four for the AOM 0th orders, one for the Glan–Taylor, one for the SAS pump after the cell and six for PBS leakage.', 'Remove one and that beam runs on to the table edge (orange glow): a stray-light hazard.'],
+    fgen: ['Dual-channel burst generator that gates both RF chains: it slices the probe pulse and switches the control off for storage and on for retrieval.', 'Off the beam path, cabled to the two RF attenuator/switches. Needed for the pulsed-storage scope mode.', 'Open the Pulsed storage scope and change τ to see the retrieved pulse shrink with the coherence time.'],
+    rfgen: ['One clock for both AOM drives keeps the two RF phases related, so the probe-control beat is stable.', 'Feeds both attenuator/switches.', 'On a real bench check the two channels on the scope: a drifting phase shows up as noise in the two-photon resonance.'],
+    rfatt: ['Sets the RF level for one AOM and acts as its on/off switch for pulses.', 'One in each RF chain, between the source and the amplifier.', 'Lower the RF level and the diffraction efficiency, and so the arm power, falls.'],
+    rfamp: ['Lifts the RF to the power the AOM needs.', 'One in each RF chain, cabled to its AOM.', 'Never run it without the AOM or a 50 Ω load attached.'],
+    csrc: ['Provides the solenoid current, so it sets B along the cell axis.', 'Cabled to the cell’s solenoid.', 'Change B on the cell and watch the two-photon resonance move at 1.4 kHz per mG.'],
+    tctrl: ['Holds the cell at the set temperature with a heater and a sensor.', 'Cabled to the cell’s heater.', 'Change the cell temperature and watch OD in the readout.'],
+    scope: ['Records the probe photodiode while the two-photon detuning is scanned.', 'Cabled to the probe photodiode.', 'This is the real-bench counterpart of the scope panel below the 3D view.']
   };
   var GROUPS = [
-    ['Source & lock', ['laser', 'isolator', 'sas', 'lockbox', 'lctrl', 'fgen']],
+    ['Source & lock', ['laser', 'isolator', 'sas', 'lockbox', 'lctrl']],
     ['Steering', ['mirror', 'pbs', 'npbs', 'pickoff']],
     ['Polarization', ['hwp', 'qwp', 'glan']],
     ['Modulation', ['aom']],
     ['Conditioning', ['lens', 'iris', 'nd']],
-    ['Atoms', ['cell']],
-    ['Detection', ['pd', 'dump']]
+    ['Atoms', ['cell', 'refcell']],
+    ['Detection', ['pd', 'dump']],
+    ['Electronics', ['fgen', 'rfgen', 'rfatt', 'rfamp', 'csrc', 'tctrl', 'scope']]
   ];
   var OBJ_A = [
     ['Laser protected by an isolator', 'Put an isolator directly after the laser, arrow pointing away from the laser, so the first thing the beam meets is the isolator going forward.'],
     ['SAS signal and closed lock loop', 'Pick off a few percent (λ/2 + PBS, or a glass pick-off) into the SAS module; place a lock box and a laser controller (cables connect SAS → lock box → controller → DFB automatically); press “Lock laser” with a positive slope sign and moderate gain.'],
     ['Beam split into control & probe at a PBS', 'After the pick-off, a λ/2 then a PBS splits the beam. Both outputs must eventually reach the cell.'],
-    ['Each arm passes its own AOM with RF on', 'Give each arm a double-pass AOM: a PBS sends the beam into the AOM module, and the returning beam (polarization rotated) exits the other port.'],
+    ['Each arm passes its own AOM with RF on', 'Build a double pass in each arm: PBS → AOM → λ/4 (45°) → lens → retro mirror on the deflected +1 order, with a dump for the 0th order. The returning beam, rotated by 90°, leaves through the PBS. (Or set the AOM to the compact double-pass module.)'],
     ['Beams recombined and overlapped in the cell', 'Use a PBS to merge the arms onto one line through the cell (co-propagating, same axis).'],
     ['Orthogonal circular polarizations in the cell', 'A λ/4 at 45° between combiner and cell turns the H probe and V control into opposite circular polarizations.'],
     ['Cell heated (≥40 °C), shielded, solenoid on', 'Select the cell: heater on (e.g. 60 °C), µ-metal shield on, solenoid on with |B| ≥ 5 mG.'],
@@ -2367,7 +2419,7 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
     var box = $('inspector'), c = comp(S.sel);
     if (!c) {
       box.innerHTML = '<h4>Bench</h4><p class="what">Select a component to see what it does and adjust it. Drag parts from the palette, or click one to drop it near the centre.</p>' +
-        '<div class="kv"><span>components</span><span>' + S.layout.components.length + '</span><span>rays traced</span><span>' + (S.ev ? S.ev.trace.rays : 0) + '</span><span>grid</span><span>25 mm, 900×600 mm</span></div>' +
+        '<div class="kv"><span>components</span><span>' + S.layout.components.length + '</span><span>rays traced</span><span>' + (S.ev ? S.ev.trace.rays : 0) + '</span><span>grid</span><span>25 mm, 1200×750 mm</span></div>' +
         '<p class="what" style="margin-top:10px">Keys (table focused): <kbd>R</kbd> rotate, <kbd>Shift</kbd>+<kbd>R</kbd> back, <kbd>Del</kbd> delete, arrows move, <kbd>Esc</kbd> deselect.</p>';
       return;
     }
@@ -2381,7 +2433,7 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
       h += chk('inRF', 'RF on', p.rf);
       h += '<label for="inF">RF frequency (MHz, 80–110)<input type="number" id="inF" min="80" max="110" step="0.001" value="' + p.fMHz.toFixed(3) + '"></label>';
       h += rng('inEff', 'Diffraction efficiency', 0, 0.9, 0.01, p.eff, '');
-      h += '<label for="inMode">Configuration<select id="inMode"><option value="double"' + (p.mode === 'double' ? ' selected' : '') + '>Double pass (cat’s-eye module)</option><option value="single"' + (p.mode === 'single' ? ' selected' : '') + '>Single pass</option></select></label>';
+      h += '<label for="inMode">Configuration<select id="inMode"><option value="double"' + (p.mode === 'double' ? ' selected' : '') + '>Double pass (compact module, shortcut)</option><option value="single"' + (p.mode === 'single' ? ' selected' : '') + '>Single pass (with separate λ/4, lens, mirror)</option></select></label>';
       h += '<label for="inOrd">Order<select id="inOrd"><option value="1"' + (p.order === 1 ? ' selected' : '') + '>+1</option><option value="-1"' + (p.order === -1 ? ' selected' : '') + '>−1</option></select></label>';
     }
     if (k === 'iris') h += rng('inAp', 'Aperture diameter', 0.5, 10, 0.5, p.ap, ' mm');
@@ -2585,7 +2637,8 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
   /* ======================= THREE.js part ======================= */
   var G = { ok: false, opt: { cutaway: true, cables: true, info: false, flow: true, filter: 'all' }, prevRot: {}, known: {}, tween: null, fade: 1, old: null };
   var FILTERS = {
-    source: ['laser', 'isolator', 'sas', 'lockbox', 'lctrl', 'fgen'],
+    source: ['laser', 'isolator', 'sas', 'refcell', 'lockbox', 'lctrl'],
+    electronics: ['fgen', 'rfgen', 'rfatt', 'rfamp', 'csrc', 'tctrl', 'scope', 'lctrl', 'lockbox'],
     path: ['mirror', 'pbs', 'npbs', 'pickoff', 'hwp', 'qwp', 'aom', 'lens', 'iris', 'nd', 'glan'],
     cell: ['cell'],
     detect: ['pd', 'dump']
@@ -2608,13 +2661,13 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
     setView('3d', true);
     bindPointer();
     var ctr = new THREE.OrbitControls(cam, canvas); G.ctr = ctr;
-    ctr.enableDamping = !reduceMotion; ctr.dampingFactor = 0.12; ctr.maxPolarAngle = Math.PI * 0.47; ctr.minDistance = 90; ctr.maxDistance = 2200; ctr.target.set(0, 0, 0); ctr.screenSpacePanning = true;
+    ctr.enableDamping = !reduceMotion; ctr.dampingFactor = 0.12; ctr.maxPolarAngle = Math.PI * 0.47; ctr.minDistance = 90; ctr.maxDistance = 3200; ctr.target.set(0, 0, 0); ctr.screenSpacePanning = true;
     ctr.addEventListener('change', requestRender);
     scene.add(new THREE.HemisphereLight(0xdfeaff, 0x40454a, 0.85));
-    var key = new THREE.DirectionalLight(0xfff1dc, 0.85); key.position.set(-380, 900, 420); key.castShadow = true;
+    var key = new THREE.DirectionalLight(0xfff1dc, 0.85); key.position.set(-500, 1200, 560); key.castShadow = true;
     key.shadow.mapSize.set(2048, 2048); key.shadow.bias = -0.0006;
-    var sc = key.shadow.camera; sc.left = -560; sc.right = 560; sc.top = 400; sc.bottom = -400; sc.near = 100; sc.far = 2200; scene.add(key);
-    var fill = new THREE.DirectionalLight(0x7fb4e6, 0.35); fill.position.set(500, 380, -450); scene.add(fill);
+    var sc = key.shadow.camera; sc.left = -780; sc.right = 780; sc.top = 560; sc.bottom = -560; sc.near = 100; sc.far = 2800; scene.add(key);
+    var fill = new THREE.DirectionalLight(0x7fb4e6, 0.35); fill.position.set(650, 500, -600); scene.add(fill);
     G.compGroup = new THREE.Group(); G.beamGroup = new THREE.Group(); G.cableGroup = new THREE.Group();
     scene.add(G.compGroup); scene.add(G.beamGroup); scene.add(G.cableGroup);
     G.layer = document.createElement('div'); G.layer.className = 'optic-layer'; stage.appendChild(G.layer);
@@ -2633,11 +2686,12 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
   function setView(v, instant) {
     if (!G.cam) return;
     var pos, tgt = new THREE.Vector3(0, 0, 0);
-    if (v === 'top') { pos = new THREE.Vector3(0, 1100, 1); tgt.set(0, 0, 0); }
-    else if (v === 'front') { pos = new THREE.Vector3(0, 200, 950); tgt.set(0, 20, 30); }
-    else if (v === 'source') { pos = new THREE.Vector3(-380, 300, 280); tgt.set(-300, 20, -90); }
-    else if (v === 'cell') { pos = new THREE.Vector3(420, 240, 340); tgt.set(260, 30, 100); }
-    else { pos = new THREE.Vector3(-20, 700, 780); tgt.set(0, 0, 10); }
+    if (v === 'top') { pos = new THREE.Vector3(0, 1450, 1); tgt.set(0, 0, 0); }
+    else if (v === 'front') { pos = new THREE.Vector3(0, 260, 1250); tgt.set(0, 20, 40); }
+    else if (v === 'source') { pos = new THREE.Vector3(-380, 380, 120); tgt.set(-300, 20, -190); }
+    else if (v === 'sas') { pos = new THREE.Vector3(-100, 420, -30); tgt.set(20, 20, -250); }
+    else if (v === 'cell') { pos = new THREE.Vector3(460, 280, 470); tgt.set(260, 30, 150); }
+    else { pos = new THREE.Vector3(-30, 900, 1020); tgt.set(0, 0, 20); }
     flyTo(pos, tgt, instant);
   }
   function flyTo(pos, tgt, instant) {
@@ -2646,7 +2700,7 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
   }
   function focusComp(id) {
     var c = comp(id); if (!c || !G.ok) return;
-    var t = wp(c), big = c.kind === 'cell' ? 1.5 : c.kind === 'fgen' || c.kind === 'lctrl' || c.kind === 'lockbox' ? 1.2 : 1;
+    var t = wp(c), big = c.kind === 'cell' ? 1.5 : /^(fgen|lctrl|lockbox|rfgen|rfatt|rfamp|csrc|tctrl|scope)$/.test(c.kind) ? 1.2 : 1;
     flyTo(t.clone().add(new THREE.Vector3(120 * big, 150 * big, 190 * big)), t.clone().setY(15));
   }
   function resize() {
@@ -2697,8 +2751,8 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
     G.table.position.y = -12; G.table.receiveShadow = true; G.table.castShadow = true; G.scene.add(G.table);
     G.under = new THREE.Group();
     var legM = std(0x2a3238, 0.3, 0.55);
-    [[-410, -270], [410, -270], [-410, 270], [410, 270]].forEach(function (p) { var l = new THREE.Mesh(new THREE.CylinderGeometry(14, 16, 330, 16), legM); l.position.set(p[0], -24 - 165, p[1]); l.castShadow = true; G.under.add(l); });
-    var floor = new THREE.Mesh(new THREE.PlaneGeometry(6000, 6000), new THREE.ShadowMaterial({ opacity: 0.4 })); floor.rotation.x = -Math.PI / 2; floor.position.y = -360; floor.receiveShadow = true; G.under.add(floor);
+    [[-560, -340], [560, -340], [-560, 340], [560, 340]].forEach(function (p) { var l = new THREE.Mesh(new THREE.CylinderGeometry(14, 16, 330, 16), legM); l.position.set(p[0], -24 - 165, p[1]); l.castShadow = true; G.under.add(l); });
+    var floor = new THREE.Mesh(new THREE.PlaneGeometry(8000, 8000), new THREE.ShadowMaterial({ opacity: 0.4 })); floor.rotation.x = -Math.PI / 2; floor.position.y = -360; floor.receiveShadow = true; G.under.add(floor);
     G.scene.add(G.under);
     G.texCW = flowTex(false); G.texPulse = flowTex(true); G.texSpot = spotTex();
     G.beamColor = col('--sim-beam');
@@ -2738,20 +2792,46 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
     g.add(cy(7.5, 9, M.black, 0, -15.5, 0, 'y', 16));
     g.add(cy(2.2, 8, M.brass, 8, -15.5, 0, 'x', 10));
   }
-  function instrument(g, w, h, d, label) {
-    var M = G.M, H = K.beamHeight, y0 = h / 2 - H;
-    g.add(bx(w, h, d, M.dark, 0, y0, 0));
+  function scopeTex() {
+    var c = document.createElement('canvas'); c.width = 128; c.height = 80; var x = c.getContext('2d');
+    x.fillStyle = '#05140e'; x.fillRect(0, 0, 128, 80); x.strokeStyle = '#124a32'; x.lineWidth = 1;
+    for (var i = 1; i < 8; i++) { x.beginPath(); x.moveTo(i * 16, 0); x.lineTo(i * 16, 80); x.stroke(); } for (i = 1; i < 5; i++) { x.beginPath(); x.moveTo(0, i * 16); x.lineTo(128, i * 16); x.stroke(); }
+    x.strokeStyle = '#ffd54a'; x.lineWidth = 2; x.beginPath();
+    for (i = 0; i <= 128; i++) { var u = (i - 64) / 7, y = 52 - 8 - 22 / (1 + u * u * 0.5) + 18 * (1 - 1 / (1 + (u * 0.3) * (u * 0.3))); if (i) x.lineTo(i, y); else x.moveTo(i, y); } x.stroke();
+    return new THREE.CanvasTexture(c);
+  }
+  // generic bench instrument; front panel faces local -x. variant picks the panel details.
+  function instrument(g, w, h, d, variant, own) {
+    var M = G.M, H = K.beamHeight, y0 = h / 2 - H, fx = -w / 2;
+    var body = variant === 'rfamp' ? std(0x23292f, 0.4, 0.5) : M.dark;
+    g.add(bx(w, h, d, body, 0, y0, 0));
     g.add(bx(w + 2, 3, d + 2, M.black, 0, y0 + h / 2, 0));
-    g.add(bx(1.4, h * 0.42, d * 0.5, M.screen, -w / 2 - 0.4, y0 + h * 0.12, -d * 0.12));
-    for (var i = 0; i < 3; i++) g.add(cy(3, 3, M.knob, -w / 2 - 1, y0 - h * 0.28, d * 0.28 - i * 9, 'x', 14));
-    for (var j = 0; j < 4; j++) g.add(bx(0.8, 2, w * 0.1, M.black, -w / 2 - 0.2, y0 - h * 0.05, -d * 0.3 + j * 6));
+    if (variant === 'rfamp') { for (var f = -3; f <= 3; f++) g.add(bx(w - 6, 6, 1.6, M.alu, 0, y0 + h / 2 + 4.5, f * d * 0.13)); }
+    if (variant === 'scope') {
+      var tex = scopeTex(); var scr = own(new THREE.MeshBasicMaterial({ map: tex })); var sc = new THREE.Mesh(geo('scr', function () { return new THREE.PlaneGeometry(d * 0.7, h * 0.62); }), scr); sc.rotation.y = -Math.PI / 2; sc.position.set(fx - 0.9, y0 + h * 0.08, 0); sc.userData.noShadow = true; g.add(sc);
+      for (var kn = 0; kn < 4; kn++) g.add(cy(2.6, 3, M.knob, fx - 1.4, y0 - h * 0.34, -d * 0.3 + kn * 9, 'x', 14));
+    } else if (variant === 'rfatt') {
+      g.add(cy(2.2, 6, M.brass, fx - 3, y0, d * 0.25, 'x', 10)); g.add(cy(2.2, 6, M.brass, fx - 3, y0, -d * 0.25, 'x', 10)); g.add(cy(4, 3, M.knob, fx - 1.4, y0 + h * 0.2, 0, 'x', 14)); g.add(bx(2, 4, 8, M.knob, fx - 1.2, y0 - h * 0.25, 0));
+    } else if (variant === 'rfamp') {
+      g.add(cy(2.2, 6, M.brass, fx - 3, y0, d * 0.25, 'x', 10)); g.add(cy(2.2, 6, M.brass, fx - 3, y0, -d * 0.25, 'x', 10)); g.add(bx(1.4, 5, 8, M.on, fx - 0.5, y0 + h * 0.25, 0));
+    } else if (variant === 'rfgen') {
+      g.add(bx(1.4, h * 0.38, d * 0.42, M.screen, fx - 0.4, y0 + h * 0.18, -d * 0.2));
+      for (var c1 = 0; c1 < 2; c1++) g.add(cy(2.6, 6, M.brass, fx - 3, y0 - h * 0.3, d * 0.12 + c1 * 12, 'x', 10)); for (var k2 = 0; k2 < 3; k2++) g.add(cy(3, 3, M.knob, fx - 1.4, y0 - h * 0.28, -d * 0.3 + k2 * 9, 'x', 14));
+    } else if (variant === 'csrc') {
+      g.add(cy(7, 4, M.knob, fx - 2, y0 + h * 0.05, -d * 0.12, 'x', 20)); g.add(bx(1.4, h * 0.3, d * 0.3, M.screen, fx - 0.4, y0 + h * 0.2, d * 0.2)); g.add(cy(2.6, 6, M.copper, fx - 3, y0 - h * 0.28, d * 0.25, 'x', 10));
+    } else if (variant === 'tctrl') {
+      g.add(bx(1.4, h * 0.34, d * 0.5, M.screen, fx - 0.4, y0 + h * 0.18, -d * 0.1)); for (var k3 = 0; k3 < 3; k3++) g.add(cy(3, 3, M.knob, fx - 1.4, y0 - h * 0.28, -d * 0.3 + k3 * 9, 'x', 14));
+    } else {
+      g.add(bx(1.4, h * 0.42, d * 0.5, M.screen, fx - 0.4, y0 + h * 0.12, -d * 0.12));
+      for (var i = 0; i < 3; i++) g.add(cy(3, 3, M.knob, fx - 1, y0 - h * 0.28, d * 0.28 - i * 9, 'x', 14));
+    }
     return y0;
   }
   function buildMesh(c) {
     var g = new THREE.Group(), M = G.M, H = K.beamHeight, p = c.params, k = c.kind, ownMats = [];
     function own(m) { ownMats.push(m); return m; }
-    var needsStand = !(k === 'fgen' || k === 'lctrl' || k === 'lockbox');
-    if (needsStand && k !== 'cell' && k !== 'sas') stand(g, k);
+    var needsStand = !(k === 'fgen' || k === 'lctrl' || k === 'lockbox' || k === 'rfgen' || k === 'rfatt' || k === 'rfamp' || k === 'csrc' || k === 'tctrl' || k === 'scope');
+    if (needsStand && k !== 'cell' && k !== 'sas' && k !== 'refcell') stand(g, k);
     switch (k) {
       case 'laser':
         g.add(bx(46, 28, 32, M.alu, -18, 0, 0)); g.add(bx(46, 4, 33, M.laser, -18, 15, 0));
@@ -2815,8 +2895,12 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
         } else g.add(bx(70, 3, 40, M.black, 0, -H + 1.5, 0));
         break; }
       case 'sas':
-        g.add(bx(58, 24, 36, M.dark)); g.add(bx(60, 3, 38, M.black, 0, 13.5, 0)); g.add(cy(7, 44, M.glass, 0, 17, 0)); g.add(cy(6, 36, own(new THREE.MeshBasicMaterial({ color: 0xb06cff, transparent: true, opacity: 0.12, depthWrite: false })), 0, 17, 0));
-        g.add(bx(9, 11, 11, M.accent, 31, 0, 0)); g.add(bx(30, 3, 22, M.black, 0, -H + 1.5, 0)); g.add(cy(4, H - 12, M.alu, 0, -12 - (H - 12) / 2, 0, 'y', 12)); break;
+        stand(g, k); g.add(bx(18, 26, 22, M.dark)); g.add(cy(7, 4, M.accent, 10, 0, 0)); g.add(cy(5, 1.2, M.glass, 12.4, 0, 0)); g.add(cy(2.4, 8, M.brass, -12, 6, 0, 'x', 10)); g.add(bx(8, 2, 8, M.laser, -2, 14, 0)); break;
+      case 'refcell': {
+        stand(g, k);
+        g.add(cy(7.5, 46, M.glass)); g.add(cy(6.2, 42, own(new THREE.MeshBasicMaterial({ color: 0xb06cff, transparent: true, opacity: 0.14, depthWrite: false })))); g.add(cy(8, 2, M.glass, -23, 0, 0)); g.add(cy(8, 2, M.glass, 23, 0, 0));
+        g.add(tr(8.2, 1, M.alu, -22, 0, 0)); g.add(tr(8.2, 1, M.alu, 22, 0, 0)); g.add(cy(2.4, 10, M.glass, 0, 11, 0, 'y', 10));
+        break; }
       case 'glan':
         g.add(bx(22, 22, 30, M.glass)); g.add(bx(24, 4, 32, M.alu, 0, -12, 0)); g.add(bx(24, 4, 32, M.alu, 0, 12, 0)); g.add(cy(3, 12, M.black, 0, 0, 18, 'z', 10)); break;
       case 'pd':
@@ -2825,6 +2909,12 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
         g.add(bx(20, 30, 26, M.matte));
         for (var q = -2; q <= 2; q++) g.add(bx(2, 28, 28, M.black, -4 + q * 3.2, 0, 0));
         g.add(bx(2, 18, 16, M.black, 10.5, 0, 0)); break; }
+      case 'rfgen': instrument(g, 84, 36, 56, 'rfgen', own); g.add(bx(1.4, 5, 5, M.on, -42.6, -K.beamHeight + 7, 22)); break;
+      case 'rfatt': instrument(g, 56, 24, 40, 'rfatt', own); break;
+      case 'rfamp': instrument(g, 64, 28, 44, 'rfamp', own); break;
+      case 'csrc': instrument(g, 70, 32, 48, 'csrc', own); break;
+      case 'tctrl': instrument(g, 70, 32, 48, 'tctrl', own); break;
+      case 'scope': instrument(g, 70, 56, 74, 'scope', own); break;
       case 'fgen': instrument(g, 92, 46, 62); g.add(bx(1.4, 8, 8, p.on ? M.on : M.off, -46.6, -K.beamHeight + 10, 20)); break;
       case 'lctrl': instrument(g, 58, 36, 46); g.add(bx(1.4, 6, 6, M.on, -29.6, -K.beamHeight + 10, 16)); break;
       case 'lockbox': {
@@ -2838,7 +2928,7 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
     g.traverse(function (o) {
       o.userData.compId = c.id;
       if (o.isMesh) {
-        var m = o.material; o.castShadow = !(m && m.transparent); o.receiveShadow = true;
+        var m = o.material; o.castShadow = !(m && m.transparent) && !o.userData.noShadow; o.receiveShadow = true;
       }
     });
     if (ownMats.length) g.userData.ownMats = ownMats;
@@ -2900,7 +2990,7 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
       var b = document.createElement('button'); b.type = 'button'; b.className = 'optic-label' + (c.id === S.sel ? ' sel' : '') + (compFilterOK(c.kind) ? '' : ' dim'); b.textContent = labelText(c); b.tabIndex = -1;
       b.setAttribute('aria-label', P.KINDS[c.kind].name);
       b.addEventListener('click', function () { selectComp(c.id, true); });
-      G.layer.appendChild(b); G.labels[c.id] = { el: b, pos: wp(c).add(new THREE.Vector3(0, c.kind === 'fgen' ? 20 : 34, 0)) };
+      G.layer.appendChild(b); G.labels[c.id] = { minor: /^(mirror|iris|dump|lens)$/.test(c.kind), el: b, pos: wp(c).add(new THREE.Vector3(0, ({ fgen: 20, rfgen: 6, rfatt: 6, rfamp: 10, csrc: 8, tctrl: 8, lctrl: 8, lockbox: 8, scope: 30 })[c.kind] || 34, 0)) };
     });
   }
   function selectComp(id, fly) {
@@ -2908,17 +2998,31 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
   }
   function buildCables() {
     disposeGroup(G.cableGroup); G.dots = [];
-    var lk = S.ev ? S.ev.lock : null; if (!lk) return;
-    var chain = [lk.ids.sas, lk.ids.box, lk.ids.ctrl, lk.ids.laser], cc = col('--sim-accent');
-    for (var i = 0; i < 3; i++) {
-      var a = comp(chain[i]), b = comp(chain[i + 1]); if (!a || !b) continue;
-      var pa = new THREE.Vector3(a.x - K.table.w / 2, 6, a.z - K.table.d / 2), pb = new THREE.Vector3(b.x - K.table.w / 2, 6, b.z - K.table.d / 2);
-      var mid = pa.clone().add(pb).multiplyScalar(0.5); mid.y = 2.5;
-      var curve = new THREE.CatmullRomCurve3([pa, pa.clone().setY(3), mid, pb.clone().setY(3), pb]);
-      var tube = new THREE.Mesh(new THREE.TubeGeometry(curve, 32, 1.1, 6, false), new THREE.MeshStandardMaterial({ color: i === 2 ? 0xd9a441 : cc, roughness: 0.6 })); tube.userData.ownGeo = true; tube.userData.ownMat = true; tube.userData.noPick = true; tube.castShadow = true; G.cableGroup.add(tube);
-      var dot = new THREE.Mesh(geo('cdot', function () { return new THREE.SphereGeometry(2.8, 10, 8); }), new THREE.MeshBasicMaterial({ color: 0xffffff })); dot.userData.ownMat = true; dot.userData.noPick = true; G.cableGroup.add(dot);
-      G.dots.push({ m: dot, curve: curve, ph: i / 3 });
-    }
+    var comps = S.layout.components, lk = S.ev ? S.ev.lock : null, links = [], cc = col('--sim-accent').getHex();
+    function of(k) { return comps.filter(function (c) { return c.kind === k; }); }
+    function near(c, list) { var best = null, bd = 1e9; list.forEach(function (o) { var d = Math.hypot(o.x - c.x, o.z - c.z); if (d < bd) { bd = d; best = o; } }); return best; }
+    function add(a, b, color, tray) { if (a && b && a !== b) links.push({ a: a, b: b, color: color, tray: tray }); }
+    if (lk) { var chain = [lk.ids.sas, lk.ids.box, lk.ids.ctrl, lk.ids.laser]; for (var i = 0; i < 3; i++) add(comp(chain[i]), comp(chain[i + 1]), i === 2 ? 0xd9a441 : cc, 'top'); }
+    of('rfatt').forEach(function (att) { add(near(att, of('rfgen')), att, 0x4f86c6, 'bottom'); of('fgen').forEach(function (f) { add(f, att, 0x9a8fd0, 'bottom'); }); });
+    of('rfamp').forEach(function (amp) { add(near(amp, of('rfatt')), amp, 0x4f86c6, 'bottom'); add(amp, near(amp, of('aom')), 0x4f86c6, 'bottom'); });
+    of('csrc').forEach(function (s) { add(s, near(s, of('cell')), 0xc17a3d, 'bottom'); });
+    of('tctrl').forEach(function (s) { add(s, near(s, of('cell')), 0xb5533c, 'bottom'); });
+    of('pd').forEach(function (pd) { add(pd, near(pd, of('scope')), 0x6fae7a, 'bottom'); });
+    var tw = K.table.w / 2, td = K.table.d / 2, trays = { top: 22 - td, bottom: td - 100 + 0 };
+    links.forEach(function (l, li) {
+      var a = new THREE.Vector3(l.a.x - tw, 3, l.a.z - td), b = new THREE.Vector3(l.b.x - tw, 3, l.b.z - td), tz = l.tray === 'top' ? trays.top : trays.bottom + (li % 5) * 7;
+      var pts = [a, new THREE.Vector3(a.x, 2.2, tz), new THREE.Vector3(b.x, 2.2, tz), new THREE.Vector3(b.x, 2.2, b.z), b];
+      var mat = new THREE.MeshStandardMaterial({ color: l.color, roughness: 0.6 }), len = 0, segs = [];
+      for (var i = 1; i < pts.length; i++) {
+        var p0 = pts[i - 1], p1 = pts[i], d = p1.clone().sub(p0), L = d.length(); if (L < 0.5) continue;
+        var t = new THREE.Mesh(new THREE.CylinderGeometry(1.1, 1.1, L, 6), mat); t.position.copy(p0).addScaledVector(d, 0.5); t.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), d.clone().normalize());
+        t.userData.ownGeo = true; t.userData.noPick = true; t.castShadow = true; G.cableGroup.add(t);
+        var j = new THREE.Mesh(geo('cj', function () { return new THREE.SphereGeometry(1.1, 6, 5); }), mat); j.position.copy(p1); j.userData.noPick = true; G.cableGroup.add(j);
+        segs.push({ p0: p0, p1: p1, L: L }); len += L;
+      }
+      var dot = new THREE.Mesh(geo('cdot', function () { return new THREE.SphereGeometry(2.4, 10, 8); }), new THREE.MeshBasicMaterial({ color: 0xffffff })); dot.userData.ownMat = true; dot.userData.noPick = true; G.cableGroup.add(dot);
+      G.dots.push({ m: dot, segs: segs, len: len, ph: (li * 0.37) % 1 });
+    });
     G.cableGroup.visible = G.opt.cables;
   }
   function beamMats(group, k) { group.traverse(function (o) { if (o.material && o.userData.baseOp !== undefined) o.material.opacity = o.userData.baseOp * k; }); }
@@ -3014,20 +3118,30 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
   var TOUR = [
     { kind: 'laser', title: 'One laser feeds everything', text: 'A single fibre-coupled DFB laser at 795 nm (Rb D1) is the source for the control, the probe and the lock reference. Because both EIT fields share this laser, its ~MHz linewidth is common to both and largely cancels in the two-photon detuning.' },
     { kind: 'isolator', title: 'Protect the diode', text: 'The Faraday isolator passes light forward and blocks the reflections coming back from the AOM double-passes and cell windows. Without it the DFB mode-hops and the lock fails.' },
-    { kind: 'mirror', nth: 0, title: 'Set the master axis', text: 'Two kinematic steering mirrors and two irises define one repeatable beam axis. Each mirror has two adjustment axes; a small tilt θ moves the beam by 2θ. Centre the beam on both irises before adding any other optic. Select a mirror and rotate it to see everything downstream lose the beam.' },
-    { kind: 'sas', title: 'Reference for the frequency lock', text: 'A half-wave plate and a PBS pick off roughly 5 % of the beam into the saturated-absorption module. Its sub-Doppler features are the frequency ruler: the lock holds the laser near F=2→F′=1.' },
-    { kind: 'mirror', nth: 2, title: 'Fold the SAS arm', text: 'Two more mirrors and an iris carry the pick-off to the SAS module so it fits beside the main axis. The pick-off PBS reflects the vertical component north; the rest continues east to the splitter.' },
-    { kind: 'lockbox', title: 'Close the loop', text: 'The lock box turns the SAS signal into an error signal and feeds the laser controller, which trims the DFB current. SAS → lock box → controller → DFB: the cables here are drawn automatically. Open any link and the laser drifts.' },
-    { kind: 'pbs', nth: 1, title: 'Split into control and probe', text: 'The second half-wave plate sets the power ratio. This PBS sends horizontal light (control, strong) one way and vertical light (probe, weak) the other. Rotate that plate and watch the two arms trade brightness.' },
-    { kind: 'aom', nth: 0, title: 'Control arm: double-pass AOM', text: 'The AOM shifts the control by 2 × f_RF and the cat’s-eye module sends the chosen order back along the input with its polarization rotated by 90°, so the upstream PBS routes it onward. RF off means no light.' },
-    { kind: 'lens', nth: 0, title: 'Control beam expander', text: 'Two lenses after the double-pass expand the control so it overfills the probe in the cell. The control intensity (mW/cm²) sets the EIT linewidth, so beam size matters as much as power. A half-wave plate trims its polarization before the combiner.' },
-    { kind: 'mirror', nth: 6, title: 'Probe arm: fold and double-pass', text: 'The probe leaves the splitter heading south, is folded by two mirrors into its double-pass separator, and after the AOM is folded again by two more mirrors to meet the control at the combiner. Path lengths of the two arms stay close, which helps the phase-locked RF.' },
-    { kind: 'aom', nth: 1, title: 'Probe arm: second AOM', text: 'The probe passes its own AOM, a few tens of kHz away from the control in RF frequency. That small difference is what makes the two-photon detuning match the Zeeman splitting. The ND filter keeps the probe weak.' },
-    { kind: 'qwp', nth: 0, title: 'Opposite circular polarizations', text: 'The PBS recombiner transmits the probe (H) and reflects the control (V) onto one line, so the beams overlap with orthogonal linear polarizations. The quarter-wave plate at 45° turns them into σ⁺ and σ⁻, the pair that drives the Λ system.' },
+    { kind: 'mirror', nth: 0, title: 'Set the master axis', text: 'Two kinematic steering mirrors and two irises define one repeatable beam axis. Each mirror has two adjustment axes; a small tilt θ moves the beam by 2θ. Centre the beam on both irises before adding any other optic.' },
+    { kind: 'pbs', nth: 0, title: 'Pick off the SAS reference', text: 'The first half-wave plate turns the polarization by a small angle, and this PBS reflects the vertical part (about 5 % of the light) north to the SAS arm. The rest, horizontally polarized, carries on along the master axis.' },
+    { kind: 'npbs', nth: 0, title: 'SAS: pump and probe', text: 'After one mirror, a non-polarizing cube divides the reference light into a stronger pump (reflected) and a weaker probe (transmitted, further attenuated by an ND filter). A half-wave plate turns the probe’s polarization to horizontal.' },
+    { kind: 'refcell', nth: 0, title: 'SAS: counter-propagating beams', text: 'The probe crosses the Rb reference cell from the left; the pump, routed round two mirrors, is injected from the right by a PBS and extracted again after the cell. Where they overlap, atoms near zero velocity see both beams and the probe shows a narrow sub-Doppler feature.' },
+    { kind: 'sas', title: 'The lock photodiode', text: 'The probe lands on this photodiode, whose signal has the sub-Doppler lines. It is the sensor of the frequency lock; its cable goes to the lock box.' },
+    { kind: 'lockbox', title: 'Close the loop', text: 'The lock box turns the SAS signal into an error signal and feeds the laser controller, which trims the DFB current. SAS photodiode → lock box → controller → DFB: the cables are drawn automatically. Open any link and the laser drifts.' },
+    { kind: 'pbs', nth: 1, title: 'Split into control and probe', text: 'The second half-wave plate sets the power ratio. This PBS sends horizontal light (control, strong) east and vertical light (probe, weak) south. Rotate that plate and watch the two arms trade brightness.' },
+    { kind: 'pbs', nth: 4, title: 'Control arm: double-pass input', text: 'Two mirrors fold the control to this PBS, which transmits it horizontally into the AOM assembly. On the way back the beam is vertically polarized, so the same cube reflects it out sideways: that is how a double pass separates the output from the input.' },
+    { kind: 'aom', nth: 0, title: 'Control AOM', text: 'The AOM diffracts a fraction of the light into the +1 order, deflected by an angle (exaggerated here) and shifted by +80 MHz. The undiffracted 0th order carries straight on to a beam dump.' },
+    { kind: 'qwp', nth: 0, title: 'Quarter-wave plate: turn the polarization', text: 'This plate sits on the deflected beam at 45° to its polarization. The beam passes it twice (out and back), which together turn horizontal into vertical, so the PBS can pick it out.' },
+    { kind: 'lens', nth: 0, title: 'Cat’s-eye lens', text: 'The lens focuses the diffracted beam onto the retro mirror. Because the beam is focused onto the mirror, a change of RF frequency (which changes the deflection angle) does not walk the returning beam.' },
+    { kind: 'mirror', nth: 7, title: 'Retro mirror: second pass', text: 'The mirror sends the +1 order straight back. It diffracts again in the AOM, shifted by another +80 MHz, back onto the input axis: 160 MHz in total. Its own 0th order goes to a second dump.' },
+    { kind: 'lens', nth: 1, title: 'Control beam expander', text: 'Two lenses after the double-pass expand the control so it overfills the probe in the cell. The control intensity (mW/cm²) sets the EIT linewidth, so beam size matters as much as power. A half-wave plate trims its polarization before the combiner.' },
+    { kind: 'aom', nth: 1, title: 'Probe arm: its own double pass', text: 'The probe leaves the splitter heading south and meets an identical assembly with the RF frequency 35 kHz lower, so the probe sits 70 kHz below the control at the atoms: the Zeeman splitting at 50 mG. After the AOM two mirrors fold it to meet the control.' },
+    { kind: 'nd', nth: 1, title: 'Keep the probe weak', text: 'An OD 2 filter cuts the probe to 1 % so Ω_p ≪ Ω_c and the EIT window is not power-broadened.' },
+    { kind: 'pbs', nth: 6, title: 'Recombine on one axis', text: 'The recombiner transmits the probe (H) and reflects the control (V), so the two overlap on a single line toward the cell. Overlap must be good to a fraction of a milliradian.' },
+    { kind: 'qwp', nth: 2, title: 'Opposite circular polarizations', text: 'The quarter-wave plate at 45° turns the horizontal probe and vertical control into σ⁻ and σ⁺, the pair that drives the Λ system.' },
     { kind: 'cell', title: 'Shielded vapour cell', text: 'The ⁸⁷Rb cell sits in a heater, a solenoid (the bias field along the beams) and three layers of µ-metal. Use the shield cutaway button to look inside. The field sets the two-photon resonance, 1.4 kHz per mG.' },
-    { kind: 'glan', title: 'Throw the control away', text: 'A second quarter-wave plate undoes the circular polarization and the Glan–Taylor (extinction ~10⁵) transmits only the probe. The rejected control goes to the beam dump; four more dumps catch the ~0.1 % PBS leakage so no stray light leaves the table.' },
-    { kind: 'pd', title: 'Detect the transparency window', text: 'The photodiode sees the probe transmission. Sweep the two-photon detuning on the scope below and the EIT peak appears when everything upstream is right.' },
-    { kind: 'fgen', title: 'Timing for stored light', text: 'The function generator gates both AOMs: it slices a probe pulse, switches the control off to store it and on again to retrieve it. Open “Pulsed storage” on the scope to run the sequence.' }
+    { kind: 'glan', title: 'Throw the control away', text: 'A second quarter-wave plate undoes the circular polarization and the Glan–Taylor (extinction ~10⁵) transmits only the probe. The rejected control goes to a beam dump.' },
+    { kind: 'pd', title: 'Detect the transparency window', text: 'A lens collects the probe onto the photodiode. Sweep the two-photon detuning on the scope and the EIT peak appears when everything upstream is right.' },
+    { kind: 'rfgen', title: 'RF chain', text: 'One dual-channel source feeds two chains, each an attenuator/switch and an amplifier, that drive the AOMs. Sharing the clock keeps the two phases related, which keeps the probe-control beat stable. The cables are drawn automatically.' },
+    { kind: 'csrc', title: 'Field and temperature', text: 'The coil current source sets B along the cell axis; the temperature controller sets the heater. Their cables run to the cell: B sets the two-photon resonance, temperature sets the optical depth.' },
+    { kind: 'fgen', title: 'Timing for stored light', text: 'The function generator gates both RF chains: it slices a probe pulse, switches the control off to store it and on again to retrieve it. Open “Pulsed storage” on the scope to run the sequence.' },
+    { kind: 'scope', title: 'Record it', text: 'The oscilloscope reads the probe photodiode. This is the real-bench counterpart of the scope panel under the 3D view.' }
   ];
   var tourI = -1;
   function tourComp(st) { var list = S.layout.components.filter(function (c) { return c.kind === st.kind; }); return list[st.nth || 0] || list[0] || null; }
@@ -3083,14 +3197,15 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
       if (an) { an.t = Math.min(1, an.t + dt / 0.3); var e = 1 - Math.pow(1 - an.t, 3); g.rotation.y = an.from + (an.to - an.from) * e; if (an.t >= 1) g.userData.anim = null; needRender = true; }
       if (g.userData.pop !== undefined) { g.userData.pop = Math.min(1, g.userData.pop + dt / 0.28); var s = 1 - Math.pow(1 - g.userData.pop, 3); g.scale.setScalar(Math.max(0.05, s)); if (g.userData.pop >= 1) { delete g.userData.pop; g.scale.setScalar(1); } needRender = true; }
     });
-    if (G.dots && G.dots.length && !reduceMotion && G.opt.cables) { var tt = t / 1000; G.dots.forEach(function (d) { d.m.position.copy(d.curve.getPoint((tt * 0.35 + d.ph) % 1)); }); needRender = true; }
+    if (G.dots && G.dots.length && !reduceMotion && G.opt.cables) { var tt = t / 1000; G.dots.forEach(function (d) { var s = ((tt * 0.12 + d.ph) % 1) * d.len, i = 0; while (i < d.segs.length - 1 && s > d.segs[i].L) s -= d.segs[i++].L; var q = d.segs[i]; d.m.position.lerpVectors(q.p0, q.p1, Math.min(1, s / q.L)); }); needRender = true; }
     stepDrift(dt);
     if (!reduceMotion && G.opt.flow) { for (var i = 0; i < G.flow.length; i++) G.flow[i].tex.offset.y -= G.flow[i].speed * dt; if (G.flow.length) needRender = true; }
     if (G.ctr && G.ctr.enableDamping) G.ctr.update();
     if (needRender) {
       G.renderer.render(G.scene, G.cam); needRender = false;
       var r = G.stage.getBoundingClientRect(); G.cam.updateMatrixWorld();
-      for (var id in G.labels) project(G.labels[id].pos, G.labels[id].el, r.width, r.height);
+      var far = G.cam.position.distanceTo(G.ctr.target) > 850;
+      for (var id in G.labels) { var Lb = G.labels[id]; if (Lb.minor && far && id !== S.sel) Lb.el.style.display = 'none'; else project(Lb.pos, Lb.el, r.width, r.height); }
       G.chips.forEach(function (c) { project(c.pos, c.el, r.width, r.height); });
     }
     scopePhase += dt * 0.25; if ((S.scope === 'sweep' || S.scope === 'err') && !reduceMotion && Math.floor(t / 100) !== Math.floor((t - dt * 1000) / 100)) drawScope();
@@ -3113,6 +3228,7 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
     $('simPersp').addEventListener('click', function () { setView('3d'); });
     $('simFront').addEventListener('click', function () { setView('front'); });
     $('simSource').addEventListener('click', function () { setView('source'); });
+    $('simSas').addEventListener('click', function () { setView('sas'); });
     $('simCellV').addEventListener('click', function () { setView('cell'); });
     $('simFocus').addEventListener('click', function () { if (S.sel) focusComp(S.sel); else showMsg('Select a component first'); });
     $('simFilter').addEventListener('change', function (e) { G.opt.filter = e.target.value; syncMeshes(); });
