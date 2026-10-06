@@ -1864,32 +1864,53 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
   function referenceLayout() {
     var n = 0;
     function mk(kind, x, z, rot, params) { var p = defaultParams(kind); if (params) for (var k in params) p[k] = params[k]; return { id: kind + (++n), kind: kind, x: x, z: z, rot: rot, params: p }; }
+    function M(x, z, din, dout) { return mk('mirror', x, z, rotMirror(din, dout)); }
+    function B(x, z, din, dout) { return mk('pbs', x, z, rotPBS(din, dout)); }
     var comps = [
-      mk('laser', 50, 150, 0, { power: 10 }),
-      mk('isolator', 100, 150, 0),
-      mk('hwp', 150, 150, 0, { axis: 29 }),          // 45° linear after isolator -> ~13° : ~5 % to SAS
-      mk('pbs', 200, 150, rotPBS(E, N)),             // pick-off: V reflected north to SAS
-      mk('sas', 200, 50, 270),
-      mk('hwp', 250, 150, 0, { axis: 10 }),          // sets probe/control split (~12 % probe)
-      mk('pbs', 300, 150, rotPBS(E, S)),             // splitter: H -> control (east), V -> probe (south)
-      mk('pbs', 375, 150, rotPBS(Wd, S)),            // control double-pass separator
-      mk('aom', 450, 150, 0, { fMHz: 80.000, eff: 0.35, mode: 'double', order: 1 }),
-      mk('pbs', 300, 225, rotPBS(S, Wd)),            // probe double-pass separator
-      mk('aom', 225, 225, 180, { fMHz: 79.965, eff: 0.5, mode: 'double', order: 1 }),
-      mk('nd', 350, 225, 0, { od: 2 }),
-      mk('pbs', 375, 225, rotPBS(S, E)),             // recombiner: probe (H) transmits, control (V) reflects
-      mk('qwp', 450, 225, 0, { axis: 45 }),
-      mk('cell', 550, 225, 0),
-      mk('qwp', 650, 225, 0, { axis: -45 }),
-      mk('glan', 700, 225, 0, { axis: 0 }),
-      mk('dump', 700, 300, 90),
-      mk('pd', 775, 225, 0),
-      mk('fgen', 800, 500, 180),
-      mk('lctrl', 50, 50, 0),
-      mk('lockbox', 125, 50, 0)
+      // --- source, isolation and master axis ---
+      mk('laser', 50, 200, 0, { power: 10 }),
+      mk('isolator', 100, 200, 0),
+      M(150, 200, E, S), M(150, 250, S, E),          // two steering mirrors set the master axis
+      mk('iris', 200, 250, 0, { ap: 3 }),
+      mk('hwp', 250, 250, 0, { axis: 29 }),          // ~5 % to the SAS reference
+      B(300, 250, E, N),                             // pick-off: V reflected north to the SAS arm
+      // --- SAS reference arm ---
+      M(300, 175, N, E), mk('iris', 350, 175, 0, { ap: 3 }), M(400, 175, E, N),
+      mk('sas', 400, 100, 270),
+      // --- control / probe split ---
+      mk('iris', 350, 250, 0, { ap: 3 }),
+      mk('hwp', 400, 250, 0, { axis: 10 }),          // sets the probe/control split (~12 % probe)
+      B(450, 250, E, S),                             // splitter: H -> control (east), V -> probe (south)
+      // --- control arm ---
+      M(525, 250, E, N), M(525, 175, N, E),
+      B(575, 175, Wd, S),                            // control double-pass input / return separator
+      mk('aom', 625, 175, 0, { fMHz: 80.000, eff: 0.35, mode: 'double', order: 1 }),
+      mk('hwp', 575, 225, 0, { axis: 0 }),           // control output polarization trim
+      mk('lens', 575, 260, 0), mk('lens', 575, 300, 0), // beam expander
+      // --- probe arm ---
+      M(450, 300, S, Wd), M(325, 300, Wd, S),
+      B(325, 350, S, Wd),                            // probe double-pass separator
+      mk('aom', 250, 350, 180, { fMHz: 79.965, eff: 0.5, mode: 'double', order: 1 }),
+      M(375, 350, E, S), M(375, 400, S, E),
+      mk('nd', 425, 400, 0, { od: 2 }),
+      // --- recombine, cell, analyser, detector ---
+      B(575, 400, S, E),                             // recombiner: probe (H) transmits, control (V) reflects
+      mk('iris', 610, 400, 0, { ap: 3 }),
+      mk('qwp', 635, 400, 0, { axis: 45 }),
+      mk('cell', 715, 400, 0),
+      mk('qwp', 795, 400, 0, { axis: -45 }),
+      mk('glan', 830, 400, 0, { axis: 0 }),
+      mk('pd', 870, 400, 0),
+      // --- beam dumps for the PBS leakage and the rejected control ---
+      mk('dump', 830, 475, 270), mk('dump', 575, 125, 90), mk('dump', 450, 200, 90), mk('dump', 325, 400, 270), mk('dump', 575, 450, 270), mk('dump', 300, 300, 270),
+      // --- electronics ---
+      mk('fgen', 775, 540, 180),
+      mk('lctrl', 50, 100, 0),
+      mk('lockbox', 125, 100, 0)
     ];
     return { mode: 'A', components: comps, state: { locked: true, tau_us: 20, storageRan: false } };
   }
+
   var api = {
     K: K, C: C, J: J, H: H, V: V, jPower: jPower, jNorm: jNorm, mApply: mApply, hwpMatrix: hwpMatrix, qwpMatrix: qwpMatrix,
     stokes: stokes, polLabel: polLabel, eitResponse: eitResponse, gammaEIT: gammaEIT,
@@ -2204,15 +2225,15 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
   var INFO2 = {
     laser: ['Single source for the whole experiment: the control, the probe and the SAS reference are all cut from this one beam.', 'The reference bench uses 10 mW. Typical limit is set by the AOM efficiencies and the control intensity you want in the cell (about 1–6 mW/cm² in the paper).', 'Raise the power and watch the control intensity and EIT width in the cell readout. Remove the isolator and read the warning.'],
     isolator: ['Stops light coming back from the AOM double-passes and cell windows from re-entering the DFB, where it would cause mode hops and break the lock.', 'First optic after the laser, arrow pointing away from it.', 'Rotate it 180° and the forward beam is blocked.'],
-    mirror: ['Folds the beam to fit the breadboard. Each mirror adds two adjustment axes, which is why steering is usually done with a pair.', 'The reference layout uses none, so the beams run straight. Add two to fold a longer path.', 'Rotate in 45° steps: the beam turns 90°. A circular polarization flips handedness on reflection.'],
+    mirror: ['Folds the beam to fit the breadboard. Each mirror adds two adjustment axes, which is why steering is usually done with a pair.', 'Ten on the reference bench: two set the master axis after the isolator, two fold the SAS arm, two fold the control arm and four fold the probe arm so it fits next to the control arm.', 'Rotate in 45° steps: the beam turns 90° and the downstream light leaves its path. A circular polarization flips handedness on reflection.'],
     pbs: ['Five on the reference bench: the pick-off to the SAS, the control/probe splitter, the two double-pass separators and the recombiner.', 'Horizontal light transmits, vertical light turns 90°. Extinction 10³ is typical, so ~0.1 % leaks into the wrong port.', 'Rotate one and see which arm loses light. A PBS with the wrong orientation sends the beam to the edge of the table (orange glow).'],
     npbs: ['A polarization-independent splitter: useful for a power tap when you do not want to disturb the polarization.', 'Not on the reference bench.', 'Swap it for a PBS and see the split depend on the polarization.'],
     pickoff: ['Samples a few percent of the beam for monitoring (about 4 % per surface).', 'Not on the reference bench: the project plan uses λ/2 + PBS instead, which is adjustable.', 'Place one after the laser and compare the SAS power with the λ/2 + PBS version.'],
-    hwp: ['Two on the reference bench. The first (θ ≈ 29°) sends about 5 % of the light to the SAS; the second (θ ≈ 10°) sets the probe/control split, about 12 % to the probe.', 'A rotation of θ turns the polarization by 2θ. Setting the split by plate angle is far finer than swapping optics.', 'Select the second one and drag its angle slider: the two arms trade brightness through the PBS.'],
+    hwp: ['Three on the reference bench. The first (θ ≈ 29°) sends about 5 % of the light to the SAS; the second (θ ≈ 10°) sets the probe/control split, about 12 % to the probe; the third (0°) trims the control polarization before the combiner.', 'A rotation of θ turns the polarization by 2θ. Setting the split by plate angle is far finer than swapping optics.', 'Select the second one and drag its angle slider: the two arms trade brightness through the PBS.'],
     qwp: ['Two on the reference bench. The one before the cell (45°) turns the H and V arms into σ⁺ and σ⁻. The one after the cell (−45°) turns them back to linear so the Glan–Taylor can reject the control.', 'Fast axis at 45° to the incoming linear polarization gives circular light.', 'Set the first one to 0° and the cell sees linear light: the EIT objective drops out.'],
     aom: ['Two on the reference bench, one per arm. Each is double-passed so the beam direction does not change when the RF frequency changes, and the shift doubles.', 'Control AOM at 80.000 MHz, probe AOM at 79.965 MHz: a 35 kHz RF difference gives 70 kHz at the atoms, which matches 50 mG.', 'Change the probe AOM frequency by a few kHz and the scope shows the EIT peak moving. Turn the RF off and the arm goes dark.'],
-    lens: ['Cosmetic here. On a real bench the cat’s-eye lens in each double-pass and the control telescope matter a lot: the beam size at the AOM sets the efficiency and the rise time.', 'Not needed for the simulation.', 'No effect on the trace (the tracer keeps beams collimated).'],
-    iris: ['Selects one diffraction order and cleans up stray light.', 'Place it just after an AOM to pass the +1 order and block the 0th.', 'Close it below the beam diameter and the beam disappears.'],
+    lens: ['Cosmetic here. On a real bench the cat’s-eye lens in each double-pass and the control telescope matter a lot: the beam size at the AOM sets the efficiency and the rise time.', 'Two lenses form the control-beam expander before the combiner (the double-pass cat’s-eye lenses are inside the AOM modules).', 'No effect on the trace (the tracer keeps beams collimated).'],
+    iris: ['Selects one diffraction order and cleans up stray light.', 'Four on the reference bench: two on the master axis, one in the SAS arm and one before the cell. Use them to align: centre the beam on two irises and every optic between them is on axis.', 'Close one below the beam diameter and the beam disappears.'],
     nd: ['Keeps the probe weak (Ω_p ≪ Ω_c) so the EIT window is not power-broadened and the probe does not saturate the medium.', 'OD 2 on the probe arm of the reference bench: 1 % transmission.', 'Change the OD and watch the probe power at the detector. Remove it and the contrast changes.'],
     cell: ['The heart of the experiment: ⁸⁷Rb vapour in a quartz cell with a heater, a solenoid along the beams and a three-layer µ-metal shield.', 'Reference values: 60 °C (OD ≈ 10), buffer gas, solenoid on, |B| ≈ 50 mG. The cell absorbs unless the control is on and the two-photon detuning is within the EIT width.', 'Turn the shield off: residual field jumps to hundreds of mG and the resonance moves out of the scan. Reverse B and watch δ₀ flip sign.'],
     sas: ['The frequency ruler for the lock: sub-Doppler lines in a reference cell give a feature narrow enough to hold the DFB near F=2→F′=1.', 'Fed by the first PBS pick-off, 5 % of the beam. Its photodiode output goes to the lock box.', 'Block the pick-off light and the error signal vanishes; the laser then drifts.'],
@@ -2220,7 +2241,7 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
     lockbox: ['The servo: it turns the SAS signal into a zero-crossing error signal and feeds the controller. Slope sign, gain and integrator are the three settings.', 'Locked, gain about 1, slope sign +.', 'Flip the sign: the loop pushes the laser away instead of back. Raise the gain too far: oscillation.'],
     glan: ['Rejects the control beam after the cell. The paper quotes ~10⁵ extinction, far better than a PBS (~10³), which is why it is used here.', 'Follows the second quarter-wave plate. Transmission axis set to pass the probe.', 'Replace it by a PBS and the control leaks onto the detector at a hundred times higher level.'],
     pd: ['Measures the probe power after the cell. The EIT peak is a small rise in this signal as the two-photon detuning is scanned.', 'Its readout splits the light into probe, control leakage and other.', 'Block the probe arm and the signal drops to the control leakage.'],
-    dump: ['Safely absorbs the control beam rejected by the Glan–Taylor and other stray beams.', 'Beside the Glan–Taylor’s reject port.', 'Remove it and the rejected control hits the table edge (orange glow): a stray-light hazard.'],
+    dump: ['Safely absorbs the control beam rejected by the Glan–Taylor and other stray beams.', 'Six on the reference bench: one at the Glan–Taylor’s reject port and five that catch the ~0.1 % PBS leakage.', 'Remove one and that beam runs on to the table edge (orange glow): a stray-light hazard.'],
     fgen: ['Dual-channel burst generator that gates both AOM RF channels: it slices the probe pulse and switches the control off for storage and on for retrieval.', 'Off the beam path. Needed for the pulsed-storage scope mode.', 'Open the Pulsed storage scope and change τ to see the retrieved pulse shrink with the coherence time.']
   };
   var GROUPS = [
@@ -2613,10 +2634,10 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
     if (!G.cam) return;
     var pos, tgt = new THREE.Vector3(0, 0, 0);
     if (v === 'top') { pos = new THREE.Vector3(0, 1100, 1); tgt.set(0, 0, 0); }
-    else if (v === 'front') { pos = new THREE.Vector3(0, 170, 880); tgt.set(0, 20, 0); }
-    else if (v === 'source') { pos = new THREE.Vector3(-420, 260, 330); tgt.set(-330, 20, -120); }
-    else if (v === 'cell') { pos = new THREE.Vector3(250, 230, 300); tgt.set(100, 30, -60); }
-    else { pos = new THREE.Vector3(-40, 560, 600); tgt.set(0, 0, -75); }
+    else if (v === 'front') { pos = new THREE.Vector3(0, 200, 950); tgt.set(0, 20, 30); }
+    else if (v === 'source') { pos = new THREE.Vector3(-380, 300, 280); tgt.set(-300, 20, -90); }
+    else if (v === 'cell') { pos = new THREE.Vector3(420, 240, 340); tgt.set(260, 30, 100); }
+    else { pos = new THREE.Vector3(-20, 700, 780); tgt.set(0, 0, 10); }
     flyTo(pos, tgt, instant);
   }
   function flyTo(pos, tgt, instant) {
@@ -2993,14 +3014,18 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
   var TOUR = [
     { kind: 'laser', title: 'One laser feeds everything', text: 'A single fibre-coupled DFB laser at 795 nm (Rb D1) is the source for the control, the probe and the lock reference. Because both EIT fields share this laser, its ~MHz linewidth is common to both and largely cancels in the two-photon detuning.' },
     { kind: 'isolator', title: 'Protect the diode', text: 'The Faraday isolator passes light forward and blocks the reflections coming back from the AOM double-passes and cell windows. Without it the DFB mode-hops and the lock fails.' },
+    { kind: 'mirror', nth: 0, title: 'Set the master axis', text: 'Two kinematic steering mirrors and two irises define one repeatable beam axis. Each mirror has two adjustment axes; a small tilt θ moves the beam by 2θ. Centre the beam on both irises before adding any other optic. Select a mirror and rotate it to see everything downstream lose the beam.' },
     { kind: 'sas', title: 'Reference for the frequency lock', text: 'A half-wave plate and a PBS pick off roughly 5 % of the beam into the saturated-absorption module. Its sub-Doppler features are the frequency ruler: the lock holds the laser near F=2→F′=1.' },
+    { kind: 'mirror', nth: 2, title: 'Fold the SAS arm', text: 'Two more mirrors and an iris carry the pick-off to the SAS module so it fits beside the main axis. The pick-off PBS reflects the vertical component north; the rest continues east to the splitter.' },
     { kind: 'lockbox', title: 'Close the loop', text: 'The lock box turns the SAS signal into an error signal and feeds the laser controller, which trims the DFB current. SAS → lock box → controller → DFB: the cables here are drawn automatically. Open any link and the laser drifts.' },
     { kind: 'pbs', nth: 1, title: 'Split into control and probe', text: 'The second half-wave plate sets the power ratio. This PBS sends horizontal light (control, strong) one way and vertical light (probe, weak) the other. Rotate that plate and watch the two arms trade brightness.' },
     { kind: 'aom', nth: 0, title: 'Control arm: double-pass AOM', text: 'The AOM shifts the control by 2 × f_RF and the cat’s-eye module sends the chosen order back along the input with its polarization rotated by 90°, so the upstream PBS routes it onward. RF off means no light.' },
+    { kind: 'lens', nth: 0, title: 'Control beam expander', text: 'Two lenses after the double-pass expand the control so it overfills the probe in the cell. The control intensity (mW/cm²) sets the EIT linewidth, so beam size matters as much as power. A half-wave plate trims its polarization before the combiner.' },
+    { kind: 'mirror', nth: 6, title: 'Probe arm: fold and double-pass', text: 'The probe leaves the splitter heading south, is folded by two mirrors into its double-pass separator, and after the AOM is folded again by two more mirrors to meet the control at the combiner. Path lengths of the two arms stay close, which helps the phase-locked RF.' },
     { kind: 'aom', nth: 1, title: 'Probe arm: second AOM', text: 'The probe passes its own AOM, a few tens of kHz away from the control in RF frequency. That small difference is what makes the two-photon detuning match the Zeeman splitting. The ND filter keeps the probe weak.' },
-    { kind: 'qwp', nth: 0, title: 'Opposite circular polarizations', text: 'After the PBS recombiner the beams overlap with orthogonal linear polarizations. The quarter-wave plate at 45° turns them into σ⁺ and σ⁻, the pair that drives the Λ system.' },
+    { kind: 'qwp', nth: 0, title: 'Opposite circular polarizations', text: 'The PBS recombiner transmits the probe (H) and reflects the control (V) onto one line, so the beams overlap with orthogonal linear polarizations. The quarter-wave plate at 45° turns them into σ⁺ and σ⁻, the pair that drives the Λ system.' },
     { kind: 'cell', title: 'Shielded vapour cell', text: 'The ⁸⁷Rb cell sits in a heater, a solenoid (the bias field along the beams) and three layers of µ-metal. Use the shield cutaway button to look inside. The field sets the two-photon resonance, 1.4 kHz per mG.' },
-    { kind: 'glan', title: 'Throw the control away', text: 'A second quarter-wave plate undoes the circular polarization and the Glan–Taylor (extinction ~10⁵) transmits only the probe. The rejected control goes to the beam dump.' },
+    { kind: 'glan', title: 'Throw the control away', text: 'A second quarter-wave plate undoes the circular polarization and the Glan–Taylor (extinction ~10⁵) transmits only the probe. The rejected control goes to the beam dump; four more dumps catch the ~0.1 % PBS leakage so no stray light leaves the table.' },
     { kind: 'pd', title: 'Detect the transparency window', text: 'The photodiode sees the probe transmission. Sweep the two-photon detuning on the scope below and the EIT peak appears when everything upstream is right.' },
     { kind: 'fgen', title: 'Timing for stored light', text: 'The function generator gates both AOMs: it slices a probe pulse, switches the control off to store it and on again to retrieve it. Open “Pulsed storage” on the scope to run the sequence.' }
   ];
