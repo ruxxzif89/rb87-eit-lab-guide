@@ -33,7 +33,7 @@
     sasWidth_MHz: 12,              // ILLUSTRATIVE width of a sub-Doppler SAS feature (error-signal plot only)
     beamHeight: 40,
     aomAngle_deg: 8,               // ILLUSTRATIVE: exaggerated 1st-order deflection so the orders separate on screen (real: tens of mrad)
-    table: { w: 1800, d: 1200, pitch: 25 }   // 1.8 m x 1.2 m optical table
+    table: { w: 2400, d: 1600, pitch: 25 }   // 2.4 m x 1.6 m optical table (drawn generously, for illustration)
   };
 
   /* ---------------- complex helpers ---------------- */
@@ -528,6 +528,7 @@
   var E = [1, 0], Wd = [-1, 0], S = [0, 1], N = [0, -1];
   function referenceLayout() {
     var n = 0, A = K.aomAngle_deg * Math.PI / 180;
+    var DP = 1.5 / LAYOUT_SCALE;   // keeps the double-pass arm (lens ~ one focal length from its mirror) the same physical size when the layout is spread out
     function mk(kind, x, z, rot, params) { var p = defaultParams(kind); if (params) for (var k in params) p[k] = params[k]; return { id: kind + (++n), kind: kind, x: Math.round(x * 10) / 10, z: Math.round(z * 10) / 10, rot: rot, params: p }; }
     function M(x, z, din, dout) { return mk('mirror', x, z, rotMirror(din, dout)); }
     function B(x, z, din, dout, kind) { return mk(kind || 'pbs', x, z, rotPBS(din, dout)); }
@@ -535,11 +536,11 @@
     function dp(x, z, east, fMHz, eff) {
       var sg = east ? 1 : -1, d1 = [sg * Math.cos(A), east ? -Math.sin(A) : Math.sin(A)], r1 = Math.round(Math.atan2(d1[1], d1[0]) * 1800 / Math.PI) / 10;
       function at(L) { return [x + L * d1[0], z + L * d1[1]]; }
-      var q = at(40), l = at(80), m = at(150);
+      var q = at(40 * DP), l = at(80 * DP), m = at(150 * DP);
       return [mk('aom', x, z, east ? 0 : 180, { fMHz: fMHz, eff: eff, mode: 'single', order: 1 }),
         mk('qwp', q[0], q[1], r1, { axis: 45 }), mk('lens', l[0], l[1], r1), mk('mirror', m[0], m[1], r1),
-        mk('dump', x + sg * 180, z, east ? 180 : 0),
-        mk('dump', x - sg * 160 * Math.cos(A), z + (east ? 1 : -1) * 160 * Math.sin(A), east ? 90 : 270)]; // 0th order of the returning pass
+        mk('dump', x + sg * 180 * DP, z, east ? 180 : 0),
+        mk('dump', x - sg * 160 * DP * Math.cos(A), z + (east ? 1 : -1) * 160 * DP * Math.sin(A), east ? 90 : 270)]; // 0th order of the returning pass
     }
     var comps = [];
     function add() { for (var i = 0; i < arguments.length; i++) { if (Array.isArray(arguments[i])) comps.push.apply(comps, arguments[i]); else comps.push(arguments[i]); } }
@@ -597,7 +598,7 @@
     comps.forEach(function (c) { c.x = Math.round(c.x * LAYOUT_SCALE * 10) / 10; c.z = Math.round(c.z * LAYOUT_SCALE * 10) / 10; });
     return { mode: 'A', components: comps, state: { locked: true, tau_us: 20, storageRan: false } };
   }
-  var LAYOUT_SCALE = 1.5;
+  var LAYOUT_SCALE = 2.0;
   // Painted zones on the table, in the compact layout's coordinates (scaled on the way out). rects: [x0, z0, x1, z1]; lab: [x, z, align] places the name chip: 'tl' = hangs below-right of the point, 'bl' = sits above-right of it, 'l' / 'r' = beside it.
   var ZONES = [
     { id: 'source', name: 'SOURCE & MASTER AXIS', sub: 'fibre laser, fibre isolator, mirrors, pick-off, splitter', color: '#f29a38', lab: [20, 266, 'tl'], rects: [[20, 105, 325, 262], [325, 212, 545, 300]] },

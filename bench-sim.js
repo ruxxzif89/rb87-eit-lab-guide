@@ -440,17 +440,17 @@
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
     renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     var scene = new THREE.Scene(); G.scene = scene;
-    var cam = new THREE.PerspectiveCamera(38, 1, 5, 6000); G.cam = cam;
+    var cam = new THREE.PerspectiveCamera(38, 1, 5, 9000); G.cam = cam;
     setView('3d', true);
     bindPointer();
     var ctr = new THREE.OrbitControls(cam, canvas); G.ctr = ctr;
-    ctr.enableDamping = !reduceMotion; ctr.dampingFactor = 0.12; ctr.maxPolarAngle = Math.PI * 0.47; ctr.minDistance = 90; ctr.maxDistance = 4800; ctr.target.set(0, 0, 0); ctr.screenSpacePanning = true;
+    ctr.enableDamping = !reduceMotion; ctr.dampingFactor = 0.12; ctr.maxPolarAngle = Math.PI * 0.47; ctr.minDistance = 90; ctr.maxDistance = 6400; ctr.target.set(0, 0, 0); ctr.screenSpacePanning = true;
     ctr.addEventListener('change', requestRender);
     scene.add(new THREE.HemisphereLight(0xdfeaff, 0x40454a, 0.85));
-    var key = new THREE.DirectionalLight(0xfff1dc, 0.85); key.position.set(-750, 1700, 840); key.castShadow = true;
+    var key = new THREE.DirectionalLight(0xfff1dc, 0.85); key.position.set(-1000, 2200, 1100); key.castShadow = true;
     key.shadow.mapSize.set(3072, 3072); key.shadow.bias = -0.0006;
-    var sc = key.shadow.camera; sc.left = -1150; sc.right = 1150; sc.top = 850; sc.bottom = -850; sc.near = 100; sc.far = 4000; scene.add(key);
-    var fill = new THREE.DirectionalLight(0x7fb4e6, 0.35); fill.position.set(980, 750, -900); scene.add(fill);
+    var sc = key.shadow.camera; sc.left = -1550; sc.right = 1550; sc.top = 1100; sc.bottom = -1100; sc.near = 100; sc.far = 5200; scene.add(key);
+    var fill = new THREE.DirectionalLight(0x7fb4e6, 0.35); fill.position.set(1300, 1000, -1200); scene.add(fill);
     G.compGroup = new THREE.Group(); G.beamGroup = new THREE.Group(); G.cableGroup = new THREE.Group();
     scene.add(G.compGroup); scene.add(G.beamGroup); scene.add(G.cableGroup);
     G.layer = document.createElement('div'); G.layer.className = 'optic-layer'; stage.appendChild(G.layer);
@@ -469,8 +469,8 @@
   function setView(v, instant) {
     if (!G.cam) return;
     var pos, tgt = new THREE.Vector3(0, 0, 0);
-    var TW = K.table.w, TD = K.table.d;
-    function tw(x, z) { return new THREE.Vector3(x - TW / 2, 0, z - TD / 2); }   // table (mm) -> world
+    var TW = K.table.w, TD = K.table.d, ks = TW / 1800;
+    function tw(x, z) { return new THREE.Vector3(x * ks - TW / 2, 0, z * ks - TD / 2); }   // x, z given on the 1800 mm layout   // table (mm) -> world
     var asp = Math.max(0.5, G.cam.aspect || 1.6), tf = Math.tan(G.cam.fov * Math.PI / 360);
     var fit = Math.max(TD / 2 / tf, TW / 2 / (tf * asp)) * 1.06;   // distance at which the whole table fits the view
     if (v === 'top') { pos = new THREE.Vector3(0, fit, 1); tgt.set(0, 0, 0); }
@@ -1043,7 +1043,7 @@
     if (needRender) {
       G.renderer.render(G.scene, G.cam); needRender = false;
       var r = G.stage.getBoundingClientRect(); G.cam.updateMatrixWorld();
-      var far = G.cam.position.distanceTo(G.ctr.target) > 1300;
+      var far = G.cam.position.distanceTo(G.ctr.target) > 1700;
       for (var id in G.labels) { var Lb = G.labels[id]; if (Lb.minor && far && id !== S.sel) Lb.el.style.display = 'none'; else project(Lb.pos, Lb.el, r.width, r.height); }
       G.chips.forEach(function (c) { project(c.pos, c.el, r.width, r.height); });
       (G.zoneLabels || []).forEach(function (L) { projectZone(L, r.width, r.height); });

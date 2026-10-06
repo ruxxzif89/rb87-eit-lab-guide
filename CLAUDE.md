@@ -14,7 +14,7 @@
 
 - index.html: Zeeman EIT guide with the 3D bench simulator, wiring diagram, and the (price-free) equipment table.
 - bench.html: the 3D bench simulator on a full page (same markup and scripts as index.html Part 05).
-- eitphys.js: the physics engine and the reference layout (73 parts, scaled by LAYOUT_SCALE onto a 1800x1200 mm table) plus the zone rectangles; bench-sim.js: the three.js simulator UI. Both are shared by index.html and bench.html (bump the ?v= query when editing). quantum.html keeps its own embedded copy of the physics.
+- eitphys.js: the physics engine and the reference layout (73 parts, scaled by LAYOUT_SCALE onto a 2400x1600 mm table) plus the zone rectangles; bench-sim.js: the three.js simulator UI. Both are shared by index.html and bench.html (bump the ?v= query when editing). quantum.html keeps its own embedded copy of the physics.
 - equipment.html: the equipment table on its own tab, plus the password-gated costed BOM (ticks: have it / remove / cheaper alternative found with price and link; saved in the browser and in a Google Sheet through an Apps Script).
 - quantum.html: Quantum Optics Lectures (primers P0-P5, L1-L13, appendices, bibliography).
 - parts3d.js: three.js models for the equipment pictures (ported from the simulator plus extra items). `Parts3D.scan(root)` renders `.p3d` elements; clicking opens a viewer.
