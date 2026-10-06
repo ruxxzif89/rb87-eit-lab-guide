@@ -9,7 +9,7 @@ Reading material and interactive 3D optical-bench simulators for building a room
 | Page | File | What it covers |
 |---|---|---|
 | Method A · Zeeman EIT (AOM) | `index.html` | The primary configuration. One DFB laser locked by saturated absorption spectroscopy (SAS) with a full servo loop. Control and probe arms each pass a double-pass AOM, with orthogonal circular polarizations. The cell sits in a solenoid inside a mu-metal shield, and a Glan-Taylor separates the probe before detection. |
-| Quantum Optics Lectures | `quantum.html` | Twelve lectures, from photons and the two-level atom up to EIT, slow and stored light, quantum memories, single photons and strong coupling. |
+| Quantum Optics Lectures | `quantum.html` | Six primers (how to use the notes, history, motivation, maths toolkit, basic quantum mechanics, basic quantum optics) and thirteen lectures, from photons and the two-level atom up to EIT, slow and stored light, quantum memories, single photons, strong coupling and the bench itself (polarization, Gaussian beams, AOMs, locking, cells and shielding, detectors, laser safety). |
 
 Both pages share a top navigation bar. The guide includes a **"Why Method A?"** decision record.
 
@@ -17,7 +17,7 @@ Both pages share a top navigation bar. The guide includes a **"Why Method A?"** 
 Project at a glance · Glossary (searchable, about 100 terms) · Physics from scratch · Method A experimental architecture (including the SAS → lock box → laser controller → DFB frequency lock) · Why Method A? · 3D optical-bench simulator · Bring-up & audit protocol · Equipment list · Recommended reading
 
 ### Lectures
-L1 Light as waves and photons · L2 Quantum states and measurement · L3 Two-level atom, Rabi oscillations, Bloch sphere · L4 Density matrix, decay and dephasing · L5 Atomic structure for alkalis · L6 Susceptibility, absorption, dispersion · L7 Dark states, CPT, EIT, Autler–Townes · L8 Slow and stopped light · L9 Thermal vapour effects · L10 Quantum memories · L11 Quantum states of light · L12 Strong coupling and polaritons in solids
+P0 Start here · P1 History · P2 Motivation · P3 Maths toolkit · P4 Basic quantum mechanics · P5 Basic quantum optics · L1 Light as waves and photons · L2 Quantum states and measurement · L3 Two-level atom, Rabi oscillations, Bloch sphere · L4 Density matrix, decay and dephasing · L5 Atomic structure for alkalis · L6 Susceptibility, absorption, dispersion · L7 Dark states, CPT, EIT, Autler–Townes · L8 Slow and stopped light · L9 Thermal vapour effects · L10 Quantum memories · L11 Quantum states of light · L12 Strong coupling and polaritons in solids · L13 Lab fundamentals for the project · Appendices (symbols, constants and ⁸⁷Rb data, record of checks and corrections) and a bibliography.
 
 ## Features
 
@@ -37,6 +37,11 @@ L1 Light as waves and photons · L2 Quantum states and measurement · L3 Two-lev
   - Game-style objectives tick off automatically as the setup is built correctly.
 - **Wiring diagram and cable schedule** (Part 07): every electrical connection, with cable type and purpose.
 - **Equipment list** (Part 07): 67 line items with quantity, suggested brand and part number, why each is needed, and a vendor link. Quantities for optics and instruments are checked against the 3D bench. A costed version is available to project members.
+- **Lecture notes (quantum.html):**
+  - Eleven interactive three.js illustrations next to the equations they explain (electromagnetic wave and polarization, Bloch sphere in three modes, Zeeman sublevels, absorption and dispersion, dark and bright states, slow and stored light, Wigner functions, avoided crossing, Poincaré sphere, Gaussian beam).
+  - Hover, focus or tap any symbol, in the text or inside an equation, for its name, meaning and units; each equation also has a chip bar listing its symbols.
+  - "Go deeper" boxes with derivations, pitfalls and sources, and a bibliography of 130+ entries whose article metadata was checked against the DOI registration records (books against library records).
+  - Atomic data come from Steck's ⁸⁷Rb D line data, revision 2.3.4 (August 2025).
 - Light and dark themes; works on phones.
 
 ## Run locally
@@ -49,7 +54,7 @@ python3 -m http.server 8000
 ```
 
 An internet connection is needed for the libraries and fonts, which load from CDNs:
-- [three.js r128](https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js)
+- [three.js r128](https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js) (both pages)
 - OrbitControls (three@0.128.0)
 - [MathJax 3.2.2](https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg-full.js) (SVG output)
 - Google Fonts
