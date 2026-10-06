@@ -3388,7 +3388,7 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
 <script>
 /* Costed BOM: fetched from a private Google Apps Script web app after a password check. No prices or password live in this page. */
 (function () {
-  var BOM_ENDPOINT = ''; // paste the Apps Script web-app URL (ends in /exec) here after deploying private/apps-script/code.gs
+  var BOM_ENDPOINT = 'https://script.google.com/macros/s/AKfycbzf7xklNDJ5bgLxpbI09A7oD6qLGath35qEceIK33m8HxycpijV6eH2y5VMXlvdEqcD2g/exec'; // paste the Apps Script web-app URL (ends in /exec) here after deploying private/apps-script/code.gs
   var form = document.getElementById('bomForm'); if (!form) return;
   var out = document.getElementById('bomOut'), pw = document.getElementById('bomPw'), btn = document.getElementById('bomGo');
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
