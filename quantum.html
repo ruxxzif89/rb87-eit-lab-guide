@@ -54,7 +54,7 @@
 [hidden]{display:none!important}
 img,svg,canvas,video{max-width:100%}
 :root{padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom)}
-html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:calc(var(--nav-h,44px) + 10px)}
 @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font-body);font-size:16.5px;line-height:1.62;overflow-x:hidden}
 a{color:var(--accent);text-underline-offset:2px;text-decoration-thickness:1px}
@@ -99,7 +99,7 @@ hr{border:0;border-top:1px solid var(--rule)}
 /* ---------- layout ---------- */
 .layout{display:grid;grid-template-columns:240px minmax(0,1fr);gap:40px;padding-block:28px 60px}
 @media (max-width:1020px){.layout{grid-template-columns:minmax(0,1fr);gap:16px}}
-.toc{position:sticky;top:12px;align-self:start;max-height:calc(100vh - 24px);overflow:auto;font-size:.88rem;border-left:2px solid var(--ink);padding-left:12px}
+.toc{position:sticky;top:calc(var(--nav-h,44px) + 12px);align-self:start;max-height:calc(100vh - var(--nav-h,44px) - 24px);overflow:auto;font-size:.88rem;border-left:2px solid var(--ink);padding-left:12px}
 .toc .toc-h{font-family:var(--font-mono);font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:6px}
 .toc ol{list-style:none;padding:0;margin:0}
 .toc li{margin:0}
@@ -174,7 +174,7 @@ svg.diag .fillc{fill:var(--laser-soft)}
 svg.diag .grid{stroke:var(--chart-grid);stroke-width:1}
 
 /* ---------- glossary ---------- */
-.gl-tools{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:12px 0;position:sticky;top:0;background:var(--bg);padding:8px 0;z-index:2;border-bottom:1px solid var(--rule)}
+.gl-tools{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:12px 0;position:sticky;top:var(--nav-h,44px);background:var(--bg);padding:8px 0;z-index:2;border-bottom:1px solid var(--rule)}
 .gl-tools input[type=search]{flex:1 1 220px;min-width:0;border:1px solid var(--rule-strong);background:var(--surface);padding:7px 10px;border-radius:3px}
 .chip{border:1px solid var(--rule-strong);background:var(--surface);border-radius:2px;padding:3px 9px;font-family:var(--font-mono);font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;cursor:pointer}
 .chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
@@ -289,14 +289,14 @@ footer.site .wrap{padding-block:20px 30px}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 
 /* ---------- shared top navigation ---------- */
-.topnav{background:var(--ink);color:var(--bg)}
+.topnav{background:var(--ink);color:var(--bg);position:sticky;top:0;z-index:100}
 .topnav .wrap{display:flex;flex-wrap:wrap;align-items:stretch;gap:0}
 .topnav .brand{font-family:var(--font-mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;padding:10px 14px 10px 0;opacity:.75;align-self:center}
 .topnav a{color:var(--bg);text-decoration:none;font-family:var(--font-display);font-size:1.02rem;font-weight:600;letter-spacing:.03em;text-transform:uppercase;padding:9px 14px;border-bottom:3px solid transparent;white-space:nowrap}
 .topnav a:hover{background:rgba(127,127,127,.18)}
 .topnav a[aria-current="page"]{border-bottom-color:var(--laser);background:rgba(127,127,127,.14)}
 .topnav a:focus-visible{outline-color:var(--laser)}
-@media (max-width:640px){.topnav .brand{display:none}.topnav a{font-size:.9rem;padding:8px 9px}.topnav .wrap{gap:0}}
+@media (max-width:640px){.topnav .lg{display:none}.topnav .brand{display:none}.topnav a{font-size:.9rem;padding:8px 9px}.topnav .wrap{gap:0}}
 
 /* ---------- analogy component ---------- */
 .ana{position:relative;border:1px solid var(--ana-rule);border-left:4px solid var(--ana);background:var(--ana-bg);border-radius:2px;padding:10px 14px 10px 46px;margin:-4px 0 18px;font-size:.93rem}
@@ -402,7 +402,7 @@ details.deeper p,details.deeper li{font-size:.95rem}
 </style>
 </head>
 <body>
-<nav class="topnav" aria-label="Guide pages"><div class="wrap"><span class="brand">Rb-87 EIT</span><a href="index.html">Zeeman EIT (AOM)</a><a href="equipment.html">Equipment</a><a href="quantum.html" aria-current="page">Quantum Optics Lectures</a></div></nav>
+<nav class="topnav" aria-label="Guide pages"><div class="wrap"><span class="brand">Razif</span><a href="index.html">Zeeman EIT<span class="lg"> (AOM)</span></a><a href="equipment.html">Equipment</a><a href="quantum.html" aria-current="page"><span class="lg">Quantum Optics </span>Lectures</a></div></nav>
 
 <a class="skip" href="#main">Skip to content</a>
 <header class="masthead">
@@ -2458,5 +2458,9 @@ details.deeper p,details.deeper li{font-size:.95rem}
 window.MathJax = { tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']] }, svg: { fontCache: 'global' }, options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code','canvas','svg'] } };
 </script>
 <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg-full.js"></script>
+<script>
+/* keep the sticky top bar's height available to the other sticky elements and to anchor jumps */
+(function () { var n = document.querySelector('.topnav'); if (!n) return; function s() { document.documentElement.style.setProperty('--nav-h', n.offsetHeight + 'px'); } s(); window.addEventListener('resize', s); window.addEventListener('load', s); if (window.ResizeObserver) new ResizeObserver(s).observe(n); })();
+</script>
 </body>
 </html>
