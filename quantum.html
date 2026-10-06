@@ -1,0 +1,1684 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Quantum Optics Lectures</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Saira+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f2f3f0; --surface:#ffffff; --surface-2:#e7e9e4; --surface-3:#dde0da;
+  --ink:#14181c; --ink-2:#3d454d; --muted:#626b73; --rule:#c6cbc4; --rule-strong:#9aa19a;
+  --accent:#0d5a78; --accent-ink:#ffffff; --accent-soft:#d7e8ef;
+  --laser:#c40f2b; --laser-soft:#f7dde1; --laser-glow:rgba(196,15,43,.22);
+  --warn:#8a5200; --warn-bg:#fdf1d8; --warn-rule:#e2b45e;
+  --ok:#1b6a39; --ok-bg:#e0f1e6; --bad:#a3192c; --bad-bg:#f8e1e4;
+  --code-bg:#eaece7; --focus:#0d5a78; --shadow:0 1px 0 rgba(0,0,0,.04),0 6px 18px -10px rgba(0,0,0,.25);
+  --ana:#6a4a94; --ana-bg:#f3eef9; --ana-rule:#cdbde3; --chart-grid:#d8dcd6; --chart-a:#c40f2b; --chart-b:#0d5a78; --chart-c:#7a5c00; --chart-d:#4c5a66;
+  --sim-bg:#d9ddd9; --sim-table:#a9afb3; --sim-table-edge:#8a9095; --sim-hole:#61686e; --sim-metal:#c9ced2; --sim-dark:#2b3036;
+  --sim-glass:#9fd0e6; --sim-beam:#ff2236; --sim-accent:#0d5a78; --sim-select:#e0a100; --sim-label:#14181c; --sim-label-bg:#ffffffd9;
+  --font-display:"Saira Condensed","Arial Narrow",Arial,sans-serif;
+  --font-body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --font-mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0c0f12; --surface:#141a1f; --surface-2:#1a2128; --surface-3:#222b33;
+    --ink:#e2e7ea; --ink-2:#b9c2c9; --muted:#8a959e; --rule:#2a343c; --rule-strong:#44515b;
+    --accent:#5db3d6; --accent-ink:#06131a; --accent-soft:#16303c;
+    --laser:#ff5468; --laser-soft:#3a1519; --laser-glow:rgba(255,84,104,.25);
+    --warn:#f2b54f; --warn-bg:#2a2010; --warn-rule:#6e5320;
+    --ok:#73d396; --ok-bg:#12271a; --bad:#ff7d8c; --bad-bg:#2e1418;
+    --code-bg:#182027; --focus:#7cc8e6; --shadow:0 1px 0 rgba(0,0,0,.3),0 8px 22px -12px rgba(0,0,0,.8);
+    --ana:#bfa3e8; --ana-bg:#1d1828; --ana-rule:#3f3355; --chart-grid:#26313a; --chart-a:#ff5468; --chart-b:#5db3d6; --chart-c:#e3b341; --chart-d:#9aa7b2;
+    --sim-bg:#0b0e11; --sim-table:#252b31; --sim-table-edge:#1a1f24; --sim-hole:#0a0c0f; --sim-metal:#8d969e; --sim-dark:#15191d;
+    --sim-glass:#6fb7d6; --sim-beam:#ff3046; --sim-accent:#5db3d6; --sim-select:#f2c14e; --sim-label:#e2e7ea; --sim-label-bg:#141a1fd9;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+    --bg:#0c0f12; --surface:#141a1f; --surface-2:#1a2128; --surface-3:#222b33;
+    --ink:#e2e7ea; --ink-2:#b9c2c9; --muted:#8a959e; --rule:#2a343c; --rule-strong:#44515b;
+    --accent:#5db3d6; --accent-ink:#06131a; --accent-soft:#16303c;
+    --laser:#ff5468; --laser-soft:#3a1519; --laser-glow:rgba(255,84,104,.25);
+    --warn:#f2b54f; --warn-bg:#2a2010; --warn-rule:#6e5320;
+    --ok:#73d396; --ok-bg:#12271a; --bad:#ff7d8c; --bad-bg:#2e1418;
+    --code-bg:#182027; --focus:#7cc8e6; --shadow:0 1px 0 rgba(0,0,0,.3),0 8px 22px -12px rgba(0,0,0,.8);
+    --ana:#bfa3e8; --ana-bg:#1d1828; --ana-rule:#3f3355; --chart-grid:#26313a; --chart-a:#ff5468; --chart-b:#5db3d6; --chart-c:#e3b341; --chart-d:#9aa7b2;
+    --sim-bg:#0b0e11; --sim-table:#252b31; --sim-table-edge:#1a1f24; --sim-hole:#0a0c0f; --sim-metal:#8d969e; --sim-dark:#15191d;
+    --sim-glass:#6fb7d6; --sim-beam:#ff3046; --sim-accent:#5db3d6; --sim-select:#f2c14e; --sim-label:#e2e7ea; --sim-label-bg:#141a1fd9;
+    color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:border-box}
+[hidden]{display:none!important}
+img,svg,canvas,video{max-width:100%}
+:root{padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom)}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font-body);font-size:16.5px;line-height:1.62;overflow-x:hidden}
+a{color:var(--accent);text-underline-offset:2px;text-decoration-thickness:1px}
+a:hover{text-decoration-thickness:2px}
+:focus-visible{outline:2px solid var(--focus);outline-offset:2px;border-radius:2px}
+button,input,select{font:inherit;color:inherit}
+code,kbd,.mono{font-family:var(--font-mono);font-size:.88em}
+code{background:var(--code-bg);padding:.08em .32em;border-radius:3px}
+kbd{border:1px solid var(--rule-strong);border-bottom-width:2px;border-radius:3px;padding:0 .3em;background:var(--surface)}
+h1,h2,h3,h4{font-family:var(--font-display);line-height:1.12;letter-spacing:.01em;margin:0}
+h2{font-size:clamp(1.9rem,1.4rem + 1.8vw,2.6rem);font-weight:700;text-transform:uppercase}
+h3{font-size:1.45rem;font-weight:600;margin-top:2.2rem;margin-bottom:.5rem}
+h4{font-size:1.15rem;font-weight:600;margin-top:1.4rem;margin-bottom:.3rem;text-transform:uppercase;letter-spacing:.04em;color:var(--ink-2)}
+p{margin:.7rem 0}
+ul,ol{padding-left:1.3rem}
+li{margin:.25rem 0}
+li::marker{color:var(--muted)}
+hr{border:0;border-top:1px solid var(--rule)}
+.wrap{padding-inline:16px;padding-block:0;max-width:1440px;margin-inline:auto}
+@media (min-width:720px){.wrap{padding-inline:28px}}
+
+/* ---------- datasheet header ---------- */
+.masthead{border-bottom:2px solid var(--ink);background:var(--surface)}
+.masthead .wrap{padding-block:18px 22px}
+.docbar{display:flex;flex-wrap:wrap;gap:6px 18px;font-family:var(--font-mono);font-size:.74rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--rule);padding-bottom:10px}
+.docbar b{color:var(--ink);font-weight:600}
+.docbar .sp{flex:1}
+.theme-btn{border:1px solid var(--rule-strong);background:var(--surface-2);border-radius:3px;padding:2px 8px;cursor:pointer;font-family:var(--font-mono);font-size:.72rem;text-transform:uppercase;letter-spacing:.06em}
+.hero{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:28px;align-items:end;padding-top:20px}
+@media (max-width:860px){.hero{grid-template-columns:minmax(0,1fr)}}
+.hero h1{font-size:clamp(2.4rem,1.6rem + 4vw,4.6rem);font-weight:700;text-transform:uppercase;line-height:.95;letter-spacing:.005em}
+.hero h1 .wl{color:var(--laser)}
+.hero .lede{font-size:1.08rem;color:var(--ink-2);max-width:62ch;margin-top:14px}
+.spec{border:1px solid var(--rule-strong);background:var(--surface);font-size:.86rem}
+.spec dl{margin:0;display:grid;grid-template-columns:auto minmax(0,1fr)}
+.spec dt,.spec dd{margin:0;padding:6px 10px;border-bottom:1px solid var(--rule)}
+.spec dt{font-family:var(--font-mono);font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);border-right:1px solid var(--rule);white-space:nowrap}
+.spec dd{font-family:var(--font-mono);font-size:.82rem}
+.spec dl > :nth-last-child(-n+2){border-bottom:0}
+.beamline{height:3px;background:linear-gradient(90deg,transparent,var(--laser) 12%,var(--laser) 88%,transparent);box-shadow:0 0 12px var(--laser-glow);margin-top:18px;opacity:.85}
+
+/* ---------- layout ---------- */
+.layout{display:grid;grid-template-columns:240px minmax(0,1fr);gap:40px;padding-block:28px 60px}
+@media (max-width:1020px){.layout{grid-template-columns:minmax(0,1fr);gap:16px}}
+.toc{position:sticky;top:12px;align-self:start;max-height:calc(100vh - 24px);overflow:auto;font-size:.88rem;border-left:2px solid var(--ink);padding-left:12px}
+.toc .toc-h{font-family:var(--font-mono);font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:6px}
+.toc ol{list-style:none;padding:0;margin:0}
+.toc li{margin:0}
+.toc a{display:grid;grid-template-columns:2.2em minmax(0,1fr);gap:2px;padding:3px 4px;color:var(--ink-2);text-decoration:none;border-radius:2px}
+.toc a .n{font-family:var(--font-mono);color:var(--muted);font-size:.78rem;padding-top:1px}
+.toc a:hover{background:var(--surface-2);color:var(--ink)}
+.toc a.active{color:var(--ink);background:var(--surface-2);box-shadow:inset 2px 0 0 var(--laser)}
+.toc ol ol a{padding-left:1.4em;font-size:.82rem}
+.toc details summary{display:none}
+@media (max-width:1020px){
+  .toc{position:static;max-height:none;border:1px solid var(--rule-strong);padding:0;background:var(--surface)}
+  .toc details summary{display:block;cursor:pointer;padding:10px 12px;font-family:var(--font-mono);font-size:.78rem;text-transform:uppercase;letter-spacing:.08em}
+  .toc details > div{padding:0 12px 12px}
+  .toc .toc-h{display:none}
+}
+main{min-width:0}
+section.part{padding-top:26px;margin-top:30px;border-top:2px solid var(--ink)}
+section.part:first-of-type{margin-top:0}
+.part-head{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 16px;align-items:baseline;margin-bottom:10px}
+.part-num{font-family:var(--font-mono);font-size:.8rem;color:var(--laser);letter-spacing:.08em;border:1px solid var(--laser);padding:1px 6px;border-radius:2px;align-self:center}
+.part-sub{grid-column:2;color:var(--muted);font-size:.95rem;margin:0}
+.prose{max-width:76ch}
+.cols-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+@media (max-width:760px){.cols-2{grid-template-columns:minmax(0,1fr)}}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:12px;margin:14px 0}
+.card{background:var(--surface);border:1px solid var(--rule);padding:12px 14px;border-radius:3px;min-width:0}
+.card h4{margin-top:0;font-size:1rem}
+.card .k{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.card .v{font-family:var(--font-display);font-size:1.7rem;font-weight:600;line-height:1.1}
+.note,.warnbox,.okbox,.gapbox{border:1px solid var(--rule);border-left:4px solid var(--accent);background:var(--surface);padding:10px 14px;margin:14px 0;border-radius:2px;font-size:.95rem}
+.note .t,.warnbox .t,.okbox .t,.gapbox .t{font-family:var(--font-mono);font-size:.72rem;text-transform:uppercase;letter-spacing:.09em;display:block;margin-bottom:2px;color:var(--muted)}
+.warnbox{border-left-color:var(--warn);background:var(--warn-bg)}
+.warnbox .t{color:var(--warn)}
+.okbox{border-left-color:var(--ok);background:var(--ok-bg)}
+.gapbox{border-left-color:var(--laser);background:var(--laser-soft)}
+.gapbox .t{color:var(--laser)}
+.tag{display:inline-block;font-family:var(--font-mono);font-size:.68rem;letter-spacing:.06em;text-transform:uppercase;padding:0 5px;border:1px solid currentColor;border-radius:2px;vertical-align:1px;white-space:nowrap}
+.tag.est{color:var(--warn)}
+.tag.src{color:var(--ok)}
+.tag.gap{color:var(--laser)}
+.tag.ver{color:var(--accent)}
+.scroll-x{overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:100%}
+table{border-collapse:collapse;width:100%;font-size:.9rem;background:var(--surface)}
+th,td{border:1px solid var(--rule);padding:6px 9px;text-align:left;vertical-align:top}
+th{background:var(--surface-2);font-family:var(--font-mono);font-size:.74rem;text-transform:uppercase;letter-spacing:.05em;font-weight:600}
+td.num{font-family:var(--font-mono);white-space:nowrap}
+caption{caption-side:bottom;text-align:left;color:var(--muted);font-size:.8rem;padding-top:6px}
+.eq{overflow-x:auto;overflow-y:hidden;margin:10px 0;padding:6px 10px;background:var(--surface);border:1px solid var(--rule);border-radius:2px;position:relative}
+.eq .src{position:absolute;right:6px;top:4px;font-family:var(--font-mono);font-size:.66rem;color:var(--muted)}
+mjx-container{max-width:100%}
+mjx-container[display="true"]{overflow-x:auto;overflow-y:hidden;margin:.4em 0!important}
+figure{margin:16px 0}
+figcaption{font-size:.84rem;color:var(--muted);margin-top:6px}
+.fig{background:var(--surface);border:1px solid var(--rule);padding:10px;border-radius:2px}
+svg.diag{display:block;width:100%;height:auto;max-width:100%}
+svg.diag text{font-family:var(--font-mono);fill:var(--ink)}
+svg.diag .muted{fill:var(--muted)}
+svg.diag .lv{stroke:var(--ink);stroke-width:2.4}
+svg.diag .lvm{stroke:var(--ink-2);stroke-width:2}
+svg.diag .ctl{stroke:var(--laser);stroke-width:3;fill:none}
+svg.diag .prb{stroke:var(--accent);stroke-width:2.4;stroke-dasharray:7 5;fill:none}
+svg.diag .rule{stroke:var(--rule-strong);stroke-width:1}
+svg.diag .box{fill:var(--surface-2);stroke:var(--ink-2);stroke-width:1.2}
+svg.diag .boxa{fill:var(--accent-soft);stroke:var(--accent);stroke-width:1.2}
+svg.diag .boxl{fill:var(--laser-soft);stroke:var(--laser);stroke-width:1.2}
+svg.diag .beam{stroke:var(--laser);stroke-width:2.5;fill:none}
+svg.diag .beamp{stroke:var(--accent);stroke-width:2;fill:none;stroke-dasharray:6 4}
+svg.diag .sig{stroke:var(--ink);stroke-width:2;fill:none}
+svg.diag .sigc{stroke:var(--laser);stroke-width:2.2;fill:none}
+svg.diag .sigp{stroke:var(--accent);stroke-width:2.2;fill:none}
+svg.diag .fillc{fill:var(--laser-soft)}
+svg.diag .grid{stroke:var(--chart-grid);stroke-width:1}
+
+/* ---------- glossary ---------- */
+.gl-tools{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:12px 0;position:sticky;top:0;background:var(--bg);padding:8px 0;z-index:2;border-bottom:1px solid var(--rule)}
+.gl-tools input[type=search]{flex:1 1 220px;min-width:0;border:1px solid var(--rule-strong);background:var(--surface);padding:7px 10px;border-radius:3px}
+.chip{border:1px solid var(--rule-strong);background:var(--surface);border-radius:2px;padding:3px 9px;font-family:var(--font-mono);font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.gl-count{font-family:var(--font-mono);font-size:.75rem;color:var(--muted)}
+dl.gloss{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,330px),1fr));gap:10px;margin:0}
+dl.gloss > div{background:var(--surface);border:1px solid var(--rule);padding:9px 12px;border-radius:2px;min-width:0}
+dl.gloss dt{font-weight:600;font-family:var(--font-body)}
+dl.gloss dt .c{float:right;font-family:var(--font-mono);font-size:.62rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;font-weight:500;margin-top:4px}
+dl.gloss dd{margin:3px 0 0;font-size:.9rem;color:var(--ink-2)}
+dl.gloss > div[hidden]{display:none}
+
+/* ---------- interactive charts ---------- */
+.lab{background:var(--surface);border:1px solid var(--rule-strong);border-radius:3px;padding:12px;margin:18px 0;box-shadow:var(--shadow)}
+.lab-h{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:baseline;justify-content:space-between;border-bottom:1px solid var(--rule);padding-bottom:6px;margin-bottom:8px}
+.lab-h b{font-family:var(--font-display);font-size:1.15rem;text-transform:uppercase;letter-spacing:.03em}
+.lab-h span{font-family:var(--font-mono);font-size:.72rem;color:var(--muted)}
+.lab-grid{display:grid;grid-template-columns:minmax(0,1fr) 250px;gap:14px}
+@media (max-width:760px){.lab-grid{grid-template-columns:minmax(0,1fr)}}
+.lab canvas{width:100%;height:300px;display:block;background:var(--surface)}
+.ctrl{display:grid;gap:10px;align-content:start}
+.ctrl label{display:grid;gap:2px;font-size:.82rem}
+.ctrl label .lt{display:flex;justify-content:space-between;gap:8px;font-family:var(--font-mono);font-size:.74rem;color:var(--ink-2)}
+.ctrl output{font-family:var(--font-mono);color:var(--ink)}
+input[type=range]{width:100%;accent-color:var(--laser);min-width:0}
+.readout{font-family:var(--font-mono);font-size:.76rem;background:var(--surface-2);border:1px solid var(--rule);padding:6px 8px;border-radius:2px;line-height:1.5}
+.legend{display:flex;flex-wrap:wrap;gap:10px;font-family:var(--font-mono);font-size:.72rem;color:var(--ink-2);margin-top:4px}
+.legend i{display:inline-block;width:16px;height:3px;vertical-align:middle;margin-right:4px}
+
+/* ---------- simulator ---------- */
+.sim{border:2px solid var(--ink);background:var(--surface);margin-top:14px}
+.sim-bar{display:flex;flex-wrap:wrap;gap:6px;align-items:center;padding:8px;border-bottom:1px solid var(--rule-strong);background:var(--surface-2)}
+.btn{border:1px solid var(--rule-strong);background:var(--surface);padding:5px 10px;border-radius:2px;cursor:pointer;font-size:.82rem;line-height:1.2;white-space:nowrap}
+.btn:hover{border-color:var(--ink)}
+.btn.primary{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.btn.danger{color:var(--bad);border-color:var(--bad)}
+.btn[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.sim-bar .sp{flex:1}
+.sim-status{font-family:var(--font-mono);font-size:.72rem;display:flex;gap:6px;flex-wrap:wrap}
+.pill{border:1px solid var(--rule-strong);padding:1px 7px;border-radius:10px;background:var(--surface);white-space:nowrap}
+.pill.on{border-color:var(--ok);color:var(--ok);background:var(--ok-bg)}
+.pill.off{border-color:var(--bad);color:var(--bad);background:var(--bad-bg)}
+.pill.mid{border-color:var(--warn);color:var(--warn);background:var(--warn-bg)}
+.sim-main{display:grid;grid-template-columns:170px minmax(0,1fr) 290px;min-height:0}
+.palette{border-right:1px solid var(--rule-strong);overflow:auto;max-height:70vh;padding:6px;background:var(--surface)}
+.palette h4{font-size:.72rem;font-family:var(--font-mono);margin:8px 2px 4px;color:var(--muted);letter-spacing:.1em}
+.pal-item{display:grid;grid-template-columns:26px minmax(0,1fr);gap:6px;align-items:center;width:100%;text-align:left;border:1px solid var(--rule);background:var(--surface-2);border-radius:2px;padding:4px 6px;margin-bottom:4px;cursor:grab;font-size:.78rem;line-height:1.15;touch-action:pan-y;user-select:none;-webkit-user-select:none}
+.pal-item:hover{border-color:var(--ink)}
+.pal-item .ic{width:26px;height:22px;display:grid;place-items:center;font-family:var(--font-mono);font-size:.62rem;font-weight:600;border:1px solid var(--rule-strong);background:var(--surface);border-radius:2px}
+.pal-item.na{opacity:.7}
+.pal-item small{display:block;color:var(--muted);font-size:.66rem}
+.stage{position:relative;height:70vh;min-height:420px;background:var(--sim-bg);overflow:hidden}
+.stage canvas{display:block;width:100%;height:100%;touch-action:none;outline:none}
+.stage:focus-within{box-shadow:inset 0 0 0 2px var(--focus)}
+.stage-msg{position:absolute;inset:0;display:none;place-items:center;text-align:center;padding:20px;font-size:.95rem;color:var(--ink-2)}
+.stage-msg.show{display:grid}
+.stage-hud{position:absolute;left:8px;bottom:8px;right:8px;display:flex;flex-wrap:wrap;gap:6px;pointer-events:none;font-family:var(--font-mono);font-size:.7rem}
+.stage-hud .h{background:var(--sim-label-bg);border:1px solid var(--rule);padding:2px 6px;border-radius:2px;color:var(--ink)}
+.stage-hud .h.w{border-color:var(--bad);color:var(--bad)}
+.stage-tip{position:absolute;right:8px;top:8px;background:var(--sim-label-bg);border:1px solid var(--rule);font-size:.72rem;padding:4px 8px;border-radius:2px;max-width:260px;pointer-events:none;color:var(--ink-2)}
+.inspector{border-left:1px solid var(--rule-strong);padding:10px;overflow:auto;max-height:70vh;font-size:.86rem}
+.inspector h4{margin:0 0 4px;font-size:1.05rem;color:var(--ink);text-transform:none;letter-spacing:0}
+.inspector .what{color:var(--ink-2);font-size:.84rem}
+.inspector .row{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+.inspector label{display:grid;gap:2px;font-size:.8rem;margin:8px 0}
+.inspector label.chk{display:flex;gap:6px;align-items:center}
+.inspector select,.inspector input[type=number]{border:1px solid var(--rule-strong);background:var(--surface);padding:4px 6px;border-radius:2px;min-width:0;width:100%}
+.kv{display:grid;grid-template-columns:auto minmax(0,1fr);gap:2px 10px;font-family:var(--font-mono);font-size:.74rem;background:var(--surface-2);padding:6px 8px;border:1px solid var(--rule);border-radius:2px;margin-top:8px}
+.kv span:nth-child(odd){color:var(--muted)}
+.sim-lower{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);border-top:1px solid var(--rule-strong)}
+.scope{padding:10px;border-right:1px solid var(--rule-strong);min-width:0}
+.scope-h{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-bottom:6px}
+.scope-h b{font-family:var(--font-display);text-transform:uppercase;font-size:1.05rem;margin-right:6px}
+.scope canvas{width:100%;height:240px;display:block;background:#06100c;border:1px solid var(--rule-strong);border-radius:2px}
+.scope .readout{margin-top:6px}
+.scope label{font-size:.78rem;display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.scope label input[type=range]{width:auto;flex:1 1 140px}
+.objs{padding:10px;min-width:0}
+.objs ol{list-style:none;padding:0;margin:6px 0;counter-reset:o}
+.objs li{display:grid;grid-template-columns:22px minmax(0,1fr);gap:6px;padding:4px 0;border-bottom:1px dashed var(--rule);font-size:.84rem;counter-increment:o}
+.objs li .bx{width:18px;height:18px;border:1.5px solid var(--rule-strong);border-radius:2px;display:grid;place-items:center;font-family:var(--font-mono);font-size:.62rem;color:var(--muted)}
+.objs li.done .bx{background:var(--ok);border-color:var(--ok);color:var(--surface)}
+.objs li.done .bx::before{content:"\2713";font-size:.8rem}
+.objs li:not(.done) .bx::before{content:counter(o)}
+.objs .score{font-family:var(--font-mono);font-size:.78rem}
+.hint{margin-top:8px;font-size:.84rem}
+.warnlist{margin:6px 0 0;padding-left:1.1rem;font-size:.8rem;color:var(--bad)}
+@media (max-width:1100px){
+  .sim-main{grid-template-columns:minmax(0,1fr)}
+  .palette{order:2;border-right:0;border-top:1px solid var(--rule-strong);max-height:none;display:flex;gap:6px;overflow-x:auto;overflow-y:hidden;padding:8px}
+  .palette h4{display:none}
+  .pal-item{flex:0 0 132px;margin:0;touch-action:pan-x}
+  .stage{order:1;height:60vh;min-height:340px}
+  .inspector{order:3;border-left:0;border-top:1px solid var(--rule-strong);max-height:none}
+  .sim-lower{grid-template-columns:minmax(0,1fr)}
+  .scope{border-right:0;border-bottom:1px solid var(--rule-strong)}
+}
+.steps{counter-reset:s;list-style:none;padding:0}
+.steps > li{counter-increment:s;display:grid;grid-template-columns:3.2em minmax(0,1fr);gap:4px 10px;padding:10px 0;border-bottom:1px solid var(--rule)}
+.steps > li::before{content:attr(data-n);font-family:var(--font-mono);font-size:.8rem;color:var(--laser);padding-top:3px}
+.steps .pass{display:block;margin-top:4px;font-size:.88rem;color:var(--ink-2)}
+.steps .pass b{font-family:var(--font-mono);font-size:.7rem;text-transform:uppercase;letter-spacing:.06em;color:var(--ok)}
+.reading h4{margin-top:1.6rem}
+.reading ul{list-style:none;padding:0}
+.reading li{padding:7px 0;border-bottom:1px solid var(--rule);overflow-wrap:anywhere}
+.reading .why{display:block;font-size:.84rem;color:var(--muted)}
+footer.site{border-top:2px solid var(--ink);background:var(--surface);font-size:.85rem;color:var(--ink-2)}
+footer.site .wrap{padding-block:20px 30px}
+.safety{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:12px}
+.skip{position:absolute;left:-999px;top:0;background:var(--ink);color:var(--bg);padding:6px 10px;z-index:10}
+.skip:focus{left:8px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* ---------- shared top navigation ---------- */
+.topnav{background:var(--ink);color:var(--bg)}
+.topnav .wrap{display:flex;flex-wrap:wrap;align-items:stretch;gap:0}
+.topnav .brand{font-family:var(--font-mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;padding:10px 14px 10px 0;opacity:.75;align-self:center}
+.topnav a{color:var(--bg);text-decoration:none;font-family:var(--font-display);font-size:1.02rem;font-weight:600;letter-spacing:.03em;text-transform:uppercase;padding:9px 14px;border-bottom:3px solid transparent;white-space:nowrap}
+.topnav a:hover{background:rgba(127,127,127,.18)}
+.topnav a[aria-current="page"]{border-bottom-color:var(--laser);background:rgba(127,127,127,.14)}
+.topnav a:focus-visible{outline-color:var(--laser)}
+@media (max-width:640px){.topnav .brand{display:none}.topnav a{font-size:.9rem;padding:8px 9px}.topnav .wrap{gap:0}}
+
+/* ---------- analogy component ---------- */
+.ana{position:relative;border:1px solid var(--ana-rule);border-left:4px solid var(--ana);background:var(--ana-bg);border-radius:2px;padding:10px 14px 10px 46px;margin:-4px 0 18px;font-size:.93rem}
+.ana::before{content:"\2248";position:absolute;left:10px;top:9px;width:26px;height:26px;border-radius:50%;background:var(--ana);color:var(--ana-bg);display:grid;place-items:center;font-family:var(--font-mono);font-weight:700;font-size:1rem;line-height:26px;text-align:center}
+.ana-h{font-family:var(--font-display);font-size:1.1rem;font-weight:600;color:var(--ana);margin-bottom:4px;text-transform:none}
+.ana p{margin:.35rem 0}
+.ana .lbl{display:inline-block;font-family:var(--font-mono);font-size:.64rem;text-transform:uppercase;letter-spacing:.09em;color:var(--ana);border:1px solid var(--ana-rule);border-radius:2px;padding:0 5px;margin-right:6px;vertical-align:1px;background:var(--surface)}
+.ana .fails .lbl{color:var(--bad);border-color:var(--bad)}
+.ana dl{display:grid;grid-template-columns:auto minmax(0,1fr);gap:2px 10px;margin:.3rem 0 .4rem}
+.ana dt{font-family:var(--font-mono);font-size:.82rem;white-space:nowrap}
+.ana dd{margin:0;font-size:.88rem;color:var(--ink-2)}
+@media (max-width:520px){.ana{padding-left:14px;padding-top:40px}.ana::before{top:8px}}
+
+/* ---------- cross references, decision section, lectures ---------- */
+.xref{display:inline-flex;gap:6px;align-items:center;font-family:var(--font-mono);font-size:.74rem;border:1px solid var(--rule-strong);border-radius:12px;padding:1px 9px;background:var(--surface);text-decoration:none;color:var(--ink-2);margin:2px 4px 2px 0}
+.xref:hover{border-color:var(--accent);color:var(--accent)}
+.xref::before{content:"\2197";color:var(--laser)}
+.decide-grid td:first-child{font-weight:600;white-space:nowrap}
+.verdict{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:12px;margin:14px 0}
+.lec{padding-top:24px;margin-top:28px;border-top:2px solid var(--ink)}
+.lec-head{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 14px;align-items:baseline}
+.lec-num{font-family:var(--font-display);font-size:2.6rem;font-weight:700;color:var(--laser);line-height:1}
+.lec h2{font-size:clamp(1.5rem,1.2rem + 1.2vw,2.1rem)}
+.goals{background:var(--surface);border:1px solid var(--rule);padding:8px 14px;margin:12px 0;border-radius:2px}
+.goals b{font-family:var(--font-mono);font-size:.7rem;letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
+.goals ul{margin:4px 0}
+.worked{border:1px dashed var(--rule-strong);background:var(--surface);padding:10px 14px;margin:14px 0;border-radius:2px}
+.worked > b{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.09em;text-transform:uppercase;color:var(--ok)}
+details.q{border:1px solid var(--rule);background:var(--surface);border-radius:2px;margin:6px 0;padding:0 12px}
+details.q summary{cursor:pointer;padding:8px 0;font-weight:500}
+details.q summary::marker{color:var(--laser)}
+details.q[open]{padding-bottom:8px}
+details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink-2)}
+.seen{font-size:.88rem;margin-top:10px}
+</style>
+</head>
+<body>
+<nav class="topnav" aria-label="Guide pages"><div class="wrap"><span class="brand">Rb-87 EIT</span><a href="index.html">Mod A · Zeeman EIT (AOM)</a><a href="mod-b.html">Mod B · Hyperfine EIT (EOM)</a><a href="quantum.html" aria-current="page">Quantum Optics Lectures</a></div></nav>
+
+<a class="skip" href="#main">Skip to content</a>
+<header class="masthead">
+  <div class="wrap">
+    <div class="docbar">
+      <span>Doc <b>QP / QO-LECTURES</b></span>
+      <span>Level <b>first principles → project</b></span>
+      <span>Lectures <b>12</b></span>
+      <span>Issued <b>Oct 2026</b></span>
+      <span class="sp"></span>
+      <button type="button" class="theme-btn" id="themeBtn" aria-label="Switch colour theme">Theme: auto</button>
+    </div>
+    <div class="hero">
+      <div>
+        <h1>Quantum optics, from the photon to <span class="wl">stored light</span></h1>
+        <p class="lede">Twelve lectures that build the ideas behind the <a href="index.html">Mod A</a> and <a href="mod-b.html">Mod B</a> guides, one step at a time. Each has learning goals, a worked example with real ⁸⁷Rb/795 nm numbers, an analogy beside every equation (including where it breaks down), questions with hidden answers, and links to where the idea appears in the experiment.</p>
+      </div>
+      <div class="spec" role="group" aria-label="How to use these lectures">
+        <dl>
+          <dt>Prerequisites</dt><dd>first-year physics, complex numbers, basic linear algebra</dd>
+          <dt>Path</dt><dd>L1–L4 foundations · L5–L9 atoms &amp; light · L10–L12 memories &amp; beyond</dd>
+          <dt>Interactive</dt><dd>photon counter (L1) · Rabi/Bloch (L3) · EIT window (L7)</dd>
+          <dt>Conventions</dt><dd>Rabi-frequency factors of 2 vary between books; we say which we use</dd>
+          <dt>Tags</dt><dd><span class="tag src">paper</span> <span class="tag ver">Steck</span> <span class="tag est">estimate</span></dd>
+        </dl>
+      </div>
+    </div>
+    <div class="beamline" aria-hidden="true"></div>
+  </div>
+</header>
+
+<div class="wrap">
+<div class="layout">
+<nav class="toc" aria-label="Lecture list">
+  <details id="tocDetails" open>
+    <summary>Lectures</summary>
+    <div>
+    <div class="toc-h">Lectures</div>
+    <ol>
+      <li><a href="#L1"><span class="n">L1</span><span>Light: waves &amp; photons</span></a></li>
+      <li><a href="#L2"><span class="n">L2</span><span>States, superposition, measurement</span></a></li>
+      <li><a href="#L3"><span class="n">L3</span><span>The two-level atom</span></a></li>
+      <li><a href="#L4"><span class="n">L4</span><span>Open systems &amp; density matrix</span></a></li>
+      <li><a href="#L5"><span class="n">L5</span><span>Alkali atomic structure</span></a></li>
+      <li><a href="#L6"><span class="n">L6</span><span>Light–matter response</span></a></li>
+      <li><a href="#L7"><span class="n">L7</span><span>Three-level interference &amp; EIT</span></a></li>
+      <li><a href="#L8"><span class="n">L8</span><span>Slow &amp; stopped light</span></a></li>
+      <li><a href="#L9"><span class="n">L9</span><span>Thermal vapour realities</span></a></li>
+      <li><a href="#L10"><span class="n">L10</span><span>Quantum memories</span></a></li>
+      <li><a href="#L11"><span class="n">L11</span><span>Quantum states of light</span></a></li>
+      <li><a href="#L12"><span class="n">L12</span><span>Strong coupling → Objective 3</span></a></li>
+      <li><a href="#q-reading"><span class="n">R</span><span>Reading</span></a></li>
+    </ol>
+    </div>
+  </details>
+</nav>
+
+<main id="main">
+
+<!-- L1 -->
+<section class="lec" id="L1" aria-labelledby="L1h" style="border-top:0;margin-top:0;padding-top:0">
+  <div class="lec-head"><span class="lec-num">L1</span><h2 id="L1h">Light as waves and photons</h2></div>
+  <div class="goals"><b>Learning goals</b><ul><li>Describe light as an electromagnetic wave with wavelength, frequency and wavevector.</li><li>Explain energy quantization and compute the photon energy at 795 nm.</li><li>Convert optical power into photon rate, the bridge between “mW” and “single photons”.</li></ul></div>
+  <div class="prose">
+    <p>Classically, a laser beam is an oscillating electric field. At 795 nm it oscillates about 3.8 × 10¹⁴ times per second, far too fast for any detector to follow, so detectors measure time-averaged <em>power</em>. Quantum mechanically, that energy arrives in indivisible packets, <strong>photons</strong>, each carrying hν. Both pictures are right. The wave picture explains interference and polarization (the waveplates of Mod A); the photon picture explains why a detector clicks and why a quantum memory must preserve single quanta.</p>
+  </div>
+  <div class="eq"><span class="src">L1.1</span>\[ E(z,t)=E_0\cos(kz-\omega t),\qquad k=\frac{2\pi}{\lambda},\quad \omega=2\pi\nu,\quad c=\lambda\nu;\qquad E_{\rm photon}=h\nu=\frac{hc}{\lambda},\qquad \Phi=\frac{P}{h\nu}. \]</div>
+  <aside class="ana" aria-label="Analogy: Rain and raindrops"><div class="ana-h">Rain and raindrops</div>
+    <p><span class="lbl">Read it in words</span>The field is a travelling wave with spatial period λ and temporal frequency ν. Its energy comes in lumps of hν, and the photon flux Φ is power divided by the energy per lump.</p>
+    <p><span class="lbl">Analogy</span>Optical power is like rainfall in mm per hour; photons are the individual raindrops. Heavy rain looks continuous, but in a drizzle you can count the drops. A “single-photon-level” probe is a drizzle so light you count individual drops.</p>
+    <p class="fails"><span class="lbl">Where it fails</span>Raindrops have positions before they land. A photon has no well-defined trajectory until it is detected, and it can interfere with itself.</p>
+  </aside>
+  <div class="worked"><b>Worked example · 795 nm</b>
+    <p>λ = 794.979 nm <span class="tag ver">Steck</span> ⇒ ν = c/λ ≈ 377.107 THz. E = hc/λ = (6.626×10⁻³⁴ J s)(2.998×10⁸ m/s)/(7.950×10⁻⁷ m) ≈ <strong>2.499 × 10⁻¹⁹ J ≈ 1.560 eV</strong>.</p>
+    <p>A 1 µW probe carries 10⁻⁶ / 2.499×10⁻¹⁹ ≈ <strong>4.0 × 10¹² photons/s</strong>, and 1 nW carries 4.0 × 10⁹ photons/s. A 10 µs pulse at 1 µW holds ≈ 4 × 10⁷ photons: a long way from one.</p>
+  </div>
+  <div class="lab" id="labPh">
+    <div class="lab-h"><b>Interactive · photon counter</b><span>E = hc/λ, Φ = P/E</span></div>
+    <div class="lab-grid" style="grid-template-columns:minmax(0,1fr)">
+      <div class="ctrl" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr))">
+        <label for="phL"><span class="lt">Wavelength <output id="phLo" for="phL"></output></span><input type="range" id="phL" min="700" max="900" step="0.1" value="795"></label>
+        <label for="phP"><span class="lt">Power (log scale) <output id="phPo" for="phP"></output></span><input type="range" id="phP" min="-15" max="-1" step="0.1" value="-6"></label>
+        <div class="readout" id="phRead"></div>
+      </div>
+    </div>
+  </div>
+  <details class="q"><summary>Q1. How many photons per second are in a 1 pW beam at 795 nm?</summary><div class="ans">1×10⁻¹² W / 2.499×10⁻¹⁹ J ≈ 4.0 × 10⁶ photons/s. Even a picowatt is millions of photons per second.</div></details>
+  <details class="q"><summary>Q2. Why can the photodiode in Mod A not see individual 795 nm photons?</summary><div class="ans">An ordinary photodiode with a transimpedance amplifier integrates current. Its noise is equivalent to many photons per measurement time, so single quanta are hidden. Counting single photons needs single-photon detectors (e.g. avalanche photodiodes), which are not in the current equipment plan.</div></details>
+  <p class="seen">Where it shows up: <a class="xref" href="index.html#p1">laser safety and power levels</a><a class="xref" href="index.html#p3-slow">pulse energies in storage</a></p>
+</section>
+
+<!-- L2 -->
+<section class="lec" id="L2" aria-labelledby="L2h">
+  <div class="lec-head"><span class="lec-num">L2</span><h2 id="L2h">Quantum states, superposition and measurement</h2></div>
+  <div class="goals"><b>Learning goals</b><ul><li>Write states in Dirac notation and normalise them.</li><li>Distinguish probability amplitudes from probabilities.</li><li>See why relative phase is physical and evolves in time.</li></ul></div>
+  <div class="prose">
+    <p>A quantum state is a vector |ψ⟩. For a two-state system with basis {|g⟩, |e⟩}, any state is a superposition with complex amplitudes. Measurement in that basis gives g or e with probabilities |c<sub>g</sub>|² and |c<sub>e</sub>|², and leaves the system in the outcome state. The <em>relative phase</em> between c<sub>g</sub> and c<sub>e</sub> does not change those probabilities, but it decides how the state interferes later. EIT is built entirely on such a phase (L7).</p>
+  </div>
+  <div class="eq"><span class="src">L2.1</span>\[ |\psi\rangle=c_g|g\rangle+c_e|e\rangle,\qquad |c_g|^2+|c_e|^2=1,\qquad P(e)=|\langle e|\psi\rangle|^2=|c_e|^2,\qquad c_j(t)=c_j(0)\,e^{-iE_jt/\hbar}. \]</div>
+  <aside class="ana" aria-label="Analogy: A compass needle"><div class="ana-h">A compass needle and a yes/no question</div>
+    <p><span class="lbl">Read it in words</span>The state is a weighted, phased mixture of basis states. Probabilities are squared magnitudes. Each component’s phase rotates at its own energy, so the relative phase rotates at the energy <em>difference</em> divided by ħ.</p>
+    <p><span class="lbl">Analogy</span>A compass needle can point anywhere, but a measurement only asks “north or south?”. A needle at 45° answers north half the time. The relative phase is like the needle swinging east–west: invisible to a north/south question, but it changes what a later east/west question would give.</p>
+    <p class="fails"><span class="lbl">Where it fails</span>A real needle has a definite direction before you look. A quantum state does not have a definite outcome, and measuring it changes the state.</p>
+  </aside>
+  <div class="worked"><b>Worked example · hyperfine superposition</b>
+    <p>Prepare (|F=1⟩ + |F=2⟩)/√2 in ⁸⁷Rb. The relative phase advances at ν<sub>hfs</sub> ≈ 6.834 683 GHz: a full turn every 1/ν<sub>hfs</sub> ≈ <strong>146.3 ps</strong>. Mod B’s microwave frequency must track that rotation; Mod A’s Zeeman superposition rotates only at kHz (70 kHz at 50 mG, a 14 µs period).</p>
+  </div>
+  <details class="q"><summary>Q1. Is (|g⟩ + i|e⟩)/√2 different from (|g⟩ + |e⟩)/√2 if you only measure in the {g, e} basis?</summary><div class="ans">No. Both give 50/50. They differ in relative phase (90°), which shows up when the state interferes with something else, e.g. after another light pulse.</div></details>
+  <details class="q"><summary>Q2. Why does a global phase e<sup>iφ</sup>|ψ⟩ not matter, while a relative phase does?</summary><div class="ans">All probabilities involve |amplitude|², which is unchanged by a common factor e<sup>iφ</sup>. A relative phase changes how the amplitudes add when they are projected onto a different basis.</div></details>
+  <p class="seen">Where it shows up: <a class="xref" href="index.html#p3-ham">dark state</a><a class="xref" href="mod-b.html#b-delta">microwave phase in Mod B</a></p>
+</section>
+
+<!-- L3 -->
+<section class="lec" id="L3" aria-labelledby="L3h">
+  <div class="lec-head"><span class="lec-num">L3</span><h2 id="L3h">The two-level atom: dipole coupling, RWA, Rabi oscillations, Bloch sphere</h2></div>
+  <div class="goals"><b>Learning goals</b><ul><li>Write the dipole Hamiltonian and apply the rotating-wave approximation.</li><li>Predict Rabi oscillations, including the effect of detuning.</li><li>Picture the state on the Bloch sphere.</li></ul></div>
+  <div class="prose"><p>An atom with transition frequency ω₀ in a laser field E cos ωt feels the energy −d·E. Moving to a frame rotating at ω and dropping terms oscillating at 2ω (the RWA) leaves a simple 2×2 problem that depends only on the detuning Δ = ω − ω₀ and the Rabi frequency Ω. Here Ω = d·E₀/ħ is the full Rabi frequency, the rate of population cycling on resonance. The EIT paper defines Ω = µẼ/ħ with its own field convention; always check factors of 2 when comparing sources.</p></div>
+  <div class="eq"><span class="src">L3.1</span>\[ \hat H_{\rm RWA}=-\hbar\Delta\,|e\rangle\langle e|+\frac{\hbar\Omega}{2}\big(|e\rangle\langle g|+|g\rangle\langle e|\big),\qquad P_e(t)=\frac{\Omega^2}{\Omega^2+\Delta^2}\,\sin^2\!\Big(\frac{\sqrt{\Omega^2+\Delta^2}}{2}\,t\Big). \]</div>
+  <aside class="ana" aria-label="Analogy: Pushing a swing"><div class="ana-h">Pushing a swing in rhythm, or slightly off-beat</div>
+    <p><span class="lbl">Read it in words</span>On resonance (Δ = 0) the population swings fully between g and e at rate Ω. Off resonance it swings faster (at √(Ω²+Δ²)) but never fully reaches e: the maximum is Ω²/(Ω²+Δ²).</p>
+    <p><span class="lbl">Analogy</span>Push a swing exactly at its natural rhythm and it goes higher and higher. Push slightly off-beat (detuning) and some pushes fight the motion: the swing goes up a little, comes back, and never reaches full height.</p>
+    <p class="fails"><span class="lbl">Where it fails</span>A swing’s amplitude can grow without limit. The atom’s population cannot exceed 1, so it swings back down even on resonance: g → e → g. That is coherent stimulated emission back into the laser.</p>
+  </aside>
+  <div class="eq"><span class="src">L3.2</span>\[ \vec r=(u,v,w),\quad w=\rho_{ee}-\rho_{gg},\qquad \dot{\vec r}=\vec\Omega_{\rm eff}\times\vec r\ \ \text{(no decay)},\qquad \vec\Omega_{\rm eff}=(\Omega,0,-\Delta). \]</div>
+  <aside class="ana" aria-label="Analogy: A spinning top"><div class="ana-h">A spinning top precessing</div>
+    <p><span class="lbl">Read it in words</span>Any two-level state is a point on a sphere: north pole is |e⟩, south pole is |g⟩, and the equator holds equal superpositions with different phases. The laser makes the point rotate about an axis set by Ω and Δ.</p>
+    <p><span class="lbl">Analogy</span>A top’s axis precesses around gravity; the Bloch vector precesses around the “laser axis”. Detuning tilts that axis, so the vector traces a smaller circle that never reaches the north pole.</p>
+    <p class="fails"><span class="lbl">Where it fails</span>Opposite points on the Bloch sphere are <em>orthogonal</em> states, not opposite directions in space. With decay the vector also shrinks inside the sphere (L4).</p>
+  </aside>
+  <div class="lab" id="labRabi">
+    <div class="lab-h"><b>Interactive · Rabi oscillation &amp; Bloch sphere</b><span>optical Bloch equations, RK4, starts in |g⟩</span></div>
+    <div class="lab-grid">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:10px;min-width:0">
+        <canvas id="blochCanvas" style="height:260px" aria-label="Bloch sphere with the state vector trajectory" role="img"></canvas>
+        <canvas id="rabiPlot" style="height:260px" aria-label="Excited-state population versus time" role="img"></canvas>
+      </div>
+      <div class="ctrl">
+        <label for="rOm"><span class="lt">Ω/2π <output id="rOmo" for="rOm"></output></span><input type="range" id="rOm" min="0.1" max="10" step="0.05" value="2"></label>
+        <label for="rDe"><span class="lt">Δ/2π <output id="rDeo" for="rDe"></output></span><input type="range" id="rDe" min="-10" max="10" step="0.05" value="0"></label>
+        <label for="rT"><span class="lt">time window <output id="rTo" for="rT"></output></span><input type="range" id="rT" min="0.2" max="3" step="0.05" value="1"></label>
+        <label class="chk" for="rG" style="display:flex;gap:6px;align-items:center"><input type="checkbox" id="rG"> include decay Γ/2π = 5.746 MHz</label>
+        <button type="button" class="btn" id="rPlay" aria-pressed="true">Pause</button>
+        <div class="readout" id="rRead"></div>
+      </div>
+    </div>
+    <p style="font-size:.82rem;color:var(--muted);margin:.4rem 0 0">Equations: u̇ = Δv − (Γ/2)u, v̇ = −Δu + Ωw − (Γ/2)v, ẇ = −Ωv − Γ(w+1). With decay on, oscillations damp toward a steady state: the reason continuous lasers on a two-level atom give absorption rather than endless Rabi cycling.</p>
+  </div>
+  <div class="worked"><b>Worked example · how big is Ω in Mod A?</b>
+    <p>A common two-level estimate is Ω = Γ√(I/(2I<sub>sat</sub>)). With Γ/2π = 5.746 MHz and the D1 far-detuned π-polarized I<sub>sat</sub> ≈ 4.484 mW/cm² <span class="tag ver">Steck</span>, the paper’s 1.3 mW/cm² control gives Ω/2π ≈ 5.746 × √(1.3/8.968) ≈ <strong>2.2 MHz</strong>. The paper quotes Ω<sub>c</sub>/2π = 1.9 MHz: the same order, with the difference coming from Clebsch–Gordan factors and Rabi-frequency conventions. A π-pulse at Ω/2π = 2 MHz takes π/Ω = 250 ns.</p>
+  </div>
+  <details class="q"><summary>Q1. With Δ = Ω, what is the maximum excited population?</summary><div class="ans">Ω²/(Ω²+Ω²) = 1/2.</div></details>
+  <details class="q"><summary>Q2. Why is the RWA safe for Rb D1 driven by a mW laser?</summary><div class="ans">The dropped terms oscillate at ≈ 2 × 377 THz, while Ω and Δ are MHz to GHz. Their effect averages out (the Bloch–Siegert shift is of order Ω²/ω, utterly negligible here).</div></details>
+  <p class="seen">Where it shows up: <a class="xref" href="index.html#p3-ham">Rabi frequencies Ω<sub>p</sub>, Ω<sub>c</sub></a><a class="xref" href="index.html#labW">control intensity vs width</a></p>
+</section>
+
+<!-- L4 -->
+<section class="lec" id="L4" aria-labelledby="L4h">
+  <div class="lec-head"><span class="lec-num">L4</span><h2 id="L4h">Open systems: density matrix, decay and dephasing</h2></div>
+  <div class="goals"><b>Learning goals</b><ul><li>Use the density matrix for mixed states.</li><li>Distinguish populations from coherences.</li><li>Read a Lindblad master equation and identify Γ, Γ/2 and pure dephasing.</li></ul></div>
+  <div class="prose"><p>Real atoms leak energy (spontaneous emission) and lose phase (collisions, fields, motion). A state vector cannot describe a statistical mixture, but a density matrix can. Diagonal elements are <strong>populations</strong> (how many atoms are where); off-diagonal elements are <strong>coherences</strong> (how well-defined the relative phase is across the ensemble). EIT and memories live in coherences, so coherence lifetimes are the central figure of merit of the whole project.</p></div>
+  <div class="eq"><span class="src">L4.1</span>\[ \hat\rho=\begin{pmatrix}\rho_{ee}&\rho_{eg}\\ \rho_{ge}&\rho_{gg}\end{pmatrix},\qquad \dot{\hat\rho}=-\frac{i}{\hbar}[\hat H,\hat\rho]+\Gamma\Big(\hat\sigma\hat\rho\hat\sigma^\dagger-\tfrac12\{\hat\sigma^\dagger\hat\sigma,\hat\rho\}\Big),\qquad \hat\sigma=|g\rangle\langle e|. \]</div>
+  <aside class="ana" aria-label="Analogy: A clapping audience"><div class="ana-h">An audience clapping in time</div>
+    <p><span class="lbl">Read it in words</span>Populations decay at Γ. The coherence ρ<sub>eg</sub> decays at Γ/2 from emission alone, plus any extra pure-dephasing rate. The commutator is the reversible part; the Lindblad term is irreversible.</p>
+    <p><span class="lbl">Analogy</span>An audience clapping in unison is a coherence: everyone shares a phase. People leaving the hall is population decay. People staying but drifting off the beat is dephasing: the hall still holds the same number of clappers, but the rhythm (coherence) is gone.</p>
+    <p class="fails"><span class="lbl">Where it fails</span>Each atom is itself in a superposition, not just “clapping or not”. Dephasing can be partly reversible (inhomogeneous, e.g. Doppler) or truly irreversible (homogeneous). The audience picture blurs that distinction.</p>
+  </aside>
+  <div class="worked"><b>Worked example · from lifetime to linewidth</b>
+    <p>τ(5P₁/₂) = 27.70 ns <span class="tag ver">Steck</span> ⇒ Γ = 1/τ = 3.61 × 10⁷ s⁻¹ ⇒ Γ/2π = <strong>5.746 MHz</strong>, matching Steck’s quoted natural linewidth. The optical coherence decays at Γ/2 (γ₁₃ ≈ 2π × 2.87 MHz without collisions). With 10 Torr of buffer gas, pressure broadening (~10 MHz/Torr, <span class="tag src">paper</span>) dominates, at ~100 MHz.</p>
+  </div>
+  <details class="q"><summary>Q1. A state has ρ<sub>ee</sub> = ρ<sub>gg</sub> = ½ and ρ<sub>eg</sub> = 0. Is it a superposition?</summary><div class="ans">No. It is a 50/50 statistical mixture with no coherence. A superposition (|g⟩+|e⟩)/√2 would have |ρ<sub>eg</sub>| = ½.</div></details>
+  <details class="q"><summary>Q2. Why is γ₁₂ (ground coherence) potentially millions of times smaller than γ₁₃?</summary><div class="ans">Ground states do not decay radiatively. γ₁₂ comes only from slow processes (transit, collisions, field gradients), typically kHz or less, while γ₁₃ includes the MHz radiative decay and collisional broadening.</div></details>
+  <p class="seen">Where it shows up: <a class="xref" href="index.html#p3-ham">master equation in the Λ system</a><a class="xref" href="index.html#p3-limits">decoherence budget</a></p>
+</section>
+
+<!-- L5 -->
+<section class="lec" id="L5" aria-labelledby="L5h">
+  <div class="lec-head"><span class="lec-num">L5</span><h2 id="L5h">Atomic structure for alkalis</h2></div>
+  <div class="goals"><b>Learning goals</b><ul><li>Build fine, hyperfine and Zeeman structure from angular-momentum addition.</li><li>Apply dipole selection rules for σ⁺, σ⁻ and π light.</li><li>Locate the Mod A and Mod B Λ systems in ⁸⁷Rb.</li></ul></div>
+  <div class="prose"><p>Rubidium’s single valence electron has orbital L and spin S = ½, which combine to J (fine structure: 5P₁/₂ vs 5P₃/₂, the D1 vs D2 lines). The nucleus has spin I = 3/2 for ⁸⁷Rb, and J and I combine to F (hyperfine). In a field B each F splits into 2F+1 sublevels m<sub>F</sub>. Light carries angular momentum: σ⁺ adds +1 to m<sub>F</sub>, σ⁻ subtracts 1, and π (polarized along B) adds 0.</p></div>
+  <div class="eq"><span class="src">L5.1</span>\[ |I-J|\le F\le I+J\ \Rightarrow\ F\in\{1,2\}\ (I=\tfrac32,\ J=\tfrac12),\qquad \Delta E_{\rm Z}=g_F\,\mu_B\,m_F\,B,\qquad \Delta F=0,\pm1,\quad \Delta m_F=0\ (\pi),\ \pm1\ (\sigma^\pm). \]</div>
+  <aside class="ana" aria-label="Analogy: A postal address"><div class="ana-h">A postal address</div>
+    <p><span class="lbl">Read it in words</span>Possible F values run from |I−J| to I+J in integer steps. Each sublevel shifts in energy by g<sub>F</sub>µ<sub>B</sub>m<sub>F</sub>B. Absorbing a photon can change F by at most one and m<sub>F</sub> by the photon’s angular momentum.</p>
+    <p><span class="lbl">Analogy</span>An address narrows down step by step: building (n, L), floor (J), apartment (F), room (m<sub>F</sub>). The magnetic field is a lift that raises rooms on one side of the corridor and lowers those on the other. Selection rules are the doors: σ⁺ light only opens the door to the next room to the right.</p>
+    <p class="fails"><span class="lbl">Where it fails</span>Rooms are places. These are angular-momentum states, and a superposition can be “in several rooms” at once, which is what Λ-EIT exploits.</p>
+  </aside>
+  <div class="worked"><b>Worked example · counting and shifting</b>
+    <p>⁸⁷Rb 5S₁/₂ has 3 + 5 = <strong>8 sublevels</strong>. With g<sub>F</sub> ≈ +½ (F=2), the shift is 0.70 MHz/G per m<sub>F</sub> <span class="tag ver">Steck</span>. Earth’s field (roughly half a gauss) would shift m<sub>F</sub>=+2 by about 0.7 MHz, enormous compared with a 10 kHz EIT line. That is why the cell sits inside µ-metal. Mod A uses the m<sub>F</sub>=+2/0 pair (1.40 kHz/mG); Mod B uses F=1/F=2 clock pairs (m=0↔0, quadratic only).</p>
+  </div>
+  <details class="q"><summary>Q1. Why can σ⁺ light on F=2→F′=1 never excite m<sub>F</sub>=+2?</summary><div class="ans">It would need m<sub>F′</sub>=+3, which does not exist in F′=1 (maximum +1). m<sub>F</sub>=+1 is also dark, since F′=1 has no m<sub>F′</sub>=+2.</div></details>
+  <details class="q"><summary>Q2. Why is D1 preferred over D2 for clean Λ systems?</summary><div class="ans">5P₁/₂ has only two excited hyperfine levels (F′=1, 2), well resolved compared with 5P₃/₂’s four. That means fewer competing excitation paths and cleaner dark states.</div></details>
+  <p class="seen">Where it shows up: <a class="xref" href="index.html#p3-atom">Mod A level scheme</a><a class="xref" href="mod-b.html#b-levels">Mod B level scheme</a><a class="xref" href="mod-b.html#b-zeeman">clock pair</a></p>
+</section>
+
+<!-- L6 -->
+<section class="lec" id="L6" aria-labelledby="L6h">
+  <div class="lec-head"><span class="lec-num">L6</span><h2 id="L6h">Light–matter response: susceptibility, absorption, dispersion</h2></div>
+  <div class="goals"><b>Learning goals</b><ul><li>Relate χ to refractive index and absorption.</li><li>Use Beer’s law and optical depth.</li><li>State the Kramers–Kronig link between absorption and dispersion.</li></ul></div>
+  <div class="prose"><p>Many atoms together respond to light with a polarization P = ε₀χE. The real part of χ slows the phase (refractive index); the imaginary part removes energy (absorption). Beer’s law follows: intensity falls exponentially with distance, and the exponent at resonance is the optical depth.</p></div>
+  <div class="eq"><span class="src">L6.1</span>\[ \chi=\chi'+i\chi'',\qquad n\simeq1+\tfrac12\chi',\qquad I(L)=I_0\,e^{-\mathrm{OD}},\ \ \mathrm{OD}=\int_0^L n_{\rm at}\,\sigma\,dz,\qquad \chi'(\omega)=\frac{2}{\pi}\,\mathcal P\!\!\int_0^\infty\frac{\omega'\chi''(\omega')}{\omega'^2-\omega^2}\,d\omega'. \]</div>
+  <aside class="ana" aria-label="Analogy: Tinted glass and a road with a dip"><div class="ana-h">Tinted glass, and a road with a dip</div>
+    <p><span class="lbl">Read it in words</span>χ′ bends the phase (index); χ″ absorbs. OD is atom density × cross-section × length, summed along the path. Kramers–Kronig says χ′ at any frequency is fixed by χ″ at all frequencies: you cannot have one without the other.</p>
+    <p><span class="lbl">Analogy</span>OD counts sheets of tinted glass, each passing 1/e. For Kramers–Kronig, think of a road with a dip: wherever the surface dips (absorption line), the slope on either side (dispersion) must go down and come back up. A narrow dip means steep slopes.</p>
+    <p class="fails"><span class="lbl">Where it fails</span>Glass absorbs broadly. Atoms absorb in narrow lines, and the “dip” can be inverted (EIT carves a transparency hole) while the same causal link still produces steep dispersion.</p>
+  </aside>
+  <div class="note"><span class="t">Lab connection: keeping the laser on the line</span>The same absorption physics gives the laser its reference. In saturated absorption spectroscopy a strong pump burns narrow sub-Doppler dips into a reference cell’s absorption. A lock box turns the dip into a dispersive error signal (zero on the line, opposite signs either side, like a derivative of the dip) and feeds a correction back to the laser current. See <a href="index.html#p4-lock">the SAS → lock box → laser controller → DFB loop</a>.</div>
+  <div class="worked"><b>Worked example · how opaque is the cell?</b>
+    <p>The paper’s cell had OD ~10 at ~60 °C <span class="tag src">paper</span>. Without EIT, T = e⁻¹⁰ ≈ <strong>4.5 × 10⁻⁵</strong>, so 1 µW in gives 45 pW out. Our vapour-pressure estimate gives n ≈ 3 × 10¹¹ cm⁻³ at 60 °C <span class="tag est">design estimate</span>, inside the paper’s typical 10¹¹–10¹² cm⁻³.</p>
+  </div>
+  <details class="q"><summary>Q1. OD doubles from 5 to 10. By what factor does resonant transmission change?</summary><div class="ans">e⁻¹⁰/e⁻⁵ = e⁻⁵ ≈ 6.7 × 10⁻³: about 150 times less light.</div></details>
+  <details class="q"><summary>Q2. Why does a narrow absorption feature imply a strong dispersion feature?</summary><div class="ans">Kramers–Kronig: the refractive-index change scales with the absorption strength divided by its width, so narrower features give steeper index slopes. This is the root of slow light under EIT.</div></details>
+  <p class="seen">Where it shows up: <a class="xref" href="index.html#p3-chi">susceptibility and OD</a><a class="xref" href="index.html#p3-limits">OD trade-offs</a></p>
+</section>
+
+<!-- L7 -->
+<section class="lec" id="L7" aria-labelledby="L7h">
+  <div class="lec-head"><span class="lec-num">L7</span><h2 id="L7h">Three-level interference: dark states, CPT, EIT, Autler–Townes</h2></div>
+  <div class="goals"><b>Learning goals</b><ul><li>Compare Λ, V and ladder schemes.</li><li>Derive the dark state and the EIT window.</li><li>Distinguish EIT (interference) from Autler–Townes splitting (level shifting).</li></ul></div>
+  <div class="prose"><p>Add a second ground state and a second laser. Two excitation routes now lead to the same excited state, and their amplitudes can cancel. The cancelling superposition is the <strong>dark state</strong>. If the control is strong and the probe weak, the probe sees a narrow transparency window: <strong>EIT</strong>. With two comparable fields, atoms are trapped in the dark state: <strong>CPT</strong>. A strong control also splits the excited state into an Autler–Townes doublet ±Ω<sub>c</sub>, which also reduces absorption at line centre, but without interference, so some residual absorption remains (paper refs [29], [30]).</p></div>
+  <div class="eq"><span class="src">L7.1</span>\[ |D\rangle=\frac{\Omega_p|2\rangle-\Omega_c|1\rangle}{\sqrt{|\Omega_p|^2+|\Omega_c|^2}},\qquad \gamma_{\rm EIT}=\gamma_{12}+\frac{|\Omega_c|^2}{\gamma_{13}},\qquad E_\pm=\pm\hbar\Omega_c\ \ (\text{Autler–Townes, paper Eq. 23}). \]</div>
+  <aside class="ana" aria-label="Analogy: Two pushes and noise-cancelling"><div class="ana-h">Two pushes that cancel; noise-cancelling headphones</div>
+    <p><span class="lbl">Read it in words</span>The dark state mixes |1⟩ and |2⟩ with weights set by the opposite field and a minus sign. The transparency window has a width set by ground decoherence plus control power. Autler–Townes describes the control splitting the excited level into two.</p>
+    <p><span class="lbl">Analogy</span>Two friends push a swing from opposite sides with matched rhythm: it stays still. The window is like noise-cancelling headphones: silence only in a band. Autler–Townes is different: it is like moving a single pothole into two smaller potholes on either side of your wheel. You miss them both, but not because anything cancelled.</p>
+    <p class="fails"><span class="lbl">Where it fails</span>No light is added to cancel the probe; the cancellation is between quantum amplitudes inside each atom. Real experiments often sit between pure EIT and pure Autler–Townes, and distinguishing them takes careful fitting.</p>
+  </aside>
+  <div class="lab" id="labE">
+    <div class="lab-h"><b>Interactive · the EIT window</b><span>paper Eq. 13 with γ₁₃ → W (effective optical width)</span></div>
+    <div class="lab-grid">
+      <canvas id="chartE" aria-label="EIT probe transmission and phase versus two-photon detuning" role="img"></canvas>
+      <div class="ctrl">
+        <label for="eOm"><span class="lt">Ω<sub>c</sub>/2π <output id="eOmo" for="eOm"></output></span><input type="range" id="eOm" min="0" max="6" step="0.05" value="1.9"></label>
+        <label for="eG"><span class="lt">γ₁₂/2π <output id="eGo" for="eG"></output></span><input type="range" id="eG" min="0.1" max="20" step="0.1" value="1"></label>
+        <label for="eOD"><span class="lt">OD <output id="eODo" for="eOD"></output></span><input type="range" id="eOD" min="0.5" max="30" step="0.5" value="10"></label>
+        <label for="eW"><span class="lt">W/2π <output id="eWo" for="eW"></output></span><input type="range" id="eW" min="3" max="500" step="1" value="300"></label>
+        <div class="readout" id="eRead"></div>
+      </div>
+    </div>
+    <div class="legend"><span><i style="background:var(--chart-a)"></i>transmission</span><span><i style="background:var(--chart-b)"></i>phase (right axis)</span><span><i style="background:var(--chart-d)"></i>no control</span></div>
+  </div>
+  <div class="worked"><b>Worked example · width at the paper’s control power</b>
+    <p>Ω<sub>c</sub>/2π = 1.9 MHz, effective optical width W/2π ≈ 300 MHz <span class="tag est">design estimate</span>, γ₁₂/2π = 1 kHz. Then γ<sub>EIT</sub>/2π ≈ 1 + 1900²/300 000 kHz ≈ <strong>13 kHz</strong> (HWHM), i.e. FWHM ≈ 26 kHz. The paper measured 7.3 kHz FWHM at this control intensity, so the crude formula overestimates here by a factor of ~3. That is a reminder to measure, not assume.</p>
+  </div>
+  <details class="q"><summary>Q1. In the dark state with Ω<sub>p</sub> ≪ Ω<sub>c</sub>, where is almost all the population?</summary><div class="ans">In |1⟩, the state coupled by the weak probe. Weight of |1⟩ = |Ω<sub>c</sub>|²/(|Ω<sub>c</sub>|²+|Ω<sub>p</sub>|²) ≈ 1. That is exactly why the result is counter-intuitive.</div></details>
+  <details class="q"><summary>Q2. Halving the control intensity halves which term of γ<sub>EIT</sub>?</summary><div class="ans">The power-broadening term |Ω<sub>c</sub>|²/γ₁₃ (Ω² ∝ intensity). γ₁₂ is unchanged.</div></details>
+  <p class="seen">Where it shows up: <a class="xref" href="index.html#p3-ham">Mod A dark state</a><a class="xref" href="index.html#p3-chi">EIT linewidth</a><a class="xref" href="mod-b.html#b-pm">Mod B fields</a></p>
+</section>
+
+<!-- L8 -->
+<section class="lec" id="L8" aria-labelledby="L8h">
+  <div class="lec-head"><span class="lec-num">L8</span><h2 id="L8h">Slow and stopped light: group velocity, polaritons, storage</h2></div>
+  <div class="goals"><b>Learning goals</b><ul><li>Compute group velocity and delay from an EIT spectrum.</li><li>Describe the dark-state polariton and its mixing angle.</li><li>Explain storage and retrieval as adiabatic transfer between light and spin wave.</li></ul></div>
+  <div class="prose"><p>The steep dispersion inside the EIT window makes the group index huge, so a pulse crawls through the cell. In the Fleischhauer–Lukin picture (paper ref. [11]) the propagating excitation is a <strong>dark-state polariton</strong>, a superposition of the probe field and the collective spin coherence. Its mixing angle θ is set by the control. Lower the control adiabatically to zero and θ → 90°: the excitation becomes purely atomic and stops. Raise it again and the light returns.</p></div>
+  <div class="eq"><span class="src">L8.1</span>\[ v_g=\frac{c}{n_g}\approx c\cos^2\theta,\qquad \hat\Psi=\cos\theta\,\hat{\mathcal E}-\sin\theta\,\sqrt{N}\,\hat\rho_{12},\qquad \tan^2\theta=\frac{g^2N}{\Omega_c^2},\qquad \tau_{\rm delay}=\frac{\mathrm{OD}_{\rm EIT}}{\gamma_{\rm EIT}}. \]</div>
+  <aside class="ana" aria-label="Analogy: Relay baton and traffic"><div class="ana-h">Traffic on a crowded road, and a relay baton</div>
+    <p><span class="lbl">Read it in words</span>The polariton Ψ is part light (cos θ) and part atomic spin wave (sin θ). g√N is the collective light–atom coupling, so more atoms means more atomic character. Group velocity falls as the excitation becomes more atomic. The delay follows from the measured OD<sub>EIT</sub> and γ<sub>EIT</sub>.</p>
+    <p><span class="lbl">Analogy</span>A convoy entering a crowded road bunches up and slows: that is pulse compression. Storage is a relay race: the light runner hands the baton (the quantum state) to an atom runner who stands still holding it until the control says “go”.</p>
+    <p class="fails"><span class="lbl">Where it fails</span>The convoy loses no cars, and the baton does not fade. In the atoms, energy is temporarily held by the atoms and control field, and the stored spin wave decays (γ₁₂) and diffuses while waiting.</p>
+  </aside>
+  <div class="worked"><b>Worked example · slow light in numbers</b>
+    <p>Take OD<sub>EIT</sub> ≈ 9.6 and γ<sub>EIT</sub>/2π ≈ 21 kHz (the simulator’s Mod A reference, <span class="tag est">illustrative</span>). τ = 9.6/(2π × 21 × 10³ s⁻¹) ≈ <strong>73 µs</strong>. In an assumed 7.5 cm cell that is v<sub>g</sub> ≈ 0.075 m / 73 µs ≈ <strong>1 km/s</strong>, about 3 × 10⁵ times slower than c. A 47 µs pulse is 14 km long in vacuum but ≈ 5 cm inside the cell: it fits, so it can be stored.</p>
+  </div>
+  <details class="q"><summary>Q1. What happens to v<sub>g</sub> if you halve the control intensity (power-broadening-dominated regime)?</summary><div class="ans">γ<sub>EIT</sub> roughly halves, so the delay OD<sub>EIT</sub>/γ<sub>EIT</sub> roughly doubles and v<sub>g</sub> roughly halves. Transparency (OD<sub>EIT</sub>) may also drop, which is the trade-off.</div></details>
+  <details class="q"><summary>Q2. Why must the control be turned off while the pulse is fully inside the cell?</summary><div class="ans">Only the part of the pulse inside the medium is converted to spin wave. Anything already out (or not yet in) is lost or unstored. That is why the delay must exceed the pulse length (time-bandwidth product ≈ √OD<sub>EIT</sub> &gt; 1).</div></details>
+  <p class="seen">Where it shows up: <a class="xref" href="index.html#p3-slow">Mod A slow &amp; stored light</a><a class="xref" href="index.html#p4">storage timing</a><a class="xref" href="mod-b.html#b-storage">Mod B storage options</a></p>
+</section>
+
+<!-- L9 -->
+<section class="lec" id="L9" aria-labelledby="L9h">
+  <div class="lec-head"><span class="lec-num">L9</span><h2 id="L9h">Thermal vapour realities: Doppler, transit, collisions, buffer gas</h2></div>
+  <div class="goals"><b>Learning goals</b><ul><li>Estimate Doppler width and transit time for warm Rb.</li><li>Explain why co-propagating Λ beams cancel Doppler broadening.</li><li>Describe what a buffer gas buys and what it costs.</li></ul></div>
+  <div class="prose"><p>Atoms in a warm cell move at hundreds of metres per second. Each motional effect is a time-of-flight T across a length l, giving broadening ≈ 1/T (paper Eq. 29). Over an optical wavelength this is Doppler broadening; across the beam it is transit broadening; across the two-photon wavelength it determines whether EIT survives motion.</p></div>
+  <div class="eq"><span class="src">L9.1</span>\[ v_{\rm th}=\sqrt{\frac{k_BT}{m}},\qquad \sigma_{\rm Dop}=v_{\rm th}k,\qquad \Gamma_{tt}\sim\frac{v_{\rm th}}{w_0}\ \text{(ballistic)},\ \ \frac{D}{w_0^2}\ \text{(diffusive)},\qquad \delta_{\rm Dop}^{(2)}=(\vec k_p-\vec k_c)\cdot\vec v. \]</div>
+  <aside class="ana" aria-label="Analogy: Siren, spotlight, crowded room"><div class="ana-h">A siren, a spotlight and a crowded room</div>
+    <p><span class="lbl">Read it in words</span>Thermal speed sets the Doppler width. Beam size and speed (or diffusion) set the time in the beam. The two-photon Doppler shift depends only on the <em>difference</em> of the two wavevectors.</p>
+    <p><span class="lbl">Analogy</span>A passing ambulance siren changes pitch (Doppler), but two sirens on the same ambulance keep the same interval (co-propagating Λ). An atom crossing the beam is a runner crossing a spotlight: fast runners are lit only briefly. Buffer gas turns the stage into a crowded room, where the runner staggers about and stays in the light far longer.</p>
+    <p class="fails"><span class="lbl">Where it fails</span>Buffer-gas collisions also shift and broaden the optical line (pressure broadening), and very high pressure eventually destroys ground coherence too.</p>
+  </aside>
+  <div class="worked"><b>Worked example · ⁸⁷Rb at 60 °C</b>
+    <p>m = 86.909 u <span class="tag ver">Steck</span>, T = 333 K ⇒ v<sub>th</sub> ≈ <strong>179 m/s</strong>. σ<sub>Dop</sub>/2π = v<sub>th</sub>/λ ≈ <strong>225 MHz</strong> (the paper’s Fig. 6 uses 230 MHz). Ballistic crossing of a 0.75 mm beam radius takes ≈ 4.2 µs. With D ≈ 10 cm²/s (paper, 10 Torr), diffusion across it takes w₀²/D ≈ 0.56 ms, about 130 times longer <span class="tag est">derived</span>.</p>
+  </div>
+  <details class="q"><summary>Q1. Why does a ladder (cascade) scheme prefer counter-propagating beams, while Λ prefers co-propagating?</summary><div class="ans">In Λ one photon is absorbed and one emitted, so the effective wavevector is k<sub>p</sub> − k<sub>c</sub>, which is small when the beams travel together. In a ladder both photons are absorbed, so it is k<sub>p</sub> + k<sub>c</sub>, which is minimised by opposite directions (paper Fig. 9 inset).</div></details>
+  <details class="q"><summary>Q2. A beam angle of 0.1 mrad between probe and control: roughly how much residual broadening without buffer gas?</summary><div class="ans">σ<sub>Dop</sub>θ ≈ 225 MHz × 10⁻⁴ ≈ 20 kHz: “tens of kHz”, as the paper says. With buffer gas, Dicke narrowing makes it quadratic in θ and much smaller.</div></details>
+  <p class="seen">Where it shows up: <a class="xref" href="index.html#p3-vapor">Mod A hot-vapour effects</a><a class="xref" href="mod-b.html#b-doppler">Mod B Doppler &amp; Dicke</a></p>
+</section>
+
+<!-- L10 -->
+<section class="lec" id="L10" aria-labelledby="L10h">
+  <div class="lec-head"><span class="lec-num">L10</span><h2 id="L10h">Quantum memories: metrics, repeaters, networks</h2></div>
+  <div class="goals"><b>Learning goals</b><ul><li>Define efficiency, fidelity, storage time, bandwidth and multimode capacity.</li><li>Explain why repeaters need memories.</li><li>Place the project’s Rb platform among memory goals.</li></ul></div>
+  <div class="prose"><p>A quantum memory stores a quantum state of light and releases it on demand. Photon loss in fibre grows exponentially with distance and a quantum state cannot be copied, so long-distance links need repeaters. Repeaters create entanglement over short segments and connect them, and they need memories to hold one segment’s success while the others try. The DLCZ proposal (paper ref. [47]) used atomic ensembles for exactly this. Published Rb and Cs ensemble memories report high efficiencies and fidelities (e.g. Hsiao <em>et al.</em> 2018, paper ref. [114]); read the originals for the numbers.</p></div>
+  <div class="eq"><span class="src">L10.1</span>\[ \eta=\frac{E_{\rm out}}{E_{\rm in}},\qquad \mathcal F=|\langle\psi_{\rm in}|\psi_{\rm out}\rangle|^2\ \ (\text{pure states}),\qquad \eta(\tau)\approx\eta_0\,e^{-\tau/T_{\rm mem}},\qquad 1-\eta_0\propto\frac{1}{\mathrm{OD}_{\rm EIT}},\qquad B\tau_{\rm delay}\approx\sqrt{\mathrm{OD}_{\rm EIT}}. \]</div>
+  <aside class="ana" aria-label="Analogy: Left-luggage office"><div class="ana-h">A left-luggage office</div>
+    <p><span class="lbl">Read it in words</span>Efficiency is how much of the stored energy (or how many photons) comes back. Fidelity is how faithfully the state comes back. Memory time is how long before efficiency decays. Inefficiency shrinks with OD (paper). The time–bandwidth product says how many pulses fit in the medium.</p>
+    <p><span class="lbl">Analogy</span>A left-luggage office. <em>Efficiency</em>: the fraction of bags you get back. <em>Fidelity</em>: whether they come back undamaged and unopened. <em>Storage time</em>: how long before bags start going missing. <em>Bandwidth</em>: how big a bag fits through the door. <em>Multimode capacity</em>: how many lockers there are.</p>
+    <p class="fails"><span class="lbl">Where it fails</span>A luggage office can photocopy your documents; a quantum memory cannot copy an unknown state (no-cloning). A “lost bag” in a memory can also become noise added to other bags.</p>
+  </aside>
+  <div class="worked"><b>Worked example · how many pulses fit?</b>
+    <p>With OD<sub>EIT</sub> ≈ 9.6 the time–bandwidth product is √9.6 ≈ <strong>3</strong>. Only about three distinguishable pulses fit in the medium at once. Raising it to 30 gives ≈ 5.5. This is why OD is the resource (paper Sec. IV). The exponential storage-decay form above is a simple model; real decay curves can be non-exponential (e.g. diffusion).</p>
+  </div>
+  <details class="q"><summary>Q1. Can a memory have 99 % fidelity and 10 % efficiency?</summary><div class="ans">Yes. Fidelity (conditional on retrieval) and efficiency are separate figures of merit. Many demonstrations report both.</div></details>
+  <details class="q"><summary>Q2. Why does the project first benchmark with classical (attenuated) light?</summary><div class="ans">Efficiency, delay, bandwidth and storage time can be measured with weak classical pulses on standard photodiodes. That calibrates the platform before single-photon sources and detectors (L11, Objective 3) are introduced.</div></details>
+  <p class="seen">Where it shows up: <a class="xref" href="index.html#p1">project framing</a><a class="xref" href="index.html#p3-limits">what limits storage</a><a class="xref" href="index.html#p6">storage audit step O2.8</a></p>
+</section>
+
+<!-- L11 -->
+<section class="lec" id="L11" aria-labelledby="L11h">
+  <div class="lec-head"><span class="lec-num">L11</span><h2 id="L11h">Quantum states of light: coherent, Fock, single photons, g⁽²⁾(0)</h2></div>
+  <div class="goals"><b>Learning goals</b><ul><li>Contrast coherent states (lasers) with Fock states (single photons).</li><li>Use Poisson statistics to analyse attenuated laser pulses.</li><li>Interpret the second-order correlation g⁽²⁾(0).</li></ul></div>
+  <div class="prose"><p>A laser, however strongly attenuated, emits a <strong>coherent state</strong>: the photon number in a pulse is Poisson-distributed. Attenuation lowers the mean but never removes the chance of two photons. A true <strong>single-photon source</strong> (e.g. the α-MoO₃ emitters planned for Objective 3) ideally emits a Fock state |1⟩ with zero chance of two. The Hanbury Brown–Twiss measurement of g⁽²⁾(0) tells them apart.</p></div>
+  <div class="eq"><span class="src">L11.1</span>\[ P(n)=e^{-\bar n}\frac{\bar n^{\,n}}{n!},\qquad g^{(2)}(0)=\frac{\langle\hat a^\dagger\hat a^\dagger\hat a\hat a\rangle}{\langle\hat a^\dagger\hat a\rangle^2}=\begin{cases}1&\text{coherent}\\ 2&\text{thermal}\\ 0&\text{single-photon Fock state}\end{cases} \]</div>
+  <aside class="ana" aria-label="Analogy: Rain versus a vending machine"><div class="ana-h">Rain on a tile versus a vending machine</div>
+    <p><span class="lbl">Read it in words</span>For a coherent state, the probability of n photons follows a Poisson law with mean n̄. g⁽²⁾(0) compares the chance of detecting two photons at the same time with what independent arrivals would give: 1 for a laser, 2 for thermal (bunched) light, 0 for an ideal single-photon source.</p>
+    <p><span class="lbl">Analogy</span>Raindrops hitting one floor tile arrive randomly: sometimes none, occasionally two at once (Poisson, g⁽²⁾ = 1). A vending machine drops exactly one can per button press, never two (Fock state, g⁽²⁾ = 0).</p>
+    <p class="fails"><span class="lbl">Where it fails</span>Raindrops are classical particles. Light’s statistics come from the quantum state of a field mode, and a single photon can still be split between two paths without being divided.</p>
+  </aside>
+  <div class="worked"><b>Worked example · attenuated probe pulses</b>
+    <p>A 10 µs, 1 µW pulse at 795 nm holds ≈ 4.0 × 10⁷ photons (L1). For n̄ = 1, attenuate by 4 × 10⁷ (ND ≈ 7.6). At n̄ = 0.1: P(0) = 0.905, P(1) = 0.090, P(≥2) = 0.0047. About 5 % of non-empty pulses still contain two or more photons, which is why “single-photon-level” classical probes are not single photons.</p>
+  </div>
+  <details class="q"><summary>Q1. What g⁽²⁾(0) would you measure for the Mod A probe laser?</summary><div class="ans">≈ 1 (coherent light), regardless of attenuation.</div></details>
+  <details class="q"><summary>Q2. Why does storing true single photons demand much better control filtering than storing a µW probe?</summary><div class="ans">The signal is ~1 photon per pulse, while a mW control leaks, scatters and fluoresces. Even a 10⁻⁵ extinction (Glan–Taylor) leaves many control photons per pulse. Spectral filtering and timing gates are then needed too.</div></details>
+  <p class="seen">Where it shows up: <a class="xref" href="index.html#p4">probe attenuation &amp; separation</a><a class="xref" href="mod-b.html#b-detect">Mod B detection problem</a></p>
+</section>
+
+<!-- L12 -->
+<section class="lec" id="L12" aria-labelledby="L12h">
+  <div class="lec-head"><span class="lec-num">L12</span><h2 id="L12h">Strong coupling, cavity QED and polaritons in solids: the bridge to Objective 3</h2></div>
+  <div class="goals"><b>Learning goals</b><ul><li>Define the strong-coupling condition and cooperativity.</li><li>See how an ensemble gives collective enhancement g√N.</li><li>Understand, without overclaiming, how microcavity polaritons relate to this project.</li></ul></div>
+  <div class="prose">
+    <p>Put an emitter in an optical cavity. If the emitter–photon coupling g beats both the cavity loss κ and the emitter decay γ, energy oscillates back and forth and the spectrum splits into two polariton peaks separated by the vacuum Rabi splitting. N emitters coupled to the same mode act collectively with g√N. The EIT paper makes the same point for vapours: strong light–matter coupling arises from collective enhancement of a large ensemble, and “no high-quality cavity is required”.</p>
+    <p>Objective 3 concerns solid-state systems. Literature cited in the project plan reports ultrastrong coupling in regioregular P3HT on plasmonic arrays (Rabi splitting ~0.6 eV) and hyperbolic phonon polaritons in α-MoO₃. Whether such systems can support EIT-like storage at room temperature is precisely the open question the calibrated Rb platform is meant to help test. Nothing here should be read as a claim that they do.</p>
+  </div>
+  <div class="eq"><span class="src">L12.1</span>\[ g\gg\kappa,\gamma\ \ (\text{strong coupling}),\qquad C=\frac{4g^2}{\kappa\gamma},\qquad \hbar\Omega_R=2\hbar g\sqrt{N}\ \ (\text{collective vacuum Rabi splitting}),\qquad \frac{g}{\omega}\gtrsim0.1\ \ (\text{a common ultrastrong criterion}). \]</div>
+  <aside class="ana" aria-label="Analogy: Coupled pendulums"><div class="ana-h">Two pendulums joined by a spring</div>
+    <p><span class="lbl">Read it in words</span>Strong coupling means the exchange rate g outruns both loss channels. Cooperativity C summarises how good the coupling is. N emitters together couple √N times more strongly. “Ultrastrong” is a regime where g becomes a sizeable fraction of the bare frequency itself; ~0.1 is a commonly used threshold.</p>
+    <p><span class="lbl">Analogy</span>Two pendulums joined by a spring trade their swing back and forth. Strongly joined, they no longer swing at their own frequencies but in two new shared modes, one faster and one slower. That frequency split is the Rabi splitting, and the shared modes are the polaritons.</p>
+    <p class="fails"><span class="lbl">Where it fails</span>Pendulums are classical. Vacuum Rabi splitting exists even with zero photons in the cavity, and polariton storage needs long-lived matter coherence. A large splitting alone does not guarantee that.</p>
+  </aside>
+  <div class="worked"><b>Worked example · same idea, different scales</b>
+    <p>In the Rb cell, the “coupling” that matters is collective: OD ≈ 10 means the ensemble absorbs strongly without any cavity. In the P3HT work cited in the project plan the splitting is quoted at ~0.6 eV <span class="tag src">project plan lit.</span>, compared with 1.56 eV for a 795 nm photon (L1). These are very different physical regimes, which is why Objective 3 begins with careful calibration on the Rb platform.</p>
+  </div>
+  <details class="q"><summary>Q1. Why does an atomic ensemble not need a cavity to reach strong collective coupling?</summary><div class="ans">The relevant figure, OD, grows with atom number. Many atoms each weakly coupled add up (g√N, or OD ∝ N L), so a single pass through a dense cell gives strong light–matter interaction.</div></details>
+  <details class="q"><summary>Q2. Does a large Rabi splitting imply a good quantum memory?</summary><div class="ans">No. A memory also needs a long-lived, controllable coherence (like γ₁₂ in Rb) and a way to switch the coupling on and off. Splitting measures coupling strength, not storage time.</div></details>
+  <p class="seen">Where it shows up: <a class="xref" href="index.html#p1">project framing (next stage)</a><a class="xref" href="index.html#decide">platform choice</a></p>
+</section>
+
+<section class="lec reading" id="q-reading" aria-labelledby="qRh">
+  <div class="lec-head"><span class="lec-num">R</span><h2 id="qRh">Reading for the lectures</h2></div>
+  <div class="cols-2">
+    <div><h4>Textbooks <span class="tag est">check current edition</span></h4><ul>
+      <li>M. Fox, <em>Quantum Optics: An Introduction</em> (Oxford University Press). <span class="why">L1, L3, L11, L12 at the right level.</span></li>
+      <li>C. J. Foot, <em>Atomic Physics</em> (Oxford University Press). <span class="why">L3–L5, L9: structure, Rabi, Doppler, SAS.</span></li>
+      <li>R. Loudon, <em>The Quantum Theory of Light</em> (Oxford University Press). <span class="why">L6, L11: response functions, photon statistics.</span></li>
+      <li>M. O. Scully and M. S. Zubairy. Quantum Optics. Cambridge University Press, Cambridge, UK, 1997. <span class="why">Paper ref. [22]: L4, L7, L8 in depth.</span></li>
+      <li>Peter W Milonni. Fast Light, Slow Light and Left-Handed Light. IOP Publishing Ltd, London, UK, 1 edition, 2005. <span class="why">Paper ref. [36]: L8.</span></li>
+      <li><a href="https://dokumen.pub/photonic-quantum-technologies-science-and-applications-1nbsped-3527414126-9783527414123.html">“Photonic Quantum Technologies: Science and Applications” (book, as named in the collected URL; third-party copy, prefer your library)</a></li>
+    </ul>
+    <h4>Reviews &amp; classics (as printed in the paper’s references)</h4><ul>
+      <li>WILLIAM HAPPER. Optical pumping. Rev. Mod. Phys., 44:169–249, Apr 1972. <span class="why">[9]: L5.</span></li>
+      <li>E. Arimondo. Coherent population trapping in laser spectroscopy. Progress in Optics, XXXV:259–354, 1996. <span class="why">[16]: L7.</span></li>
+      <li>Michael Fleischhauer, Atac Imamoglu, and Jonathan P. Marangos. Electromagnetically induced transparency: Optics in coherent media. Rev. Mod. Phys., 77:633–673, Jul 2005. <span class="why">[2]: L7–L8.</span></li>
+      <li>Petr M. Anisimov, Jonathan P. Dowling, and Barry C. Sanders. Objectively discerning autler-townes splitting from electromagnetically induced transparency. Phys. Rev. Lett., 107:163604, Oct 2011. <span class="why">[29]: L7.</span></li>
+    </ul></div>
+    <div><h4>Polaritons, memories, networks</h4><ul>
+      <li>M Fleischhauer and MD Lukin. Dark-state polaritons in electromagnetically induced transparency. Phys. Rev. Lett., 84(22):5094–5097, MAY 29 2000. <span class="why">[11]: L8.</span></li>
+      <li>M. D. Lukin. Colloquium: Trapping and manipulating photon states in atomic ensembles. Rev. Mod. Phys., 75:457, April 2003. <span class="why">[12]: L8, L10.</span></li>
+      <li>L.-M. Duan, M. D. Lukin, J. I. Cirac, and P. Zoller. Long-distance quantum communication with atomic ensembles and linear optics. Nature, 414:413, 2001. <span class="why">[47]: L10.</span></li>
+      <li>Khabat Heshami, Duncan G. England, Peter C. Humphreys, Philip J. Bustard, Victor M. Acosta, Joshua Nunn, and Benjamin J. Sussman. Quantum memories: emerging applications and recent advances. Journal of Modern Optics, 63(20):2005–2028, 2016. <span class="why">[46]: L10.</span></li>
+      <li>Lijun Ma, Oliver Slattery, and Xiao Tang. Optical quantum memory based on electromagnetically induced transparency. Journal of Optics, 19(4):043001, feb 2017. <span class="why">[7]: L10.</span></li>
+      <li>Shi-Hai Wei, Bo Jing, Xue-Ying Zhang, Jin-Yu Liao, Chen-Zhi Yuan, Bo-Yu Fan, Chen Lyu, Dian-Li Zhou, You Wang, Guang-Wei Deng, Hai-Zhi Song, Daniel Oblak, Guang-Can Guo, and Qiang Zhou. Towards real-world quantum networks: a review, 2022. <span class="why">[8]: L10.</span></li>
+      <li>Mikhail D. Lukin, Michael Fleischhauer, Marlan O. Scully, and Vladimir L. Velichansky. Intracavity electromagnetically induced transparency. Opt. Lett., 23(4):295–297, Feb 1998. <span class="why">[129]: L12.</span></li>
+      <li><a href="https://arxiv.org/html/2205.10959v2">Finkelstein, Bali, Firstenberg &amp; Novikova, “A practical guide to electromagnetically induced transparency in atomic vapor”, arXiv:2205.10959v2</a><span class="why">The bridge from these lectures to the experiment.</span></li>
+      <li><a href="https://en.wikipedia.org/wiki/Electromagnetically_induced_transparency">Wikipedia: Electromagnetically induced transparency</a> · <a href="https://www.youtube.com/watch?v=ykWIOBJZ0OE">Video (YouTube) ykWIOBJZ0OE</a> · <a href="https://www.youtube.com/watch?v=OVIwu10N5lM">Video (YouTube) OVIwu10N5lM</a><span class="why">Collected by the researcher; titles not confirmed.</span></li>
+    </ul></div>
+  </div>
+</section>
+
+</main>
+</div>
+</div>
+
+<footer class="site">
+  <div class="wrap">
+    <p><strong>Quantum Optics Lectures</strong>: background reading for the IMEN quantum photonics programme. Prepared October 2026. Companion pages: <a href="index.html">Mod A guide</a> · <a href="mod-b.html">Mod B guide</a>.</p>
+    <p><strong>Sources.</strong> Physics conventions follow standard textbooks and the Finkelstein <em>et al.</em> tutorial (arXiv:2205.10959v2). ⁸⁷Rb constants from Steck (verify against the current revision). Worked-example numbers marked as estimates are for orientation only.</p>
+  </div>
+</footer>
+<script>
+/* ==========================================================================
+   EITPhys — pure logic (no DOM, no THREE). Jones calculus, Λ-EIT
+   susceptibility, illustrative cell model, 2-D beam tracer, objectives.
+   Units: lengths mm (table), powers mW, frequencies kHz unless stated.
+   ========================================================================== */
+(function (root) {
+  'use strict';
+
+  /* ---------------- constants ---------------- */
+  var K = {
+    zeeman_kHz_per_mG: 0.70,       // |g_F| mu_B / h for 5S1/2 F=2 (and F=1): 0.70 MHz/G = 0.70 kHz/mG
+    lambdaShift_kHz_per_mG: 1.40,  // m_F=2 <-> m_F=0 splitting = 2 x 0.70 kHz/mG
+    pbsLeak: 1e-3,                 // typical PBS extinction (paper Sec. V B)
+    glanLeak: 1e-5,                // Glan-Taylor extinction (paper Sec. V B)
+    isolatorBack: 1e-4,            // illustrative 40 dB isolation
+    isolatorFwd: 0.90,             // illustrative forward transmission
+    mirrorR: 0.98,                 // illustrative protected-silver reflectance
+    pickoffR: 0.04,                // ~4 % Fresnel reflection, uncoated glass
+    controlWaist_cm: 0.255,        // 1/e^2 radius 2.55 mm (paper Fig. 10c control beam)
+    probeWaist_mm: 0.75,           // illustrative (planned collimator gives a ~1.5 mm waist)
+    vth_ms_60C: 178,               // 1-D rms thermal speed of 87Rb at 333 K, sqrt(kT/m)
+    earthResidual_mG: 450,         // illustrative unshielded residual field along the axis
+    fitW0_kHz: 1.5,                // empirical intercept, linear fit to paper's two points
+    fitSlope_kHz_per_mWcm2: 4.452, // (26-7.3)/(5.5-1.3)
+    od_ref: 10, T_ref_C: 60,       // OD ~10 at ~60 C (paper, Fig. 10c conditions)
+    hfs_kHz: 6834682.61,           // 87Rb ground hyperfine splitting (Steck: 6.834 682 610 904 GHz)
+    clockQuad_kHz_per_mG2: 5.75e-7,// ~575 Hz/G^2 clock-transition quadratic Zeeman shift (verify vs Steck)
+    lineWindow_kHz: 300000,        // a spectral component within ±300 MHz of a D1 line counts as "on the line"
+    eomLoss: 0.8,                  // illustrative EOM insertion transmission
+    eomVpi_V: 3.0,                 // illustrative Vπ at 6.8 GHz (read your EOM datasheet)
+    dopplerSigma_MHz: 224,         // 1-D Doppler width sigma/2pi at 60 C (design estimate)
+    eitDetuneScale_MHz: 50,        // ILLUSTRATIVE: EIT contrast fades as the one-photon detuning grows
+    sasWidth_MHz: 12,              // ILLUSTRATIVE width of a sub-Doppler SAS feature (error-signal plot only)
+    beamHeight: 40,
+    table: { w: 900, d: 600, pitch: 25 }
+  };
+
+  /* ---------------- complex helpers ---------------- */
+  function C(re, im) { return { re: re, im: im || 0 }; }
+  function cadd(a, b) { return C(a.re + b.re, a.im + b.im); }
+  function csub(a, b) { return C(a.re - b.re, a.im - b.im); }
+  function cmul(a, b) { return C(a.re * b.re - a.im * b.im, a.re * b.im + a.im * b.re); }
+  function cdiv(a, b) { var d = b.re * b.re + b.im * b.im; return C((a.re * b.re + a.im * b.im) / d, (a.im * b.re - a.re * b.im) / d); }
+  function cconj(a) { return C(a.re, -a.im); }
+  function cabs2(a) { return a.re * a.re + a.im * a.im; }
+  function cscale(a, s) { return C(a.re * s, a.im * s); }
+
+  /* ---------------- Jones calculus ----------------
+     Basis for a ray travelling along d (in table plane): h = y x d (horizontal, in plane),
+     v = y (vertical). Waveplate axis angle theta measured from h toward v.            */
+  function J(h, v) { return { h: h, v: v }; }
+  var H = function () { return J(C(1), C(0)); };
+  var V = function () { return J(C(0), C(1)); };
+  function jPower(j) { return cabs2(j.h) + cabs2(j.v); }
+  function jNorm(j) { var p = jPower(j); if (p <= 0) return H(); var s = 1 / Math.sqrt(p); return J(cscale(j.h, s), cscale(j.v, s)); }
+  function mApply(M, j) { return J(cadd(cmul(M[0][0], j.h), cmul(M[0][1], j.v)), cadd(cmul(M[1][0], j.h), cmul(M[1][1], j.v))); }
+  function rad(d) { return d * Math.PI / 180; }
+  function hwpMatrix(thetaDeg) { var t = 2 * rad(thetaDeg); return [[C(Math.cos(t)), C(Math.sin(t))], [C(Math.sin(t)), C(-Math.cos(t))]]; }
+  function qwpMatrix(thetaDeg) {
+    var c = Math.cos(rad(thetaDeg)), s = Math.sin(rad(thetaDeg));
+    // R(-t) diag(1, i) R(t)
+    return [[C(c * c, s * s), C(c * s, -c * s)], [C(c * s, -c * s), C(s * s, c * c)]];
+  }
+  function stokes(j) {
+    var p = jPower(j) || 1;
+    var hv = cmul(cconj(j.h), j.v);
+    return { s1: (cabs2(j.h) - cabs2(j.v)) / p, s2: 2 * hv.re / p, s3: 2 * hv.im / p };
+  }
+  function polLabel(j) {
+    var s = stokes(j);
+    if (Math.abs(s.s3) > 0.9) return s.s3 > 0 ? 'circular (+)' : 'circular (−)';
+    if (Math.abs(s.s3) < 0.1) {
+      var ang = 0.5 * Math.atan2(s.s2, s.s1) * 180 / Math.PI;
+      if (Math.abs(ang) < 3) return 'linear H';
+      if (Math.abs(Math.abs(ang) - 90) < 3) return 'linear V';
+      return 'linear ' + ang.toFixed(0) + '°';
+    }
+    return 'elliptical (S3=' + s.s3.toFixed(2) + ')';
+  }
+
+  /* ---------------- Λ-EIT susceptibility (Finkelstein et al., Eq. 13) -------------
+     f(δ) = W Γ12 / (Γ12 Γ13 + |Ωc|²), Γ12 = γ12 − iδ, Γ13 = W − iΔ1, control on resonance
+     so Δ1 = δ. All quantities in the same (kHz, "/2π") units. Intensity transmission
+     T = exp(−OD Re f); probe phase φ = −(OD/2) Im f.  W = effective optical width.      */
+  function eitResponse(delta, p) {
+    var g12 = C(p.gamma12, -delta);
+    var g13 = C(p.W, -delta);
+    var den = cadd(cmul(g12, g13), C(p.omega * p.omega));
+    var f = cdiv(cmul(C(p.W), g12), den);
+    return { T: Math.exp(-p.OD * f.re), phase: -0.5 * p.OD * f.im, absorb: f.re }; // field factor exp[-(OD/2) f]
+  }
+  function gammaEIT(p) { return p.gamma12 + p.omega * p.omega / p.W; } // HWHM, kHz
+
+  /* ---------------- vapour (design estimate) ----------------
+     Vapour-pressure fit as commonly quoted in Steck's data sheets (Nesmeyanov):
+     solid  log10 P[Torr] = 2.881 + 4.857 − 4215/T ; liquid 2.881 + 4.312 − 4040/T
+     (melting point 312.46 K). OD is scaled from OD≈10 at 60 °C (paper Fig. 10c).      */
+  function rbPressureTorr(Tc) {
+    var T = Tc + 273.15;
+    var l = T < 312.46 ? (2.881 + 4.857 - 4215 / T) : (2.881 + 4.312 - 4040 / T);
+    return Math.pow(10, l);
+  }
+  function numberDensity_cm3(Tc) { var T = Tc + 273.15; return rbPressureTorr(Tc) * 133.322 / (1.380649e-23 * T) * 1e-6; }
+  function odFromTemp(Tc) { return K.od_ref * numberDensity_cm3(Tc) / numberDensity_cm3(K.T_ref_C); }
+
+  /* ---------------- illustrative cell model ---------------- */
+  function cellModel(o) {
+    // o: {Ic (mW/cm2), buffer, shield, heater, T_C, solenoid, B_mG}
+    var Tc = o.heater ? o.T_C : 22;
+    var OD = odFromTemp(Tc);
+    var transitFWHM = 2 * (K.vth_ms_60C / (K.probeWaist_mm * 1e-3)) * Math.LN2 / (2 * Math.PI) / 1e3; // kHz, paper eq.(38) text
+    var floor = K.fitW0_kHz + (o.buffer ? 0 : transitFWHM) + (o.shield ? 0 : 40);
+    var fwhm = floor + K.fitSlope_kHz_per_mWcm2 * Math.max(0, o.Ic);
+    var contrast = 1 - floor / fwhm;
+    if (!o.shield) contrast *= 0.5; // transverse residual fields mix sublevels (illustrative)
+    var Beff = (o.solenoid ? o.B_mG : 0) + (o.shield ? 0 : K.earthResidual_mG);
+    var T2_us = o.buffer ? (o.shield ? 200 : 20) : (K.probeWaist_mm * 1e-3 / K.vth_ms_60C) * 1e6;
+    return { OD: OD, Tc: Tc, n: numberDensity_cm3(Tc), fwhm: fwhm, floor: floor, contrast: contrast, Beff: Beff, T2_us: T2_us, transitFWHM: transitFWHM };
+  }
+  function lorentz(d, fwhm) { var x = 2 * d / fwhm; return 1 / (1 + x * x); }
+  function probeT(delta, m) { return Math.exp(-m.OD * (1 - m.contrast * lorentz(delta, m.fwhm))); }
+  function storageModel(m, tau_us) {
+    var odE = m.OD * m.contrast;
+    var g = 2 * Math.PI * (m.fwhm / 2) * 1e3;                 // rad/s
+    var delay_us = odE / g * 1e6;                             // paper: τ = OD_EIT / γ_EIT
+    var bw = g / Math.sqrt(Math.max(odE, 1));                 // rad/s, B ~ γ_EIT/√OD_EIT
+    var Tp_us = Math.max(2, 2 / bw * 1e6);
+    var eta0 = 0.5 * (1 - 1 / (1 + 0.2 * odE));               // ILLUSTRATIVE ONLY
+    var eta = eta0 * Math.exp(-tau_us / m.T2_us);
+    var leak = Math.min(0.6, 0.15 * Tp_us / Math.max(delay_us, 1e-3));
+    return { odE: odE, delay_us: delay_us, Tp_us: Tp_us, eta0: eta0, eta: eta, leak: leak, T2_us: m.T2_us };
+  }
+
+  /* ---------------- component catalogue ---------------- */
+  var KINDS = {
+    laser:   { name: 'DFB laser 795 nm', short: 'DFB', cap: 14, rotStep: 90 },
+    isolator:{ name: 'Optical isolator', short: 'ISO', cap: 12, rotStep: 90 },
+    mirror:  { name: 'Mirror', short: 'M', cap: 12, rotStep: 45 },
+    pbs:     { name: 'PBS cube', short: 'PBS', cap: 12, rotStep: 90 },
+    npbs:    { name: 'NPBS 50:50 cube', short: 'BS', cap: 12, rotStep: 90 },
+    pickoff: { name: 'Glass pick-off window', short: 'PO', cap: 12, rotStep: 45 },
+    hwp:     { name: 'Half-wave plate', short: 'λ/2', cap: 12, rotStep: 90 },
+    qwp:     { name: 'Quarter-wave plate', short: 'λ/4', cap: 12, rotStep: 90 },
+    aom:     { name: 'AOM (+RF driver)', short: 'AOM', cap: 12, rotStep: 90 },
+    lens:    { name: 'Lens', short: 'L', cap: 12, rotStep: 90 },
+    iris:    { name: 'Iris', short: 'IR', cap: 12, rotStep: 90 },
+    nd:      { name: 'ND filter', short: 'ND', cap: 12, rotStep: 90 },
+    cell:    { name: 'Rb-87 vapour cell', short: 'Rb', cap: 12, rotStep: 90 },
+    sas:     { name: 'SAS module', short: 'SAS', cap: 16, rotStep: 90 },
+    glan:    { name: 'Glan-Taylor polariser', short: 'GT', cap: 12, rotStep: 90 },
+    pd:      { name: 'Photodiode detector', short: 'PD', cap: 12, rotStep: 90 },
+    dump:    { name: 'Beam dump', short: 'BD', cap: 12, rotStep: 90 },
+    eom:     { name: 'Fibre EOM (~6.834 GHz)', short: 'EOM', cap: 12, rotStep: 90 },
+    fp:      { name: 'Scanning Fabry–Pérot', short: 'FP', cap: 14, rotStep: 90 },
+    lctrl:   { name: 'Laser controller (current + TEC)', short: 'LDC', cap: 0, rotStep: 90 },
+    lockbox: { name: 'Lock box (lock-in + PID)', short: 'PID', cap: 0, rotStep: 90 },
+    fgen:    { name: 'Dual-ch. function generator', short: 'FG', cap: 0, rotStep: 90 }
+  };
+  function defaultParams(kind) {
+    switch (kind) {
+      case 'laser': return { power: 10 };
+      case 'hwp': return { axis: 0 };
+      case 'qwp': return { axis: 45 };
+      case 'aom': return { rf: true, fMHz: 80, eff: 0.6, mode: 'double', order: 1 };
+      case 'iris': return { ap: 2 };
+      case 'nd': return { od: 1 };
+      case 'cell': return { heater: true, T_C: 60, solenoid: true, B_mG: 50, shield: true, buffer: true };
+      case 'glan': return { axis: 0 };
+      case 'fgen': return { on: true };
+      case 'eom': return { rf: true, fMHz: 6834.683, dBm: 5 };
+      case 'lctrl': return { dither: true, ditherMHz: 0.5 };
+      case 'lockbox': return { method: 'lockin', sign: 1, gain: 1 };
+      default: return {};
+    }
+  }
+
+  /* ---------------- geometry helpers ---------------- */
+  function dirOf(deg) { var r = rad(deg); var x = Math.cos(r), z = Math.sin(r); if (Math.abs(x) < 1e-12) x = 0; if (Math.abs(z) < 1e-12) z = 0; return [x, z]; }
+  function dot(a, b) { return a[0] * b[0] + a[1] * b[1]; }
+  function norm2(a) { var l = Math.hypot(a[0], a[1]) || 1; return [a[0] / l, a[1] / l]; }
+  function rot2(a, deg) { var r = rad(deg), c = Math.cos(r), s = Math.sin(r); return [a[0] * c - a[1] * s, a[0] * s + a[1] * c]; }
+  function reflect(d, n) { var k = 2 * dot(d, n); return norm2([d[0] - k * n[0], d[1] - k * n[1]]); }
+  function effAxis(comp, d, axis) { return dot(d, dirOf(comp.rot)) >= 0 ? axis : -axis; }
+
+  /* ---------------- phase modulation (EOM) ----------------
+     E0 exp[i(ωt + β sin Ωt)] = E0 Σ_n J_n(β) exp[i(ω + nΩ)t]  → sideband n carries J_n(β)² of the power */
+  function besselJ(n, x) {
+    var an = Math.abs(n), sum = 0, fact = function (k) { var f = 1; for (var i = 2; i <= k; i++) f *= i; return f; };
+    for (var k = 0; k < 40; k++) { var t = Math.pow(-1, k) / (fact(k) * fact(k + an)) * Math.pow(x / 2, 2 * k + an); sum += t; if (k > 4 && Math.abs(t) < 1e-16) break; }
+    return (n < 0 && an % 2) ? -sum : sum;
+  }
+  function betaFromDbm(dBm, vpi) { var Pw = Math.pow(10, dBm / 10) / 1000; return Math.PI * Math.sqrt(2 * 50 * Pw) / (vpi || K.eomVpi_V); }
+  function modulateSpec(spec, beta, fmod_kHz, mfrac) {
+    var map = {};
+    function add(df, w) { var k = Math.round(df * 1000) / 1000; map[k] = (map[k] || 0) + w; }
+    spec.forEach(function (sc) {
+      for (var n = -3; n <= 3; n++) { var Jn = besselJ(n, beta); add(sc.df + n * fmod_kHz, sc.w * mfrac * Jn * Jn); }
+      add(sc.df, sc.w * (1 - mfrac));
+    });
+    var out = [], tot = 0;
+    Object.keys(map).forEach(function (k) { if (map[k] > 1e-7) { out.push({ df: +k, w: map[k] }); tot += map[k]; } });
+    out.forEach(function (q) { q.w /= tot; });
+    return out.sort(function (a, b) { return a.df - b.df; });
+  }
+  function specT(list, fabs) { for (var i = 0; i < list.length; i++) if (Math.abs(list[i].f - fabs) < 1) return list[i].T; return 1; }
+
+  /* ---------------- tracer ---------------- */
+  var uid = 0;
+  function newRay(o, d, j, P, f, extra) {
+    var r = { o: o, d: norm2(d), J: jNorm(j), P: P, f: f, spec: [{ df: 0, w: 1 }], aoms: [], pbs: [], pulsed: false, depth: 0, lastId: null, path: [], first: null, id: ++uid };
+    if (extra) for (var k in extra) r[k] = extra[k];
+    return r;
+  }
+  function child(ray, d, j, P, df, comp) {
+    var r = newRay(null, d, j, P, ray.f + (df || 0));
+    r.spec = ray.spec; r.aoms = ray.aoms.slice(); r.pbs = ray.pbs.slice(); r.pulsed = ray.pulsed; r.depth = ray.depth + 1;
+    r.lastId = comp ? comp.id : null; r.path = ray.path.concat(comp ? [comp.id] : []); r.fromLaser = ray.fromLaser;
+    return r;
+  }
+
+  function findHit(ray, comps) {
+    var best = null, bestT = Infinity;
+    for (var i = 0; i < comps.length; i++) {
+      var c = comps[i]; var cap = KINDS[c.kind].cap; if (!cap) continue;
+      if (c.id === ray.lastId) continue;
+      var rel = [c.x - ray.o[0], c.z - ray.o[1]];
+      var t = dot(rel, ray.d); if (t < 0.5) continue;
+      var perp = Math.abs(rel[0] * ray.d[1] - rel[1] * ray.d[0]);
+      if (perp > cap) continue;
+      if (t < bestT) { bestT = t; best = c; best._perp = perp; }
+    }
+    return best ? { comp: best, t: bestT, perp: best._perp } : null;
+  }
+  function edgeT(ray) {
+    var W = K.table.w, D = K.table.d, t = Infinity, o = ray.o, d = ray.d;
+    if (d[0] > 1e-9) t = Math.min(t, (W - o[0]) / d[0]); else if (d[0] < -1e-9) t = Math.min(t, (0 - o[0]) / d[0]);
+    if (d[1] > 1e-9) t = Math.min(t, (D - o[1]) / d[1]); else if (d[1] < -1e-9) t = Math.min(t, (0 - o[1]) / d[1]);
+    return Math.max(0, t);
+  }
+  function groupKey(ray) { return ray.aoms.length ? ray.aoms.slice().sort().join('+') : 'direct'; }
+
+  function trace(layout, opts) {
+    opts = opts || {};
+    var comps = layout.components, st = layout.state || {};
+    var cellT = opts.cellT || {};           // groupKey -> transmission factor
+    var fgen = comps.filter(function (c) { return c.kind === 'fgen' && c.params.on; })[0];
+    var res = { segments: [], cellHits: {}, pd: {}, pdSpec: {}, fp: {}, eomIn: null, sas: {}, warnings: [], laserFirst: null, backToLaser: 0, edgeExits: 0, rays: 0 };
+    var queue = [];
+    comps.forEach(function (c) {
+      if (c.kind !== 'laser') return;
+      var d = dirOf(c.rot);
+      var r = newRay([c.x + d[0] * 15, c.z + d[1] * 15], d, H(), c.params.power, 0);
+      r.lastId = c.id; r.fromLaser = c.id; r.isPrimary = true;
+      queue.push(r);
+    });
+    var MIN_P = 1e-7, MAX_DEPTH = 40, MAX_SEG = 900;
+    while (queue.length && res.segments.length < MAX_SEG) {
+      var ray = queue.shift(); res.rays++;
+      if (ray.P < MIN_P || ray.depth > MAX_DEPTH) continue;
+      var hit = findHit(ray, comps);
+      var te = edgeT(ray);
+      if (!hit || hit.t > te) {
+        var e = [ray.o[0] + ray.d[0] * te, ray.o[1] + ray.d[1] * te];
+        res.segments.push(seg(ray, ray.o, e, true)); res.edgeExits++;
+        if (ray.isPrimary && !res.laserFirst) res.laserFirst = { kind: null };
+        continue;
+      }
+      var hp = [ray.o[0] + ray.d[0] * hit.t, ray.o[1] + ray.d[1] * hit.t];
+      res.segments.push(seg(ray, ray.o, hp, false));
+      var c = hit.comp;
+      if (ray.isPrimary && !res.laserFirst) res.laserFirst = { kind: c.kind, forward: c.kind === 'isolator' ? dot(ray.d, dirOf(c.rot)) > 0.5 : false, id: c.id };
+      var outs = interact(c, ray, hit, res, cellT, fgen);
+      for (var i = 0; i < outs.length; i++) { outs[i].o = hp; if (outs[i].P >= MIN_P) queue.push(outs[i]); }
+    }
+    if (res.backToLaser > 1e-3) res.warnings.push('Back-reflection into laser (' + fmtP(res.backToLaser) + ') — add an isolator');
+    return res;
+  }
+  function seg(ray, a, b, toEdge) {
+    return { a: a.slice(), b: b.slice(), P: ray.P, f: ray.f, spec: ray.spec, J: ray.J, key: groupKey(ray), pulsed: ray.pulsed, toEdge: toEdge, d: ray.d.slice() };
+  }
+
+  function interact(c, ray, hit, res, cellT, fgen) {
+    var d = ray.d, f = dirOf(c.rot), p = c.params, out = [], fd = dot(d, f), j = ray.J;
+    switch (c.kind) {
+      case 'laser':
+        if (fd < -0.5) res.backToLaser += ray.P;
+        return out;
+      case 'isolator':
+        if (fd > 0.5) { var ph = cabs2(j.h); out.push(child(ray, d, J(C(Math.SQRT1_2), C(Math.SQRT1_2)), ray.P * ph * K.isolatorFwd, 0, c)); }
+        else if (fd < -0.5) { out.push(child(ray, d, j, ray.P * K.isolatorBack, 0, c)); }
+        return out;
+      case 'mirror': {
+        var n = f; if (Math.abs(dot(d, n)) < 0.05) return out;
+        out.push(child(ray, reflect(d, n), J(j.h, cscale(j.v, -1)), ray.P * K.mirrorR, 0, c));
+        return out;
+      }
+      case 'pickoff': {
+        var n2 = f; if (Math.abs(dot(d, n2)) < 0.05) return out;
+        out.push(child(ray, d, j, ray.P * (1 - K.pickoffR), 0, c));
+        out.push(child(ray, reflect(d, n2), J(j.h, cscale(j.v, -1)), ray.P * K.pickoffR, 0, c));
+        return out;
+      }
+      case 'pbs': case 'npbs': {
+        var s = dirOf(c.rot + 45), nn = [-s[1], s[0]];
+        var dr = reflect(d, nn);
+        if (c.kind === 'npbs') {
+          out.push(child(ray, d, j, ray.P * 0.5, 0, c));
+          out.push(child(ray, dr, J(j.h, cscale(j.v, -1)), ray.P * 0.5, 0, c));
+          return out;
+        }
+        var eps = Math.sqrt(K.pbsLeak);
+        var jt = J(j.h, cscale(j.v, eps)), pt = ray.P * jPower(jt);
+        var pr = ray.P * cabs2(j.v);
+        var rt = child(ray, d, jt, pt, 0, c); rt.pbs.push({ id: c.id, port: 'T' });
+        var rr = child(ray, dr, V(), pr, 0, c); rr.pbs.push({ id: c.id, port: 'R' });
+        out.push(rt, rr);
+        return out;
+      }
+      case 'hwp': out.push(child(ray, d, mApply(hwpMatrix(effAxis(c, d, p.axis)), j), ray.P, 0, c)); return out;
+      case 'qwp': out.push(child(ray, d, mApply(qwpMatrix(effAxis(c, d, p.axis)), j), ray.P, 0, c)); return out;
+      case 'aom': {
+        if (fd < 0.7) return out; // only accepts light entering along its axis
+        var on = !!p.rf, eta = on ? p.eff : 0, fs = p.order * p.fMHz * 1000;
+        if (p.mode === 'double') {
+          if (!on) return out; // 0th order is blocked inside the cat's-eye module
+          var r = child(ray, [-d[0], -d[1]], J(j.v, j.h), ray.P * eta * eta, 2 * fs, c);
+          r.aoms.push(c.id); if (fgen) r.pulsed = true; out.push(r);
+          return out;
+        }
+        out.push(child(ray, d, j, ray.P * (1 - eta), 0, c));
+        if (on) { var r1 = child(ray, rot2(d, -2 * p.order), j, ray.P * eta, fs, c); r1.aoms.push(c.id); if (fgen) r1.pulsed = true; out.push(r1); }
+        return out;
+      }
+      case 'lens': out.push(child(ray, d, j, ray.P * 0.99, 0, c)); return out;
+      case 'iris': if (hit.perp <= p.ap / 2) out.push(child(ray, d, j, ray.P, 0, c)); return out;
+      case 'nd': out.push(child(ray, d, j, ray.P * Math.pow(10, -p.od), 0, c)); return out;
+      case 'eom': {
+        if (Math.abs(fd) < 0.7) return out;
+        var beta = p.rf ? betaFromDbm(p.dBm) : 0, mfrac = cabs2(j.h); // only the field along the crystal axis (H) is modulated
+        if (!res.eomIn || ray.P > res.eomIn.P) res.eomIn = { P: ray.P, hFrac: mfrac, beta: beta, id: c.id };
+        var re = child(ray, d, j, ray.P * K.eomLoss, 0, c);
+        if (beta > 0) re.spec = modulateSpec(ray.spec, beta, p.fMHz * 1000, mfrac);
+        out.push(re); return out;
+      }
+      case 'fp': {
+        var rec = res.fp[c.id] || (res.fp[c.id] = { P: 0, comps: {} });
+        rec.P += ray.P;
+        ray.spec.forEach(function (sc) { var key = Math.round(ray.f + sc.df); rec.comps[key] = (rec.comps[key] || 0) + ray.P * sc.w; });
+        return out;
+      }
+      case 'cell': {
+        var key = groupKey(ray);
+        var h = res.cellHits[key] || (res.cellHits[key] = { P: 0, J: ray.J, f: ray.f, d: d.slice(), o: ray.o.slice(), maxP: 0, pbs: ray.pbs, aoms: ray.aoms, pulsed: ray.pulsed });
+        h.P += ray.P; if (ray.P > h.maxP) { h.maxP = ray.P; h.J = ray.J; h.f = ray.f; h.d = d.slice(); h.o = ray.o.slice(); h.pbs = ray.pbs; h.aoms = ray.aoms; }
+        if (!h.spec || ray.P >= h.maxP) h.spec = ray.spec;
+        if (cellT.spec) {
+          var tot = 0, ns = ray.spec.map(function (sc) { var T1 = specT(cellT.spec, ray.f + sc.df); tot += sc.w * T1; return { df: sc.df, w: sc.w * T1 }; });
+          var rc = child(ray, d, j, ray.P * tot, 0, c); rc.spec = tot > 0 ? ns.map(function (q) { return { df: q.df, w: q.w / tot }; }) : ray.spec; out.push(rc);
+          return out;
+        }
+        var T = (key in cellT) ? cellT[key] : 1;
+        out.push(child(ray, d, j, ray.P * T, 0, c));
+        return out;
+      }
+      case 'glan': {
+        var a = effAxis(c, d, p.axis), ea = [Math.cos(rad(a)), Math.sin(rad(a))];
+        var A = cadd(cscale(j.h, ea[0]), cscale(j.v, ea[1]));
+        var B = cadd(cscale(j.h, -ea[1]), cscale(j.v, ea[0]));
+        var pa = cabs2(A), pb = cabs2(B);
+        out.push(child(ray, d, J(C(ea[0]), C(ea[1])), ray.P * (pa + K.glanLeak * pb), 0, c));
+        out.push(child(ray, rot2(d, 90), J(C(-ea[1]), C(ea[0])), ray.P * pb * (1 - K.glanLeak), 0, c));
+        return out;
+      }
+      case 'pd': {
+        var k2 = groupKey(ray); res.pd[c.id] = res.pd[c.id] || {}; res.pd[c.id][k2] = (res.pd[c.id][k2] || 0) + ray.P;
+        var ps = res.pdSpec[c.id] || (res.pdSpec[c.id] = {});
+        ray.spec.forEach(function (sc) { var kk = Math.round(ray.f + sc.df); ps[kk] = (ps[kk] || 0) + ray.P * sc.w; });
+        return out;
+      }
+      case 'sas': res.sas[c.id] = (res.sas[c.id] || 0) + ray.P; return out;
+      default: return out; // dump, fgen
+    }
+  }
+  function fmtP(mW) {
+    if (mW >= 1) return mW.toFixed(2) + ' mW';
+    if (mW >= 1e-3) return (mW * 1e3).toFixed(1) + ' µW';
+    return (mW * 1e6).toFixed(1) + ' nW';
+  }
+
+  /* ---------------- cell physics from a trace ---------------- */
+  function analyseCell(layout, tr) {
+    var cell = layout.components.filter(function (c) { return c.kind === 'cell'; })[0];
+    var st = layout.state || {};
+    var out = { cell: cell, groups: [], control: null, probe: null, overlap: false, orth: false, ok: false, cellT: {} };
+    if (!cell) return out;
+    var axis = dirOf(cell.rot);
+    var keys = Object.keys(tr.cellHits);
+    var gs = keys.map(function (k) { var h = tr.cellHits[k]; return { key: k, P: h.P, J: h.J, f: h.f, d: h.d, o: h.o, pbs: h.pbs, aoms: h.aoms, pulsed: h.pulsed }; })
+      .filter(function (g) { return g.P > 1e-6; })
+      .sort(function (a, b) { return b.P - a.P; });
+    out.groups = gs;
+    var p = cell.params;
+    var ctrl = gs[0] || null, prb = gs[1] || null;
+    var Ic = ctrl ? 2 * ctrl.P / (Math.PI * K.controlWaist_cm * K.controlWaist_cm) : 0;
+    var m = cellModel({ Ic: Ic, buffer: p.buffer, shield: p.shield, heater: p.heater, T_C: p.T_C, solenoid: p.solenoid, B_mG: p.B_mG });
+    var df = detuneFactors(st.drift_MHz); m.OD *= df.od; m.contrast *= df.c; out.drift = st.drift_MHz || 0;
+    out.model = m; out.Ic = Ic;
+    var locked = !!st.locked;
+    if (ctrl && prb) {
+      var co = dot(ctrl.d, prb.d) > 0.999;
+      var dperp = Math.abs((prb.o[0] - ctrl.o[0]) * ctrl.d[1] - (prb.o[1] - ctrl.o[1]) * ctrl.d[0]);
+      out.overlap = co && dperp < 1.0;
+      var hc = stokes(ctrl.J).s3 * Math.sign(dot(ctrl.d, axis) || 1);
+      var hp = stokes(prb.J).s3 * Math.sign(dot(prb.d, axis) || 1);
+      out.hc = hc; out.hp = hp;
+      out.orth = Math.abs(hc) > 0.9 && Math.abs(hp) > 0.9 && hc * hp < 0;
+      out.control = ctrl; out.probe = prb;
+      // two-photon detuning: δ = (ν_p − ν_c) + 1.40 kHz/mG · B · sgn(h_c)
+      out.delta0 = (prb.f - ctrl.f) + K.lambdaShift_kHz_per_mG * m.Beff * (hc >= 0 ? 1 : -1);
+      out.ok = out.overlap && out.orth;
+    }
+    var mm = Object.assign({}, m); if (!out.ok) mm.contrast = 0;
+    out.eff = mm;
+    gs.forEach(function (g, i) {
+      var T;
+      if (i === 0 && g.P > 0.05) T = Math.exp(-m.OD * 0.03); // strong control: optically pumped, mostly transmitted
+      else if (g === prb) T = probeT(out.delta0 || 0, mm);
+      else T = Math.exp(-m.OD);
+      out.cellT[g.key] = T;
+    });
+    out.probeT0 = prb ? out.cellT[prb.key] : null;
+    return out;
+  }
+
+  /* ---------------- full evaluation & objectives ---------------- */
+  /* ---------------- frequency-lock chain: SAS PD → lock box → laser controller → DFB ---------------- */
+  function first(comps, kind) { for (var i = 0; i < comps.length; i++) if (comps[i].kind === kind) return comps[i]; return null; }
+  function lockChain(layout, sasP) {
+    var c = layout.components, st = layout.state || {};
+    var laser = first(c, 'laser'), sas = first(c, 'sas'), box = first(c, 'lockbox'), ctrl = first(c, 'lctrl');
+    var chain = !!(laser && sas && box && ctrl);
+    var light = sasP > 0.05;
+    var modOK = !!(box && (box.params.method === 'davll' || (ctrl && ctrl.params.dither)));
+    var errAvail = chain && light && modOK;
+    var status = 'open', note = '';
+    if (!chain) note = 'Open loop: lock chain incomplete (needs SAS, lock box, laser controller)';
+    else if (!light) note = 'Open loop: no light on the SAS photodiode';
+    else if (!modOK) note = 'No error signal: lock-in method needs current dither on the laser controller';
+    else if (!st.locked) note = 'Open loop: error signal available, loop not closed';
+    if (st.locked && errAvail) {
+      if (box.params.sign < 0) { status = 'runaway'; note = 'Loop ran away: error-signal slope has the wrong sign (flip the sign)'; }
+      else if (box.params.gain > 1.6) { status = 'oscillating'; note = 'Loop oscillating: gain too high'; }
+      else if (box.params.gain < 0.2) { status = 'weak'; note = 'Loop too weak: laser still drifts (raise gain)'; }
+      else { status = 'locked'; note = 'Closed loop: locked to the SAS feature'; }
+    }
+    return { chain: chain, light: light, modOK: modOK, errAvail: errAvail, status: status, note: note, ids: { laser: laser && laser.id, sas: sas && sas.id, box: box && box.id, ctrl: ctrl && ctrl.id },
+      dither_MHz: (ctrl && ctrl.params.dither && box && box.params.method === 'lockin') ? ctrl.params.ditherMHz : 0 };
+  }
+  function detuneFactors(drift_MHz) {
+    var d = drift_MHz || 0;
+    return { od: Math.exp(-0.5 * Math.pow(d / K.dopplerSigma_MHz, 2)), c: Math.exp(-Math.pow(d / K.eitDetuneScale_MHz, 2)) };
+  }
+
+  /* ---------------- Mod B: hyperfine Λ from one spectrally modulated beam ---------------- */
+  var B_WEIGHTS_CIRC = { '-1': 0.6, '0': 1, '1': 0.6 }, B_WEIGHTS_LIN = { '-1': 0.3, '0': 0.5, '1': 0.3 }; // ILLUSTRATIVE relative strengths
+  function probeTB(delta0, m, Beff, weights) {
+    var sum = 0;
+    [-1, 0, 1].forEach(function (mm) {
+      var dm = delta0 - mm * K.lambdaShift_kHz_per_mG * Beff - (mm === 0 ? K.clockQuad_kHz_per_mG2 * Beff * Beff : 0);
+      sum += weights[String(mm)] * lorentz(dm, m.fwhm);
+    });
+    return Math.exp(-m.OD * (1 - m.contrast * Math.min(1, sum)));
+  }
+  function analyseCellB(layout, tr) {
+    var cell = layout.components.filter(function (c) { return c.kind === 'cell'; })[0];
+    var st = layout.state || {};
+    var out = { mode: 'B', cell: cell, groups: [], control: null, probe: null, ok: false, cellT: {} };
+    if (!cell) return out;
+    var axis = dirOf(cell.rot), p = cell.params, locked = !!st.locked, lockLine = st.lockLine || 'F1';
+    var keys = Object.keys(tr.cellHits);
+    var gs = keys.map(function (k) { var h = tr.cellHits[k]; return { key: k, P: h.P, J: h.J, f: h.f, d: h.d, spec: h.spec || [{ df: 0, w: 1 }] }; })
+      .filter(function (g) { return g.P > 1e-6; }).sort(function (a, b) { return b.P - a.P; });
+    out.groups = gs;
+    var g = gs[0];
+    var off = { F1: lockLine === 'F1' ? 0 : K.hfs_kHz, F2: lockLine === 'F2' ? 0 : -K.hfs_kHz };
+    var driftk = (st.drift_MHz || 0) * 1000;
+    var comps = g ? g.spec.map(function (sc) { var fa = g.f + sc.df + driftk; var line = Math.abs(fa - off.F1) < K.lineWindow_kHz ? 'F1' : Math.abs(fa - off.F2) < K.lineWindow_kHz ? 'F2' : null; return { fa: fa, P: g.P * sc.w, line: line }; }) : [];
+    out.comps = comps;
+    var res = comps.filter(function (c) { return c.line; }).sort(function (a, b) { return b.P - a.P; });
+    var ctrl = res[0] || null, prb = ctrl ? res.filter(function (c) { return c.line !== ctrl.line; })[0] || null : null;
+    out.control = ctrl; out.probe = prb;
+    var Ic = ctrl ? 2 * ctrl.P / (Math.PI * K.controlWaist_cm * K.controlWaist_cm) : 0;
+    var m = cellModel({ Ic: Ic, buffer: p.buffer, shield: p.shield, heater: p.heater, T_C: p.T_C, solenoid: p.solenoid, B_mG: p.B_mG });
+    var dfB = detuneFactors(st.drift_MHz); m.OD *= dfB.od; m.contrast *= dfB.c; out.drift = st.drift_MHz || 0;
+    out.model = m; out.Ic = Ic;
+    var s3 = g ? stokes(g.J).s3 * Math.sign(dot(g.d, axis) || 1) : 0;
+    out.s3 = s3; out.circ = Math.abs(s3) > 0.9;
+    out.weights = out.circ ? B_WEIGHTS_CIRC : B_WEIGHTS_LIN;
+    if (ctrl && prb) out.delta0 = (prb.fa - ctrl.fa) - (off[prb.line] - off[ctrl.line]); // deviation from exact hyperfine separation
+    out.ok = !!(ctrl && prb);
+    var mm = Object.assign({}, m); if (!out.ok) mm.contrast = 0;
+    out.eff = mm;
+    var list = comps.map(function (c) {
+      var T;
+      if (c === ctrl) T = Math.exp(-m.OD * 0.03);
+      else if (c === prb) T = probeTB(out.delta0, mm, m.Beff, out.weights);
+      else if (c.line) T = Math.exp(-m.OD);
+      else T = 1; // far off resonance (multi-wave mixing not modelled)
+      return { f: c.fa - driftk, T: T };
+    });
+    out.cellT = { spec: list };
+    out.probeT0 = prb ? specT(list, prb.fa - driftk) : null;
+    return out;
+  }
+  function evaluateB(layout) {
+    var tr1 = trace(layout, {}), c1 = analyseCellB(layout, tr1);
+    var tr = trace(layout, { cellT: c1.cellT });
+    var cell = analyseCellB(layout, tr); cell.cellT = c1.cellT; cell.probeT0 = c1.probeT0;
+    var st = layout.state || {}, comps = layout.components;
+    var sasP = 0; for (var k in tr.sas) sasP += tr.sas[k];
+    var lockAvailable = sasP > 0.05, lock = lockChain(layout, sasP), dk = (st.drift_MHz || 0) * 1000;
+    var det = { probe: 0, control: 0, other: 0, total: 0 };
+    Object.keys(tr.pdSpec).forEach(function (id) { var g = tr.pdSpec[id]; for (var fk in g) { var v = g[fk]; det.total += v; if (cell.probe && Math.abs(+fk + dk - cell.probe.fa) < 1) det.probe += v; else if (cell.control && Math.abs(+fk + dk - cell.control.fa) < 1) det.control += v; else det.other += v; } });
+    var m = cell.eff, sweepHalf = Math.max(150, 3 * (cell.model ? cell.model.fwhm : 0), 2.2 * K.lambdaShift_kHz_per_mG * Math.abs(cell.model ? cell.model.Beff : 0));
+    if (cell.ok && cell.probe && cell.probeT0 > 0) {
+      var Toff = probeTB(1e9, m, cell.model.Beff, cell.weights);
+      det.probeOff = det.probe / cell.probeT0 * Toff;
+      det.eitFrac = det.total > 0 ? (det.probe - det.probeOff) / det.total : 0;
+    } else { det.probeOff = det.probe; det.eitFrac = 0; }
+    var cellComp = cell.cell, ein = tr.eomIn;
+    var fpOK = Object.keys(tr.fp).some(function (id) { var r = tr.fp[id]; return r.P > 1e-4 && Object.keys(r.comps).filter(function (f) { return r.comps[f] > 1e-3 * r.P; }).length >= 3; });
+    var o = [];
+    o[0] = !!(tr.laserFirst && tr.laserFirst.kind === 'isolator' && tr.laserFirst.forward) && tr.backToLaser <= 1e-3;
+    o[1] = lock.status === 'locked';
+    o[2] = !!(ein && ein.beta >= 0.2);
+    o[3] = fpOK;
+    o[4] = !!(ein && ein.hFrac > 0.95);
+    o[5] = !!(cell.groups.length && cell.circ);
+    o[6] = !!(cellComp && cellComp.params.heater && cellComp.params.T_C >= 40 && cellComp.params.shield && cellComp.params.solenoid && Math.abs(cellComp.params.B_mG) >= 5 && Math.abs(cellComp.params.B_mG) <= 200);
+    o[7] = !!(cell.control && cell.probe && Math.abs(cell.delta0) < sweepHalf);
+    o[8] = o[1] && o[2] && o[4] && o[5] && o[7] && cell.ok && m.contrast > 0.3 && det.probe > 1e-6;
+    o[9] = !!(o[8] && st.lockin && Math.abs(cell.delta0) < m.fwhm / 4);
+    var warnings = tr.warnings.slice();
+    if (ein && ein.hFrac <= 0.95) warnings.push('EOM input polarization not aligned to the crystal axis: only ' + (ein.hFrac * 100).toFixed(0) + ' % is modulated');
+    if (cellComp && cellComp.params.heater && cell.model && cell.model.n > 5e11) warnings.push('n ≈ ' + cell.model.n.toExponential(1) + ' cm⁻³: radiation trapping becomes significant above ~5×10¹¹ cm⁻³');
+    if (lock.status !== 'locked') warnings.push(lock.note + (Math.abs(st.drift_MHz || 0) > 0.5 ? ' (laser Δ ≈ ' + (st.drift_MHz).toFixed(1) + ' MHz)' : ''));
+    return { mode: 'B', trace: tr, cell: cell, sasP: sasP, lockAvailable: lockAvailable, lock: lock, det: det, objectives: o, storage: null, sweepHalf: sweepHalf, warnings: warnings, fgen: false };
+  }
+
+  function evaluate(layout) {
+    if (layout.mode === 'B') return evaluateB(layout);
+    var tr1 = trace(layout, {});
+    var cell1 = analyseCell(layout, tr1);
+    var tr = trace(layout, { cellT: cell1.cellT });
+    var cell = analyseCell(layout, tr);
+    cell.cellT = cell1.cellT; cell.probeT0 = cell1.probeT0;
+    var st = layout.state || {};
+    var comps = layout.components;
+    var sasP = 0; for (var k in tr.sas) sasP += tr.sas[k];
+    var lockAvailable = sasP > 0.05, lock = lockChain(layout, sasP);
+    var pdIds = Object.keys(tr.pd);
+    var det = { probe: 0, control: 0, other: 0, total: 0 };
+    pdIds.forEach(function (id) { var g = tr.pd[id]; for (var key in g) { det.total += g[key]; if (cell.probe && key === cell.probe.key) det.probe += g[key]; else if (cell.control && key === cell.control.key) det.control += g[key]; else det.other += g[key]; } });
+    var cellComp = cell.cell, fgen = comps.filter(function (c) { return c.kind === 'fgen' && c.params.on; })[0];
+    var o = [];
+    o[0] = !!(tr.laserFirst && tr.laserFirst.kind === 'isolator' && tr.laserFirst.forward) && tr.backToLaser <= 1e-3;
+    o[1] = lock.status === 'locked';
+    var shared = false;
+    if (cell.control && cell.probe) {
+      cell.control.pbs.forEach(function (a) { cell.probe.pbs.forEach(function (b) { if (a.id === b.id && a.port !== b.port) shared = true; }); });
+    }
+    o[2] = shared && cell.probe.P > 1e-6;
+    o[3] = !!(cell.control && cell.probe && cell.control.aoms.length && cell.probe.aoms.length &&
+      cell.control.aoms.every(function (a) { return cell.probe.aoms.indexOf(a) < 0; }));
+    o[4] = !!cell.overlap;
+    o[5] = !!cell.orth;
+    o[6] = !!(cellComp && cellComp.params.heater && cellComp.params.T_C >= 40 && cellComp.params.shield && cellComp.params.solenoid && Math.abs(cellComp.params.B_mG) >= 5);
+    // probe power the detector would see with the cell transparent (removes EIT/absorption dependence)
+    det.probeRef = (cell.probeT0 && cell.probeT0 > 1e-12) ? det.probe / cell.probeT0 : det.probe;
+    o[7] = det.probeRef > 1e-5 && det.control < 0.1 * det.probeRef;
+    var sweepHalf = Math.max(150, 3 * (cell.model ? cell.model.fwhm : 0));
+    o[8] = o[1] && o[2] && o[3] && o[4] && o[5] && o[7] && cell.ok && cell.eff.contrast > 0.3 && Math.abs(cell.delta0) < sweepHalf;
+    var stor = null;
+    if (cell.ok) stor = storageModel(cell.eff, st.tau_us || 20);
+    o[9] = !!(o[8] && fgen && st.storageRan && stor && stor.eta > 0.01);
+    var warnings = tr.warnings.slice();
+    if (cellComp && cellComp.params.heater && cell.model && cell.model.n > 5e11) warnings.push('n ≈ ' + cell.model.n.toExponential(1) + ' cm⁻³: radiation trapping becomes significant above ~5×10¹¹ cm⁻³');
+    if (lock.status !== 'locked') warnings.push(lock.note + (Math.abs(st.drift_MHz || 0) > 0.5 ? ' (laser Δ ≈ ' + (st.drift_MHz).toFixed(1) + ' MHz)' : ''));
+    if (cell.probe && det.total > 0 && det.control > 0.1 * Math.max(det.probeRef, 1e-9)) warnings.push('Control leaks onto the detector (' + fmtP(det.control) + ') — use a Glan-Taylor');
+    return { trace: tr, cell: cell, sasP: sasP, lockAvailable: lockAvailable, lock: lock, det: det, objectives: o, storage: stor, sweepHalf: sweepHalf, warnings: warnings, fgen: !!fgen };
+  }
+
+  /* ---------------- reference layout (Mod A) ---------------- */
+  function rotMirror(din, dout) { var n = norm2([dout[0] - din[0], dout[1] - din[1]]); return Math.round(Math.atan2(n[1], n[0]) * 180 / Math.PI); }
+  function rotPBS(din, dout) { var s = norm2([din[0] + dout[0], din[1] + dout[1]]); var r = Math.round(Math.atan2(s[1], s[0]) * 180 / Math.PI) - 45; return ((r % 360) + 360) % 360; }
+  var E = [1, 0], Wd = [-1, 0], S = [0, 1], N = [0, -1];
+  function referenceLayout() {
+    var n = 0;
+    function mk(kind, x, z, rot, params) { var p = defaultParams(kind); if (params) for (var k in params) p[k] = params[k]; return { id: kind + (++n), kind: kind, x: x, z: z, rot: rot, params: p }; }
+    var comps = [
+      mk('laser', 50, 150, 0, { power: 10 }),
+      mk('isolator', 100, 150, 0),
+      mk('hwp', 150, 150, 0, { axis: 29 }),          // 45° linear after isolator -> ~13° : ~5 % to SAS
+      mk('pbs', 200, 150, rotPBS(E, N)),             // pick-off: V reflected north to SAS
+      mk('sas', 200, 50, 270),
+      mk('hwp', 250, 150, 0, { axis: 10 }),          // sets probe/control split (~12 % probe)
+      mk('pbs', 300, 150, rotPBS(E, S)),             // splitter: H -> control (east), V -> probe (south)
+      mk('pbs', 375, 150, rotPBS(Wd, S)),            // control double-pass separator
+      mk('aom', 450, 150, 0, { fMHz: 80.000, eff: 0.35, mode: 'double', order: 1 }),
+      mk('pbs', 300, 225, rotPBS(S, Wd)),            // probe double-pass separator
+      mk('aom', 225, 225, 180, { fMHz: 79.965, eff: 0.5, mode: 'double', order: 1 }),
+      mk('nd', 350, 225, 0, { od: 2 }),
+      mk('pbs', 375, 225, rotPBS(S, E)),             // recombiner: probe (H) transmits, control (V) reflects
+      mk('qwp', 450, 225, 0, { axis: 45 }),
+      mk('cell', 550, 225, 0),
+      mk('qwp', 650, 225, 0, { axis: -45 }),
+      mk('glan', 700, 225, 0, { axis: 0 }),
+      mk('dump', 700, 300, 90),
+      mk('pd', 775, 225, 0),
+      mk('fgen', 800, 500, 180),
+      mk('lctrl', 50, 50, 0),
+      mk('lockbox', 125, 50, 0)
+    ];
+    return { mode: 'A', components: comps, state: { locked: true, tau_us: 20, storageRan: false } };
+  }
+  function referenceLayoutB() {
+    var n = 0;
+    function mk(kind, x, z, rot, params) { var p = defaultParams(kind); if (params) for (var k in params) p[k] = params[k]; return { id: kind + (++n), kind: kind, x: x, z: z, rot: rot, params: p }; }
+    var comps = [
+      mk('laser', 50, 150, 0, { power: 10 }),
+      mk('isolator', 100, 150, 0),
+      mk('hwp', 150, 150, 0, { axis: 29 }),          // ~5 % to SAS, transmitted light is H (EOM axis)
+      mk('pbs', 200, 150, rotPBS(E, N)),
+      mk('sas', 200, 50, 270),                       // carrier locked near F=1→F'=1 (design choice)
+      mk('eom', 300, 150, 0, { rf: true, fMHz: 6834.683, dBm: 5 }),
+      mk('pickoff', 375, 150, rotMirror(E, N)),      // ~4 % to the scanning Fabry–Pérot
+      mk('fp', 375, 75, 270),
+      mk('nd', 450, 150, 0, { od: 1 }),
+      mk('qwp', 500, 150, 0, { axis: 45 }),          // both spectral components become σ+ together
+      mk('cell', 600, 150, 0),
+      mk('pd', 725, 150, 0),
+      mk('lctrl', 50, 50, 0),
+      mk('lockbox', 125, 50, 0)
+    ];
+    return { mode: 'B', components: comps, state: { locked: true, lockLine: 'F1', lockin: false, tau_us: 20, storageRan: false } };
+  }
+
+  var api = {
+    K: K, C: C, J: J, H: H, V: V, jPower: jPower, jNorm: jNorm, mApply: mApply, hwpMatrix: hwpMatrix, qwpMatrix: qwpMatrix,
+    stokes: stokes, polLabel: polLabel, eitResponse: eitResponse, gammaEIT: gammaEIT,
+    rbPressureTorr: rbPressureTorr, numberDensity_cm3: numberDensity_cm3, odFromTemp: odFromTemp,
+    cellModel: cellModel, probeT: probeT, lorentz: lorentz, storageModel: storageModel,
+    KINDS: KINDS, defaultParams: defaultParams, dirOf: dirOf, trace: trace, analyseCell: analyseCell, evaluate: evaluate,
+    referenceLayout: referenceLayout, referenceLayoutB: referenceLayoutB, lockChain: lockChain, detuneFactors: detuneFactors, besselJ: besselJ, betaFromDbm: betaFromDbm, modulateSpec: modulateSpec, probeTB: probeTB, fmtP: fmtP, groupKey: groupKey, rotPBS: rotPBS, rotMirror: rotMirror
+  };
+  root.EITPhys = api;
+  if (typeof module !== 'undefined' && module.exports) module.exports = api;
+})(typeof window !== 'undefined' ? window : this);
+
+</script>
+<script>
+/* ==========================================================================
+   Page behaviour: theme, TOC, glossary filter, interactive charts
+   ========================================================================== */
+(function () {
+  'use strict';
+  var P = window.EITPhys;
+  var root = document.documentElement;
+  function css(name) { return getComputedStyle(root).getPropertyValue(name).trim(); }
+  var themeListeners = [];
+  window.onThemeChange = function (fn) { themeListeners.push(fn); };
+  function fireTheme() { themeListeners.forEach(function (f) { try { f(); } catch (e) { console.error(e); } }); }
+  try { window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', fireTheme); } catch (e) { }
+  new MutationObserver(fireTheme).observe(root, { attributes: true, attributeFilter: ['data-theme'] });
+
+  /* theme button */
+  var tb = document.getElementById('themeBtn');
+  var modes = ['auto', 'light', 'dark'];
+  function curMode() { var t = root.getAttribute('data-theme'); return t === 'light' || t === 'dark' ? t : 'auto'; }
+  function paintBtn() { if (tb) tb.textContent = 'Theme: ' + curMode(); }
+  if (tb) tb.addEventListener('click', function () {
+    var m = modes[(modes.indexOf(curMode()) + 1) % 3];
+    if (m === 'auto') root.removeAttribute('data-theme'); else root.setAttribute('data-theme', m);
+    try { localStorage.setItem('rb87-theme', m); } catch (e) { }
+    paintBtn();
+  });
+  try { var saved = localStorage.getItem('rb87-theme'); if (saved === 'light' || saved === 'dark') root.setAttribute('data-theme', saved); } catch (e) { }
+  paintBtn();
+
+  /* TOC active section + mobile collapse */
+  var tocLinks = Array.prototype.slice.call(document.querySelectorAll('.toc a'));
+  var targets = tocLinks.map(function (a) { return document.getElementById(a.getAttribute('href').slice(1)); }).filter(Boolean);
+  if ('IntersectionObserver' in window) {
+    var vis = {};
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { vis[e.target.id] = e.isIntersecting ? e.boundingClientRect.top : null; });
+      var best = null, bt = Infinity;
+      targets.forEach(function (t) { var r = t.getBoundingClientRect(); if (r.top < window.innerHeight * 0.35 && r.bottom > 0) { var d = Math.abs(r.top); if (r.top <= 120 && d < bt) { bt = d; best = t.id; } } });
+      if (!best) { for (var i = targets.length - 1; i >= 0; i--) { if (targets[i].getBoundingClientRect().top < 140) { best = targets[i].id; break; } } }
+      tocLinks.forEach(function (a) { a.classList.toggle('active', a.getAttribute('href') === '#' + best); });
+    }, { rootMargin: '0px 0px -60% 0px', threshold: [0, 1] });
+    targets.forEach(function (t) { io.observe(t); });
+  }
+  var td = document.getElementById('tocDetails');
+  function tocMode() { if (!td) return; if (window.innerWidth <= 1020) { if (!td.dataset.touched) td.open = false; } else td.open = true; }
+  if (td) { td.addEventListener('toggle', function () { if (window.innerWidth <= 1020) td.dataset.touched = '1'; }); tocMode(); window.addEventListener('resize', tocMode); }
+
+  /* glossary filter */
+  var gl = document.getElementById('gloss'), gs = document.getElementById('glSearch'), gc = document.getElementById('glCount');
+  var cat = 'all';
+  function filterGloss() {
+    if (!gl || !gs) return;
+    var q = (gs.value || '').trim().toLowerCase(), n = 0, items = gl.children;
+    for (var i = 0; i < items.length; i++) {
+      var it = items[i], okc = cat === 'all' || it.getAttribute('data-cat') === cat;
+      var okq = !q || it.textContent.toLowerCase().indexOf(q) >= 0;
+      it.hidden = !(okc && okq); if (!it.hidden) n++;
+    }
+    gc.textContent = n + ' / ' + items.length + ' terms';
+  }
+  if (gl && gs) {
+    gs.addEventListener('input', filterGloss);
+    Array.prototype.forEach.call(document.querySelectorAll('.gl-tools .chip'), function (b) {
+      b.addEventListener('click', function () {
+        cat = b.getAttribute('data-cat');
+        Array.prototype.forEach.call(document.querySelectorAll('.gl-tools .chip'), function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+        filterGloss();
+      });
+    });
+    filterGloss();
+  }
+
+  /* ---------------- chart helpers ---------------- */
+  function prep(canvas) {
+    var r = canvas.getBoundingClientRect(), dpr = Math.min(window.devicePixelRatio || 1, 2);
+    var w = Math.max(200, r.width), h = Math.max(150, r.height);
+    if (canvas.width !== Math.round(w * dpr) || canvas.height !== Math.round(h * dpr)) { canvas.width = Math.round(w * dpr); canvas.height = Math.round(h * dpr); }
+    var ctx = canvas.getContext('2d'); ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    return { ctx: ctx, w: w, h: h };
+  }
+  function niceTicks(a, b, n) {
+    var span = b - a; if (span <= 0) return [a];
+    var step = Math.pow(10, Math.floor(Math.log10(span / n))), err = span / n / step;
+    if (err >= 7.5) step *= 10; else if (err >= 3.5) step *= 5; else if (err >= 1.5) step *= 2;
+    var t = [], s = Math.ceil(a / step) * step; for (var v = s; v <= b + 1e-9; v += step) t.push(Math.abs(v) < 1e-12 ? 0 : v); return t;
+  }
+  function fmt(v) { var a = Math.abs(v); if (a >= 1000) return v.toFixed(0); if (a >= 10) return v.toFixed(0); if (a >= 1) return v.toFixed(1).replace(/\.0$/, ''); if (a === 0) return '0'; return v.toPrecision(2); }
+  function axes(o) {
+    // o: {ctx,w,h,xmin,xmax,ymin,ymax,xlabel,ylabel,y2min,y2max,y2label, padR}
+    var c = o.ctx, L = 52, R = o.y2label ? 52 : 14, T = 12, B = 40;
+    var pw = o.w - L - R, ph = o.h - T - B;
+    var X = function (x) { return L + (x - o.xmin) / (o.xmax - o.xmin) * pw; };
+    var Y = function (y) { return T + ph - (y - o.ymin) / (o.ymax - o.ymin) * ph; };
+    var Y2 = o.y2label ? function (y) { return T + ph - (y - o.y2min) / (o.y2max - o.y2min) * ph; } : null;
+    c.clearRect(0, 0, o.w, o.h);
+    c.fillStyle = css('--surface'); c.fillRect(0, 0, o.w, o.h);
+    c.strokeStyle = css('--chart-grid'); c.lineWidth = 1; c.font = '11px ' + css('--font-mono'); c.fillStyle = css('--muted');
+    niceTicks(o.xmin, o.xmax, Math.max(3, Math.floor(pw / 80))).forEach(function (t) { var x = X(t); c.beginPath(); c.moveTo(x, T); c.lineTo(x, T + ph); c.stroke(); c.textAlign = 'center'; c.fillText(fmt(t), x, T + ph + 14); });
+    niceTicks(o.ymin, o.ymax, 5).forEach(function (t) { var y = Y(t); c.beginPath(); c.moveTo(L, y); c.lineTo(L + pw, y); c.stroke(); c.textAlign = 'right'; c.fillText(fmt(t), L - 6, y + 4); });
+    if (Y2) niceTicks(o.y2min, o.y2max, 5).forEach(function (t) { c.textAlign = 'left'; c.fillText(fmt(t), L + pw + 6, Y2(t) + 4); });
+    c.strokeStyle = css('--rule-strong'); c.strokeRect(L, T, pw, ph);
+    c.fillStyle = css('--ink-2'); c.textAlign = 'center'; c.fillText(o.xlabel, L + pw / 2, o.h - 6);
+    c.save(); c.translate(12, T + ph / 2); c.rotate(-Math.PI / 2); c.fillText(o.ylabel, 0, 0); c.restore();
+    if (o.y2label) { c.save(); c.translate(o.w - 10, T + ph / 2); c.rotate(Math.PI / 2); c.fillText(o.y2label, 0, 0); c.restore(); }
+    return { X: X, Y: Y, Y2: Y2, L: L, T: T, pw: pw, ph: ph };
+  }
+  function line(c, pts, color, width, dash) {
+    c.save(); c.strokeStyle = color; c.lineWidth = width || 2; if (dash) c.setLineDash(dash);
+    c.beginPath(); pts.forEach(function (p, i) { if (i) c.lineTo(p[0], p[1]); else c.moveTo(p[0], p[1]); }); c.stroke(); c.restore();
+  }
+  function clipTo(c, a) { c.save(); c.beginPath(); c.rect(a.L, a.T, a.pw, a.ph); c.clip(); }
+  function $(id) { return document.getElementById(id); }
+
+  /* ---------------- Chart A: EIT ---------------- */
+  function drawE() {
+    var cv = $('chartE'); if (!cv) return;
+    var om = +$('eOm').value * 1000, g = +$('eG').value, OD = +$('eOD').value, W = +$('eW').value * 1000;
+    $('eOmo').textContent = (om / 1000).toFixed(2) + ' MHz'; $('eGo').textContent = g.toFixed(1) + ' kHz'; $('eODo').textContent = OD.toFixed(1); $('eWo').textContent = (W / 1000).toFixed(0) + ' MHz';
+    var p = { omega: om, gamma12: g, W: W, OD: OD };
+    var gE = P.gammaEIT(p), R = Math.min(5000, Math.max(20, 6 * gE));
+    var s = prep(cv), N = 500, pts = [], ph = [], pts0 = [], phMax = 1e-9;
+    for (var i = 0; i <= N; i++) { var d = -R + 2 * R * i / N; var e = P.eitResponse(d, p); pts.push([d, e.T]); ph.push([d, e.phase]); phMax = Math.max(phMax, Math.abs(e.phase)); pts0.push([d, P.eitResponse(d, { omega: 0, gamma12: g, W: W, OD: OD }).T]); }
+    var a = axes({ ctx: s.ctx, w: s.w, h: s.h, xmin: -R, xmax: R, ymin: 0, ymax: 1, xlabel: 'two-photon detuning δ/2π (kHz)', ylabel: 'probe transmission', y2min: -phMax * 1.1, y2max: phMax * 1.1, y2label: 'probe phase (rad)' });
+    var c = s.ctx; clipTo(c, a);
+    line(c, pts0.map(function (q) { return [a.X(q[0]), a.Y(q[1])]; }), css('--chart-d'), 1.5, [4, 4]);
+    line(c, ph.map(function (q) { return [a.X(q[0]), a.Y2(q[1])]; }), css('--chart-b'), 1.8);
+    line(c, pts.map(function (q) { return [a.X(q[0]), a.Y(q[1])]; }), css('--chart-a'), 2.4);
+    c.restore();
+    var T0 = P.eitResponse(0, p).T, odE = OD + Math.log(Math.max(T0, 1e-300));
+    var h = 0.01 * Math.max(gE, 0.01);
+    var tau = (P.eitResponse(h, p).phase - P.eitResponse(-h, p).phase) / (2 * 2 * Math.PI * 1e3 * h);
+    var tauPaper = odE / (2 * Math.PI * 1e3 * gE);
+    $('eRead').innerHTML = 'γ<sub>EIT</sub>/2π = ' + gE.toFixed(2) + ' kHz (HWHM, Eq. 15 form)<br>FWHM ≈ ' + (2 * gE).toFixed(2) + ' kHz<br>T(δ=0) = ' + T0.toFixed(3) + ' · OD<sub>EIT</sub> ≈ ' + odE.toFixed(2) +
+      '<br>group delay dφ/dω = ' + (tau * 1e6).toFixed(1) + ' µs<br>paper estimate OD<sub>EIT</sub>/γ<sub>EIT</sub> = ' + (tauPaper * 1e6).toFixed(1) + ' µs<br><span style="color:var(--muted)">(about 2× apart: the paper’s scaling estimate vs this model’s exact slope; OD and γ definitions differ by factors of 2 between sources)</span>';
+  }
+  ['eOm', 'eG', 'eOD', 'eW'].forEach(function (id) { var el = $(id); if (el) el.addEventListener('input', drawE); });
+
+  /* ---------------- Chart B: Zeeman ---------------- */
+  function drawZ() {
+    var cv = $('chartZ'); if (!cv) return;
+    var B = +$('zB').value, F = +$('zF').value, gsign = F === 2 ? 1 : -1;
+    $('zBo').textContent = B + ' mG';
+    var s = prep(cv), Bmax = 200, ymax = 0.7 * F * Bmax * 1.05;
+    var a = axes({ ctx: s.ctx, w: s.w, h: s.h, xmin: 0, xmax: Bmax, ymin: -ymax, ymax: ymax, xlabel: 'magnetic field B (mG)', ylabel: 'sublevel shift (kHz)' });
+    var c = s.ctx; clipTo(c, a);
+    for (var m = -F; m <= F; m++) {
+      var k = gsign * 0.7 * m;
+      var hl = F === 2 && (m === 2 || m === 0);
+      line(c, [[a.X(0), a.Y(0)], [a.X(Bmax), a.Y(k * Bmax)]], hl ? (m === 2 ? css('--chart-b') : css('--chart-a')) : css('--chart-d'), hl ? 2.6 : 1.4);
+      c.fillStyle = css('--ink-2'); c.font = '11px ' + css('--font-mono'); c.textAlign = 'right';
+      c.fillText('m=' + (m > 0 ? '+' : '') + m, a.X(Bmax) - 4, a.Y(k * Bmax) - 4);
+    }
+    line(c, [[a.X(B), a.T], [a.X(B), a.T + a.ph]], css('--sim-select'), 1.5, [5, 4]);
+    c.restore();
+    var split = 1.4 * B;
+    $('zRead').innerHTML = 'adjacent m<sub>F</sub>: ' + (0.7 * B).toFixed(1) + ' kHz<br>Λ pair (m=+2 ↔ 0): <b>' + split.toFixed(1) + ' kHz</b><br>AOM RF difference (double pass): ' + (split / 2).toFixed(1) + ' kHz' + (B === 50 ? '<br><span style="color:var(--ok)">paper: 50 mG → 35 kHz adjacent</span>' : '');
+  }
+  ['zB', 'zF'].forEach(function (id) { var el = $(id); if (el) el.addEventListener('input', drawZ); });
+
+  /* ---------------- Chart C: width vs intensity ---------------- */
+  function drawW() {
+    var cv = $('chartW'); if (!cv) return;
+    var I = +$('wI').value, buf = $('wBuf').checked;
+    var K = P.K, extra = buf ? 0 : P.cellModel({ Ic: 0, buffer: false, shield: true, heater: true, T_C: 60 }).transitFWHM;
+    var fw = function (x) { return K.fitW0_kHz + extra + K.fitSlope_kHz_per_mWcm2 * x; };
+    $('wIo').textContent = I.toFixed(1) + ' mW/cm²';
+    var Pm = I * Math.PI * K.controlWaist_cm * K.controlWaist_cm / 2;
+    $('wPo').textContent = Pm.toFixed(3) + ' mW (peak I = 2P/πw²)';
+    var s = prep(cv), Imax = 20, ymax = fw(Imax) * 1.08;
+    var a = axes({ ctx: s.ctx, w: s.w, h: s.h, xmin: 0, xmax: Imax, ymin: 0, ymax: ymax, xlabel: 'control intensity (mW/cm²)', ylabel: 'EIT FWHM (kHz)' });
+    var c = s.ctx; clipTo(c, a);
+    line(c, [[a.X(0), a.Y(fw(0))], [a.X(Imax), a.Y(fw(Imax))]], css('--chart-a'), 2.2);
+    [[1.3, 7.3], [5.5, 26]].forEach(function (q) { c.fillStyle = css('--chart-b'); c.beginPath(); c.arc(a.X(q[0]), a.Y(q[1]), 5, 0, 7); c.fill(); });
+    c.fillStyle = css('--sim-select'); c.beginPath(); c.arc(a.X(I), a.Y(fw(I)), 5, 0, 7); c.fill();
+    c.restore();
+    $('wRead').innerHTML = 'FWHM ≈ <b>' + fw(I).toFixed(1) + ' kHz</b>' + (buf ? '' : '<br>incl. transit ≈ ' + extra.toFixed(0) + ' kHz (w₀ 0.75 mm)') + '<br>paper points: 7.3 kHz @1.3, 26 kHz @5.5 mW/cm²';
+  }
+  ['wI', 'wBuf'].forEach(function (id) { var el = $(id); if (el) el.addEventListener('input', drawW); });
+  var wb = $('wBuf'); if (wb) wb.addEventListener('change', drawW);
+
+
+  /* ---------------- Chart D: Bessel sideband weights (Mod B) ---------------- */
+  function drawBes() {
+    var cv = $('chartBes'); if (!cv) return;
+    var dbm = +$('bDbm').value, vpi = +$('bVpi').value, Pt = +$('bP').value;
+    var beta = P.betaFromDbm(dbm, vpi);
+    $('bDbmo').textContent = dbm.toFixed(1) + ' dBm'; $('bVpio').textContent = vpi.toFixed(1) + ' V'; $('bPo').textContent = Pt.toFixed(1) + ' mW';
+    var s = prep(cv), bmax = 4;
+    var a = axes({ ctx: s.ctx, w: s.w, h: s.h, xmin: 0, xmax: bmax, ymin: 0, ymax: 1, xlabel: 'modulation depth β (rad)', ylabel: 'fraction of optical power' });
+    var c = s.ctx; clipTo(c, a);
+    [[0, css('--chart-a')], [1, css('--chart-b')], [2, css('--chart-c')]].forEach(function (q) {
+      var pts = []; for (var i = 0; i <= 300; i++) { var b = bmax * i / 300, j = P.besselJ(q[0], b); pts.push([a.X(b), a.Y(j * j)]); }
+      line(c, pts, q[1], 2.2);
+    });
+    line(c, [[a.X(beta), a.T], [a.X(beta), a.T + a.ph]], css('--sim-select'), 1.5, [5, 4]);
+    c.restore();
+    c.font = '11px ' + css('--font-mono'); c.fillStyle = css('--ink-2'); c.textAlign = 'left';
+    c.fillText('J₀² carrier', a.X(0.08), a.Y(0.95)); c.fillText('J₁² each 1st', a.X(1.9), a.Y(0.37)); c.fillText('J₂² each 2nd', a.X(3.05), a.Y(0.2));
+    var j0 = P.besselJ(0, beta), j1 = P.besselJ(1, beta), j2 = P.besselJ(2, beta);
+    $('besRead').innerHTML = 'β = <b>' + beta.toFixed(3) + '</b> rad<br>carrier ' + (j0 * j0 * 100).toFixed(1) + ' % = ' + (Pt * j0 * j0).toFixed(2) + ' mW<br>each ±1 ' + (j1 * j1 * 100).toFixed(1) + ' % = ' + (Pt * j1 * j1).toFixed(3) + ' mW<br>each ±2 ' + (j2 * j2 * 100).toFixed(2) + ' %<br>CSR (J₀²/J₁²) = ' + (j1 ? (j0 * j0 / (j1 * j1)).toFixed(1) : '∞') + (Math.abs(j0) < 0.05 ? '<br><b>carrier nearly suppressed (β ≈ 2.405)</b>' : '');
+  }
+  ['bDbm', 'bVpi', 'bP'].forEach(function (id) { var el = $(id); if (el) el.addEventListener('input', drawBes); });
+
+  /* ---------------- Chart E: hyperfine resonances (Mod B) ---------------- */
+  function drawHf() {
+    var cv = $('chartHf'); if (!cv) return;
+    var B = +$('hB').value, I = +$('hI').value, circ = $('hPol').value === 'c', sh = $('hSh').checked;
+    $('hBo').textContent = B + ' mG'; $('hIo').textContent = I.toFixed(1) + ' mW/cm²';
+    var m = P.cellModel({ Ic: I, buffer: true, shield: sh, heater: true, T_C: 60, solenoid: true, B_mG: B });
+    var w = circ ? { '-1': 0.6, '0': 1, '1': 0.6 } : { '-1': 0.3, '0': 0.5, '1': 0.3 };
+    var R = Math.max(150, 2.5 * 1.4 * m.Beff + 2 * m.fwhm);
+    var s = prep(cv), pts = [];
+    for (var i = 0; i <= 600; i++) { var d = -R + 2 * R * i / 600; pts.push([d, P.probeTB(d, m, m.Beff, w)]); }
+    var a = axes({ ctx: s.ctx, w: s.w, h: s.h, xmin: -R, xmax: R, ymin: 0, ymax: 1, xlabel: 'microwave detuning f_mw − ν_hfs (kHz)', ylabel: 'probe transmission' });
+    var c = s.ctx; clipTo(c, a);
+    line(c, pts.map(function (q) { return [a.X(q[0]), a.Y(q[1])]; }), css('--chart-a'), 2.2);
+    [-1, 0, 1].forEach(function (mm) { var x = mm * 1.4 * m.Beff; line(c, [[a.X(x), a.T], [a.X(x), a.T + a.ph]], css('--chart-d'), 1, [3, 4]); });
+    c.restore();
+    $('hfRead').innerHTML = 'FWHM ≈ ' + m.fwhm.toFixed(1) + ' kHz<br>m=±1 pairs at ±' + (1.4 * m.Beff).toFixed(1) + ' kHz' + (sh ? '' : '<br>(unshielded: +450 mG residual assumed)') + '<br>clock quadratic shift ≈ ' + (5.75e-7 * m.Beff * m.Beff * 1000).toFixed(2) + ' Hz' + (B < 10 && sh ? '<br><b>pairs overlap: apply a bias</b>' : '');
+  }
+  ['hB', 'hI', 'hPol', 'hSh'].forEach(function (id) { var el = $(id); if (el) { el.addEventListener('input', drawHf); el.addEventListener('change', drawHf); } });
+
+  /* ---------------- Rabi / Bloch widget (lectures) ---------------- */
+  var rb = { t: 0, playing: true, last: 0, raf: 0, traj: null };
+  function blochTraj() {
+    var Om = 2 * Math.PI * +$('rOm').value, De = 2 * Math.PI * +$('rDe').value, G = $('rG').checked ? 2 * Math.PI * 5.746 : 0; // rad/µs
+    var T = +$('rT').value, N = 1200, dt = T / N, y = [0, 0, -1], out = [y.slice()];
+    function f(q) { return [De * q[1] - G / 2 * q[0], -De * q[0] + Om * q[2] - G / 2 * q[1], -Om * q[1] - G * (q[2] + 1)]; }
+    for (var i = 0; i < N; i++) {
+      var k1 = f(y), k2 = f(y.map(function (v, j) { return v + dt / 2 * k1[j]; })), k3 = f(y.map(function (v, j) { return v + dt / 2 * k2[j]; })), k4 = f(y.map(function (v, j) { return v + dt * k3[j]; }));
+      y = y.map(function (v, j) { return v + dt / 6 * (k1[j] + 2 * k2[j] + 2 * k3[j] + k4[j]); }); out.push(y.slice());
+    }
+    return { pts: out, T: T, Om: Om, De: De, G: G };
+  }
+  function drawRabi() {
+    var cv = $('rabiPlot'), cb = $('blochCanvas'); if (!cv || !cb) return;
+    $('rOmo').textContent = (+$('rOm').value).toFixed(2) + ' MHz'; $('rDeo').textContent = (+$('rDe').value).toFixed(2) + ' MHz'; $('rTo').textContent = (+$('rT').value).toFixed(2) + ' µs';
+    var tr = rb.traj || (rb.traj = blochTraj()), n = tr.pts.length - 1, k = Math.min(n, Math.round(rb.t / tr.T * n));
+    var s = prep(cv);
+    var a = axes({ ctx: s.ctx, w: s.w, h: s.h, xmin: 0, xmax: tr.T, ymin: 0, ymax: 1, xlabel: 'time (µs)', ylabel: 'excited-state population' });
+    var c = s.ctx; clipTo(c, a);
+    line(c, tr.pts.map(function (q, i) { return [a.X(tr.T * i / n), a.Y((q[2] + 1) / 2)]; }), css('--chart-d'), 1.2, [3, 3]);
+    line(c, tr.pts.slice(0, k + 1).map(function (q, i) { return [a.X(tr.T * i / n), a.Y((q[2] + 1) / 2)]; }), css('--chart-a'), 2.4);
+    c.restore();
+    // Bloch sphere (orthographic, tilted view)
+    var sb = prep(cb), x = sb.ctx, W = sb.w, H = sb.h, R = Math.min(W, H) * 0.38, cx = W / 2, cy = H / 2 + 6;
+    x.clearRect(0, 0, W, H); x.fillStyle = css('--surface'); x.fillRect(0, 0, W, H);
+    var el = 0.35, az = -0.6;
+    function proj(p) { var X = p[0] * Math.cos(az) - p[1] * Math.sin(az), Y = p[0] * Math.sin(az) + p[1] * Math.cos(az), Z = p[2]; return [cx + R * X, cy - R * (Z * Math.cos(el) - Y * Math.sin(el)), Y * Math.cos(el) + Z * Math.sin(el)]; }
+    x.strokeStyle = css('--rule-strong'); x.lineWidth = 1; x.beginPath(); x.arc(cx, cy, R, 0, 7); x.stroke();
+    x.beginPath(); for (var i = 0; i <= 64; i++) { var t = i / 64 * 2 * Math.PI, q = proj([Math.cos(t), Math.sin(t), 0]); if (i) x.lineTo(q[0], q[1]); else x.moveTo(q[0], q[1]); } x.stroke();
+    [[1, 0, 0, 'u'], [0, 1, 0, 'v'], [0, 0, 1, '|e⟩']].forEach(function (ax) { var p0 = proj([-ax[0], -ax[1], -ax[2]]), p1 = proj([ax[0], ax[1], ax[2]]); x.strokeStyle = css('--chart-grid'); x.beginPath(); x.moveTo(p0[0], p0[1]); x.lineTo(p1[0], p1[1]); x.stroke(); x.fillStyle = css('--muted'); x.font = '11px ' + css('--font-mono'); x.fillText(ax[3], p1[0] + 4, p1[1] - 2); });
+    var pg = proj([0, 0, -1]); x.fillStyle = css('--muted'); x.fillText('|g⟩', pg[0] + 4, pg[1] + 12);
+    x.strokeStyle = css('--chart-b'); x.lineWidth = 1.5; x.beginPath();
+    tr.pts.slice(0, k + 1).forEach(function (q, i) { var pp = proj(q); if (i) x.lineTo(pp[0], pp[1]); else x.moveTo(pp[0], pp[1]); }); x.stroke();
+    var tip = proj(tr.pts[k]); x.strokeStyle = css('--chart-a'); x.lineWidth = 3; x.beginPath(); x.moveTo(cx, cy); x.lineTo(tip[0], tip[1]); x.stroke();
+    x.fillStyle = css('--chart-a'); x.beginPath(); x.arc(tip[0], tip[1], 4.5, 0, 7); x.fill();
+    var Oe = Math.sqrt(tr.Om * tr.Om + tr.De * tr.De);
+    $('rRead').innerHTML = 'generalized Rabi Ω′/2π = ' + (Oe / 2 / Math.PI).toFixed(2) + ' MHz<br>max P<sub>e</sub> (no decay) = Ω²/(Ω²+Δ²) = ' + (Oe ? (tr.Om * tr.Om / (Oe * Oe)).toFixed(3) : '0') + '<br>π-pulse time π/Ω = ' + (tr.Om ? (Math.PI / tr.Om * 1000).toFixed(0) + ' ns' : '—') + '<br>now: t = ' + (rb.t).toFixed(3) + ' µs, P<sub>e</sub> = ' + ((tr.pts[k][2] + 1) / 2).toFixed(3);
+  }
+  function rabiReset() { rb.traj = null; rb.t = reduce() ? +$('rT').value : 0; drawRabi(); rabiLoop(); }
+  function reduce() { try { return window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) { return false; } }
+  function rabiLoop() {
+    if (rb.raf || !$('rabiPlot')) return;
+    rb.raf = requestAnimationFrame(function step(ts) {
+      rb.raf = 0; var T = +$('rT').value;
+      if (!rb.playing || reduce()) { rb.last = 0; return; }
+      var dt = rb.last ? (ts - rb.last) / 1000 : 0; rb.last = ts;
+      rb.t += dt * T / 6; if (rb.t > T) rb.t = 0;
+      drawRabi(); rabiLoop();
+    });
+  }
+  ['rOm', 'rDe', 'rT'].forEach(function (id) { var el = $(id); if (el) el.addEventListener('input', rabiReset); });
+  if ($('rG')) $('rG').addEventListener('change', rabiReset);
+  if ($('rPlay')) $('rPlay').addEventListener('click', function (e) { rb.playing = !rb.playing; e.currentTarget.setAttribute('aria-pressed', rb.playing ? 'true' : 'false'); e.currentTarget.textContent = rb.playing ? 'Pause' : 'Play'; rb.last = 0; if (rb.playing) rabiLoop(); });
+  if ($('rabiPlot')) { if (reduce()) rb.t = +$('rT').value; rabiLoop(); }
+
+  /* ---------------- photon counter (lecture 1) ---------------- */
+  function drawPh() {
+    var el = $('phP'); if (!el) return;
+    var lam = +$('phL').value, Pw = Math.pow(10, +$('phP').value);
+    var h = 6.62607015e-34, c0 = 299792458, E = h * c0 / (lam * 1e-9), rate = Pw / E;
+    $('phLo').textContent = lam.toFixed(1) + ' nm'; $('phPo').textContent = (Pw >= 1e-3 ? (Pw * 1e3).toPrecision(3) + ' mW' : Pw >= 1e-6 ? (Pw * 1e6).toPrecision(3) + ' µW' : Pw >= 1e-9 ? (Pw * 1e9).toPrecision(3) + ' nW' : (Pw * 1e12).toPrecision(3) + ' pW');
+    $('phRead').innerHTML = 'E<sub>photon</sub> = ' + E.toExponential(4) + ' J = ' + (E / 1.602176634e-19).toFixed(4) + ' eV<br>ν = ' + (c0 / (lam * 1e-9) / 1e12).toFixed(3) + ' THz<br>photon rate = <b>' + rate.toExponential(2) + ' /s</b><br>photons in a 10 µs pulse = ' + (rate * 1e-5).toExponential(2);
+  }
+  ['phL', 'phP'].forEach(function (id) { var el = $(id); if (el) el.addEventListener('input', drawPh); });
+
+  function drawAll() { drawE(); drawZ(); drawW(); drawBes(); drawHf(); drawRabi(); drawPh(); }
+  window.onThemeChange(drawAll);
+  var rt; window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(drawAll, 120); });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(drawAll);
+  drawAll();
+})();
+
+</script>
+<script>
+window.MathJax = { tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']] }, svg: { fontCache: 'global' }, options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code','canvas','svg'] } };
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg-full.js"></script>
+</body>
+</html>
