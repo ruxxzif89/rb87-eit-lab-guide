@@ -340,7 +340,7 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
 </style>
 </head>
 <body>
-<nav class="topnav" aria-label="Guide pages"><div class="wrap"><span class="brand">Rb-87 EIT</span><a href="index.html">Method A · Zeeman EIT (AOM)</a><a href="mod-b.html">Method B · Hyperfine EIT (EOM)</a><a href="quantum.html" aria-current="page">Quantum Optics Lectures</a></div></nav>
+<nav class="topnav" aria-label="Guide pages"><div class="wrap"><span class="brand">Rb-87 EIT</span><a href="index.html">Method A · Zeeman EIT (AOM)</a><a href="quantum.html" aria-current="page">Quantum Optics Lectures</a></div></nav>
 
 <a class="skip" href="#main">Skip to content</a>
 <header class="masthead">
@@ -356,7 +356,7 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
     <div class="hero">
       <div>
         <h1>Quantum optics, from the photon to <span class="wl">stored light</span></h1>
-        <p class="lede">Twelve lectures that build the ideas behind the <a href="index.html">Method A</a> and <a href="mod-b.html">Method B</a> guides, one step at a time. Each has learning goals, a worked example with real ⁸⁷Rb/795 nm numbers, an analogy beside every equation (including where it breaks down), questions with hidden answers, and links to where the idea appears in the experiment.</p>
+        <p class="lede">Twelve lectures that build the ideas behind the <a href="index.html">Method A</a> guide, one step at a time. Each has learning goals, a worked example with real ⁸⁷Rb/795 nm numbers, an analogy beside every equation (including where it breaks down), questions with hidden answers, and links to where the idea appears in the experiment.</p>
       </div>
       <div class="spec" role="group" aria-label="How to use these lectures">
         <dl>
@@ -450,7 +450,7 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
   </div>
   <details class="q"><summary>Q1. Is (|g⟩ + i|e⟩)/√2 different from (|g⟩ + |e⟩)/√2 if you only measure in the {g, e} basis?</summary><div class="ans">No. Both give 50/50. They differ in relative phase (90°), which shows up when the state interferes with something else, e.g. after another light pulse.</div></details>
   <details class="q"><summary>Q2. Why does a global phase e<sup>iφ</sup>|ψ⟩ not matter, while a relative phase does?</summary><div class="ans">All probabilities involve |amplitude|², which is unchanged by a common factor e<sup>iφ</sup>. A relative phase changes how the amplitudes add when they are projected onto a different basis.</div></details>
-  <p class="seen">Where it shows up: <a class="xref" href="index.html#p3-ham">dark state</a><a class="xref" href="mod-b.html#b-delta">microwave phase in Method B</a></p>
+  <p class="seen">Where it shows up: <a class="xref" href="index.html#p3-ham">dark state</a></p>
 </section>
 
 <!-- L3 -->
@@ -531,7 +531,7 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
   </div>
   <details class="q"><summary>Q1. Why can σ⁺ light on F=2→F′=1 never excite m<sub>F</sub>=+2?</summary><div class="ans">It would need m<sub>F′</sub>=+3, which does not exist in F′=1 (maximum +1). m<sub>F</sub>=+1 is also dark, since F′=1 has no m<sub>F′</sub>=+2.</div></details>
   <details class="q"><summary>Q2. Why is D1 preferred over D2 for clean Λ systems?</summary><div class="ans">5P₁/₂ has only two excited hyperfine levels (F′=1, 2), well resolved compared with 5P₃/₂’s four. That means fewer competing excitation paths and cleaner dark states.</div></details>
-  <p class="seen">Where it shows up: <a class="xref" href="index.html#p3-atom">Method A level scheme</a><a class="xref" href="mod-b.html#b-levels">Method B level scheme</a><a class="xref" href="mod-b.html#b-zeeman">clock pair</a></p>
+  <p class="seen">Where it shows up: <a class="xref" href="index.html#p3-atom">Method A level scheme</a></p>
 </section>
 
 <!-- L6 -->
@@ -584,7 +584,7 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
   </div>
   <details class="q"><summary>Q1. In the dark state with Ω<sub>p</sub> ≪ Ω<sub>c</sub>, where is almost all the population?</summary><div class="ans">In |1⟩, the state coupled by the weak probe. Weight of |1⟩ = |Ω<sub>c</sub>|²/(|Ω<sub>c</sub>|²+|Ω<sub>p</sub>|²) ≈ 1. That is exactly why the result is counter-intuitive.</div></details>
   <details class="q"><summary>Q2. Halving the control intensity halves which term of γ<sub>EIT</sub>?</summary><div class="ans">The power-broadening term |Ω<sub>c</sub>|²/γ₁₃ (Ω² ∝ intensity). γ₁₂ is unchanged.</div></details>
-  <p class="seen">Where it shows up: <a class="xref" href="index.html#p3-ham">Method A dark state</a><a class="xref" href="index.html#p3-chi">EIT linewidth</a><a class="xref" href="mod-b.html#b-pm">Method B fields</a></p>
+  <p class="seen">Where it shows up: <a class="xref" href="index.html#p3-ham">Method A dark state</a><a class="xref" href="index.html#p3-chi">EIT linewidth</a></p>
 </section>
 
 <!-- L8 -->
@@ -603,7 +603,7 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
   </div>
   <details class="q"><summary>Q1. What happens to v<sub>g</sub> if you halve the control intensity (power-broadening-dominated regime)?</summary><div class="ans">γ<sub>EIT</sub> roughly halves, so the delay OD<sub>EIT</sub>/γ<sub>EIT</sub> roughly doubles and v<sub>g</sub> roughly halves. Transparency (OD<sub>EIT</sub>) may also drop, which is the trade-off.</div></details>
   <details class="q"><summary>Q2. Why must the control be turned off while the pulse is fully inside the cell?</summary><div class="ans">Only the part of the pulse inside the medium is converted to spin wave. Anything already out (or not yet in) is lost or unstored. That is why the delay must exceed the pulse length (time-bandwidth product ≈ √OD<sub>EIT</sub> &gt; 1).</div></details>
-  <p class="seen">Where it shows up: <a class="xref" href="index.html#p3-slow">Method A slow &amp; stored light</a><a class="xref" href="index.html#p4">storage timing</a><a class="xref" href="mod-b.html#b-storage">Method B storage options</a></p>
+  <p class="seen">Where it shows up: <a class="xref" href="index.html#p3-slow">Method A slow &amp; stored light</a><a class="xref" href="index.html#p4">storage timing</a></p>
 </section>
 
 <!-- L9 -->
@@ -622,7 +622,7 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
   </div>
   <details class="q"><summary>Q1. Why does a ladder (cascade) scheme prefer counter-propagating beams, while Λ prefers co-propagating?</summary><div class="ans">In Λ one photon is absorbed and one emitted, so the effective wavevector is k<sub>p</sub> − k<sub>c</sub>, which is small when the beams travel together. In a ladder both photons are absorbed, so it is k<sub>p</sub> + k<sub>c</sub>, which is minimised by opposite directions (paper Fig. 9 inset).</div></details>
   <details class="q"><summary>Q2. A beam angle of 0.1 mrad between probe and control: roughly how much residual broadening without buffer gas?</summary><div class="ans">σ<sub>Dop</sub>θ ≈ 225 MHz × 10⁻⁴ ≈ 20 kHz: “tens of kHz”, as the paper says. With buffer gas, Dicke narrowing makes it quadratic in θ and much smaller.</div></details>
-  <p class="seen">Where it shows up: <a class="xref" href="index.html#p3-vapor">Method A hot-vapour effects</a><a class="xref" href="mod-b.html#b-doppler">Method B Doppler &amp; Dicke</a></p>
+  <p class="seen">Where it shows up: <a class="xref" href="index.html#p3-vapor">Method A hot-vapour effects</a></p>
 </section>
 
 <!-- L10 -->
@@ -660,7 +660,7 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
   </div>
   <details class="q"><summary>Q1. What g⁽²⁾(0) would you measure for the Method A probe laser?</summary><div class="ans">≈ 1 (coherent light), regardless of attenuation.</div></details>
   <details class="q"><summary>Q2. Why does storing true single photons demand much better control filtering than storing a µW probe?</summary><div class="ans">The signal is ~1 photon per pulse, while a mW control leaks, scatters and fluoresces. Even a 10⁻⁵ extinction (Glan–Taylor) leaves many control photons per pulse. Spectral filtering and timing gates are then needed too.</div></details>
-  <p class="seen">Where it shows up: <a class="xref" href="index.html#p4">probe attenuation &amp; separation</a><a class="xref" href="mod-b.html#b-detect">Method B detection problem</a></p>
+  <p class="seen">Where it shows up: <a class="xref" href="index.html#p4">probe attenuation &amp; separation</a></p>
 </section>
 
 <!-- L12 -->
@@ -722,7 +722,7 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
 
 <footer class="site">
   <div class="wrap">
-    <p><strong>Quantum Optics Lectures</strong>: background reading for the IMEN quantum photonics programme. Prepared October 2026. Companion pages: <a href="index.html">Method A guide</a> · <a href="mod-b.html">Method B guide</a>.</p>
+    <p><strong>Quantum Optics Lectures</strong>: background reading for the IMEN quantum photonics programme. Prepared October 2026. Companion pages: <a href="index.html">Method A guide</a>.</p>
     <p><strong>Sources.</strong> Physics conventions follow standard textbooks and the Finkelstein <em>et al.</em> tutorial (arXiv:2205.10959v2). ⁸⁷Rb constants from Steck (verify against the current revision). Worked-example numbers marked as estimates are for orientation only.</p>
   </div>
 </footer>

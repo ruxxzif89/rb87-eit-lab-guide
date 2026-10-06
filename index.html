@@ -242,6 +242,23 @@ input[type=range]{width:100%;accent-color:var(--laser);min-width:0}
 .stage-hud .h{background:var(--sim-label-bg);border:1px solid var(--rule);padding:2px 6px;border-radius:2px;color:var(--ink)}
 .stage-hud .h.w{border-color:var(--bad);color:var(--bad)}
 .stage-tip{position:absolute;right:8px;top:8px;background:var(--sim-label-bg);border:1px solid var(--rule);font-size:.72rem;padding:4px 8px;border-radius:2px;max-width:260px;pointer-events:none;color:var(--ink-2)}
+.sim-bar .seg-l{font-family:var(--font-mono);font-size:.72rem;color:var(--muted)}
+.sim-filter{display:inline-flex;align-items:center;gap:4px;font-size:.78rem}
+.sim-filter select{border:1px solid var(--rule-strong);background:var(--surface);color:var(--ink);padding:3px 6px;border-radius:2px;font-size:.78rem}
+.optic-layer{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.optic-label{position:absolute;left:0;top:0;pointer-events:auto;cursor:pointer;font:600 .66rem/1 var(--font-mono);color:var(--sim-label);background:var(--sim-label-bg);border:1px solid var(--rule-strong);border-radius:2px;padding:2px 5px;white-space:nowrap}
+.optic-label.sel{border-color:var(--sim-select);box-shadow:0 0 0 1px var(--sim-select);z-index:2}
+.optic-label.dim{opacity:.35}
+.beam-chip{position:absolute;left:0;top:0;font:600 .62rem/1 var(--font-mono);color:#fff;background:rgba(196,15,43,.82);border-radius:9px;padding:2px 7px;white-space:nowrap}
+.optic-tip{position:absolute;pointer-events:none;font-size:.74rem;background:var(--sim-label-bg);color:var(--sim-label);border:1px solid var(--rule-strong);padding:3px 7px;border-radius:2px;z-index:5;white-space:nowrap}
+.tour{position:absolute;left:10px;bottom:44px;max-width:min(380px,calc(100% - 20px));background:var(--surface);border:2px solid var(--ink);padding:10px 12px;box-shadow:0 6px 24px rgba(0,0,0,.35);z-index:6;font-size:.84rem}
+.tour .tour-h{display:flex;justify-content:space-between;align-items:center;font-family:var(--font-mono);font-size:.72rem;color:var(--muted)}
+.tour h5{margin:4px 0;font-size:1rem}
+.tour p{margin:0 0 8px;color:var(--ink-2)}
+.tour .row{display:flex;gap:6px}
+.inspector .rich{margin-top:8px;border-top:1px solid var(--rule);padding-top:6px}
+.inspector .rich b{display:block;font-family:var(--font-mono);font-size:.68rem;letter-spacing:.06em;color:var(--muted);margin-top:6px;text-transform:uppercase}
+.inspector .rich p{margin:2px 0 0;font-size:.82rem;color:var(--ink-2)}
 .inspector{border-left:1px solid var(--rule-strong);padding:10px;overflow:auto;max-height:70vh;font-size:.86rem}
 .inspector h4{margin:0 0 4px;font-size:1.05rem;color:var(--ink);text-transform:none;letter-spacing:0}
 .inspector .what{color:var(--ink-2);font-size:.84rem}
@@ -348,7 +365,7 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
 </head>
 <body>
 
-<nav class="topnav" aria-label="Guide pages"><div class="wrap"><span class="brand">Rb-87 EIT</span><a href="index.html" aria-current="page">Method A · Zeeman EIT (AOM)</a><a href="mod-b.html">Method B · Hyperfine EIT (EOM)</a><a href="quantum.html">Quantum Optics Lectures</a></div></nav>
+<nav class="topnav" aria-label="Guide pages"><div class="wrap"><span class="brand">Rb-87 EIT</span><a href="index.html" aria-current="page">Method A · Zeeman EIT (AOM)</a><a href="quantum.html">Quantum Optics Lectures</a></div></nav>
 
 <a class="skip" href="#main">Skip to content</a>
 <header class="masthead">
@@ -402,7 +419,7 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
       </li>
       <li><a href="#p4"><span class="n">04</span><span>Method A architecture</span></a></li>
       <li><a href="#p4-lock"><span class="n">4a</span><span>Frequency lock loop</span></a></li>
-      <li><a href="#decide"><span class="n">A|B</span><span>Why Method A? Why Method B?</span></a></li>
+      <li><a href="#decide"><span class="n">A</span><span>Why Method A?</span></a></li>
       <li><a href="#p5"><span class="n">05</span><span>3D bench simulator</span></a></li>
       <li><a href="#p6"><span class="n">06</span><span>Bring-up &amp; audit</span></a></li>
       <li><a href="#p7"><span class="n">07</span><span>Equipment list</span></a></li>
@@ -544,7 +561,7 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
     <div data-cat="optics"><dt>Double-pass AOM<span class="c">optics</span></dt><dd>The diffracted beam is sent back through the AOM, so the total shift is 2f<sub>RF</sub> and beam steering cancels when f<sub>RF</sub> is scanned. A QWP in the return path rotates polarization by 90° so a PBS can separate the output.</dd></div>
     <div data-cat="optics"><dt>Cat’s-eye retro-reflector<span class="c">optics</span></dt><dd>A lens one focal length from the AOM plus a mirror at its focus. The return beam retraces the input regardless of the small angle change, which is essential for double-pass scanning.</dd></div>
     <div data-cat="lab"><dt>RF driver<span class="c">lab</span></dt><dd>Oscillator plus amplifier that powers the AOM transducer. Method A needs <em>twin, phase-locked</em> channels whose difference can be set and scanned at the kHz level (paper: “twin phase-locked rf signals from the same dual-output waveform generator”).</dd></div>
-    <div data-cat="optics"><dt>EOM (electro-optic modulator)<span class="c">optics</span></dt><dd>A crystal whose index changes with voltage. It phase-modulates light to create sidebands at GHz frequencies. It is needed for hyperfine EIT (6.834 GHz) but <strong>not used in Method A</strong>; it is the core of <a href="mod-b.html">Method B</a>.</dd></div>
+    <div data-cat="optics"><dt>EOM (electro-optic modulator)<span class="c">optics</span></dt><dd>A crystal whose index changes with voltage. It phase-modulates light to create sidebands at GHz frequencies. It is needed for hyperfine EIT (6.834 GHz) but <strong>not used in Method A</strong>.</dd></div>
     <div data-cat="optics"><dt>PBS (polarizing beamsplitter)<span class="c">optics</span></dt><dd>A cube that transmits p (here horizontal) and reflects s (vertical) polarization. Typical extinction is ~10³.</dd></div>
     <div data-cat="optics"><dt>NPBS (non-polarizing beamsplitter)<span class="c">optics</span></dt><dd>Splits power in a fixed ratio (e.g. 50:50) almost independently of polarization.</dd></div>
     <div data-cat="optics"><dt>HWP (half-wave plate, λ/2)<span class="c">optics</span></dt><dd>Retards one axis by π. It rotates linear polarization by 2θ, where θ is the angle between the input polarization and the fast axis. Used with a PBS as a variable power splitter.</dd></div>
@@ -583,7 +600,7 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
 <!-- ===================================================== PART 3 -->
 <section class="part" id="p3" aria-labelledby="p3h">
   <div class="part-head"><span class="part-num">03</span><h2 id="p3h">Physics from scratch</h2>
-  <p class="part-sub">From the rubidium atom to stored light, step by step. Background lectures: <a href="quantum.html#L3">two-level atom</a>, <a href="quantum.html#L7">dark states &amp; EIT</a>. Hyperfine counterpart: <a href="mod-b.html#b-physics">Method B physics</a>. Equation numbers in grey refer to Finkelstein <em>et al.</em>, arXiv:2205.10959v2.</p></div>
+  <p class="part-sub">From the rubidium atom to stored light, step by step. Background lectures: <a href="quantum.html#L3">two-level atom</a>, <a href="quantum.html#L7">dark states &amp; EIT</a>. Equation numbers in grey refer to Finkelstein <em>et al.</em>, arXiv:2205.10959v2.</p></div>
 
   <h3 id="p3-atom">3a · The ⁸⁷Rb atom and the Zeeman Λ system</h3>
   <div class="prose">
@@ -853,7 +870,7 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
 <!-- ===================================================== PART 4 -->
 <section class="part" id="p4" aria-labelledby="p4h">
   <div class="part-head"><span class="part-num">04</span><h2 id="p4h">Method A experimental architecture</h2>
-  <p class="part-sub">One DFB, two double-pass AOMs, one shielded cell. Block by block, following paper Fig. 10 and the project plan. Counterpart: <a href="mod-b.html#b-arch">Method B architecture</a>.</p></div>
+  <p class="part-sub">One DFB, two double-pass AOMs, one shielded cell. Block by block, following paper Fig. 10 and the project plan.</p></div>
 
   <figure class="fig">
     <svg class="diag" viewBox="0 0 960 430" role="img" aria-labelledby="arT arD">
@@ -955,7 +972,7 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
     </tbody>
   </table></div>
   <div class="note"><span class="t">What the lock actually has to achieve</span>
-    In Method A the lock holds the laser near the F=2→F′=1 one-photon resonance, within roughly the MHz scale. That is small compared with the Doppler- and pressure-broadened optical line of hundreds of MHz <span class="tag est">design estimate</span>. It does <strong>not</strong> set the kHz-level two-photon resonance: that comes from the phase-locked AOM RF (Method A) or the microwave synthesiser (<a href="mod-b.html#b-arch">Method B</a>), because probe and control share the laser’s frequency noise. In the simulator, removing the lock box or controller opens the loop and the laser drifts by MHz to tens of MHz <span class="tag est">illustrative</span>. The EIT signal then degrades and objective 2 fails.</div>
+    In Method A the lock holds the laser near the F=2→F′=1 one-photon resonance, within roughly the MHz scale. That is small compared with the Doppler- and pressure-broadened optical line of hundreds of MHz <span class="tag est">design estimate</span>. It does <strong>not</strong> set the kHz-level two-photon resonance: that comes from the phase-locked AOM RF, because probe and control share the laser’s frequency noise. In the simulator, removing the lock box or controller opens the loop and the laser drifts by MHz to tens of MHz <span class="tag est">illustrative</span>. The EIT signal then degrades and objective 2 fails.</div>
 
   <h3>Timing for pulsed storage</h3>
   <figure class="fig">
@@ -981,7 +998,7 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
   </figure>
 
   <h3>Why Method A rather than hyperfine EIT</h3>
-  <p>The full side-by-side decision record is in <a href="#decide">Why Method A? Why Method B?</a> below. The hyperfine route is developed in the <a href="mod-b.html">Method B guide</a>.</p>
+  <p>The decision record for the chosen route is in <a href="#decide">Why Method A?</a> below. The table compares it with the other ways to build a Λ system in ⁸⁷Rb.</p>
   <div class="scroll-x">
   <table>
     <thead><tr><th></th><th>Method A: Zeeman Λ, 1 laser + 2 AOMs</th><th>Hyperfine Λ, 1 laser + EOM</th><th>Hyperfine Λ, 2 phase-locked lasers</th><th>Ladder (e.g. Rydberg)</th></tr></thead>
@@ -997,50 +1014,42 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
     </tbody>
   </table>
   </div>
-  <div class="note"><span class="t">Technical note: AOMs cannot bridge 6.834 GHz</span>The planned AOMs run at 80–110 MHz; even double-passed they shift by at most ≈ 0.22 GHz, far short of the 6.834 GHz ground hyperfine splitting. That is why Method A uses Zeeman EIT, where both fields address F=2 and the AOMs only set a kHz–MHz <em>relative</em> offset (plus a common shift). It is also why <a href="mod-b.html">Method B</a> uses an EOM for the hyperfine Λ; the alternative is two phase-locked lasers, as the paper explains.</div>
+  <div class="note"><span class="t">Technical note: AOMs cannot bridge 6.834 GHz</span>The planned AOMs run at 80–110 MHz; even double-passed they shift by at most ≈ 0.22 GHz, far short of the 6.834 GHz ground hyperfine splitting. That is why Method A uses Zeeman EIT, where both fields address F=2 and the AOMs only set a kHz–MHz <em>relative</em> offset (plus a common shift). Bridging it with the hyperfine Λ needs an EOM or two phase-locked lasers, as the paper explains.</div>
 </section>
 
 
-<!-- ===================================================== SHARED: decision section (identical on index.html and mod-b.html) -->
+<!-- ===================================================== DECISION: why Method A -->
 <section class="part" id="decide" aria-labelledby="decideh">
-  <div class="part-head"><span class="part-num">A|B</span><h2 id="decideh">Why Method A? Why Method B?</h2>
-  <p class="part-sub">The two single-laser routes to Λ-EIT in ⁸⁷Rb D1, side by side. This section is identical on the <a href="index.html#decide">Method A</a> and <a href="mod-b.html#decide">Method B</a> pages.</p></div>
+  <div class="part-head"><span class="part-num">A</span><h2 id="decideh">Why Method A?</h2>
+  <p class="part-sub">The decision record for the single-laser Zeeman Λ-EIT route in ⁸⁷Rb D1.</p></div>
   <div class="scroll-x">
   <table class="decide-grid">
-    <thead><tr><th>Criterion</th><th>Method A · Zeeman Λ (1 DFB + 2 AOMs)</th><th>Method B · Hyperfine Λ (1 DFB + fibre EOM ≈ 6.834 GHz)</th></tr></thead>
+    <thead><tr><th>Criterion</th><th>Method A · Zeeman Λ (1 DFB + 2 AOMs)</th></tr></thead>
     <tbody>
-      <tr><td>Lower states</td><td>F=2, m<sub>F</sub>=+2 and 0 (same hyperfine level)</td><td>F=1 and F=2 (clock pair m<sub>F</sub>=0 ↔ 0 targeted)</td></tr>
-      <tr><td>Hardware</td><td>two 80–110 MHz AOMs, dual phase-locked RF, PBSs, λ/4s, Glan–Taylor, solenoid, shield</td><td>fibre EOM, microwave synthesiser (≥ 7 GHz), microwave amplifier, SMA cabling, possibly an RF switch, scanning Fabry–Pérot for sideband checks, solenoid, shield</td></tr>
-      <tr><td>Hardware readiness</td><td><span class="tag src">planned</span> AOMs and dual RF driver. To procure: shield, solenoid, Glan–Taylor, detector, scope.</td><td><span class="tag gap">to procure</span> EOM, synthesiser, amplifier and Fabry–Pérot.</td></tr>
-      <tr><td>Laser frequency lock</td><td>SAS → lock box → laser controller → DFB current. The lock holds the one-photon detuning (≈ MHz); the two-photon resonance comes from the phase-locked AOM RF.</td><td>Same loop, with the carrier locked to the control line. The two-photon resonance comes from the microwave synthesiser.</td></tr>
-      <tr><td>How the two frequencies are made</td><td>Double-pass AOMs set a kHz relative offset (the Zeeman splitting) plus a common ~160 MHz shift</td><td>Phase modulation creates sidebands at ±f<sub>mw</sub>. The paper: AOM double pass works below ≈ 3.5 GHz; above that “electro-optical modulators are the best choice”.</td></tr>
-      <tr><td>Probe/control separation</td><td>Separate beams with orthogonal circular polarizations, so λ/4 + Glan–Taylor (~10⁵) removes the control</td><td>Carrier and sidebands “emerge perfectly spatially overlapped” (paper) with the same polarization. A polariser cannot separate them; spectral filtering is needed, or you measure on a large background.</td></tr>
-      <tr><td>Independent control of each field</td><td>Yes: each arm has its own AOM for intensity, switching and pulses</td><td>No: all components rise and fall together unless extra hardware is added</td></tr>
-      <tr><td>Magnetic sensitivity</td><td>First order: 1.40 kHz/mG for the m<sub>F</sub>=+2↔0 pair. Shielding and field stability are critical.</td><td>Clock pair m<sub>F</sub>=0↔0 is insensitive to first order (quadratic only). A small bias field separates the field-sensitive pairs (paper).</td></tr>
-      <tr><td>Linewidth expectations</td><td><span class="tag src">paper</span> 7.3–26 kHz measured (Zeeman, 10 Torr Ne, ~60 °C)</td><td><span class="tag src">paper</span> Dicke-narrowed limit of a few Hz for hyperfine EIT with buffer gas; in practice power, transit and field broadening dominate <span class="tag est">design estimate</span></td></tr>
-      <tr><td>Pulsed storage at single-photon level</td><td>Good fit: independent switching plus polarization filtering, matching the planned storage protocol</td><td>Harder: the control cannot be gated separately and leaks onto the detector. Off-resonant sidebands can drive multi-wave mixing (paper ref. [73]). See <a href="mod-b.html#b-storage">storage options</a>.</td></tr>
-      <tr><td>CW spectroscopy / clock-type work</td><td>Possible, but limited by field sensitivity</td><td>Natural fit: the paper notes CPT clocks and magnetometers use directly modulated single lasers</td></tr>
-      <tr><td>Alignment difficulty</td><td>Higher: two arms, two double passes, recombination to ≪ 1 mrad</td><td>Lower optically (overlap is automatic), higher in microwave engineering</td></tr>
-      <tr><td>Main risks</td><td>AOM aperture vs beam size, RF phase coherence, shield and solenoid procurement</td><td>Procurement of the microwave chain; carrier-to-sideband drift; background-dominated detection; multi-wave mixing; residual amplitude modulation, a general EOM issue <span class="tag est">background</span></td></tr>
+      <tr><td>Lower states</td><td>F=2, m<sub>F</sub>=+2 and 0 (same hyperfine level)</td></tr>
+      <tr><td>Hardware</td><td>two 80–110 MHz AOMs, dual phase-locked RF, PBSs, λ/4s, Glan–Taylor, solenoid, shield</td></tr>
+      <tr><td>Hardware readiness</td><td><span class="tag src">planned</span> AOMs and dual RF driver. To procure: shield, solenoid, Glan–Taylor, detector, scope.</td></tr>
+      <tr><td>Laser frequency lock</td><td>SAS → lock box → laser controller → DFB current. The lock holds the one-photon detuning (≈ MHz); the two-photon resonance comes from the phase-locked AOM RF.</td></tr>
+      <tr><td>How the two frequencies are made</td><td>Double-pass AOMs set a kHz relative offset (the Zeeman splitting) plus a common ~160 MHz shift</td></tr>
+      <tr><td>Probe/control separation</td><td>Separate beams with orthogonal circular polarizations, so λ/4 + Glan–Taylor (~10⁵) removes the control</td></tr>
+      <tr><td>Independent control of each field</td><td>Yes: each arm has its own AOM for intensity, switching and pulses</td></tr>
+      <tr><td>Magnetic sensitivity</td><td>First order: 1.40 kHz/mG for the m<sub>F</sub>=+2↔0 pair. Shielding and field stability are critical.</td></tr>
+      <tr><td>Linewidth expectations</td><td><span class="tag src">paper</span> 7.3–26 kHz measured (Zeeman, 10 Torr Ne, ~60 °C)</td></tr>
+      <tr><td>Pulsed storage at single-photon level</td><td>Good fit: independent switching plus polarization filtering, matching the planned storage protocol</td></tr>
+      <tr><td>Alignment difficulty</td><td>Higher: two arms, two double passes, recombination to ≪ 1 mrad</td></tr>
+      <tr><td>Main risks</td><td>AOM aperture vs beam size, RF phase coherence, shield and solenoid procurement</td></tr>
     </tbody>
   </table>
   </div>
   <div class="verdict">
-    <div class="okbox"><span class="t">Project position</span><strong>Method A is the primary route for Objectives 1–2.</strong> It matches the purchased 80–110 MHz AOMs, and its separate, orthogonally polarized beams allow the control to be filtered out, which pulsed storage needs. <strong>Method B is planned as a complementary path</strong>: buy an EOM (with synthesiser and amplifier) for hyperfine CW characterisation of the same cell, subject to procurement.</div>
-    <div class="note"><span class="t">When to switch or add Method B</span>
-      <ul style="margin:.2rem 0 0">
-        <li>The EOM, synthesiser and amplifier are funded and delivered (otherwise stay on Method A).</li>
-        <li>Zeeman EIT width is stuck at a field-noise floor that shielding cannot fix: compare with the field-insensitive clock resonance.</li>
-        <li>You want a CW, GHz-referenced benchmark of OD, γ<sub>EIT</sub> and decoherence for the same cell.</li>
-        <li>Stay on Method A for pulsed storage and retrieval (Milestone 2) unless a Method B filtering scheme has been verified.</li>
-      </ul></div>
+    <div class="okbox"><span class="t">Project position</span><strong>Method A is the primary route for Objectives 1–2.</strong> It matches the purchased 80–110 MHz AOMs, and its separate, orthogonally polarized beams allow the control to be filtered out, which pulsed storage needs.</div>
   </div>
 </section>
 
 <!-- ===================================================== PART 5 -->
 <section class="part" id="p5" aria-labelledby="p5h">
   <div class="part-head"><span class="part-num">05</span><h2 id="p5h">3D optical-bench simulator</h2>
-  <p class="part-sub">Counterpart: <a href="mod-b.html#b-sim">Method B simulator</a>. Build the Method A bench on a 25 mm-pitch breadboard. Beams are traced with Jones calculus, AOM shifts and polarizing optics. The cell responds with a simplified EIT model.</p></div>
+  <p class="part-sub">Build the Method A bench on a 25 mm-pitch breadboard. Beams are traced with Jones calculus, AOM shifts and polarizing optics. The cell responds with a simplified EIT model.</p></div>
   <div class="prose">
     <p><strong>How to use it.</strong> Drag a component from the palette onto the table, or click or tap it to drop it near the centre. Click a part to select it, then drag it to move it (it snaps to the grid). Rotate with <kbd>R</kbd> (<kbd>Shift</kbd>+<kbd>R</kbd> reverses) or the buttons. Delete with <kbd>Del</kbd>, nudge with the arrow keys while the table has focus. Orbit with the left mouse button or one finger, pan with the right button or two fingers, zoom with the wheel or a pinch. The bench opens with the complete Method A reference layout, so take it apart and see what breaks.</p>
   </div>
@@ -1049,13 +1058,24 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
 
   <div class="sim" id="sim">
     <div class="sim-bar">
-      <div class="seg" role="group" aria-labelledby="segLbl"><span class="seg-l" id="segLbl">Load reference:</span><button type="button" class="btn" id="simRefA" aria-pressed="false">Method A (Zeeman, 2×AOM)</button><button type="button" class="btn" id="simRefB" aria-pressed="false">Method B (Hyperfine, EOM)</button></div>
       <button type="button" class="btn" id="simClear">Clear bench</button>
       <button type="button" class="btn" id="simHint">Hint</button>
       <button type="button" class="btn" id="simRestore" hidden>Restore my saved bench</button>
       <button type="button" class="btn" id="simLabels" aria-pressed="true">Labels</button>
-      <button type="button" class="btn" id="simTop">Top view</button>
-      <button type="button" class="btn" id="simPersp">3D view</button>
+      <span class="seg-l">View:</span>
+      <button type="button" class="btn" id="simPersp">3D</button>
+      <button type="button" class="btn" id="simTop">Top</button>
+      <button type="button" class="btn" id="simFront">Front</button>
+      <button type="button" class="btn" id="simSource">Source</button>
+      <button type="button" class="btn" id="simCellV">Cell</button>
+      <button type="button" class="btn" id="simFocus" title="Fly the camera to the selected component">Focus</button>
+      <label class="sim-filter" for="simFilter">Show <select id="simFilter"><option value="all">all optics</option><option value="source">source &amp; lock</option><option value="path">beam path</option><option value="cell">cell</option><option value="detect">detection</option></select></label>
+      <button type="button" class="btn primary" id="simTour">▶ Guided tour</button>
+      <button type="button" class="btn" id="simCut" aria-pressed="true" title="Cut away the µ-metal shield to see the cell">Shield cutaway</button>
+      <button type="button" class="btn" id="simCables" aria-pressed="true">Cables</button>
+      <button type="button" class="btn" id="simInfo" aria-pressed="false" title="Show power and polarization on each beam">Beam info</button>
+      <button type="button" class="btn" id="simFlow" aria-pressed="true">Light motion</button>
+      <button type="button" class="btn" id="simShot">Screenshot</button>
       <span class="sp"></span>
       <div class="sim-status" aria-live="polite">
         <span class="pill" id="stLock">Laser: free-running</span>
@@ -1070,6 +1090,7 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
         <div class="stage-msg" id="stageMsg"></div>
         <div class="stage-tip" id="stageTip">Beam drawn red; real 795 nm light is invisible.</div>
         <div class="stage-hud" id="stageHud"></div>
+        <div class="tour" id="tour" hidden></div>
       </div>
       <aside class="inspector" id="inspector" aria-live="polite"></aside>
     </div>
@@ -1079,7 +1100,6 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
           <b>Detector · scope</b>
           <button type="button" class="btn" id="scSweep" aria-pressed="true">EIT sweep</button>
           <button type="button" class="btn" id="scStore" aria-pressed="false">Pulsed storage</button>
-          <button type="button" class="btn" id="scLockin" aria-pressed="false" hidden>Lock-in</button>
           <button type="button" class="btn" id="scErr" aria-pressed="false">SAS error signal</button>
         </div>
         <canvas id="scopeCanvas" aria-label="Simulated oscilloscope trace" role="img"></canvas>
@@ -1103,7 +1123,7 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
 <!-- ===================================================== PART 6 -->
 <section class="part" id="p6" aria-labelledby="p6h">
   <div class="part-head"><span class="part-num">06</span><h2 id="p6h">Bring-up &amp; audit protocol</h2>
-  <p class="part-sub">Counterpart: <a href="mod-b.html#b-bringup">Method B bring-up</a>. An ordered commissioning sequence. Each step isolates one variable. Numeric pass criteria are <span class="tag est">design targets</span> unless tagged otherwise.</p></div>
+  <p class="part-sub">An ordered commissioning sequence. Each step isolates one variable. Numeric pass criteria are <span class="tag est">design targets</span> unless tagged otherwise.</p></div>
 
   <h3>Objective 1: locked laser and operating cell</h3>
   <ol class="steps">
@@ -1179,7 +1199,7 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
 <!-- ===================================================== PART 7 -->
 <section class="part" id="p7" aria-labelledby="p7h">
   <div class="part-head"><span class="part-num">07</span><h2 id="p7h">Equipment list</h2>
-  <p class="part-sub">What Method A needs, and the status of each item. Method B additions: <a href="mod-b.html#b-bom">Method B equipment list</a>.</p></div>
+  <p class="part-sub">What Method A needs, and the status of each item.</p></div>
   <div class="scroll-x">
   <table>
     <thead><tr><th>Item</th><th>Role in Method A</th><th>Status</th><th>Notes</th></tr></thead>
@@ -1208,7 +1228,7 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
       <tr><td>Fast amplified photodetector(s)</td><td>probe detection; SAS</td><td><span class="tag gap">to procure</span></td><td>balanced detectors may be shared within the programme</td></tr>
       <tr><td>Oscilloscope</td><td>sweeps, pulses, error-signal monitoring</td><td><span class="tag gap">to procure</span></td><td></td></tr>
       <tr><td>Beam dumps, optical power meter</td><td>safety, calibration</td><td><span class="tag gap">to procure</span></td><td></td></tr>
-      <tr><td>Scanning Fabry–Pérot or wavemeter</td><td>mode-hop checks</td><td><span class="tag est">optional</span></td><td>also needed for Method B sideband checks</td></tr>
+      <tr><td>Scanning Fabry–Pérot or wavemeter</td><td>mode-hop checks</td><td><span class="tag est">optional</span></td><td>also useful for checking the AOM-shifted beams</td></tr>
     </tbody>
   </table>
   </div>
@@ -1795,94 +1815,7 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
     return { od: Math.exp(-0.5 * Math.pow(d / K.dopplerSigma_MHz, 2)), c: Math.exp(-Math.pow(d / K.eitDetuneScale_MHz, 2)) };
   }
 
-  /* ---------------- Method B: hyperfine Λ from one spectrally modulated beam ---------------- */
-  var B_WEIGHTS_CIRC = { '-1': 0.6, '0': 1, '1': 0.6 }, B_WEIGHTS_LIN = { '-1': 0.3, '0': 0.5, '1': 0.3 }; // ILLUSTRATIVE relative strengths
-  function probeTB(delta0, m, Beff, weights) {
-    var sum = 0;
-    [-1, 0, 1].forEach(function (mm) {
-      var dm = delta0 - mm * K.lambdaShift_kHz_per_mG * Beff - (mm === 0 ? K.clockQuad_kHz_per_mG2 * Beff * Beff : 0);
-      sum += weights[String(mm)] * lorentz(dm, m.fwhm);
-    });
-    return Math.exp(-m.OD * (1 - m.contrast * Math.min(1, sum)));
-  }
-  function analyseCellB(layout, tr) {
-    var cell = layout.components.filter(function (c) { return c.kind === 'cell'; })[0];
-    var st = layout.state || {};
-    var out = { mode: 'B', cell: cell, groups: [], control: null, probe: null, ok: false, cellT: {} };
-    if (!cell) return out;
-    var axis = dirOf(cell.rot), p = cell.params, locked = !!st.locked, lockLine = st.lockLine || 'F1';
-    var keys = Object.keys(tr.cellHits);
-    var gs = keys.map(function (k) { var h = tr.cellHits[k]; return { key: k, P: h.P, J: h.J, f: h.f, d: h.d, spec: h.spec || [{ df: 0, w: 1 }] }; })
-      .filter(function (g) { return g.P > 1e-6; }).sort(function (a, b) { return b.P - a.P; });
-    out.groups = gs;
-    var g = gs[0];
-    var off = { F1: lockLine === 'F1' ? 0 : K.hfs_kHz, F2: lockLine === 'F2' ? 0 : -K.hfs_kHz };
-    var driftk = (st.drift_MHz || 0) * 1000;
-    var comps = g ? g.spec.map(function (sc) { var fa = g.f + sc.df + driftk; var line = Math.abs(fa - off.F1) < K.lineWindow_kHz ? 'F1' : Math.abs(fa - off.F2) < K.lineWindow_kHz ? 'F2' : null; return { fa: fa, P: g.P * sc.w, line: line }; }) : [];
-    out.comps = comps;
-    var res = comps.filter(function (c) { return c.line; }).sort(function (a, b) { return b.P - a.P; });
-    var ctrl = res[0] || null, prb = ctrl ? res.filter(function (c) { return c.line !== ctrl.line; })[0] || null : null;
-    out.control = ctrl; out.probe = prb;
-    var Ic = ctrl ? 2 * ctrl.P / (Math.PI * K.controlWaist_cm * K.controlWaist_cm) : 0;
-    var m = cellModel({ Ic: Ic, buffer: p.buffer, shield: p.shield, heater: p.heater, T_C: p.T_C, solenoid: p.solenoid, B_mG: p.B_mG });
-    var dfB = detuneFactors(st.drift_MHz); m.OD *= dfB.od; m.contrast *= dfB.c; out.drift = st.drift_MHz || 0;
-    out.model = m; out.Ic = Ic;
-    var s3 = g ? stokes(g.J).s3 * Math.sign(dot(g.d, axis) || 1) : 0;
-    out.s3 = s3; out.circ = Math.abs(s3) > 0.9;
-    out.weights = out.circ ? B_WEIGHTS_CIRC : B_WEIGHTS_LIN;
-    if (ctrl && prb) out.delta0 = (prb.fa - ctrl.fa) - (off[prb.line] - off[ctrl.line]); // deviation from exact hyperfine separation
-    out.ok = !!(ctrl && prb);
-    var mm = Object.assign({}, m); if (!out.ok) mm.contrast = 0;
-    out.eff = mm;
-    var list = comps.map(function (c) {
-      var T;
-      if (c === ctrl) T = Math.exp(-m.OD * 0.03);
-      else if (c === prb) T = probeTB(out.delta0, mm, m.Beff, out.weights);
-      else if (c.line) T = Math.exp(-m.OD);
-      else T = 1; // far off resonance (multi-wave mixing not modelled)
-      return { f: c.fa - driftk, T: T };
-    });
-    out.cellT = { spec: list };
-    out.probeT0 = prb ? specT(list, prb.fa - driftk) : null;
-    return out;
-  }
-  function evaluateB(layout) {
-    var tr1 = trace(layout, {}), c1 = analyseCellB(layout, tr1);
-    var tr = trace(layout, { cellT: c1.cellT });
-    var cell = analyseCellB(layout, tr); cell.cellT = c1.cellT; cell.probeT0 = c1.probeT0;
-    var st = layout.state || {}, comps = layout.components;
-    var sasP = 0; for (var k in tr.sas) sasP += tr.sas[k];
-    var lockAvailable = sasP > 0.05, lock = lockChain(layout, sasP), dk = (st.drift_MHz || 0) * 1000;
-    var det = { probe: 0, control: 0, other: 0, total: 0 };
-    Object.keys(tr.pdSpec).forEach(function (id) { var g = tr.pdSpec[id]; for (var fk in g) { var v = g[fk]; det.total += v; if (cell.probe && Math.abs(+fk + dk - cell.probe.fa) < 1) det.probe += v; else if (cell.control && Math.abs(+fk + dk - cell.control.fa) < 1) det.control += v; else det.other += v; } });
-    var m = cell.eff, sweepHalf = Math.max(150, 3 * (cell.model ? cell.model.fwhm : 0), 2.2 * K.lambdaShift_kHz_per_mG * Math.abs(cell.model ? cell.model.Beff : 0));
-    if (cell.ok && cell.probe && cell.probeT0 > 0) {
-      var Toff = probeTB(1e9, m, cell.model.Beff, cell.weights);
-      det.probeOff = det.probe / cell.probeT0 * Toff;
-      det.eitFrac = det.total > 0 ? (det.probe - det.probeOff) / det.total : 0;
-    } else { det.probeOff = det.probe; det.eitFrac = 0; }
-    var cellComp = cell.cell, ein = tr.eomIn;
-    var fpOK = Object.keys(tr.fp).some(function (id) { var r = tr.fp[id]; return r.P > 1e-4 && Object.keys(r.comps).filter(function (f) { return r.comps[f] > 1e-3 * r.P; }).length >= 3; });
-    var o = [];
-    o[0] = !!(tr.laserFirst && tr.laserFirst.kind === 'isolator' && tr.laserFirst.forward) && tr.backToLaser <= 1e-3;
-    o[1] = lock.status === 'locked';
-    o[2] = !!(ein && ein.beta >= 0.2);
-    o[3] = fpOK;
-    o[4] = !!(ein && ein.hFrac > 0.95);
-    o[5] = !!(cell.groups.length && cell.circ);
-    o[6] = !!(cellComp && cellComp.params.heater && cellComp.params.T_C >= 40 && cellComp.params.shield && cellComp.params.solenoid && Math.abs(cellComp.params.B_mG) >= 5 && Math.abs(cellComp.params.B_mG) <= 200);
-    o[7] = !!(cell.control && cell.probe && Math.abs(cell.delta0) < sweepHalf);
-    o[8] = o[1] && o[2] && o[4] && o[5] && o[7] && cell.ok && m.contrast > 0.3 && det.probe > 1e-6;
-    o[9] = !!(o[8] && st.lockin && Math.abs(cell.delta0) < m.fwhm / 4);
-    var warnings = tr.warnings.slice();
-    if (ein && ein.hFrac <= 0.95) warnings.push('EOM input polarization not aligned to the crystal axis: only ' + (ein.hFrac * 100).toFixed(0) + ' % is modulated');
-    if (cellComp && cellComp.params.heater && cell.model && cell.model.n > 5e11) warnings.push('n ≈ ' + cell.model.n.toExponential(1) + ' cm⁻³: radiation trapping becomes significant above ~5×10¹¹ cm⁻³');
-    if (lock.status !== 'locked') warnings.push(lock.note + (Math.abs(st.drift_MHz || 0) > 0.5 ? ' (laser Δ ≈ ' + (st.drift_MHz).toFixed(1) + ' MHz)' : ''));
-    return { mode: 'B', trace: tr, cell: cell, sasP: sasP, lockAvailable: lockAvailable, lock: lock, det: det, objectives: o, storage: null, sweepHalf: sweepHalf, warnings: warnings, fgen: false };
-  }
-
   function evaluate(layout) {
-    if (layout.mode === 'B') return evaluateB(layout);
     var tr1 = trace(layout, {});
     var cell1 = analyseCell(layout, tr1);
     var tr = trace(layout, { cellT: cell1.cellT });
@@ -1957,35 +1890,13 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
     ];
     return { mode: 'A', components: comps, state: { locked: true, tau_us: 20, storageRan: false } };
   }
-  function referenceLayoutB() {
-    var n = 0;
-    function mk(kind, x, z, rot, params) { var p = defaultParams(kind); if (params) for (var k in params) p[k] = params[k]; return { id: kind + (++n), kind: kind, x: x, z: z, rot: rot, params: p }; }
-    var comps = [
-      mk('laser', 50, 150, 0, { power: 10 }),
-      mk('isolator', 100, 150, 0),
-      mk('hwp', 150, 150, 0, { axis: 29 }),          // ~5 % to SAS, transmitted light is H (EOM axis)
-      mk('pbs', 200, 150, rotPBS(E, N)),
-      mk('sas', 200, 50, 270),                       // carrier locked near F=1→F'=1 (design choice)
-      mk('eom', 300, 150, 0, { rf: true, fMHz: 6834.683, dBm: 5 }),
-      mk('pickoff', 375, 150, rotMirror(E, N)),      // ~4 % to the scanning Fabry–Pérot
-      mk('fp', 375, 75, 270),
-      mk('nd', 450, 150, 0, { od: 1 }),
-      mk('qwp', 500, 150, 0, { axis: 45 }),          // both spectral components become σ+ together
-      mk('cell', 600, 150, 0),
-      mk('pd', 725, 150, 0),
-      mk('lctrl', 50, 50, 0),
-      mk('lockbox', 125, 50, 0)
-    ];
-    return { mode: 'B', components: comps, state: { locked: true, lockLine: 'F1', lockin: false, tau_us: 20, storageRan: false } };
-  }
-
   var api = {
     K: K, C: C, J: J, H: H, V: V, jPower: jPower, jNorm: jNorm, mApply: mApply, hwpMatrix: hwpMatrix, qwpMatrix: qwpMatrix,
     stokes: stokes, polLabel: polLabel, eitResponse: eitResponse, gammaEIT: gammaEIT,
     rbPressureTorr: rbPressureTorr, numberDensity_cm3: numberDensity_cm3, odFromTemp: odFromTemp,
     cellModel: cellModel, probeT: probeT, lorentz: lorentz, storageModel: storageModel,
     KINDS: KINDS, defaultParams: defaultParams, dirOf: dirOf, trace: trace, analyseCell: analyseCell, evaluate: evaluate,
-    referenceLayout: referenceLayout, referenceLayoutB: referenceLayoutB, lockChain: lockChain, detuneFactors: detuneFactors, besselJ: besselJ, betaFromDbm: betaFromDbm, modulateSpec: modulateSpec, probeTB: probeTB, fmtP: fmtP, groupKey: groupKey, rotPBS: rotPBS, rotMirror: rotMirror
+    referenceLayout: referenceLayout, lockChain: lockChain, detuneFactors: detuneFactors, besselJ: besselJ, betaFromDbm: betaFromDbm, modulateSpec: modulateSpec, fmtP: fmtP, groupKey: groupKey, rotPBS: rotPBS, rotMirror: rotMirror
   };
   root.EITPhys = api;
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
@@ -2173,46 +2084,6 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
   var wb = $('wBuf'); if (wb) wb.addEventListener('change', drawW);
 
 
-  /* ---------------- Chart D: Bessel sideband weights (Method B) ---------------- */
-  function drawBes() {
-    var cv = $('chartBes'); if (!cv) return;
-    var dbm = +$('bDbm').value, vpi = +$('bVpi').value, Pt = +$('bP').value;
-    var beta = P.betaFromDbm(dbm, vpi);
-    $('bDbmo').textContent = dbm.toFixed(1) + ' dBm'; $('bVpio').textContent = vpi.toFixed(1) + ' V'; $('bPo').textContent = Pt.toFixed(1) + ' mW';
-    var s = prep(cv), bmax = 4;
-    var a = axes({ ctx: s.ctx, w: s.w, h: s.h, xmin: 0, xmax: bmax, ymin: 0, ymax: 1, xlabel: 'modulation depth β (rad)', ylabel: 'fraction of optical power' });
-    var c = s.ctx; clipTo(c, a);
-    [[0, css('--chart-a')], [1, css('--chart-b')], [2, css('--chart-c')]].forEach(function (q) {
-      var pts = []; for (var i = 0; i <= 300; i++) { var b = bmax * i / 300, j = P.besselJ(q[0], b); pts.push([a.X(b), a.Y(j * j)]); }
-      line(c, pts, q[1], 2.2);
-    });
-    line(c, [[a.X(beta), a.T], [a.X(beta), a.T + a.ph]], css('--sim-select'), 1.5, [5, 4]);
-    c.restore();
-    c.font = '11px ' + css('--font-mono'); c.fillStyle = css('--ink-2'); c.textAlign = 'left';
-    c.fillText('J₀² carrier', a.X(0.08), a.Y(0.95)); c.fillText('J₁² each 1st', a.X(1.9), a.Y(0.37)); c.fillText('J₂² each 2nd', a.X(3.05), a.Y(0.2));
-    var j0 = P.besselJ(0, beta), j1 = P.besselJ(1, beta), j2 = P.besselJ(2, beta);
-    $('besRead').innerHTML = 'β = <b>' + beta.toFixed(3) + '</b> rad<br>carrier ' + (j0 * j0 * 100).toFixed(1) + ' % = ' + (Pt * j0 * j0).toFixed(2) + ' mW<br>each ±1 ' + (j1 * j1 * 100).toFixed(1) + ' % = ' + (Pt * j1 * j1).toFixed(3) + ' mW<br>each ±2 ' + (j2 * j2 * 100).toFixed(2) + ' %<br>CSR (J₀²/J₁²) = ' + (j1 ? (j0 * j0 / (j1 * j1)).toFixed(1) : '∞') + (Math.abs(j0) < 0.05 ? '<br><b>carrier nearly suppressed (β ≈ 2.405)</b>' : '');
-  }
-  ['bDbm', 'bVpi', 'bP'].forEach(function (id) { var el = $(id); if (el) el.addEventListener('input', drawBes); });
-
-  /* ---------------- Chart E: hyperfine resonances (Method B) ---------------- */
-  function drawHf() {
-    var cv = $('chartHf'); if (!cv) return;
-    var B = +$('hB').value, I = +$('hI').value, circ = $('hPol').value === 'c', sh = $('hSh').checked;
-    $('hBo').textContent = B + ' mG'; $('hIo').textContent = I.toFixed(1) + ' mW/cm²';
-    var m = P.cellModel({ Ic: I, buffer: true, shield: sh, heater: true, T_C: 60, solenoid: true, B_mG: B });
-    var w = circ ? { '-1': 0.6, '0': 1, '1': 0.6 } : { '-1': 0.3, '0': 0.5, '1': 0.3 };
-    var R = Math.max(150, 2.5 * 1.4 * m.Beff + 2 * m.fwhm);
-    var s = prep(cv), pts = [];
-    for (var i = 0; i <= 600; i++) { var d = -R + 2 * R * i / 600; pts.push([d, P.probeTB(d, m, m.Beff, w)]); }
-    var a = axes({ ctx: s.ctx, w: s.w, h: s.h, xmin: -R, xmax: R, ymin: 0, ymax: 1, xlabel: 'microwave detuning f_mw − ν_hfs (kHz)', ylabel: 'probe transmission' });
-    var c = s.ctx; clipTo(c, a);
-    line(c, pts.map(function (q) { return [a.X(q[0]), a.Y(q[1])]; }), css('--chart-a'), 2.2);
-    [-1, 0, 1].forEach(function (mm) { var x = mm * 1.4 * m.Beff; line(c, [[a.X(x), a.T], [a.X(x), a.T + a.ph]], css('--chart-d'), 1, [3, 4]); });
-    c.restore();
-    $('hfRead').innerHTML = 'FWHM ≈ ' + m.fwhm.toFixed(1) + ' kHz<br>m=±1 pairs at ±' + (1.4 * m.Beff).toFixed(1) + ' kHz' + (sh ? '' : '<br>(unshielded: +450 mG residual assumed)') + '<br>clock quadratic shift ≈ ' + (5.75e-7 * m.Beff * m.Beff * 1000).toFixed(2) + ' Hz' + (B < 10 && sh ? '<br><b>pairs overlap: apply a bias</b>' : '');
-  }
-  ['hB', 'hI', 'hPol', 'hSh'].forEach(function (id) { var el = $(id); if (el) { el.addEventListener('input', drawHf); el.addEventListener('change', drawHf); } });
 
   /* ---------------- Rabi / Bloch widget (lectures) ---------------- */
   var rb = { t: 0, playing: true, last: 0, raf: 0, traj: null };
@@ -2279,7 +2150,7 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
   }
   ['phL', 'phP'].forEach(function (id) { var el = $(id); if (el) el.addEventListener('input', drawPh); });
 
-  function drawAll() { drawE(); drawZ(); drawW(); drawBes(); drawHf(); drawRabi(); drawPh(); }
+  function drawAll() { drawE(); drawZ(); drawW(); drawRabi(); drawPh(); }
   window.onThemeChange(drawAll);
   var rt; window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(drawAll, 120); });
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(drawAll);
@@ -2289,9 +2160,6 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
-<script>
-window.SIM_MODE = 'A';
-</script>
 <script>
 /* ==========================================================================
    3D optical-bench simulator (three.js r128 + OrbitControls)
@@ -2305,10 +2173,9 @@ window.SIM_MODE = 'A';
   var reduceMotion = false;
   try { var mq = window.matchMedia('(prefers-reduced-motion: reduce)'); reduceMotion = mq.matches; mq.addEventListener('change', function (e) { reduceMotion = e.matches; }); } catch (e) { }
 
-  var MODE = window.SIM_MODE === 'B' ? 'B' : 'A';
-  var PAGE_MODE = MODE;
-  function refLayout() { return MODE === 'B' ? P.referenceLayoutB() : P.referenceLayout(); }
-  var STORE_KEY = MODE === 'B' ? 'rb87-eit-bench-modB-v1' : 'rb87-eit-bench-v1';
+  var MODE = 'A';
+  function refLayout() { return P.referenceLayout(); }
+  var STORE_KEY = 'rb87-eit-bench-v1';
   var S = { layout: refLayout(), sel: null, labels: true, scope: 'sweep', ev: null, store: null, incident: {} };
   var idn = 1000;
 
@@ -2332,30 +2199,38 @@ window.SIM_MODE = 'A';
     glan: 'Glan–Taylor calcite polariser. It transmits linear polarization along its axis and rejects the orthogonal one sideways. Extinction ~10⁵ (paper), the right tool to keep the strong control off the detector.',
     pd: 'Photodiode detector feeding the scope. Shows the probe and control power reaching it.',
     dump: 'Beam dump: safely absorbs stray beams.',
-    eom: 'Fibre-coupled electro-optic phase modulator driven by a microwave synthesiser at f_mw ≈ 6.834 GHz. Phase modulation puts J_n(β)² of the power into sideband n at ν + n·f_mw, all in the SAME spatial mode and polarization. β = πV/Vπ is set by the RF power (Vπ = 3 V assumed, illustrative). Only light polarized along the crystal axis (H here) is modulated. This is the heart of Method B; Method A does not use it.',
-    fp: 'Scanning Fabry–Pérot interferometer (diagnostic). It absorbs the picked-off beam and displays its optical spectrum, so you can check that sidebands exist and measure the carrier-to-sideband ratio. Not yet in the equipment plan (to procure).',
     fgen: 'Dual-channel function generator in burst mode (project plan). It gates both AOM RF channels to slice probe pulses and switch the control off and on. Required for the pulsed-storage sequence. Off-beam: place it anywhere.'
+  };
+  var INFO2 = {
+    laser: ['Single source for the whole experiment: the control, the probe and the SAS reference are all cut from this one beam.', 'The reference bench uses 10 mW. Typical limit is set by the AOM efficiencies and the control intensity you want in the cell (about 1–6 mW/cm² in the paper).', 'Raise the power and watch the control intensity and EIT width in the cell readout. Remove the isolator and read the warning.'],
+    isolator: ['Stops light coming back from the AOM double-passes and cell windows from re-entering the DFB, where it would cause mode hops and break the lock.', 'First optic after the laser, arrow pointing away from it.', 'Rotate it 180° and the forward beam is blocked.'],
+    mirror: ['Folds the beam to fit the breadboard. Each mirror adds two adjustment axes, which is why steering is usually done with a pair.', 'The reference layout uses none, so the beams run straight. Add two to fold a longer path.', 'Rotate in 45° steps: the beam turns 90°. A circular polarization flips handedness on reflection.'],
+    pbs: ['Five on the reference bench: the pick-off to the SAS, the control/probe splitter, the two double-pass separators and the recombiner.', 'Horizontal light transmits, vertical light turns 90°. Extinction 10³ is typical, so ~0.1 % leaks into the wrong port.', 'Rotate one and see which arm loses light. A PBS with the wrong orientation sends the beam to the edge of the table (orange glow).'],
+    npbs: ['A polarization-independent splitter: useful for a power tap when you do not want to disturb the polarization.', 'Not on the reference bench.', 'Swap it for a PBS and see the split depend on the polarization.'],
+    pickoff: ['Samples a few percent of the beam for monitoring (about 4 % per surface).', 'Not on the reference bench: the project plan uses λ/2 + PBS instead, which is adjustable.', 'Place one after the laser and compare the SAS power with the λ/2 + PBS version.'],
+    hwp: ['Two on the reference bench. The first (θ ≈ 29°) sends about 5 % of the light to the SAS; the second (θ ≈ 10°) sets the probe/control split, about 12 % to the probe.', 'A rotation of θ turns the polarization by 2θ. Setting the split by plate angle is far finer than swapping optics.', 'Select the second one and drag its angle slider: the two arms trade brightness through the PBS.'],
+    qwp: ['Two on the reference bench. The one before the cell (45°) turns the H and V arms into σ⁺ and σ⁻. The one after the cell (−45°) turns them back to linear so the Glan–Taylor can reject the control.', 'Fast axis at 45° to the incoming linear polarization gives circular light.', 'Set the first one to 0° and the cell sees linear light: the EIT objective drops out.'],
+    aom: ['Two on the reference bench, one per arm. Each is double-passed so the beam direction does not change when the RF frequency changes, and the shift doubles.', 'Control AOM at 80.000 MHz, probe AOM at 79.965 MHz: a 35 kHz RF difference gives 70 kHz at the atoms, which matches 50 mG.', 'Change the probe AOM frequency by a few kHz and the scope shows the EIT peak moving. Turn the RF off and the arm goes dark.'],
+    lens: ['Cosmetic here. On a real bench the cat’s-eye lens in each double-pass and the control telescope matter a lot: the beam size at the AOM sets the efficiency and the rise time.', 'Not needed for the simulation.', 'No effect on the trace (the tracer keeps beams collimated).'],
+    iris: ['Selects one diffraction order and cleans up stray light.', 'Place it just after an AOM to pass the +1 order and block the 0th.', 'Close it below the beam diameter and the beam disappears.'],
+    nd: ['Keeps the probe weak (Ω_p ≪ Ω_c) so the EIT window is not power-broadened and the probe does not saturate the medium.', 'OD 2 on the probe arm of the reference bench: 1 % transmission.', 'Change the OD and watch the probe power at the detector. Remove it and the contrast changes.'],
+    cell: ['The heart of the experiment: ⁸⁷Rb vapour in a quartz cell with a heater, a solenoid along the beams and a three-layer µ-metal shield.', 'Reference values: 60 °C (OD ≈ 10), buffer gas, solenoid on, |B| ≈ 50 mG. The cell absorbs unless the control is on and the two-photon detuning is within the EIT width.', 'Turn the shield off: residual field jumps to hundreds of mG and the resonance moves out of the scan. Reverse B and watch δ₀ flip sign.'],
+    sas: ['The frequency ruler for the lock: sub-Doppler lines in a reference cell give a feature narrow enough to hold the DFB near F=2→F′=1.', 'Fed by the first PBS pick-off, 5 % of the beam. Its photodiode output goes to the lock box.', 'Block the pick-off light and the error signal vanishes; the laser then drifts.'],
+    lctrl: ['Low-noise current source and temperature controller for the DFB. Temperature sets the coarse wavelength, current the fine one. It also adds a small current dither for the lock-in method.', 'Its BNC modulation input is driven by the lock box.', 'Turn the dither off and see the error signal disappear (lock-in method).'],
+    lockbox: ['The servo: it turns the SAS signal into a zero-crossing error signal and feeds the controller. Slope sign, gain and integrator are the three settings.', 'Locked, gain about 1, slope sign +.', 'Flip the sign: the loop pushes the laser away instead of back. Raise the gain too far: oscillation.'],
+    glan: ['Rejects the control beam after the cell. The paper quotes ~10⁵ extinction, far better than a PBS (~10³), which is why it is used here.', 'Follows the second quarter-wave plate. Transmission axis set to pass the probe.', 'Replace it by a PBS and the control leaks onto the detector at a hundred times higher level.'],
+    pd: ['Measures the probe power after the cell. The EIT peak is a small rise in this signal as the two-photon detuning is scanned.', 'Its readout splits the light into probe, control leakage and other.', 'Block the probe arm and the signal drops to the control leakage.'],
+    dump: ['Safely absorbs the control beam rejected by the Glan–Taylor and other stray beams.', 'Beside the Glan–Taylor’s reject port.', 'Remove it and the rejected control hits the table edge (orange glow): a stray-light hazard.'],
+    fgen: ['Dual-channel burst generator that gates both AOM RF channels: it slices the probe pulse and switches the control off for storage and on for retrieval.', 'Off the beam path. Needed for the pulsed-storage scope mode.', 'Open the Pulsed storage scope and change τ to see the retrieved pulse shrink with the coherence time.']
   };
   var GROUPS = [
     ['Source & lock', ['laser', 'isolator', 'sas', 'lockbox', 'lctrl', 'fgen']],
     ['Steering', ['mirror', 'pbs', 'npbs', 'pickoff']],
     ['Polarization', ['hwp', 'qwp', 'glan']],
-    ['Modulation', ['aom', 'eom']],
+    ['Modulation', ['aom']],
     ['Conditioning', ['lens', 'iris', 'nd']],
     ['Atoms', ['cell']],
-    ['Detection', ['pd', 'dump', 'fp']]
-  ];
-  var OBJ_B = [
-    ['Laser protected by an isolator', 'Put an isolator directly after the laser, arrow pointing away from the laser.'],
-    ['SAS signal and closed lock loop', 'Pick off a few percent into the SAS module; place a lock box and a laser controller (cables connect SAS → lock box → controller → DFB automatically); choose the lock line on the SAS; press “Lock laser” with a positive slope sign and moderate gain.'],
-    ['EOM driven (modulation depth β ≥ 0.2)', 'Select the EOM: microwave on, RF power high enough that β ≥ 0.2 (≈ −1 dBm with the assumed Vπ).'],
-    ['Sidebands checked on a Fabry–Pérot', 'Use a glass pick-off after the EOM to send ~4 % to a scanning Fabry–Pérot. It must see carrier and both first-order sidebands.'],
-    ['EOM input polarization on the crystal axis', 'The EOM only modulates light along its axis (H). A PBS before it guarantees clean H.'],
-    ['Circular polarization in the cell', 'A λ/4 at 45° before the cell. Carrier and sidebands share one polarization, so both become σ⁺ together.'],
-    ['Cell heated, shielded, small bias field', 'Select the cell: heater ≥ 40 °C, shield on, solenoid on with 5 ≤ |B| ≤ 200 mG to separate the m=±1 resonances from the clock (m=0) line.'],
-    ['Probe and control on the two hyperfine lines', 'Carrier locked on one D1 line and a first-order sideband on the other: f_mw ≈ 6834.683 MHz puts the two-photon detuning near zero.'],
-    ['EIT (clock) peak observed', 'Everything above, with the probe component reaching the photodiode. Expect a small bump on a large background: detector sees all components.'],
-    ['Lock-in readout centred on the clock resonance', 'Switch the scope to “Lock-in” and tune f_mw until the two-photon detuning is within a quarter linewidth of zero (the zero crossing of the derivative).']
+    ['Detection', ['pd', 'dump']]
   ];
   var OBJ_A = [
     ['Laser protected by an isolator', 'Put an isolator directly after the laser, arrow pointing away from the laser, so the first thing the beam meets is the isolator going forward.'],
@@ -2369,7 +2244,7 @@ window.SIM_MODE = 'A';
     ['EIT peak observed', 'Everything above, plus two-photon resonance: 2(f_C − f_P) ≈ 1.40 kHz/mG × B. For B = 50 mG, set AOM-P 35 kHz below AOM-C.'],
     ['Light stored and retrieved', 'Place the function generator, open “Pulsed storage” in the scope, choose τ and run the sequence. Efficiency must exceed 1 %.']
   ];
-  var OBJ = MODE === 'B' ? OBJ_B : OBJ_A;
+  var OBJ = OBJ_A;
 
   /* ---------------- persistence ---------------- */
   function save() { try { localStorage.setItem(STORE_KEY, JSON.stringify(S.layout)); } catch (e) { } }
@@ -2429,8 +2304,8 @@ window.SIM_MODE = 'A';
     GROUPS.forEach(function (g) {
       var h = document.createElement('h4'); h.textContent = g[0]; pal.appendChild(h);
       g[1].forEach(function (k) {
-        var b = document.createElement('button'); b.type = 'button'; b.className = 'pal-item' + (k === 'eom' && MODE === 'A' ? ' na' : ''); b.id = 'pal-' + k;
-        b.innerHTML = '<span class="ic">' + P.KINDS[k].short + '</span><span>' + P.KINDS[k].name + (k === 'eom' && MODE === 'A' ? '<small>not used in Method A · see Method B</small>' : '') + '</span>';
+        var b = document.createElement('button'); b.type = 'button'; b.className = 'pal-item'; b.id = 'pal-' + k;
+        b.innerHTML = '<span class="ic">' + P.KINDS[k].short + '</span><span>' + P.KINDS[k].name + '</span>';
         b.setAttribute('aria-label', 'Add ' + P.KINDS[k].name);
         palDrag(b, k);
         pal.appendChild(b);
@@ -2477,6 +2352,7 @@ window.SIM_MODE = 'A';
     }
     var k = c.kind, p = c.params, h = '';
     h += '<h4>' + esc(P.KINDS[k].name) + '</h4><p class="what">' + esc(INFO[k]) + '</p>';
+    if (INFO2[k]) h += '<div class="rich"><b>Role in Method A</b><p>' + esc(INFO2[k][0]) + '</p><b>On the reference bench</b><p>' + esc(INFO2[k][1]) + '</p><b>Try this</b><p>' + esc(INFO2[k][2]) + '</p></div>';
     h += '<div class="row"><button type="button" class="btn" id="inRotL" aria-label="Rotate counter-clockwise">⟲ Rotate</button><button type="button" class="btn" id="inRotR" aria-label="Rotate clockwise">Rotate ⟳</button><button type="button" class="btn danger" id="inDel">Delete</button></div>';
     if (k === 'laser') h += rng('inPow', 'Power', 1, 40, 0.5, p.power, ' mW');
     if (k === 'hwp' || k === 'qwp' || k === 'glan') h += rng('inAxis', (k === 'glan' ? 'Transmission axis' : 'Fast-axis angle') + ' θ', -90, 90, 0.5, p.axis, '°');
@@ -2494,7 +2370,6 @@ window.SIM_MODE = 'A';
       h += chk('inSol', 'Solenoid on', p.solenoid) + rng('inB', 'Field B (along cell axis)', -200, 200, 1, p.B_mG, ' mG');
       h += chk('inSh', 'µ-metal shield (3 layers, degaussed)', p.shield) + chk('inBuf', 'Buffer gas (~10 Torr Ne, paper)', p.buffer);
     }
-    if (k === 'sas' && MODE === 'B') h += '<label for="inLine">Lock point for the carrier<select id="inLine"><option value="F1"' + (S.layout.state.lockLine !== 'F2' ? ' selected' : '') + '>near F=1→F′=1 (carrier = control)</option><option value="F2"' + (S.layout.state.lockLine === 'F2' ? ' selected' : '') + '>near F=2→F′=1</option></select></label>';
     if (k === 'sas' || k === 'lockbox') h += '<div class="row"><button type="button" class="btn primary" id="inLock"></button><button type="button" class="btn" id="inErr">Show error signal</button></div>';
     if (k === 'lockbox') {
       h += '<label for="inMeth">Error-signal method<select id="inMeth"><option value="lockin"' + (p.method === 'lockin' ? ' selected' : '') + '>Current dither + lock-in (derivative)</option><option value="davll"' + (p.method === 'davll' ? ' selected' : '') + '>Modulation-free (DAVLL-type)</option></select></label>';
@@ -2502,11 +2377,6 @@ window.SIM_MODE = 'A';
       h += rng('inGain', 'Loop gain (relative)', 0, 2.5, 0.05, p.gain, '');
     }
     if (k === 'lctrl') { h += chk('inDith', 'Current dither on (tens of kHz, for lock-in)', p.dither) + rng('inDithA', 'Dither depth (optical, illustrative)', 0.1, 3, 0.1, p.ditherMHz, ' MHz'); }
-    if (k === 'eom') {
-      h += chk('inMw', 'Microwave drive on', p.rf);
-      h += '<label for="inFmw">Microwave frequency f_mw (MHz)<input type="number" id="inFmw" min="6000" max="7500" step="0.0001" value="' + p.fMHz.toFixed(4) + '"></label>';
-      h += rng('inDbm', 'RF power into EOM', -10, 27, 0.5, p.dBm, ' dBm');
-    }
     if (k === 'fgen') h += chk('inFg', 'Burst output enabled (gates both AOMs)', p.on);
     h += '<div id="inspLive"></div>';
     box.innerHTML = h;
@@ -2532,10 +2402,6 @@ window.SIM_MODE = 'A';
     on('inSh', 'change', function (e) { p.shield = e.target.checked; changed(true); });
     on('inBuf', 'change', function (e) { p.buffer = e.target.checked; changed(false); });
     on('inFg', 'change', function (e) { p.on = e.target.checked; changed(true); });
-    on('inLine', 'change', function (e) { S.layout.state.lockLine = e.target.value; changed(false); });
-    on('inMw', 'change', function (e) { p.rf = e.target.checked; changed(true, true); });
-    on('inFmw', 'change', function (e) { var v = Math.min(7500, Math.max(6000, +e.target.value || 6834.683)); p.fMHz = Math.round(v * 1e4) / 1e4; e.target.value = p.fMHz.toFixed(4); changed(true, true); });
-    on('inDbm', 'input', function (e) { p.dBm = +e.target.value; var o = $('inDbmo'); if (o) o.textContent = p.dBm + ' dBm'; changed(false); });
     on('inLock', 'click', function () { if (S.layout.state.locked) S.layout.state.locked = false; else if (S.ev.lock.errAvail) S.layout.state.locked = true; changed(true, true); renderInspector(); });
     on('inErr', 'click', function () { setScope('err'); });
     on('inMeth', 'change', function (e) { p.method = e.target.value; changed(false); });
@@ -2562,15 +2428,6 @@ window.SIM_MODE = 'A';
       if (lk.dither_MHz) rows.push(['dither on light', '±' + lk.dither_MHz + ' MHz FM (also on the EIT beams)']);
       var lb = $('inLock'); if (lb) { lb.textContent = S.layout.state.locked ? 'Unlock laser (open loop)' : 'Lock laser (close loop)'; lb.disabled = !S.layout.state.locked && !lk.errAvail; }
     }
-    if (c.kind === 'cell' && cl.model && MODE === 'B') {
-      var mB = cl.model;
-      rows.push(['T (cell)', mB.Tc.toFixed(0) + ' °C'], ['OD (est.)', mB.OD.toFixed(2)], ['polarization', cl.circ ? 'circular (all components)' : 'not circular']);
-      if (cl.control) rows.push(['control', P.fmtP(cl.control.P) + ' on ' + cl.control.line + ' line']);
-      if (cl.probe) rows.push(['probe', P.fmtP(cl.probe.P) + ' on ' + cl.probe.line + ' line']);
-      rows.push(['I_c', cl.Ic.toFixed(2) + ' mW/cm²'], ['EIT FWHM', mB.fwhm.toFixed(1) + ' kHz'], ['contrast', cl.ok ? cl.eff.contrast.toFixed(2) : '—']);
-      if (cl.delta0 !== undefined) rows.push(['δ₀ (clock pair)', cl.delta0.toFixed(2) + ' kHz'], ['m=±1 pairs at', '±' + (1.4 * mB.Beff).toFixed(1) + ' kHz']);
-      live.innerHTML = kv(rows); return;
-    }
     if (c.kind === 'cell' && cl.model) {
       var m = cl.model;
       rows.push(['T (cell)', m.Tc.toFixed(0) + ' °C'], ['n (est.)', m.n.toExponential(1) + ' cm⁻³'], ['OD (est.)', m.OD.toFixed(2)]);
@@ -2581,18 +2438,6 @@ window.SIM_MODE = 'A';
       rows.push(['probe T at δ₀', cl.probeT0 != null ? cl.probeT0.toExponential(2) : '—']);
       if (!c.params.shield) rows.push(['note', 'unshielded: ~' + K.earthResidual_mG + ' mG residual assumed']);
     }
-    if (c.kind === 'eom') {
-      var beta = c.params.rf ? P.betaFromDbm(c.params.dBm) : 0, j0 = P.besselJ(0, beta), j1 = P.besselJ(1, beta), j2 = P.besselJ(2, beta);
-      rows.push(['β = πV/Vπ', beta.toFixed(3)], ['carrier J₀²', (j0 * j0 * 100).toFixed(1) + ' %'], ['each 1st J₁²', (j1 * j1 * 100).toFixed(1) + ' %'], ['each 2nd J₂²', (j2 * j2 * 100).toFixed(2) + ' %'],
-        ['carrier : sideband', j1 ? (j0 * j0 / (j1 * j1)).toFixed(1) + ' : 1' : '—'], ['sideband offset', '±' + c.params.fMHz.toFixed(4) + ' MHz']);
-      if (ev.trace.eomIn) rows.push(['modulated fraction', (ev.trace.eomIn.hFrac * 100).toFixed(1) + ' %']);
-    }
-    if (c.kind === 'fp') {
-      var rec = ev.trace.fp[c.id];
-      if (rec) Object.keys(rec.comps).map(Number).sort(function (a, b) { return a - b; }).forEach(function (f) { var v = rec.comps[f]; if (v > 1e-4 * rec.P) rows.push([(f >= 0 ? '+' : '') + (f / 1e6).toFixed(4) + ' GHz', (v / rec.P * 100).toFixed(2) + ' %']); });
-      else rows.push(['spectrum', 'no light']);
-    }
-    if (c.kind === 'pd' && MODE === 'B') { var dB = ev.det; rows.push(['total (all components)', P.fmtP(dB.total)], ['probe sideband', P.fmtP(dB.probe)], ['control (carrier)', P.fmtP(dB.control)], ['other sidebands', P.fmtP(dB.other)], ['EIT change / total', ((dB.eitFrac || 0) * 100).toFixed(2) + ' %']); live.innerHTML = kv(rows); return; }
     if (c.kind === 'pd') { var d = ev.det; rows.push(['probe', P.fmtP(d.probe)], ['control leak', P.fmtP(d.control)], ['other', P.fmtP(d.other)], ['total', P.fmtP(d.total)]); }
     live.innerHTML = kv(rows);
   }
@@ -2604,7 +2449,6 @@ window.SIM_MODE = 'A';
     OBJ.forEach(function (o, i) { var d = ev.objectives[i]; if (d) n++; html += '<li class="' + (d ? 'done' : '') + '"><span class="bx" aria-hidden="true"></span><span>' + o[0] + '<span class="sr">' + (d ? ' (done)' : ' (not yet)') + '</span></span></li>'; });
     ol.innerHTML = html; $('objScore').textContent = n + ' / 10';
     var wl = $('warnList'); wl.innerHTML = ev.warnings.map(function (w) { return '<li>' + esc(w) + '</li>'; }).join('');
-    var lib = $('scLockin'); if (lib) lib.setAttribute('aria-pressed', S.layout.state.lockin ? 'true' : 'false');
     var sl = $('stLock'), lst = ev.lock.status;
     sl.className = 'pill ' + (lst === 'locked' ? 'on' : (lst === 'open' && ev.lock.errAvail) ? 'mid' : 'off');
     sl.textContent = lst === 'locked' ? 'Laser: closed loop (locked)' : lst === 'oscillating' ? 'Laser: loop oscillating' : lst === 'runaway' ? 'Laser: loop ran away' : lst === 'weak' ? 'Laser: loop too weak' : ev.lock.errAvail ? 'Laser: open loop (error signal ready)' : 'Laser: open loop, drifting';
@@ -2618,10 +2462,11 @@ window.SIM_MODE = 'A';
     $('stageHud').innerHTML = hud.map(function (t) { return '<span class="h">' + t + '</span>'; }).join('') + ev.warnings.slice(0, 2).map(function (w) { return '<span class="h w">' + esc(w) + '</span>'; }).join('');
     drawScope();
   }
+  function showMsg(t) { var hb = $('hintBox'); hb.hidden = false; hb.textContent = t; }
   function showHint() {
     var hb = $('hintBox'), i = S.ev.objectives.indexOf(false);
     hb.hidden = false;
-    hb.innerHTML = i < 0 ? (MODE === 'B' ? '<b>All ten objectives complete.</b> Now try: turn the shield off, remove the λ/4, or raise the RF power past β ≈ 2.4 (the carrier vanishes) and watch the scope.' : '<b>All ten objectives complete.</b> Try breaking the bench: swap the Glan–Taylor for a PBS, reverse B, or turn the shield off, and watch the scope.') : '<b>Next: ' + OBJ[i][0] + '.</b> ' + OBJ[i][1];
+    hb.innerHTML = i < 0 ? '<b>All ten objectives complete.</b> Try breaking the bench: swap the Glan–Taylor for a PBS, reverse B, or turn the shield off, and watch the scope.' : '<b>Next: ' + OBJ[i][0] + '.</b> ' + OBJ[i][1];
   }
 
   /* ---------------- scope ---------------- */
@@ -2641,7 +2486,6 @@ window.SIM_MODE = 'A';
     var ev = S.ev, cl = ev.cell, read = $('scopeRead');
     function msg(t) { c.fillStyle = TX; c.textAlign = 'center'; c.fillText(t, L + pw / 2, T + ph / 2); c.textAlign = 'left'; }
     if (S.scope === 'err') { drawErr(c, L, T, pw, ph, w, h, TX, CH1, CH3, msg, read); return; }
-    if (MODE === 'B') { drawScopeB(c, L, T, pw, ph, w, h, TX, CH1, CH3, msg, read); return; }
     if (S.scope === 'sweep') {
       if (!cl.probe || ev.det.total <= 0) { msg('No probe on the detector'); read.innerHTML = 'Build a path so the weak beam reaches the photodiode through the cell.'; return; }
       var k, half = ev.sweepHalf, m = cl.eff, pin = cl.probe.P, T0 = cl.probeT0 || 1e-12;
@@ -2690,28 +2534,6 @@ window.SIM_MODE = 'A';
     c.textAlign = 'left';
     read.innerHTML = S.store ? ('Retrieved efficiency η = <b>' + (st.eta * 100).toFixed(1) + ' %</b> at τ = ' + tau + ' µs (η₀ ' + (st.eta0 * 100).toFixed(0) + ' %, T₂ ' + st.T2_us.toFixed(0) + ' µs, delay ' + st.delay_us.toFixed(0) + ' µs, pulse ' + Tp.toFixed(0) + ' µs FWHM). <span class="tag est">illustrative model</span>') : 'Set τ and press “Run storage sequence”.';
   }
-  function drawScopeB(c, L, T, pw, ph, w, h, TX, CH1, CH3, msg, read) {
-    var ev = S.ev, cl = ev.cell;
-    if (S.scope !== 'sweep') { msg('Storage not modelled for Method B'); read.innerHTML = 'Carrier and sidebands share one spatial mode and polarization, so the strong control cannot be removed by polarization optics. See <a href="mod-b.html#b-storage">storage options for Method B</a> (to be verified in the literature).'; return; }
-    if (!cl.probe || ev.det.total <= 0 || !ev.objectives[2]) { msg(ev.det.total > 0 ? 'Light on detector, but no probe sideband on a hyperfine line' : 'No light on the detector'); read.innerHTML = 'Needs: EOM driven, carrier locked on one D1 line, first-order sideband on the other, beam through the cell to the photodiode.'; return; }
-    var half = ev.sweepHalf, m = cl.eff, pin = cl.probe.P, T0 = cl.probeT0 || 1e-12, kf = ev.det.probe / (pin * T0 || 1e-12); if (!isFinite(kf)) kf = 0;
-    var bg = ev.det.total - ev.det.probe, pts = [], lock = !!S.layout.state.lockin;
-    for (var k = 0; k <= 400; k++) { var s0 = -half + 2 * half * k / 400; pts.push([s0, (bg + kf * pin * P.probeTB(cl.delta0 + s0, m, cl.model.Beff, cl.weights)) * 1000]); }
-    var ys = pts.map(function (q) { return q[1]; });
-    if (lock) { ys = pts.map(function (q, i) { var a = pts[Math.max(0, i - 1)], b = pts[Math.min(pts.length - 1, i + 1)]; return (b[1] - a[1]) / (b[0] - a[0]); }); }
-    var ymin = lock ? Math.min.apply(null, ys) : 0, ymax = Math.max.apply(null, ys); if (lock) { var mx = Math.max(Math.abs(ymin), Math.abs(ymax), 1e-12); ymin = -1.15 * mx; ymax = 1.15 * mx; } else ymax *= 1.1;
-    c.strokeStyle = CH1; c.lineWidth = 1.8; c.beginPath();
-    pts.forEach(function (q, i) { var X = L + (q[0] + half) / (2 * half) * pw, Y = T + ph - (ys[i] - ymin) / (ymax - ymin) * ph; if (i) c.lineTo(X, Y); else c.moveTo(X, Y); }); c.stroke();
-    if (lock) { c.strokeStyle = 'rgba(144,212,173,.5)'; var y0 = T + ph - (0 - ymin) / (ymax - ymin) * ph; c.beginPath(); c.moveTo(L, y0); c.lineTo(L + pw, y0); c.stroke(); }
-    var xr = L + (-cl.delta0 + half) / (2 * half) * pw;
-    if (xr >= L && xr <= L + pw) { c.setLineDash([3, 3]); c.strokeStyle = CH3; c.beginPath(); c.moveTo(xr, T); c.lineTo(xr, T + ph); c.stroke(); c.setLineDash([]); }
-    c.fillStyle = TX; c.textAlign = 'center';
-    [-1, -0.5, 0, 0.5, 1].forEach(function (f) { c.fillText((f * half).toFixed(0), L + (f + 1) / 2 * pw, T + ph + 14); });
-    c.fillText('microwave scan offset (kHz) around f_mw', L + pw / 2, h - 3);
-    c.textAlign = 'right'; c.fillText(lock ? 'd/df' : ymax.toPrecision(3), L - 4, T + 10); c.fillText(lock ? '' : '0', L - 4, T + ph); c.textAlign = 'left';
-    c.save(); c.translate(11, T + ph / 2); c.rotate(-Math.PI / 2); c.textAlign = 'center'; c.fillText(lock ? 'lock-in (a.u.)' : 'PD total (µW)', 0, 0); c.restore();
-    read.innerHTML = (ev.lock.status !== 'locked' ? '<b style="color:var(--bad)">' + esc(ev.lock.note) + ' · laser Δ = ' + (S.layout.state.drift_MHz || 0).toFixed(1) + ' MHz.</b><br>' : '') + (ev.objectives[8] ? '<b style="color:var(--ok)">Clock EIT peak visible.</b> ' : '') + 'Background ' + P.fmtP(bg) + ' · EIT change ' + ((ev.det.eitFrac || 0) * 100).toFixed(2) + ' % of total · FWHM ≈ ' + m.fwhm.toFixed(1) + ' kHz · clock resonance at scan = ' + (-cl.delta0).toFixed(2) + ' kHz (red dashed) · m=±1 at ±' + (1.4 * cl.model.Beff).toFixed(0) + ' kHz from it' + (lock ? ' · lock-in: zero crossing = resonance' : '') + ' <span class="tag est">illustrative model</span>';
-  }
   function drawErr(c, L, T, pw, ph, w, h, TX, CH1, CH3, msg, read) {
     var lk = S.ev.lock, box = comp(lk.ids.box);
     if (!lk.chain) { msg('Lock chain incomplete'); read.innerHTML = 'Place a SAS module, a lock box and a laser controller: cables connect SAS photodiode → lock box → controller → DFB.'; return; }
@@ -2735,12 +2557,18 @@ window.SIM_MODE = 'A';
   function setScope(mode) {
     S.scope = mode;
     $('scSweep').setAttribute('aria-pressed', mode === 'sweep' ? 'true' : 'false'); $('scStore').setAttribute('aria-pressed', mode === 'store' ? 'true' : 'false'); $('scErr').setAttribute('aria-pressed', mode === 'err' ? 'true' : 'false');
-    $('storeCtrls').hidden = !(mode === 'store' && MODE === 'A'); drawScope();
+    $('storeCtrls').hidden = !(mode === 'store'); drawScope();
   }
   function niceT(a, b) { var span = b - a, st = Math.pow(10, Math.floor(Math.log10(span / 6))); if (span / st > 30) st *= 5; else if (span / st > 12) st *= 2; var o = []; for (var v = Math.ceil(a / st) * st; v <= b; v += st) o.push(v); return o; }
 
   /* ======================= THREE.js part ======================= */
-  var G = { ok: false };
+  var G = { ok: false, opt: { cutaway: true, cables: true, info: false, flow: true, filter: 'all' }, prevRot: {}, known: {}, tween: null, fade: 1, old: null };
+  var FILTERS = {
+    source: ['laser', 'isolator', 'sas', 'lockbox', 'lctrl', 'fgen'],
+    path: ['mirror', 'pbs', 'npbs', 'pickoff', 'hwp', 'qwp', 'aom', 'lens', 'iris', 'nd', 'glan'],
+    cell: ['cell'],
+    detect: ['pd', 'dump']
+  };
   function initThree() {
     var msgEl = $('stageMsg');
     if (!window.THREE || !THREE.OrbitControls) {
@@ -2749,23 +2577,28 @@ window.SIM_MODE = 'A';
     }
     var canvas = $('simCanvas'), stage = $('stage');
     var renderer;
-    try { renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true }); }
+    try { renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, preserveDrawingBuffer: true }); }
     catch (e) { msgEl.classList.add('show'); msgEl.innerHTML = '<div><b>WebGL is not available</b> in this browser, so the 3D bench cannot be drawn. The objectives and scope below still evaluate the reference layout.</div>'; return; }
     G.ok = true; G.renderer = renderer; G.canvas = canvas; G.stage = stage;
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     var scene = new THREE.Scene(); G.scene = scene;
     var cam = new THREE.PerspectiveCamera(38, 1, 5, 6000); G.cam = cam;
-    setView('3d');
-    // our pointer handlers BEFORE OrbitControls so we can disable it on component hits
+    setView('3d', true);
     bindPointer();
     var ctr = new THREE.OrbitControls(cam, canvas); G.ctr = ctr;
-    ctr.enableDamping = !reduceMotion; ctr.dampingFactor = 0.12; ctr.maxPolarAngle = Math.PI * 0.47; ctr.minDistance = 180; ctr.maxDistance = 2200; ctr.target.set(0, 0, 0);
+    ctr.enableDamping = !reduceMotion; ctr.dampingFactor = 0.12; ctr.maxPolarAngle = Math.PI * 0.47; ctr.minDistance = 90; ctr.maxDistance = 2200; ctr.target.set(0, 0, 0); ctr.screenSpacePanning = true;
     ctr.addEventListener('change', requestRender);
-    scene.add(new THREE.HemisphereLight(0xffffff, 0x445566, 0.75));
-    var dl = new THREE.DirectionalLight(0xffffff, 0.65); dl.position.set(-300, 900, 500); scene.add(dl);
-    G.compGroup = new THREE.Group(); G.beamGroup = new THREE.Group(); G.labelGroup = new THREE.Group(); G.cableGroup = new THREE.Group(); G.scene_cables = true;
-    scene.add(G.compGroup); scene.add(G.beamGroup); scene.add(G.labelGroup); scene.add(G.cableGroup);
-    G.meshes = {}; G.flow = [];
+    scene.add(new THREE.HemisphereLight(0xdfeaff, 0x40454a, 0.85));
+    var key = new THREE.DirectionalLight(0xfff1dc, 0.85); key.position.set(-380, 900, 420); key.castShadow = true;
+    key.shadow.mapSize.set(2048, 2048); key.shadow.bias = -0.0006;
+    var sc = key.shadow.camera; sc.left = -560; sc.right = 560; sc.top = 400; sc.bottom = -400; sc.near = 100; sc.far = 2200; scene.add(key);
+    var fill = new THREE.DirectionalLight(0x7fb4e6, 0.35); fill.position.set(500, 380, -450); scene.add(fill);
+    G.compGroup = new THREE.Group(); G.beamGroup = new THREE.Group(); G.cableGroup = new THREE.Group();
+    scene.add(G.compGroup); scene.add(G.beamGroup); scene.add(G.cableGroup);
+    G.layer = document.createElement('div'); G.layer.className = 'optic-layer'; stage.appendChild(G.layer);
+    G.tip = document.createElement('div'); G.tip.className = 'optic-tip'; G.tip.hidden = true; stage.appendChild(G.tip);
+    G.labels = {}; G.chips = []; G.flow = [];
     buildTheme();
     var ro = new ResizeObserver(resize); ro.observe(stage); resize();
     if ('IntersectionObserver' in window) {
@@ -2775,11 +2608,25 @@ window.SIM_MODE = 'A';
     window.onThemeChange(function () { buildTheme(); syncMeshes(); pendingBeams = true; requestRender(); drawScope(); });
     syncMeshes(); pendingBeams = true; loop();
   }
-  function setView(v) {
+  function wp(c) { return new THREE.Vector3(c.x - K.table.w / 2, K.beamHeight, c.z - K.table.d / 2); }
+  function setView(v, instant) {
     if (!G.cam) return;
-    if (v === 'top') G.cam.position.set(0, 1150, 1); else G.cam.position.set(-60, 640, 760);
-    G.cam.lookAt(0, 0, 0); if (G.ctr) { G.ctr.target.set(0, 0, 0); G.ctr.update(); }
-    requestRender();
+    var pos, tgt = new THREE.Vector3(0, 0, 0);
+    if (v === 'top') { pos = new THREE.Vector3(0, 1100, 1); tgt.set(0, 0, 0); }
+    else if (v === 'front') { pos = new THREE.Vector3(0, 170, 880); tgt.set(0, 20, 0); }
+    else if (v === 'source') { pos = new THREE.Vector3(-420, 260, 330); tgt.set(-330, 20, -120); }
+    else if (v === 'cell') { pos = new THREE.Vector3(250, 230, 300); tgt.set(100, 30, -60); }
+    else { pos = new THREE.Vector3(-40, 560, 600); tgt.set(0, 0, -75); }
+    flyTo(pos, tgt, instant);
+  }
+  function flyTo(pos, tgt, instant) {
+    if (instant || reduceMotion) { G.cam.position.copy(pos); G.cam.lookAt(tgt); if (G.ctr) { G.ctr.target.copy(tgt); G.ctr.update(); } G.tween = null; requestRender(); return; }
+    G.tween = { pos: pos, tgt: tgt }; requestRender();
+  }
+  function focusComp(id) {
+    var c = comp(id); if (!c || !G.ok) return;
+    var t = wp(c), big = c.kind === 'cell' ? 1.5 : c.kind === 'fgen' || c.kind === 'lctrl' || c.kind === 'lockbox' ? 1.2 : 1;
+    flyTo(t.clone().add(new THREE.Vector3(120 * big, 150 * big, 190 * big)), t.clone().setY(15));
   }
   function resize() {
     if (!G.ok) return;
@@ -2791,37 +2638,48 @@ window.SIM_MODE = 'A';
 
   /* ---- theme / materials ---- */
   function col(n) { var v = css(n); try { return new THREE.Color(v.length === 9 && v[0] === '#' ? v.slice(0, 7) : v); } catch (e) { return new THREE.Color(0x888888); } }
+  function std(color, metal, rough, extra) { var m = new THREE.MeshStandardMaterial(Object.assign({ color: color, metalness: metal, roughness: rough }, extra || {})); return m; }
   function buildTheme() {
     var M = G.M = {};
-    G.scene.background = col('--sim-bg');
-    M.metal = new THREE.MeshStandardMaterial({ color: col('--sim-metal'), metalness: 0.6, roughness: 0.35 });
-    M.dark = new THREE.MeshStandardMaterial({ color: col('--sim-dark'), metalness: 0.3, roughness: 0.6 });
-    M.black = new THREE.MeshStandardMaterial({ color: 0x0b0d10, roughness: 0.9 });
-    M.glass = new THREE.MeshStandardMaterial({ color: col('--sim-glass'), transparent: true, opacity: 0.35, roughness: 0.1, metalness: 0.0, depthWrite: false });
-    M.glassDiag = new THREE.MeshBasicMaterial({ color: col('--sim-glass'), transparent: true, opacity: 0.55, side: THREE.DoubleSide, depthWrite: false });
-    M.accent = new THREE.MeshStandardMaterial({ color: col('--sim-accent'), metalness: 0.2, roughness: 0.5 });
-    M.laser = new THREE.MeshStandardMaterial({ color: col('--laser'), roughness: 0.5 });
-    M.hwp = new THREE.MeshStandardMaterial({ color: 0x4f7fd1, transparent: true, opacity: 0.75, roughness: 0.2 });
-    M.qwp = new THREE.MeshStandardMaterial({ color: 0x3fae8a, transparent: true, opacity: 0.75, roughness: 0.2 });
-    M.copper = new THREE.MeshStandardMaterial({ color: 0xb8733a, metalness: 0.7, roughness: 0.35 });
-    M.heater = new THREE.MeshStandardMaterial({ color: 0xd88a1d, roughness: 0.6, transparent: true, opacity: 0.85 });
-    M.shield = new THREE.MeshStandardMaterial({ color: col('--sim-metal'), metalness: 0.5, roughness: 0.4, transparent: true, opacity: 0.28, side: THREE.DoubleSide, depthWrite: false });
-    M.vapor = new THREE.MeshBasicMaterial({ color: 0xb06cff, transparent: true, opacity: 0.12, depthWrite: false });
-    M.nd = new THREE.MeshStandardMaterial({ color: 0x222428, transparent: true, opacity: 0.8 });
+    G.scene.background = new THREE.Color(0x0e1a21);
+    M.metal = std(0xa9b2b8, 0.3, 0.38);
+    M.alu = std(0xc9d0d4, 0.3, 0.38);
+    M.dark = std(col('--sim-dark'), 0.35, 0.55);
+    M.black = std(0x0d0f12, 0.5, 0.55);
+    M.matte = std(0x07080a, 0.1, 0.95);
+    M.mirror = std(0xf2f6f8, 0.45, 0.1);
+    M.brass = std(0xd1a94d, 0.4, 0.35);
+    M.glass = std(col('--sim-glass'), 0.05, 0.08, { transparent: true, opacity: 0.38, depthWrite: false });
+    M.glassDiag = new THREE.MeshBasicMaterial({ color: col('--sim-glass'), transparent: true, opacity: 0.6, side: THREE.DoubleSide, depthWrite: false });
+    M.accent = std(col('--sim-accent'), 0.3, 0.45);
+    M.laser = std(col('--laser'), 0.2, 0.5);
+    M.hwp = std(0x5b8bde, 0.1, 0.12, { transparent: true, opacity: 0.7, depthWrite: false });
+    M.qwp = std(0x3fbf96, 0.1, 0.12, { transparent: true, opacity: 0.7, depthWrite: false });
+    M.copper = std(0xc17a3d, 0.4, 0.35);
+    M.mumetal = std(0x9aa5ad, 0.35, 0.4, { side: THREE.DoubleSide });
+    M.nd = std(0x2a2d33, 0.2, 0.3, { transparent: true, opacity: 0.82 });
     M.on = new THREE.MeshBasicMaterial({ color: 0x39d36b }); M.off = new THREE.MeshBasicMaterial({ color: 0xd33a3a });
     M.select = new THREE.MeshBasicMaterial({ color: col('--sim-select'), side: THREE.DoubleSide });
-    M.screen = new THREE.MeshBasicMaterial({ color: 0x0f3b2a });
-    // table with tiled hole texture
+    M.screen = std(0x0b2a1f, 0.1, 0.4, { emissive: 0x1c9a68, emissiveIntensity: 0.55 });
+    M.knob = std(0xd9dde0, 0.8, 0.25);
     if (G.table) { G.scene.remove(G.table); G.table.geometry.dispose(); }
+    if (G.under) { G.scene.remove(G.under); }
     var tc = document.createElement('canvas'); tc.width = tc.height = 64; var x = tc.getContext('2d');
-    x.fillStyle = css('--sim-table'); x.fillRect(0, 0, 64, 64); x.fillStyle = css('--sim-hole'); x.beginPath(); x.arc(32, 32, 9, 0, 7); x.fill();
-    var tex = new THREE.CanvasTexture(tc); tex.wrapS = tex.wrapT = THREE.RepeatWrapping; tex.repeat.set(K.table.w / 25, K.table.d / 25); tex.anisotropy = 4;
-    var top = new THREE.MeshStandardMaterial({ map: tex, roughness: 0.8, metalness: 0.2 });
-    var side = new THREE.MeshStandardMaterial({ color: col('--sim-table-edge'), roughness: 0.8 });
+    x.fillStyle = '#46555b'; x.fillRect(0, 0, 64, 64);
+    x.fillStyle = 'rgba(255,255,255,.07)'; x.fillRect(0, 0, 64, 1); x.fillRect(0, 0, 1, 64);
+    x.fillStyle = '#1b272c'; x.beginPath(); x.arc(32, 32, 9, 0, 7); x.fill();
+    x.strokeStyle = 'rgba(255,255,255,.12)'; x.lineWidth = 1.2; x.beginPath(); x.arc(32, 32, 9, 0.2, 2.6); x.stroke();
+    var tex = new THREE.CanvasTexture(tc); tex.wrapS = tex.wrapT = THREE.RepeatWrapping; tex.repeat.set(K.table.w / 25, K.table.d / 25); tex.anisotropy = 8;
+    var top = new THREE.MeshStandardMaterial({ map: tex, roughness: 0.55, metalness: 0.35 });
+    var side = new THREE.MeshStandardMaterial({ color: 0x2c3a40, roughness: 0.7, metalness: 0.3 });
     G.table = new THREE.Mesh(new THREE.BoxGeometry(K.table.w, 24, K.table.d), [side, side, top, side, side, side]);
-    G.table.position.y = -12; G.scene.add(G.table);
-    // beam textures
-    G.texCW = flowTex(false); G.texPulse = flowTex(true);
+    G.table.position.y = -12; G.table.receiveShadow = true; G.table.castShadow = true; G.scene.add(G.table);
+    G.under = new THREE.Group();
+    var legM = std(0x2a3238, 0.3, 0.55);
+    [[-410, -270], [410, -270], [-410, 270], [410, 270]].forEach(function (p) { var l = new THREE.Mesh(new THREE.CylinderGeometry(14, 16, 330, 16), legM); l.position.set(p[0], -24 - 165, p[1]); l.castShadow = true; G.under.add(l); });
+    var floor = new THREE.Mesh(new THREE.PlaneGeometry(6000, 6000), new THREE.ShadowMaterial({ opacity: 0.4 })); floor.rotation.x = -Math.PI / 2; floor.position.y = -360; floor.receiveShadow = true; G.under.add(floor);
+    G.scene.add(G.under);
+    G.texCW = flowTex(false); G.texPulse = flowTex(true); G.texSpot = spotTex();
     G.beamColor = col('--sim-beam');
     if (!G.ghost) { G.ghost = new THREE.Mesh(new THREE.RingGeometry(14, 19, 32), M.select); G.ghost.rotation.x = -Math.PI / 2; G.ghost.visible = false; G.scene.add(G.ghost); }
     else G.ghost.material = M.select;
@@ -2830,92 +2688,202 @@ window.SIM_MODE = 'A';
     var c = document.createElement('canvas'); c.width = 4; c.height = 128; var x = c.getContext('2d');
     var g = x.createLinearGradient(0, 0, 0, 128);
     if (pulsed) { g.addColorStop(0, 'rgba(255,255,255,0.08)'); g.addColorStop(0.42, 'rgba(255,255,255,0.08)'); g.addColorStop(0.5, 'rgba(255,255,255,1)'); g.addColorStop(0.58, 'rgba(255,255,255,0.08)'); g.addColorStop(1, 'rgba(255,255,255,0.08)'); }
-    else { g.addColorStop(0, 'rgba(255,255,255,0.55)'); g.addColorStop(0.45, 'rgba(255,255,255,0.55)'); g.addColorStop(0.5, 'rgba(255,255,255,1)'); g.addColorStop(0.55, 'rgba(255,255,255,0.55)'); g.addColorStop(1, 'rgba(255,255,255,0.55)'); }
+    else { g.addColorStop(0, 'rgba(255,255,255,0.6)'); g.addColorStop(0.45, 'rgba(255,255,255,0.6)'); g.addColorStop(0.5, 'rgba(255,255,255,1)'); g.addColorStop(0.55, 'rgba(255,255,255,0.6)'); g.addColorStop(1, 'rgba(255,255,255,0.6)'); }
     x.fillStyle = g; x.fillRect(0, 0, 4, 128);
     var t = new THREE.CanvasTexture(c); t.wrapS = t.wrapT = THREE.RepeatWrapping; return t;
   }
+  function spotTex() {
+    var c = document.createElement('canvas'); c.width = c.height = 64; var x = c.getContext('2d');
+    var g = x.createRadialGradient(32, 32, 0, 32, 32, 32);
+    g.addColorStop(0, 'rgba(255,255,255,1)'); g.addColorStop(0.2, 'rgba(255,255,255,.75)'); g.addColorStop(0.5, 'rgba(255,255,255,.18)'); g.addColorStop(1, 'rgba(255,255,255,0)');
+    x.fillStyle = g; x.fillRect(0, 0, 64, 64); return new THREE.CanvasTexture(c);
+  }
 
-  /* ---- component meshes (local +x = forward) ---- */
+  /* ---- component meshes (local +x = forward, y up, group origin on the beam axis) ---- */
   var geoCache = {};
   function geo(key, mk) { return geoCache[key] || (geoCache[key] = mk()); }
-  function box(w, h, d, m, x, y, z) { var o = new THREE.Mesh(geo('b' + w + '_' + h + '_' + d, function () { return new THREE.BoxGeometry(w, h, d); }), m); o.position.set(x || 0, y || 0, z || 0); return o; }
-  function cylX(r, len, m, x, y, z, seg) { var o = new THREE.Mesh(geo('c' + r + '_' + len + '_' + (seg || 24), function () { return new THREE.CylinderGeometry(r, r, len, seg || 24, 1, false); }), m); o.rotation.z = Math.PI / 2; o.position.set(x || 0, y || 0, z || 0); return o; }
+  function bx(w, h, d, m, x, y, z) { var o = new THREE.Mesh(geo('b' + w + '_' + h + '_' + d, function () { return new THREE.BoxGeometry(w, h, d); }), m); o.position.set(x || 0, y || 0, z || 0); return o; }
+  function cy(r, len, m, x, y, z, ax, seg) { // cylinder with its axis along ax ('x' default, 'y', 'z')
+    var o = new THREE.Mesh(geo('c' + r + '_' + len + '_' + (seg || 24), function () { return new THREE.CylinderGeometry(r, r, len, seg || 24, 1, false); }), m);
+    if (ax === 'y') { } else if (ax === 'z') o.rotation.x = Math.PI / 2; else o.rotation.z = Math.PI / 2;
+    o.position.set(x || 0, y || 0, z || 0); return o;
+  }
+  function tr(R, t, m, x, y, z, ry) { var o = new THREE.Mesh(geo('t' + R + '_' + t, function () { return new THREE.TorusGeometry(R, t, 10, 36); }), m); o.rotation.y = ry === undefined ? Math.PI / 2 : ry; o.position.set(x || 0, y || 0, z || 0); return o; }
+  function sp(r, m, x, y, z, sx) { var o = new THREE.Mesh(geo('s' + r, function () { return new THREE.SphereGeometry(r, 20, 14); }), m); o.position.set(x || 0, y || 0, z || 0); if (sx) o.scale.set(sx, 1, 1); return o; }
+  function stand(g, kind) { // base plate, post and clamp
+    var H = K.beamHeight, M = G.M;
+    g.add(bx(30, 3, 22, M.black, 0, -H + 1.5, 0));
+    var h = H - 14; g.add(cy(4.5, h, M.alu, 0, -H + 3 + h / 2, 0, 'y', 14));
+    g.add(cy(7.5, 9, M.black, 0, -15.5, 0, 'y', 16));
+    g.add(cy(2.2, 8, M.brass, 8, -15.5, 0, 'x', 10));
+  }
+  function instrument(g, w, h, d, label) {
+    var M = G.M, H = K.beamHeight, y0 = h / 2 - H;
+    g.add(bx(w, h, d, M.dark, 0, y0, 0));
+    g.add(bx(w + 2, 3, d + 2, M.black, 0, y0 + h / 2, 0));
+    g.add(bx(1.4, h * 0.42, d * 0.5, M.screen, -w / 2 - 0.4, y0 + h * 0.12, -d * 0.12));
+    for (var i = 0; i < 3; i++) g.add(cy(3, 3, M.knob, -w / 2 - 1, y0 - h * 0.28, d * 0.28 - i * 9, 'x', 14));
+    for (var j = 0; j < 4; j++) g.add(bx(0.8, 2, w * 0.1, M.black, -w / 2 - 0.2, y0 - h * 0.05, -d * 0.3 + j * 6));
+    return y0;
+  }
   function buildMesh(c) {
-    var g = new THREE.Group(), M = G.M, H = K.beamHeight, p = c.params, k = c.kind;
-    var post = new THREE.Mesh(geo('post', function () { return new THREE.CylinderGeometry(5, 5, H - 8, 12); }), M.metal); post.position.y = -(H - 8) / 2 - 8;
-    if (k !== 'fgen' && k !== 'lctrl' && k !== 'lockbox') g.add(post);
+    var g = new THREE.Group(), M = G.M, H = K.beamHeight, p = c.params, k = c.kind, ownMats = [];
+    function own(m) { ownMats.push(m); return m; }
+    var needsStand = !(k === 'fgen' || k === 'lctrl' || k === 'lockbox');
+    if (needsStand && k !== 'cell' && k !== 'sas') stand(g, k);
     switch (k) {
-      case 'laser': g.add(box(44, 26, 30, M.dark, -18, 0, 0)); g.add(box(44, 4, 31, M.laser, -18, 10, 0)); g.add(cylX(6, 16, M.metal, 10, 0, 0)); break;
-      case 'isolator': { g.add(cylX(11, 36, M.accent, 0, 0, 0)); g.add(cylX(12, 4, M.metal, -18, 0, 0)); g.add(cylX(12, 4, M.metal, 18, 0, 0));
-        var cone = new THREE.Mesh(geo('cone', function () { return new THREE.ConeGeometry(4, 10, 12); }), M.laser); cone.rotation.z = -Math.PI / 2; cone.position.set(6, 15, 0); g.add(cone); g.add(box(14, 2, 2, M.laser, -4, 15, 0)); break; }
-      case 'mirror': g.add(box(3, 25, 25, M.metal, 0, 0, 0)); g.add(box(6, 30, 30, M.dark, -5, 0, 0)); break;
-      case 'pickoff': g.add(box(2, 22, 22, M.glass, 0, 0, 0)); g.add(box(4, 4, 26, M.dark, -1, -13, 0)); break;
-      case 'pbs': case 'npbs': { g.add(box(20, 20, 20, M.glass)); var pl = new THREE.Mesh(geo('diag', function () { return new THREE.PlaneGeometry(28, 20); }), M.glassDiag); pl.rotation.y = -Math.PI / 4; g.add(pl);
-        if (k === 'npbs') g.add(box(20, 2, 20, M.accent, 0, 11, 0)); break; }
-      case 'hwp': case 'qwp': { g.add(cylX(12, 3, k === 'hwp' ? M.hwp : M.qwp)); g.add(cylX(14, 2, M.dark, -3, 0, 0));
-        var ax = box(1.4, 1.4, 22, M.dark, 2, 0, 0); ax.rotation.x = (p.axis || 0) * Math.PI / 180; g.add(ax); break; }
-      case 'aom': { g.add(box(26, 18, 22, M.metal)); g.add(box(26, 6, 22, M.accent, 0, 10, 0)); var sma = new THREE.Mesh(geo('sma', function () { return new THREE.CylinderGeometry(2.5, 2.5, 8, 10); }), M.metal); sma.position.set(6, 16, 0); g.add(sma);
-        var led = new THREE.Mesh(geo('led', function () { return new THREE.SphereGeometry(2.5, 10, 8); }), p.rf ? M.on : M.off); led.position.set(-8, 15, 6); g.add(led);
-        if (p.mode === 'double') { g.add(cylX(9, 2, M.glass, 30, 0, 0)); g.add(box(3, 18, 18, M.metal, 48, 0, 0)); g.add(cylX(9, 2, M.qwp, 40, 0, 0)); g.add(box(56, 3, 26, M.dark, 24, -13, 0)); }
+      case 'laser':
+        g.add(bx(46, 28, 32, M.alu, -18, 0, 0)); g.add(bx(46, 4, 33, M.laser, -18, 15, 0));
+        for (var f = 0; f < 6; f++) g.add(bx(2.2, 8, 34, M.black, -34 + f * 6, 19, 0));
+        g.add(cy(7, 18, M.black, 12, 0, 0)); g.add(cy(4.2, 10, M.brass, 24, 0, 0)); g.add(cy(3.2, 1.2, M.glass, 29.4, 0, 0));
+        g.add(bx(8, 3, 6, M.accent, -34, -13, 0));
+        var led = sp(1.9, M.on, -38, 13, 17); g.add(led); break;
+      case 'isolator':
+        g.add(cy(11, 38, M.accent, 0, 0, 0)); g.add(cy(12.4, 4, M.metal, -17, 0, 0)); g.add(cy(12.4, 4, M.metal, 17, 0, 0)); g.add(cy(11.4, 3, M.black, 0, 0, 0));
+        var cone = new THREE.Mesh(geo('cone', function () { return new THREE.ConeGeometry(4, 10, 12); }), M.laser); cone.rotation.z = -Math.PI / 2; cone.position.set(8, 15, 0); g.add(cone); g.add(bx(14, 2, 2, M.laser, -2, 15, 0)); break;
+      case 'mirror':
+        g.add(bx(8, 30, 30, M.black, -6, 0, 0)); g.add(cy(13.5, 3, M.mirror, 0, 0, 0)); g.add(cy(14.5, 2, M.alu, -2.5, 0, 0));
+        g.add(cy(2.6, 9, M.knob, -12, 11, 10)); g.add(cy(2.6, 9, M.knob, -12, -11, 10)); g.add(cy(2.6, 9, M.knob, -12, 11, -10)); break;
+      case 'pickoff':
+        g.add(bx(2, 22, 22, M.glass, 0, 0, 0)); g.add(bx(6, 3, 26, M.black, -2, -13, 0)); g.add(bx(2.5, 24, 2, M.alu, -1, 0, 12)); g.add(bx(2.5, 24, 2, M.alu, -1, 0, -12)); break;
+      case 'pbs': case 'npbs': {
+        g.add(bx(20, 20, 20, M.glass)); g.add(bx(22, 2, 22, M.alu, 0, -11, 0));
+        var pl = new THREE.Mesh(geo('diag', function () { return new THREE.PlaneGeometry(28, 20); }), M.glassDiag); pl.rotation.y = -Math.PI / 4; g.add(pl);
+        if (k === 'npbs') g.add(bx(20, 2, 20, M.accent, 0, 11, 0)); else { g.add(bx(4, 1, 4, M.accent, 8, 10.6, 8)); }
         break; }
-      case 'lens': g.add(cylX(12, 3, M.glass)); g.add(cylX(13, 2, M.dark, -2, 0, 0)); break;
-      case 'iris': { var tor = new THREE.Mesh(geo('tor', function () { return new THREE.TorusGeometry(11, 3, 8, 24); }), M.dark); tor.rotation.y = Math.PI / 2; g.add(tor); break; }
-      case 'nd': g.add(box(2.5, 24, 24, M.nd)); g.add(box(4, 4, 26, M.dark, 0, -13, 0)); break;
+      case 'hwp': case 'qwp': {
+        g.add(tr(13.2, 2.2, M.black, -2, 0, 0)); g.add(cy(12, 2.6, k === 'hwp' ? M.hwp : M.qwp, 0, 0, 0));
+        g.add(tr(14.4, 1.4, M.knob, 0, 0, 0));
+        for (var t = 0; t < 12; t++) { var a = t * Math.PI / 6, tk = bx(0.8, t % 3 ? 1.6 : 3, 0.8, M.knob, 1.2, Math.sin(a) * 14.6, Math.cos(a) * 14.6); g.add(tk); }
+        var ax = bx(1.2, 1.4, 22, M.black, 1.6, 0, 0); ax.rotation.x = (p.axis || 0) * Math.PI / 180; g.add(ax);
+        var tab = bx(1.6, 4, 2.4, M.laser, 1.8, 0, 0); tab.position.set(1.8, -Math.sin((p.axis || 0) * Math.PI / 180) * 11, Math.cos((p.axis || 0) * Math.PI / 180) * 11); g.add(tab); break; }
+      case 'aom':
+        g.add(bx(28, 20, 24, M.alu)); g.add(bx(28, 6, 24, M.accent, 0, 12, 0)); g.add(bx(30, 2, 26, M.black, 0, -11, 0));
+        g.add(cy(4, 2, M.black, -14.4, 0, 0)); g.add(cy(4, 2, M.black, 14.4, 0, 0));
+        g.add(cy(2.6, 9, M.brass, 6, 18, 0, 'y', 10));
+        g.add(sp(2.4, p.rf ? M.on : M.off, -9, 15.5, 8));
+        if (p.mode === 'double') {
+          g.add(cy(9, 2, M.glass, 32, 0, 0)); g.add(tr(10, 1.4, M.black, 32, 0, 0)); g.add(cy(8.5, 2, M.qwp, 42, 0, 0)); g.add(tr(9.5, 1.2, M.black, 42, 0, 0));
+          g.add(cy(10, 3, M.mirror, 54, 0, 0)); g.add(bx(4, 22, 22, M.black, 58, 0, 0)); g.add(bx(62, 3, 28, M.black, 25, -14, 0)); g.add(cy(3.5, 24, M.alu, 54, -14, 0, 'y', 10));
+        }
+        break;
+      case 'lens':
+        g.add(tr(13.5, 2, M.black, 0, 0, 0)); g.add(sp(12, M.glass, 0, 0, 0, 0.24)); break;
+      case 'iris': {
+        g.add(tr(11, 3, M.black, 0, 0, 0)); g.add(tr(6, 3.2, M.dark, 0, 0, 0)); g.add(bx(2, 2, 12, M.knob, 0, 13, 5)); break; }
+      case 'nd':
+        g.add(bx(2.5, 24, 24, M.nd)); g.add(bx(5, 3, 26, M.black, 0, -13, 0)); g.add(bx(3, 26, 2, M.black, 0, 0, 13)); g.add(bx(3, 26, 2, M.black, 0, 0, -13)); break;
       case 'cell': {
-        g.add(cylX(11, 75, M.glass)); g.add(cylX(9, 70, M.vapor)); g.add(cylX(11.5, 2, M.glass, -37, 0, 0)); g.add(cylX(11.5, 2, M.glass, 37, 0, 0));
-        var stem = new THREE.Mesh(geo('stem', function () { return new THREE.CylinderGeometry(3, 3, 14, 10); }), M.glass); stem.position.set(0, 16, 0); g.add(stem);
-        if (p.heater) g.add(cylX(12.5, 40, M.heater));
-        if (p.solenoid) for (var i = -4; i <= 4; i++) { var ring = new THREE.Mesh(geo('coil', function () { return new THREE.TorusGeometry(15.5, 1.3, 6, 28); }), M.copper); ring.rotation.y = Math.PI / 2; ring.position.x = i * 9; g.add(ring); }
-        if (p.shield) { g.add(cylX(22, 110, M.shield, 0, 0, 0, 32)); g.add(cylX(26, 118, M.shield, 0, 0, 0, 32)); }
+        var hot = p.heater ? Math.min(1, Math.max(0, (p.T_C - 20) / 50)) : 0;
+        var heaterM = own(std(0xd88a1d, 0.3, 0.55, { emissive: 0xff6a00, emissiveIntensity: 0.1 + 0.8 * hot, transparent: true, opacity: 0.9 }));
+        var vaporM = own(new THREE.MeshBasicMaterial({ color: 0xb06cff, transparent: true, opacity: 0.05 + 0.2 * Math.min(1, (p.T_C - 20) / 50), depthWrite: false }));
+        stand(g, k);
+        g.add(cy(11, 75, M.glass)); g.add(cy(9, 70, vaporM)); g.add(cy(11.6, 2, M.glass, -37, 0, 0)); g.add(cy(11.6, 2, M.glass, 37, 0, 0));
+        g.add(tr(11.4, 1.1, M.alu, -36, 0, 0)); g.add(tr(11.4, 1.1, M.alu, 36, 0, 0));
+        g.add(cy(3, 14, M.glass, 0, 16, 0, 'y', 10)); g.add(sp(2.4, std(0xa08060, 0.8, 0.3), 0, 23, 0));
+        if (p.heater) g.add(cy(12.6, 40, heaterM));
+        if (p.solenoid) for (var i = -4; i <= 4; i++) g.add(tr(16.2, 1.5, M.copper, i * 8.5, 0, 0));
+        if (p.shield) {
+          var layers = [[21, 108], [24.5, 114], [28, 120]];
+          layers.forEach(function (L) {
+            var geoS = G.opt.cutaway ? new THREE.CylinderGeometry(L[0], L[0], L[1], 44, 1, true, Math.PI * 0.75, Math.PI * 1.5) : new THREE.CylinderGeometry(L[0], L[0], L[1], 44, 1, true);
+            var sh = new THREE.Mesh(geoS, M.mumetal); sh.rotation.z = Math.PI / 2; sh.userData.ownGeo = true; sh.userData.noPick = false; g.add(sh);
+            [-1, 1].forEach(function (s) { var cap = new THREE.Mesh(new THREE.RingGeometry(6, L[0], 36), M.mumetal); cap.rotation.y = Math.PI / 2; cap.position.x = s * L[1] / 2; cap.userData.ownGeo = true; g.add(cap); });
+          });
+          g.add(bx(100, 3, 70, M.black, 0, -H + 1.5, 0));
+        } else g.add(bx(70, 3, 40, M.black, 0, -H + 1.5, 0));
         break; }
-      case 'sas': g.add(box(56, 24, 34, M.dark)); g.add(cylX(7, 40, M.glass, 0, 14, 0)); g.add(box(8, 10, 10, M.accent, 30, 0, 0)); break;
-      case 'glan': g.add(box(22, 22, 30, M.glass)); g.add(box(24, 4, 32, M.metal, 0, -12, 0)); g.add(box(24, 4, 32, M.metal, 0, 12, 0)); break;
-      case 'pd': g.add(box(16, 26, 20, M.dark)); g.add(cylX(6, 4, M.accent, 9, 0, 0)); break;
-      case 'dump': g.add(box(18, 28, 24, M.black)); g.add(box(2, 18, 14, M.dark, 9.5, 0, 0)); break;
-      case 'eom': { g.add(box(56, 20, 20, M.metal)); g.add(box(56, 4, 21, M.accent, 0, 8, 0)); g.add(cylX(2.5, 12, M.dark, -33, 0, 0)); g.add(cylX(2.5, 12, M.dark, 33, 0, 0));
-        var sm2 = new THREE.Mesh(geo('sma', function () { return new THREE.CylinderGeometry(2.5, 2.5, 8, 10); }), M.metal); sm2.position.set(0, 14, 0); g.add(sm2);
-        var led2 = new THREE.Mesh(geo('led', function () { return new THREE.SphereGeometry(2.5, 10, 8); }), p.rf ? M.on : M.off); led2.position.set(-20, 12, 6); g.add(led2); break; }
-      case 'lctrl': g.add(box(56, 34, 44, M.dark, 0, 17 - K.beamHeight, 0)); g.add(box(1, 12, 26, M.screen, -28.6, 24 - K.beamHeight, -4)); g.add(box(1, 6, 6, M.on, -28.6, 10 - K.beamHeight, 14)); break;
-      case 'lockbox': { g.add(box(50, 26, 40, M.dark, 0, 13 - K.beamHeight, 0)); for (var kb = -1; kb <= 1; kb++) { var knob = new THREE.Mesh(geo('knob', function () { return new THREE.CylinderGeometry(3, 3, 4, 12); }), M.metal); knob.rotation.z = Math.PI / 2; knob.position.set(-26, 16 - K.beamHeight, kb * 11); g.add(knob); }
-        g.add(box(1, 6, 6, S.ev && S.ev.lock && S.ev.lock.status === 'locked' ? M.on : M.off, -25.6, 6 - K.beamHeight, 14)); break; }
-      case 'fp': g.add(cylX(13, 40, M.dark)); g.add(cylX(13.5, 3, M.metal, -19, 0, 0)); g.add(cylX(13.5, 3, M.metal, 19, 0, 0)); g.add(box(10, 6, 10, M.accent, 0, 16, 0)); break;
-      case 'fgen': g.add(box(90, 45, 60, M.dark, 0, 22.5 - K.beamHeight, 0)); g.add(box(1, 22, 34, M.screen, -45.6, 28 - K.beamHeight, -6)); g.add(box(1, 8, 8, p.on ? M.on : M.off, -45.6, 10 - K.beamHeight, 20)); break;
+      case 'sas':
+        g.add(bx(58, 24, 36, M.dark)); g.add(bx(60, 3, 38, M.black, 0, 13.5, 0)); g.add(cy(7, 44, M.glass, 0, 17, 0)); g.add(cy(6, 36, own(new THREE.MeshBasicMaterial({ color: 0xb06cff, transparent: true, opacity: 0.12, depthWrite: false })), 0, 17, 0));
+        g.add(bx(9, 11, 11, M.accent, 31, 0, 0)); g.add(bx(30, 3, 22, M.black, 0, -H + 1.5, 0)); g.add(cy(4, H - 12, M.alu, 0, -12 - (H - 12) / 2, 0, 'y', 12)); break;
+      case 'glan':
+        g.add(bx(22, 22, 30, M.glass)); g.add(bx(24, 4, 32, M.alu, 0, -12, 0)); g.add(bx(24, 4, 32, M.alu, 0, 12, 0)); g.add(cy(3, 12, M.black, 0, 0, 18, 'z', 10)); break;
+      case 'pd':
+        g.add(bx(18, 26, 22, M.dark)); g.add(cy(7, 4, M.accent, 10, 0, 0)); g.add(cy(5, 1.2, M.glass, 12.4, 0, 0)); g.add(cy(2.4, 8, M.brass, -12, 6, 0, 'x', 10)); break;
+      case 'dump': {
+        g.add(bx(20, 30, 26, M.matte));
+        for (var q = -2; q <= 2; q++) g.add(bx(2, 28, 28, M.black, -4 + q * 3.2, 0, 0));
+        g.add(bx(2, 18, 16, M.black, 10.5, 0, 0)); break; }
+      case 'fgen': instrument(g, 92, 46, 62); g.add(bx(1.4, 8, 8, p.on ? M.on : M.off, -46.6, -K.beamHeight + 10, 20)); break;
+      case 'lctrl': instrument(g, 58, 36, 46); g.add(bx(1.4, 6, 6, M.on, -29.6, -K.beamHeight + 10, 16)); break;
+      case 'lockbox': {
+        instrument(g, 52, 30, 42);
+        g.add(bx(1.4, 6, 6, S.ev && S.ev.lock && S.ev.lock.status === 'locked' ? M.on : M.off, -26.6, -K.beamHeight + 8, 16)); break; }
+      default: break;
     }
     g.position.set(c.x - K.table.w / 2, H, c.z - K.table.d / 2);
     g.rotation.y = -c.rot * Math.PI / 180;
-    g.traverse(function (o) { o.userData.compId = c.id; });
+    g.userData.rot = c.rot;
+    g.traverse(function (o) {
+      o.userData.compId = c.id;
+      if (o.isMesh) {
+        var m = o.material; o.castShadow = !(m && m.transparent); o.receiveShadow = true;
+      }
+    });
+    if (ownMats.length) g.userData.ownMats = ownMats;
     if (c.id === S.sel) {
-      var sr = new THREE.Mesh(geo('selring', function () { return new THREE.RingGeometry(20, 23, 40); }), M.select); sr.rotation.x = -Math.PI / 2; sr.position.y = -H + 0.6; sr.userData.noPick = true; g.add(sr);
+      var sr = new THREE.Mesh(geo('selring', function () { return new THREE.RingGeometry(21, 25, 48); }), M.select); sr.rotation.x = -Math.PI / 2; sr.position.y = -H + 0.8; sr.userData.noPick = true; sr.castShadow = false; g.add(sr);
+      var pole = new THREE.Mesh(geo('selpole', function () { return new THREE.CylinderGeometry(0.7, 0.7, 70, 6); }), M.select); pole.position.y = 38; pole.userData.noPick = true; g.add(pole);
     }
     return g;
   }
-  function labelSprite(text) {
-    var c = document.createElement('canvas'), x = c.getContext('2d'), fs = 34;
-    x.font = '600 ' + fs + 'px ' + (css('--font-mono') || 'monospace'); var w = Math.ceil(x.measureText(text).width) + 20;
-    c.width = w; c.height = fs + 16; x.font = '600 ' + fs + 'px ' + (css('--font-mono') || 'monospace');
-    x.fillStyle = css('--sim-label-bg') || 'rgba(255,255,255,.85)'; x.fillRect(0, 0, w, c.height);
-    x.fillStyle = css('--sim-label') || '#111'; x.textBaseline = 'middle'; x.fillText(text, 10, c.height / 2 + 1);
-    var t = new THREE.CanvasTexture(c); var sp = new THREE.Sprite(new THREE.SpriteMaterial({ map: t, depthTest: false, transparent: true }));
-    sp.scale.set(w / 3.4, c.height / 3.4, 1); sp.renderOrder = 10; return sp;
+  function dimGroup(g) {
+    g.traverse(function (o) {
+      if (!o.isMesh || o.userData.noPick) return;
+      var m = o.material; if (!m || m.userData && m.userData.dim) return;
+      var key = m.uuid; G.dimCache = G.dimCache || {};
+      var d = G.dimCache[key];
+      if (!d) { d = m.clone(); d.transparent = true; d.opacity = 0.1; d.depthWrite = false; d.userData = { dim: true }; G.dimCache[key] = d; }
+      o.material = d; o.castShadow = false;
+    });
+  }
+  function compFilterOK(kind) { var f = G.opt.filter; return f === 'all' || (FILTERS[f] || []).indexOf(kind) >= 0; }
+  function labelText(c) {
+    var t = P.KINDS[c.kind].short; if (c.kind === 'aom') t += ' ' + c.params.fMHz.toFixed(3);
+    if (c.kind === 'hwp' || c.kind === 'qwp' || c.kind === 'glan') t += ' ' + c.params.axis + '°';
+    return t;
   }
   function disposeGroup(gr) {
     while (gr.children.length) {
       var o = gr.children.pop();
-      o.traverse(function (q) { if (q.isSprite) { q.material.map.dispose(); q.material.dispose(); } if (q.userData && q.userData.ownGeo && q.geometry) q.geometry.dispose(); if (q.userData && q.userData.ownMat && q.material) { if (q.material.map) q.material.map.dispose(); q.material.dispose(); } });
+      if (o.userData && o.userData.ownMats) o.userData.ownMats.forEach(function (m) { m.dispose(); });
+      o.traverse(function (q) { if (q.isSprite) { q.material.dispose(); } if (q.userData && q.userData.ownGeo && q.geometry) q.geometry.dispose(); if (q.userData && q.userData.ownMat && q.material) { if (q.material.map && !q.userData.sharedMap) q.material.map.dispose(); q.material.dispose(); } });
     }
   }
   function syncMeshes() {
     if (!G.ok) return;
-    disposeGroup(G.compGroup); disposeGroup(G.labelGroup); buildCables();
+    disposeGroup(G.compGroup); buildCables();
+    var alive = {};
     S.layout.components.forEach(function (c) {
-      G.compGroup.add(buildMesh(c));
-      if (S.labels) {
-        var t = P.KINDS[c.kind].short; if (c.kind === 'aom') t += ' ' + c.params.fMHz.toFixed(3); if (c.kind === 'eom') t += ' ' + (c.params.fMHz / 1000).toFixed(6) + ' GHz';
-        if (c.kind === 'hwp' || c.kind === 'qwp' || c.kind === 'glan') t += ' ' + c.params.axis + '°';
-        var sp = labelSprite(t); sp.position.set(c.x - K.table.w / 2, K.beamHeight + (c.kind === 'fgen' ? 20 : 34), c.z - K.table.d / 2); G.labelGroup.add(sp);
+      var g = buildMesh(c); alive[c.id] = 1;
+      if (!compFilterOK(c.kind) && c.id !== S.sel) dimGroup(g);
+      var prev = G.prevRot[c.id];
+      if (prev !== undefined && prev !== c.rot && !reduceMotion) {
+        var d = ((c.rot - prev + 540) % 360) - 180;
+        g.userData.anim = { from: -(c.rot - d) * Math.PI / 180, to: -c.rot * Math.PI / 180, t: 0 };
+        g.rotation.y = g.userData.anim.from;
+      } else if (!G.known[c.id] && Object.keys(G.known).length && !reduceMotion) {
+        g.userData.pop = 0; g.scale.setScalar(0.05);
       }
+      G.prevRot[c.id] = c.rot; G.known[c.id] = 1;
+      G.compGroup.add(g);
     });
+    Object.keys(G.known).forEach(function (id) { if (!alive[id]) { delete G.known[id]; delete G.prevRot[id]; } });
+    buildLabels();
     requestRender();
+  }
+  function buildLabels() {
+    G.layer.querySelectorAll('.optic-label').forEach(function (e) { e.remove(); }); G.labels = {};
+    if (!S.labels) return;
+    S.layout.components.forEach(function (c) {
+      var b = document.createElement('button'); b.type = 'button'; b.className = 'optic-label' + (c.id === S.sel ? ' sel' : '') + (compFilterOK(c.kind) ? '' : ' dim'); b.textContent = labelText(c); b.tabIndex = -1;
+      b.setAttribute('aria-label', P.KINDS[c.kind].name);
+      b.addEventListener('click', function () { selectComp(c.id, true); });
+      G.layer.appendChild(b); G.labels[c.id] = { el: b, pos: wp(c).add(new THREE.Vector3(0, c.kind === 'fgen' ? 20 : 34, 0)) };
+    });
+  }
+  function selectComp(id, fly) {
+    S.sel = id; syncMeshes(); renderInspector(); if (fly) focusComp(id);
   }
   function buildCables() {
     disposeGroup(G.cableGroup); G.dots = [];
@@ -2923,29 +2891,46 @@ window.SIM_MODE = 'A';
     var chain = [lk.ids.sas, lk.ids.box, lk.ids.ctrl, lk.ids.laser], cc = col('--sim-accent');
     for (var i = 0; i < 3; i++) {
       var a = comp(chain[i]), b = comp(chain[i + 1]); if (!a || !b) continue;
-      var pa = new THREE.Vector3(a.x - K.table.w / 2, 3, a.z - K.table.d / 2), pb = new THREE.Vector3(b.x - K.table.w / 2, 3, b.z - K.table.d / 2);
-      var gm = new THREE.BufferGeometry().setFromPoints([pa, pb]);
-      var ln = new THREE.Line(gm, new THREE.LineDashedMaterial({ color: cc, dashSize: 6, gapSize: 4 })); ln.computeLineDistances(); ln.userData.ownGeo = true; ln.userData.ownMat = true; G.cableGroup.add(ln);
-      var dot = new THREE.Mesh(geo('cdot', function () { return new THREE.SphereGeometry(2.6, 10, 8); }), new THREE.MeshBasicMaterial({ color: cc })); dot.userData.ownMat = true; dot.position.copy(pa); G.cableGroup.add(dot);
-      G.dots.push({ m: dot, a: pa, b: pb, ph: i / 3 });
+      var pa = new THREE.Vector3(a.x - K.table.w / 2, 6, a.z - K.table.d / 2), pb = new THREE.Vector3(b.x - K.table.w / 2, 6, b.z - K.table.d / 2);
+      var mid = pa.clone().add(pb).multiplyScalar(0.5); mid.y = 2.5;
+      var curve = new THREE.CatmullRomCurve3([pa, pa.clone().setY(3), mid, pb.clone().setY(3), pb]);
+      var tube = new THREE.Mesh(new THREE.TubeGeometry(curve, 32, 1.1, 6, false), new THREE.MeshStandardMaterial({ color: i === 2 ? 0xd9a441 : cc, roughness: 0.6 })); tube.userData.ownGeo = true; tube.userData.ownMat = true; tube.userData.noPick = true; tube.castShadow = true; G.cableGroup.add(tube);
+      var dot = new THREE.Mesh(geo('cdot', function () { return new THREE.SphereGeometry(2.8, 10, 8); }), new THREE.MeshBasicMaterial({ color: 0xffffff })); dot.userData.ownMat = true; dot.userData.noPick = true; G.cableGroup.add(dot);
+      G.dots.push({ m: dot, curve: curve, ph: i / 3 });
     }
+    G.cableGroup.visible = G.opt.cables;
   }
+  function beamMats(group, k) { group.traverse(function (o) { if (o.material && o.userData.baseOp !== undefined) o.material.opacity = o.userData.baseOp * k; }); }
   function buildBeams() {
-    disposeGroup(G.beamGroup); G.flow = [];
+    if (G.old) { disposeGroup(G.old); G.scene.remove(G.old); G.old = null; }
+    if (G.beamGroup.children.length) { G.old = G.beamGroup; G.beamGroup = new THREE.Group(); G.scene.add(G.beamGroup); }
+    G.fade = G.old && !reduceMotion ? 0 : 1; G.flow = [];
+    G.chips.forEach(function (c) { c.el.remove(); }); G.chips = [];
     if (!S.ev) return;
-    var H = K.beamHeight, up = new THREE.Vector3(0, 1, 0);
-    S.ev.trace.segments.forEach(function (s) {
-      if (s.P < 1e-5) return;
+    var H = K.beamHeight, up = new THREE.Vector3(0, 1, 0), segs = S.ev.trace.segments.filter(function (s) { return s.P >= 1e-5; });
+    var core = new THREE.Color(G.beamColor).lerp(new THREE.Color(0xffffff), 0.45);
+    segs.forEach(function (s) {
       var a = new THREE.Vector3(s.a[0] - K.table.w / 2, H, s.a[1] - K.table.d / 2), b = new THREE.Vector3(s.b[0] - K.table.w / 2, H, s.b[1] - K.table.d / 2);
       var d = b.clone().sub(a), L = d.length(); if (L < 0.5) return;
       var k = Math.min(1, Math.max(0, (Math.log10(s.P) + 5) / 6));
       var r = 0.45 + 1.25 * k;
       var tex = (s.pulsed ? G.texPulse : G.texCW).clone(); tex.needsUpdate = true; tex.repeat.set(1, L / (s.pulsed ? 90 : 40));
-      var core = new THREE.Mesh(new THREE.CylinderGeometry(r, r, L, 10, 1, true), new THREE.MeshBasicMaterial({ color: G.beamColor, map: tex, transparent: true, opacity: 0.35 + 0.65 * k, depthWrite: false }));
-      var halo = new THREE.Mesh(new THREE.CylinderGeometry(r * 2.8, r * 2.8, L, 10, 1, true), new THREE.MeshBasicMaterial({ color: G.beamColor, transparent: true, opacity: 0.06 + 0.16 * k, blending: THREE.AdditiveBlending, depthWrite: false }));
-      [core, halo].forEach(function (m) { m.position.copy(a).addScaledVector(d, 0.5); m.quaternion.setFromUnitVectors(up, d.clone().normalize()); m.userData.ownGeo = true; m.userData.ownMat = true; m.userData.noPick = true; G.beamGroup.add(m); });
-      G.flow.push({ tex: tex, speed: s.pulsed ? 0.8 : 1.4 }); // texture periods per second (~55 mm/s on screen)
+      var o1 = 0.4 + 0.6 * k, o2 = 0.06 + 0.2 * k;
+      var cm = new THREE.Mesh(new THREE.CylinderGeometry(r, r, L, 10, 1, true), new THREE.MeshBasicMaterial({ color: core, map: tex, transparent: true, opacity: o1, depthWrite: false }));
+      var hm = new THREE.Mesh(new THREE.CylinderGeometry(r * 3, r * 3, L, 12, 1, true), new THREE.MeshBasicMaterial({ color: G.beamColor, transparent: true, opacity: o2, blending: THREE.AdditiveBlending, depthWrite: false }));
+      cm.userData.baseOp = o1; hm.userData.baseOp = o2;
+      [cm, hm].forEach(function (m) { m.position.copy(a).addScaledVector(d, 0.5); m.quaternion.setFromUnitVectors(up, d.clone().normalize()); m.userData.ownGeo = true; m.userData.ownMat = true; m.userData.noPick = true; G.beamGroup.add(m); });
+      G.flow.push({ tex: tex, speed: s.pulsed ? 0.8 : 1.4 });
+      // glow where the beam lands on an optic, or leaves the table (stray light)
+      var sprMat = new THREE.SpriteMaterial({ map: G.texSpot, color: s.toEdge ? 0xff9a3c : G.beamColor, transparent: true, opacity: (s.toEdge ? 0.1 + 0.75 * k : 0.25 + 0.6 * k), blending: THREE.AdditiveBlending, depthWrite: false });
+      var spr = new THREE.Sprite(sprMat); spr.position.copy(b); var ss = (s.toEdge ? 8 + 30 * k : 9 + 22 * k); spr.scale.set(ss, ss, 1);
+      spr.userData.baseOp = sprMat.opacity; spr.userData.ownMat = true; spr.userData.sharedMap = true; spr.userData.noPick = true; G.beamGroup.add(spr);
+      if (G.opt.info && L > 60 && s.P > 0.02 && G.chips.length < 16) {
+        var el = document.createElement('div'); el.className = 'beam-chip'; el.textContent = P.fmtP(s.P) + ' · ' + P.polLabel(s.J);
+        G.layer.appendChild(el); G.chips.push({ el: el, pos: a.clone().addScaledVector(d, 0.5).add(new THREE.Vector3(0, 12, 0)) });
+      }
     });
+    beamMats(G.beamGroup, G.fade); if (G.old) beamMats(G.old, 1 - G.fade);
   }
 
   /* ---- picking & dragging ---- */
@@ -2964,14 +2949,14 @@ window.SIM_MODE = 'A';
   function pickComp(cx, cy) {
     ray = ray || new THREE.Raycaster(); G.cam.updateMatrixWorld(); G.compGroup.updateMatrixWorld(true); ray.setFromCamera(ndc(cx, cy), G.cam);
     var hits = ray.intersectObjects(G.compGroup.children, true);
-    for (var i = 0; i < hits.length; i++) { var o = hits[i].object; if (o.userData.noPick) continue; if (o.userData.compId) return o.userData.compId; }
+    for (var i = 0; i < hits.length; i++) { var o = hits[i].object; if (o.userData.noPick || !o.visible) continue; if (o.userData.compId) { var c = comp(o.userData.compId); if (c && !compFilterOK(c.kind) && c.id !== S.sel) continue; return o.userData.compId; } }
     return null;
   }
   function showGhost(t) { if (!G.ok) return; if (!t) { G.ghost.visible = false; requestRender(); return; } G.ghost.visible = true; G.ghost.position.set(t[0] - K.table.w / 2, 1, t[1] - K.table.d / 2); requestRender(); }
   function bindPointer() {
     var cv = $('simCanvas'), drag = null, down = null;
     cv.addEventListener('pointerdown', function (e) {
-      down = { x: e.clientX, y: e.clientY };
+      down = { x: e.clientX, y: e.clientY }; G.tween = null;
       if (e.button !== 0) return;
       var id = pickComp(e.clientX, e.clientY);
       if (id) {
@@ -2979,7 +2964,7 @@ window.SIM_MODE = 'A';
         if (S.sel !== id) { S.sel = id; syncMeshes(); renderInspector(); }
         drag = { id: id, moved: false, pid: e.pointerId };
         try { cv.setPointerCapture(e.pointerId); } catch (er) { }
-        cv.style.cursor = 'grabbing';
+        cv.style.cursor = 'grabbing'; G.tip.hidden = true;
       }
     });
     cv.addEventListener('pointermove', function (e) {
@@ -2988,14 +2973,47 @@ window.SIM_MODE = 'A';
         if (t && c && (t[0] !== c.x || t[1] !== c.z) && !occupied(t[0], t[1], c.id)) { c.x = t[0]; c.z = t[1]; drag.moved = true; S.layout.state.storageRan = false; changed(true); }
         return;
       }
-      if (e.pointerType === 'mouse' && !e.buttons) cv.style.cursor = pickComp(e.clientX, e.clientY) ? 'grab' : '';
+      if (e.pointerType === 'mouse' && !e.buttons) {
+        var id = pickComp(e.clientX, e.clientY); cv.style.cursor = id ? 'grab' : '';
+        var c2 = id && comp(id), r = G.stage.getBoundingClientRect();
+        if (c2) { G.tip.hidden = false; G.tip.textContent = P.KINDS[c2.kind].name + ' · ' + labelText(c2); G.tip.style.left = (e.clientX - r.left + 14) + 'px'; G.tip.style.top = (e.clientY - r.top + 12) + 'px'; } else G.tip.hidden = true;
+      }
     });
+    cv.addEventListener('pointerleave', function () { G.tip.hidden = true; });
     function up(e) {
       if (drag) { drag = null; if (G.ctr) G.ctr.enabled = true; cv.style.cursor = ''; try { cv.releasePointerCapture(e.pointerId); } catch (er) { } return; }
       if (down && Math.hypot(e.clientX - down.x, e.clientY - down.y) < 4 && e.button === 0) { if (S.sel) { S.sel = null; syncMeshes(); renderInspector(); } }
       down = null;
     }
     cv.addEventListener('pointerup', up); cv.addEventListener('pointercancel', up);
+    cv.addEventListener('wheel', function () { G.tween = null; }, { passive: true });
+  }
+
+  /* ---- guided tour ---- */
+  var TOUR = [
+    { kind: 'laser', title: 'One laser feeds everything', text: 'A single fibre-coupled DFB laser at 795 nm (Rb D1) is the source for the control, the probe and the lock reference. Because both EIT fields share this laser, its ~MHz linewidth is common to both and largely cancels in the two-photon detuning.' },
+    { kind: 'isolator', title: 'Protect the diode', text: 'The Faraday isolator passes light forward and blocks the reflections coming back from the AOM double-passes and cell windows. Without it the DFB mode-hops and the lock fails.' },
+    { kind: 'sas', title: 'Reference for the frequency lock', text: 'A half-wave plate and a PBS pick off roughly 5 % of the beam into the saturated-absorption module. Its sub-Doppler features are the frequency ruler: the lock holds the laser near F=2→F′=1.' },
+    { kind: 'lockbox', title: 'Close the loop', text: 'The lock box turns the SAS signal into an error signal and feeds the laser controller, which trims the DFB current. SAS → lock box → controller → DFB: the cables here are drawn automatically. Open any link and the laser drifts.' },
+    { kind: 'pbs', nth: 1, title: 'Split into control and probe', text: 'The second half-wave plate sets the power ratio. This PBS sends horizontal light (control, strong) one way and vertical light (probe, weak) the other. Rotate that plate and watch the two arms trade brightness.' },
+    { kind: 'aom', nth: 0, title: 'Control arm: double-pass AOM', text: 'The AOM shifts the control by 2 × f_RF and the cat’s-eye module sends the chosen order back along the input with its polarization rotated by 90°, so the upstream PBS routes it onward. RF off means no light.' },
+    { kind: 'aom', nth: 1, title: 'Probe arm: second AOM', text: 'The probe passes its own AOM, a few tens of kHz away from the control in RF frequency. That small difference is what makes the two-photon detuning match the Zeeman splitting. The ND filter keeps the probe weak.' },
+    { kind: 'qwp', nth: 0, title: 'Opposite circular polarizations', text: 'After the PBS recombiner the beams overlap with orthogonal linear polarizations. The quarter-wave plate at 45° turns them into σ⁺ and σ⁻, the pair that drives the Λ system.' },
+    { kind: 'cell', title: 'Shielded vapour cell', text: 'The ⁸⁷Rb cell sits in a heater, a solenoid (the bias field along the beams) and three layers of µ-metal. Use the shield cutaway button to look inside. The field sets the two-photon resonance, 1.4 kHz per mG.' },
+    { kind: 'glan', title: 'Throw the control away', text: 'A second quarter-wave plate undoes the circular polarization and the Glan–Taylor (extinction ~10⁵) transmits only the probe. The rejected control goes to the beam dump.' },
+    { kind: 'pd', title: 'Detect the transparency window', text: 'The photodiode sees the probe transmission. Sweep the two-photon detuning on the scope below and the EIT peak appears when everything upstream is right.' },
+    { kind: 'fgen', title: 'Timing for stored light', text: 'The function generator gates both AOMs: it slices a probe pulse, switches the control off to store it and on again to retrieve it. Open “Pulsed storage” on the scope to run the sequence.' }
+  ];
+  var tourI = -1;
+  function tourComp(st) { var list = S.layout.components.filter(function (c) { return c.kind === st.kind; }); return list[st.nth || 0] || list[0] || null; }
+  function tourShow(i) {
+    var box = $('tour'); if (!box) return;
+    if (i < 0 || i >= TOUR.length) { tourI = -1; box.hidden = true; return; }
+    tourI = i; var st = TOUR[i], c = tourComp(st);
+    box.hidden = false;
+    box.innerHTML = '<div class="tour-h"><b>Tour ' + (i + 1) + ' / ' + TOUR.length + '</b><button type="button" class="btn" id="tourX" aria-label="Close tour">×</button></div><h5>' + esc(st.title) + '</h5><p>' + esc(st.text) + (c ? '' : ' <em>(this part is not on your bench right now)</em>') + '</p><div class="row"><button type="button" class="btn" id="tourP"' + (i === 0 ? ' disabled' : '') + '>← Back</button><button type="button" class="btn primary" id="tourN">' + (i === TOUR.length - 1 ? 'Finish' : 'Next →') + '</button></div>';
+    $('tourX').onclick = function () { tourShow(-1); }; $('tourP').onclick = function () { tourShow(tourI - 1); }; $('tourN').onclick = function () { tourShow(tourI + 1); };
+    if (c) { S.sel = c.id; syncMeshes(); renderInspector(); focusComp(c.id); }
   }
 
   /* ---- render loop ---- */
@@ -3016,33 +3034,70 @@ window.SIM_MODE = 'A';
     if (raf || !G.ok) return;
     raf = requestAnimationFrame(frame);
   }
+  var tmpV = null;
+  function project(pos, el, w, h) {
+    tmpV = tmpV || new THREE.Vector3(); tmpV.copy(pos).project(G.cam);
+    var hide = tmpV.z > 1 || tmpV.z < -1 || Math.abs(tmpV.x) > 1.05 || Math.abs(tmpV.y) > 1.05;
+    el.style.display = hide ? 'none' : '';
+    if (!hide) { el.style.transform = 'translate(-50%,-100%) translate(' + ((tmpV.x * 0.5 + 0.5) * w).toFixed(1) + 'px,' + ((-tmpV.y * 0.5 + 0.5) * h).toFixed(1) + 'px)'; }
+  }
   function frame(t) {
     raf = 0;
     if (!G.visible || document.hidden) return;
     var dt = Math.min(0.1, (t - (last || t)) / 1000); last = t;
     if (pendingBeams) { buildBeams(); pendingBeams = false; needRender = true; }
-    if (G.dots && G.dots.length && !reduceMotion) { var tt = t / 1000; G.dots.forEach(function (d) { var f = (tt * 0.5 + d.ph) % 1; d.m.position.lerpVectors(d.a, d.b, f); }); needRender = true; }
+    if (G.fade < 1) { G.fade = Math.min(1, G.fade + dt / 0.28); beamMats(G.beamGroup, G.fade); if (G.old) { beamMats(G.old, 1 - G.fade); if (G.fade >= 1) { disposeGroup(G.old); G.scene.remove(G.old); G.old = null; } } needRender = true; }
+    if (G.tween) {
+      var k = 1 - Math.exp(-dt * 6.5);
+      G.cam.position.lerp(G.tween.pos, k); G.ctr.target.lerp(G.tween.tgt, k); G.ctr.update();
+      if (G.cam.position.distanceTo(G.tween.pos) < 1.5 && G.ctr.target.distanceTo(G.tween.tgt) < 1.5) G.tween = null;
+      needRender = true;
+    }
+    G.compGroup.children.forEach(function (g) {
+      var an = g.userData.anim;
+      if (an) { an.t = Math.min(1, an.t + dt / 0.3); var e = 1 - Math.pow(1 - an.t, 3); g.rotation.y = an.from + (an.to - an.from) * e; if (an.t >= 1) g.userData.anim = null; needRender = true; }
+      if (g.userData.pop !== undefined) { g.userData.pop = Math.min(1, g.userData.pop + dt / 0.28); var s = 1 - Math.pow(1 - g.userData.pop, 3); g.scale.setScalar(Math.max(0.05, s)); if (g.userData.pop >= 1) { delete g.userData.pop; g.scale.setScalar(1); } needRender = true; }
+    });
+    if (G.dots && G.dots.length && !reduceMotion && G.opt.cables) { var tt = t / 1000; G.dots.forEach(function (d) { d.m.position.copy(d.curve.getPoint((tt * 0.35 + d.ph) % 1)); }); needRender = true; }
     stepDrift(dt);
-    if (!reduceMotion) { for (var i = 0; i < G.flow.length; i++) G.flow[i].tex.offset.y -= G.flow[i].speed * dt; if (G.flow.length) needRender = true; }
+    if (!reduceMotion && G.opt.flow) { for (var i = 0; i < G.flow.length; i++) G.flow[i].tex.offset.y -= G.flow[i].speed * dt; if (G.flow.length) needRender = true; }
     if (G.ctr && G.ctr.enableDamping) G.ctr.update();
-    if (needRender) { G.renderer.render(G.scene, G.cam); needRender = false; }
+    if (needRender) {
+      G.renderer.render(G.scene, G.cam); needRender = false;
+      var r = G.stage.getBoundingClientRect(); G.cam.updateMatrixWorld();
+      for (var id in G.labels) project(G.labels[id].pos, G.labels[id].el, r.width, r.height);
+      G.chips.forEach(function (c) { project(c.pos, c.el, r.width, r.height); });
+    }
     scopePhase += dt * 0.25; if ((S.scope === 'sweep' || S.scope === 'err') && !reduceMotion && Math.floor(t / 100) !== Math.floor((t - dt * 1000) / 100)) drawScope();
     loop();
+  }
+  function screenshot() {
+    if (!G.ok) return;
+    G.renderer.render(G.scene, G.cam);
+    var a = document.createElement('a'); a.href = G.canvas.toDataURL('image/png'); a.download = 'rb87-eit-bench.png'; document.body.appendChild(a); a.click(); a.remove();
   }
 
   /* ---------------- toolbar, keys, scope controls ---------------- */
   function bind() {
-    var li = $('scLockin');
-    if (li) li.addEventListener('click', function () { S.layout.state.lockin = !S.layout.state.lockin; li.setAttribute('aria-pressed', S.layout.state.lockin ? 'true' : 'false'); changed(false); });
-    $('simRefA').addEventListener('click', function () { setMode('A', true); });
-    $('simRefB').addEventListener('click', function () { setMode('B', true); });
-    $('simClear').addEventListener('click', function () { S.layout = { mode: MODE, components: [], state: { locked: false, lockLine: 'F1', lockin: false, tau_us: 20, storageRan: false } }; S.sel = null; S.store = null; changed(true); });
+    $('simClear').addEventListener('click', function () { S.layout = { mode: 'A', components: [], state: { locked: false, tau_us: 20, storageRan: false } }; S.sel = null; S.store = null; changed(true); });
     $('simHint').addEventListener('click', showHint);
     var rb = $('simRestore'), sv = loadSaved();
-    if (sv && sv.components && sv.components.length) { rb.hidden = false; rb.addEventListener('click', function () { var s2 = loadSaved(); if (s2 && s2.components) { S.layout = s2; S.layout.mode = s2.mode === 'B' ? 'B' : 'A'; S.layout.state = S.layout.state || { locked: false, tau_us: 20, lockLine: 'F1' }; S.sel = null; S.store = null; setMode(S.layout.mode, false); changed(true); } }); }
+    if (sv && sv.components && sv.components.length) { rb.hidden = false; rb.addEventListener('click', function () { var s2 = loadSaved(); if (s2 && s2.components) { S.layout = s2; S.layout.mode = 'A'; S.layout.state = S.layout.state || { locked: false, tau_us: 20 }; S.sel = null; S.store = null; changed(true); } }); }
     $('simLabels').addEventListener('click', function (e) { S.labels = !S.labels; e.currentTarget.setAttribute('aria-pressed', S.labels ? 'true' : 'false'); syncMeshes(); });
     $('simTop').addEventListener('click', function () { setView('top'); });
     $('simPersp').addEventListener('click', function () { setView('3d'); });
+    $('simFront').addEventListener('click', function () { setView('front'); });
+    $('simSource').addEventListener('click', function () { setView('source'); });
+    $('simCellV').addEventListener('click', function () { setView('cell'); });
+    $('simFocus').addEventListener('click', function () { if (S.sel) focusComp(S.sel); else showMsg('Select a component first'); });
+    $('simFilter').addEventListener('change', function (e) { G.opt.filter = e.target.value; syncMeshes(); });
+    $('simTour').addEventListener('click', function () { if (!G.ok) return; if (tourI >= 0) tourShow(-1); else tourShow(0); });
+    function toggle(id, key, after) { $(id).addEventListener('click', function (e) { G.opt[key] = !G.opt[key]; e.currentTarget.setAttribute('aria-pressed', G.opt[key] ? 'true' : 'false'); if (after) after(); requestRender(); }); }
+    toggle('simCut', 'cutaway', function () { syncMeshes(); });
+    toggle('simCables', 'cables', function () { if (G.cableGroup) G.cableGroup.visible = G.opt.cables; });
+    toggle('simInfo', 'info', function () { pendingBeams = true; });
+    toggle('simFlow', 'flow');
+    $('simShot').addEventListener('click', screenshot);
     $('scSweep').addEventListener('click', function () { setScope('sweep'); });
     $('scStore').addEventListener('click', function () { setScope('store'); });
     $('scErr').addEventListener('click', function () { setScope('err'); });
@@ -3073,23 +3128,11 @@ window.SIM_MODE = 'A';
   }
 
   function applyModeUI() {
-    OBJ = MODE === 'B' ? OBJ_B : OBJ_A;
-    $('simRefA').setAttribute('aria-pressed', MODE === 'A' ? 'true' : 'false'); $('simRefB').setAttribute('aria-pressed', MODE === 'B' ? 'true' : 'false');
-    var li = $('scLockin'); if (li) li.hidden = MODE !== 'B';
-    $('scStore').textContent = MODE === 'B' ? 'Storage (Method B)' : 'Pulsed storage';
-    $('simNote').innerHTML = MODE === 'B'
-      ? 'Active: <b>Method B</b> (hyperfine Λ, EOM carrier + sideband; objectives, scope and physics switched). Guide: <a href="mod-b.html#b-arch">Method B architecture</a> · <a href="mod-b.html#b-physics">physics</a>.'
-      : 'Active: <b>Method A</b> (Zeeman Λ, two double-pass AOMs; objectives, scope and physics switched). Guide: <a href="index.html#p4">Method A architecture</a> · <a href="index.html#p3">physics</a>.';
+    $('simNote').innerHTML = 'Method A (Zeeman Λ, two double-pass AOMs). Guide: <a href="#p4">architecture</a> · <a href="#p3">physics</a>.';
     buildPalette();
     var hb = $('hintBox'); if (hb) hb.hidden = true;
   }
-  function setMode(m, loadRef) {
-    MODE = m === 'B' ? 'B' : 'A';
-    if (loadRef) { S.layout = refLayout(); S.sel = null; S.store = null; }
-    applyModeUI();
-    if (loadRef) changed(true); else recompute();
-    setScope(S.scope);
-  }
+
   function start() {
     buildPalette(); bind(); applyModeUI();
     recompute(); renderInspector(); updateUI();

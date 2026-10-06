@@ -9,16 +9,12 @@ Reading material and interactive 3D optical-bench simulators for building a room
 | Page | File | What it covers |
 |---|---|---|
 | Method A · Zeeman EIT (AOM) | `index.html` | The primary configuration. One DFB laser locked by saturated absorption spectroscopy (SAS) with a full servo loop. Control and probe arms each pass a double-pass AOM, with orthogonal circular polarizations. The cell sits in a solenoid inside a mu-metal shield, and a Glan-Taylor separates the probe before detection. |
-| Method B · Hyperfine EIT (EOM) | `mod-b.html` | The complementary configuration. A fiber EOM driven at ≈6.834 GHz generates the carrier and sideband for hyperfine Λ-EIT, mainly for CW characterisation. The page includes storage options that still need verification. |
 | Quantum Optics Lectures | `quantum.html` | Twelve lectures, from photons and the two-level atom up to EIT, slow and stored light, quantum memories, single photons and strong coupling. |
 
-All three pages share a top navigation bar. Both guides contain the same **"Why Method A? Why Method B?"** decision section.
+Both pages share a top navigation bar. The guide includes a **"Why Method A?"** decision record.
 
 ### Method A guide sections
-Project at a glance · Glossary (searchable, about 100 terms) · Physics from scratch · Method A experimental architecture (including the SAS → lock box → laser controller → DFB frequency lock) · Why Method A? Why Method B? · 3D optical-bench simulator · Bring-up & audit protocol · Equipment list · Recommended reading
-
-### Method B guide sections
-Method B at a glance · Why Method A? Why Method B? · Physics of hyperfine Λ-EIT · Architecture & timing · Light storage in Method B: options to verify · 3D bench simulator · Bring-up & audit · Equipment list · Reading
+Project at a glance · Glossary (searchable, about 100 terms) · Physics from scratch · Method A experimental architecture (including the SAS → lock box → laser controller → DFB frequency lock) · Why Method A? · 3D optical-bench simulator · Bring-up & audit protocol · Equipment list · Recommended reading
 
 ### Lectures
 L1 Light as waves and photons · L2 Quantum states and measurement · L3 Two-level atom, Rabi oscillations, Bloch sphere · L4 Density matrix, decay and dephasing · L5 Atomic structure for alkalis · L6 Susceptibility, absorption, dispersion · L7 Dark states, CPT, EIT, Autler–Townes · L8 Slow and stopped light · L9 Thermal vapour effects · L10 Quantum memories · L11 Quantum states of light · L12 Strong coupling and polaritons in solids
@@ -26,12 +22,16 @@ L1 Light as waves and photons · L2 Quantum states and measurement · L3 Two-lev
 ## Features
 
 - **Analogy boxes on every equation:** each one gives a plain-language reading of the symbols, an everyday analogy, and where the analogy breaks down.
-- **Interactive charts:** EIT transmission and dispersion, Zeeman shifts, linewidth vs control intensity, EOM sideband powers, and a Rabi/Bloch-sphere widget.
+- **Interactive charts:** EIT transmission and dispersion, Zeeman shifts, linewidth vs control intensity, and a Rabi/Bloch-sphere widget.
 - **3D bench simulator (three.js):**
   - You drag optical and electronic components onto a breadboard, and the beam is traced through them, keeping track of polarization (Jones calculus), power and frequency shifts.
-  - Both simulators have a "Load reference" switch for Method A (Zeeman, 2×AOM) and Method B (Hyperfine, EOM). Each loads that method's full reference layout, objectives and scope modes.
+  - Detailed component models (mounted mirrors, PBS cubes, graduated waveplates, double-pass AOM modules, shielded cell with solenoid and heater glow, instruments with screens and LEDs) lit with shadows on a dark-lab table.
+  - The light reacts live: rotating, moving, adding or removing a part re-traces the beams, which cross-fade to the new path. Beams glow where they land on an optic and flag stray light leaving the table. A **Beam info** toggle labels each beam with its power and polarization.
+  - Camera views (3D, Top, Front, Source, Cell), a Focus button, a "Show" filter for subsystems, a µ-metal shield cutaway, a cable toggle, a pause for the moving light, and a PNG screenshot.
+  - A 12-step **guided tour** walks along the beam path from the laser to the function generator.
+  - The inspector gives each component's role in Method A, its place on the reference bench, and an experiment to try.
   - The laser frequency lock (SAS, lock box, laser controller) and its error signal are modelled.
-  - A scope shows the EIT sweep, the lock-in signal and the pulsed-storage view.
+  - A scope shows the EIT sweep, the SAS error signal and the pulsed-storage view.
   - Game-style objectives tick off automatically as the setup is built correctly.
 - Light and dark themes; works on phones.
 
