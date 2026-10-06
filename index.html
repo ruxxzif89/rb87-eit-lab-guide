@@ -269,6 +269,9 @@ input[type=range]{width:100%;accent-color:var(--laser);min-width:0}
 .bom-tot .have{color:var(--muted)}
 .bom-tbl tr.have td{opacity:.55}
 .bom-tbl tr.have td:first-child{opacity:1}
+.bom-tbl tr.removed td{opacity:.45}
+.bom-tbl tr.removed td:nth-child(-n+2){opacity:1}
+.bom-tbl tr.removed td:nth-child(4){text-decoration:line-through}
 .bom-tbl input.bomTick{width:18px;height:18px;accent-color:var(--laser)}
 #bomOut .tot{font-family:var(--font-mono);font-weight:600}
 .wire-key{display:flex;flex-wrap:wrap;gap:6px 14px;font:600 .72rem/1.3 var(--font-mono);margin:6px 0 0;color:var(--ink-2)}
@@ -3417,16 +3420,24 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
   function now() { var d = new Date(); return d.toLocaleTimeString('en-MY', { hour: '2-digit', minute: '2-digit' }); }
 
   /* ---- totals ---- */
+  /* effective state of a row: 'have' (owned / borrowed), 'remove' (dropped from the plan) or 'buy'. Optional rows are removed unless the user keeps them. */
+  function eff(r) {
+    var v = S.states[r.id]; if (v === true) v = 'have';
+    if (v === 'have' || v === 'remove') return v;
+    if (v === 'keep') return 'buy';
+    return r.status === 'optional' ? 'remove' : 'buy';
+  }
   function totals() {
-    var core = 0, opt = 0, have = 0, n = 0;
+    var core = 0, opt = 0, have = 0, rem = 0, n = 0, m = 0;
     D.rows.forEach(function (r) {
-      if (S.states[r.id]) { have += r.line_myr; n++; } else if (r.status === 'optional') opt += r.line_myr; else core += r.line_myr;
+      var e = eff(r);
+      if (e === 'have') { have += r.line_myr; n++; } else if (e === 'remove') { rem += r.line_myr; m++; } else if (r.status === 'optional') opt += r.line_myr; else core += r.line_myr;
     });
-    return { core: core, opt: opt, have: have, n: n };
+    return { core: core, opt: opt, have: have, n: n, rem: rem, m: m };
   }
   function paintTotals() {
     var t = totals(), el = document.getElementById('bomTotals'); if (!el) return;
-    el.innerHTML = '<span><b>To purchase (core)</b> MYR ' + fmt(t.core) + '</span><span><b>Optional / shared to purchase</b> MYR ' + fmt(t.opt) + '</span><span><b>Everything to purchase</b> MYR ' + fmt(t.core + t.opt) + '</span><span class="have"><b>Not purchased (' + t.n + ' owned / borrowed)</b> MYR ' + fmt(t.have) + '</span>';
+    el.innerHTML = '<span><b>To purchase (core)</b> MYR ' + fmt(t.core) + '</span><span><b>Optional kept, to purchase</b> MYR ' + fmt(t.opt) + '</span><span><b>Everything to purchase</b> MYR ' + fmt(t.core + t.opt) + '</span><span class="have"><b>Not purchased (' + t.n + ' owned / borrowed)</b> MYR ' + fmt(t.have) + '</span><span class="have"><b>Removed from the plan (' + t.m + ' items)</b> MYR ' + fmt(t.rem) + '</span>';
   }
 
   /* ---- saving: browser now, database shortly after ---- */
@@ -3483,29 +3494,36 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
   }
 
   /* ---- table ---- */
+  function setTick(id, kind, on) {
+    var row = D.rows.filter(function (r) { return r.id === id; })[0], opt = row.status === 'optional';
+    if (on) S.states[id] = kind; else if (opt) S.states[id] = 'keep'; else delete S.states[id];
+  }
+  function rowHtml(r) {
+    var e = eff(r);
+    return '<tr class="' + (e === 'have' ? 'have' : e === 'remove' ? 'removed' : '') + '" data-id="' + esc(r.id) + '"><td><input type="checkbox" class="bomTick" data-kind="have" data-id="' + esc(r.id) + '"' + (e === 'have' ? ' checked' : '') + ' aria-label="Owned or borrowed: ' + esc(r.item) + '"></td><td><input type="checkbox" class="bomTick" data-kind="remove" data-id="' + esc(r.id) + '"' + (e === 'remove' ? ' checked' : '') + ' aria-label="Remove from plan: ' + esc(r.item) + '"></td><td>' + esc(r.id) + '</td><td>' + esc(r.item) + (r.status === 'optional' ? ' <span class="tag est">optional</span>' : '') + '</td><td class="num">' + r.qty + ' ' + esc(r.unit) + '</td><td class="num">' + fmt(r.market_myr) + '</td><td class="num">' + fmt(r.unit_myr) + '</td><td class="num">' + (e === 'buy' ? fmt(r.line_myr) : '<s>' + fmt(r.line_myr) + '</s> 0') + '</td><td>' + (r.basis === 'web' ? 'seen on vendor page' : '<span class="tag est">estimate</span>') + '</td></tr>';
+  }
   function paintRows() {
-    var h = '<thead><tr><th title="Tick if we already own it or can borrow it">Have it?</th><th>#</th><th>Item</th><th>Qty</th><th>Market price (MYR, unit)</th><th>Budget price (MYR, unit)</th><th>Line total (MYR)</th><th>Price basis</th></tr></thead><tbody>', cur = null;
+    var h = '<thead><tr><th title="Tick if we already own it or can borrow it">Have it?</th><th title="Tick to take it out of the plan (optional items start ticked)">Remove</th><th>#</th><th>Item</th><th>Qty</th><th>Market price (MYR, unit)</th><th>Budget price (MYR, unit)</th><th>Line total (MYR)</th><th>Price basis</th></tr></thead><tbody>', cur = null;
     D.rows.forEach(function (r) {
-      if (r.g !== cur) { h += '<tr class="grp"><th colspan="8">' + esc(r.g) + '</th></tr>'; cur = r.g; }
-      var on = !!S.states[r.id];
-      h += '<tr class="' + (on ? 'have' : '') + '" data-id="' + esc(r.id) + '"><td><input type="checkbox" class="bomTick" data-id="' + esc(r.id) + '"' + (on ? ' checked' : '') + ' aria-label="Owned or borrowed: ' + esc(r.item) + '"></td><td>' + esc(r.id) + '</td><td>' + esc(r.item) + (r.status === 'optional' ? ' <span class="tag est">optional</span>' : '') + '</td><td class="num">' + r.qty + ' ' + esc(r.unit) + '</td><td class="num">' + fmt(r.market_myr) + '</td><td class="num">' + fmt(r.unit_myr) + '</td><td class="num">' + (on ? '<s>' + fmt(r.line_myr) + '</s> 0' : fmt(r.line_myr)) + '</td><td>' + (r.basis === 'web' ? 'seen on vendor page' : '<span class="tag est">estimate</span>') + '</td></tr>';
+      if (r.g !== cur) { h += '<tr class="grp"><th colspan="9">' + esc(r.g) + '</th></tr>'; cur = r.g; }
+      h += rowHtml(r);
     });
     document.getElementById('bomTable').innerHTML = h + '</tbody>';
     document.querySelectorAll('#bomTable .bomTick').forEach(function (cb) {
       cb.addEventListener('change', function () {
-        var id = cb.getAttribute('data-id'); if (cb.checked) S.states[id] = true; else delete S.states[id];
-        var tr = cb.closest('tr'); tr.className = cb.checked ? 'have' : '';
-        var row = D.rows.filter(function (r) { return r.id === id; })[0]; tr.children[6].innerHTML = cb.checked ? '<s>' + fmt(row.line_myr) + '</s> 0' : fmt(row.line_myr);
+        var id = cb.getAttribute('data-id'), kind = cb.getAttribute('data-kind'), y = window.scrollY;
+        setTick(id, kind, cb.checked); paintRows(); window.scrollTo(0, y);
+        var again = document.querySelector('#bomTable .bomTick[data-id="' + id + '"][data-kind="' + kind + '"]'); if (again) again.focus({ preventScroll: true });
         changed();
       });
     });
     paintTotals(); paintVer();
   }
   function csv() {
-    var lines = ['id,group,item,qty,unit,market_myr_unit,budget_myr_unit,line_myr,owned_or_borrowed,to_purchase_myr,status,basis'];
+    var lines = ['id,group,item,qty,unit,market_myr_unit,budget_myr_unit,line_myr,owned_or_borrowed,removed,to_purchase_myr,status,basis'];
     D.rows.forEach(function (r) {
-      var on = !!S.states[r.id];
-      lines.push([r.id, '"' + r.g.replace(/"/g, '""') + '"', '"' + r.item.replace(/"/g, '""') + '"', r.qty, r.unit, r.market_myr, r.unit_myr, r.line_myr, on ? 'yes' : 'no', on ? 0 : r.line_myr, r.status, r.basis].join(','));
+      var e = eff(r);
+      lines.push([r.id, '"' + r.g.replace(/"/g, '""') + '"', '"' + r.item.replace(/"/g, '""') + '"', r.qty, r.unit, r.market_myr, r.unit_myr, r.line_myr, e === 'have' ? 'yes' : 'no', e === 'remove' ? 'yes' : 'no', e === 'buy' ? r.line_myr : 0, r.status, r.basis].join(','));
     });
     var a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([lines.join('\n')], { type: 'text/csv' })); a.download = 'rb87-eit-bom-costed' + (S.verName ? '-' + S.verName.replace(/[^a-z0-9]+/gi, '_') : '') + '.csv'; document.body.appendChild(a); a.click(); a.remove();
   }
@@ -3516,7 +3534,7 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
       '<p id="bomStatus" class="bom-status" aria-live="polite"></p></div>' +
       '<div class="bom-tot" id="bomTotals"></div>' +
       '<div class="scroll-x"><table class="bom-tbl" id="bomTable"></table></div>' +
-      '<p>' + esc(D.note) + ' “Estimate” prices are catalogue-range estimates: confirm each with a vendor quote. Tick “Have it?” for anything we already own or can borrow: it drops out of the purchase totals. <button type="button" class="btn" id="bomCsv">Download CSV</button> <button type="button" class="btn" id="bomClear">Clear all ticks</button> <button type="button" class="btn" id="bomLock">Lock</button></p>';
+      '<p>' + esc(D.note) + ' “Estimate” prices are catalogue-range estimates: confirm each with a vendor quote. Tick “Have it?” for anything we already own or can borrow, and “Remove” for anything we decide not to buy: both drop out of the purchase totals. Optional items start with Remove ticked. <button type="button" class="btn" id="bomCsv">Download CSV</button> <button type="button" class="btn" id="bomClear">Reset ticks to defaults</button> <button type="button" class="btn" id="bomLock">Lock</button></p>';
     bindVer(); paintRows();
   }
   form.addEventListener('submit', function (e) {
