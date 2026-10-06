@@ -331,10 +331,16 @@ details.q summary::marker{color:var(--laser)}
 details.q[open]{padding-bottom:8px}
 details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink-2)}
 .seen{font-size:.88rem;margin-top:10px}
+
+.seg{display:inline-flex;flex-wrap:wrap;align-items:stretch;border:1px solid var(--ink);border-radius:2px;background:var(--surface)}
+.seg .seg-l{font-family:var(--font-mono);font-size:.68rem;text-transform:uppercase;letter-spacing:.07em;padding:5px 8px;color:var(--muted);align-self:center}
+.seg .btn{border:0;border-left:1px solid var(--rule-strong);border-radius:0}
+.seg .btn[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.sim-note{flex:1 1 100%;margin:2px 0 0;font-size:.78rem;color:var(--ink-2)}
 </style>
 </head>
 <body>
-<nav class="topnav" aria-label="Guide pages"><div class="wrap"><span class="brand">Rb-87 EIT</span><a href="index.html">Mod A · Zeeman EIT (AOM)</a><a href="mod-b.html">Mod B · Hyperfine EIT (EOM)</a><a href="quantum.html" aria-current="page">Quantum Optics Lectures</a></div></nav>
+<nav class="topnav" aria-label="Guide pages"><div class="wrap"><span class="brand">Rb-87 EIT</span><a href="index.html">Method A · Zeeman EIT (AOM)</a><a href="mod-b.html">Method B · Hyperfine EIT (EOM)</a><a href="quantum.html" aria-current="page">Quantum Optics Lectures</a></div></nav>
 
 <a class="skip" href="#main">Skip to content</a>
 <header class="masthead">
@@ -350,7 +356,7 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
     <div class="hero">
       <div>
         <h1>Quantum optics, from the photon to <span class="wl">stored light</span></h1>
-        <p class="lede">Twelve lectures that build the ideas behind the <a href="index.html">Mod A</a> and <a href="mod-b.html">Mod B</a> guides, one step at a time. Each has learning goals, a worked example with real ⁸⁷Rb/795 nm numbers, an analogy beside every equation (including where it breaks down), questions with hidden answers, and links to where the idea appears in the experiment.</p>
+        <p class="lede">Twelve lectures that build the ideas behind the <a href="index.html">Method A</a> and <a href="mod-b.html">Method B</a> guides, one step at a time. Each has learning goals, a worked example with real ⁸⁷Rb/795 nm numbers, an analogy beside every equation (including where it breaks down), questions with hidden answers, and links to where the idea appears in the experiment.</p>
       </div>
       <div class="spec" role="group" aria-label="How to use these lectures">
         <dl>
@@ -399,7 +405,7 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
   <div class="lec-head"><span class="lec-num">L1</span><h2 id="L1h">Light as waves and photons</h2></div>
   <div class="goals"><b>Learning goals</b><ul><li>Describe light as an electromagnetic wave with wavelength, frequency and wavevector.</li><li>Explain energy quantization and compute the photon energy at 795 nm.</li><li>Convert optical power into photon rate, the bridge between “mW” and “single photons”.</li></ul></div>
   <div class="prose">
-    <p>Classically, a laser beam is an oscillating electric field. At 795 nm it oscillates about 3.8 × 10¹⁴ times per second, far too fast for any detector to follow, so detectors measure time-averaged <em>power</em>. Quantum mechanically, that energy arrives in indivisible packets, <strong>photons</strong>, each carrying hν. Both pictures are right. The wave picture explains interference and polarization (the waveplates of Mod A); the photon picture explains why a detector clicks and why a quantum memory must preserve single quanta.</p>
+    <p>Classically, a laser beam is an oscillating electric field. At 795 nm it oscillates about 3.8 × 10¹⁴ times per second, far too fast for any detector to follow, so detectors measure time-averaged <em>power</em>. Quantum mechanically, that energy arrives in indivisible packets, <strong>photons</strong>, each carrying hν. Both pictures are right. The wave picture explains interference and polarization (the waveplates of Method A); the photon picture explains why a detector clicks and why a quantum memory must preserve single quanta.</p>
   </div>
   <div class="eq"><span class="src">L1.1</span>\[ E(z,t)=E_0\cos(kz-\omega t),\qquad k=\frac{2\pi}{\lambda},\quad \omega=2\pi\nu,\quad c=\lambda\nu;\qquad E_{\rm photon}=h\nu=\frac{hc}{\lambda},\qquad \Phi=\frac{P}{h\nu}. \]</div>
   <aside class="ana" aria-label="Analogy: Rain and raindrops"><div class="ana-h">Rain and raindrops</div>
@@ -422,7 +428,7 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
     </div>
   </div>
   <details class="q"><summary>Q1. How many photons per second are in a 1 pW beam at 795 nm?</summary><div class="ans">1×10⁻¹² W / 2.499×10⁻¹⁹ J ≈ 4.0 × 10⁶ photons/s. Even a picowatt is millions of photons per second.</div></details>
-  <details class="q"><summary>Q2. Why can the photodiode in Mod A not see individual 795 nm photons?</summary><div class="ans">An ordinary photodiode with a transimpedance amplifier integrates current. Its noise is equivalent to many photons per measurement time, so single quanta are hidden. Counting single photons needs single-photon detectors (e.g. avalanche photodiodes), which are not in the current equipment plan.</div></details>
+  <details class="q"><summary>Q2. Why can the photodiode in Method A not see individual 795 nm photons?</summary><div class="ans">An ordinary photodiode with a transimpedance amplifier integrates current. Its noise is equivalent to many photons per measurement time, so single quanta are hidden. Counting single photons needs single-photon detectors (e.g. avalanche photodiodes), which are not in the current equipment plan.</div></details>
   <p class="seen">Where it shows up: <a class="xref" href="index.html#p1">laser safety and power levels</a><a class="xref" href="index.html#p3-slow">pulse energies in storage</a></p>
 </section>
 
@@ -440,11 +446,11 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
     <p class="fails"><span class="lbl">Where it fails</span>A real needle has a definite direction before you look. A quantum state does not have a definite outcome, and measuring it changes the state.</p>
   </aside>
   <div class="worked"><b>Worked example · hyperfine superposition</b>
-    <p>Prepare (|F=1⟩ + |F=2⟩)/√2 in ⁸⁷Rb. The relative phase advances at ν<sub>hfs</sub> ≈ 6.834 683 GHz: a full turn every 1/ν<sub>hfs</sub> ≈ <strong>146.3 ps</strong>. Mod B’s microwave frequency must track that rotation; Mod A’s Zeeman superposition rotates only at kHz (70 kHz at 50 mG, a 14 µs period).</p>
+    <p>Prepare (|F=1⟩ + |F=2⟩)/√2 in ⁸⁷Rb. The relative phase advances at ν<sub>hfs</sub> ≈ 6.834 683 GHz: a full turn every 1/ν<sub>hfs</sub> ≈ <strong>146.3 ps</strong>. Method B’s microwave frequency must track that rotation; Method A’s Zeeman superposition rotates only at kHz (70 kHz at 50 mG, a 14 µs period).</p>
   </div>
   <details class="q"><summary>Q1. Is (|g⟩ + i|e⟩)/√2 different from (|g⟩ + |e⟩)/√2 if you only measure in the {g, e} basis?</summary><div class="ans">No. Both give 50/50. They differ in relative phase (90°), which shows up when the state interferes with something else, e.g. after another light pulse.</div></details>
   <details class="q"><summary>Q2. Why does a global phase e<sup>iφ</sup>|ψ⟩ not matter, while a relative phase does?</summary><div class="ans">All probabilities involve |amplitude|², which is unchanged by a common factor e<sup>iφ</sup>. A relative phase changes how the amplitudes add when they are projected onto a different basis.</div></details>
-  <p class="seen">Where it shows up: <a class="xref" href="index.html#p3-ham">dark state</a><a class="xref" href="mod-b.html#b-delta">microwave phase in Mod B</a></p>
+  <p class="seen">Where it shows up: <a class="xref" href="index.html#p3-ham">dark state</a><a class="xref" href="mod-b.html#b-delta">microwave phase in Method B</a></p>
 </section>
 
 <!-- L3 -->
@@ -482,7 +488,7 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
     </div>
     <p style="font-size:.82rem;color:var(--muted);margin:.4rem 0 0">Equations: u̇ = Δv − (Γ/2)u, v̇ = −Δu + Ωw − (Γ/2)v, ẇ = −Ωv − Γ(w+1). With decay on, oscillations damp toward a steady state: the reason continuous lasers on a two-level atom give absorption rather than endless Rabi cycling.</p>
   </div>
-  <div class="worked"><b>Worked example · how big is Ω in Mod A?</b>
+  <div class="worked"><b>Worked example · how big is Ω in Method A?</b>
     <p>A common two-level estimate is Ω = Γ√(I/(2I<sub>sat</sub>)). With Γ/2π = 5.746 MHz and the D1 far-detuned π-polarized I<sub>sat</sub> ≈ 4.484 mW/cm² <span class="tag ver">Steck</span>, the paper’s 1.3 mW/cm² control gives Ω/2π ≈ 5.746 × √(1.3/8.968) ≈ <strong>2.2 MHz</strong>. The paper quotes Ω<sub>c</sub>/2π = 1.9 MHz: the same order, with the difference coming from Clebsch–Gordan factors and Rabi-frequency conventions. A π-pulse at Ω/2π = 2 MHz takes π/Ω = 250 ns.</p>
   </div>
   <details class="q"><summary>Q1. With Δ = Ω, what is the maximum excited population?</summary><div class="ans">Ω²/(Ω²+Ω²) = 1/2.</div></details>
@@ -512,7 +518,7 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
 <!-- L5 -->
 <section class="lec" id="L5" aria-labelledby="L5h">
   <div class="lec-head"><span class="lec-num">L5</span><h2 id="L5h">Atomic structure for alkalis</h2></div>
-  <div class="goals"><b>Learning goals</b><ul><li>Build fine, hyperfine and Zeeman structure from angular-momentum addition.</li><li>Apply dipole selection rules for σ⁺, σ⁻ and π light.</li><li>Locate the Mod A and Mod B Λ systems in ⁸⁷Rb.</li></ul></div>
+  <div class="goals"><b>Learning goals</b><ul><li>Build fine, hyperfine and Zeeman structure from angular-momentum addition.</li><li>Apply dipole selection rules for σ⁺, σ⁻ and π light.</li><li>Locate the Method A and Method B Λ systems in ⁸⁷Rb.</li></ul></div>
   <div class="prose"><p>Rubidium’s single valence electron has orbital L and spin S = ½, which combine to J (fine structure: 5P₁/₂ vs 5P₃/₂, the D1 vs D2 lines). The nucleus has spin I = 3/2 for ⁸⁷Rb, and J and I combine to F (hyperfine). In a field B each F splits into 2F+1 sublevels m<sub>F</sub>. Light carries angular momentum: σ⁺ adds +1 to m<sub>F</sub>, σ⁻ subtracts 1, and π (polarized along B) adds 0.</p></div>
   <div class="eq"><span class="src">L5.1</span>\[ |I-J|\le F\le I+J\ \Rightarrow\ F\in\{1,2\}\ (I=\tfrac32,\ J=\tfrac12),\qquad \Delta E_{\rm Z}=g_F\,\mu_B\,m_F\,B,\qquad \Delta F=0,\pm1,\quad \Delta m_F=0\ (\pi),\ \pm1\ (\sigma^\pm). \]</div>
   <aside class="ana" aria-label="Analogy: A postal address"><div class="ana-h">A postal address</div>
@@ -521,11 +527,11 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
     <p class="fails"><span class="lbl">Where it fails</span>Rooms are places. These are angular-momentum states, and a superposition can be “in several rooms” at once, which is what Λ-EIT exploits.</p>
   </aside>
   <div class="worked"><b>Worked example · counting and shifting</b>
-    <p>⁸⁷Rb 5S₁/₂ has 3 + 5 = <strong>8 sublevels</strong>. With g<sub>F</sub> ≈ +½ (F=2), the shift is 0.70 MHz/G per m<sub>F</sub> <span class="tag ver">Steck</span>. Earth’s field (roughly half a gauss) would shift m<sub>F</sub>=+2 by about 0.7 MHz, enormous compared with a 10 kHz EIT line. That is why the cell sits inside µ-metal. Mod A uses the m<sub>F</sub>=+2/0 pair (1.40 kHz/mG); Mod B uses F=1/F=2 clock pairs (m=0↔0, quadratic only).</p>
+    <p>⁸⁷Rb 5S₁/₂ has 3 + 5 = <strong>8 sublevels</strong>. With g<sub>F</sub> ≈ +½ (F=2), the shift is 0.70 MHz/G per m<sub>F</sub> <span class="tag ver">Steck</span>. Earth’s field (roughly half a gauss) would shift m<sub>F</sub>=+2 by about 0.7 MHz, enormous compared with a 10 kHz EIT line. That is why the cell sits inside µ-metal. Method A uses the m<sub>F</sub>=+2/0 pair (1.40 kHz/mG); Method B uses F=1/F=2 clock pairs (m=0↔0, quadratic only).</p>
   </div>
   <details class="q"><summary>Q1. Why can σ⁺ light on F=2→F′=1 never excite m<sub>F</sub>=+2?</summary><div class="ans">It would need m<sub>F′</sub>=+3, which does not exist in F′=1 (maximum +1). m<sub>F</sub>=+1 is also dark, since F′=1 has no m<sub>F′</sub>=+2.</div></details>
   <details class="q"><summary>Q2. Why is D1 preferred over D2 for clean Λ systems?</summary><div class="ans">5P₁/₂ has only two excited hyperfine levels (F′=1, 2), well resolved compared with 5P₃/₂’s four. That means fewer competing excitation paths and cleaner dark states.</div></details>
-  <p class="seen">Where it shows up: <a class="xref" href="index.html#p3-atom">Mod A level scheme</a><a class="xref" href="mod-b.html#b-levels">Mod B level scheme</a><a class="xref" href="mod-b.html#b-zeeman">clock pair</a></p>
+  <p class="seen">Where it shows up: <a class="xref" href="index.html#p3-atom">Method A level scheme</a><a class="xref" href="mod-b.html#b-levels">Method B level scheme</a><a class="xref" href="mod-b.html#b-zeeman">clock pair</a></p>
 </section>
 
 <!-- L6 -->
@@ -578,7 +584,7 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
   </div>
   <details class="q"><summary>Q1. In the dark state with Ω<sub>p</sub> ≪ Ω<sub>c</sub>, where is almost all the population?</summary><div class="ans">In |1⟩, the state coupled by the weak probe. Weight of |1⟩ = |Ω<sub>c</sub>|²/(|Ω<sub>c</sub>|²+|Ω<sub>p</sub>|²) ≈ 1. That is exactly why the result is counter-intuitive.</div></details>
   <details class="q"><summary>Q2. Halving the control intensity halves which term of γ<sub>EIT</sub>?</summary><div class="ans">The power-broadening term |Ω<sub>c</sub>|²/γ₁₃ (Ω² ∝ intensity). γ₁₂ is unchanged.</div></details>
-  <p class="seen">Where it shows up: <a class="xref" href="index.html#p3-ham">Mod A dark state</a><a class="xref" href="index.html#p3-chi">EIT linewidth</a><a class="xref" href="mod-b.html#b-pm">Mod B fields</a></p>
+  <p class="seen">Where it shows up: <a class="xref" href="index.html#p3-ham">Method A dark state</a><a class="xref" href="index.html#p3-chi">EIT linewidth</a><a class="xref" href="mod-b.html#b-pm">Method B fields</a></p>
 </section>
 
 <!-- L8 -->
@@ -593,11 +599,11 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
     <p class="fails"><span class="lbl">Where it fails</span>The convoy loses no cars, and the baton does not fade. In the atoms, energy is temporarily held by the atoms and control field, and the stored spin wave decays (γ₁₂) and diffuses while waiting.</p>
   </aside>
   <div class="worked"><b>Worked example · slow light in numbers</b>
-    <p>Take OD<sub>EIT</sub> ≈ 9.6 and γ<sub>EIT</sub>/2π ≈ 21 kHz (the simulator’s Mod A reference, <span class="tag est">illustrative</span>). τ = 9.6/(2π × 21 × 10³ s⁻¹) ≈ <strong>73 µs</strong>. In an assumed 7.5 cm cell that is v<sub>g</sub> ≈ 0.075 m / 73 µs ≈ <strong>1 km/s</strong>, about 3 × 10⁵ times slower than c. A 47 µs pulse is 14 km long in vacuum but ≈ 5 cm inside the cell: it fits, so it can be stored.</p>
+    <p>Take OD<sub>EIT</sub> ≈ 9.6 and γ<sub>EIT</sub>/2π ≈ 21 kHz (the simulator’s Method A reference, <span class="tag est">illustrative</span>). τ = 9.6/(2π × 21 × 10³ s⁻¹) ≈ <strong>73 µs</strong>. In an assumed 7.5 cm cell that is v<sub>g</sub> ≈ 0.075 m / 73 µs ≈ <strong>1 km/s</strong>, about 3 × 10⁵ times slower than c. A 47 µs pulse is 14 km long in vacuum but ≈ 5 cm inside the cell: it fits, so it can be stored.</p>
   </div>
   <details class="q"><summary>Q1. What happens to v<sub>g</sub> if you halve the control intensity (power-broadening-dominated regime)?</summary><div class="ans">γ<sub>EIT</sub> roughly halves, so the delay OD<sub>EIT</sub>/γ<sub>EIT</sub> roughly doubles and v<sub>g</sub> roughly halves. Transparency (OD<sub>EIT</sub>) may also drop, which is the trade-off.</div></details>
   <details class="q"><summary>Q2. Why must the control be turned off while the pulse is fully inside the cell?</summary><div class="ans">Only the part of the pulse inside the medium is converted to spin wave. Anything already out (or not yet in) is lost or unstored. That is why the delay must exceed the pulse length (time-bandwidth product ≈ √OD<sub>EIT</sub> &gt; 1).</div></details>
-  <p class="seen">Where it shows up: <a class="xref" href="index.html#p3-slow">Mod A slow &amp; stored light</a><a class="xref" href="index.html#p4">storage timing</a><a class="xref" href="mod-b.html#b-storage">Mod B storage options</a></p>
+  <p class="seen">Where it shows up: <a class="xref" href="index.html#p3-slow">Method A slow &amp; stored light</a><a class="xref" href="index.html#p4">storage timing</a><a class="xref" href="mod-b.html#b-storage">Method B storage options</a></p>
 </section>
 
 <!-- L9 -->
@@ -616,7 +622,7 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
   </div>
   <details class="q"><summary>Q1. Why does a ladder (cascade) scheme prefer counter-propagating beams, while Λ prefers co-propagating?</summary><div class="ans">In Λ one photon is absorbed and one emitted, so the effective wavevector is k<sub>p</sub> − k<sub>c</sub>, which is small when the beams travel together. In a ladder both photons are absorbed, so it is k<sub>p</sub> + k<sub>c</sub>, which is minimised by opposite directions (paper Fig. 9 inset).</div></details>
   <details class="q"><summary>Q2. A beam angle of 0.1 mrad between probe and control: roughly how much residual broadening without buffer gas?</summary><div class="ans">σ<sub>Dop</sub>θ ≈ 225 MHz × 10⁻⁴ ≈ 20 kHz: “tens of kHz”, as the paper says. With buffer gas, Dicke narrowing makes it quadratic in θ and much smaller.</div></details>
-  <p class="seen">Where it shows up: <a class="xref" href="index.html#p3-vapor">Mod A hot-vapour effects</a><a class="xref" href="mod-b.html#b-doppler">Mod B Doppler &amp; Dicke</a></p>
+  <p class="seen">Where it shows up: <a class="xref" href="index.html#p3-vapor">Method A hot-vapour effects</a><a class="xref" href="mod-b.html#b-doppler">Method B Doppler &amp; Dicke</a></p>
 </section>
 
 <!-- L10 -->
@@ -652,9 +658,9 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
   <div class="worked"><b>Worked example · attenuated probe pulses</b>
     <p>A 10 µs, 1 µW pulse at 795 nm holds ≈ 4.0 × 10⁷ photons (L1). For n̄ = 1, attenuate by 4 × 10⁷ (ND ≈ 7.6). At n̄ = 0.1: P(0) = 0.905, P(1) = 0.090, P(≥2) = 0.0047. About 5 % of non-empty pulses still contain two or more photons, which is why “single-photon-level” classical probes are not single photons.</p>
   </div>
-  <details class="q"><summary>Q1. What g⁽²⁾(0) would you measure for the Mod A probe laser?</summary><div class="ans">≈ 1 (coherent light), regardless of attenuation.</div></details>
+  <details class="q"><summary>Q1. What g⁽²⁾(0) would you measure for the Method A probe laser?</summary><div class="ans">≈ 1 (coherent light), regardless of attenuation.</div></details>
   <details class="q"><summary>Q2. Why does storing true single photons demand much better control filtering than storing a µW probe?</summary><div class="ans">The signal is ~1 photon per pulse, while a mW control leaks, scatters and fluoresces. Even a 10⁻⁵ extinction (Glan–Taylor) leaves many control photons per pulse. Spectral filtering and timing gates are then needed too.</div></details>
-  <p class="seen">Where it shows up: <a class="xref" href="index.html#p4">probe attenuation &amp; separation</a><a class="xref" href="mod-b.html#b-detect">Mod B detection problem</a></p>
+  <p class="seen">Where it shows up: <a class="xref" href="index.html#p4">probe attenuation &amp; separation</a><a class="xref" href="mod-b.html#b-detect">Method B detection problem</a></p>
 </section>
 
 <!-- L12 -->
@@ -716,7 +722,7 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
 
 <footer class="site">
   <div class="wrap">
-    <p><strong>Quantum Optics Lectures</strong>: background reading for the IMEN quantum photonics programme. Prepared October 2026. Companion pages: <a href="index.html">Mod A guide</a> · <a href="mod-b.html">Mod B guide</a>.</p>
+    <p><strong>Quantum Optics Lectures</strong>: background reading for the IMEN quantum photonics programme. Prepared October 2026. Companion pages: <a href="index.html">Method A guide</a> · <a href="mod-b.html">Method B guide</a>.</p>
     <p><strong>Sources.</strong> Physics conventions follow standard textbooks and the Finkelstein <em>et al.</em> tutorial (arXiv:2205.10959v2). ⁸⁷Rb constants from Steck (verify against the current revision). Worked-example numbers marked as estimates are for orientation only.</p>
   </div>
 </footer>
@@ -1184,7 +1190,7 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
     return { od: Math.exp(-0.5 * Math.pow(d / K.dopplerSigma_MHz, 2)), c: Math.exp(-Math.pow(d / K.eitDetuneScale_MHz, 2)) };
   }
 
-  /* ---------------- Mod B: hyperfine Λ from one spectrally modulated beam ---------------- */
+  /* ---------------- Method B: hyperfine Λ from one spectrally modulated beam ---------------- */
   var B_WEIGHTS_CIRC = { '-1': 0.6, '0': 1, '1': 0.6 }, B_WEIGHTS_LIN = { '-1': 0.3, '0': 0.5, '1': 0.3 }; // ILLUSTRATIVE relative strengths
   function probeTB(delta0, m, Beff, weights) {
     var sum = 0;
@@ -1313,7 +1319,7 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
     return { trace: tr, cell: cell, sasP: sasP, lockAvailable: lockAvailable, lock: lock, det: det, objectives: o, storage: stor, sweepHalf: sweepHalf, warnings: warnings, fgen: !!fgen };
   }
 
-  /* ---------------- reference layout (Mod A) ---------------- */
+  /* ---------------- reference layout (Method A) ---------------- */
   function rotMirror(din, dout) { var n = norm2([dout[0] - din[0], dout[1] - din[1]]); return Math.round(Math.atan2(n[1], n[0]) * 180 / Math.PI); }
   function rotPBS(din, dout) { var s = norm2([din[0] + dout[0], din[1] + dout[1]]); var r = Math.round(Math.atan2(s[1], s[0]) * 180 / Math.PI) - 45; return ((r % 360) + 360) % 360; }
   var E = [1, 0], Wd = [-1, 0], S = [0, 1], N = [0, -1];
@@ -1562,7 +1568,7 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
   var wb = $('wBuf'); if (wb) wb.addEventListener('change', drawW);
 
 
-  /* ---------------- Chart D: Bessel sideband weights (Mod B) ---------------- */
+  /* ---------------- Chart D: Bessel sideband weights (Method B) ---------------- */
   function drawBes() {
     var cv = $('chartBes'); if (!cv) return;
     var dbm = +$('bDbm').value, vpi = +$('bVpi').value, Pt = +$('bP').value;
@@ -1584,7 +1590,7 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
   }
   ['bDbm', 'bVpi', 'bP'].forEach(function (id) { var el = $(id); if (el) el.addEventListener('input', drawBes); });
 
-  /* ---------------- Chart E: hyperfine resonances (Mod B) ---------------- */
+  /* ---------------- Chart E: hyperfine resonances (Method B) ---------------- */
   function drawHf() {
     var cv = $('chartHf'); if (!cv) return;
     var B = +$('hB').value, I = +$('hI').value, circ = $('hPol').value === 'c', sh = $('hSh').checked;

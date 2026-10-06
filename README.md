@@ -8,17 +8,17 @@ Reading material and interactive 3D optical-bench simulators for building a room
 
 | Page | File | What it covers |
 |---|---|---|
-| Mod A · Zeeman EIT (AOM) | `index.html` | The primary configuration. One DFB laser locked by saturated absorption spectroscopy (SAS) with a full servo loop. Control and probe arms each pass a double-pass AOM, with orthogonal circular polarizations. The cell sits in a solenoid inside a mu-metal shield, and a Glan-Taylor separates the probe before detection. |
-| Mod B · Hyperfine EIT (EOM) | `mod-b.html` | The complementary configuration. A fiber EOM driven at ≈6.834 GHz generates the carrier and sideband for hyperfine Λ-EIT, mainly for CW characterisation. The page includes storage options that still need verification. |
+| Method A · Zeeman EIT (AOM) | `index.html` | The primary configuration. One DFB laser locked by saturated absorption spectroscopy (SAS) with a full servo loop. Control and probe arms each pass a double-pass AOM, with orthogonal circular polarizations. The cell sits in a solenoid inside a mu-metal shield, and a Glan-Taylor separates the probe before detection. |
+| Method B · Hyperfine EIT (EOM) | `mod-b.html` | The complementary configuration. A fiber EOM driven at ≈6.834 GHz generates the carrier and sideband for hyperfine Λ-EIT, mainly for CW characterisation. The page includes storage options that still need verification. |
 | Quantum Optics Lectures | `quantum.html` | Twelve lectures, from photons and the two-level atom up to EIT, slow and stored light, quantum memories, single photons and strong coupling. |
 
-All three pages share a top navigation bar. Both guides contain the same **"Why Mod A? Why Mod B?"** decision section.
+All three pages share a top navigation bar. Both guides contain the same **"Why Method A? Why Method B?"** decision section.
 
-### Mod A guide sections
-Project at a glance · Glossary (searchable, about 100 terms) · Physics from scratch · Mod A experimental architecture (including the SAS → lock box → laser controller → DFB frequency lock) · Why Mod A? Why Mod B? · 3D optical-bench simulator · Bring-up & audit protocol · Equipment list · Recommended reading
+### Method A guide sections
+Project at a glance · Glossary (searchable, about 100 terms) · Physics from scratch · Method A experimental architecture (including the SAS → lock box → laser controller → DFB frequency lock) · Why Method A? Why Method B? · 3D optical-bench simulator · Bring-up & audit protocol · Equipment list · Recommended reading
 
-### Mod B guide sections
-Mod B at a glance · Why Mod A? Why Mod B? · Physics of hyperfine Λ-EIT · Architecture & timing · Light storage in Mod B: options to verify · 3D bench simulator · Bring-up & audit · Equipment list · Reading
+### Method B guide sections
+Method B at a glance · Why Method A? Why Method B? · Physics of hyperfine Λ-EIT · Architecture & timing · Light storage in Method B: options to verify · 3D bench simulator · Bring-up & audit · Equipment list · Reading
 
 ### Lectures
 L1 Light as waves and photons · L2 Quantum states and measurement · L3 Two-level atom, Rabi oscillations, Bloch sphere · L4 Density matrix, decay and dephasing · L5 Atomic structure for alkalis · L6 Susceptibility, absorption, dispersion · L7 Dark states, CPT, EIT, Autler–Townes · L8 Slow and stopped light · L9 Thermal vapour effects · L10 Quantum memories · L11 Quantum states of light · L12 Strong coupling and polaritons in solids
@@ -29,6 +29,7 @@ L1 Light as waves and photons · L2 Quantum states and measurement · L3 Two-lev
 - **Interactive charts:** EIT transmission and dispersion, Zeeman shifts, linewidth vs control intensity, EOM sideband powers, and a Rabi/Bloch-sphere widget.
 - **3D bench simulator (three.js):**
   - You drag optical and electronic components onto a breadboard, and the beam is traced through them, keeping track of polarization (Jones calculus), power and frequency shifts.
+  - Both simulators have a "Load reference" switch for Method A (Zeeman, 2×AOM) and Method B (Hyperfine, EOM). Each loads that method's full reference layout, objectives and scope modes.
   - The laser frequency lock (SAS, lock box, laser controller) and its error signal are modelled.
   - A scope shows the EIT sweep, the lock-in signal and the pulsed-storage view.
   - Game-style objectives tick off automatically as the setup is built correctly.

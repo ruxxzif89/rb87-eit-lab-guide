@@ -338,11 +338,17 @@ details.q summary::marker{color:var(--laser)}
 details.q[open]{padding-bottom:8px}
 details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink-2)}
 .seen{font-size:.88rem;margin-top:10px}
+
+.seg{display:inline-flex;flex-wrap:wrap;align-items:stretch;border:1px solid var(--ink);border-radius:2px;background:var(--surface)}
+.seg .seg-l{font-family:var(--font-mono);font-size:.68rem;text-transform:uppercase;letter-spacing:.07em;padding:5px 8px;color:var(--muted);align-self:center}
+.seg .btn{border:0;border-left:1px solid var(--rule-strong);border-radius:0}
+.seg .btn[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.sim-note{flex:1 1 100%;margin:2px 0 0;font-size:.78rem;color:var(--ink-2)}
 </style>
 </head>
 <body>
 
-<nav class="topnav" aria-label="Guide pages"><div class="wrap"><span class="brand">Rb-87 EIT</span><a href="index.html" aria-current="page">Mod A · Zeeman EIT (AOM)</a><a href="mod-b.html">Mod B · Hyperfine EIT (EOM)</a><a href="quantum.html">Quantum Optics Lectures</a></div></nav>
+<nav class="topnav" aria-label="Guide pages"><div class="wrap"><span class="brand">Rb-87 EIT</span><a href="index.html" aria-current="page">Method A · Zeeman EIT (AOM)</a><a href="mod-b.html">Method B · Hyperfine EIT (EOM)</a><a href="quantum.html">Quantum Optics Lectures</a></div></nav>
 
 <a class="skip" href="#main">Skip to content</a>
 <header class="masthead">
@@ -350,7 +356,7 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
     <div class="docbar">
       <span>Doc <b>QP / EIT-RB87</b></span>
       <span>Scope <b>Objectives 1–2</b></span>
-      <span>Scheme <b>Mod A · Zeeman Λ · D1</b></span>
+      <span>Scheme <b>Method A · Zeeman Λ · D1</b></span>
       <span>Issued <b>Oct 2026</b></span>
       <span class="sp"></span>
       <button type="button" class="theme-btn" id="themeBtn" aria-label="Switch colour theme">Theme: auto</button>
@@ -358,7 +364,7 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
     <div class="hero">
       <div>
         <h1>Rubidium-87 EIT &amp; light storage at <span class="wl">795&nbsp;nm</span></h1>
-        <p class="lede">A study guide and interactive optical bench for building a room-temperature atomic reference platform for EIT and quantum-memory work. It explains Zeeman Λ-EIT from first principles, lays out the chosen one-laser, two-AOM architecture (“Mod A”), and lets you assemble and test that bench in 3D.</p>
+        <p class="lede">A study guide and interactive optical bench for building a room-temperature atomic reference platform for EIT and quantum-memory work. It explains Zeeman Λ-EIT from first principles, lays out the chosen one-laser, two-AOM architecture (“Method A”), and lets you assemble and test that bench in 3D.</p>
       </div>
       <div class="spec" role="group" aria-label="Project specification">
         <dl>
@@ -394,9 +400,9 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
           <li><a href="#p3-limits"><span class="n">3f</span><span>Decoherence &amp; trade-offs</span></a></li>
         </ol>
       </li>
-      <li><a href="#p4"><span class="n">04</span><span>Mod A architecture</span></a></li>
+      <li><a href="#p4"><span class="n">04</span><span>Method A architecture</span></a></li>
       <li><a href="#p4-lock"><span class="n">4a</span><span>Frequency lock loop</span></a></li>
-      <li><a href="#decide"><span class="n">A|B</span><span>Why Mod A? Why Mod B?</span></a></li>
+      <li><a href="#decide"><span class="n">A|B</span><span>Why Method A? Why Method B?</span></a></li>
       <li><a href="#p5"><span class="n">05</span><span>3D bench simulator</span></a></li>
       <li><a href="#p6"><span class="n">06</span><span>Bring-up &amp; audit</span></a></li>
       <li><a href="#p7"><span class="n">07</span><span>Equipment list</span></a></li>
@@ -440,7 +446,7 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
   </div>
 
   <div class="note"><span class="t">Decision record</span>
-  The project uses <strong>Mod A</strong>: Zeeman Λ-EIT on the ⁸⁷Rb D1 line, with <strong>one DFB laser</strong> and <strong>two AOMs</strong> (one per arm, double-pass as reference configuration). This follows Fig. 10 of Finkelstein <em>et al.</em> (2022). The paper calls Zeeman EIT “the least resource-intensive” scheme, requiring only acousto-optic modulation of a single laser at a few tens of kHz. §04 compares the alternatives.</div>
+  The project uses <strong>Method A</strong>: Zeeman Λ-EIT on the ⁸⁷Rb D1 line, with <strong>one DFB laser</strong> and <strong>two AOMs</strong> (one per arm, double-pass as reference configuration). This follows Fig. 10 of Finkelstein <em>et al.</em> (2022). The paper calls Zeeman EIT “the least resource-intensive” scheme, requiring only acousto-optic modulation of a single laser at a few tens of kHz. §04 compares the alternatives.</div>
 
   <div class="safety">
     <div class="warnbox"><span class="t">Laser safety</span>
@@ -483,13 +489,13 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
     <div data-cat="atom"><dt>m<sub>F</sub> (magnetic quantum number)<span class="c">atom</span></dt><dd>Projection of F on the quantization axis, from −F to +F. Absorbing σ⁺ light changes m<sub>F</sub> by +1, σ⁻ by −1, π by 0.</dd></div>
     <div data-cat="atom"><dt>g<sub>F</sub> (hyperfine Landé factor)<span class="c">atom</span></dt><dd>Sets the Zeeman shift per m<sub>F</sub> per field. For ⁸⁷Rb 5S₁/₂: g<sub>F</sub> ≈ +1/2 for F=2 and ≈ −1/2 for F=1, i.e. about ±0.70 MHz/G = 0.70 kHz/mG per unit m<sub>F</sub>.</dd></div>
     <div data-cat="atom"><dt>Landé g-factor<span class="c">atom</span></dt><dd>The general factor relating a level’s magnetic moment to its angular momentum (g<sub>J</sub> for the electron, g<sub>F</sub> for hyperfine levels).</dd></div>
-    <div data-cat="atom"><dt>Quantization axis<span class="c">atom</span></dt><dd>The direction against which m<sub>F</sub> and σ/π polarizations are defined. In Mod A it is the solenoid field B along the beam direction z.</dd></div>
+    <div data-cat="atom"><dt>Quantization axis<span class="c">atom</span></dt><dd>The direction against which m<sub>F</sub> and σ/π polarizations are defined. In Method A it is the solenoid field B along the beam direction z.</dd></div>
     <div data-cat="atom"><dt>D1 / D2 lines<span class="c">atom</span></dt><dd>Alkali transitions from nS₁/₂ to nP₁/₂ (D1) and nP₃/₂ (D2). For Rb, D1 ≈ 795 nm and D2 ≈ 780 nm. D1 has fewer excited hyperfine levels, which gives cleaner Λ systems.</dd></div>
     <div data-cat="theory"><dt>Rabi frequency Ω<span class="c">theory</span></dt><dd>Strength of the light–atom coupling, µE/ħ in the paper’s convention (Ω<sub>p</sub> = µ₁₃Ẽ₁/ħ). It scales with √intensity.</dd></div>
     <div data-cat="theory"><dt>One-photon detuning Δ<span class="c">theory</span></dt><dd>Laser frequency minus atomic transition frequency for each field: Δ<sub>i</sub> = ν<sub>i</sub> − ω<sub>i3</sub>.</dd></div>
     <div data-cat="theory"><dt>Two-photon detuning δ<span class="c">theory</span></dt><dd>δ = Δ₁ − Δ₂ = ν₁ − ν₂ − ω₁₂: the mismatch between the probe–control frequency difference and the ground-state splitting. EIT is centred at δ = 0.</dd></div>
     <div data-cat="theory"><dt>Raman resonance<span class="c">theory</span></dt><dd>A two-photon transition between the ground states. With large one-photon detuning it appears as a narrow absorption line shifted by |Ω<sub>c</sub>|²/Δ₁. Far-detuned Raman memories are an alternative to EIT memories.</dd></div>
-    <div data-cat="atom"><dt>Optical pumping<span class="c">atom</span></dt><dd>Using light plus spontaneous emission to move population into a particular state. In Mod A, the σ⁺ control pumps atoms toward the high-m<sub>F</sub> end of F=2 (m<sub>F</sub>=+1, +2 are dark to σ⁺ on F=2→F′=1).</dd></div>
+    <div data-cat="atom"><dt>Optical pumping<span class="c">atom</span></dt><dd>Using light plus spontaneous emission to move population into a particular state. In Method A, the σ⁺ control pumps atoms toward the high-m<sub>F</sub> end of F=2 (m<sub>F</sub>=+1, +2 are dark to σ⁺ on F=2→F′=1).</dd></div>
     <div data-cat="theory"><dt>Susceptibility χ<span class="c">theory</span></dt><dd>The medium’s linear response, P = ε₀χE. Im χ gives absorption and Re χ gives the refractive index (n ≈ 1 + Re χ/2 for a dilute gas; the paper writes n = 1 + Re χ<sub>p</sub>).</dd></div>
     <div data-cat="theory"><dt>Kramers–Kronig relations<span class="c">theory</span></dt><dd>Causality links absorption and dispersion. A narrow transparency window must be accompanied by a steep refractive-index slope, which is the origin of slow light.</dd></div>
     <div data-cat="theory"><dt>Group index n<sub>g</sub> / group velocity v<sub>g</sub><span class="c">theory</span></dt><dd>n<sub>g</sub> = n + ν dn/dν and v<sub>g</sub> = c/n<sub>g</sub>, the speed of a pulse envelope. Under EIT n<sub>g</sub> can be enormous.</dd></div>
@@ -528,7 +534,7 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
     <div data-cat="lab"><dt>Polarization spectroscopy<span class="c">lab</span></dt><dd>A circularly polarized pump makes the vapour birefringent near sub-Doppler resonances. A probe analysed by a polarizer and balanced photodiodes gives a dispersive, modulation-free error signal.</dd></div>
     <div data-cat="lab"><dt>DFB laser<span class="c">lab</span></dt><dd>Distributed-feedback diode laser with a grating in the gain chip. It is robust and mode-hop-resistant, with linewidth ~1–2 MHz (paper). Tuned by current and temperature.</dd></div>
     <div data-cat="lab"><dt>ECDL<span class="c">lab</span></dt><dd>External-cavity diode laser with grating feedback. Typical linewidth is a few hundred kHz (paper), with a wider tuning range but more mechanical sensitivity.</dd></div>
-    <div data-cat="lab"><dt>Laser linewidth<span class="c">lab</span></dt><dd>Spectral width of the laser’s frequency noise. In Mod A, probe and control share one laser, so their common noise largely cancels in the two-photon detuning. This is why a 1–2 MHz DFB can still resolve kHz EIT lines.</dd></div>
+    <div data-cat="lab"><dt>Laser linewidth<span class="c">lab</span></dt><dd>Spectral width of the laser’s frequency noise. In Method A, probe and control share one laser, so their common noise largely cancels in the two-photon detuning. This is why a 1–2 MHz DFB can still resolve kHz EIT lines.</dd></div>
     <div data-cat="lab"><dt>RIN (relative intensity noise)<span class="c">lab</span></dt><dd>Fractional power fluctuations of a laser. It sets the noise floor of transmission measurements.</dd></div>
     <div data-cat="lab"><dt>Mode hop<span class="c">lab</span></dt><dd>An abrupt jump of a diode laser to another longitudinal mode during tuning. It shows up as a discontinuity in SAS scans.</dd></div>
     <div data-cat="optics"><dt>Faraday optical isolator<span class="c">optics</span></dt><dd>Input polariser, then a 45° Faraday rotator, then an output polariser at 45°. Light going forward passes. Back-reflected light is rotated a further 45° (non-reciprocally) and blocked, which protects the laser from feedback that destabilises its frequency.</dd></div>
@@ -537,12 +543,12 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
     <div data-cat="optics"><dt>Diffraction orders<span class="c">optics</span></dt><dd>The zeroth order is undeflected and unshifted. The ±1 orders are deflected by roughly λ f<sub>RF</sub>/v<sub>sound</sub> and shifted by ±f<sub>RF</sub>.</dd></div>
     <div data-cat="optics"><dt>Double-pass AOM<span class="c">optics</span></dt><dd>The diffracted beam is sent back through the AOM, so the total shift is 2f<sub>RF</sub> and beam steering cancels when f<sub>RF</sub> is scanned. A QWP in the return path rotates polarization by 90° so a PBS can separate the output.</dd></div>
     <div data-cat="optics"><dt>Cat’s-eye retro-reflector<span class="c">optics</span></dt><dd>A lens one focal length from the AOM plus a mirror at its focus. The return beam retraces the input regardless of the small angle change, which is essential for double-pass scanning.</dd></div>
-    <div data-cat="lab"><dt>RF driver<span class="c">lab</span></dt><dd>Oscillator plus amplifier that powers the AOM transducer. Mod A needs <em>twin, phase-locked</em> channels whose difference can be set and scanned at the kHz level (paper: “twin phase-locked rf signals from the same dual-output waveform generator”).</dd></div>
-    <div data-cat="optics"><dt>EOM (electro-optic modulator)<span class="c">optics</span></dt><dd>A crystal whose index changes with voltage. It phase-modulates light to create sidebands at GHz frequencies. It is needed for hyperfine EIT (6.834 GHz) but <strong>not used in Mod A</strong>; it is the core of <a href="mod-b.html">Mod B</a>.</dd></div>
+    <div data-cat="lab"><dt>RF driver<span class="c">lab</span></dt><dd>Oscillator plus amplifier that powers the AOM transducer. Method A needs <em>twin, phase-locked</em> channels whose difference can be set and scanned at the kHz level (paper: “twin phase-locked rf signals from the same dual-output waveform generator”).</dd></div>
+    <div data-cat="optics"><dt>EOM (electro-optic modulator)<span class="c">optics</span></dt><dd>A crystal whose index changes with voltage. It phase-modulates light to create sidebands at GHz frequencies. It is needed for hyperfine EIT (6.834 GHz) but <strong>not used in Method A</strong>; it is the core of <a href="mod-b.html">Method B</a>.</dd></div>
     <div data-cat="optics"><dt>PBS (polarizing beamsplitter)<span class="c">optics</span></dt><dd>A cube that transmits p (here horizontal) and reflects s (vertical) polarization. Typical extinction is ~10³.</dd></div>
     <div data-cat="optics"><dt>NPBS (non-polarizing beamsplitter)<span class="c">optics</span></dt><dd>Splits power in a fixed ratio (e.g. 50:50) almost independently of polarization.</dd></div>
     <div data-cat="optics"><dt>HWP (half-wave plate, λ/2)<span class="c">optics</span></dt><dd>Retards one axis by π. It rotates linear polarization by 2θ, where θ is the angle between the input polarization and the fast axis. Used with a PBS as a variable power splitter.</dd></div>
-    <div data-cat="optics"><dt>QWP (quarter-wave plate, λ/4)<span class="c">optics</span></dt><dd>Retards by π/2. Linear light at 45° to its axis becomes circular, and vice versa. In Mod A it turns the orthogonal linear control and probe into opposite circular polarizations.</dd></div>
+    <div data-cat="optics"><dt>QWP (quarter-wave plate, λ/4)<span class="c">optics</span></dt><dd>Retards by π/2. Linear light at 45° to its axis becomes circular, and vice versa. In Method A it turns the orthogonal linear control and probe into opposite circular polarizations.</dd></div>
     <div data-cat="optics"><dt>Jones vector / matrix<span class="c">optics</span></dt><dd>A 2-component complex vector (E<sub>H</sub>, E<sub>V</sub>) for fully polarized light. Each element is a 2×2 matrix, and the simulator traces polarization this way.</dd></div>
     <div data-cat="optics"><dt>σ⁺, σ⁻, π polarization<span class="c">optics</span></dt><dd>Circular light driving Δm<sub>F</sub> = +1 or −1 relative to the quantization axis, and linear light along the axis driving Δm<sub>F</sub> = 0. For a beam along B, circular light is σ±.</dd></div>
     <div data-cat="optics"><dt>Glan–Taylor polariser<span class="c">optics</span></dt><dd>A calcite prism polariser with an air gap. It transmits one linear polarization and rejects the other sideways with very high extinction (~10⁵, paper), which is why it is used to keep the strong control off the detector.</dd></div>
@@ -577,12 +583,12 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
 <!-- ===================================================== PART 3 -->
 <section class="part" id="p3" aria-labelledby="p3h">
   <div class="part-head"><span class="part-num">03</span><h2 id="p3h">Physics from scratch</h2>
-  <p class="part-sub">From the rubidium atom to stored light, step by step. Background lectures: <a href="quantum.html#L3">two-level atom</a>, <a href="quantum.html#L7">dark states &amp; EIT</a>. Hyperfine counterpart: <a href="mod-b.html#b-physics">Mod B physics</a>. Equation numbers in grey refer to Finkelstein <em>et al.</em>, arXiv:2205.10959v2.</p></div>
+  <p class="part-sub">From the rubidium atom to stored light, step by step. Background lectures: <a href="quantum.html#L3">two-level atom</a>, <a href="quantum.html#L7">dark states &amp; EIT</a>. Hyperfine counterpart: <a href="mod-b.html#b-physics">Method B physics</a>. Equation numbers in grey refer to Finkelstein <em>et al.</em>, arXiv:2205.10959v2.</p></div>
 
   <h3 id="p3-atom">3a · The ⁸⁷Rb atom and the Zeeman Λ system</h3>
   <div class="prose">
   <p>Rubidium is an alkali: one valence electron outside closed shells. Its ground configuration is 5S₁/₂. The first excited configuration splits by fine structure into 5P₁/₂ (reached by the <strong>D1</strong> line near 795 nm) and 5P₃/₂ (D2, near 780 nm). The ⁸⁷Rb nucleus has spin I = 3/2. Coupling it to the electron gives hyperfine levels F = 1, 2 in both 5S₁/₂ and 5P₁/₂. In a magnetic field each F splits into 2F+1 Zeeman sublevels m<sub>F</sub>.</p>
-  <p>EIT needs three levels: two long-lived lower states and one excited state. Mod A takes all three from the D1 manifold (paper Fig. 9b):</p>
+  <p>EIT needs three levels: two long-lived lower states and one excited state. Method A takes all three from the D1 manifold (paper Fig. 9b):</p>
   <ul>
     <li>|1⟩ = 5S₁/₂, F=2, m<sub>F</sub>=+2</li>
     <li>|2⟩ = 5S₁/₂, F=2, m<sub>F</sub>=0</li>
@@ -639,7 +645,7 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
       <text x="300" y="192" font-size="11" class="muted">≈794.98 nm</text>
       <text x="14" y="236" font-size="11" class="muted">not to scale</text>
     </svg>
-    <figcaption>Zeeman Λ system used in Mod A (after paper Fig. 9b). With B along the beams, the F=2 sublevels shift by g<sub>F</sub>μ<sub>B</sub>m<sub>F</sub>B ≈ 0.70 kHz/mG × m<sub>F</sub>, so |1⟩ and |2⟩ (Δm<sub>F</sub> = 2) are split by ≈1.40 kHz/mG × B. Excited-state spacing not to scale. The F′=1↔F′=2 splitting is deliberately not quoted; take it from the current Steck revision.</figcaption>
+    <figcaption>Zeeman Λ system used in Method A (after paper Fig. 9b). With B along the beams, the F=2 sublevels shift by g<sub>F</sub>μ<sub>B</sub>m<sub>F</sub>B ≈ 0.70 kHz/mG × m<sub>F</sub>, so |1⟩ and |2⟩ (Δm<sub>F</sub> = 2) are split by ≈1.40 kHz/mG × B. Excited-state spacing not to scale. The F′=1↔F′=2 splitting is deliberately not quoted; take it from the current Steck revision.</figcaption>
   </figure>
 
   <h4>Reference constants for ⁸⁷Rb D1 <span class="tag ver">Steck · verify before citing</span></h4>
@@ -679,7 +685,7 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
         <label for="zF"><span class="lt">Hyperfine level</span>
           <select id="zF"><option value="2" selected>F = 2 (gF ≈ +1/2)</option><option value="1">F = 1 (gF ≈ −1/2)</option></select></label>
         <div class="readout" id="zRead"></div>
-        <p style="font-size:.8rem;color:var(--muted);margin:0">Solid lines: sublevel shifts (kHz) up to 200 mG. The highlighted pair is the Mod A Λ (m<sub>F</sub>=+2 and 0). Their splitting is the two-photon resonance the AOM offset must match.</p>
+        <p style="font-size:.8rem;color:var(--muted);margin:0">Solid lines: sublevel shifts (kHz) up to 200 mG. The highlighted pair is the Method A Λ (m<sub>F</sub>=+2 and 0). Their splitting is the two-photon resonance the AOM offset must match.</p>
       </div>
     </div>
   </div>
@@ -705,7 +711,7 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
   <div class="eq"><span class="src">§II A</span>\[ \delta=\Delta_1-\Delta_2=\nu_1-\nu_2-\omega_{12},\qquad |D_\delta(t)\rangle=\big(\Omega_p|2\rangle-e^{i\delta t}\,\Omega_c|1\rangle\big)/\Omega . \]</div>
   <aside class="ana" aria-label="Analogy: Two metronomes drifting apart"><div class="ana-h">Two metronomes drifting apart</div><p><span class="lbl">Read it in words</span>δ is the mismatch between the lasers’ frequency difference and the atom’s ground-state splitting. If δ ≠ 0, the relative phase inside the dark state creeps forward as e<sup>iδt</sup>, and the atom slowly becomes absorbing again.</p><p><span class="lbl">Analogy</span>Two metronomes set to exactly the same tempo stay in step forever. Set one slightly off-beat and they drift in and out of step; how long you can tolerate the drift depends on how long you listen (the coherence time). That is why the EIT width ≈ (π/2)/τ<sub>coh</sub>.</p><p class="fails"><span class="lbl">Where it fails</span>Metronomes do not care about a common tempo error. Here too only the <em>difference</em> matters, which is why one laser split into two arms (common noise) works so well.</p></aside>
   <div class="prose">
-  <p>If δ ≠ 0 the relative phase drifts and the atoms slowly become absorbing. A coherence lifetime τ<sub>coh</sub> therefore gives a transparency width of order δ ≈ (π/2)/τ<sub>coh</sub>. This is the first hint that <strong>EIT linewidth measures ground-state coherence</strong>, which is exactly what a memory needs. It also explains why Mod A tolerates a 1–2 MHz DFB: probe and control come from the same laser, so laser frequency noise is common to both and largely drops out of δ.</p>
+  <p>If δ ≠ 0 the relative phase drifts and the atoms slowly become absorbing. A coherence lifetime τ<sub>coh</sub> therefore gives a transparency width of order δ ≈ (π/2)/τ<sub>coh</sub>. This is the first hint that <strong>EIT linewidth measures ground-state coherence</strong>, which is exactly what a memory needs. It also explains why Method A tolerates a 1–2 MHz DFB: probe and control come from the same laser, so laser frequency noise is common to both and largely drops out of δ.</p>
   <h4>Adding decay: the master equation</h4>
   <p>Real atoms decay and dephase, so we use the density matrix ρ and a Lindblad term L<sub>Γ</sub>:</p>
   </div>
@@ -780,7 +786,7 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
   <div class="cols-2">
   <div class="prose">
     <h4>Doppler and the co-propagating trick</h4>
-    <p>One-photon Doppler broadening (a few hundred MHz) reduces the absorption cross-section and therefore the usable OD, but it does not by itself widen the EIT line. EIT is a two-photon process with effective wavevector k<sub>eff</sub> = k<sub>p</sub> − k<sub>c</sub> for a Λ system. For Zeeman EIT the two frequencies differ by only kHz, so co-propagating beams give k<sub>eff</sub> ≈ 0, and every velocity class shares the same transparency window. This is why Mod A sends probe and control along the same path. A small angle θ between them gives a residual broadening of about σ<sub>Dop</sub>θ, tens of kHz already for θ ~ 0.1 mrad without buffer gas.</p>
+    <p>One-photon Doppler broadening (a few hundred MHz) reduces the absorption cross-section and therefore the usable OD, but it does not by itself widen the EIT line. EIT is a two-photon process with effective wavevector k<sub>eff</sub> = k<sub>p</sub> − k<sub>c</sub> for a Λ system. For Zeeman EIT the two frequencies differ by only kHz, so co-propagating beams give k<sub>eff</sub> ≈ 0, and every velocity class shares the same transparency window. This is why Method A sends probe and control along the same path. A small angle θ between them gives a residual broadening of about σ<sub>Dop</sub>θ, tens of kHz already for θ ~ 0.1 mrad without buffer gas.</p>
     <h4>Buffer gas and Dicke narrowing</h4>
     <p>A few Torr of inert gas makes Rb diffuse. Broadening over a length l becomes D/l², and when the mean free path is shorter than the two-photon wavelength 2π/|k<sub>p</sub> − k<sub>c</sub>| the residual Doppler width collapses to D|k<sub>p</sub> − k<sub>c</sub>|² (Dicke narrowing). In the paper’s data (Fig. 10c) the angular sensitivity becomes quadratic in θ rather than linear. The price is pressure broadening of the optical line (~10 MHz/Torr).</p>
   </div>
@@ -798,7 +804,7 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
   <div class="prose"><p>Use this as a checklist when an EIT line is broader than expected or storage dies too fast. Numbers marked as estimates are for planning only.</p></div>
   <div class="scroll-x">
   <table>
-    <thead><tr><th>Mechanism</th><th>Scales as</th><th>Mod A planning value</th><th>Lever</th></tr></thead>
+    <thead><tr><th>Mechanism</th><th>Scales as</th><th>Method A planning value</th><th>Lever</th></tr></thead>
     <tbody>
       <tr><td>Power broadening</td><td class="num">Ω<sub>c</sub>²/(γ₁₃+γ<sub>col</sub>+σ<sub>Dop</sub>)</td><td>dominates in the paper’s data: 26 kHz at 5.5 mW/cm², 7.3 kHz at 1.3 mW/cm² <span class="tag src">paper</span></td><td>control intensity, beam expansion</td></tr>
       <tr><td>Transit time (no buffer gas)</td><td class="num">v<sub>th</sub>/w₀</td><td>≈50 kHz FWHM for w₀ ≈ 0.75 mm <span class="tag est">design estimate</span></td><td>buffer gas, larger beams, coatings</td></tr>
@@ -846,12 +852,12 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
 
 <!-- ===================================================== PART 4 -->
 <section class="part" id="p4" aria-labelledby="p4h">
-  <div class="part-head"><span class="part-num">04</span><h2 id="p4h">Mod A experimental architecture</h2>
-  <p class="part-sub">One DFB, two double-pass AOMs, one shielded cell. Block by block, following paper Fig. 10 and the project plan. Counterpart: <a href="mod-b.html#b-arch">Mod B architecture</a>.</p></div>
+  <div class="part-head"><span class="part-num">04</span><h2 id="p4h">Method A experimental architecture</h2>
+  <p class="part-sub">One DFB, two double-pass AOMs, one shielded cell. Block by block, following paper Fig. 10 and the project plan. Counterpart: <a href="mod-b.html#b-arch">Method B architecture</a>.</p></div>
 
   <figure class="fig">
     <svg class="diag" viewBox="0 0 960 430" role="img" aria-labelledby="arT arD">
-      <title id="arT">Mod A block diagram</title>
+      <title id="arT">Method A block diagram</title>
       <desc id="arD">Laser and isolator feed a pick-off to the SAS lock. The main beam is split into control and probe arms, each with a double-pass AOM driven by a dual RF source. The arms recombine, pass a quarter-wave plate, the shielded heated cell in a solenoid, a second quarter-wave plate and a Glan-Taylor polariser, and the probe reaches a photodiode.</desc>
       <defs><marker id="ar-b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" style="fill:var(--laser)"/></marker>
       <marker id="ar-e" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" style="fill:var(--ink-2)"/></marker></defs>
@@ -900,7 +906,7 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
       <text x="14" y="216" font-size="11" class="muted">dashed blue: probe (weak)</text>
       <text x="14" y="232" font-size="11" class="muted">grey dashed: RF electronics</text><text x="14" y="248" font-size="11" class="muted">blue dashed: lock-loop cables</text>
     </svg>
-    <figcaption>Mod A signal chain, simplified from paper Fig. 10(a) and the project plan. The simulator’s reference layout implements exactly this chain on a 25 mm grid.</figcaption>
+    <figcaption>Method A signal chain, simplified from paper Fig. 10(a) and the project plan. The simulator’s reference layout implements exactly this chain on a 25 mm grid.</figcaption>
   </figure>
 
   <div class="cards">
@@ -943,13 +949,13 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
   <div class="scroll-x"><table>
     <thead><tr><th>Method</th><th>How</th><th>Side effects for this experiment</th></tr></thead>
     <tbody>
-      <tr><td>(a) Current dither + lock-in</td><td>Dither the DFB current at tens of kHz through the controller’s modulation input, then demodulate the SAS photodiode at the dither frequency to get the derivative of the SAS spectrum.</td><td>The dither frequency-modulates <em>all</em> the light, including the EIT beams. In Mod A, control and probe come from the same laser, so this jitter is largely common-mode for the two-photon resonance. The one-photon detuning still wobbles by the dither depth, so keep the dither small compared with the optical line, or use (b) or (c).</td></tr>
+      <tr><td>(a) Current dither + lock-in</td><td>Dither the DFB current at tens of kHz through the controller’s modulation input, then demodulate the SAS photodiode at the dither frequency to get the derivative of the SAS spectrum.</td><td>The dither frequency-modulates <em>all</em> the light, including the EIT beams. In Method A, control and probe come from the same laser, so this jitter is largely common-mode for the two-photon resonance. The one-photon detuning still wobbles by the dither depth, so keep the dither small compared with the optical line, or use (b) or (c).</td></tr>
       <tr><td>(b) Modulation-free: DAVLL or polarization spectroscopy</td><td>DAVLL: a small magnetic field on the reference cell splits the σ⁺/σ⁻ absorption; the difference of two photodiodes is dispersive. Polarization spectroscopy: a circularly polarized pump makes the cell birefringent near the sub-Doppler lines, read out with a polarizer and balanced photodiodes.</td><td>No modulation on the laser. More optics in the SAS arm, and the zero point can drift with field, alignment and photodiode balance.</td></tr>
       <tr><td>(c) Modulate only the SAS beam</td><td>Put an AOM or EOM in the SAS arm (e.g. frequency- or amplitude-modulate the pump) and demodulate as in (a).</td><td>The main beam stays clean. Needs an extra modulator and driver in the SAS arm.</td></tr>
     </tbody>
   </table></div>
   <div class="note"><span class="t">What the lock actually has to achieve</span>
-    In Mod A the lock holds the laser near the F=2→F′=1 one-photon resonance, within roughly the MHz scale. That is small compared with the Doppler- and pressure-broadened optical line of hundreds of MHz <span class="tag est">design estimate</span>. It does <strong>not</strong> set the kHz-level two-photon resonance: that comes from the phase-locked AOM RF (Mod A) or the microwave synthesiser (<a href="mod-b.html#b-arch">Mod B</a>), because probe and control share the laser’s frequency noise. In the simulator, removing the lock box or controller opens the loop and the laser drifts by MHz to tens of MHz <span class="tag est">illustrative</span>. The EIT signal then degrades and objective 2 fails.</div>
+    In Method A the lock holds the laser near the F=2→F′=1 one-photon resonance, within roughly the MHz scale. That is small compared with the Doppler- and pressure-broadened optical line of hundreds of MHz <span class="tag est">design estimate</span>. It does <strong>not</strong> set the kHz-level two-photon resonance: that comes from the phase-locked AOM RF (Method A) or the microwave synthesiser (<a href="mod-b.html#b-arch">Method B</a>), because probe and control share the laser’s frequency noise. In the simulator, removing the lock box or controller opens the loop and the laser drifts by MHz to tens of MHz <span class="tag est">illustrative</span>. The EIT signal then degrades and objective 2 fails.</div>
 
   <h3>Timing for pulsed storage</h3>
   <figure class="fig">
@@ -974,11 +980,11 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
     <figcaption>Pulse sequence (project protocol): AOM-P slices an attenuated probe pulse. AOM-C switches the control off once the compressed pulse is inside the cell (dark-state polariton mapped to a spin wave), holds it off for τ, then switches it on to retrieve. Not to scale. The function generator’s two burst channels set t_off and τ.</figcaption>
   </figure>
 
-  <h3>Why Mod A rather than hyperfine EIT</h3>
-  <p>The full side-by-side decision record is in <a href="#decide">Why Mod A? Why Mod B?</a> below. The hyperfine route is developed in the <a href="mod-b.html">Mod B guide</a>.</p>
+  <h3>Why Method A rather than hyperfine EIT</h3>
+  <p>The full side-by-side decision record is in <a href="#decide">Why Method A? Why Method B?</a> below. The hyperfine route is developed in the <a href="mod-b.html">Method B guide</a>.</p>
   <div class="scroll-x">
   <table>
-    <thead><tr><th></th><th>Mod A: Zeeman Λ, 1 laser + 2 AOMs</th><th>Hyperfine Λ, 1 laser + EOM</th><th>Hyperfine Λ, 2 phase-locked lasers</th><th>Ladder (e.g. Rydberg)</th></tr></thead>
+    <thead><tr><th></th><th>Method A: Zeeman Λ, 1 laser + 2 AOMs</th><th>Hyperfine Λ, 1 laser + EOM</th><th>Hyperfine Λ, 2 phase-locked lasers</th><th>Ladder (e.g. Rydberg)</th></tr></thead>
     <tbody>
       <tr><td>Lower states</td><td>F=2, m<sub>F</sub>=+2 and 0</td><td>F=1 and F=2</td><td>F=1 and F=2</td><td>ground and highly excited</td></tr>
       <tr><td>Probe–control offset</td><td class="num">kHz (70 kHz at 50 mG)</td><td class="num">6.834 GHz</td><td class="num">6.834 GHz</td><td>different wavelengths</td></tr>
@@ -991,17 +997,17 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
     </tbody>
   </table>
   </div>
-  <div class="note"><span class="t">Technical note: AOMs cannot bridge 6.834 GHz</span>The planned AOMs run at 80–110 MHz; even double-passed they shift by at most ≈ 0.22 GHz, far short of the 6.834 GHz ground hyperfine splitting. That is why Mod A uses Zeeman EIT, where both fields address F=2 and the AOMs only set a kHz–MHz <em>relative</em> offset (plus a common shift). It is also why <a href="mod-b.html">Mod B</a> uses an EOM for the hyperfine Λ; the alternative is two phase-locked lasers, as the paper explains.</div>
+  <div class="note"><span class="t">Technical note: AOMs cannot bridge 6.834 GHz</span>The planned AOMs run at 80–110 MHz; even double-passed they shift by at most ≈ 0.22 GHz, far short of the 6.834 GHz ground hyperfine splitting. That is why Method A uses Zeeman EIT, where both fields address F=2 and the AOMs only set a kHz–MHz <em>relative</em> offset (plus a common shift). It is also why <a href="mod-b.html">Method B</a> uses an EOM for the hyperfine Λ; the alternative is two phase-locked lasers, as the paper explains.</div>
 </section>
 
 
 <!-- ===================================================== SHARED: decision section (identical on index.html and mod-b.html) -->
 <section class="part" id="decide" aria-labelledby="decideh">
-  <div class="part-head"><span class="part-num">A|B</span><h2 id="decideh">Why Mod A? Why Mod B?</h2>
-  <p class="part-sub">The two single-laser routes to Λ-EIT in ⁸⁷Rb D1, side by side. This section is identical on the <a href="index.html#decide">Mod A</a> and <a href="mod-b.html#decide">Mod B</a> pages.</p></div>
+  <div class="part-head"><span class="part-num">A|B</span><h2 id="decideh">Why Method A? Why Method B?</h2>
+  <p class="part-sub">The two single-laser routes to Λ-EIT in ⁸⁷Rb D1, side by side. This section is identical on the <a href="index.html#decide">Method A</a> and <a href="mod-b.html#decide">Method B</a> pages.</p></div>
   <div class="scroll-x">
   <table class="decide-grid">
-    <thead><tr><th>Criterion</th><th>Mod A · Zeeman Λ (1 DFB + 2 AOMs)</th><th>Mod B · Hyperfine Λ (1 DFB + fibre EOM ≈ 6.834 GHz)</th></tr></thead>
+    <thead><tr><th>Criterion</th><th>Method A · Zeeman Λ (1 DFB + 2 AOMs)</th><th>Method B · Hyperfine Λ (1 DFB + fibre EOM ≈ 6.834 GHz)</th></tr></thead>
     <tbody>
       <tr><td>Lower states</td><td>F=2, m<sub>F</sub>=+2 and 0 (same hyperfine level)</td><td>F=1 and F=2 (clock pair m<sub>F</sub>=0 ↔ 0 targeted)</td></tr>
       <tr><td>Hardware</td><td>two 80–110 MHz AOMs, dual phase-locked RF, PBSs, λ/4s, Glan–Taylor, solenoid, shield</td><td>fibre EOM, microwave synthesiser (≥ 7 GHz), microwave amplifier, SMA cabling, possibly an RF switch, scanning Fabry–Pérot for sideband checks, solenoid, shield</td></tr>
@@ -1020,13 +1026,13 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
   </table>
   </div>
   <div class="verdict">
-    <div class="okbox"><span class="t">Project position</span><strong>Mod A is the primary route for Objectives 1–2.</strong> It matches the purchased 80–110 MHz AOMs, and its separate, orthogonally polarized beams allow the control to be filtered out, which pulsed storage needs. <strong>Mod B is planned as a complementary path</strong>: buy an EOM (with synthesiser and amplifier) for hyperfine CW characterisation of the same cell, subject to procurement.</div>
-    <div class="note"><span class="t">When to switch or add Mod B</span>
+    <div class="okbox"><span class="t">Project position</span><strong>Method A is the primary route for Objectives 1–2.</strong> It matches the purchased 80–110 MHz AOMs, and its separate, orthogonally polarized beams allow the control to be filtered out, which pulsed storage needs. <strong>Method B is planned as a complementary path</strong>: buy an EOM (with synthesiser and amplifier) for hyperfine CW characterisation of the same cell, subject to procurement.</div>
+    <div class="note"><span class="t">When to switch or add Method B</span>
       <ul style="margin:.2rem 0 0">
-        <li>The EOM, synthesiser and amplifier are funded and delivered (otherwise stay on Mod A).</li>
+        <li>The EOM, synthesiser and amplifier are funded and delivered (otherwise stay on Method A).</li>
         <li>Zeeman EIT width is stuck at a field-noise floor that shielding cannot fix: compare with the field-insensitive clock resonance.</li>
         <li>You want a CW, GHz-referenced benchmark of OD, γ<sub>EIT</sub> and decoherence for the same cell.</li>
-        <li>Stay on Mod A for pulsed storage and retrieval (Milestone 2) unless a Mod B filtering scheme has been verified.</li>
+        <li>Stay on Method A for pulsed storage and retrieval (Milestone 2) unless a Method B filtering scheme has been verified.</li>
       </ul></div>
   </div>
 </section>
@@ -1034,16 +1040,16 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
 <!-- ===================================================== PART 5 -->
 <section class="part" id="p5" aria-labelledby="p5h">
   <div class="part-head"><span class="part-num">05</span><h2 id="p5h">3D optical-bench simulator</h2>
-  <p class="part-sub">Counterpart: <a href="mod-b.html#b-sim">Mod B simulator</a>. Build the Mod A bench on a 25 mm-pitch breadboard. Beams are traced with Jones calculus, AOM shifts and polarizing optics. The cell responds with a simplified EIT model.</p></div>
+  <p class="part-sub">Counterpart: <a href="mod-b.html#b-sim">Method B simulator</a>. Build the Method A bench on a 25 mm-pitch breadboard. Beams are traced with Jones calculus, AOM shifts and polarizing optics. The cell responds with a simplified EIT model.</p></div>
   <div class="prose">
-    <p><strong>How to use it.</strong> Drag a component from the palette onto the table, or click or tap it to drop it near the centre. Click a part to select it, then drag it to move it (it snaps to the grid). Rotate with <kbd>R</kbd> (<kbd>Shift</kbd>+<kbd>R</kbd> reverses) or the buttons. Delete with <kbd>Del</kbd>, nudge with the arrow keys while the table has focus. Orbit with the left mouse button or one finger, pan with the right button or two fingers, zoom with the wheel or a pinch. The bench opens with the complete Mod A reference layout, so take it apart and see what breaks.</p>
+    <p><strong>How to use it.</strong> Drag a component from the palette onto the table, or click or tap it to drop it near the centre. Click a part to select it, then drag it to move it (it snaps to the grid). Rotate with <kbd>R</kbd> (<kbd>Shift</kbd>+<kbd>R</kbd> reverses) or the buttons. Delete with <kbd>Del</kbd>, nudge with the arrow keys while the table has focus. Orbit with the left mouse button or one finger, pan with the right button or two fingers, zoom with the wheel or a pinch. The bench opens with the complete Method A reference layout, so take it apart and see what breaks.</p>
   </div>
   <div class="note"><span class="t">Model honesty</span>
     The tracer is a 2-D, single-height ray model with ideal Jones optics, plus fixed leakages: PBS 10⁻³, Glan–Taylor 10⁻⁵, isolator 10⁻⁴ (illustrative). The EIT response is <strong>illustrative</strong>. Width = 1.5 kHz + 4.45 kHz/(mW cm⁻²) × I<sub>c</sub> (fit to the paper’s two points), plus ≈52 kHz without buffer gas (transit) and 40 kHz without shield. Control intensity uses a 2.55 mm beam radius. OD is scaled from OD≈10 at 60 °C. Storage efficiency and the 200 µs coherence time are invented placeholders that only respect the paper’s qualitative trends (inefficiency ∝ 1/OD<sub>EIT</sub>, delay = OD<sub>EIT</sub>/γ<sub>EIT</sub>). Two-photon detuning uses δ = (ν<sub>p</sub> − ν<sub>c</sub>) + 1.40 kHz/mG × B × sgn(control helicity). The laser lock is modelled as a chain: SAS photodiode → lock box → laser controller → DFB, with cables drawn automatically. With the loop open (or a wrong slope sign or too much gain) the laser frequency drifts by MHz to tens of MHz <span class="tag est">illustrative</span>. That lowers OD and fades EIT contrast as exp[−(Δ/50 MHz)²] <span class="tag est">illustrative</span>. Use “SAS error signal” on the scope to see the dispersive error curve. Reversing B or swapping helicities mirrors the scheme to m<sub>F</sub> = −2, 0 and m<sub>F′</sub> = −1. The 795 nm beam is near-infrared and invisible to the eye; it is drawn red here.</div>
 
   <div class="sim" id="sim">
     <div class="sim-bar">
-      <button type="button" class="btn primary" id="simRef">Load Mod A reference layout</button>
+      <div class="seg" role="group" aria-labelledby="segLbl"><span class="seg-l" id="segLbl">Load reference:</span><button type="button" class="btn" id="simRefA" aria-pressed="false">Method A (Zeeman, 2×AOM)</button><button type="button" class="btn" id="simRefB" aria-pressed="false">Method B (Hyperfine, EOM)</button></div>
       <button type="button" class="btn" id="simClear">Clear bench</button>
       <button type="button" class="btn" id="simHint">Hint</button>
       <button type="button" class="btn" id="simRestore" hidden>Restore my saved bench</button>
@@ -1055,6 +1061,7 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
         <span class="pill" id="stLock">Laser: free-running</span>
         <span class="pill" id="stEIT">EIT: —</span>
       </div>
+      <p class="sim-note" id="simNote"></p>
     </div>
     <div class="sim-main">
       <div class="palette" id="palette" aria-label="Component palette"></div>
@@ -1096,7 +1103,7 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
 <!-- ===================================================== PART 6 -->
 <section class="part" id="p6" aria-labelledby="p6h">
   <div class="part-head"><span class="part-num">06</span><h2 id="p6h">Bring-up &amp; audit protocol</h2>
-  <p class="part-sub">Counterpart: <a href="mod-b.html#b-bringup">Mod B bring-up</a>. An ordered commissioning sequence. Each step isolates one variable. Numeric pass criteria are <span class="tag est">design targets</span> unless tagged otherwise.</p></div>
+  <p class="part-sub">Counterpart: <a href="mod-b.html#b-bringup">Method B bring-up</a>. An ordered commissioning sequence. Each step isolates one variable. Numeric pass criteria are <span class="tag est">design targets</span> unless tagged otherwise.</p></div>
 
   <h3>Objective 1: locked laser and operating cell</h3>
   <ol class="steps">
@@ -1172,10 +1179,10 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
 <!-- ===================================================== PART 7 -->
 <section class="part" id="p7" aria-labelledby="p7h">
   <div class="part-head"><span class="part-num">07</span><h2 id="p7h">Equipment list</h2>
-  <p class="part-sub">What Mod A needs, and the status of each item. Mod B additions: <a href="mod-b.html#b-bom">Mod B equipment list</a>.</p></div>
+  <p class="part-sub">What Method A needs, and the status of each item. Method B additions: <a href="mod-b.html#b-bom">Method B equipment list</a>.</p></div>
   <div class="scroll-x">
   <table>
-    <thead><tr><th>Item</th><th>Role in Mod A</th><th>Status</th><th>Notes</th></tr></thead>
+    <thead><tr><th>Item</th><th>Role in Method A</th><th>Status</th><th>Notes</th></tr></thead>
     <tbody>
       <tr><td>795 nm single-frequency DFB laser diode (fibre-coupled)</td><td>source</td><td><span class="tag src">planned</span></td><td>tuned by current (fast) and temperature (slow); no piezo</td></tr>
       <tr><td>Laser controller: low-noise current source + TEC, with current modulation input</td><td>drives the DFB; actuator of the frequency lock</td><td><span class="tag gap">to procure</span></td><td>modulation input (BNC) bandwidth must suit the lock and any dither</td></tr>
@@ -1183,7 +1190,7 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
       <tr><td>SAS module (reference Rb cell, pump/probe optics, photodiode)</td><td>frequency reference (sensor of the lock)</td><td><span class="tag src">planned</span></td><td>extra optics if a DAVLL or polarization-spectroscopy signal is chosen</td></tr>
       <tr><td>FC/PC fibre collimation packages (f = 11.07 mm)</td><td>~1.5 mm waist beam</td><td><span class="tag src">planned</span></td><td></td></tr>
       <tr><td>Free-space isolator, Thorlabs I795P3D</td><td>protect laser</td><td><span class="tag src">planned</span></td><td></td></tr>
-      <tr><td>HWP &amp; QWP (795 nm), rotation mounts</td><td>split ratios; circular polarization; double-pass return</td><td><span class="tag src">planned</span></td><td>Mod A uses ≥ 2 HWP + 4 QWP (2 in double passes, 2 at the cell)</td></tr>
+      <tr><td>HWP &amp; QWP (795 nm), rotation mounts</td><td>split ratios; circular polarization; double-pass return</td><td><span class="tag src">planned</span></td><td>Method A uses ≥ 2 HWP + 4 QWP (2 in double passes, 2 at the cell)</td></tr>
       <tr><td>PBS &amp; NPBS cubes</td><td>pick-off, split, double-pass separation, combining</td><td><span class="tag src">planned</span></td><td>≥ 5 PBS in the reference layout</td></tr>
       <tr><td>Protected-silver right-angle prism mirrors; kinematic &amp; standard mounts; posts; forks; 30 mm cage</td><td>routing, cat’s-eye mirrors</td><td><span class="tag src">planned</span></td><td></td></tr>
       <tr><td>Mode-matching lenses</td><td>cat’s-eye lenses, control telescope</td><td><span class="tag src">planned</span></td><td></td></tr>
@@ -1192,7 +1199,7 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
       <tr><td>Flexible polyimide foil heater (≤ 70 °C) + cable</td><td>cell heating</td><td><span class="tag src">planned</span></td><td>bifilar, non-magnetic winding preferred (paper)</td></tr>
       <tr><td>GCH25-75 heater assembly (≤ 50 °C)</td><td>cell heating</td><td><span class="tag src">planned</span></td><td>50 °C limit gives OD ≈ 4 <span class="tag est">design estimate</span></td></tr>
       <tr><td>TC300B heater &amp; TEC temperature controller</td><td>cell temperature</td><td><span class="tag src">planned</span></td><td></td></tr>
-      <tr><td>Gooch &amp; Housego AOM, 750–850 nm, TeO₂, 1.5 mm aperture, 80–110 MHz</td><td>frequency offset &amp; switching</td><td><span class="tag src">planned</span></td><td>Mod A needs <strong>two</strong>: confirm quantity. A 1.5 mm beam ≈ 1.5 mm aperture, so reduce or focus the beam in the AOM <span class="tag est">design note</span></td></tr>
+      <tr><td>Gooch &amp; Housego AOM, 750–850 nm, TeO₂, 1.5 mm aperture, 80–110 MHz</td><td>frequency offset &amp; switching</td><td><span class="tag src">planned</span></td><td>Method A needs <strong>two</strong>: confirm quantity. A 1.5 mm beam ≈ 1.5 mm aperture, so reduce or focus the beam in the AOM <span class="tag est">design note</span></td></tr>
       <tr><td>Dual-channel RF driver for AOMs</td><td>twin RF</td><td><span class="tag src">planned</span></td><td>must be phase-locked/shared clock and finely tunable (Hz–kHz); fixed-frequency VCO drivers will not do</td></tr>
       <tr><td>Dual-channel function generator (burst mode)</td><td>pulse timing</td><td><span class="tag src">planned</span></td><td></td></tr>
       <tr><td>µ-metal shield (triple-layer in the paper) + degaussing coil and driver</td><td>field isolation</td><td><span class="tag gap">to procure</span></td><td>critical path for Zeeman EIT</td></tr>
@@ -1201,7 +1208,7 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
       <tr><td>Fast amplified photodetector(s)</td><td>probe detection; SAS</td><td><span class="tag gap">to procure</span></td><td>balanced detectors may be shared within the programme</td></tr>
       <tr><td>Oscilloscope</td><td>sweeps, pulses, error-signal monitoring</td><td><span class="tag gap">to procure</span></td><td></td></tr>
       <tr><td>Beam dumps, optical power meter</td><td>safety, calibration</td><td><span class="tag gap">to procure</span></td><td></td></tr>
-      <tr><td>Scanning Fabry–Pérot or wavemeter</td><td>mode-hop checks</td><td><span class="tag est">optional</span></td><td>also needed for Mod B sideband checks</td></tr>
+      <tr><td>Scanning Fabry–Pérot or wavemeter</td><td>mode-hop checks</td><td><span class="tag est">optional</span></td><td>also needed for Method B sideband checks</td></tr>
     </tbody>
   </table>
   </div>
@@ -1218,7 +1225,7 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
   <div>
     <h4>Start here: foundational &amp; tutorial</h4>
     <ul>
-      <li><a href="https://arxiv.org/html/2205.10959v2">Ran Finkelstein, Samir Bali, Ofer Firstenberg, and Irina Novikova. A practical guide to electromagnetically induced transparency in atomic vapor. arXiv:2205.10959v2 (2022)</a><span class="why">The reference design for Mod A (Fig. 10). Read §II–V in full.</span></li>
+      <li><a href="https://arxiv.org/html/2205.10959v2">Ran Finkelstein, Samir Bali, Ofer Firstenberg, and Irina Novikova. A practical guide to electromagnetically induced transparency in atomic vapor. arXiv:2205.10959v2 (2022)</a><span class="why">The reference design for Method A (Fig. 10). Read §II–V in full.</span></li>
       <li>S. E. Harris. Electromagnetically induced transparency. Physics Today, 50(7):36, 1997. <span class="why">Paper ref. [1]: short conceptual introduction.</span></li>
       <li>Michael Fleischhauer, Atac Imamoglu, and Jonathan P. Marangos. Electromagnetically induced transparency: Optics in coherent media. Rev. Mod. Phys., 77:633–673, Jul 2005. <span class="why">Paper ref. [2]: the standard review.</span></li>
       <li>K.-J. Boller, A. Imamoğlu, and S. E. Harris. Observation of electromagnetically induced transparency. Phys. Rev. Lett., 66:2593–2596, May 1991. <span class="why">Paper ref. [13]: the first observation.</span></li>
@@ -1243,9 +1250,9 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
     <h4>Lasers, locking &amp; vendors</h4>
     <ul>
       <li>K. B. MacAdam, A. Steinbach, and C. Wieman. A narrow-band tunable diode laser system with grating feedback, and a saturated absorption spectrometer for cs and rb. American Journal of Physics, 60(12):1098–1111, 1992. <span class="why">Paper ref. [75]: the classic SAS reference.</span></li>
-      <li>Alberto M. Marino and C. R. Stroud. Phase-locked laser system for use in atomic coherence experiments. Review of Scientific Instruments, 79(1):013104, 2008. <span class="why">Paper ref. [78]: the two-laser alternative to Mod A.</span></li>
+      <li>Alberto M. Marino and C. R. Stroud. Phase-locked laser system for use in atomic coherence experiments. Review of Scientific Instruments, 79(1):013104, 2008. <span class="why">Paper ref. [78]: the two-laser alternative to Method A.</span></li>
       <li><a href="https://opg.optica.org/josab/fulltext.cfm?uri=josab-37-2-574">Guoqing Yang <em>et al.</em>, “Laser frequency locking with subnatural linewidth spectroscopy”, JOSA B 37(2), 574–578 (2020)</a><span class="why">Title and authors confirmed from the Optica page.</span></li>
-      <li><a href="https://opg.optica.org/abstract.cfm?uri=ol-47-12-2983">Guochao Wang <em>et al.</em>, “In situ probing and stabilizing the power ratio of electro-optic-modulated laser pairs based on VIPA etalon for quantum sensing”, Optics Letters (2022)</a><span class="why">EOM-sideband diagnostics, i.e. the hyperfine route Mod A avoids.</span></li>
+      <li><a href="https://opg.optica.org/abstract.cfm?uri=ol-47-12-2983">Guochao Wang <em>et al.</em>, “In situ probing and stabilizing the power ratio of electro-optic-modulated laser pairs based on VIPA etalon for quantum sensing”, Optics Letters (2022)</a><span class="why">EOM-sideband diagnostics, i.e. the hyperfine route Method A avoids.</span></li>
       <li><a href="https://www.toptica-eagleyard.com/wp-content/uploads/data_sheets/EYP-DFB-0795-00080-1500-BFW01-0005.pdf">Toptica eagleyard datasheet: EYP-DFB-0795-00080-1500-BFW01-0005 (PDF)</a></li>
       <li><a href="https://agiltron.com/product/795nm-dfb-butterfly-laser-diode-15mw/">Agiltron: 795 nm DFB butterfly laser diode, 15 mW</a></li>
       <li><a href="https://www.innolume.com/dfb-dbr-lasers/fiber-coupled-dfb-laser-diode-at-795nm-with-5mw-output-power/">Innolume: fibre-coupled DFB laser diode at 795 nm, 5 mW</a></li>
@@ -1310,7 +1317,7 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
   </div>
   </div>
   <div class="note"><span class="t">About the earlier setup guide</span>
-  An earlier AI-generated “Rb-87 EIT Setup Guide” in the project files describes an EOM-based hyperfine setup said to be modelled on a “Quantum Spain” experiment. That attribution could not be verified, and the setup is not the Mod A scheme, so it is not used as a source here. Only its generic audit ideas (staged laser → polarization → field → EIT checks) informed §06.</div>
+  An earlier AI-generated “Rb-87 EIT Setup Guide” in the project files describes an EOM-based hyperfine setup said to be modelled on a “Quantum Spain” experiment. That attribution could not be verified, and the setup is not the Method A scheme, so it is not used as a source here. Only its generic audit ideas (staged laser → polarization → field → EIT checks) informed §06.</div>
 </section>
 
 </main>
@@ -1788,7 +1795,7 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
     return { od: Math.exp(-0.5 * Math.pow(d / K.dopplerSigma_MHz, 2)), c: Math.exp(-Math.pow(d / K.eitDetuneScale_MHz, 2)) };
   }
 
-  /* ---------------- Mod B: hyperfine Λ from one spectrally modulated beam ---------------- */
+  /* ---------------- Method B: hyperfine Λ from one spectrally modulated beam ---------------- */
   var B_WEIGHTS_CIRC = { '-1': 0.6, '0': 1, '1': 0.6 }, B_WEIGHTS_LIN = { '-1': 0.3, '0': 0.5, '1': 0.3 }; // ILLUSTRATIVE relative strengths
   function probeTB(delta0, m, Beff, weights) {
     var sum = 0;
@@ -1917,7 +1924,7 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
     return { trace: tr, cell: cell, sasP: sasP, lockAvailable: lockAvailable, lock: lock, det: det, objectives: o, storage: stor, sweepHalf: sweepHalf, warnings: warnings, fgen: !!fgen };
   }
 
-  /* ---------------- reference layout (Mod A) ---------------- */
+  /* ---------------- reference layout (Method A) ---------------- */
   function rotMirror(din, dout) { var n = norm2([dout[0] - din[0], dout[1] - din[1]]); return Math.round(Math.atan2(n[1], n[0]) * 180 / Math.PI); }
   function rotPBS(din, dout) { var s = norm2([din[0] + dout[0], din[1] + dout[1]]); var r = Math.round(Math.atan2(s[1], s[0]) * 180 / Math.PI) - 45; return ((r % 360) + 360) % 360; }
   var E = [1, 0], Wd = [-1, 0], S = [0, 1], N = [0, -1];
@@ -2166,7 +2173,7 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
   var wb = $('wBuf'); if (wb) wb.addEventListener('change', drawW);
 
 
-  /* ---------------- Chart D: Bessel sideband weights (Mod B) ---------------- */
+  /* ---------------- Chart D: Bessel sideband weights (Method B) ---------------- */
   function drawBes() {
     var cv = $('chartBes'); if (!cv) return;
     var dbm = +$('bDbm').value, vpi = +$('bVpi').value, Pt = +$('bP').value;
@@ -2188,7 +2195,7 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
   }
   ['bDbm', 'bVpi', 'bP'].forEach(function (id) { var el = $(id); if (el) el.addEventListener('input', drawBes); });
 
-  /* ---------------- Chart E: hyperfine resonances (Mod B) ---------------- */
+  /* ---------------- Chart E: hyperfine resonances (Method B) ---------------- */
   function drawHf() {
     var cv = $('chartHf'); if (!cv) return;
     var B = +$('hB').value, I = +$('hI').value, circ = $('hPol').value === 'c', sh = $('hSh').checked;
@@ -2299,7 +2306,8 @@ window.SIM_MODE = 'A';
   try { var mq = window.matchMedia('(prefers-reduced-motion: reduce)'); reduceMotion = mq.matches; mq.addEventListener('change', function (e) { reduceMotion = e.matches; }); } catch (e) { }
 
   var MODE = window.SIM_MODE === 'B' ? 'B' : 'A';
-  var refLayout = MODE === 'B' ? P.referenceLayoutB : P.referenceLayout;
+  var PAGE_MODE = MODE;
+  function refLayout() { return MODE === 'B' ? P.referenceLayoutB() : P.referenceLayout(); }
   var STORE_KEY = MODE === 'B' ? 'rb87-eit-bench-modB-v1' : 'rb87-eit-bench-v1';
   var S = { layout: refLayout(), sel: null, labels: true, scope: 'sweep', ev: null, store: null, incident: {} };
   var idn = 1000;
@@ -2312,7 +2320,7 @@ window.SIM_MODE = 'A';
     npbs: 'Non-polarizing 50:50 cube. Splits power equally whatever the polarization.',
     pickoff: 'Uncoated glass plate at an angle. Reflects ~4 % (Fresnel) and transmits the rest. The paper picks off SAS light this way; the project plan uses λ/2 + PBS instead.',
     hwp: 'Half-wave plate. Jones matrix [[cos2θ, sin2θ], [sin2θ, −cos2θ]]: it rotates linear polarization by twice the angle to the fast axis (the line drawn on its face). Before a PBS it sets the split ratio.',
-    qwp: 'Quarter-wave plate. At 45° to a linear polarization it produces circular light, and back again. Two orthogonal linear inputs become opposite circular polarizations: the σ⁺/σ⁻ pair Mod A needs.',
+    qwp: 'Quarter-wave plate. At 45° to a linear polarization it produces circular light, and back again. Two orthogonal linear inputs become opposite circular polarizations: the σ⁺/σ⁻ pair Method A needs.',
     aom: 'Acousto-optic modulator with one RF-driver channel (planned: G&H, TeO₂, 80–110 MHz, 1.5 mm aperture). Single pass: the 0th order goes straight; the ±1st order is deflected (angle exaggerated) and shifted by ±f_RF. Double-pass module (AOM + cat’s-eye + λ/4): the chosen order returns along the input, shifted by 2f_RF, with polarization rotated 90° so the upstream PBS routes it out; the 0th order is blocked. RF off: no output.',
     lens: 'Lens (cosmetic: the tracer keeps beams collimated). On a real bench: cat’s-eye lenses in the AOM double passes and a telescope to expand the control beam.',
     iris: 'Iris. Passes light within its aperture radius of the axis. Use it to select one AOM order.',
@@ -2324,7 +2332,7 @@ window.SIM_MODE = 'A';
     glan: 'Glan–Taylor calcite polariser. It transmits linear polarization along its axis and rejects the orthogonal one sideways. Extinction ~10⁵ (paper), the right tool to keep the strong control off the detector.',
     pd: 'Photodiode detector feeding the scope. Shows the probe and control power reaching it.',
     dump: 'Beam dump: safely absorbs stray beams.',
-    eom: 'Fibre-coupled electro-optic phase modulator driven by a microwave synthesiser at f_mw ≈ 6.834 GHz. Phase modulation puts J_n(β)² of the power into sideband n at ν + n·f_mw, all in the SAME spatial mode and polarization. β = πV/Vπ is set by the RF power (Vπ = 3 V assumed, illustrative). Only light polarized along the crystal axis (H here) is modulated. This is the heart of Mod B; Mod A does not use it.',
+    eom: 'Fibre-coupled electro-optic phase modulator driven by a microwave synthesiser at f_mw ≈ 6.834 GHz. Phase modulation puts J_n(β)² of the power into sideband n at ν + n·f_mw, all in the SAME spatial mode and polarization. β = πV/Vπ is set by the RF power (Vπ = 3 V assumed, illustrative). Only light polarized along the crystal axis (H here) is modulated. This is the heart of Method B; Method A does not use it.',
     fp: 'Scanning Fabry–Pérot interferometer (diagnostic). It absorbs the picked-off beam and displays its optical spectrum, so you can check that sidebands exist and measure the carrier-to-sideband ratio. Not yet in the equipment plan (to procure).',
     fgen: 'Dual-channel function generator in burst mode (project plan). It gates both AOM RF channels to slice probe pulses and switch the control off and on. Required for the pulsed-storage sequence. Off-beam: place it anywhere.'
   };
@@ -2349,7 +2357,7 @@ window.SIM_MODE = 'A';
     ['EIT (clock) peak observed', 'Everything above, with the probe component reaching the photodiode. Expect a small bump on a large background: detector sees all components.'],
     ['Lock-in readout centred on the clock resonance', 'Switch the scope to “Lock-in” and tune f_mw until the two-photon detuning is within a quarter linewidth of zero (the zero crossing of the derivative).']
   ];
-  var OBJ = [
+  var OBJ_A = [
     ['Laser protected by an isolator', 'Put an isolator directly after the laser, arrow pointing away from the laser, so the first thing the beam meets is the isolator going forward.'],
     ['SAS signal and closed lock loop', 'Pick off a few percent (λ/2 + PBS, or a glass pick-off) into the SAS module; place a lock box and a laser controller (cables connect SAS → lock box → controller → DFB automatically); press “Lock laser” with a positive slope sign and moderate gain.'],
     ['Beam split into control & probe at a PBS', 'After the pick-off, a λ/2 then a PBS splits the beam. Both outputs must eventually reach the cell.'],
@@ -2361,7 +2369,7 @@ window.SIM_MODE = 'A';
     ['EIT peak observed', 'Everything above, plus two-photon resonance: 2(f_C − f_P) ≈ 1.40 kHz/mG × B. For B = 50 mG, set AOM-P 35 kHz below AOM-C.'],
     ['Light stored and retrieved', 'Place the function generator, open “Pulsed storage” in the scope, choose τ and run the sequence. Efficiency must exceed 1 %.']
   ];
-  if (MODE === 'B') OBJ = OBJ_B;
+  var OBJ = MODE === 'B' ? OBJ_B : OBJ_A;
 
   /* ---------------- persistence ---------------- */
   function save() { try { localStorage.setItem(STORE_KEY, JSON.stringify(S.layout)); } catch (e) { } }
@@ -2422,7 +2430,7 @@ window.SIM_MODE = 'A';
       var h = document.createElement('h4'); h.textContent = g[0]; pal.appendChild(h);
       g[1].forEach(function (k) {
         var b = document.createElement('button'); b.type = 'button'; b.className = 'pal-item' + (k === 'eom' && MODE === 'A' ? ' na' : ''); b.id = 'pal-' + k;
-        b.innerHTML = '<span class="ic">' + P.KINDS[k].short + '</span><span>' + P.KINDS[k].name + (k === 'eom' && MODE === 'A' ? '<small>not used in Mod A · see Mod B</small>' : '') + '</span>';
+        b.innerHTML = '<span class="ic">' + P.KINDS[k].short + '</span><span>' + P.KINDS[k].name + (k === 'eom' && MODE === 'A' ? '<small>not used in Method A · see Method B</small>' : '') + '</span>';
         b.setAttribute('aria-label', 'Add ' + P.KINDS[k].name);
         palDrag(b, k);
         pal.appendChild(b);
@@ -2684,7 +2692,7 @@ window.SIM_MODE = 'A';
   }
   function drawScopeB(c, L, T, pw, ph, w, h, TX, CH1, CH3, msg, read) {
     var ev = S.ev, cl = ev.cell;
-    if (S.scope !== 'sweep') { msg('Storage not modelled for Mod B'); read.innerHTML = 'Carrier and sidebands share one spatial mode and polarization, so the strong control cannot be removed by polarization optics. See <a href="#b-storage">storage options for Mod B</a> (to be verified in the literature).'; return; }
+    if (S.scope !== 'sweep') { msg('Storage not modelled for Method B'); read.innerHTML = 'Carrier and sidebands share one spatial mode and polarization, so the strong control cannot be removed by polarization optics. See <a href="mod-b.html#b-storage">storage options for Method B</a> (to be verified in the literature).'; return; }
     if (!cl.probe || ev.det.total <= 0 || !ev.objectives[2]) { msg(ev.det.total > 0 ? 'Light on detector, but no probe sideband on a hyperfine line' : 'No light on the detector'); read.innerHTML = 'Needs: EOM driven, carrier locked on one D1 line, first-order sideband on the other, beam through the cell to the photodiode.'; return; }
     var half = ev.sweepHalf, m = cl.eff, pin = cl.probe.P, T0 = cl.probeT0 || 1e-12, kf = ev.det.probe / (pin * T0 || 1e-12); if (!isFinite(kf)) kf = 0;
     var bg = ev.det.total - ev.det.probe, pts = [], lock = !!S.layout.state.lockin;
@@ -3025,13 +3033,13 @@ window.SIM_MODE = 'A';
   /* ---------------- toolbar, keys, scope controls ---------------- */
   function bind() {
     var li = $('scLockin');
-    if (li) { li.hidden = MODE !== 'B'; li.addEventListener('click', function () { S.layout.state.lockin = !S.layout.state.lockin; li.setAttribute('aria-pressed', S.layout.state.lockin ? 'true' : 'false'); changed(false); }); }
-    if (MODE === 'B') { $('scStore').textContent = 'Storage (Mod B)'; }
-    $('simRef').addEventListener('click', function () { S.layout = refLayout(); S.sel = null; S.store = null; changed(true); });
+    if (li) li.addEventListener('click', function () { S.layout.state.lockin = !S.layout.state.lockin; li.setAttribute('aria-pressed', S.layout.state.lockin ? 'true' : 'false'); changed(false); });
+    $('simRefA').addEventListener('click', function () { setMode('A', true); });
+    $('simRefB').addEventListener('click', function () { setMode('B', true); });
     $('simClear').addEventListener('click', function () { S.layout = { mode: MODE, components: [], state: { locked: false, lockLine: 'F1', lockin: false, tau_us: 20, storageRan: false } }; S.sel = null; S.store = null; changed(true); });
     $('simHint').addEventListener('click', showHint);
     var rb = $('simRestore'), sv = loadSaved();
-    if (sv && sv.components && sv.components.length) { rb.hidden = false; rb.addEventListener('click', function () { var s2 = loadSaved(); if (s2 && s2.components) { S.layout = s2; S.layout.mode = MODE; S.layout.state = S.layout.state || { locked: false, tau_us: 20, lockLine: 'F1' }; S.sel = null; S.store = null; changed(true); } }); }
+    if (sv && sv.components && sv.components.length) { rb.hidden = false; rb.addEventListener('click', function () { var s2 = loadSaved(); if (s2 && s2.components) { S.layout = s2; S.layout.mode = s2.mode === 'B' ? 'B' : 'A'; S.layout.state = S.layout.state || { locked: false, tau_us: 20, lockLine: 'F1' }; S.sel = null; S.store = null; setMode(S.layout.mode, false); changed(true); } }); }
     $('simLabels').addEventListener('click', function (e) { S.labels = !S.labels; e.currentTarget.setAttribute('aria-pressed', S.labels ? 'true' : 'false'); syncMeshes(); });
     $('simTop').addEventListener('click', function () { setView('top'); });
     $('simPersp').addEventListener('click', function () { setView('3d'); });
@@ -3064,8 +3072,26 @@ window.SIM_MODE = 'A';
     window.addEventListener('resize', function () { drawScope(); });
   }
 
+  function applyModeUI() {
+    OBJ = MODE === 'B' ? OBJ_B : OBJ_A;
+    $('simRefA').setAttribute('aria-pressed', MODE === 'A' ? 'true' : 'false'); $('simRefB').setAttribute('aria-pressed', MODE === 'B' ? 'true' : 'false');
+    var li = $('scLockin'); if (li) li.hidden = MODE !== 'B';
+    $('scStore').textContent = MODE === 'B' ? 'Storage (Method B)' : 'Pulsed storage';
+    $('simNote').innerHTML = MODE === 'B'
+      ? 'Active: <b>Method B</b> (hyperfine Λ, EOM carrier + sideband; objectives, scope and physics switched). Guide: <a href="mod-b.html#b-arch">Method B architecture</a> · <a href="mod-b.html#b-physics">physics</a>.'
+      : 'Active: <b>Method A</b> (Zeeman Λ, two double-pass AOMs; objectives, scope and physics switched). Guide: <a href="index.html#p4">Method A architecture</a> · <a href="index.html#p3">physics</a>.';
+    buildPalette();
+    var hb = $('hintBox'); if (hb) hb.hidden = true;
+  }
+  function setMode(m, loadRef) {
+    MODE = m === 'B' ? 'B' : 'A';
+    if (loadRef) { S.layout = refLayout(); S.sel = null; S.store = null; }
+    applyModeUI();
+    if (loadRef) changed(true); else recompute();
+    setScope(S.scope);
+  }
   function start() {
-    buildPalette(); bind();
+    buildPalette(); bind(); applyModeUI();
     recompute(); renderInspector(); updateUI();
     try { initThree(); } catch (e) { console.error(e); var m = $('stageMsg'); m.classList.add('show'); m.textContent = '3D view failed to start: ' + e.message; }
   }
