@@ -29,7 +29,7 @@
     lens: 'Lens (cosmetic: the tracer keeps beams collimated). On a real bench: cat’s-eye lenses in the AOM double passes and a telescope to expand the control beam.',
     iris: 'Iris. Passes light within its aperture radius of the axis. Use it to select one AOM order.',
     nd: 'Neutral-density filter, transmission 10^−OD. Keeps the probe weak (Ω_p ≪ Ω_c).',
-    cell: 'Quartz ⁸⁷Rb vapour cell with accessories: foil heater under a TC300B (planned; foil rated to 70 °C), solenoid (B along the cell axis, i.e. the beam), triple-layer µ-metal shield, and optional buffer gas (paper example: 10 Torr Ne). Probe and control must co-propagate with opposite circular polarizations.',
+    cell: 'Quartz ⁸⁷Rb vapour cell, Ø19 × 75 mm with wedged windows (planned: Precision Glassblowing AB-RB-Q-UV-19X75-AW, with enriched ⁸⁷Rb and buffer gas to be confirmed with the vendor), with accessories: foil heater under a TC300B (planned; foil rated to 70 °C), solenoid (B along the cell axis, i.e. the beam), triple-layer µ-metal shield, and optional buffer gas (paper example: 10 Torr Ne). Probe and control must co-propagate with opposite circular polarizations.',
     sas: 'Reference photodiode at the end of the SAS probe path. The probe, after crossing the Rb reference cell against the counter-propagating pump, shows sub-Doppler features on this photodiode; that signal is the “sensor” of the frequency lock. Its output goes by cable to the lock box, which turns it into an error signal. The photodiode alone cannot lock anything.',
     refcell: 'Small Rb reference cell for saturated-absorption spectroscopy. A strong pump and a weak probe cross it in opposite directions: atoms near zero velocity see both beams, the pump saturates the transition, and a narrow transparency appears inside the Doppler-broadened absorption. Pump and probe have orthogonal polarizations so PBSs can inject the pump and extract it afterwards.',
     rfgen: 'Dual-channel RF source. Both channels share one clock so the two AOM drive signals stay phase-related, which keeps the probe-control beat stable. Channel A drives the control AOM (80.000 MHz), channel B the probe AOM (79.965 MHz).',
@@ -711,11 +711,11 @@
         var heaterM = own(std(0xd88a1d, 0.3, 0.55, { emissive: 0xff6a00, emissiveIntensity: 0.1 + 0.8 * hot, transparent: true, opacity: 0.9 }));
         var vaporM = own(new THREE.MeshBasicMaterial({ color: 0xb06cff, transparent: true, opacity: 0.05 + 0.2 * Math.min(1, (p.T_C - 20) / 50), depthWrite: false }));
         stand(g, k);
-        g.add(cy(11, 75, M.glass)); g.add(cy(9, 70, vaporM)); g.add(cy(11.6, 2, M.glass, -37, 0, 0)); g.add(cy(11.6, 2, M.glass, 37, 0, 0));
-        g.add(tr(11.4, 1.1, M.alu, -36, 0, 0)); g.add(tr(11.4, 1.1, M.alu, 36, 0, 0));
+        g.add(cy(9.5, 75, M.glass)); g.add(cy(7.8, 70, vaporM)); g.add(cy(10.1, 2, M.glass, -37, 0, 0)); g.add(cy(10.1, 2, M.glass, 37, 0, 0));   // Ø19 x 75 mm cell
+        g.add(tr(9.9, 1.1, M.alu, -36, 0, 0)); g.add(tr(9.9, 1.1, M.alu, 36, 0, 0));
         g.add(cy(3, 14, M.glass, 0, 16, 0, 'y', 10)); g.add(sp(2.4, std(0xa08060, 0.8, 0.3), 0, 23, 0));
-        if (p.heater) g.add(cy(12.6, 40, heaterM));
-        if (p.solenoid) for (var i = -4; i <= 4; i++) g.add(tr(16.2, 1.5, M.copper, i * 8.5, 0, 0));
+        if (p.heater) g.add(cy(10.9, 40, heaterM));
+        if (p.solenoid) for (var i = -4; i <= 4; i++) g.add(tr(14.4, 1.5, M.copper, i * 8.5, 0, 0));
         if (p.shield) {
           var layers = [[21, 108], [24.5, 114], [28, 120]];
           layers.forEach(function (L) {
