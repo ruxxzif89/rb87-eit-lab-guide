@@ -10,10 +10,11 @@ Reading material and interactive 3D optical-bench simulators for building a room
 |---|---|---|
 | Zeeman EIT (AOM) | `index.html` | The primary configuration. One DFB laser locked by saturated absorption spectroscopy (SAS) with a full servo loop. Control and probe arms each pass a double-pass AOM, with orthogonal circular polarizations. The cell sits in a solenoid inside a mu-metal shield, and a Glan-Taylor separates the probe before detection. |
 | 3D Bench | `bench.html` | The same 3D optical-bench simulator on a full page, with a large view of the table, a toggle to hide the side panels, and all the simulator features (tour, views, cables, scope, objectives). |
+| Lab Inventory | `inventory.html` | An editable list of what the lab already owns (from the lab's component record sheet plus the oscilloscope and spectrum analyzer), with specifications, a 3D picture of each item, whether it suits a 795 nm experiment and which equipment-list item it can cover. Edits are kept in the browser and can be shared through the password-protected database (`inventory-data.js` holds the default list). |
 | Equipment | `equipment.html` | The equipment list on its own page: 56 line items with quantity, suggested brand and part number, why each is needed, a vendor link and a **3D picture** of every item (click to rotate). Group members can unlock a costed version with ticks and a "cheaper alternative found" field. |
 | Quantum Optics Lectures | `quantum.html` | Six primers (how to use the notes, history, motivation, maths toolkit, basic quantum mechanics, basic quantum optics) and thirteen lectures, from photons and the two-level atom up to EIT, slow and stored light, quantum memories, single photons, strong coupling and the bench itself (polarization, Gaussian beams, AOMs, locking, cells and shielding, detectors, laser safety). |
 
-The four pages share a sticky top navigation bar. The guide includes a **"Why Zeeman EIT?"** decision record.
+The five pages share a sticky top navigation bar. The guide includes a **"Why Zeeman EIT?"** decision record.
 
 ### Zeeman EIT guide sections
 Project at a glance · Glossary (searchable, about 100 terms) · Physics from scratch · Zeeman EIT experimental architecture (including the SAS → lock box → laser controller → DFB frequency lock) · Why Zeeman EIT? · 3D optical-bench simulator · Bring-up & audit protocol · Equipment list · Recommended reading

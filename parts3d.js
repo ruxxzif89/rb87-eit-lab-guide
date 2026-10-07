@@ -274,6 +274,48 @@
       g.add(cy(7, 40, M.black, -95, 4, 0)); g.add(cy(8, 4, M.dark, -75, 4, 0)); g.add(cy(7, 40, M.black, 95, 4, 0)); g.add(cy(8, 4, M.dark, 75, 4, 0));
       g.add(bx(30, 20, 2, M.black, 0, 6, 36)); g.add(bx(3, 3, 8, M.knob, 12, 10, 38));
     },
+    baseplate: function (g, p) { // square or round mounting / adapter plate, optional black finish and clear aperture
+      var M = mats(), body; p = p || {}; body = p.black ? M.black : M.alu;
+      if (p.round) g.add(cy(26, 7, body, 0, 0, 0, 'y', 44)); else g.add(bx(46, 7, 46, body, 0, 0, 0));
+      if (p.ap) g.add(cy(9, 7.4, M.dark, 0, 0, 0, 'y', 24));
+      [[-17, -17], [17, -17], [-17, 17], [17, 17]].forEach(function (q) { g.add(cy(2.3, 7.4, M.dark, q[0], 0, q[1], 'y', 10)); });
+    },
+    rodclamp: function (g) { // rod / post clamp with side knob
+      var M = mats(); g.add(cy(18, 22, M.black, 0, 0, 0, 'y', 28)); g.add(cy(12.5, 22.4, M.dark, 0, 0, 0, 'y', 24)); g.add(bx(14, 22, 22, M.black, -20, 0, 0)); g.add(cy(5, 12, M.knob, 24, 0, 0, 'x', 14)); g.add(cy(7, 4, M.knob, 31, 0, 0, 'x', 14));
+    },
+    rotstage: function (g) { // manual rotation stage with graduated ring and micrometer
+      var M = mats(); g.add(cy(32, 8, M.black, 0, -6, 0, 'y', 44)); g.add(cy(28, 6, M.alu, 0, 1, 0, 'y', 44)); g.add(cy(8, 6.4, M.dark, 0, 1, 0, 'y', 20));
+      for (var i = 0; i < 36; i++) { var a = i * Math.PI / 18; g.add(cy(0.6, 1.4, M.black, Math.cos(a) * 25, 4.2, Math.sin(a) * 25, 'y', 6)); }
+      g.add(cy(4, 20, M.knob, 36, -6, 0, 'x', 12)); g.add(cy(6.4, 6, M.brass, 49, -6, 0, 'x', 12));
+    },
+    goniometer: function (g) { // tilt (goniometer) stage
+      var M = mats(); g.add(bx(40, 6, 40, std(0x24282c, 0.4, 0.5), 0, -6, 0)); g.add(bx(36, 10, 36, M.brass, 0, 2, 0));
+      var t = bx(40, 5, 40, M.black, 0, 10, 0); t.rotation.z = 0.12; g.add(t);
+      g.add(cy(4, 12, M.knob, 27, 0, 0, 'x', 12)); g.add(cy(3, 8, M.knob, 0, 0, 25, 'z', 10)); g.add(cy(2.2, 3, M.dark, 12, 13, 12, 'y', 8));
+    },
+    xyzstage: function (g) { // three-axis micrometer translation stage
+      var M = mats(); g.add(bx(54, 8, 54, M.alu, 0, -14, 0)); g.add(bx(50, 8, 46, M.metal, 0, -6, 0)); g.add(bx(46, 10, 40, M.alu, 0, 2, 0)); g.add(bx(40, 3, 40, M.black, 0, 8.5, 0));
+      g.add(cy(3.6, 18, M.knob, 36, -14, 0, 'x', 12)); g.add(cy(5, 4, M.brass, 46, -14, 0, 'x', 12));
+      g.add(cy(3.6, 18, M.knob, 0, -6, -34, 'z', 12)); g.add(cy(5, 4, M.brass, 0, -6, -44, 'z', 12));
+      g.add(cy(3.6, 18, M.knob, -30, 2, 0, 'x', 12)); g.add(cy(5, 4, M.brass, -40, 2, 0, 'x', 12));
+    },
+    fiberbench: function (g) { // fibre-to-fibre coupler bench with a clear cover
+      var M = mats(); g.add(bx(110, 14, 40, M.alu, 0, -8, 0)); g.add(bx(100, 18, 30, M.glass, 0, 8, 0));
+      [-1, 1].forEach(function (s) { g.add(cy(8, 16, M.black, s * 62, 0, 0, 'x', 20)); g.add(cy(4, 10, M.green, s * 74, 0, 0, 'x', 12)); g.add(cy(1.4, 14, M.yellow, s * 86, 0, 0, 'x', 8)); });
+      g.add(bx(60, 2, 2, M.laser, 0, 4, 0));
+    },
+    postholder: function (g) { // post holder with a post in it
+      var M = mats(); g.add(cy(7, 70, M.alu, 0, 20, 0, 'y', 16)); g.add(cy(10, 50, M.black, 0, -10, 0, 'y', 24)); g.add(cy(2.5, 12, M.knob, 12, 6, 0, 'x', 10)); g.add(cy(5, 6, M.metal, 0, -38, 0, 'y', 14));
+    },
+    tubeadapter: function (g) { // stepped lens-tube adapter with a set screw
+      var M = mats(); g.add(cy(15, 24, M.black, 0, 0, 0, 'x', 32)); g.add(cy(11, 16, M.dark, -18, 0, 0, 'x', 28)); g.add(cy(16, 3, M.alu, 12, 0, 0, 'x', 32)); g.add(cy(2, 6, M.knob, 0, 16, 0, 'y', 8));
+    },
+    osa: function (g) { // benchtop optical spectrum analyzer
+      var M = mats(); instrument(g, 96, 52, 70, 'sa'); g.add(cy(4, 6, M.green, -51, -H + 36, -26, 'x', 12));
+    },
+    generic: function (g) { // unidentified item
+      var M = mats(); g.add(bx(40, 26, 32, M.alu, 0, 0, 0)); g.add(bx(42, 3, 34, M.black, 0, 14, 0)); g.add(cy(3, 8, M.knob, 0, 0, 18, 'z', 10));
+    },
     tctrl: function (g) { instrument(g, 70, 32, 48, 'tctrl'); },
     csrc: function (g) { instrument(g, 70, 32, 48, 'csrc'); },
     rfgen: function (g) { var M = mats(); instrument(g, 84, 36, 56, 'rfgen'); g.add(bx(1.4, 5, 5, M.on, -42.6, -H + 7, 22)); },
@@ -382,8 +424,8 @@
     eom: function (g) { var M = mats(); stand(g); g.add(bx(60, 14, 20, M.alu, 0, 0, 0)); g.add(cy(4, 10, M.green, -36, 0, 0)); g.add(cy(4, 10, M.green, 36, 0, 0)); g.add(cy(2.4, 8, M.brass, 0, 10, 0, 'y', 10)); }
   };
   var INSTR = { lctrl: 1, lockbox: 1, fgen: 1, rfgen: 1, rfatt: 1, rfamp: 1, csrc: 1, tctrl: 1, scope: 1, psu: 1, pwrmeter: 1, dmm: 1, sa: 1, wavemeter: 1, laptop: 1, fluxgate: 1, degauss: 1, adapters: 1, powerstrip: 1, cleaning: 1, calliper: 1, hexkeys: 1, enclosure: 1, goggles: 1, foil: 1, sign: 1, cable: 1, solenoid: 1, shield: 1, breadboard: 1, legs: 1, holder: 1, postset: 1, card: 1, rfswitch: 1, coupler: 1, fp: 1 };
-  var FRONT_NEG = { lctrl: 1, lockbox: 1, fgen: 1, rfgen: 1, rfatt: 1, rfamp: 1, csrc: 1, tctrl: 1, scope: 1, psu: 1, pwrmeter: 1, dmm: 1, sa: 1, wavemeter: 1, fluxgate: 1, degauss: 1, fp: 1 };
-  var LOW_VIEW = { lctrl: 1, lockbox: 1, fgen: 1, rfgen: 1, rfatt: 1, rfamp: 1, csrc: 1, tctrl: 1, scope: 1, psu: 1, pwrmeter: 1, dmm: 1, sa: 1, wavemeter: 1 };
+  var FRONT_NEG = { osa: 1, lctrl: 1, lockbox: 1, fgen: 1, rfgen: 1, rfatt: 1, rfamp: 1, csrc: 1, tctrl: 1, scope: 1, psu: 1, pwrmeter: 1, dmm: 1, sa: 1, wavemeter: 1, fluxgate: 1, degauss: 1, fp: 1 };
+  var LOW_VIEW = { osa: 1, lctrl: 1, lockbox: 1, fgen: 1, rfgen: 1, rfatt: 1, rfamp: 1, csrc: 1, tctrl: 1, scope: 1, psu: 1, pwrmeter: 1, dmm: 1, sa: 1, wavemeter: 1 };
   var TOP_VIEW = { card: 1, foil: 1 };
 
   function build(name, params) {

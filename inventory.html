@@ -10,8 +10,8 @@ body{margin:0;font:14px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif
 img{max-width:100%}
 [hidden]{display:none!important}
 </style>
-<title>3D Bench · Rb-87 EIT Lab Guide</title>
-<meta name="description" content="Full-page 3D optical bench simulator for the Rb-87 Zeeman-EIT experiment: build, trace the beams, lock the laser and see the EIT signal.">
+<title>Lab Inventory · Rb-87 EIT Lab Guide</title>
+<meta name="description" content="What the lab already owns that can be used in the Rb-87 Zeeman-EIT project: editable list with specifications and a 3D picture of each item.">
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Saira+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -409,105 +409,99 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
 </style>
 
 <style>
-body.bench-page{height:var(--app-h,100vh);display:flex;flex-direction:column;overflow:hidden}
-body.bench-page .sim-wrap{flex:1;min-height:0;display:flex;flex-direction:column;overflow:auto;scroll-padding-top:0}
-body.bench-page .sim{margin:0;border:0;display:flex;flex-direction:column;flex:none}
-body.bench-page .sim > *{flex:none}
-body.bench-page .sim-top{flex:0 0 auto}
-body.bench-page .sim-main{height:calc(var(--app-h,100vh) - var(--nav-h,44px) - var(--bar-h,90px));min-height:360px;grid-template-columns:170px minmax(0,1fr) 290px}
-body.bench-page .stage{height:100%;min-height:0}
-body.bench-page .palette{max-height:none;height:100%}
-body.bench-page .inspector{max-height:none;height:100%;overflow:auto}
-body.bench-page.nopanels .sim-main{grid-template-columns:minmax(0,1fr)}
-body.bench-page.nopanels .palette,body.bench-page.nopanels .inspector{display:none}
-.bench-bar-note{font-size:.74rem;color:var(--muted);font-family:var(--font-mono)}
-@media (max-width:1100px){body.bench-page .sim-main,body.bench-page.nopanels .sim-main{height:auto;grid-template-columns:minmax(0,1fr)}body.bench-page .stage{height:70vh;min-height:340px}body.bench-page .palette,body.bench-page .inspector{height:auto}}
+.inv-tbl{font-size:.84rem}
+.inv-tbl td.look{width:124px;padding:4px 6px}
+.inv-tbl td:first-child{font-family:var(--font-mono);white-space:nowrap}
+.inv-tbl td.specs{min-width:280px;max-width:420px;color:var(--ink-2)}
+.inv-tbl td.num{white-space:nowrap;text-align:center}
+.inv-tbl td.acts{white-space:nowrap}
+.inv-bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:12px 0}
+.inv-bar input[type=search],.inv-bar select,.inv-sync input{border:1px solid var(--rule-strong);background:var(--surface);color:var(--ink);padding:6px 8px;border-radius:2px;font:inherit}
+.inv-bar input[type=search]{flex:1 1 220px;min-width:0}
+.inv-bar label.btn{cursor:pointer}
+.inv-sync{border:2px solid var(--ink);background:var(--surface);padding:10px 12px;margin:14px 0}
+.inv-sync .row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:6px}
+.inv-form{max-width:760px}
+.inv-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 12px;padding:10px 12px;overflow:auto}
+.inv-f{display:flex;flex-direction:column;gap:2px;font-size:.78rem;color:var(--muted)}
+.inv-f.wide{grid-column:1/-1}
+.inv-f input,.inv-f textarea,.inv-f select{border:1px solid var(--rule-strong);background:var(--surface);color:var(--ink);padding:5px 7px;border-radius:2px;font:inherit;font-size:.86rem;width:100%}
+@media (max-width:560px){.inv-grid{grid-template-columns:minmax(0,1fr)}}
 </style>
 </head>
-<body class="bench-page">
+<body>
 
-<nav class="topnav" aria-label="Guide pages"><div class="wrap"><span class="brand">Razif</span><a href="index.html">Zeeman EIT<span class="lg"> (AOM)</span></a><a href="bench.html" aria-current="page">3D<span class="lg"> Bench</span></a><a href="equipment.html">Equipment</a><a href="inventory.html"><span class="lg">Lab </span>Inventory</a><a href="quantum.html"><span class="lg">Quantum Optics </span>Lectures</a></div></nav>
+<nav class="topnav" aria-label="Guide pages"><div class="wrap"><span class="brand">Razif</span><a href="index.html">Zeeman EIT<span class="lg"> (AOM)</span></a><a href="bench.html">3D<span class="lg"> Bench</span></a><a href="equipment.html">Equipment</a><a href="inventory.html" aria-current="page"><span class="lg">Lab </span>Inventory</a><a href="quantum.html"><span class="lg">Quantum Optics </span>Lectures</a></div></nav>
 
-<div class="sim-wrap" id="main">
-  <div class="sim" id="sim">
-    <div class="sim-bar">
-      <button type="button" class="btn primary" id="simReset" title="Restore the full reference bench and the default camera">Reset bench &amp; view</button>
-      <button type="button" class="btn" id="simClear">Clear bench</button>
-      <button type="button" class="btn" id="simHint">Hint</button>
-      <button type="button" class="btn" id="simRestore" hidden>Restore my saved bench</button>
-      <button type="button" class="btn" id="simLabels" aria-pressed="true">Labels</button>
-      <span class="seg-l">View:</span>
-      <button type="button" class="btn" id="simPersp">3D</button>
-      <button type="button" class="btn" id="simTop">Top</button>
-      <button type="button" class="btn" id="simFront">Front</button>
-      <button type="button" class="btn" id="simSource">Source</button>
-      <button type="button" class="btn" id="simSas">SAS</button>
-      <button type="button" class="btn" id="simCellV">Cell</button>
-      <button type="button" class="btn" id="simFocus" title="Fly the camera to the selected component">Focus</button>
-      <label class="sim-filter" for="simFilter">Show <select id="simFilter"><option value="all">all optics</option><option value="source">source &amp; lock</option><option value="path">beam path</option><option value="cell">cell</option><option value="detect">detection</option><option value="electronics">electronics</option></select></label>
-      <button type="button" class="btn primary" id="simTour">▶ Guided tour</button>
-      <button type="button" class="btn" id="simCut" aria-pressed="true" title="Cut away the µ-metal shield to see the cell">Shield cutaway</button>
-      <button type="button" class="btn" id="simZones" aria-pressed="true" title="Painted areas on the table: source, SAS, control arm, probe arm, cell, electronics">Zones</button>
-      <button type="button" class="btn" id="simCables" aria-pressed="true">Cables</button>
-      <button type="button" class="btn" id="simInfo" aria-pressed="false" title="Show power and polarization on each beam">Beam info</button>
-      <button type="button" class="btn" id="simFlow" aria-pressed="true">Light motion</button>
-      <button type="button" class="btn" id="simShot">Screenshot</button>
-      <button type="button" class="btn" id="benchPanels" aria-pressed="false" title="Hide the palette and inspector to give the 3D view the whole page">Hide side panels</button>
-      <button type="button" class="theme-btn" id="themeBtn" aria-label="Switch colour theme">Theme: auto</button>
+<a class="skip" href="#main">Skip to content</a>
+<header class="masthead">
+  <div class="wrap">
+    <div class="docbar">
+      <span>Doc <b>QP / EIT-RB87</b></span>
+      <span>Page <b>Lab inventory</b></span>
+      <span>Scheme <b>Zeeman Λ · D1</b></span>
       <span class="sp"></span>
-      <div class="sim-status" aria-live="polite">
-        <span class="pill" id="stLock">Laser: free-running</span>
-        <span class="pill" id="stEIT">EIT: —</span>
-      </div>
-      <p class="sim-note" id="simNote"></p>
+      <button type="button" class="theme-btn" id="themeBtn" aria-label="Switch colour theme">Theme: auto</button>
     </div>
-    <div class="sim-main">
-      <div class="palette" id="palette" aria-label="Component palette"></div>
-      <div class="stage" id="stage">
-        <canvas id="simCanvas" tabindex="0" aria-label="3D optical table. Select components with the mouse; use R to rotate, Delete to remove, arrows to move."></canvas>
-        <div class="stage-msg" id="stageMsg"></div>
-        <div class="stage-tip" id="stageTip">Beam drawn red; real 795 nm light is invisible.</div>
-        <div class="stage-hud" id="stageHud"></div>
-        <div class="cable-legend" id="cableLegend" aria-label="Cable colour key"><b>Cables</b><span><i style="background:#6fae7a"></i>BNC signal</span><span><i style="background:#4f86c6"></i>SMA RF</span><span><i style="background:#9a8fd0"></i>trigger / gate</span><span><i style="background:#e0b030"></i>power</span><span><i style="background:#c17a3d"></i>coil</span><span><i style="background:#b5533c"></i>heater</span></div>
-        <div class="tour" id="tour" hidden></div>
+    <div class="hero">
+      <div>
+        <h1>What the lab already has</h1>
+        <p class="lede">Components and instruments in the lab that can go into this project, with their specifications, a 3D picture and whether they suit a 795 nm Rb experiment. The list is editable: add, change or remove items, then share it with the group through the password-protected database.</p>
       </div>
-      <aside class="inspector" id="inspector" aria-live="polite"></aside>
-    </div>
-
-    <div class="sim-lower">
-      <div class="scope">
-        <div class="scope-h">
-          <b>Detector · scope</b>
-          <button type="button" class="btn" id="scSweep" aria-pressed="true">EIT sweep</button>
-          <button type="button" class="btn" id="scStore" aria-pressed="false">Pulsed storage</button>
-          <button type="button" class="btn" id="scErr" aria-pressed="false">SAS error signal</button>
-        </div>
-        <canvas id="scopeCanvas" aria-label="Simulated oscilloscope trace" role="img"></canvas>
-        <div class="row" id="storeCtrls" hidden style="margin-top:6px">
-          <label for="scTau">Storage time τ <output id="scTauO" for="scTau">20 µs</output> <input type="range" id="scTau" min="0" max="600" step="5" value="20"></label>
-          <button type="button" class="btn primary" id="scRun">Run storage sequence</button>
-        </div>
-        <div class="readout" id="scopeRead"></div>
-      </div>
-      <div class="objs">
-        <div class="scope-h"><b>Objectives</b><span class="score" id="objScore"></span></div>
-        <ol id="objList"></ol>
-        <div class="hint" id="hintBox" hidden></div>
-        <ul class="warnlist" id="warnList"></ul>
+      <div class="spec" role="group" aria-label="How to use this page">
+        <dl>
+          <dt>Edit</dt><dd>Add item, or Edit / Delete on a row. Changes are saved in this browser.</dd>
+          <dt>Share</dt><dd>Enter the group password, then “Save to shared list” or “Load shared list”.</dd>
+          <dt>Compare</dt><dd>The “BOM” tag shows which <a href="equipment.html">equipment-list</a> item it can cover.</dd>
+        </dl>
       </div>
     </div>
+    <div class="beamline" aria-hidden="true"></div>
   </div>
+</header>
+
+<div class="wrap eq-main">
+<main id="main">
+<section class="part" id="inv" aria-labelledby="invh">
+  <div class="part-head"><span class="part-num">08</span><h2 id="invh">Lab inventory</h2>
+  <p class="part-sub">Owned items, specifications, and what each can do for the experiment.</p></div>
+  <div class="eq-stats" id="invStats" aria-live="polite"></div>
+  <div class="inv-bar">
+    <button type="button" class="btn primary" id="invAdd">Add item</button>
+    <input type="search" id="invSearch" placeholder="Search name, part, specs, BOM item…" aria-label="Search the inventory">
+    <label class="muted" for="invStatus">Show</label>
+    <select id="invStatus" aria-label="Filter by suitability"><option value="all">all items</option><option value="use">can use</option><option value="check">check first</option><option value="no">not suitable</option></select>
+    <button type="button" class="btn" id="invJson">Export JSON</button>
+    <button type="button" class="btn" id="invCsv">Export CSV</button>
+    <label class="btn" for="invImport">Import JSON</label><input type="file" id="invImport" accept="application/json,.json" hidden>
+    <button type="button" class="btn danger" id="invReset">Reset to default list</button>
+  </div>
+  <div class="scroll-x"><table class="bom-tbl inv-tbl">
+    <thead><tr><th>#</th><th>Look (3D)</th><th>Item</th><th>Part / brand</th><th>Qty</th><th>Specifications</th><th>Use in this project</th><th>Location / owner</th><th>Link</th><th></th></tr></thead>
+    <tbody id="invBody"></tbody>
+  </table></div>
+  <div class="inv-sync">
+    <h3 style="margin-top:0">Shared list (group members)</h3>
+    <p style="margin:0">Edits are kept in this browser until you save them to the shared list. “Load shared list” replaces what you see with the shared copy; “Save to shared list” replaces the shared copy with what you see (the last save wins).</p>
+    <div class="row"><label for="invPw">Password</label><input type="password" id="invPw" autocomplete="off"><button type="button" class="btn" id="invLoad">Load shared list</button><button type="button" class="btn primary" id="invSave">Save to shared list</button></div>
+    <p id="invStatusMsg" class="bom-status" aria-live="polite"></p>
+  </div>
+  <div class="note"><span class="t">About the data</span>The default list comes from the lab’s optical-components record sheet plus the oscilloscope and spectrum analyzer. Several rows in that sheet have no part number or quantity (shown as “?”): measure or identify them and edit the row. Statuses are my reading of the specifications against a 795 nm experiment, not a test.</div>
+</section>
+</main>
 </div>
+
+<footer class="site">
+  <div class="wrap">
+    <p><strong>Rubidium-87 EIT &amp; light storage: study guide and bench simulator.</strong> Prepared October 2026 for the IMEN quantum photonics programme (Objectives 1–2).</p>
+    <p class="mono" style="color:var(--muted)">The 3D pictures are schematic and not to scale.</p>
+  </div>
+</footer>
 
 <script>
 (function () {
   'use strict';
   var root = document.documentElement, tb = document.getElementById('themeBtn'), modes = ['auto', 'light', 'dark'];
-  var themeListeners = [];
-  window.onThemeChange = function (fn) { themeListeners.push(fn); };
-  function fireTheme() { themeListeners.forEach(function (f) { try { f(); } catch (e) { console.error(e); } }); }
-  try { window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', fireTheme); } catch (e) { }
-  new MutationObserver(fireTheme).observe(root, { attributes: true, attributeFilter: ['data-theme'] });
   function curMode() { var t = root.getAttribute('data-theme'); return t === 'light' || t === 'dark' ? t : 'auto'; }
   function paintBtn() { if (tb) tb.textContent = 'Theme: ' + curMode(); }
   if (tb) tb.addEventListener('click', function () {
@@ -518,23 +512,13 @@ body.bench-page.nopanels .palette,body.bench-page.nopanels .inspector{display:no
   });
   try { var saved = localStorage.getItem('rb87-theme'); if (saved === 'light' || saved === 'dark') root.setAttribute('data-theme', saved); } catch (e) { }
   paintBtn();
-  /* the toolbar height decides how tall the 3D view can be */
-  function ah() { root.style.setProperty('--app-h', window.innerHeight + 'px'); } ah(); window.addEventListener('resize', ah);
-  var bar = document.querySelector('.sim-bar');
-  function bh() { if (bar) root.style.setProperty('--bar-h', bar.offsetHeight + 'px'); }
-  bh(); window.addEventListener('resize', bh); window.addEventListener('load', bh); if (window.ResizeObserver && bar) new ResizeObserver(bh).observe(bar);
-  var pb = document.getElementById('benchPanels');
-  if (pb) pb.addEventListener('click', function () {
-    var on = !document.body.classList.contains('nopanels'); document.body.classList.toggle('nopanels', on);
-    pb.setAttribute('aria-pressed', on ? 'true' : 'false'); pb.textContent = on ? 'Show side panels' : 'Hide side panels';
-    window.dispatchEvent(new Event('resize'));
-  });
 })();
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
-<script src="eitphys.js?v=5"></script>
-<script src="bench-sim.js?v=11"></script>
+<script src="parts3d.js?v=4"></script>
+<script src="inventory-data.js?v=1"></script>
+<script src="inventory.js?v=1"></script>
 <script>
 (function () { var n = document.querySelector('.topnav'); if (!n) return; function s() { document.documentElement.style.setProperty('--nav-h', n.offsetHeight + 'px'); } s(); window.addEventListener('resize', s); window.addEventListener('load', s); if (window.ResizeObserver) new ResizeObserver(s).observe(n); })();
 </script>
