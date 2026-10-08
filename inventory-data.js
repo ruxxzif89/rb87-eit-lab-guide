@@ -2,7 +2,7 @@
    status: use = can be used in this project, check = identify or measure first, no = not suitable. bom = BOM item(s) it can cover.
    Edits made on the Lab Inventory page are kept in the browser and can be synced to the private database. */
 window.LAB_INVENTORY = {
-  version: 1,
+  version: 2,
   items: [
     { id: 'L01', name: 'Polarizing cube beamsplitter, cage-mounted', part: 'CM1-PBS251', brand: 'Thorlabs', qty: '2', model: 'pbs', mp: {}, status: 'no', bom: 'O03',
       specs: '30 mm cage-cube-mounted polarizing beamsplitter cube, 420–680 nm, 8-32 and M4 adapters. Discontinued 21 Sep 2016.',
@@ -86,6 +86,9 @@ window.LAB_INVENTORY = {
       role: 'Probe photodiode (CH1), lock-box error signal (CH2), trigger from the function generator. Connect with BNC cables; check whether probes came with it.', link: 'https://valuetronics.com/products/dso7104b-agilent-digital-oscilloscope-used', loc: '', owner: '', notes: '' },
     { id: 'I02', name: 'Optical spectrum analyzer', part: '86142B', brand: 'Agilent (Keysight)', qty: '1', model: 'osa', mp: {}, status: 'use', bom: '',
       specs: '600–1700 nm, resolution bandwidth from 0.06 nm, dynamic range up to about 70 dB, wavelength reproducibility ±0.002 nm; accuracy is specified for 1480–1620 nm and about ±0.2 nm after user calibration over the full range.',
-      role: 'Checks that the DFB runs on a single mode (side-mode suppression) and its coarse wavelength near 795 nm. It cannot find the Rb line, resolve AOM shifts or measure MHz linewidths.', link: 'https://wp.optics.arizona.edu/milster/wp-content/uploads/sites/48/2016/06/8614XBSeries.pdf', loc: '', owner: '', notes: '' }
+      role: 'Checks that the DFB runs on a single mode (side-mode suppression) and its coarse wavelength near 795 nm. It cannot find the Rb line, resolve AOM shifts or measure MHz linewidths.', link: 'https://wp.optics.arizona.edu/milster/wp-content/uploads/sites/48/2016/06/8614XBSeries.pdf', loc: '', owner: '', notes: '' },
+    { id: 'I03', name: 'Laser diode current source and TEC temperature controller (ITC500 series)', part: 'ITC502', brand: 'Thorlabs', qty: '1', model: 'lctrl', mp: {}, status: 'use', bom: 'L03',
+      specs: 'Laser: 0–200 mA, compliance > 6 V, noise < 1.5 µA rms (10 Hz–10 MHz), 24 h drift < 10 µA, analog modulation 20 mA/V with 0–500 kHz bandwidth (10 kΩ input). TEC: ±2 A, 16 W, > 8 V, thermistor input 10 Ω–19.9 kΩ, 24 h stability ≤ 0.5 Ω.',
+      role: 'Drives and cools the 795 nm DFB (160 mA, 0.4 A TEC, 10 kΩ NTC). Set the current limit to 170 mA or lower before connecting. Its modulation input takes the lock box correction: 20 mA/V is about 28 GHz per volt, so attenuate the lock-box output about 100:1. Front-panel steps are coarse (10 µA is about 14 MHz, 1 Ω is about 65 MHz): tune coarsely by hand and let the lock do the fine tuning. The laser reads about 20 kΩ at 10 °C, so run at 15 °C or warmer. Check the output polarity and the cable against the butterfly mount.', link: 'https://www.thorlabs.com/catalogpages/417.pdf', loc: '', owner: '', notes: '' }
   ]
 };
