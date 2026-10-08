@@ -29,7 +29,7 @@
     lens: 'Lens (cosmetic: the tracer keeps beams collimated). On a real bench: cat’s-eye lenses in the AOM double passes and a telescope to expand the control beam.',
     iris: 'Iris. Passes light within its aperture radius of the axis. Use it to select one AOM order.',
     nd: 'Neutral-density filter, transmission 10^−OD. Keeps the probe weak (Ω_p ≪ Ω_c).',
-    cell: 'EIT vapour cell: quartz, Ø19 × 75 mm with 2° wedged windows (planned: Precision Glassblowing standard body AB-RB-Q-UV-19X75-AW, custom-filled with isotopically enriched ⁸⁷Rb and 10 Torr Ne buffer gas, the fill used in the published DeRose et al. Zeeman-EIT experiment; windows uncoated as there), with accessories: foil heater under a TC300B (planned; foil rated to 70 °C), solenoid (B along the cell axis, i.e. the beam) and triple-layer µ-metal shield. Probe and control must co-propagate with opposite circular polarizations.',
+    cell: 'EIT vapour cell: quartz, Ø25 mm × 25 mm vapour path (about 28 mm long with two 1.6 mm windows), isotopically enriched ⁸⁷Rb with 10 Torr Ne buffer gas, uncoated windows: the geometry and fill of the cell in the published DeRose et al. Zeeman-EIT experiment (that cell is Pyrex; we ask the supplier for quartz). Custom-made by Precision Glassblowing, with accessories: foil heater under a TC300B (planned; foil rated to 70 °C), solenoid (B along the cell axis, i.e. the beam) and triple-layer µ-metal shield. Probe and control must co-propagate with opposite circular polarizations.',
     sas: 'Reference photodiode at the end of the SAS probe path. The probe, after crossing the Rb reference cell against the counter-propagating pump, shows sub-Doppler features on this photodiode; that signal is the “sensor” of the frequency lock. Its output goes by cable to the lock box, which turns it into an error signal. The photodiode alone cannot lock anything.',
     refcell: 'Rb reference cell for saturated-absorption spectroscopy: natural-abundance rubidium vapour with no buffer gas at room temperature, quartz Ø19 × 75 mm (planned: Precision Glassblowing stock cell AB-RB-Q-UV-19X75-AW). A strong pump and a weak probe cross it in opposite directions: atoms near zero velocity see both beams, the pump saturates the transition, and a narrow transparency appears inside the Doppler-broadened absorption. Pump and probe have orthogonal polarizations so PBSs can inject the pump and extract it afterwards.',
     rfgen: 'Dual-channel RF source. Both channels share one clock so the two AOM drive signals stay phase-related, which keeps the probe-control beat stable. Channel A drives the control AOM (80.000 MHz), channel B the probe AOM (79.965 MHz).',
@@ -711,11 +711,11 @@
         var heaterM = own(std(0xd88a1d, 0.3, 0.55, { emissive: 0xff6a00, emissiveIntensity: 0.1 + 0.8 * hot, transparent: true, opacity: 0.9 }));
         var vaporM = own(new THREE.MeshBasicMaterial({ color: 0xb06cff, transparent: true, opacity: 0.05 + 0.2 * Math.min(1, (p.T_C - 20) / 50), depthWrite: false }));
         stand(g, k);
-        g.add(cy(9.5, 75, M.glass)); g.add(cy(7.8, 70, vaporM)); g.add(cy(10.1, 2, M.glass, -37, 0, 0)); g.add(cy(10.1, 2, M.glass, 37, 0, 0));   // Ø19 x 75 mm quartz cell
-        g.add(tr(9.9, 1.1, M.alu, -36, 0, 0)); g.add(tr(9.9, 1.1, M.alu, 36, 0, 0));
-        g.add(cy(3, 14, M.glass, 0, 16, 0, 'y', 10)); g.add(sp(2.4, std(0xa08060, 0.8, 0.3), 0, 23, 0));
-        if (p.heater) g.add(cy(10.9, 40, heaterM));
-        if (p.solenoid) for (var i = -4; i <= 4; i++) g.add(tr(14.4, 1.5, M.copper, i * 8.5, 0, 0));
+        g.add(cy(12.5, 25, M.glass)); g.add(cy(11, 22, vaporM)); g.add(cy(13.1, 2, M.glass, -13, 0, 0)); g.add(cy(13.1, 2, M.glass, 13, 0, 0));   // Ø25 mm cell, 25 mm vapour path (as the published EIT cell)
+        g.add(tr(12.9, 1.1, M.alu, -12, 0, 0)); g.add(tr(12.9, 1.1, M.alu, 12, 0, 0));
+        g.add(cy(3, 14, M.glass, 0, 19, 0, 'y', 10)); g.add(sp(2.4, std(0xa08060, 0.8, 0.3), 0, 26, 0));
+        if (p.heater) g.add(cy(13.9, 22, heaterM));
+        if (p.solenoid) for (var i = -4; i <= 4; i++) g.add(tr(17.5, 1.5, M.copper, i * 8.5, 0, 0));
         if (p.shield) {
           var layers = [[21, 108], [24.5, 114], [28, 120]];
           layers.forEach(function (L) {

@@ -199,11 +199,11 @@
     cell: function (g, p) {
       var M = mats(); p = p || {}; stand(g);
       var heat = p.heater ? 1 : 0;
-      g.add(cy(9.5, 75, M.glass)); g.add(cy(7.8, 70, M.vapor)); g.add(cy(10.1, 2, M.glass, -37, 0, 0)); g.add(cy(10.1, 2, M.glass, 37, 0, 0));   // Ø19 x 75 mm quartz cell
-      g.add(tr(9.9, 1.1, M.alu, -36, 0, 0)); g.add(tr(9.9, 1.1, M.alu, 36, 0, 0));
-      g.add(cy(3, 14, M.glass, 0, 16, 0, 'y', 10)); g.add(sp(2.4, std(0xa08060, 0.8, 0.3), 0, 23, 0));
-      if (heat) g.add(cy(10.9, 40, M.foil));
-      if (p.solenoid) for (var i = -4; i <= 4; i++) g.add(tr(14.4, 1.5, M.copper, i * 8.5, 0, 0));
+      g.add(cy(12.5, 25, M.glass)); g.add(cy(11, 22, M.vapor)); g.add(cy(13.1, 2, M.glass, -13, 0, 0)); g.add(cy(13.1, 2, M.glass, 13, 0, 0));   // Ø25 mm cell, 25 mm vapour path (as the published EIT cell)
+      g.add(tr(12.9, 1.1, M.alu, -12, 0, 0)); g.add(tr(12.9, 1.1, M.alu, 12, 0, 0));
+      g.add(cy(3, 14, M.glass, 0, 19, 0, 'y', 10)); g.add(sp(2.4, std(0xa08060, 0.8, 0.3), 0, 26, 0));
+      if (heat) g.add(cy(13.9, 22, M.foil));
+      if (p.solenoid) for (var i = -4; i <= 4; i++) g.add(tr(17.5, 1.5, M.copper, i * 8.5, 0, 0));
       if (p.shield) {
         [[21, 108], [24.5, 114], [28, 120]].forEach(function (L) {
           var sh = new T.Mesh(new T.CylinderGeometry(L[0], L[0], L[1], 44, 1, true, Math.PI * 0.75, Math.PI * 1.5), M.mumetal); sh.rotation.z = Math.PI / 2; g.add(sh);
