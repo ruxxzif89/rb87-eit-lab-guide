@@ -426,6 +426,11 @@ body.bench-page.nopanels .palette,body.bench-page.nopanels .inspector{display:no
 @media (max-width:1100px){body.bench-page .sim-main,body.bench-page.nopanels .sim-main{height:auto;grid-template-columns:minmax(0,1fr)}body.bench-page .stage{height:70vh;min-height:340px}body.bench-page .palette,body.bench-page .inspector{height:auto}}
 </style>
 <style>
+body.bench-page .sim-main{height:calc(var(--app-h,100vh) - var(--nav-h,44px) - var(--bar-h,90px) - 64px)}
+.qs-info .toplink{display:inline-block;margin:0 0 8px;font-family:var(--font-mono);font-size:.78rem}
+.qs-info .toplink a{color:var(--accent)}
+.qs-more{display:flex;gap:10px;align-items:center;justify-content:center;padding:8px 12px;background:var(--surface-2);border-top:1px solid var(--rule-strong);font-size:.85rem;color:var(--ink-2)}
+.qs-more button{font:inherit;padding:3px 10px;border:1px solid var(--accent);background:transparent;color:var(--accent);border-radius:2px;cursor:pointer}
 .qs-info{max-width:1180px;margin:0 auto;padding:28px 16px 60px}
 .qs-info h2{font-family:var(--font-display);font-size:1.7rem;margin:0 0 6px}
 .qs-info h3{font-family:var(--font-display);font-size:1.25rem;margin:26px 0 8px}
@@ -483,6 +488,7 @@ body.bench-page.nopanels .palette,body.bench-page.nopanels .inspector{display:no
       <button type="button" class="btn" id="simInfo" aria-pressed="false" title="Show power and polarization on each beam">Beam info</button>
       <button type="button" class="btn" id="simFlow" aria-pressed="true">Light motion</button>
       <button type="button" class="btn" id="simShot">Screenshot</button>
+      <button type="button" class="btn primary" id="qsJump" title="Identified equipment, probable bill of materials and the cost estimate are below the 3D view">Equipment &amp; cost ↓</button>
       <button type="button" class="btn" id="benchPanels" aria-pressed="false" title="Hide the palette and inspector to give the 3D view the whole page">Hide side panels</button>
       <button type="button" class="theme-btn" id="themeBtn" aria-label="Switch colour theme">Theme: auto</button>
       <span class="sp"></span>
@@ -529,7 +535,9 @@ body.bench-page.nopanels .palette,body.bench-page.nopanels .inspector{display:no
     </div>
   </div>
 
+<div class="qs-more" id="qsMore"><span>Below: identified equipment, probable bill of materials and the cost estimate (scroll the page, the mouse wheel zooms the 3D view)</span><button type="button" id="qsMoreGo">Go there ↓</button></div>
 <section class="qs-info" id="qsInfo">
+  <p class="toplink"><a href="#" id="qsUp">↑ Back to the 3D bench</a></p>
   <h2>Quantum Spain-style bench: what the photograph shows</h2>
   <p class="note">This bench is reconstructed from a single photograph of a Quantum Spain-style EIT bench, not from drawings. Positions are approximate, part names marked “look” or “class” are look-alikes, and anything not visible is marked “assumed”. The optical chain is this guide’s own Zeeman-EIT chain (same physics as the 3D Bench tab) re-laid on the two boards; in the simulator the lock, the EIT window and the pulse storage all work.</p>
 
@@ -683,6 +691,28 @@ body.bench-page.nopanels .palette,body.bench-page.nopanels .inspector{display:no
   }
   go.addEventListener('click', run);
   pw.addEventListener('keydown', function (e) { if (e.key === 'Enter') run(); });
+})();
+</script>
+<script>
+(function () {
+  var wrap = document.querySelector('.sim-wrap'), info = document.getElementById('qsInfo'), box = document.getElementById('qsCost');
+  if (!wrap || !info) return;
+  function down() { var top = info.getBoundingClientRect().top - wrap.getBoundingClientRect().top + wrap.scrollTop - 8; wrap.scrollTo({ top: top, behavior: 'smooth' }); }
+  function up() { wrap.scrollTo({ top: 0, behavior: 'smooth' }); }
+  var b1 = document.getElementById('qsJump'), b2 = document.getElementById('qsMoreGo'), b3 = document.getElementById('qsUp');
+  if (b1) b1.addEventListener('click', down); if (b2) b2.addEventListener('click', down);
+  if (b3) b3.addEventListener('click', function (e) { e.preventDefault(); up(); });
+  var K1 = 'rb87-qs-scroll', K2 = 'rb87-qs-cost-open', tmr = 0;
+  function save() { try { sessionStorage.setItem(K1, String(Math.round(wrap.scrollTop))); } catch (e) { } }
+  wrap.addEventListener('scroll', function () { clearTimeout(tmr); tmr = setTimeout(save, 150); });
+  if (box) box.addEventListener('toggle', function () { try { sessionStorage.setItem(K2, box.open ? '1' : '0'); } catch (e) { } });
+  function restore() {
+    try {
+      if (box && sessionStorage.getItem(K2) === '1') box.open = true;
+      var y = Number(sessionStorage.getItem(K1) || 0); if (y > 0) wrap.scrollTop = y;
+    } catch (e) { }
+  }
+  window.addEventListener('load', function () { restore(); setTimeout(restore, 400); setTimeout(restore, 1200); });
 })();
 </script>
 </body>
