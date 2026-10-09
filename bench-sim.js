@@ -4,6 +4,8 @@
 (function () {
   'use strict';
   var P = window.EITPhys, K = P.K;
+  var CFG = window.BENCH_CFG || {};   // optional variant bench (see toni-layout.js): table, layout(), zones(), views, trays, storeKey, notes
+  if (CFG.table) K.table = Object.assign({}, K.table, CFG.table);
   var $ = function (id) { return document.getElementById(id); };
   var root = document.documentElement;
   function css(n) { return getComputedStyle(root).getPropertyValue(n).trim(); }
@@ -11,8 +13,9 @@
   try { var mq = window.matchMedia('(prefers-reduced-motion: reduce)'); reduceMotion = mq.matches; mq.addEventListener('change', function (e) { reduceMotion = e.matches; }); } catch (e) { }
 
   var MODE = 'A';
-  function refLayout() { return P.referenceLayout(); }
-  var STORE_KEY = 'rb87-eit-bench-v1';
+  function refLayout() { return CFG.layout ? CFG.layout() : P.referenceLayout(); }
+  function refZones() { return CFG.zones ? CFG.zones() : P.referenceZones(); }
+  var STORE_KEY = CFG.storeKey || 'rb87-eit-bench-v1';
   var S = { layout: refLayout(), sel: null, labels: true, scope: 'sweep', ev: null, store: null, incident: {} };
   var idn = 1000;
 
@@ -207,7 +210,7 @@
       return;
     }
     var k = c.kind, p = c.params, h = '';
-    h += '<h4>' + esc(P.KINDS[k].name) + '</h4><p class="what">' + esc(INFO[k]) + '</p>';
+    h += '<h4>' + esc(c.nm || P.KINDS[k].name) + '</h4>' + (c.photo ? '<p class="what"><b>In the photo:</b> ' + esc(c.photo) + '</p>' : '') + '<p class="what">' + esc(INFO[k]) + '</p>';
     if (INFO2[k]) h += '<div class="rich"><b>Role in the Zeeman EIT bench</b><p>' + esc(INFO2[k][0]) + '</p><b>On the reference bench</b><p>' + esc(INFO2[k][1]) + '</p><b>Try this</b><p>' + esc(INFO2[k][2]) + '</p></div>';
     h += '<div class="row"><button type="button" class="btn" id="inRotL" aria-label="Rotate counter-clockwise">⟲ Rotate</button><button type="button" class="btn" id="inRotR" aria-label="Rotate clockwise">Rotate ⟳</button><button type="button" class="btn danger" id="inDel">Delete</button></div>';
     if (k === 'laser') h += rng('inPow', 'Power', 1, 40, 0.5, p.power, ' mW');
@@ -475,6 +478,7 @@
     var fit = Math.max(TD / 2 / tf, TW / 2 / (tf * asp)) * 1.06;   // distance at which the whole table fits the view
     if (v === 'top') { pos = new THREE.Vector3(0, fit, 1); tgt.set(0, 0, 0); }
     else if (v === 'front') { pos = new THREE.Vector3(0, fit * 0.2, fit * 0.95); tgt.set(0, 30, 70); }
+    else if (CFG.views && CFG.views[v]) { var vw = CFG.views[v]; tgt = new THREE.Vector3(vw.at[0] - TW / 2, vw.at[2] || 20, vw.at[1] - TD / 2); pos = tgt.clone().add(new THREE.Vector3(vw.off[0], vw.off[1], vw.off[2])); }
     else if (v === 'source') { tgt = tw(250, 270); tgt.y = 20; pos = tgt.clone().add(new THREE.Vector3(-150, 520, 330)); }
     else if (v === 'sas') { tgt = tw(850, 215); tgt.y = 20; pos = tgt.clone().add(new THREE.Vector3(-120, 640, 420)); }
     else if (v === 'cell') { tgt = tw(1230, 780); tgt.y = 30; pos = tgt.clone().add(new THREE.Vector3(300, 380, 480)); }
@@ -553,7 +557,7 @@
     if (G.zoneGroup) { G.scene.remove(G.zoneGroup); G.zoneGroup.traverse(function (o) { if (o.isMesh) { o.geometry.dispose(); if (o.material.map) o.material.map.dispose(); o.material.dispose(); } }); }
     var grp = G.zoneGroup = new THREE.Group(), PPM = 0.8, TW = K.table.w, TD = K.table.d;
     function rgba(hex, a) { var n = parseInt(hex.slice(1), 16); return 'rgba(' + (n >> 16) + ',' + ((n >> 8) & 255) + ',' + (n & 255) + ',' + a + ')'; }
-    P.referenceZones().forEach(function (z) {
+    refZones().forEach(function (z) {
       z.rects.forEach(function (r, ri) {
         var w = r[2] - r[0], h = r[3] - r[1], cw = Math.max(8, Math.round(w * PPM)), ch = Math.max(8, Math.round(h * PPM));
         var c = document.createElement('canvas'); c.width = cw; c.height = ch; var x = c.getContext('2d');
@@ -570,7 +574,7 @@
     // name chips (HTML, always readable) at the corner of each zone
     if (!document.getElementById('zone-css')) { var st = document.createElement('style'); st.id = 'zone-css'; st.textContent = '.zone-label{position:absolute;left:0;top:0;pointer-events:none;font:700 .72rem/1.1 var(--font-display,system-ui);letter-spacing:.05em;text-transform:uppercase;color:#fff;padding:3px 8px 3px 6px;border-radius:2px;white-space:nowrap;text-shadow:0 1px 1px rgba(0,0,0,.5);box-shadow:0 1px 4px rgba(0,0,0,.35);opacity:.93}'; document.head.appendChild(st); }
     (G.zoneLabels || []).forEach(function (L) { L.el.remove(); });
-    G.zoneLabels = P.referenceZones().map(function (z) {
+    G.zoneLabels = refZones().map(function (z) {
       var el = document.createElement('div'); el.className = 'zone-label'; el.textContent = z.name; el.title = z.sub || z.name;
       el.style.background = z.color; el.style.color = '#10161a'; el.style.textShadow = 'none'; el.hidden = !G.opt.zones;
       G.layer.insertBefore(el, G.layer.firstChild);
@@ -784,7 +788,7 @@
   }
   function compFilterOK(kind) { var f = G.opt.filter; return f === 'all' || (FILTERS[f] || []).indexOf(kind) >= 0; }
   function labelText(c) {
-    var t = P.KINDS[c.kind].short; if (c.kind === 'aom') t += ' ' + c.params.fMHz.toFixed(3);
+    var t = c.tag || P.KINDS[c.kind].short; if (c.kind === 'aom') t += ' ' + c.params.fMHz.toFixed(3);
     if (c.kind === 'hwp' || c.kind === 'qwp' || c.kind === 'glan') t += ' ' + c.params.axis + '°';
     return t;
   }
@@ -822,7 +826,7 @@
     if (!S.labels) return;
     S.layout.components.forEach(function (c) {
       var b = document.createElement('button'); b.type = 'button'; b.className = 'optic-label' + (c.id === S.sel ? ' sel' : '') + (compFilterOK(c.kind) ? '' : ' dim'); b.textContent = labelText(c); b.tabIndex = -1;
-      b.setAttribute('aria-label', P.KINDS[c.kind].name);
+      b.setAttribute('aria-label', c.nm || P.KINDS[c.kind].name);
       b.addEventListener('click', function () { selectComp(c.id, true); });
       G.layer.appendChild(b); G.labels[c.id] = { minor: /^(mirror|iris|dump|lens)$/.test(c.kind), el: b, pos: wp(c).add(new THREE.Vector3(0, ({ fgen: 20, rfgen: 6, rfatt: 6, rfamp: 10, csrc: 8, tctrl: 8, lctrl: 8, lockbox: 8, scope: 30, psu: 8, pwrmeter: 8 })[c.kind] || 34, 0)) };
     });
@@ -835,7 +839,7 @@
     var comps = S.layout.components, lk = S.ev ? S.ev.lock : null, links = [], cc = col('--sim-accent').getHex();
     function of(k) { return comps.filter(function (c) { return c.kind === k; }); }
     function near(c, list) { var best = null, bd = 1e9; list.forEach(function (o) { var d = Math.hypot(o.x - c.x, o.z - c.z); if (d < bd) { bd = d; best = o; } }); return best; }
-    function add(a, b, color, tray) { if (a && b && a !== b) links.push({ a: a, b: b, color: color, tray: tray }); }
+    function add(a, b, color, tray) { if (a && b && a !== b && !a.nocable && !b.nocable) links.push({ a: a, b: b, color: color, tray: tray }); }
     if (lk) { var chain = [lk.ids.sas, lk.ids.box, lk.ids.ctrl, lk.ids.laser]; for (var i = 0; i < 3; i++) add(comp(chain[i]), comp(chain[i + 1]), i === 2 ? 0xd9a441 : cc, 'top'); }
     of('rfatt').forEach(function (att) { add(near(att, of('rfgen')), att, 0x4f86c6, 'bottom'); of('fgen').forEach(function (f) { add(f, att, 0x9a8fd0, 'bottom'); }); });
     of('rfamp').forEach(function (amp) { add(near(amp, of('rfatt')), amp, 0x4f86c6, 'bottom'); add(amp, near(amp, of('aom')), 0x4f86c6, 'bottom'); });
@@ -845,7 +849,8 @@
     of('sas').forEach(function (sd) { of('psu').forEach(function (u) { add(u, sd, 0xe0b030, 'top'); }); });
     of('pd').forEach(function (pd) { of('psu').forEach(function (u) { add(u, pd, 0xe0b030, 'top'); }); });
     of('scope').forEach(function (sc) { if (lk && lk.ids.box) add(comp(lk.ids.box), sc, 0x6fae7a, 'top'); of('fgen').forEach(function (f) { add(f, sc, 0x9a8fd0, 'bottom'); }); });
-    var tw = K.table.w / 2, td = K.table.d / 2, trays = { top: 22 - td, bottom: td - 100 + 0 };
+    comps.forEach(function (c) { (c.cableTo || []).forEach(function (t) { var o = comp(t.to); if (o && o !== c) links.push({ a: c, b: o, color: t.color || cc, tray: t.tray || 'top' }); }); });
+    var tw = K.table.w / 2, td = K.table.d / 2, trays = CFG.trays ? { top: CFG.trays.top - td, bottom: CFG.trays.bottom - td } : { top: 22 - td, bottom: td - 100 + 0 };
     links.forEach(function (l, li) {
       var a = new THREE.Vector3(l.a.x - tw, 3, l.a.z - td), b = new THREE.Vector3(l.b.x - tw, 3, l.b.z - td), tz = l.tray === 'top' ? trays.top : trays.bottom + (li % 5) * 7;
       var pts = [a, new THREE.Vector3(a.x, 2.2, tz), new THREE.Vector3(b.x, 2.2, tz), new THREE.Vector3(b.x, 2.2, b.z), b];
@@ -938,7 +943,7 @@
       if (e.pointerType === 'mouse' && !e.buttons) {
         var id = pickComp(e.clientX, e.clientY); cv.style.cursor = id ? 'grab' : '';
         var c2 = id && comp(id), r = G.stage.getBoundingClientRect();
-        if (c2) { G.tip.hidden = false; G.tip.textContent = P.KINDS[c2.kind].name + ' · ' + labelText(c2); G.tip.style.left = (e.clientX - r.left + 14) + 'px'; G.tip.style.top = (e.clientY - r.top + 12) + 'px'; } else G.tip.hidden = true;
+        if (c2) { G.tip.hidden = false; G.tip.textContent = (c2.nm || P.KINDS[c2.kind].name) + ' · ' + labelText(c2); G.tip.style.left = (e.clientX - r.left + 14) + 'px'; G.tip.style.top = (e.clientY - r.top + 12) + 'px'; } else G.tip.hidden = true;
       }
     });
     cv.addEventListener('pointerleave', function () { G.tip.hidden = true; });
@@ -1116,7 +1121,7 @@
   }
 
   function applyModeUI() {
-    $('simNote').innerHTML = 'Zeeman EIT (Zeeman Λ, two double-pass AOMs). Guide: <a href="index.html#p4">architecture</a> · <a href="index.html#p3">physics</a>.';
+    $('simNote').innerHTML = CFG.note || 'Zeeman EIT (Zeeman Λ, two double-pass AOMs). Guide: <a href="index.html#p4">architecture</a> · <a href="index.html#p3">physics</a>.';
     buildPalette();
     var hb = $('hintBox'); if (hb) hb.hidden = true;
   }

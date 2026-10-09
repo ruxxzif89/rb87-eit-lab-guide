@@ -10,8 +10,8 @@ body{margin:0;font:14px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif
 img{max-width:100%}
 [hidden]{display:none!important}
 </style>
-<title>3D Bench · Rb-87 EIT Lab Guide</title>
-<meta name="description" content="Full-page 3D optical bench simulator for the Rb-87 Zeeman-EIT experiment: build, trace the beams, lock the laser and see the EIT signal.">
+<title>Spain-style Bench · Rb-87 EIT Lab Guide</title>
+<meta name="description" content="3D bench simulation of a Quantum Spain-style EIT bench (two 450 x 450 mm breadboards: SAS lock and EIT with two AOMs), reconstructed from a photograph, with the identified equipment and a probable bill of materials.">
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Saira+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -423,10 +423,23 @@ body.bench-page.nopanels .palette,body.bench-page.nopanels .inspector{display:no
 .bench-bar-note{font-size:.74rem;color:var(--muted);font-family:var(--font-mono)}
 @media (max-width:1100px){body.bench-page .sim-main,body.bench-page.nopanels .sim-main{height:auto;grid-template-columns:minmax(0,1fr)}body.bench-page .stage{height:70vh;min-height:340px}body.bench-page .palette,body.bench-page .inspector{height:auto}}
 </style>
+<style>
+.qs-info{max-width:1180px;margin:0 auto;padding:28px 16px 60px}
+.qs-info h2{font-family:var(--font-display);font-size:1.7rem;margin:0 0 6px}
+.qs-info h3{font-family:var(--font-display);font-size:1.25rem;margin:26px 0 8px}
+.qs-info p,.qs-info li{max-width:78ch;color:var(--ink-2)}
+.qs-info .tbl{overflow-x:auto;margin:8px 0 14px}
+.qs-info table{border-collapse:collapse;width:100%;font-size:.86rem}
+.qs-info th,.qs-info td{border:1px solid var(--rule);padding:6px 9px;text-align:left;vertical-align:top}
+.qs-info th{background:var(--surface-2);font-family:var(--font-mono);font-size:.72rem;letter-spacing:.05em;text-transform:uppercase}
+.qs-info td.c{font-family:var(--font-mono);font-size:.74rem;white-space:nowrap}
+.qs-info .hi{color:var(--ok);font-weight:600}.qs-info .md{color:var(--warn);font-weight:600}.qs-info .lo{color:var(--bad);font-weight:600}
+.qs-info .note{background:var(--warn-bg);border:1px solid var(--warn-rule);padding:10px 14px;border-radius:3px;max-width:78ch}
+</style>
 </head>
 <body class="bench-page">
 
-<nav class="topnav" aria-label="Guide pages"><div class="wrap"><span class="brand">Razif</span><a href="index.html">Zeeman EIT<span class="lg"> (AOM)</span></a><a href="bench.html" aria-current="page">3D<span class="lg"> Bench</span></a><a href="qs-bench.html">Spain-style<span class="lg"> Bench</span></a><a href="equipment.html">Equipment</a><a href="inventory.html"><span class="lg">Lab </span>Inventory</a><a href="quantum.html"><span class="lg">Quantum Optics </span>Lectures</a></div></nav>
+<nav class="topnav" aria-label="Guide pages"><div class="wrap"><span class="brand">Razif</span><a href="index.html">Zeeman EIT<span class="lg"> (AOM)</span></a><a href="bench.html">3D<span class="lg"> Bench</span></a><a href="qs-bench.html" aria-current="page">Spain-style<span class="lg"> Bench</span></a><a href="equipment.html">Equipment</a><a href="inventory.html"><span class="lg">Lab </span>Inventory</a><a href="quantum.html"><span class="lg">Quantum Optics </span>Lectures</a></div></nav>
 
 <div class="sim-wrap" id="main">
   <div class="sim" id="sim">
@@ -497,6 +510,66 @@ body.bench-page.nopanels .palette,body.bench-page.nopanels .inspector{display:no
       </div>
     </div>
   </div>
+
+<section class="qs-info" id="qsInfo">
+  <h2>Quantum Spain-style bench: what the photograph shows</h2>
+  <p class="note">This bench is reconstructed from a single photograph of a Quantum Spain-style EIT bench, not from drawings. Positions are approximate, part names marked “look” or “class” are look-alikes, and anything not visible is marked “assumed”. The optical chain is this guide’s own Zeeman-EIT chain (same physics as the 3D Bench tab) re-laid on the two boards; in the simulator the lock, the EIT window and the pulse storage all work.</p>
+
+  <h3>Reading of the bench</h3>
+  <ul>
+    <li><b>Left breadboard: laser input and SAS lock.</b> Fibre-coupled laser light (blue PM patch cables with green FC/APC connectors), isolator, steering mirrors, a pick-off, and the saturated-absorption arm with the white 3D-printed reference-cell module (banana jacks and a small board on top).</li>
+    <li><b>Right breadboard (Thorlabs MB4545/M): the EIT board.</b> Two red-housed AOMs with gold SMA inputs, many waveplates, cubes and lenses, the white EIT-cell module with red heater and coil leads, and a black detector or camera housing at the right edge.</li>
+    <li><b>Shelf behind the boards:</b> two Thorlabs benchtop controllers, two Rigol generators, two TENMA DC supplies labelled HEATER and COILS, and a Rigol oscilloscope at each end of the boards.</li>
+  </ul>
+
+  <h3>Instruments identified</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>Tag / label</th><th>Item</th><th>What is readable</th><th>Confidence</th></tr></thead>
+    <tbody>
+      <tr><td class="c">LDC</td><td>Thorlabs benchtop laser diode current controller (LDC200C-series look)</td><td>Thorlabs logo; display 146.88, taken as laser current in mA (close to the 160 mA of a 795 nm DFB at 15 mW)</td><td class="md">brand high, model low</td></tr>
+      <tr><td class="c">TED</td><td>Thorlabs benchtop TEC controller (TED200C-series look)</td><td>Thorlabs logo; display 9.021, probably the thermistor reading in kΩ</td><td class="md">brand high, model low</td></tr>
+      <tr><td class="c">FG</td><td>Rigol function / arbitrary generator, small, colour screen, 3 BNC outputs (DG800 look)</td><td>Rigol logo</td><td class="md">brand high, model low</td></tr>
+      <tr><td class="c">(none)</td><td>Rigol two-channel arbitrary generator, larger, split screen (DG4000 look)</td><td>Rigol logo; two yellow and two blue BNC outputs. Likely the two-channel source for the AOMs</td><td class="md">brand high, model low</td></tr>
+      <tr><td class="c">HEATER</td><td>TENMA linear DC power supply</td><td>Label HEATER; display about 02.40 and 0.500 (V and A, my reading)</td><td class="hi">high</td></tr>
+      <tr><td class="c">COILS</td><td>TENMA linear DC power supply</td><td>Label COILS; display about 01.00 and 0.080 (about 80 mA through the solenoid, my reading)</td><td class="hi">high</td></tr>
+      <tr><td class="c">DSO1, DSO2</td><td>Rigol digital oscilloscopes (two)</td><td>Rigol logo, colour screens; models not readable (DS1000 look)</td><td class="md">brand high, model low</td></tr>
+      <tr><td class="c">(none)</td><td>PC keyboard and monitor behind the shelf, power strips under it</td><td>Visible</td><td class="hi">high</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Optics and mechanics: probable bill of materials (no prices)</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>Item</th><th>Likely class</th><th>Seen / est. qty</th><th>Board</th><th>Confidence</th></tr></thead>
+    <tbody>
+      <tr><td>Breadboards</td><td>Thorlabs MB4545/M, 450 × 450 mm, M6 on 25 mm pitch, black anodised</td><td>2 (label “MB4545/M” readable)</td><td>both</td><td class="hi">high</td></tr>
+      <tr><td>Acousto-optic modulators</td><td>Red-housed modules, gold SMA input, white label (maker unreadable; possibly Thorlabs)</td><td>2</td><td>2</td><td class="md">medium</td></tr>
+      <tr><td>Rubidium vapour cell modules</td><td>White 3D-printed housings with heater and coil leads (a shield may be inside)</td><td>2: reference cell (left), EIT cell (right)</td><td>1, 2</td><td class="hi">high</td></tr>
+      <tr><td>Kinematic mirror mounts</td><td>Black two-axis mounts with asset labels (Thorlabs KM100 / Polaris class)</td><td>about 20–25</td><td>both</td><td class="md">count rough</td></tr>
+      <tr><td>Polarizing beamsplitter cubes</td><td>Clear cubes on kinematic cube mounts with white tags</td><td>about 6–8</td><td>both</td><td class="md">count rough</td></tr>
+      <tr><td>Waveplates in rotation mounts</td><td>Black rotation mounts with white angle scale (RSP1 type)</td><td>about 6–8</td><td>both</td><td class="md">count rough</td></tr>
+      <tr><td>Lenses and tubes</td><td>Lens mounts and SM-thread tubes, some with blue AR tint</td><td>about 8–10</td><td>both</td><td class="md">count rough</td></tr>
+      <tr><td>Posts, post holders, clamping forks</td><td>Silver posts; grey and red slotted forks (CF125 type)</td><td>one set per optic, about 50</td><td>both</td><td class="md">medium</td></tr>
+      <tr><td>Detectors</td><td>Black housings with a round aperture (amplified photodetector or camera)</td><td>2</td><td>1, 2</td><td class="lo">low</td></tr>
+      <tr><td>Fibre parts</td><td>Blue PM patch cables with green FC/APC connectors, collimators in kinematic mounts, white 900 µm fibre loops</td><td>2–3 cables, ≥ 2 collimators</td><td>1 (to 2)</td><td class="md">medium</td></tr>
+      <tr><td>Isolator or collimator tube</td><td>Tall cylindrical part at the back of the left board</td><td>1</td><td>1</td><td class="lo">low</td></tr>
+      <tr><td>Cell electronics</td><td>Small board with banana jacks on top of the left cell module</td><td>1</td><td>1</td><td class="md">medium</td></tr>
+      <tr><td>Beam dumps, filters, irises</td><td>Not visible in the photo</td><td>assumed</td><td>both</td><td class="lo">assumed</td></tr>
+      <tr><td>RF amplifiers and attenuators for the AOMs</td><td>Not visible; needed to drive two AOMs from a Rigol generator</td><td>assumed hidden</td><td>—</td><td class="lo">assumed</td></tr>
+      <tr><td>Laser-lock electronics</td><td>Not visible; added in the simulator so the lock closes</td><td>assumed</td><td>—</td><td class="lo">assumed</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>What this bench can do</h3>
+  <ul>
+    <li><b>Laser lock to the Rb D1 line.</b> The SAS arm and the reference cell on board 1, with the Thorlabs current and TEC controllers (about 147 mA is a normal 795 nm DFB drive current) and a Rigol generator for the dither, read on a scope.</li>
+    <li><b>Continuous-wave Zeeman EIT.</b> Control and probe from two AOM arms, opposite circular polarizations, an EIT cell with a heater (about 1.2 W DC) and a solenoid (about 80 mA); linewidth versus control intensity, magnetic field and temperature.</li>
+    <li><b>Slow light and light storage.</b> The two-channel Rigol generator can drive the probe pulse and switch the control AOM off and on, with the second scope on the probe and the trigger.</li>
+    <li><b>Field sensing.</b> The Zeeman EIT line moves 1.4 kHz per milligauss, so the bench can double as a magnetometer.</li>
+    <li><b>Not possible with what is visible:</b> hyperfine (6.8 GHz) EIT (no microwave source or EOM), single-photon-level detection (no photon counters), and absolute efficiency measurements (no calibrated detection).</li>
+  </ul>
+
+  <p style="font-size:.8rem;color:var(--muted)">Reconstructed by this guide from one photograph; this is an illustration of that style of bench, not a drawing of any specific laboratory.</p>
+</section>
 </div>
 
 <script>
@@ -534,6 +607,7 @@ body.bench-page.nopanels .palette,body.bench-page.nopanels .inspector{display:no
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
 <script src="eitphys.js?v=5"></script>
+<script src="qs-layout.js?v=1"></script>
 <script src="bench-sim.js?v=14"></script>
 <script>
 (function () { var n = document.querySelector('.topnav'); if (!n) return; function s() { document.documentElement.style.setProperty('--nav-h', n.offsetHeight + 'px'); } s(); window.addEventListener('resize', s); window.addEventListener('load', s); if (window.ResizeObserver) new ResizeObserver(s).observe(n); })();

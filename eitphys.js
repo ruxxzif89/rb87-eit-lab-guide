@@ -526,9 +526,11 @@
   function rotMirror(din, dout) { var n = norm2([dout[0] - din[0], dout[1] - din[1]]); return Math.round(Math.atan2(n[1], n[0]) * 180 / Math.PI); }
   function rotPBS(din, dout) { var s = norm2([din[0] + dout[0], din[1] + dout[1]]); var r = Math.round(Math.atan2(s[1], s[0]) * 180 / Math.PI) - 45; return ((r % 360) + 360) % 360; }
   var E = [1, 0], Wd = [-1, 0], S = [0, 1], N = [0, -1];
-  function referenceLayout() {
+  function referenceLayout(opts) {
+    opts = opts || {};   // optional variant for other benches: { scale, dpMM (arm size), shift: [dx, dz] in mm, electronics: false }
+    var SC = opts.scale || LAYOUT_SCALE;
     var n = 0, A = K.aomAngle_deg * Math.PI / 180;
-    var DP = 1.5 / LAYOUT_SCALE;   // keeps the double-pass arm (lens ~ one focal length from its mirror) the same physical size when the layout is spread out
+    var DP = (opts.dpMM || 1.5) / SC;   // keeps the double-pass arm (lens ~ one focal length from its mirror) the same physical size when the layout is spread out
     function mk(kind, x, z, rot, params) { var p = defaultParams(kind); if (params) for (var k in params) p[k] = params[k]; return { id: kind + (++n), kind: kind, x: Math.round(x * 10) / 10, z: Math.round(z * 10) / 10, rot: rot, params: p }; }
     function M(x, z, din, dout) { return mk('mirror', x, z, rotMirror(din, dout)); }
     function B(x, z, din, dout, kind) { return mk(kind || 'pbs', x, z, rotPBS(din, dout)); }
@@ -590,12 +592,13 @@
       mk('pd', 1060, 520, 0),
       mk('dump', 985, 590, 270), mk('dump', 630, 570, 270));
     // --- electronics ---
-    add(mk('lctrl', 50, 60, 270), mk('lockbox', 125, 60, 270),
+    if (opts.electronics !== false) add(mk('lctrl', 50, 60, 270), mk('lockbox', 125, 60, 270),
       mk('rfgen', 90, 720, 270), mk('rfatt', 210, 720, 270), mk('rfamp', 310, 720, 270), mk('rfatt', 430, 720, 270), mk('rfamp', 530, 720, 270),
       mk('psu', 240, 60, 270), mk('pwrmeter', 350, 60, 270),
       mk('csrc', 690, 720, 270), mk('tctrl', 800, 720, 270), mk('fgen', 930, 720, 270), mk('scope', 1080, 720, 270));
     // The layout above is drawn on a compact 1200 x 750 grid; spread it out so every part has room (and the cat's-eye lenses sit one focal length from their mirrors).
-    comps.forEach(function (c) { c.x = Math.round(c.x * LAYOUT_SCALE * 10) / 10; c.z = Math.round(c.z * LAYOUT_SCALE * 10) / 10; });
+    var sh = opts.shift || [0, 0];
+    comps.forEach(function (c) { c.x = Math.round((c.x * SC + sh[0]) * 10) / 10; c.z = Math.round((c.z * SC + sh[1]) * 10) / 10; });
     return { mode: 'A', components: comps, state: { locked: true, tau_us: 20, storageRan: false } };
   }
   var LAYOUT_SCALE = 2.0;
@@ -610,9 +613,11 @@
     { id: 'rf', name: 'RF CHAIN FOR THE AOMs', sub: 'dual RF source, attenuators, amplifiers', color: '#e58fd0', lab: [40, 786, 'bl'], rects: [[40, 680, 565, 790]] },
     { id: 'field', name: 'FIELD, HEATER, TIMING & SCOPE', sub: '', color: '#6fd0d6', lab: [640, 786, 'bl'], rects: [[640, 680, 1135, 790]] }
   ];
-  function referenceZones() {
-    return ZONES.map(function (z) {
-      return { id: z.id, name: z.name, sub: z.sub, color: z.color, lab: [z.lab[0] * LAYOUT_SCALE, z.lab[1] * LAYOUT_SCALE, z.lab[2]], rects: z.rects.map(function (r) { return [r[0] * LAYOUT_SCALE, r[1] * LAYOUT_SCALE, r[2] * LAYOUT_SCALE, r[3] * LAYOUT_SCALE]; }) };
+  function referenceZones(opts) {
+    opts = opts || {};   // same variant options as referenceLayout, plus only: [zone ids to keep]
+    var SC = opts.scale || LAYOUT_SCALE, sh = opts.shift || [0, 0];
+    return ZONES.filter(function (z) { return !opts.only || opts.only.indexOf(z.id) >= 0; }).map(function (z) {
+      return { id: z.id, name: z.name, sub: z.sub, color: z.color, lab: [z.lab[0] * SC + sh[0], z.lab[1] * SC + sh[1], z.lab[2]], rects: z.rects.map(function (r) { return [r[0] * SC + sh[0], r[1] * SC + sh[1], r[2] * SC + sh[0], r[3] * SC + sh[1]]; }) };
     });
   }
 
