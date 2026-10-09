@@ -436,6 +436,22 @@ body.bench-page.nopanels .palette,body.bench-page.nopanels .inspector{display:no
 .qs-info th{background:var(--surface-2);font-family:var(--font-mono);font-size:.72rem;letter-spacing:.05em;text-transform:uppercase}
 .qs-info td.c{font-family:var(--font-mono);font-size:.74rem;white-space:nowrap}
 .qs-info .hi{color:var(--ok);font-weight:600}.qs-info .md{color:var(--warn);font-weight:600}.qs-info .lo{color:var(--bad);font-weight:600}
+.qs-cost{margin:26px 0 8px;border:1px solid var(--rule-strong);border-radius:3px;background:var(--surface)}
+.qs-cost>summary{cursor:pointer;padding:12px 16px;font-family:var(--font-display);font-size:1.15rem;font-weight:600;list-style:none}
+.qs-cost>summary::-webkit-details-marker{display:none}
+.qs-cost>summary::before{content:"▸";display:inline-block;width:1.2em;color:var(--accent)}
+.qs-cost[open]>summary::before{content:"▾"}
+.qs-cost .body{padding:4px 16px 16px;border-top:1px solid var(--rule)}
+.qs-cost .unlock{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:10px 0 6px}
+.qs-cost .unlock input{font:inherit;padding:5px 8px;border:1px solid var(--rule-strong);background:var(--bg);color:var(--ink);border-radius:2px;min-width:200px}
+.qs-cost .unlock button{font:inherit;padding:5px 12px;border:1px solid var(--accent);background:var(--accent);color:var(--accent-ink);border-radius:2px;cursor:pointer}
+.qs-cost .msg{font-size:.84rem;margin:2px 0 8px}.qs-cost .msg.bad{color:var(--bad)}.qs-cost .msg.ok{color:var(--ok)}
+.qs-cost .tbl{overflow-x:auto;margin:8px 0 12px}.qs-cost table{border-collapse:collapse;width:100%;font-size:.84rem}
+.qs-cost th,.qs-cost td{border:1px solid var(--rule);padding:5px 9px;text-align:left}
+.qs-cost th{background:var(--surface-2);font-family:var(--font-mono);font-size:.7rem;letter-spacing:.05em;text-transform:uppercase}
+.qs-cost td.num{text-align:right;font-family:var(--font-mono);white-space:nowrap}.qs-cost td.p{color:var(--muted)}
+.qs-cost.unlocked td.p{color:var(--ink)}.qs-cost tr.tot td{background:var(--surface-2)}
+.qs-cost .verdict{font-weight:600;margin:8px 0}
 .qs-info .note{background:var(--warn-bg);border:1px solid var(--warn-rule);padding:10px 14px;border-radius:3px;max-width:78ch}
 </style>
 </head>
@@ -570,6 +586,33 @@ body.bench-page.nopanels .palette,body.bench-page.nopanels .inspector{display:no
     <li><b>Not possible with what is visible:</b> hyperfine (6.8 GHz) EIT (no microwave source or EOM), single-photon-level detection (no photon counters), and absolute efficiency measurements (no calibrated detection).</li>
   </ul>
 
+
+  <details class="qs-cost" id="qsCost">
+    <summary>Cost estimate of this bench (units are public, prices need the group password)</summary>
+    <div class="body">
+      <p>Every unit in the Quantum Spain-style version (the 63 parts drawn above) is priced with the <b>same unit prices as this guide’s costed bill of materials</b>. Left out on purpose: the laser mount, the laser current and TEC controllers, and the breadboard. Group A is what the photo and the simulator show; group B is what is needed to run the bench but is not visible in the photo.</p>
+      <div class="unlock">
+        <label for="qsPw">Group password</label>
+        <input type="password" id="qsPw" autocomplete="off" aria-describedby="qsMsg">
+        <button type="button" id="qsGo">Show the prices</button>
+      </div>
+      <p class="msg" id="qsMsg" role="status" aria-live="polite">The prices stay on the server until the password is entered; nothing is stored in this page.</p>
+      <!--QS-START--><div class="tbl"><table id="qsTable"><thead><tr><th>#</th><th>Unit</th><th>Qty</th><th>Unit price (RM)</th><th>Line (RM)</th></tr></thead><tbody><tr class="grp"><th colspan="5">A · Units in the Quantum Spain-style version</th></tr><tr><td>1</td><td>Fibre-coupled 795 nm DFB laser</td><td class="num">1</td><td class="num p" data-qs="u1">—</td><td class="num p" data-qs="l1">—</td></tr><tr><td>2</td><td>Fibre isolator with FC/APC collimator</td><td class="num">1</td><td class="num p" data-qs="u2">—</td><td class="num p" data-qs="l2">—</td></tr><tr><td>3</td><td>Mirrors with kinematic mounts</td><td class="num">9</td><td class="num p" data-qs="u3">—</td><td class="num p" data-qs="l3">—</td></tr><tr><td>4</td><td>Polarizing beamsplitter cubes, cage-mounted</td><td class="num">7</td><td class="num p" data-qs="u4">—</td><td class="num p" data-qs="l4">—</td></tr><tr><td>5</td><td>Non-polarizing 50:50 cube</td><td class="num">1</td><td class="num p" data-qs="u5">—</td><td class="num p" data-qs="l5">—</td></tr><tr><td>6</td><td>Half-wave plates with rotation mounts</td><td class="num">4</td><td class="num p" data-qs="u6">—</td><td class="num p" data-qs="l6">—</td></tr><tr><td>7</td><td>Quarter-wave plates with rotation mounts</td><td class="num">4</td><td class="num p" data-qs="u7">—</td><td class="num p" data-qs="l7">—</td></tr><tr><td>8</td><td>Lenses with mounts</td><td class="num">5</td><td class="num p" data-qs="u8">—</td><td class="num p" data-qs="l8">—</td></tr><tr><td>9</td><td>Irises</td><td class="num">3</td><td class="num p" data-qs="u9">—</td><td class="num p" data-qs="l9">—</td></tr><tr><td>10</td><td>ND filters with holders</td><td class="num">2</td><td class="num p" data-qs="u10">—</td><td class="num p" data-qs="l10">—</td></tr><tr><td>11</td><td>Beam dumps</td><td class="num">10</td><td class="num p" data-qs="u11">—</td><td class="num p" data-qs="l11">—</td></tr><tr><td>12</td><td>Glan-Taylor polarizer with rotation mount</td><td class="num">1</td><td class="num p" data-qs="u12">—</td><td class="num p" data-qs="l12">—</td></tr><tr><td>13</td><td>Acousto-optic modulators</td><td class="num">2</td><td class="num p" data-qs="u13">—</td><td class="num p" data-qs="l13">—</td></tr><tr><td>14</td><td>AOM tilt stages (2) and cell holder (1)</td><td class="num">3</td><td class="num p" data-qs="u14">—</td><td class="num p" data-qs="l14">—</td></tr><tr><td>15</td><td>SAS reference cell with holder</td><td class="num">1</td><td class="num p" data-qs="u15">—</td><td class="num p" data-qs="l15">—</td></tr><tr><td>16</td><td>EIT vapour cell with two foil heaters</td><td class="num">1</td><td class="num p" data-qs="u16">—</td><td class="num p" data-qs="l16">—</td></tr><tr><td>17</td><td>Photodiodes (SAS and detector)</td><td class="num">2</td><td class="num p" data-qs="u17">—</td><td class="num p" data-qs="l17">—</td></tr><tr><td>18</td><td>Photodiode power supply</td><td class="num">1</td><td class="num p" data-qs="u18">—</td><td class="num p" data-qs="l18">—</td></tr><tr><td>19</td><td>Posts, post holders and clamping forks (one set per optic)</td><td class="num">39</td><td class="num p" data-qs="u19">—</td><td class="num p" data-qs="l19">—</td></tr><tr><td>20</td><td>Laser-lock electronics (assumed, not visible)</td><td class="num">1</td><td class="num p" data-qs="u20">—</td><td class="num p" data-qs="l20">—</td></tr><tr><td>21</td><td>Function generator</td><td class="num">1</td><td class="num p" data-qs="u21">—</td><td class="num p" data-qs="l21">—</td></tr><tr><td>22</td><td>Two-channel RF source</td><td class="num">1</td><td class="num p" data-qs="u22">—</td><td class="num p" data-qs="l22">—</td></tr><tr><td>23</td><td>DC supplies for the heater and the coil</td><td class="num">2</td><td class="num p" data-qs="u23">—</td><td class="num p" data-qs="l23">—</td></tr><tr><td>24</td><td>Oscilloscopes</td><td class="num">2</td><td class="num p" data-qs="u24">—</td><td class="num p" data-qs="l24">—</td></tr><tr class="tot"><td></td><td><b>Visible in the version</b></td><td></td><td></td><td class="num p" data-qs="tA">—</td></tr><tr class="grp"><th colspan="5">B · Needed to run it, not visible in the photo (assumed)</th></tr><tr><td>25</td><td>RF power amplifiers</td><td class="num">2</td><td class="num p" data-qs="u25">—</td><td class="num p" data-qs="l25">—</td></tr><tr><td>26</td><td>RF switches</td><td class="num">2</td><td class="num p" data-qs="u26">—</td><td class="num p" data-qs="l26">—</td></tr><tr><td>27</td><td>RF step attenuators</td><td class="num">2</td><td class="num p" data-qs="u27">—</td><td class="num p" data-qs="l27">—</td></tr><tr><td>28</td><td>DC supply for the RF parts</td><td class="num">1</td><td class="num p" data-qs="u28">—</td><td class="num p" data-qs="l28">—</td></tr><tr><td>29</td><td>Cables: BNC (12), SMA (8), adapters, leads</td><td class="num">1</td><td class="num p" data-qs="u29">—</td><td class="num p" data-qs="l29">—</td></tr><tr><td>30</td><td>Solenoid former and wire</td><td class="num">1</td><td class="num p" data-qs="u30">—</td><td class="num p" data-qs="l30">—</td></tr><tr><td>31</td><td>µ-metal shield, 3 layers (only if not inside the white boxes)</td><td class="num">1</td><td class="num p" data-qs="u31">—</td><td class="num p" data-qs="l31">—</td></tr><tr><td>32</td><td>Degaussing coil with variac</td><td class="num">1</td><td class="num p" data-qs="u32">—</td><td class="num p" data-qs="l32">—</td></tr><tr><td>33</td><td>Enclosure panels and beam tubes</td><td class="num">1</td><td class="num p" data-qs="u33">—</td><td class="num p" data-qs="l33">—</td></tr><tr class="tot"><td></td><td><b>Needed but not visible</b></td><td></td><td></td><td class="num p" data-qs="tB">—</td></tr><tr class="tot"><td></td><td><b>Total A + B</b></td><td></td><td></td><td class="num p" data-qs="tT">—</td></tr><tr class="tot"><td></td><td>Our BOM for comparison (same exclusions, optional items left out)</td><td></td><td></td><td class="num p" data-qs="tO">—</td></tr></tbody></table></div><!--QS-END-->
+      <p class="verdict" id="qsVerdict" hidden></p>
+      <h3 style="margin-top:14px">Why it differs from our bill of materials</h3>
+      <ul>
+        <li>Fewer mounts: 39 post sets and 9 mirrors in the Spain-style version, against 60 post sets and 11 mirrors in ours.</li>
+        <li>The cell is heated from a plain DC supply instead of a temperature controller.</li>
+        <li>No optical power meter, no multimeter, no fluxgate magnetometer and no laser-safety items.</li>
+      </ul>
+      <h3 style="margin-top:14px">Caveats</h3>
+      <ul>
+        <li>The real photo shows more mounts than the simulated layout (about 20–25 mirrors against 9); each extra mirror with its mount and post adds one more line of cost.</li>
+        <li>The laser is priced as this guide’s DFB (the laser in the photo is not visible), and the two-channel Rigol source is priced as this guide’s two-channel RF synthesiser.</li>
+        <li>Prices are the guide’s planning prices, not quotations.</li>
+      </ul>
+    </div>
+  </details>
   <p style="font-size:.8rem;color:var(--muted)">Reconstructed by this guide from one photograph; this is an illustration of that style of bench, not a drawing of any specific laboratory.</p>
 </section>
 </div>
@@ -613,6 +656,34 @@ body.bench-page.nopanels .palette,body.bench-page.nopanels .inspector{display:no
 <script src="bench-sim.js?v=14"></script>
 <script>
 (function () { var n = document.querySelector('.topnav'); if (!n) return; function s() { document.documentElement.style.setProperty('--nav-h', n.offsetHeight + 'px'); } s(); window.addEventListener('resize', s); window.addEventListener('load', s); if (window.ResizeObserver) new ResizeObserver(s).observe(n); })();
+</script>
+<script>
+(function () {
+  var ENDPOINT = 'https://script.google.com/macros/s/AKfycbzf7xklNDJ5bgLxpbI09A7oD6qLGath35qEceIK33m8HxycpijV6eH2y5VMXlvdEqcD2g/exec';
+  var box = document.getElementById('qsCost'), pw = document.getElementById('qsPw'), go = document.getElementById('qsGo'), msg = document.getElementById('qsMsg'), ver = document.getElementById('qsVerdict');
+  if (!box || !go) return;
+  function say(t, cls) { msg.textContent = t; msg.className = 'msg' + (cls ? ' ' + cls : ''); }
+  function fmt(n) { return 'RM ' + Number(n).toLocaleString('en-GB'); }
+  function set(k, v) { var c = box.querySelector('[data-qs="' + k + '"]'); if (c) c.textContent = v; }
+  function run() {
+    var p = pw.value; if (!p) { say('Enter the group password.', 'bad'); pw.focus(); return; }
+    go.disabled = true; say('Checking…');
+    fetch(ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify({ pw: p, action: 'qsest' }) })
+      .then(function (r) { return r.json(); })
+      .then(function (d) {
+        go.disabled = false;
+        if (!d.ok) { say(d.error === 'Unknown action' ? 'The price service has not been updated yet (redeploy the Apps Script).' : (d.error || 'Failed'), 'bad'); return; }
+        d.rows.forEach(function (r) { set('u' + r.n, fmt(r.unit_myr)); set('l' + r.n, fmt(r.line_myr)); });
+        set('tA', fmt(d.totalA)); set('tB', fmt(d.totalB)); set('tT', fmt(d.total)); set('tO', fmt(d.ours));
+        var pc = Math.round((1 - d.totalA / d.ours) * 100), pc2 = Math.round((1 - d.total / d.ours) * 100);
+        ver.textContent = 'Visible units: ' + fmt(d.totalA) + '. With the items that are needed but not visible: ' + fmt(d.total) + ', which is ' + pc2 + ' % ' + (pc2 >= 0 ? 'below' : 'above') + ' our bill of materials (' + fmt(d.ours) + '); the visible units alone are ' + pc + ' % ' + (pc >= 0 ? 'below' : 'above') + '.';
+        ver.hidden = false; box.classList.add('unlocked'); say('Prices shown. They disappear when the page is reloaded.', 'ok'); pw.value = '';
+      })
+      .catch(function () { go.disabled = false; say('Could not reach the price service.', 'bad'); });
+  }
+  go.addEventListener('click', run);
+  pw.addEventListener('keydown', function (e) { if (e.key === 'Enter') run(); });
+})();
 </script>
 </body>
 </html>
