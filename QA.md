@@ -209,14 +209,22 @@ It is in the lab inventory with a 3D picture.
 
 *Added 9 Oct 2026*
 
-**Yes, as the bench power meter, once the head's wavelength range is confirmed.** The OMM-6810B is ILX's optical power and wavelength meter for the OMH-6700B heads (5-digit LED display, GPIB, no longer sold). Its power range, wavelength range and accuracy come from the head.
+**Not with this head. The meter is useful only if a silicon head is found.** The OMM-6810B is ILX's optical power and wavelength meter for the OMH-6700B heads (5-digit LED display, GPIB, no longer sold); its power range, wavelength range and accuracy come from the head.
 
-The OMH-6745B is not in the silicon-head brochure I could read (OMH-6703B: power only, 400–1100 nm; OMH-6742B: power and wavelength, 350–1100 nm; OMH-6790B: 830–1100 nm only). **Read the range on the head label.** A silicon head covers 795 nm; the 830 nm head or a germanium or InGaAs head would not.
+The head in the lab, the OMH-6745B, reads **950 to 1650 nm** (confirmed from its label), so it cannot measure our 795 nm laser. It is not in the silicon-head brochure I could read, which lists:
 
-If it covers 795 nm:
-- **Power budget:** silicon heads read 100 nW to 1 W, which spans the fibre output (about 5–15 mW), the control (about 1 mW) and the probe (about 2 µW); the integrating sphere makes the reading independent of polarization.
+| Head | Covers |
+|---|---|
+| OMH-6703B | power only, 400–1100 nm |
+| OMH-6742B | power and wavelength, 350–1100 nm |
+| OMH-6790B | 830–1100 nm only (does not cover 795 nm) |
+
+**What a silicon head (OMH-6703B or OMH-6742B) would give:**
+- **Power budget:** 100 nW to 1 W, spanning the fibre output (about 5–15 mW), the control (about 1 mW) and the probe (about 2 µW); the integrating sphere makes the reading independent of polarization.
 - **Wavelength:** a power/wavelength head reads a power-averaged wavelength to about 1 nm with at least 10 µW. That only confirms the diode is near 795 nm; it cannot find the Rb line or resolve MHz shifts.
-- **Cautions:** the detectors are temperature controlled (about one hour of warm-up), accuracy is about 3.5–5 %, and the calibration date matters; the readout is GPIB only.
+- **Cautions:** the detectors are temperature controlled (about one hour of warm-up), accuracy is about 3.5–5 %, the calibration date matters, and the readout is GPIB only.
+
+Until a silicon head turns up, use another power sensor for the power budget. Check whether the lab has other OMH heads.
 
 Source: [ILX 6700B silicon heads brochure](https://www.newport.com/medias/sys_master/images/images/he7/had/9260480790558/6700B-brochure-silicon-REV11.pdf)
 
