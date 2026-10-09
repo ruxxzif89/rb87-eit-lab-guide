@@ -48,7 +48,9 @@
       function at(L) { return [x + L * d1[0], z + L * d1[1]]; }
       var q = at(40 * DPM), l = at(80 * DPM), m = at(150 * DPM);
       mk('aom', x, z, east ? 0 : 180, { fMHz: fMHz, eff: eff, mode: 'single', order: 1 });
-      mk('qwp', q[0], q[1], r1, { axis: 45 }); mk('lens', l[0], l[1], r1); mk('mirror', m[0], m[1], r1);
+      mk('qwp', q[0], q[1], r1, { axis: 45 });
+      var cl = mk('lens', l[0], l[1], r1); cl.nm = "Cat's-eye lens, f about 75 mm"; cl.photo = 'Lens one focal length from the retro mirror (70 mm) and about one focal length after the AOM (80 mm), so a 75 mm lens is needed. The guide parts list has 100 mm and 50 mm lenses, not 75 mm.';
+      mk('mirror', m[0], m[1], r1);
       mk('dump', x + sg * d0, z, east ? 180 : 0);
       mk('dump', x - sg * d2 * Math.cos(A), z + (east ? 1 : -1) * d2 * Math.sin(A), east ? 90 : 270);
     }
@@ -79,8 +81,9 @@
     B(665, ZM, W, S);                                               // double-pass separator
     dp(825, ZM, true, 80.000, 0.35, 110, 130);
     mk('dump', 665, ZM - 40, 90);
-    mk('hwp', 665, 385, 90, { axis: 0 });                           // control polarization trim
-    mk('lens', 665, 495, 90); mk('lens', 665, 535, 90);             // beam expander
+    mk('hwp', 665, 370, 90, { axis: 0 });                           // control polarization trim
+    var e1 = mk('lens', 665, 410, 90), e2 = mk('lens', 665, 540, 90);   // x3.3 beam expander: f = 30 mm + f = 100 mm, 130 mm apart
+    e1.nm = 'Expander lens, f = 30 mm'; e2.nm = 'Expander lens, f = 100 mm';
     // probe arm (east, lower row)
     var ZPB = 440;
     B(615, ZPB, S, E);

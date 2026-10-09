@@ -548,6 +548,8 @@ body.bench-page .sim-main{height:calc(var(--app-h,100vh) - var(--nav-h,44px) - v
     <li><b>Shelf behind the boards:</b> two Thorlabs benchtop controllers, two Rigol generators, two TENMA DC supplies labelled HEATER and COILS, and a Rigol oscilloscope at each end of the boards.</li>
   </ul>
 
+  <p class="note"><b>Assumption about the lock.</b> The two double-pass AOMs shift the beams by +160 MHz, and the SAS arm has no AOM. The simulator treats the lock point as the atomic resonance, which hides that offset. A real bench needs the lock moved by about 160 MHz (for example with an AOM in the SAS arm), and the photograph does not show how this is done.</p>
+
   <h3>Instruments identified</h3>
   <div class="tbl"><table>
     <thead><tr><th>Tag / label</th><th>Item</th><th>What is readable</th><th>Confidence</th></tr></thead>
@@ -591,6 +593,7 @@ body.bench-page .sim-main{height:calc(var(--app-h,100vh) - var(--nav-h,44px) - v
     <li><b>Continuous-wave Zeeman EIT.</b> Control and probe from two AOM arms, opposite circular polarizations, an EIT cell with a heater (about 1.2 W DC) and a solenoid (about 80 mA); linewidth versus control intensity, magnetic field and temperature.</li>
     <li><b>Slow light and light storage.</b> The two-channel Rigol generator can drive the probe pulse and switch the control AOM off and on, with the second scope on the probe and the trigger.</li>
     <li><b>Field sensing.</b> The Zeeman EIT line moves 1.4 kHz per milligauss, so the bench can double as a magnetometer.</li>
+    <li><b>Parts the guide’s list does not have:</b> the cat’s-eye lenses in the two AOM arms need a focal length of about 75 mm (80 mm after the AOM, 70 mm to the retro mirror); the control beam expander is f = 30 mm plus f = 100 mm, 130 mm apart.</li>
     <li><b>Not possible with what is visible:</b> hyperfine (6.8 GHz) EIT (no microwave source or EOM), single-photon-level detection (no photon counters), and absolute efficiency measurements (no calibrated detection).</li>
   </ul>
 
