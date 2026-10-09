@@ -70,7 +70,7 @@
   /* ---- generic bench instrument (front panel faces local -x); ported from the simulator ---- */
   function instrument(g, w, h, d, variant) {
     var M = mats(), y0 = h / 2 - H, fx = -w / 2;
-    var body = variant === 'rfamp' ? std(0x23292f, 0.4, 0.5) : M.dark;
+    var body = variant === 'rfamp' ? std(0x23292f, 0.4, 0.5) : variant === 'dualpsu' ? std(0xe6e0c6, 0.15, 0.62) : M.dark;
     g.add(bx(w, h, d, body, 0, y0, 0));
     g.add(bx(w + 2, 3, d + 2, M.black, 0, y0 + h / 2, 0));
     if (variant === 'rfamp') { for (var f = -3; f <= 3; f++) g.add(bx(w - 6, 6, 1.6, M.alu, 0, y0 + h / 2 + 4.5, f * d * 0.13)); }
@@ -88,6 +88,13 @@
     } else if (variant === 'psu') {
       g.add(bx(1.4, h * 0.3, d * 0.34, M.screen, fx - 0.4, y0 + h * 0.2, -d * 0.18)); g.add(cy(3, 3, M.knob, fx - 1.4, y0 - h * 0.25, -d * 0.25, 'x', 14)); g.add(cy(3, 3, M.knob, fx - 1.4, y0 - h * 0.25, d * 0.05, 'x', 14));
       for (var t2 = 0; t2 < 3; t2++) g.add(cy(2.2, 5, t2 === 1 ? M.alu : (t2 ? M.black : M.laser), fx - 3, y0 - h * 0.25, d * 0.22 + t2 * 6, 'x', 10));
+    } else if (variant === 'dualpsu') {   // bench supply, two 30 V / 3 A channels with tracking switch and a fixed 5 V output (cream panel, four red displays, four knobs)
+      var rd = std(0x2a0606, 0.1, 0.4, { emissive: 0xff2a2a, emissiveIntensity: 0.55 });
+      g.add(bx(1.2, h * 0.07, d * 0.5, M.yellow, fx - 0.3, y0 + h * 0.44, -d * 0.2));
+      [-0.36, -0.12, 0.12, 0.36].forEach(function (zz) { g.add(bx(1.4, h * 0.2, d * 0.17, rd, fx - 0.4, y0 + h * 0.24, d * zz)); });
+      [-0.4, -0.2, 0.1, 0.3].forEach(function (zz) { g.add(cy(3.6, 4, M.knob, fx - 1.8, y0 - h * 0.02, d * zz, 'x', 18)); });
+      [-0.02, 0.04].forEach(function (zz) { g.add(bx(1.2, 2.2, 3, M.black, fx - 0.4, y0 - h * 0.02, d * zz)); });
+      [[-0.43, 'k'], [-0.34, 'g'], [-0.25, 'r'], [-0.02, 'k'], [0.07, 'g'], [0.16, 'r'], [0.36, 'k'], [0.45, 'r']].forEach(function (t) { g.add(cy(1.9, 5, t[1] === 'r' ? M.red : (t[1] === 'g' ? M.green : M.black), fx - 3, y0 - h * 0.3, d * t[0], 'x', 10)); });
     } else if (variant === 'pwrmeter') {
       g.add(bx(1.4, h * 0.4, d * 0.5, M.screen, fx - 0.4, y0 + h * 0.15, 0)); g.add(cy(3, 3, M.knob, fx - 1.4, y0 - h * 0.28, -d * 0.2, 'x', 14)); g.add(cy(3, 3, M.knob, fx - 1.4, y0 - h * 0.28, d * 0.2, 'x', 14));
     } else if (variant === 'csrc') {
@@ -323,6 +330,7 @@
     rfamp: function (g) { instrument(g, 64, 28, 44, 'rfamp'); },
     scope: function (g) { instrument(g, 70, 56, 74, 'scope'); },
     psu: function (g) { instrument(g, 60, 30, 44, 'psu'); },
+    dualpsu: function (g) { instrument(g, 72, 34, 104, 'dualpsu'); },
     pwrmeter: function (g) { instrument(g, 56, 26, 40, 'pwrmeter'); var M = mats(); g.add(cy(7, 6, M.black, -56, -H + 12, 40, 'x', 16)); g.add(cy(4, 10, M.alu, -62, -H + 12, 40, 'x', 16)); g.add(tube([[-30, -H + 12, 18], [-48, -H + 5, 30], [-56, -H + 12, 40]], 1.2, M.black, 20)); },
     fgen: function (g) { var M = mats(); instrument(g, 92, 46, 62); g.add(bx(1.4, 8, 8, M.on, -46.6, -H + 10, 20)); },
     lctrl: function (g) { var M = mats(); instrument(g, 58, 36, 46); g.add(bx(1.4, 6, 6, M.on, -29.6, -H + 10, 16)); },
@@ -423,9 +431,9 @@
     },
     eom: function (g) { var M = mats(); stand(g); g.add(bx(60, 14, 20, M.alu, 0, 0, 0)); g.add(cy(4, 10, M.green, -36, 0, 0)); g.add(cy(4, 10, M.green, 36, 0, 0)); g.add(cy(2.4, 8, M.brass, 0, 10, 0, 'y', 10)); }
   };
-  var INSTR = { lctrl: 1, lockbox: 1, fgen: 1, rfgen: 1, rfatt: 1, rfamp: 1, csrc: 1, tctrl: 1, scope: 1, psu: 1, pwrmeter: 1, dmm: 1, sa: 1, wavemeter: 1, laptop: 1, fluxgate: 1, degauss: 1, adapters: 1, powerstrip: 1, cleaning: 1, calliper: 1, hexkeys: 1, enclosure: 1, goggles: 1, foil: 1, sign: 1, cable: 1, solenoid: 1, shield: 1, breadboard: 1, legs: 1, holder: 1, postset: 1, card: 1, rfswitch: 1, coupler: 1, fp: 1 };
-  var FRONT_NEG = { osa: 1, lctrl: 1, lockbox: 1, fgen: 1, rfgen: 1, rfatt: 1, rfamp: 1, csrc: 1, tctrl: 1, scope: 1, psu: 1, pwrmeter: 1, dmm: 1, sa: 1, wavemeter: 1, fluxgate: 1, degauss: 1, fp: 1 };
-  var LOW_VIEW = { osa: 1, lctrl: 1, lockbox: 1, fgen: 1, rfgen: 1, rfatt: 1, rfamp: 1, csrc: 1, tctrl: 1, scope: 1, psu: 1, pwrmeter: 1, dmm: 1, sa: 1, wavemeter: 1 };
+  var INSTR = { dualpsu: 1, lctrl: 1, lockbox: 1, fgen: 1, rfgen: 1, rfatt: 1, rfamp: 1, csrc: 1, tctrl: 1, scope: 1, psu: 1, pwrmeter: 1, dmm: 1, sa: 1, wavemeter: 1, laptop: 1, fluxgate: 1, degauss: 1, adapters: 1, powerstrip: 1, cleaning: 1, calliper: 1, hexkeys: 1, enclosure: 1, goggles: 1, foil: 1, sign: 1, cable: 1, solenoid: 1, shield: 1, breadboard: 1, legs: 1, holder: 1, postset: 1, card: 1, rfswitch: 1, coupler: 1, fp: 1 };
+  var FRONT_NEG = { dualpsu: 1, osa: 1, lctrl: 1, lockbox: 1, fgen: 1, rfgen: 1, rfatt: 1, rfamp: 1, csrc: 1, tctrl: 1, scope: 1, psu: 1, pwrmeter: 1, dmm: 1, sa: 1, wavemeter: 1, fluxgate: 1, degauss: 1, fp: 1 };
+  var LOW_VIEW = { dualpsu: 1, osa: 1, lctrl: 1, lockbox: 1, fgen: 1, rfgen: 1, rfatt: 1, rfamp: 1, csrc: 1, tctrl: 1, scope: 1, psu: 1, pwrmeter: 1, dmm: 1, sa: 1, wavemeter: 1 };
   var TOP_VIEW = { card: 1, foil: 1 };
 
   function build(name, params) {

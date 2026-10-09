@@ -190,7 +190,37 @@ Sources: [ILX LDM-4984](https://www.newport.com/p/LDM-4984) · [Thorlabs TCLDM9 
 
 Source: [SG-1710 listing](https://www.radiolocman.com/op/device.html?di=63870)
 
-### Q11. Is the Newport AD-300/DC fast detector useful?
+### Q11. Can the Aditeg PS-3030DD dual power supply be used as a main supply?
+
+*Added 9 Oct 2026*
+
+**Yes, as the main supply of the RF chain and, if you wish, of the cell heater. Not for the solenoid or the photodiodes.** From the front panel: two adjustable channels with a tracking switch (independent, series, parallel) and a fixed 5 V / 3 A output; the model name suggests 0–30 V and 0–3 A per channel. No datasheet was found, so the ripple is unverified (similar linear supplies quote about 0.5–1 mV rms in voltage mode and about 3 mA rms in current mode).
+
+| Job | Use it? | Why |
+|---|---|---|
+| RF amplifiers (+24 V) and RF switches (±5 V) | **yes, primary** | channel 1 at +24 V; the fixed 5 V and channel 2 give the two rails; millivolts of ripple do not matter for RF parts; check that the outputs are isolated first |
+| Cell heater | yes | constant-current mode, about 0.3–0.5 A, but no temperature loop: add a thermistor and adjust by hand, or let the second ITC502 regulate the heater and keep this supply for the RF parts |
+| Solenoid | no | a few mA of ripple is too much against a 7–26 kHz EIT line; use the ITC502 laser section |
+| Photodiodes, lock electronics | no | millivolts of ripple |
+
+It is in the lab inventory with a 3D picture.
+
+### Q12. Are the ILX OMM-6810B optical multimeter and the OMH-6745B head useful?
+
+*Added 9 Oct 2026*
+
+**Yes, as the bench power meter, once the head's wavelength range is confirmed.** The OMM-6810B is ILX's optical power and wavelength meter for the OMH-6700B heads (5-digit LED display, GPIB, no longer sold). Its power range, wavelength range and accuracy come from the head.
+
+The OMH-6745B is not in the silicon-head brochure I could read (OMH-6703B: power only, 400–1100 nm; OMH-6742B: power and wavelength, 350–1100 nm; OMH-6790B: 830–1100 nm only). **Read the range on the head label.** A silicon head covers 795 nm; the 830 nm head or a germanium or InGaAs head would not.
+
+If it covers 795 nm:
+- **Power budget:** silicon heads read 100 nW to 1 W, which spans the fibre output (about 5–15 mW), the control (about 1 mW) and the probe (about 2 µW); the integrating sphere makes the reading independent of polarization.
+- **Wavelength:** a power/wavelength head reads a power-averaged wavelength to about 1 nm with at least 10 µW. That only confirms the diode is near 795 nm; it cannot find the Rb line or resolve MHz shifts.
+- **Cautions:** the detectors are temperature controlled (about one hour of warm-up), accuracy is about 3.5–5 %, and the calibration date matters; the readout is GPIB only.
+
+Source: [ILX 6700B silicon heads brochure](https://www.newport.com/medias/sys_master/images/images/he7/had/9260480790558/6700B-brochure-silicon-REV11.pdf)
+
+### Q13. Is the Newport AD-300/DC fast detector useful?
 
 *Added 9 Oct 2026*
 
@@ -201,7 +231,7 @@ Source: [SG-1710 listing](https://www.radiolocman.com/op/device.html?di=63870)
 
 ## The Quantum Spain-style bench
 
-### Q12. Is the Spain-style arrangement correct, in theory and in practice?
+### Q14. Is the Spain-style arrangement correct, in theory and in practice?
 
 *Added 9 Oct 2026*
 
