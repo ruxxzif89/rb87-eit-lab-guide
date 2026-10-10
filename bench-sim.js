@@ -614,6 +614,18 @@
   }
   function tr(R, t, m, x, y, z, ry) { var o = new THREE.Mesh(geo('t' + R + '_' + t, function () { return new THREE.TorusGeometry(R, t, 10, 36); }), m); o.rotation.y = ry === undefined ? Math.PI / 2 : ry; o.position.set(x || 0, y || 0, z || 0); return o; }
   function sp(r, m, x, y, z, sx) { var o = new THREE.Mesh(geo('s' + r, function () { return new THREE.SphereGeometry(r, 20, 14); }), m); o.position.set(x || 0, y || 0, z || 0); if (sx) o.scale.set(sx, 1, 1); return o; }
+  function pm100(g) {
+    var M = G.M;
+    var y0 = 14 - K.beamHeight;
+    g.add(bx(62, 28, 52, M.dark, 0, y0, 0)); g.add(bx(64, 2, 54, M.black, 0, y0 + 14, 0)); g.add(bx(64, 2, 54, M.black, 0, y0 - 14, 0));
+    g.add(bx(1.2, 10, 24, M.black, -31.3, y0, 0)); g.add(bx(2, 8, 16, M.alu, -32.4, y0 + 0.5, 0));
+    for (var pn = 0; pn < 2; pn++) g.add(cy(0.7, 2.4, M.black, -33.1, y0 + 0.5 + (pn ? 2.2 : -2.2), -5 + pn * 0.6 + 10 * 0, 'x', 6));
+    g.add(cy(1.4, 1, M.on, -31.6, y0 + 9, 20, 'x', 10));
+    g.add(bx(3, 3.6, 4.4, M.alu, 32.4, y0 - 3, 0));
+    g.add(bx(0.8, 14, 36, M.alu, -0.2, y0 + 14.2, 0));
+    g.add(cy(1.1, 22, M.black, -41, y0 + 2, -18, 'x', 8)); g.add(cy(1.1, 24, M.black, -50, y0 + 7, -42, 'y', 8));
+    g.add(cy(22.5, 30.5, M.black, -70, y0 + 8.5, -46, 'x', 36)); g.add(cy(23, 2, M.alu, -84, y0 + 8.5, -46, 'x', 36)); g.add(cy(12.7, 5, M.alu, -87, y0 + 8.5, -46, 'x', 28)); g.add(cy(8, 1, M.black, -89.6, y0 + 8.5, -46, 'x', 24)); g.add(cy(5.2, 1, M.glass, -90.2, y0 + 8.5, -46, 'x', 20));
+  }
   function pda(g) {
     var M = G.M;
     g.add(bx(25, 52.5, 59.3, M.dark, 0, 1.2, 0));
@@ -765,7 +777,7 @@
       case 'tctrl': instrument(g, 70, 32, 48, 'tctrl', own); break;
       case 'scope': instrument(g, 70, 56, 74, 'scope', own); break;
       case 'psu': instrument(g, 60, 30, 44, 'psu', own); break;
-      case 'pwrmeter': instrument(g, 56, 26, 40, 'pwrmeter', own); break;
+      case 'pwrmeter': pm100(g); break;
       case 'fgen': instrument(g, 92, 46, 62); g.add(bx(1.4, 8, 8, p.on ? M.on : M.off, -46.6, -K.beamHeight + 10, 20)); break;
       case 'lctrl': instrument(g, 58, 36, 46); g.add(bx(1.4, 6, 6, M.on, -29.6, -K.beamHeight + 10, 16)); break;
       case 'lockbox': {

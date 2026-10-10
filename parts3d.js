@@ -197,6 +197,17 @@
     nd: function (g) { var M = mats(); stand(g); g.add(bx(2.5, 24, 24, M.nd)); g.add(bx(5, 3, 26, M.black, 0, -13, 0)); g.add(bx(3, 26, 2, M.black, 0, 0, 13)); g.add(bx(3, 26, 2, M.black, 0, 0, -13)); },
     glan: function (g) { var M = mats(); stand(g); g.add(bx(22, 22, 30, M.glass)); g.add(bx(24, 4, 32, M.alu, 0, -12, 0)); g.add(bx(24, 4, 32, M.alu, 0, 12, 0)); g.add(cy(3, 12, M.black, 0, 0, 18, 'z', 10)); },
     pdgen: function (g) { var M = mats(); stand(g); g.add(bx(18, 26, 22, M.dark)); g.add(cy(7, 4, M.accent, 10, 0, 0)); g.add(cy(5, 1.2, M.glass, 12.4, 0, 0)); g.add(cy(2.4, 8, M.brass, -12, 6, 0, 'x', 10)); g.add(bx(6, 3, 8, M.laser, -2, 14.5, 0)); },
+    pm100usb: function (g) { var M = mats(); /* Thorlabs PM100USB console with an S140C head: approximate outline, not the CAD */
+      var y0 = 14 - H;
+      g.add(bx(62, 28, 52, M.dark, 0, y0, 0)); g.add(bx(64, 2, 54, M.black, 0, y0 + 14, 0)); g.add(bx(64, 2, 54, M.black, 0, y0 - 14, 0));
+      g.add(bx(1.2, 10, 24, M.black, -31.3, y0, 0)); g.add(bx(2, 8, 16, M.alu, -32.4, y0 + 0.5, 0));
+      for (var pn = 0; pn < 2; pn++) g.add(cy(0.7, 2.4, M.black, -33.1, y0 + 0.5 + (pn ? 2.2 : -2.2), -5 + pn * 0.6 + 10 * 0, 'x', 6));
+      g.add(cy(1.4, 1, M.on, -31.6, y0 + 9, 20, 'x', 10));
+      g.add(bx(3, 3.6, 4.4, M.alu, 32.4, y0 - 3, 0));
+      g.add(bx(0.8, 14, 36, M.alu, -0.2, y0 + 14.2, 0));
+      g.add(tube([[-33, y0, -2], [-42, y0, -20], [-50, y0 + 6, -40], [-55, y0 + 8.5, -46]], 1.1, M.black, 24));
+      g.add(cy(22.5, 30.5, M.black, -70, y0 + 8.5, -46, 'x', 36)); g.add(cy(23, 2, M.alu, -84, y0 + 8.5, -46, 'x', 36)); g.add(cy(12.7, 5, M.alu, -87, y0 + 8.5, -46, 'x', 28)); g.add(cy(8, 1, M.black, -89.6, y0 + 8.5, -46, 'x', 24)); g.add(cy(5.2, 1, M.glass, -90.2, y0 + 8.5, -46, 'x', 20));
+    },
     sphere: function (g) { var M = mats(); stand(g); /* Thorlabs S14xC integrating-sphere head: disc O45 x 30.5 mm, O5 mm aperture, SM1 thread, cable at the back */
       g.add(cy(22.5, 30.5, M.black, 0, 0, 0, 'x', 36)); g.add(cy(23, 2, M.alu, 14, 0, 0, 'x', 36)); g.add(cy(12.7, 6, M.alu, 18, 0, 0, 'x', 28)); g.add(cy(8, 1, M.black, 21.2, 0, 0, 'x', 24)); g.add(cy(5.2, 1, M.glass, 21.8, 0, 0, 'x', 20));
       g.add(cy(3.2, 14, M.black, -22, 0, 0, 'x', 12)); g.add(bx(14, 6, 10, M.dark, -29, 0, 0)); },
