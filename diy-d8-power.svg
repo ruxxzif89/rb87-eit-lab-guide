@@ -1,0 +1,158 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 960" role="img" aria-labelledby="t d" font-family="Segoe UI, Arial, Helvetica, sans-serif">
+<title id="t">D8 bias rails of the RF control box</title><desc id="d">Schematics of the plus and minus 5 volt and plus and minus 3 volt rails made from the plus and minus 12 volt supply.</desc>
+<defs><pattern id="hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="6" stroke="#555" stroke-width="1"/></pattern><pattern id="hatchf" width="4" height="4" patternUnits="userSpaceOnUse" patternTransform="rotate(-45)"><line x1="0" y1="0" x2="0" y2="4" stroke="#888" stroke-width="0.8"/></pattern><pattern id="dots" width="5" height="5" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="0.8" fill="#999"/></pattern><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#1b1f24"/></marker><marker id="arrg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#6b7280"/></marker></defs>
+<rect width="1000" height="960" fill="#ffffff"/>
+<text x="20.00" y="28.00" font-size="17" text-anchor="start" fill="#1b1f24" font-weight="700">D8  RF bias box, part 1: the four supply rails (+5 V, −5 V, +3.0 V, −3.1 V)</text>
+<text x="20.00" y="48.00" font-size="12" text-anchor="start" fill="#6b7280">In: ±12 V from a linear supply (≥ 150 mA per rail). The TO-220 pin order differs between 7805, 7905, LM317 and LM337: follow the datasheet pin names.</text>
+<rect x="20.00" y="70.00" width="470.00" height="270.00" rx="4" fill="#fcfcfd" stroke="#c9ced6" stroke-width="1.2"/>
+<text x="32.00" y="92.00" font-size="13" text-anchor="start" fill="#1b1f24" font-weight="700">+5 V rail: LM7805</text>
+<line x1="40.00" y1="170.00" x2="150.00" y2="170.00" stroke="#c0392b" stroke-width="2.2" stroke-linecap="round"/>
+<line x1="40.00" y1="290.00" x2="470.00" y2="290.00" stroke="#1b1f24" stroke-width="2.2" stroke-linecap="round"/>
+<circle cx="40.00" cy="170.00" r="5.00" fill="#fff" stroke="#c0392b" stroke-width="1.8"/>
+<text x="40.00" y="156.00" font-size="12" text-anchor="start" fill="#c0392b" font-weight="700">+12 V</text>
+<text x="40.00" y="310.00" font-size="11.5" text-anchor="start" fill="#1b1f24" font-weight="700">GND</text>
+<circle cx="100.00" cy="170.00" r="3.2" fill="#c0392b"/>
+<line x1="100.00" y1="170.00" x2="100.00" y2="226.00" stroke="#1b1f24" stroke-width="1.8" stroke-linecap="round"/>
+<line x1="100.00" y1="234.00" x2="100.00" y2="290.00" stroke="#1b1f24" stroke-width="1.8" stroke-linecap="round"/>
+<line x1="89.00" y1="226.00" x2="111.00" y2="226.00" stroke="#1b1f24" stroke-width="2.2" stroke-linecap="round"/>
+<line x1="89.00" y1="234.00" x2="111.00" y2="234.00" stroke="#1b1f24" stroke-width="2.2" stroke-linecap="round"/>
+<circle cx="100.00" cy="290.00" r="3.2" fill="#1b1f24"/>
+<text x="116.00" y="234.00" font-size="11.5" text-anchor="start" fill="#1b1f24">C1 0.33 µF</text>
+<rect x="150.00" y="130.00" width="120.00" height="60.00" rx="6" fill="#eef2f6" stroke="#1b1f24" stroke-width="1.8"/>
+<text x="210.00" y="154.00" font-size="13" text-anchor="middle" fill="#1b1f24" font-weight="700">LM7805</text>
+<text x="210.00" y="174.00" font-size="11" text-anchor="middle" fill="#6b7280">IN · GND · OUT</text>
+<line x1="270.00" y1="170.00" x2="460.00" y2="170.00" stroke="#2e7d32" stroke-width="2.2" stroke-linecap="round"/>
+<circle cx="460.00" cy="170.00" r="5.00" fill="#fff" stroke="#2e7d32" stroke-width="1.8"/>
+<text x="460.00" y="156.00" font-size="13" text-anchor="end" fill="#2e7d32" font-weight="700">+5 V</text>
+<line x1="210.00" y1="190.00" x2="210.00" y2="290.00" stroke="#1b1f24" stroke-width="1.8" stroke-linecap="round"/>
+<circle cx="210.00" cy="290.00" r="3.2" fill="#1b1f24"/>
+<circle cx="370.00" cy="170.00" r="3.2" fill="#2e7d32"/>
+<line x1="370.00" y1="170.00" x2="370.00" y2="226.00" stroke="#1b1f24" stroke-width="1.8" stroke-linecap="round"/>
+<line x1="370.00" y1="234.00" x2="370.00" y2="290.00" stroke="#1b1f24" stroke-width="1.8" stroke-linecap="round"/>
+<line x1="359.00" y1="226.00" x2="381.00" y2="226.00" stroke="#1b1f24" stroke-width="2.2" stroke-linecap="round"/>
+<line x1="359.00" y1="234.00" x2="381.00" y2="234.00" stroke="#1b1f24" stroke-width="2.2" stroke-linecap="round"/>
+<circle cx="370.00" cy="290.00" r="3.2" fill="#1b1f24"/>
+<text x="386.00" y="234.00" font-size="11.5" text-anchor="start" fill="#1b1f24">C 10 µF + 0.1 µF</text>
+<text x="32.00" y="332.00" font-size="11.5" text-anchor="start" fill="#1b1f24" font-weight="700">→ both RF switches, pin 2 (+5 V)</text>
+<rect x="510.00" y="70.00" width="470.00" height="270.00" rx="4" fill="#fcfcfd" stroke="#c9ced6" stroke-width="1.2"/>
+<text x="522.00" y="92.00" font-size="13" text-anchor="start" fill="#1b1f24" font-weight="700">+3.0 V rail: LM317 (fed from the raw +12 V)</text>
+<line x1="530.00" y1="170.00" x2="640.00" y2="170.00" stroke="#c0392b" stroke-width="2.2" stroke-linecap="round"/>
+<line x1="530.00" y1="290.00" x2="960.00" y2="290.00" stroke="#1b1f24" stroke-width="2.2" stroke-linecap="round"/>
+<circle cx="530.00" cy="170.00" r="5.00" fill="#fff" stroke="#c0392b" stroke-width="1.8"/>
+<text x="530.00" y="156.00" font-size="12" text-anchor="start" fill="#c0392b" font-weight="700">+12 V</text>
+<text x="530.00" y="310.00" font-size="11.5" text-anchor="start" fill="#1b1f24" font-weight="700">GND</text>
+<circle cx="590.00" cy="170.00" r="3.2" fill="#c0392b"/>
+<line x1="590.00" y1="170.00" x2="590.00" y2="226.00" stroke="#1b1f24" stroke-width="1.8" stroke-linecap="round"/>
+<line x1="590.00" y1="234.00" x2="590.00" y2="290.00" stroke="#1b1f24" stroke-width="1.8" stroke-linecap="round"/>
+<line x1="579.00" y1="226.00" x2="601.00" y2="226.00" stroke="#1b1f24" stroke-width="2.2" stroke-linecap="round"/>
+<line x1="579.00" y1="234.00" x2="601.00" y2="234.00" stroke="#1b1f24" stroke-width="2.2" stroke-linecap="round"/>
+<circle cx="590.00" cy="290.00" r="3.2" fill="#1b1f24"/>
+<text x="606.00" y="234.00" font-size="11.5" text-anchor="start" fill="#1b1f24">C1 0.33 µF</text>
+<rect x="640.00" y="130.00" width="120.00" height="60.00" rx="6" fill="#eef2f6" stroke="#1b1f24" stroke-width="1.8"/>
+<text x="700.00" y="154.00" font-size="13" text-anchor="middle" fill="#1b1f24" font-weight="700">LM317</text>
+<text x="700.00" y="174.00" font-size="11" text-anchor="middle" fill="#6b7280">IN · ADJ · OUT</text>
+<line x1="760.00" y1="170.00" x2="950.00" y2="170.00" stroke="#2e7d32" stroke-width="2.2" stroke-linecap="round"/>
+<circle cx="950.00" cy="170.00" r="5.00" fill="#fff" stroke="#2e7d32" stroke-width="1.8"/>
+<text x="950.00" y="156.00" font-size="13" text-anchor="end" fill="#2e7d32" font-weight="700">+2.99 V</text>
+<line x1="700.00" y1="190.00" x2="700.00" y2="230.00" stroke="#1b1f24" stroke-width="1.8" stroke-linecap="round"/>
+<line x1="700.00" y1="230.00" x2="810.00" y2="230.00" stroke="#1b1f24" stroke-width="1.8" stroke-linecap="round"/>
+<circle cx="810.00" cy="230.00" r="3.2" fill="#1b1f24"/>
+<circle cx="810.00" cy="170.00" r="3.2" fill="#2e7d32"/>
+<line x1="810.00" y1="170.00" x2="810.00" y2="185.00" stroke="#1b1f24" stroke-width="1.8" stroke-linecap="round"/>
+<rect x="803.00" y="185.00" width="14.00" height="30.00" rx="0" fill="#fff" stroke="#1b1f24" stroke-width="1.8"/>
+<line x1="810.00" y1="215.00" x2="810.00" y2="230.00" stroke="#1b1f24" stroke-width="1.8" stroke-linecap="round"/>
+<text x="800.00" y="204.00" font-size="11.5" text-anchor="end" fill="#1b1f24" font-weight="700">R1 240 Ω</text>
+<line x1="810.00" y1="230.00" x2="810.00" y2="245.00" stroke="#1b1f24" stroke-width="1.8" stroke-linecap="round"/>
+<rect x="803.00" y="245.00" width="14.00" height="30.00" rx="0" fill="#fff" stroke="#1b1f24" stroke-width="1.8"/>
+<line x1="810.00" y1="275.00" x2="810.00" y2="290.00" stroke="#1b1f24" stroke-width="1.8" stroke-linecap="round"/>
+<circle cx="810.00" cy="290.00" r="3.2" fill="#1b1f24"/>
+<text x="800.00" y="264.00" font-size="11.5" text-anchor="end" fill="#1b1f24" font-weight="700">R2 330 Ω</text>
+<circle cx="890.00" cy="170.00" r="3.2" fill="#2e7d32"/>
+<line x1="890.00" y1="170.00" x2="890.00" y2="226.00" stroke="#1b1f24" stroke-width="1.8" stroke-linecap="round"/>
+<line x1="890.00" y1="234.00" x2="890.00" y2="290.00" stroke="#1b1f24" stroke-width="1.8" stroke-linecap="round"/>
+<line x1="879.00" y1="226.00" x2="901.00" y2="226.00" stroke="#1b1f24" stroke-width="2.2" stroke-linecap="round"/>
+<line x1="879.00" y1="234.00" x2="901.00" y2="234.00" stroke="#1b1f24" stroke-width="2.2" stroke-linecap="round"/>
+<circle cx="890.00" cy="290.00" r="3.2" fill="#1b1f24"/>
+<text x="906.00" y="234.00" font-size="11.5" text-anchor="start" fill="#1b1f24">C 10 µF</text>
+<text x="522.00" y="332.00" font-size="11.5" text-anchor="start" fill="#1b1f24" font-weight="700">→ both attenuators, Vdd (module pin P2)</text>
+<rect x="20.00" y="360.00" width="470.00" height="270.00" rx="4" fill="#fcfcfd" stroke="#c9ced6" stroke-width="1.2"/>
+<text x="32.00" y="382.00" font-size="13" text-anchor="start" fill="#1b1f24" font-weight="700">−5 V rail: LM7905</text>
+<line x1="40.00" y1="540.00" x2="150.00" y2="540.00" stroke="#1f5fa8" stroke-width="2.2" stroke-linecap="round"/>
+<line x1="40.00" y1="420.00" x2="470.00" y2="420.00" stroke="#1b1f24" stroke-width="2.2" stroke-linecap="round"/>
+<circle cx="40.00" cy="540.00" r="5.00" fill="#fff" stroke="#1f5fa8" stroke-width="1.8"/>
+<text x="40.00" y="562.00" font-size="12" text-anchor="start" fill="#1f5fa8" font-weight="700">−12 V</text>
+<text x="40.00" y="410.00" font-size="11.5" text-anchor="start" fill="#1b1f24" font-weight="700">GND</text>
+<circle cx="100.00" cy="540.00" r="3.2" fill="#1f5fa8"/>
+<line x1="100.00" y1="580.00" x2="100.00" y2="516.00" stroke="#1b1f24" stroke-width="1.8" stroke-linecap="round"/>
+<line x1="100.00" y1="524.00" x2="100.00" y2="460.00" stroke="#1b1f24" stroke-width="1.8" stroke-linecap="round"/>
+<line x1="89.00" y1="516.00" x2="111.00" y2="516.00" stroke="#1b1f24" stroke-width="2.2" stroke-linecap="round"/>
+<line x1="89.00" y1="524.00" x2="111.00" y2="524.00" stroke="#1b1f24" stroke-width="2.2" stroke-linecap="round"/>
+<circle cx="100.00" cy="420.00" r="3.2" fill="#1b1f24"/>
+<text x="116.00" y="484.00" font-size="11.5" text-anchor="start" fill="#1b1f24">C1 0.33 µF</text>
+<rect x="150.00" y="520.00" width="120.00" height="60.00" rx="6" fill="#eef2f6" stroke="#1b1f24" stroke-width="1.8"/>
+<text x="210.00" y="544.00" font-size="13" text-anchor="middle" fill="#1b1f24" font-weight="700">LM7905</text>
+<text x="210.00" y="564.00" font-size="11" text-anchor="middle" fill="#6b7280">GND · IN · OUT</text>
+<line x1="270.00" y1="540.00" x2="460.00" y2="540.00" stroke="#1f5fa8" stroke-width="2.2" stroke-linecap="round"/>
+<circle cx="460.00" cy="540.00" r="5.00" fill="#fff" stroke="#1f5fa8" stroke-width="1.8"/>
+<text x="460.00" y="562.00" font-size="13" text-anchor="end" fill="#1f5fa8" font-weight="700">−5 V</text>
+<line x1="210.00" y1="520.00" x2="210.00" y2="420.00" stroke="#1b1f24" stroke-width="1.8" stroke-linecap="round"/>
+<circle cx="210.00" cy="420.00" r="3.2" fill="#1b1f24"/>
+<circle cx="370.00" cy="540.00" r="3.2" fill="#1f5fa8"/>
+<line x1="370.00" y1="580.00" x2="370.00" y2="516.00" stroke="#1b1f24" stroke-width="1.8" stroke-linecap="round"/>
+<line x1="370.00" y1="524.00" x2="370.00" y2="460.00" stroke="#1b1f24" stroke-width="1.8" stroke-linecap="round"/>
+<line x1="359.00" y1="516.00" x2="381.00" y2="516.00" stroke="#1b1f24" stroke-width="2.2" stroke-linecap="round"/>
+<line x1="359.00" y1="524.00" x2="381.00" y2="524.00" stroke="#1b1f24" stroke-width="2.2" stroke-linecap="round"/>
+<circle cx="370.00" cy="420.00" r="3.2" fill="#1b1f24"/>
+<text x="386.00" y="484.00" font-size="11.5" text-anchor="start" fill="#1b1f24">C 10 µF + 0.1 µF</text>
+<text x="32.00" y="622.00" font-size="11.5" text-anchor="start" fill="#1b1f24" font-weight="700">→ both RF switches, pin 5 (−5 V)</text>
+<rect x="510.00" y="360.00" width="470.00" height="270.00" rx="4" fill="#fcfcfd" stroke="#c9ced6" stroke-width="1.2"/>
+<text x="522.00" y="382.00" font-size="13" text-anchor="start" fill="#1b1f24" font-weight="700">−3.1 V rail: LM337 (fed from the raw −12 V)</text>
+<line x1="530.00" y1="540.00" x2="640.00" y2="540.00" stroke="#1f5fa8" stroke-width="2.2" stroke-linecap="round"/>
+<line x1="530.00" y1="420.00" x2="960.00" y2="420.00" stroke="#1b1f24" stroke-width="2.2" stroke-linecap="round"/>
+<circle cx="530.00" cy="540.00" r="5.00" fill="#fff" stroke="#1f5fa8" stroke-width="1.8"/>
+<text x="530.00" y="562.00" font-size="12" text-anchor="start" fill="#1f5fa8" font-weight="700">−12 V</text>
+<text x="530.00" y="410.00" font-size="11.5" text-anchor="start" fill="#1b1f24" font-weight="700">GND</text>
+<circle cx="590.00" cy="540.00" r="3.2" fill="#1f5fa8"/>
+<line x1="590.00" y1="580.00" x2="590.00" y2="516.00" stroke="#1b1f24" stroke-width="1.8" stroke-linecap="round"/>
+<line x1="590.00" y1="524.00" x2="590.00" y2="460.00" stroke="#1b1f24" stroke-width="1.8" stroke-linecap="round"/>
+<line x1="579.00" y1="516.00" x2="601.00" y2="516.00" stroke="#1b1f24" stroke-width="2.2" stroke-linecap="round"/>
+<line x1="579.00" y1="524.00" x2="601.00" y2="524.00" stroke="#1b1f24" stroke-width="2.2" stroke-linecap="round"/>
+<circle cx="590.00" cy="420.00" r="3.2" fill="#1b1f24"/>
+<text x="606.00" y="484.00" font-size="11.5" text-anchor="start" fill="#1b1f24">C1 0.33 µF</text>
+<rect x="640.00" y="520.00" width="120.00" height="60.00" rx="6" fill="#eef2f6" stroke="#1b1f24" stroke-width="1.8"/>
+<text x="700.00" y="544.00" font-size="13" text-anchor="middle" fill="#1b1f24" font-weight="700">LM337</text>
+<text x="700.00" y="564.00" font-size="11" text-anchor="middle" fill="#6b7280">ADJ · IN · OUT</text>
+<line x1="760.00" y1="540.00" x2="950.00" y2="540.00" stroke="#1f5fa8" stroke-width="2.2" stroke-linecap="round"/>
+<circle cx="950.00" cy="540.00" r="5.00" fill="#fff" stroke="#1f5fa8" stroke-width="1.8"/>
+<text x="950.00" y="562.00" font-size="13" text-anchor="end" fill="#1f5fa8" font-weight="700">-3.14 V</text>
+<line x1="700.00" y1="520.00" x2="700.00" y2="480.00" stroke="#1b1f24" stroke-width="1.8" stroke-linecap="round"/>
+<line x1="700.00" y1="480.00" x2="810.00" y2="480.00" stroke="#1b1f24" stroke-width="1.8" stroke-linecap="round"/>
+<circle cx="810.00" cy="480.00" r="3.2" fill="#1b1f24"/>
+<circle cx="810.00" cy="540.00" r="3.2" fill="#1f5fa8"/>
+<line x1="810.00" y1="540.00" x2="810.00" y2="525.00" stroke="#1b1f24" stroke-width="1.8" stroke-linecap="round"/>
+<rect x="803.00" y="495.00" width="14.00" height="30.00" rx="0" fill="#fff" stroke="#1b1f24" stroke-width="1.8"/>
+<line x1="810.00" y1="495.00" x2="810.00" y2="480.00" stroke="#1b1f24" stroke-width="1.8" stroke-linecap="round"/>
+<text x="800.00" y="514.00" font-size="11.5" text-anchor="end" fill="#1b1f24" font-weight="700">R1 120 Ω</text>
+<line x1="810.00" y1="480.00" x2="810.00" y2="465.00" stroke="#1b1f24" stroke-width="1.8" stroke-linecap="round"/>
+<rect x="803.00" y="435.00" width="14.00" height="30.00" rx="0" fill="#fff" stroke="#1b1f24" stroke-width="1.8"/>
+<line x1="810.00" y1="435.00" x2="810.00" y2="420.00" stroke="#1b1f24" stroke-width="1.8" stroke-linecap="round"/>
+<circle cx="810.00" cy="420.00" r="3.2" fill="#1b1f24"/>
+<text x="800.00" y="454.00" font-size="11.5" text-anchor="end" fill="#1b1f24" font-weight="700">R2 180 Ω</text>
+<circle cx="890.00" cy="540.00" r="3.2" fill="#1f5fa8"/>
+<line x1="890.00" y1="580.00" x2="890.00" y2="516.00" stroke="#1b1f24" stroke-width="1.8" stroke-linecap="round"/>
+<line x1="890.00" y1="524.00" x2="890.00" y2="460.00" stroke="#1b1f24" stroke-width="1.8" stroke-linecap="round"/>
+<line x1="879.00" y1="516.00" x2="901.00" y2="516.00" stroke="#1b1f24" stroke-width="2.2" stroke-linecap="round"/>
+<line x1="879.00" y1="524.00" x2="901.00" y2="524.00" stroke="#1b1f24" stroke-width="2.2" stroke-linecap="round"/>
+<circle cx="890.00" cy="420.00" r="3.2" fill="#1b1f24"/>
+<text x="906.00" y="484.00" font-size="11.5" text-anchor="start" fill="#1b1f24">C 10 µF</text>
+<text x="522.00" y="622.00" font-size="11.5" text-anchor="start" fill="#1b1f24" font-weight="700">→ both attenuators, Vss (module pin P4)</text>
+<rect x="20.00" y="660.00" width="960.00" height="270.00" rx="0" fill="#fffbe8" stroke="#b58900" stroke-width="1.4"/>
+<text x="34.00" y="684.00" font-size="13" text-anchor="start" fill="#1b1f24" font-weight="700">Numbers</text>
+<text x="34.00" y="710.00" font-size="11.5" text-anchor="start" fill="#1b1f24">LM317: V = 1.25 (1 + 330/240) + 50 µA × 330 = 2.99 V (attenuator limit 2.7 to 3.3 V). The programming current 5.2 mA is the load that keeps it regulating.</text>
+<text x="34.00" y="736.00" font-size="11.5" text-anchor="start" fill="#1b1f24">LM337: V = −[1.25 (1 + 180/120) + 65 µA × 180] = -3.14 V (limit −2.7 to −3.3 V). Programming current 10.4 mA, which is its 10 mA minimum load.</text>
+<text x="34.00" y="762.00" font-size="11.5" text-anchor="start" fill="#1b1f24">Why the 3 V rails come from ±12 V and not from ±5 V: the LM317 / LM337 need about 2 V of head-room, and 5 V − 3 V is only 2 V.</text>
+<text x="34.00" y="788.00" font-size="11.5" text-anchor="start" fill="#1b1f24">Loads: each switch 22 mA typ, 60 mA max on both of its rails; each attenuator 3 mA (Vdd) and 0.1 mA (Vss) max.</text>
+<text x="34.00" y="814.00" font-size="11.5" text-anchor="start" fill="#1b1f24">Dissipation: 7805 and 7905 0.31 W typ, 0.84 W max (clip-on heatsink); LM317 0.10 W; LM337 0.09 W.</text>
+<text x="34.00" y="840.00" font-size="11.5" text-anchor="start" fill="#1b1f24">Supply draw from the ±12 V rails: at most 131 mA on the + side and 131 mA on the − side. Put 100 nF at every regulator output close to the load.</text>
+<text x="34.00" y="866.00" font-size="11.5" text-anchor="start" fill="#1b1f24" font-weight="700">Power-on order: bias box first, then the +24 V of the amplifiers, then the synthesizer. Power-off in the reverse order.</text>
+</svg>

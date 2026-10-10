@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 650" role="img" aria-labelledby="t d" font-family="Segoe UI, Arial, Helvetica, sans-serif">
+<title id="t">D1 solenoid winding developed view</title><desc id="d">Unrolled surface of the former showing the helical winding, the end turns, the two return wires and the lead exit.</desc>
+<defs><pattern id="hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="6" stroke="#555" stroke-width="1"/></pattern><pattern id="hatchf" width="4" height="4" patternUnits="userSpaceOnUse" patternTransform="rotate(-45)"><line x1="0" y1="0" x2="0" y2="4" stroke="#888" stroke-width="0.8"/></pattern><pattern id="dots" width="5" height="5" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="0.8" fill="#999"/></pattern><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#1b1f24"/></marker><marker id="arrg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#6b7280"/></marker></defs>
+<rect width="1000" height="650" fill="#ffffff"/>
+<text x="20.00" y="28.00" font-size="17" text-anchor="start" fill="#1b1f24" font-weight="700">D1  Winding plan: the former surface unrolled</text>
+<text x="20.00" y="48.00" font-size="12" text-anchor="start" fill="#6b7280">Horizontal: along the axis (4.2 px per mm). Vertical: once round the circumference (118.7 mm), compressed. Each line is one turn, from 0° to 360°, at its true axial position.</text>
+<rect x="250.00" y="130.00" width="672.00" height="230.00" rx="0" fill="#fbfaf5" stroke="#1b1f24" stroke-width="1.6"/>
+<text x="930.00" y="134.00" font-size="11.5" text-anchor="start" fill="#6b7280">0°</text>
+<text x="930.00" y="191.50" font-size="11.5" text-anchor="start" fill="#6b7280">90°</text>
+<text x="930.00" y="249.00" font-size="11.5" text-anchor="start" fill="#6b7280">180°</text>
+<text x="930.00" y="306.50" font-size="11.5" text-anchor="start" fill="#6b7280">270°</text>
+<text x="930.00" y="364.00" font-size="11.5" text-anchor="start" fill="#6b7280">360°</text>
+<line x1="291.16" y1="130.00" x2="298.72" y2="360.00" stroke="#c0703a" stroke-width="1.2" stroke-linecap="round"/>
+<line x1="298.72" y1="130.00" x2="306.28" y2="360.00" stroke="#c0703a" stroke-width="1.2" stroke-linecap="round"/>
+<line x1="306.28" y1="130.00" x2="313.84" y2="360.00" stroke="#c0703a" stroke-width="1.2" stroke-linecap="round"/>
+<line x1="313.84" y1="130.00" x2="328.96" y2="360.00" stroke="#c0703a" stroke-width="1.2" stroke-linecap="round"/>
+<line x1="328.96" y1="130.00" x2="344.08" y2="360.00" stroke="#c0703a" stroke-width="1.2" stroke-linecap="round"/>
+<line x1="344.08" y1="130.00" x2="359.20" y2="360.00" stroke="#c0703a" stroke-width="1.2" stroke-linecap="round"/>
+<line x1="359.20" y1="130.00" x2="374.32" y2="360.00" stroke="#c0703a" stroke-width="1.2" stroke-linecap="round"/>
+<line x1="374.32" y1="130.00" x2="389.44" y2="360.00" stroke="#c0703a" stroke-width="1.2" stroke-linecap="round"/>
+<line x1="389.44" y1="130.00" x2="404.56" y2="360.00" stroke="#c0703a" stroke-width="1.2" stroke-linecap="round"/>
+<line x1="404.56" y1="130.00" x2="419.68" y2="360.00" stroke="#c0703a" stroke-width="1.2" stroke-linecap="round"/>
+<line x1="419.68" y1="130.00" x2="434.80" y2="360.00" stroke="#c0703a" stroke-width="1.2" stroke-linecap="round"/>
+<line x1="434.80" y1="130.00" x2="449.92" y2="360.00" stroke="#c0703a" stroke-width="1.2" stroke-linecap="round"/>
+<line x1="449.92" y1="130.00" x2="465.04" y2="360.00" stroke="#c0703a" stroke-width="1.2" stroke-linecap="round"/>
+<line x1="465.04" y1="130.00" x2="480.16" y2="360.00" stroke="#c0703a" stroke-width="1.2" stroke-linecap="round"/>
+<line x1="480.16" y1="130.00" x2="495.28" y2="360.00" stroke="#c0703a" stroke-width="1.2" stroke-linecap="round"/>
+<line x1="495.28" y1="130.00" x2="510.40" y2="360.00" stroke="#c0703a" stroke-width="1.2" stroke-linecap="round"/>
+<line x1="510.40" y1="130.00" x2="525.52" y2="360.00" stroke="#c0703a" stroke-width="1.2" stroke-linecap="round"/>
+<line x1="525.52" y1="130.00" x2="540.64" y2="360.00" stroke="#c0703a" stroke-width="1.2" stroke-linecap="round"/>
+<line x1="540.64" y1="130.00" x2="555.76" y2="360.00" stroke="#c0703a" stroke-width="1.2" stroke-linecap="round"/>
+<line x1="555.76" y1="130.00" x2="570.88" y2="360.00" stroke="#c0703a" stroke-width="1.2" stroke-linecap="round"/>
+<line x1="570.88" y1="130.00" x2="586.00" y2="360.00" stroke="#c0703a" stroke-width="1.2" stroke-linecap="round"/>
+<line x1="586.00" y1="130.00" x2="601.12" y2="360.00" stroke="#c0703a" stroke-width="1.2" stroke-linecap="round"/>
+<line x1="601.12" y1="130.00" x2="616.24" y2="360.00" stroke="#c0703a" stroke-width="1.2" stroke-linecap="round"/>
+<line x1="616.24" y1="130.00" x2="631.36" y2="360.00" stroke="#c0703a" stroke-width="1.2" stroke-linecap="round"/>
+<line x1="631.36" y1="130.00" x2="646.48" y2="360.00" stroke="#c0703a" stroke-width="1.2" stroke-linecap="round"/>
+<line x1="646.48" y1="130.00" x2="661.60" y2="360.00" stroke="#c0703a" stroke-width="1.2" stroke-linecap="round"/>
+<line x1="661.60" y1="130.00" x2="676.72" y2="360.00" stroke="#c0703a" stroke-width="1.2" stroke-linecap="round"/>
+<line x1="676.72" y1="130.00" x2="691.84" y2="360.00" stroke="#c0703a" stroke-width="1.2" stroke-linecap="round"/>
+<line x1="691.84" y1="130.00" x2="706.96" y2="360.00" stroke="#c0703a" stroke-width="1.2" stroke-linecap="round"/>
+<line x1="706.96" y1="130.00" x2="722.08" y2="360.00" stroke="#c0703a" stroke-width="1.2" stroke-linecap="round"/>
+<line x1="722.08" y1="130.00" x2="737.20" y2="360.00" stroke="#c0703a" stroke-width="1.2" stroke-linecap="round"/>
+<line x1="737.20" y1="130.00" x2="752.32" y2="360.00" stroke="#c0703a" stroke-width="1.2" stroke-linecap="round"/>
+<line x1="752.32" y1="130.00" x2="767.44" y2="360.00" stroke="#c0703a" stroke-width="1.2" stroke-linecap="round"/>
+<line x1="767.44" y1="130.00" x2="782.56" y2="360.00" stroke="#c0703a" stroke-width="1.2" stroke-linecap="round"/>
+<line x1="782.56" y1="130.00" x2="797.68" y2="360.00" stroke="#c0703a" stroke-width="1.2" stroke-linecap="round"/>
+<line x1="797.68" y1="130.00" x2="812.80" y2="360.00" stroke="#c0703a" stroke-width="1.2" stroke-linecap="round"/>
+<line x1="812.80" y1="130.00" x2="827.92" y2="360.00" stroke="#c0703a" stroke-width="1.2" stroke-linecap="round"/>
+<line x1="827.92" y1="130.00" x2="843.04" y2="360.00" stroke="#c0703a" stroke-width="1.2" stroke-linecap="round"/>
+<line x1="843.04" y1="130.00" x2="858.16" y2="360.00" stroke="#c0703a" stroke-width="1.2" stroke-linecap="round"/>
+<line x1="858.16" y1="130.00" x2="865.72" y2="360.00" stroke="#c0703a" stroke-width="1.2" stroke-linecap="round"/>
+<line x1="865.72" y1="130.00" x2="873.28" y2="360.00" stroke="#c0703a" stroke-width="1.2" stroke-linecap="round"/>
+<line x1="873.28" y1="130.00" x2="880.84" y2="360.00" stroke="#c0703a" stroke-width="1.2" stroke-linecap="round"/>
+<circle cx="291.16" cy="130.00" r="5.00" fill="#2e7d32" stroke="#1b1f24" stroke-width="1.2"/>
+<circle cx="880.84" cy="360.00" r="5.00" fill="#c0392b" stroke="#1b1f24" stroke-width="1.2"/>
+<text x="301.16" y="118.00" font-size="12" text-anchor="start" fill="#2e7d32" font-weight="700">start of the helix</text>
+<text x="874.84" y="380.00" font-size="12" text-anchor="end" fill="#c0392b" font-weight="700">finish of the helix</text>
+<line x1="880.84" y1="187.50" x2="265.16" y2="187.50" stroke="#1b1f24" stroke-width="3.0" stroke-linecap="round"/>
+<text x="586.00" y="179.50" font-size="11.5" text-anchor="middle" fill="#1b1f24" font-weight="700">return wire A (90°): I/2, laid along the axis on top of the winding</text>
+<line x1="880.84" y1="302.50" x2="265.16" y2="302.50" stroke="#1b1f24" stroke-width="3.0" stroke-linecap="round"/>
+<text x="586.00" y="294.50" font-size="11.5" text-anchor="middle" fill="#1b1f24" font-weight="700">return wire B (270°): I/2, laid along the axis on top of the winding</text>
+<line x1="880.84" y1="360.00" x2="880.84" y2="187.50" stroke="#1b1f24" stroke-width="3.0" stroke-linecap="round"/>
+<line x1="265.16" y1="187.50" x2="265.16" y2="302.50" stroke="#1b1f24" stroke-width="3.0" stroke-linecap="round"/>
+<line x1="265.16" y1="245.00" x2="190.00" y2="245.00" stroke="#1b1f24" stroke-width="3.0" stroke-linecap="round"/>
+<circle cx="265.16" cy="245.00" r="4" fill="#1b1f24"/>
+<line x1="291.16" y1="130.00" x2="269.16" y2="130.00" stroke="#2e7d32" stroke-width="3.0" stroke-linecap="round"/>
+<line x1="269.16" y1="130.00" x2="269.16" y2="96.00" stroke="#2e7d32" stroke-width="3.0" stroke-linecap="round"/>
+<line x1="269.16" y1="96.00" x2="190.00" y2="96.00" stroke="#2e7d32" stroke-width="3.0" stroke-linecap="round"/>
+<text x="184.00" y="100.00" font-size="11.5" text-anchor="end" fill="#2e7d32" font-weight="700">start lead</text>
+<text x="184.00" y="239.00" font-size="11.5" text-anchor="end" fill="#1b1f24" font-weight="700">finish lead</text>
+<text x="184.00" y="255.00" font-size="11.5" text-anchor="end" fill="#1b1f24">(both returns joined)</text>
+<text x="184.00" y="271.00" font-size="11.5" text-anchor="end" fill="#1b1f24">twist with the start lead</text>
+<text x="184.00" y="287.00" font-size="11.5" text-anchor="end" fill="#1b1f24">and go to the D9 plug</text>
+<rect x="20.00" y="418.00" width="960.00" height="148.00" rx="0" fill="#f7f8fa" stroke="#1b1f24" stroke-width="1.2"/>
+<text x="34.00" y="440.00" font-size="13" text-anchor="start" fill="#1b1f24" font-weight="700">Where each turn starts (z in mm from the mid-plane, on the 0° line; negative = the cable end). The groove ends at 70.2.</text>
+<text x="34.00" y="462.00" font-size="12" text-anchor="start" fill="#1b1f24">Left end turns:   -70.2,  -68.4,  -66.6   (pitch 1.8; the 3.6 pitch starts at -64.8)</text>
+<text x="34.00" y="482.00" font-size="12" text-anchor="start" fill="#1b1f24">Uniform turns:    from -64.8 to 61.2 in steps of 3.6 (36 turns)</text>
+<text x="34.00" y="502.00" font-size="12" text-anchor="start" fill="#1b1f24">Right end turns: 64.8,  66.6,  68.4   (pitch 1.8, finish at 70.2)</text>
+<text x="34.00" y="526.00" font-size="12" text-anchor="start" fill="#1b1f24">Wire 0.50 mm enamelled copper: about 4.98 m in the helix, two return wires of 0.15 m each, leads 0.8 m each.</text>
+<text x="34.00" y="546.00" font-size="12" text-anchor="start" fill="#1b1f24">Resistance 0.58 Ω in all (returns in parallel), inductance about 16 µH: no problem for the ITC502.</text>
+<rect x="20.00" y="604.00" width="960.00" height="34.00" rx="0" fill="#f7f8fa" stroke="#1b1f24" stroke-width="1.2"/>
+<text x="30.00" y="619.00" font-size="13" text-anchor="start" fill="#1b1f24" font-weight="700">D1  Winding plan</text>
+<text x="30.00" y="633.00" font-size="11" text-anchor="start" fill="#6b7280">Helix + two return wires 180° apart: the return currents cancel the transverse field on the axis (one wire alone would add 1.0 mG per 10 mA).</text>
+</svg>

@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 880" role="img" aria-labelledby="t d" font-family="Segoe UI, Arial, Helvetica, sans-serif">
+<title id="t">D2 heater drawing</title><desc id="d">Bifilar-wound constantan heater on Kapton, trace pairing detail, thermistor position and the field consequences.</desc>
+<defs><pattern id="hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="6" stroke="#555" stroke-width="1"/></pattern><pattern id="hatchf" width="4" height="4" patternUnits="userSpaceOnUse" patternTransform="rotate(-45)"><line x1="0" y1="0" x2="0" y2="4" stroke="#888" stroke-width="0.8"/></pattern><pattern id="dots" width="5" height="5" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="0.8" fill="#999"/></pattern><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#1b1f24"/></marker><marker id="arrg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#6b7280"/></marker></defs>
+<rect width="1000" height="880" fill="#ffffff"/>
+<text x="20.00" y="28.00" font-size="17" text-anchor="start" fill="#1b1f24" font-weight="700">D2  Heater: a non-inductive (bifilar) pattern, drawn as the do-it-yourself version</text>
+<text x="20.00" y="48.00" font-size="12" text-anchor="start" fill="#6b7280">Kapton sheet 80 × 25 mm drawn at 8 px per mm. One folded wire runs up and down the sheet as a pair (go and return side by side).</text>
+<rect x="175.00" y="130.00" width="640.00" height="200.00" rx="0" fill="#ffe7c2" stroke="#8a4b00" stroke-width="1.6"/>
+<polyline points="212.00,310.00 212.00,150.00 212.00,150.00 258.00,150.00 258.00,310.00 258.00,305.00 292.00,305.00 292.00,150.00 292.00,150.00 338.00,150.00 338.00,310.00 338.00,305.00 372.00,305.00 372.00,150.00 372.00,150.00 418.00,150.00 418.00,310.00 418.00,305.00 452.00,305.00 452.00,150.00 452.00,150.00 498.00,150.00 498.00,310.00 498.00,305.00 532.00,305.00 532.00,150.00 532.00,150.00 578.00,150.00 578.00,310.00 578.00,305.00 612.00,305.00 612.00,150.00 612.00,150.00 658.00,150.00 658.00,310.00 658.00,305.00 692.00,305.00 692.00,150.00 692.00,150.00 738.00,150.00 738.00,310.00 738.00,305.00 772.00,305.00 772.00,150.00" fill="none" stroke="#c0392b" stroke-width="1.9" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="218.00,315.00 218.00,150.00 218.00,155.00 252.00,155.00 252.00,310.00 252.00,310.00 298.00,310.00 298.00,150.00 298.00,155.00 332.00,155.00 332.00,310.00 332.00,310.00 378.00,310.00 378.00,150.00 378.00,155.00 412.00,155.00 412.00,310.00 412.00,310.00 458.00,310.00 458.00,150.00 458.00,155.00 492.00,155.00 492.00,310.00 492.00,310.00 538.00,310.00 538.00,150.00 538.00,155.00 572.00,155.00 572.00,310.00 572.00,310.00 618.00,310.00 618.00,150.00 618.00,155.00 652.00,155.00 652.00,310.00 652.00,310.00 698.00,310.00 698.00,150.00 698.00,155.00 732.00,155.00 732.00,310.00 732.00,310.00 778.00,310.00 778.00,150.00" fill="none" stroke="#1f5fa8" stroke-width="1.9" stroke-linejoin="round" stroke-linecap="round"/>
+<line x1="772.00" y1="150.00" x2="778.00" y2="150.00" stroke="#1b1f24" stroke-width="1.9" stroke-linecap="round"/>
+<line x1="105.00" y1="310.00" x2="212.00" y2="310.00" stroke="#c0392b" stroke-width="1.9" stroke-linecap="round"/>
+<line x1="105.00" y1="315.00" x2="218.00" y2="315.00" stroke="#1f5fa8" stroke-width="1.9" stroke-linecap="round"/>
+<text x="101.00" y="332.00" font-size="11.5" text-anchor="end" fill="#1b1f24" font-weight="700">tails (twisted)</text>
+<line x1="212.00" y1="310.00" x2="212.00" y2="310.00" stroke="#c0392b" stroke-width="1.9" stroke-linecap="round"/>
+<text x="807.00" y="350.00" font-size="11.5" text-anchor="end" fill="#1b1f24">fold of the wire at the far end</text>
+<line x1="175.00" y1="130.00" x2="175.00" y2="100.00" stroke="#6b7280" stroke-width="0.9" stroke-linecap="round"/>
+<line x1="815.00" y1="130.00" x2="815.00" y2="100.00" stroke="#6b7280" stroke-width="0.9" stroke-linecap="round"/>
+<line x1="175.00" y1="106.00" x2="815.00" y2="106.00" stroke="#1b1f24" stroke-width="1" marker-start="url(#arr)" marker-end="url(#arr)"/>
+<text x="495.00" y="102.00" font-size="11.5" text-anchor="middle" fill="#1b1f24">80 (one wrap round the cell: circumference 78.5 + 1.5 overlap)</text>
+<line x1="815.00" y1="130.00" x2="847.00" y2="130.00" stroke="#6b7280" stroke-width="0.9" stroke-linecap="round"/>
+<line x1="815.00" y1="330.00" x2="847.00" y2="330.00" stroke="#6b7280" stroke-width="0.9" stroke-linecap="round"/>
+<line x1="841.00" y1="130.00" x2="841.00" y2="330.00" stroke="#1b1f24" stroke-width="1" marker-start="url(#arr)" marker-end="url(#arr)"/>
+<text x="846.00" y="234.00" font-size="11.5" text-anchor="start" fill="#1b1f24">25 (along the axis)</text>
+<line x1="295.00" y1="310.00" x2="295.00" y2="382.00" stroke="#6b7280" stroke-width="0.9" stroke-linecap="round"/>
+<line x1="335.00" y1="310.00" x2="335.00" y2="382.00" stroke="#6b7280" stroke-width="0.9" stroke-linecap="round"/>
+<line x1="295.00" y1="376.00" x2="335.00" y2="376.00" stroke="#1b1f24" stroke-width="1" marker-start="url(#arr)" marker-end="url(#arr)"/>
+<text x="341.00" y="380.00" font-size="11.5" text-anchor="start" fill="#1b1f24">pitch 5</text>
+<text x="181.00" y="350.00" font-size="11.5" text-anchor="start" fill="#1b1f24">15 runs, each a pair of strands</text>
+<circle cx="751.00" cy="230.00" r="6.00" fill="#2e7d32" stroke="#1b1f24" stroke-width="1.2"/>
+<line x1="751.00" y1="236.00" x2="767.00" y2="396.00" stroke="#6b7280" stroke-width="1.0" stroke-linecap="round"/>
+<circle cx="751.00" cy="236.00" r="2.2" fill="#6b7280"/>
+<text x="763.00" y="400.00" font-size="11.5" text-anchor="end" fill="#2e7d32" font-weight="700">NTC under the heater, 5 mm from the end</text>
+<text x="270.00" y="408.00" font-size="13" text-anchor="middle" fill="#1b1f24" font-weight="700">Detail of one run (not to scale)</text>
+<rect x="120.00" y="440.00" width="300.00" height="120.00" rx="0" fill="#ffe7c2" stroke="#8a4b00" stroke-width="1.2"/>
+<line x1="140.00" y1="470.00" x2="400.00" y2="470.00" stroke="#c0392b" stroke-width="3.0" stroke-linecap="round"/>
+<line x1="140.00" y1="484.00" x2="400.00" y2="484.00" stroke="#1f5fa8" stroke-width="3.0" stroke-linecap="round"/>
+<polyline points="375.00,464.00 395.00,464.00" fill="none" stroke="#c0392b" stroke-width="1.2" stroke-linejoin="round" stroke-linecap="round"/>
+<text x="270.00" y="456.00" font-size="11.5" text-anchor="middle" fill="#c0392b" font-weight="700">go  →  (0.54 A)</text>
+<text x="270.00" y="506.00" font-size="11.5" text-anchor="middle" fill="#1f5fa8" font-weight="700">←  return (0.54 A), 0.4 mm away</text>
+<text x="270.00" y="532.00" font-size="11.5" text-anchor="middle" fill="#1b1f24">the two currents cancel at every point: no loop of current</text>
+<rect x="480.00" y="410.00" width="500.00" height="252.00" rx="0" fill="#fff7f7" stroke="#c0392b" stroke-width="1.2"/>
+<text x="494.00" y="432.00" font-size="13" text-anchor="start" fill="#c0392b" font-weight="700">Why the pattern matters (calculated, ring model)</text>
+<text x="494.00" y="454.00" font-size="12" text-anchor="start" fill="#1b1f24">One unpaired turn of 0.54 A at the end of the heater gives</text>
+<text x="494.00" y="472.00" font-size="12" text-anchor="start" fill="#1b1f24" font-weight="700">97 mG at the cell centre: 2000 times the 0.05 mG we can accept.</text>
+<text x="494.00" y="496.00" font-size="12" text-anchor="start" fill="#1b1f24">Heater wire running round the cell, all in one direction, is a coil.</text>
+<text x="494.00" y="520.00" font-size="12" text-anchor="start" fill="#1b1f24">A bought foil may have a return bus along one edge: that is also</text>
+<text x="494.00" y="538.00" font-size="12" text-anchor="start" fill="#1b1f24">an unpaired turn. Ask the vendor for the trace layout, accept only</text>
+<text x="494.00" y="556.00" font-size="12" text-anchor="start" fill="#1b1f24">a bifilar or symmetric layout, and always test it on the bench:</text>
+<text x="494.00" y="580.00" font-size="12" text-anchor="start" fill="#1b1f24" font-weight="700">fluxgate in the shield, heater on / off: change under 0.1 mG.</text>
+<text x="494.00" y="604.00" font-size="12" text-anchor="start" fill="#1b1f24">If the test fails, switch the heater off during the measurement:</text>
+<text x="494.00" y="622.00" font-size="12" text-anchor="start" fill="#1b1f24">the cell cools only about 0.5 K in a 2 s scan (tau at least 166 s).</text>
+<text x="494.00" y="646.00" font-size="11.5" text-anchor="start" fill="#6b7280">(estimate: foam k = 0.05 W/m/K, heat capacity 8 J/K)</text>
+<rect x="20.00" y="690.00" width="960.00" height="128.00" rx="0" fill="#f7f8fa" stroke="#1b1f24" stroke-width="1.2"/>
+<text x="34.00" y="712.00" font-size="13" text-anchor="start" fill="#1b1f24" font-weight="700">DIY heater: numbers</text>
+<text x="34.00" y="734.00" font-size="12" text-anchor="start" fill="#1b1f24">Wire: enamelled constantan (or manganin) Ø0.20 mm, 15.6 Ω per metre. For 12 Ω: 0.77 m of wire in all (two strands of 0.38 m, 15 runs of 25 mm).</text>
+<text x="34.00" y="754.00" font-size="12" text-anchor="start" fill="#1b1f24">Glue the pair to the Kapton with polyimide tape; cover with a second Kapton sheet. At the supply limit (7.2 V): 0.60 A, 4.3 W, 0.22 W per cm².</text>
+<text x="34.00" y="774.00" font-size="12" text-anchor="start" fill="#1b1f24">Estimated loss at 65 °C: 2.1 W in free air (G = 0.048 W/K), about 0.9 W inside the former and shield. The heater has up to 4.3 W: warm-up takes minutes.</text>
+<text x="34.00" y="796.00" font-size="12" text-anchor="start" fill="#1b1f24" font-weight="700">Use an NTC thermistor, not a Pt100: Pt100 = 2.6 K per ohm and the ITC502 resolves 1 ohm; the 10 kΩ NTC gives 14 mK per ohm.</text>
+<rect x="20.00" y="826.00" width="960.00" height="34.00" rx="0" fill="#f7f8fa" stroke="#1b1f24" stroke-width="1.2"/>
+<text x="30.00" y="841.00" font-size="13" text-anchor="start" fill="#1b1f24" font-weight="700">D2  Heater</text>
+<text x="30.00" y="855.00" font-size="11" text-anchor="start" fill="#6b7280">Bifilar constantan heater on Kapton, 80 × 25 mm, about 12 Ω, NTC 10 kΩ under it. A purchased foil is allowed if its layout is paired and the test passes.</text>
+</svg>

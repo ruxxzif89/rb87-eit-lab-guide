@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 650" role="img" aria-labelledby="t d" font-family="Segoe UI, Arial, Helvetica, sans-serif">
+<title id="t">D4 degaussing procedure plot</title><desc id="d">Illustration of the saturation search and of the slow linear ramp-down of the AC current to zero.</desc>
+<defs><pattern id="hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="6" stroke="#555" stroke-width="1"/></pattern><pattern id="hatchf" width="4" height="4" patternUnits="userSpaceOnUse" patternTransform="rotate(-45)"><line x1="0" y1="0" x2="0" y2="4" stroke="#888" stroke-width="0.8"/></pattern><pattern id="dots" width="5" height="5" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="0.8" fill="#999"/></pattern><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#1b1f24"/></marker><marker id="arrg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#6b7280"/></marker></defs>
+<rect width="1000" height="650" fill="#ffffff"/>
+<text x="20.00" y="28.00" font-size="17" text-anchor="start" fill="#1b1f24" font-weight="700">D4  The procedure in one picture (illustration, not a measurement)</text>
+<text x="20.00" y="48.00" font-size="12" text-anchor="start" fill="#6b7280">Left: find the saturation knee. Right: the actual degauss, a slow linear ramp from above the knee to zero. Disconnect only at zero.</text>
+<rect x="90.00" y="90.00" width="380.00" height="300.00" rx="0" fill="#ffffff" stroke="#1b1f24" stroke-width="1.3"/>
+<line x1="90.00" y1="150.00" x2="470.00" y2="150.00" stroke="#d9dde2" stroke-width="0.8" stroke-linecap="round"/>
+<line x1="166.00" y1="90.00" x2="166.00" y2="390.00" stroke="#d9dde2" stroke-width="0.8" stroke-linecap="round"/>
+<line x1="90.00" y1="210.00" x2="470.00" y2="210.00" stroke="#d9dde2" stroke-width="0.8" stroke-linecap="round"/>
+<line x1="242.00" y1="90.00" x2="242.00" y2="390.00" stroke="#d9dde2" stroke-width="0.8" stroke-linecap="round"/>
+<line x1="90.00" y1="270.00" x2="470.00" y2="270.00" stroke="#d9dde2" stroke-width="0.8" stroke-linecap="round"/>
+<line x1="318.00" y1="90.00" x2="318.00" y2="390.00" stroke="#d9dde2" stroke-width="0.8" stroke-linecap="round"/>
+<line x1="90.00" y1="330.00" x2="470.00" y2="330.00" stroke="#d9dde2" stroke-width="0.8" stroke-linecap="round"/>
+<line x1="394.00" y1="90.00" x2="394.00" y2="390.00" stroke="#d9dde2" stroke-width="0.8" stroke-linecap="round"/>
+<polyline points="90.00,390.00 93.80,389.76 97.60,389.52 101.40,389.28 105.20,389.04 109.00,388.80 112.80,388.56 116.60,388.32 120.40,388.08 124.20,387.84 128.00,387.60 131.80,387.36 135.60,387.12 139.40,386.88 143.20,386.64 147.00,386.40 150.80,386.16 154.60,385.92 158.40,385.68 162.20,385.44 166.00,385.20 169.80,384.96 173.60,384.72 177.40,384.48 181.20,384.24 185.00,384.00 188.80,383.76 192.60,383.52 196.40,383.28 200.20,383.04 204.00,382.80 207.80,382.56 211.60,382.32 215.40,382.08 219.20,381.84 223.00,381.60 226.80,381.36 230.60,381.12 234.40,380.88 238.20,380.64 242.00,380.40 245.80,380.16 249.60,379.92 253.40,379.68 257.20,379.44 261.00,379.20 264.80,378.65 268.60,377.71 272.40,376.47 276.20,374.96 280.00,373.21 283.80,371.23 287.60,369.03 291.40,366.63 295.20,364.03 299.00,361.24 302.80,358.26 306.60,355.10 310.40,351.77 314.20,348.27 318.00,344.59 321.80,340.76 325.60,336.76 329.40,332.61 333.20,328.30 337.00,323.84 340.80,319.22 344.60,314.46 348.40,309.55 352.20,304.50 356.00,299.31 359.80,293.97 363.60,288.50 367.40,282.89 371.20,277.14 375.00,271.26 378.80,265.25 382.60,259.10 386.40,252.82 390.20,246.41 394.00,239.88 397.80,233.22 401.60,226.43 405.40,219.51 409.20,212.48 413.00,205.32 416.80,198.03 420.60,190.63 424.40,183.10 428.20,175.46 432.00,167.70 435.80,159.82 439.60,151.82 443.40,143.70 447.20,135.47 451.00,127.13 454.80,118.67 458.60,110.09 462.40,102.00 466.20,102.00 470.00,102.00" fill="none" stroke="#c0392b" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<line x1="261.00" y1="90.00" x2="261.00" y2="390.00" stroke="#2e7d32" stroke-width="1.4" stroke-dasharray="5 4" stroke-linecap="round"/>
+<text x="255.00" y="108.00" font-size="11.5" text-anchor="end" fill="#2e7d32" font-weight="700">knee: the shield saturates</text>
+<text x="255.00" y="124.00" font-size="11.5" text-anchor="end" fill="#2e7d32">(current rises sharply)</text>
+<text x="280.00" y="426.00" font-size="12.5" text-anchor="middle" fill="#1b1f24" font-weight="700">variac setting →</text>
+<text x="78.00" y="240.00" font-size="12.5" text-anchor="end" fill="#1b1f24" font-weight="700">I (rms)</text>
+<text x="325.60" y="345.00" font-size="11.5" text-anchor="start" fill="#1b1f24" font-weight="700">start the ramp</text>
+<text x="325.60" y="360.00" font-size="11.5" text-anchor="start" fill="#1b1f24">about 1.5 × the knee</text>
+<text x="325.60" y="375.00" font-size="11.5" text-anchor="start" fill="#1b1f24">(never above 2 A rms)</text>
+<rect x="560.00" y="90.00" width="400.00" height="300.00" rx="0" fill="#ffffff" stroke="#1b1f24" stroke-width="1.3"/>
+<line x1="560.00" y1="150.00" x2="960.00" y2="150.00" stroke="#d9dde2" stroke-width="0.8" stroke-linecap="round"/>
+<line x1="560.00" y1="210.00" x2="960.00" y2="210.00" stroke="#d9dde2" stroke-width="0.8" stroke-linecap="round"/>
+<line x1="560.00" y1="270.00" x2="960.00" y2="270.00" stroke="#d9dde2" stroke-width="0.8" stroke-linecap="round"/>
+<line x1="560.00" y1="330.00" x2="960.00" y2="330.00" stroke="#d9dde2" stroke-width="0.8" stroke-linecap="round"/>
+<line x1="600.00" y1="390.00" x2="660.00" y2="156.00" stroke="#d9770a" stroke-width="2.4" stroke-linecap="round"/>
+<line x1="660.00" y1="156.00" x2="920.00" y2="390.00" stroke="#d9770a" stroke-width="2.4" stroke-linecap="round"/>
+<text x="630.00" y="146.00" font-size="11.5" text-anchor="end" fill="#d9770a" font-weight="700">raise</text>
+<text x="800.00" y="220.00" font-size="12" text-anchor="start" fill="#d9770a" font-weight="700">linear ramp-down</text>
+<text x="800.00" y="235.00" font-size="12" text-anchor="start" fill="#d9770a" font-weight="700">100–300 s</text>
+<circle cx="920.00" cy="390.00" r="5.00" fill="#c0392b" stroke="#1b1f24" stroke-width="1.2"/>
+<text x="926.00" y="408.00" font-size="11.5" text-anchor="end" fill="#c0392b" font-weight="700">zero: open the switch, then unplug</text>
+<line x1="660.00" y1="156.00" x2="660.00" y2="390.00" stroke="#f2d6b5" stroke-width="0.6" stroke-linecap="round"/>
+<line x1="668.60" y1="163.74" x2="668.60" y2="390.00" stroke="#f2d6b5" stroke-width="0.6" stroke-linecap="round"/>
+<line x1="677.20" y1="171.48" x2="677.20" y2="390.00" stroke="#f2d6b5" stroke-width="0.6" stroke-linecap="round"/>
+<line x1="685.80" y1="179.22" x2="685.80" y2="390.00" stroke="#f2d6b5" stroke-width="0.6" stroke-linecap="round"/>
+<line x1="694.40" y1="186.96" x2="694.40" y2="390.00" stroke="#f2d6b5" stroke-width="0.6" stroke-linecap="round"/>
+<line x1="703.00" y1="194.70" x2="703.00" y2="390.00" stroke="#f2d6b5" stroke-width="0.6" stroke-linecap="round"/>
+<line x1="711.60" y1="202.44" x2="711.60" y2="390.00" stroke="#f2d6b5" stroke-width="0.6" stroke-linecap="round"/>
+<line x1="720.20" y1="210.18" x2="720.20" y2="390.00" stroke="#f2d6b5" stroke-width="0.6" stroke-linecap="round"/>
+<line x1="728.80" y1="217.92" x2="728.80" y2="390.00" stroke="#f2d6b5" stroke-width="0.6" stroke-linecap="round"/>
+<line x1="737.40" y1="225.66" x2="737.40" y2="390.00" stroke="#f2d6b5" stroke-width="0.6" stroke-linecap="round"/>
+<line x1="746.00" y1="233.40" x2="746.00" y2="390.00" stroke="#f2d6b5" stroke-width="0.6" stroke-linecap="round"/>
+<line x1="754.60" y1="241.14" x2="754.60" y2="390.00" stroke="#f2d6b5" stroke-width="0.6" stroke-linecap="round"/>
+<line x1="763.20" y1="248.88" x2="763.20" y2="390.00" stroke="#f2d6b5" stroke-width="0.6" stroke-linecap="round"/>
+<line x1="771.80" y1="256.62" x2="771.80" y2="390.00" stroke="#f2d6b5" stroke-width="0.6" stroke-linecap="round"/>
+<line x1="780.40" y1="264.36" x2="780.40" y2="390.00" stroke="#f2d6b5" stroke-width="0.6" stroke-linecap="round"/>
+<line x1="789.00" y1="272.10" x2="789.00" y2="390.00" stroke="#f2d6b5" stroke-width="0.6" stroke-linecap="round"/>
+<line x1="797.60" y1="279.84" x2="797.60" y2="390.00" stroke="#f2d6b5" stroke-width="0.6" stroke-linecap="round"/>
+<line x1="806.20" y1="287.58" x2="806.20" y2="390.00" stroke="#f2d6b5" stroke-width="0.6" stroke-linecap="round"/>
+<line x1="814.80" y1="295.32" x2="814.80" y2="390.00" stroke="#f2d6b5" stroke-width="0.6" stroke-linecap="round"/>
+<line x1="823.40" y1="303.06" x2="823.40" y2="390.00" stroke="#f2d6b5" stroke-width="0.6" stroke-linecap="round"/>
+<line x1="832.00" y1="310.80" x2="832.00" y2="390.00" stroke="#f2d6b5" stroke-width="0.6" stroke-linecap="round"/>
+<line x1="840.60" y1="318.54" x2="840.60" y2="390.00" stroke="#f2d6b5" stroke-width="0.6" stroke-linecap="round"/>
+<line x1="849.20" y1="326.28" x2="849.20" y2="390.00" stroke="#f2d6b5" stroke-width="0.6" stroke-linecap="round"/>
+<line x1="857.80" y1="334.02" x2="857.80" y2="390.00" stroke="#f2d6b5" stroke-width="0.6" stroke-linecap="round"/>
+<line x1="866.40" y1="341.76" x2="866.40" y2="390.00" stroke="#f2d6b5" stroke-width="0.6" stroke-linecap="round"/>
+<line x1="875.00" y1="349.50" x2="875.00" y2="390.00" stroke="#f2d6b5" stroke-width="0.6" stroke-linecap="round"/>
+<line x1="883.60" y1="357.24" x2="883.60" y2="390.00" stroke="#f2d6b5" stroke-width="0.6" stroke-linecap="round"/>
+<line x1="892.20" y1="364.98" x2="892.20" y2="390.00" stroke="#f2d6b5" stroke-width="0.6" stroke-linecap="round"/>
+<line x1="900.80" y1="372.72" x2="900.80" y2="390.00" stroke="#f2d6b5" stroke-width="0.6" stroke-linecap="round"/>
+<line x1="909.40" y1="380.46" x2="909.40" y2="390.00" stroke="#f2d6b5" stroke-width="0.6" stroke-linecap="round"/>
+<text x="700.00" y="430.00" font-size="12.5" text-anchor="middle" fill="#1b1f24" font-weight="700">time →</text>
+<text x="548.00" y="240.00" font-size="12.5" text-anchor="end" fill="#1b1f24" font-weight="700">peak I</text>
+<rect x="20.00" y="450.00" width="960.00" height="180.00" rx="0" fill="#f7f8fa" stroke="#1b1f24" stroke-width="1.2"/>
+<text x="34.00" y="474.00" font-size="11.5" text-anchor="start" fill="#1b1f24">1  Shield closed, degauss coil in place, the solenoid and the cell stack inside (in a first run the fluxgate plate of D7 instead of the cell, sensor</text>
+<text x="48.00" y="491.00" font-size="11.5" text-anchor="start" fill="#1b1f24">unpowered), everything non-magnetic.</text>
+<text x="34.00" y="514.00" font-size="11.5" text-anchor="start" fill="#1b1f24">2  Variac at zero, switch on, raise slowly while watching the ammeter. The knee is where the current starts to rise much faster than the voltage</text>
+<text x="48.00" y="531.00" font-size="11.5" text-anchor="start" fill="#1b1f24">(Twinleaf: saturation shows as a sharp rise of the coil current).</text>
+<text x="34.00" y="554.00" font-size="11.5" text-anchor="start" fill="#1b1f24">3  Go to about 1.5 × the knee (our rule of thumb; Twinleaf says only "high enough to ensure saturation"), at most 2 A rms. Hold 5 seconds, then turn</text>
+<text x="48.00" y="571.00" font-size="11.5" text-anchor="start" fill="#1b1f24">the knob down steadily to zero in 100–300 seconds (longer is better). Do not stop and do not jerk.</text>
+<text x="34.00" y="594.00" font-size="11.5" text-anchor="start" fill="#1b1f24">4  Variac at zero, mains switch off, then unplug the coil from the drive (Twinleaf’s unit disconnects the coil with relays when it is done, so that no</text>
+<text x="48.00" y="611.00" font-size="11.5" text-anchor="start" fill="#1b1f24">noise couples into the shield). Repeat once. Then measure (D7) or look at the atoms (EIT line against current).</text>
+</svg>

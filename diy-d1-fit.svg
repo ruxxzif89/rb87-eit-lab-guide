@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 950" role="img" aria-labelledby="t d" font-family="Segoe UI, Arial, Helvetica, sans-serif">
+<title id="t">D1 fit of the solenoid inside the shield</title><desc id="d">End and side sections: cell, heater stack, former and winding inside the innermost shield layer.</desc>
+<defs><pattern id="hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="6" stroke="#555" stroke-width="1"/></pattern><pattern id="hatchf" width="4" height="4" patternUnits="userSpaceOnUse" patternTransform="rotate(-45)"><line x1="0" y1="0" x2="0" y2="4" stroke="#888" stroke-width="0.8"/></pattern><pattern id="dots" width="5" height="5" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="0.8" fill="#999"/></pattern><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#1b1f24"/></marker><marker id="arrg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#6b7280"/></marker></defs>
+<rect width="1000" height="950" fill="#ffffff"/>
+<text x="20.00" y="28.00" font-size="17" text-anchor="start" fill="#1b1f24" font-weight="700">D1  Fit check inside the µ-metal shield (the bore is the number to confirm with the shield maker)</text>
+<text x="20.00" y="48.00" font-size="12" text-anchor="start" fill="#6b7280">Top: side section of the innermost layer (scale 3.4 px per mm). Bottom left: end section (scale 8 px per mm). Shield bore ≥ 46 mm is required.</text>
+<rect x="75.00" y="115.00" width="850.00" height="170.00" rx="0" fill="#9aa5b1" stroke="#1b1f24" stroke-width="1.4"/>
+<rect x="81.80" y="121.80" width="836.40" height="156.40" rx="0" fill="#ffffff" stroke="#1b1f24" stroke-width="1.0"/>
+<rect x="228.00" y="135.40" width="544.00" height="129.20" rx="0" fill="url(#hatch)" stroke="#1b1f24" stroke-width="1.2"/>
+<rect x="228.00" y="142.20" width="544.00" height="115.60" rx="0" fill="#ffffff" stroke="#1b1f24" stroke-width="1.0"/>
+<rect x="442.20" y="146.28" width="115.60" height="107.44" rx="0" fill="#f3efe3" stroke="#1b1f24" stroke-width="1.0"/>
+<rect x="452.40" y="157.50" width="95.20" height="85.00" rx="0" fill="#d6ebf7" stroke="#1b1f24" stroke-width="1.0"/>
+<line x1="55.00" y1="200.00" x2="945.00" y2="200.00" stroke="#b5651d" stroke-width="1.0" stroke-dasharray="14 3 3 3" stroke-linecap="round"/>
+<text x="500.00" y="205.00" font-size="11.5" text-anchor="middle" fill="#1f5fa8" font-weight="700">cell</text>
+<line x1="75.00" y1="115.00" x2="75.00" y2="71.00" stroke="#6b7280" stroke-width="0.9" stroke-linecap="round"/>
+<line x1="925.00" y1="115.00" x2="925.00" y2="71.00" stroke="#6b7280" stroke-width="0.9" stroke-linecap="round"/>
+<line x1="75.00" y1="77.00" x2="925.00" y2="77.00" stroke="#1b1f24" stroke-width="1" marker-start="url(#arr)" marker-end="url(#arr)"/>
+<text x="500.00" y="73.00" font-size="11.5" text-anchor="middle" fill="#1b1f24">shield length 250 (BOM)</text>
+<line x1="228.00" y1="278.20" x2="228.00" y2="319.00" stroke="#6b7280" stroke-width="0.9" stroke-linecap="round"/>
+<line x1="772.00" y1="278.20" x2="772.00" y2="319.00" stroke="#6b7280" stroke-width="0.9" stroke-linecap="round"/>
+<line x1="228.00" y1="313.00" x2="772.00" y2="313.00" stroke="#1b1f24" stroke-width="1" marker-start="url(#arr)" marker-end="url(#arr)"/>
+<text x="500.00" y="309.00" font-size="11.5" text-anchor="middle" fill="#1b1f24">former 160</text>
+<line x1="75.00" y1="278.20" x2="75.00" y2="319.00" stroke="#6b7280" stroke-width="0.9" stroke-linecap="round"/>
+<line x1="228.00" y1="278.20" x2="228.00" y2="319.00" stroke="#6b7280" stroke-width="0.9" stroke-linecap="round"/>
+<line x1="75.00" y1="313.00" x2="228.00" y2="313.00" stroke="#1b1f24" stroke-width="1" marker-start="url(#arr)" marker-end="url(#arr)"/>
+<text x="151.50" y="309.00" font-size="11.5" text-anchor="middle" fill="#1b1f24">45</text>
+<line x1="772.00" y1="278.20" x2="772.00" y2="319.00" stroke="#6b7280" stroke-width="0.9" stroke-linecap="round"/>
+<line x1="925.00" y1="278.20" x2="925.00" y2="319.00" stroke="#6b7280" stroke-width="0.9" stroke-linecap="round"/>
+<line x1="772.00" y1="313.00" x2="925.00" y2="313.00" stroke="#1b1f24" stroke-width="1" marker-start="url(#arr)" marker-end="url(#arr)"/>
+<text x="848.50" y="309.00" font-size="11.5" text-anchor="middle" fill="#1b1f24">45</text>
+<line x1="920.00" y1="120.00" x2="905.00" y2="103.00" stroke="#6b7280" stroke-width="1.0" stroke-linecap="round"/>
+<circle cx="920.00" cy="120.00" r="2.2" fill="#6b7280"/>
+<text x="901.00" y="107.00" font-size="11.5" text-anchor="end" fill="#1b1f24">end cap with feed-through (leads, cable)</text>
+<text x="250.00" y="400.00" font-size="13" text-anchor="middle" fill="#1b1f24" font-weight="700">End section (scale 8 px per mm)</text>
+<circle cx="250.00" cy="640.00" r="200.00" fill="#9aa5b1" stroke="#1b1f24" stroke-width="1.4"/>
+<circle cx="250.00" cy="640.00" r="184.00" fill="#ffffff" stroke="#1b1f24" stroke-width="1.4"/>
+<circle cx="250.00" cy="640.00" r="156.40" fill="#c0703a" stroke="#1b1f24" stroke-width="1.0"/>
+<circle cx="250.00" cy="640.00" r="152.00" fill="url(#hatch)" stroke="#1b1f24" stroke-width="1.4"/>
+<circle cx="250.00" cy="640.00" r="136.00" fill="#ffffff" stroke="#1b1f24" stroke-width="1.4"/>
+<circle cx="250.00" cy="640.00" r="126.40" fill="#f3efe3" stroke="#1b1f24" stroke-width="1.2"/>
+<circle cx="250.00" cy="640.00" r="101.60" fill="#d9770a" stroke="#1b1f24" stroke-width="1.0"/>
+<circle cx="250.00" cy="640.00" r="100.00" fill="#d6ebf7" stroke="#1b1f24" stroke-width="1.2"/>
+<circle cx="250.00" cy="640.00" r="40.00" fill="#ffd9d9" stroke="#c0392b" stroke-width="1.2" stroke-dasharray="4 3"/>
+<text x="250.00" y="644.00" font-size="11.5" text-anchor="middle" fill="#c0392b" font-weight="700">beam Ø10</text>
+<line x1="300.00" y1="690.00" x2="425.00" y2="790.00" stroke="#6b7280" stroke-width="1.0" stroke-linecap="round"/>
+<circle cx="300.00" cy="690.00" r="2.2" fill="#6b7280"/>
+<text x="429.00" y="794.00" font-size="11.5" text-anchor="start" fill="#1b1f24">cell Ø25 (glass)</text>
+<line x1="348.00" y1="584.00" x2="440.00" y2="522.00" stroke="#6b7280" stroke-width="1.0" stroke-linecap="round"/>
+<circle cx="348.00" cy="584.00" r="2.2" fill="#6b7280"/>
+<text x="444.00" y="526.00" font-size="11.5" text-anchor="start" fill="#1b1f24">foam sleeve Ø31.6</text>
+<line x1="322.00" y1="515.00" x2="440.00" y2="462.00" stroke="#6b7280" stroke-width="1.0" stroke-linecap="round"/>
+<circle cx="322.00" cy="515.00" r="2.2" fill="#6b7280"/>
+<text x="444.00" y="466.00" font-size="11.5" text-anchor="start" fill="#1b1f24" font-weight="700">former Ø38 / Ø34</text>
+<text x="444.00" y="476.00" font-size="11.5" text-anchor="start" fill="#1b1f24">+ winding to Ø39.1</text>
+<line x1="66.00" y1="840.00" x2="66.00" y2="876.00" stroke="#6b7280" stroke-width="0.9" stroke-linecap="round"/>
+<line x1="434.00" y1="840.00" x2="434.00" y2="876.00" stroke="#6b7280" stroke-width="0.9" stroke-linecap="round"/>
+<line x1="66.00" y1="870.00" x2="434.00" y2="870.00" stroke="#1b1f24" stroke-width="1" marker-start="url(#arr)" marker-end="url(#arr)"/>
+<text x="250.00" y="866.00" font-size="11.5" text-anchor="middle" fill="#1b1f24">bore ≥ 46</text>
+<text x="250.00" y="892.00" font-size="12" text-anchor="middle" fill="#1b1f24" font-weight="700">radial clearance to the winding: 3.45 mm</text>
+<text x="560.00" y="440.00" font-size="14" text-anchor="start" fill="#1b1f24" font-weight="700">What to confirm with the shield maker</text>
+<text x="560.00" y="468.00" font-size="12" text-anchor="start" fill="#1b1f24">• innermost bore ≥ Ø46 mm. The BOM line "Ø~70 × 250 mm,</text>
+<text x="560.00" y="487.00" font-size="12" text-anchor="start" fill="#1b1f24">   3 layers" gives only the overall size. Three layers and two</text>
+<text x="560.00" y="506.00" font-size="12" text-anchor="start" fill="#1b1f24">   gaps would share the 12 mm of radius between Ø46 and Ø70</text>
+<text x="560.00" y="525.00" font-size="12" text-anchor="start" fill="#1b1f24">   (gaps of about 4 mm): ask the maker for the real layer sizes.</text>
+<text x="560.00" y="544.00" font-size="12" text-anchor="start" fill="#1b1f24">• inner length ≥ 250 mm; end caps with a feed-through of Ø20 mm</text>
+<text x="560.00" y="563.00" font-size="12" text-anchor="start" fill="#1b1f24">   (cell cables and the degaussing bundle, D4).</text>
+<text x="560.00" y="582.00" font-size="12" text-anchor="start" fill="#1b1f24">• the end caps act like mirrors (high permeability): the field</text>
+<text x="560.00" y="601.00" font-size="12" text-anchor="start" fill="#1b1f24">   inside is a little larger and more uniform than the free-space</text>
+<text x="560.00" y="620.00" font-size="12" text-anchor="start" fill="#1b1f24">   plot.</text>
+<text x="560.00" y="639.00" font-size="12" text-anchor="start" fill="#1b1f24">• calibrate B against the current with the fluxgate (D7), best of all</text>
+<text x="560.00" y="658.00" font-size="12" text-anchor="start" fill="#1b1f24">   with the atoms (1.4 kHz per mG): use the calibration, not the formula.</text>
+<text x="560.00" y="677.00" font-size="12" text-anchor="start" fill="#1b1f24">• cables leave through the end-cap hole as twisted pairs,</text>
+<text x="560.00" y="696.00" font-size="12" text-anchor="start" fill="#1b1f24">   never as loops.</text>
+<rect x="20.00" y="904.00" width="960.00" height="34.00" rx="0" fill="#f7f8fa" stroke="#1b1f24" stroke-width="1.2"/>
+<text x="30.00" y="919.00" font-size="13" text-anchor="start" fill="#1b1f24" font-weight="700">D1  Fit check</text>
+<text x="30.00" y="933.00" font-size="11" text-anchor="start" fill="#6b7280">Shield bore ≥ 46 mm, length ≥ 250 mm: former 160 mm centred, cell in the middle. Confirm the innermost bore of the shield before ordering.</text>
+</svg>

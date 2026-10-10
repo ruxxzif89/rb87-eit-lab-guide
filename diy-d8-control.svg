@@ -1,0 +1,210 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 980" role="img" aria-labelledby="t d" font-family="Segoe UI, Arial, Helvetica, sans-serif">
+<title id="t">D8 control section of the RF box</title><desc id="d">DIP switch bank that sets the 6-bit parallel word of the digital attenuator, the TTL gate input for the RF switch and the connector tables.</desc>
+<defs><pattern id="hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="6" stroke="#555" stroke-width="1"/></pattern><pattern id="hatchf" width="4" height="4" patternUnits="userSpaceOnUse" patternTransform="rotate(-45)"><line x1="0" y1="0" x2="0" y2="4" stroke="#888" stroke-width="0.8"/></pattern><pattern id="dots" width="5" height="5" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="0.8" fill="#999"/></pattern><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#1b1f24"/></marker><marker id="arrg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#6b7280"/></marker></defs>
+<rect width="1000" height="980" fill="#ffffff"/>
+<text x="20.00" y="28.00" font-size="17" text-anchor="start" fill="#1b1f24" font-weight="700">D8  RF box, part 2: attenuator DIP switches, TTL gate input and the cables</text>
+<text x="20.00" y="48.00" font-size="12" text-anchor="start" fill="#6b7280">Attenuator ZX76-31R5-PN-S+: 6 parallel bits, latch enable LE tied high = the attenuation follows the switches at once (direct mode, per the datasheet).</text>
+<text x="50.00" y="96.00" font-size="13" text-anchor="start" fill="#1b1f24" font-weight="700">A  six-way DIP bank, one per attenuator</text>
+<line x1="40.00" y1="130.00" x2="492.00" y2="130.00" stroke="#c0392b" stroke-width="2.2" stroke-linecap="round"/>
+<text x="40.00" y="118.00" font-size="12" text-anchor="start" fill="#c0392b" font-weight="700">+3.0 V (Vdd)</text>
+<line x1="40.00" y1="380.00" x2="492.00" y2="380.00" stroke="#1b1f24" stroke-width="2.2" stroke-linecap="round"/>
+<text x="40.00" y="400.00" font-size="12" text-anchor="start" fill="#1b1f24" font-weight="700">GND</text>
+<circle cx="74.00" cy="130.00" r="3.2" fill="#c0392b"/>
+<line x1="74.00" y1="130.00" x2="74.00" y2="162.00" stroke="#c0392b" stroke-width="1.8" stroke-linecap="round"/>
+<circle cx="74.00" cy="166.00" r="3.50" fill="#fff" stroke="#1b1f24" stroke-width="1.5"/>
+<circle cx="74.00" cy="210.00" r="3.50" fill="#fff" stroke="#1b1f24" stroke-width="1.5"/>
+<line x1="74.00" y1="169.50" x2="61.00" y2="206.00" stroke="#1b1f24" stroke-width="1.8" stroke-linecap="round"/>
+<text x="54.00" y="190.00" font-size="11" text-anchor="end" fill="#6b7280">S1</text>
+<line x1="74.00" y1="213.50" x2="74.00" y2="240.00" stroke="#1b1f24" stroke-width="1.8" stroke-linecap="round"/>
+<circle cx="74.00" cy="240.00" r="3.2" fill="#1b1f24"/>
+<line x1="74.00" y1="240.00" x2="100.00" y2="240.00" stroke="#1b1f24" stroke-width="1.8" stroke-linecap="round"/>
+<text x="104.00" y="238.00" font-size="12" text-anchor="start" fill="#1b1f24" font-weight="700">C16</text>
+<text x="104.00" y="253.00" font-size="10.5" text-anchor="start" fill="#6b7280">16 dB</text>
+<line x1="74.00" y1="240.00" x2="74.00" y2="280.00" stroke="#1b1f24" stroke-width="1.8" stroke-linecap="round"/>
+<rect x="68.00" y="280.00" width="12.00" height="44.00" rx="0" fill="#fff" stroke="#1b1f24" stroke-width="1.6"/>
+<line x1="74.00" y1="324.00" x2="74.00" y2="380.00" stroke="#1b1f24" stroke-width="1.8" stroke-linecap="round"/>
+<circle cx="74.00" cy="380.00" r="3.2" fill="#1b1f24"/>
+<circle cx="146.00" cy="130.00" r="3.2" fill="#c0392b"/>
+<line x1="146.00" y1="130.00" x2="146.00" y2="162.00" stroke="#c0392b" stroke-width="1.8" stroke-linecap="round"/>
+<circle cx="146.00" cy="166.00" r="3.50" fill="#fff" stroke="#1b1f24" stroke-width="1.5"/>
+<circle cx="146.00" cy="210.00" r="3.50" fill="#fff" stroke="#1b1f24" stroke-width="1.5"/>
+<line x1="146.00" y1="169.50" x2="133.00" y2="206.00" stroke="#1b1f24" stroke-width="1.8" stroke-linecap="round"/>
+<text x="126.00" y="190.00" font-size="11" text-anchor="end" fill="#6b7280">S2</text>
+<line x1="146.00" y1="213.50" x2="146.00" y2="240.00" stroke="#1b1f24" stroke-width="1.8" stroke-linecap="round"/>
+<circle cx="146.00" cy="240.00" r="3.2" fill="#1b1f24"/>
+<line x1="146.00" y1="240.00" x2="172.00" y2="240.00" stroke="#1b1f24" stroke-width="1.8" stroke-linecap="round"/>
+<text x="176.00" y="238.00" font-size="12" text-anchor="start" fill="#1b1f24" font-weight="700">C8</text>
+<text x="176.00" y="253.00" font-size="10.5" text-anchor="start" fill="#6b7280">8 dB</text>
+<line x1="146.00" y1="240.00" x2="146.00" y2="280.00" stroke="#1b1f24" stroke-width="1.8" stroke-linecap="round"/>
+<rect x="140.00" y="280.00" width="12.00" height="44.00" rx="0" fill="#fff" stroke="#1b1f24" stroke-width="1.6"/>
+<line x1="146.00" y1="324.00" x2="146.00" y2="380.00" stroke="#1b1f24" stroke-width="1.8" stroke-linecap="round"/>
+<circle cx="146.00" cy="380.00" r="3.2" fill="#1b1f24"/>
+<circle cx="218.00" cy="130.00" r="3.2" fill="#c0392b"/>
+<line x1="218.00" y1="130.00" x2="218.00" y2="162.00" stroke="#c0392b" stroke-width="1.8" stroke-linecap="round"/>
+<circle cx="218.00" cy="166.00" r="3.50" fill="#fff" stroke="#1b1f24" stroke-width="1.5"/>
+<circle cx="218.00" cy="210.00" r="3.50" fill="#fff" stroke="#1b1f24" stroke-width="1.5"/>
+<line x1="218.00" y1="169.50" x2="205.00" y2="206.00" stroke="#1b1f24" stroke-width="1.8" stroke-linecap="round"/>
+<text x="198.00" y="190.00" font-size="11" text-anchor="end" fill="#6b7280">S3</text>
+<line x1="218.00" y1="213.50" x2="218.00" y2="240.00" stroke="#1b1f24" stroke-width="1.8" stroke-linecap="round"/>
+<circle cx="218.00" cy="240.00" r="3.2" fill="#1b1f24"/>
+<line x1="218.00" y1="240.00" x2="244.00" y2="240.00" stroke="#1b1f24" stroke-width="1.8" stroke-linecap="round"/>
+<text x="248.00" y="238.00" font-size="12" text-anchor="start" fill="#1b1f24" font-weight="700">C4</text>
+<text x="248.00" y="253.00" font-size="10.5" text-anchor="start" fill="#6b7280">4 dB</text>
+<line x1="218.00" y1="240.00" x2="218.00" y2="280.00" stroke="#1b1f24" stroke-width="1.8" stroke-linecap="round"/>
+<rect x="212.00" y="280.00" width="12.00" height="44.00" rx="0" fill="#fff" stroke="#1b1f24" stroke-width="1.6"/>
+<line x1="218.00" y1="324.00" x2="218.00" y2="380.00" stroke="#1b1f24" stroke-width="1.8" stroke-linecap="round"/>
+<circle cx="218.00" cy="380.00" r="3.2" fill="#1b1f24"/>
+<circle cx="290.00" cy="130.00" r="3.2" fill="#c0392b"/>
+<line x1="290.00" y1="130.00" x2="290.00" y2="162.00" stroke="#c0392b" stroke-width="1.8" stroke-linecap="round"/>
+<circle cx="290.00" cy="166.00" r="3.50" fill="#fff" stroke="#1b1f24" stroke-width="1.5"/>
+<circle cx="290.00" cy="210.00" r="3.50" fill="#fff" stroke="#1b1f24" stroke-width="1.5"/>
+<line x1="290.00" y1="169.50" x2="277.00" y2="206.00" stroke="#1b1f24" stroke-width="1.8" stroke-linecap="round"/>
+<text x="270.00" y="190.00" font-size="11" text-anchor="end" fill="#6b7280">S4</text>
+<line x1="290.00" y1="213.50" x2="290.00" y2="240.00" stroke="#1b1f24" stroke-width="1.8" stroke-linecap="round"/>
+<circle cx="290.00" cy="240.00" r="3.2" fill="#1b1f24"/>
+<line x1="290.00" y1="240.00" x2="316.00" y2="240.00" stroke="#1b1f24" stroke-width="1.8" stroke-linecap="round"/>
+<text x="320.00" y="238.00" font-size="12" text-anchor="start" fill="#1b1f24" font-weight="700">C2</text>
+<text x="320.00" y="253.00" font-size="10.5" text-anchor="start" fill="#6b7280">2 dB</text>
+<line x1="290.00" y1="240.00" x2="290.00" y2="280.00" stroke="#1b1f24" stroke-width="1.8" stroke-linecap="round"/>
+<rect x="284.00" y="280.00" width="12.00" height="44.00" rx="0" fill="#fff" stroke="#1b1f24" stroke-width="1.6"/>
+<line x1="290.00" y1="324.00" x2="290.00" y2="380.00" stroke="#1b1f24" stroke-width="1.8" stroke-linecap="round"/>
+<circle cx="290.00" cy="380.00" r="3.2" fill="#1b1f24"/>
+<circle cx="362.00" cy="130.00" r="3.2" fill="#c0392b"/>
+<line x1="362.00" y1="130.00" x2="362.00" y2="162.00" stroke="#c0392b" stroke-width="1.8" stroke-linecap="round"/>
+<circle cx="362.00" cy="166.00" r="3.50" fill="#fff" stroke="#1b1f24" stroke-width="1.5"/>
+<circle cx="362.00" cy="210.00" r="3.50" fill="#fff" stroke="#1b1f24" stroke-width="1.5"/>
+<line x1="362.00" y1="169.50" x2="349.00" y2="206.00" stroke="#1b1f24" stroke-width="1.8" stroke-linecap="round"/>
+<text x="342.00" y="190.00" font-size="11" text-anchor="end" fill="#6b7280">S5</text>
+<line x1="362.00" y1="213.50" x2="362.00" y2="240.00" stroke="#1b1f24" stroke-width="1.8" stroke-linecap="round"/>
+<circle cx="362.00" cy="240.00" r="3.2" fill="#1b1f24"/>
+<line x1="362.00" y1="240.00" x2="388.00" y2="240.00" stroke="#1b1f24" stroke-width="1.8" stroke-linecap="round"/>
+<text x="392.00" y="238.00" font-size="12" text-anchor="start" fill="#1b1f24" font-weight="700">C1</text>
+<text x="392.00" y="253.00" font-size="10.5" text-anchor="start" fill="#6b7280">1 dB</text>
+<line x1="362.00" y1="240.00" x2="362.00" y2="280.00" stroke="#1b1f24" stroke-width="1.8" stroke-linecap="round"/>
+<rect x="356.00" y="280.00" width="12.00" height="44.00" rx="0" fill="#fff" stroke="#1b1f24" stroke-width="1.6"/>
+<line x1="362.00" y1="324.00" x2="362.00" y2="380.00" stroke="#1b1f24" stroke-width="1.8" stroke-linecap="round"/>
+<circle cx="362.00" cy="380.00" r="3.2" fill="#1b1f24"/>
+<circle cx="434.00" cy="130.00" r="3.2" fill="#c0392b"/>
+<line x1="434.00" y1="130.00" x2="434.00" y2="162.00" stroke="#c0392b" stroke-width="1.8" stroke-linecap="round"/>
+<circle cx="434.00" cy="166.00" r="3.50" fill="#fff" stroke="#1b1f24" stroke-width="1.5"/>
+<circle cx="434.00" cy="210.00" r="3.50" fill="#fff" stroke="#1b1f24" stroke-width="1.5"/>
+<line x1="434.00" y1="169.50" x2="421.00" y2="206.00" stroke="#1b1f24" stroke-width="1.8" stroke-linecap="round"/>
+<text x="414.00" y="190.00" font-size="11" text-anchor="end" fill="#6b7280">S6</text>
+<line x1="434.00" y1="213.50" x2="434.00" y2="240.00" stroke="#1b1f24" stroke-width="1.8" stroke-linecap="round"/>
+<circle cx="434.00" cy="240.00" r="3.2" fill="#1b1f24"/>
+<line x1="434.00" y1="240.00" x2="460.00" y2="240.00" stroke="#1b1f24" stroke-width="1.8" stroke-linecap="round"/>
+<text x="464.00" y="238.00" font-size="12" text-anchor="start" fill="#1b1f24" font-weight="700">C0.5</text>
+<text x="464.00" y="253.00" font-size="10.5" text-anchor="start" fill="#6b7280">0.5 dB</text>
+<line x1="434.00" y1="240.00" x2="434.00" y2="280.00" stroke="#1b1f24" stroke-width="1.8" stroke-linecap="round"/>
+<rect x="428.00" y="280.00" width="12.00" height="44.00" rx="0" fill="#fff" stroke="#1b1f24" stroke-width="1.6"/>
+<line x1="434.00" y1="324.00" x2="434.00" y2="380.00" stroke="#1b1f24" stroke-width="1.8" stroke-linecap="round"/>
+<circle cx="434.00" cy="380.00" r="3.2" fill="#1b1f24"/>
+<text x="40.00" y="422.00" font-size="11.5" text-anchor="start" fill="#1b1f24">R3 to R8: 10 kΩ pull-downs.  Switch ON = this bit adds its dB (logic 1).</text>
+<text x="40.00" y="440.00" font-size="11.5" text-anchor="start" fill="#c0392b" font-weight="700">Power-up: set all six ON = 31.5 dB, the safe state.</text>
+<text x="40.00" y="138.00" font-size="1" text-anchor="start" fill="#1b1f24"></text>
+<text x="442.00" y="118.00" font-size="11.5" text-anchor="end" fill="#1b1f24" font-weight="700">LE tied here</text>
+<rect x="540.00" y="80.00" width="440.00" height="300.00" rx="0" fill="#f7f8fa" stroke="#1b1f24" stroke-width="1.2"/>
+<text x="554.00" y="104.00" font-size="13" text-anchor="start" fill="#1b1f24" font-weight="700">Attenuator control plug J1 (datasheet)</text>
+<text x="554.00" y="120.00" font-size="10.5" text-anchor="start" fill="#6b7280" font-weight="700">pin</text>
+<text x="620.00" y="120.00" font-size="10.5" text-anchor="start" fill="#6b7280" font-weight="700">signal</text>
+<text x="755.00" y="120.00" font-size="10.5" text-anchor="start" fill="#6b7280" font-weight="700">to DIP switch</text>
+<text x="870.00" y="120.00" font-size="10.5" text-anchor="start" fill="#6b7280" font-weight="700">ZX76-WP+ wire</text>
+<text x="554.00" y="142.00" font-size="12" text-anchor="start" fill="#1b1f24" font-weight="700">J1-1</text>
+<text x="620.00" y="142.00" font-size="12" text-anchor="start" fill="#1b1f24">LE</text>
+<text x="755.00" y="142.00" font-size="12" text-anchor="start" fill="#1b1f24">+3.0 V</text>
+<text x="870.00" y="142.00" font-size="12" text-anchor="start" fill="#1b1f24">white</text>
+<text x="554.00" y="162.00" font-size="12" text-anchor="start" fill="#1b1f24" font-weight="700">J1-2</text>
+<text x="620.00" y="162.00" font-size="12" text-anchor="start" fill="#1b1f24">C1 (1 dB)</text>
+<text x="755.00" y="162.00" font-size="12" text-anchor="start" fill="#1b1f24">S5</text>
+<text x="870.00" y="162.00" font-size="12" text-anchor="start" fill="#1b1f24">yellow</text>
+<text x="554.00" y="182.00" font-size="12" text-anchor="start" fill="#1b1f24" font-weight="700">J1-3</text>
+<text x="620.00" y="182.00" font-size="12" text-anchor="start" fill="#1b1f24">C0.5 (0.5 dB)</text>
+<text x="755.00" y="182.00" font-size="12" text-anchor="start" fill="#1b1f24">S6</text>
+<text x="870.00" y="182.00" font-size="12" text-anchor="start" fill="#1b1f24">green</text>
+<text x="554.00" y="202.00" font-size="12" text-anchor="start" fill="#1b1f24" font-weight="700">J1-4</text>
+<text x="620.00" y="202.00" font-size="12" text-anchor="start" fill="#1b1f24">not connected</text>
+<text x="755.00" y="202.00" font-size="12" text-anchor="start" fill="#1b1f24">—</text>
+<text x="870.00" y="202.00" font-size="12" text-anchor="start" fill="#1b1f24">—</text>
+<text x="554.00" y="222.00" font-size="12" text-anchor="start" fill="#1b1f24" font-weight="700">J1-5</text>
+<text x="620.00" y="222.00" font-size="12" text-anchor="start" fill="#1b1f24">C16 (16 dB)</text>
+<text x="755.00" y="222.00" font-size="12" text-anchor="start" fill="#1b1f24">S1</text>
+<text x="870.00" y="222.00" font-size="12" text-anchor="start" fill="#1b1f24">blue</text>
+<text x="554.00" y="242.00" font-size="12" text-anchor="start" fill="#1b1f24" font-weight="700">J1-6</text>
+<text x="620.00" y="242.00" font-size="12" text-anchor="start" fill="#1b1f24">GND</text>
+<text x="755.00" y="242.00" font-size="12" text-anchor="start" fill="#1b1f24">GND</text>
+<text x="870.00" y="242.00" font-size="12" text-anchor="start" fill="#1b1f24">black</text>
+<text x="554.00" y="262.00" font-size="12" text-anchor="start" fill="#1b1f24" font-weight="700">J1-7</text>
+<text x="620.00" y="262.00" font-size="12" text-anchor="start" fill="#1b1f24">GND</text>
+<text x="755.00" y="262.00" font-size="12" text-anchor="start" fill="#1b1f24">GND</text>
+<text x="870.00" y="262.00" font-size="12" text-anchor="start" fill="#1b1f24">—</text>
+<text x="554.00" y="282.00" font-size="12" text-anchor="start" fill="#1b1f24" font-weight="700">J1-8</text>
+<text x="620.00" y="282.00" font-size="12" text-anchor="start" fill="#1b1f24">C4 (4 dB)</text>
+<text x="755.00" y="282.00" font-size="12" text-anchor="start" fill="#1b1f24">S3</text>
+<text x="870.00" y="282.00" font-size="12" text-anchor="start" fill="#1b1f24">orange</text>
+<text x="554.00" y="302.00" font-size="12" text-anchor="start" fill="#1b1f24" font-weight="700">J1-9</text>
+<text x="620.00" y="302.00" font-size="12" text-anchor="start" fill="#1b1f24">C8 (8 dB)</text>
+<text x="755.00" y="302.00" font-size="12" text-anchor="start" fill="#1b1f24">S2</text>
+<text x="870.00" y="302.00" font-size="12" text-anchor="start" fill="#1b1f24">brown</text>
+<text x="554.00" y="322.00" font-size="12" text-anchor="start" fill="#1b1f24" font-weight="700">J1-10</text>
+<text x="620.00" y="322.00" font-size="12" text-anchor="start" fill="#1b1f24">C2 (2 dB)</text>
+<text x="755.00" y="322.00" font-size="12" text-anchor="start" fill="#1b1f24">S4</text>
+<text x="870.00" y="322.00" font-size="12" text-anchor="start" fill="#1b1f24">red</text>
+<text x="554.00" y="350.00" font-size="11.5" text-anchor="start" fill="#1b1f24">DC pins on the module: P1 GND, P2 Vdd (+3.0 V), P3 GND, P4 Vss (−3.1 V).</text>
+<text x="554.00" y="368.00" font-size="11.5" text-anchor="start" fill="#6b7280">Solder them fast: the pins overheat (Mini-Circuits AN-40-010).</text>
+<rect x="20.00" y="480.00" width="960.00" height="190.00" rx="0" fill="#f7faf7" stroke="#2e7d32" stroke-width="1.4"/>
+<text x="34.00" y="504.00" font-size="13" text-anchor="start" fill="#2e7d32" font-weight="700">B  TTL gate input of one RF switch (ZASWA-2-50DR+)</text>
+<circle cx="90.00" cy="570.00" r="13.00" fill="#fff" stroke="#1b1f24" stroke-width="1.8"/>
+<circle cx="90.00" cy="570.00" r="4.00" fill="#1b1f24" stroke="#1b1f24" stroke-width="1"/>
+<text x="90.00" y="550.00" font-size="11.5" text-anchor="middle" fill="#1b1f24" font-weight="700">GATE A</text>
+<line x1="103.00" y1="570.00" x2="180.00" y2="570.00" stroke="#1b1f24" stroke-width="2.0" stroke-linecap="round"/>
+<line x1="180.00" y1="570.00" x2="203.00" y2="570.00" stroke="#1b1f24" stroke-width="1.8" stroke-linecap="round"/>
+<line x1="237.00" y1="570.00" x2="260.00" y2="570.00" stroke="#1b1f24" stroke-width="1.8" stroke-linecap="round"/>
+<rect x="203.00" y="563.00" width="34.00" height="14.00" rx="0" fill="#fff" stroke="#1b1f24" stroke-width="1.8"/>
+<text x="220.00" y="557.00" font-size="12" text-anchor="middle" fill="#1b1f24" font-weight="700">R9</text>
+<text x="220.00" y="594.00" font-size="11.5" text-anchor="middle" fill="#1b1f24">100 Ω</text>
+<line x1="260.00" y1="570.00" x2="380.00" y2="570.00" stroke="#1b1f24" stroke-width="2.0" stroke-linecap="round"/>
+<circle cx="320.00" cy="570.00" r="3.2" fill="#1b1f24"/>
+<line x1="320.00" y1="570.00" x2="320.00" y2="592.00" stroke="#1b1f24" stroke-width="1.8" stroke-linecap="round"/>
+<rect x="313.00" y="592.00" width="14.00" height="40.00" rx="0" fill="#fff" stroke="#1b1f24" stroke-width="1.6"/>
+<line x1="320.00" y1="632.00" x2="320.00" y2="646.00" stroke="#1b1f24" stroke-width="1.8" stroke-linecap="round"/>
+<line x1="320.00" y1="646.00" x2="320.00" y2="653.00" stroke="#1b1f24" stroke-width="1.8" stroke-linecap="round"/>
+<line x1="310.00" y1="653.00" x2="330.00" y2="653.00" stroke="#1b1f24" stroke-width="1.8" stroke-linecap="round"/>
+<line x1="314.00" y1="657.00" x2="326.00" y2="657.00" stroke="#1b1f24" stroke-width="1.8" stroke-linecap="round"/>
+<line x1="317.50" y1="661.00" x2="322.50" y2="661.00" stroke="#1b1f24" stroke-width="1.8" stroke-linecap="round"/>
+<text x="336.00" y="614.00" font-size="11.5" text-anchor="start" fill="#1b1f24" font-weight="700">R10 10 kΩ</text>
+<line x1="380.00" y1="570.00" x2="440.00" y2="570.00" stroke="#1b1f24" stroke-width="2.0" stroke-linecap="round"/>
+<rect x="440.00" y="540.00" width="150.00" height="60.00" rx="4" fill="#eef2f6" stroke="#1b1f24" stroke-width="1.6"/>
+<text x="515.00" y="564.00" font-size="12" text-anchor="middle" fill="#1b1f24" font-weight="700">switch pin 4</text>
+<text x="515.00" y="582.00" font-size="12" text-anchor="middle" fill="#1b1f24">TTL IN</text>
+<text x="620.00" y="550.00" font-size="1" text-anchor="start" fill="#1b1f24"></text>
+<text x="620.00" y="570.00" font-size="1" text-anchor="start" fill="#1b1f24"></text>
+<text x="620.00" y="590.00" font-size="1" text-anchor="start" fill="#1b1f24"></text>
+<text x="620.00" y="610.00" font-size="1" text-anchor="start" fill="#1b1f24"></text>
+<text x="34.00" y="656.00" font-size="1" text-anchor="start" fill="#1b1f24"></text>
+<text x="34.00" y="656.00" font-size="1" text-anchor="start" fill="#1b1f24"></text>
+<text x="34.00" y="656.00" font-size="1" text-anchor="start" fill="#1b1f24"></text>
+<text x="34.00" y="656.00" font-size="1" text-anchor="start" fill="#1b1f24"></text>
+<text x="34.00" y="670.00" font-size="1" text-anchor="start" fill="#1b1f24"></text>
+<text x="34.00" y="670.00" font-size="1" text-anchor="start" fill="#1b1f24"></text>
+<text x="34.00" y="670.00" font-size="1" text-anchor="start" fill="#1b1f24"></text>
+<text x="34.00" y="670.00" font-size="1" text-anchor="start" fill="#1b1f24"></text>
+<text x="620.00" y="534.00" font-size="12" text-anchor="start" fill="#1b1f24" font-weight="700">Logic of the switch</text>
+<text x="620.00" y="554.00" font-size="11.5" text-anchor="start" fill="#1b1f24">HIGH (2–5 V): OUT 1 off, OUT 2 on</text>
+<text x="620.00" y="572.00" font-size="11.5" text-anchor="start" fill="#1b1f24">LOW (0–0.8 V): OUT 1 on, OUT 2 off</text>
+<text x="620.00" y="590.00" font-size="11.5" text-anchor="start" fill="#1b1f24">We use OUT 2 for the AOM:</text>
+<text x="620.00" y="608.00" font-size="11.5" text-anchor="start" fill="#1b1f24">gate HIGH = RF on. 50 Ω on OUT 1.</text>
+<text x="620.00" y="626.00" font-size="11.5" text-anchor="start" fill="#1b1f24">Limits: 5 V, 5 mA. Switching 10 ns.</text>
+<rect x="20.00" y="700.00" width="960.00" height="230.00" rx="0" fill="#f7f8fa" stroke="#1b1f24" stroke-width="1.2"/>
+<text x="34.00" y="724.00" font-size="13" text-anchor="start" fill="#1b1f24" font-weight="700">C  Wiring of the RF chain (all RF on SMA, 50 Ω; the DC and control wires in the box)</text>
+<text x="34.00" y="748.00" font-size="11.5" text-anchor="start" fill="#1b1f24">Switch ZASWA-2-50DR+: RF IN = pin 1, OUT 1 = pin 3, OUT 2 = pin 6, TTL IN = pin 4, +5 V = pin 2, −5 V = pin 5. All RF connections must be DC blocked</text>
+<text x="34.00" y="765.00" font-size="11.5" text-anchor="start" fill="#1b1f24">or at 0 V.</text>
+<text x="34.00" y="782.00" font-size="11.5" text-anchor="start" fill="#1b1f24">Attenuator ZX76-31R5-PN-S+: RF in J2, RF out J3, control J1, supplies P1–P4 as above. Insertion loss at 0 dB: 1.5 dB typ (2.2 dB max), input limit</text>
+<text x="34.00" y="799.00" font-size="11.5" text-anchor="start" fill="#1b1f24">+24 dBm.</text>
+<text x="34.00" y="816.00" font-size="11.5" text-anchor="start" fill="#1b1f24">Amplifier ZHL-1-2W-S+ (SMA, with heatsink, 700 g): +24 V on its feed-through, 0.9 A; input limit +10 dBm; output to the coupler, never open.</text>
+<text x="34.00" y="850.00" font-size="11.5" text-anchor="start" fill="#1b1f24">Coupler ZFDC-20-4-S+: IN from the amplifier, OUT to the AOM, CPL (−19.5 dB) to a scope input with a 50 Ω feed-through terminator. Power limit 2 W.</text>
+<text x="34.00" y="884.00" font-size="11.5" text-anchor="start" fill="#1b1f24">Order: synthesizer → switch (IN 1, OUT 2) → attenuator → amplifier → coupler → AOM. Cables: SMA male-male 0.3–0.5 m, same on both arms.</text>
+<text x="34.00" y="918.00" font-size="11.5" text-anchor="start" fill="#1b1f24">Label each arm A or B on every box and cable, and keep a log of the attenuator setting that gave the best efficiency.</text>
+<rect x="20.00" y="934.00" width="960.00" height="34.00" rx="0" fill="#f7f8fa" stroke="#1b1f24" stroke-width="1.2"/>
+<text x="30.00" y="949.00" font-size="13" text-anchor="start" fill="#1b1f24" font-weight="700">D8  Control section</text>
+<text x="30.00" y="963.00" font-size="11" text-anchor="start" fill="#6b7280">DIP bank + pull-downs (attenuator), 100 Ω + 10 kΩ at the gate input (switch). Test: gate the RF and look at the coupler on the scope.</text>
+</svg>

@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 840" role="img" aria-labelledby="t d" font-family="Segoe UI, Arial, Helvetica, sans-serif">
+<title id="t">D10 light-tight cover drawing</title><desc id="d">Cut list, hole positions and assembled view of the hardboard cover that goes over one AOM double-pass arm.</desc>
+<defs><pattern id="hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="6" stroke="#555" stroke-width="1"/></pattern><pattern id="hatchf" width="4" height="4" patternUnits="userSpaceOnUse" patternTransform="rotate(-45)"><line x1="0" y1="0" x2="0" y2="4" stroke="#888" stroke-width="0.8"/></pattern><pattern id="dots" width="5" height="5" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="0.8" fill="#999"/></pattern><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#1b1f24"/></marker><marker id="arrg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#6b7280"/></marker></defs>
+<rect width="1000" height="840" fill="#ffffff"/>
+<text x="20.00" y="28.00" font-size="17" text-anchor="start" fill="#1b1f24" font-weight="700">D10  Light-tight cover for one AOM double-pass arm (black hardboard, 3 mm)</text>
+<text x="20.00" y="48.00" font-size="12" text-anchor="start" fill="#6b7280">Cut list at 1.6 px per mm. Arm layout, measured from the PBS end: PBS 25, AOM 75, lens 175 (f = 100), mirror 275 mm; beam height 40 mm.</text>
+<text x="50.00" y="98.00" font-size="13" text-anchor="start" fill="#1b1f24" font-weight="700">Cut list (mm)</text>
+<rect x="50.00" y="120.00" width="480.00" height="176.00" rx="0" fill="#f2efe6" stroke="#1b1f24" stroke-width="1.4"/>
+<text x="290.00" y="212.00" font-size="12" text-anchor="middle" fill="#1b1f24" font-weight="700">top 300 × 110</text>
+<line x1="50.00" y1="296.00" x2="50.00" y2="328.00" stroke="#6b7280" stroke-width="0.9" stroke-linecap="round"/>
+<line x1="530.00" y1="296.00" x2="530.00" y2="328.00" stroke="#6b7280" stroke-width="0.9" stroke-linecap="round"/>
+<line x1="50.00" y1="322.00" x2="530.00" y2="322.00" stroke="#1b1f24" stroke-width="1" marker-start="url(#arr)" marker-end="url(#arr)"/>
+<text x="290.00" y="318.00" font-size="11.5" text-anchor="middle" fill="#1b1f24">300</text>
+<rect x="50.00" y="362.00" width="480.00" height="128.00" rx="0" fill="#f2efe6" stroke="#1b1f24" stroke-width="1.4"/>
+<text x="230.00" y="430.00" font-size="12" text-anchor="middle" fill="#1b1f24" font-weight="700">side 300 × 80 (2×)</text>
+<circle cx="490.00" cy="426.00" r="11.20" fill="#fff" stroke="#1b1f24" stroke-width="1.4"/>
+<text x="470.80" y="424.00" font-size="11.5" text-anchor="end" fill="#1b1f24">Ø14 out-beam hole</text>
+<text x="470.80" y="440.00" font-size="11.5" text-anchor="end" fill="#1b1f24">25 from the end, 40 high</text>
+<text x="470.80" y="456.00" font-size="11.5" text-anchor="end" fill="#6b7280">(in one side panel only)</text>
+<text x="526.00" y="354.00" font-size="11" text-anchor="end" fill="#6b7280">PBS end</text>
+<line x1="50.00" y1="490.00" x2="50.00" y2="522.00" stroke="#6b7280" stroke-width="0.9" stroke-linecap="round"/>
+<line x1="530.00" y1="490.00" x2="530.00" y2="522.00" stroke="#6b7280" stroke-width="0.9" stroke-linecap="round"/>
+<line x1="50.00" y1="516.00" x2="530.00" y2="516.00" stroke="#1b1f24" stroke-width="1" marker-start="url(#arr)" marker-end="url(#arr)"/>
+<text x="290.00" y="512.00" font-size="11.5" text-anchor="middle" fill="#1b1f24">300</text>
+<line x1="50.00" y1="362.00" x2="28.00" y2="362.00" stroke="#6b7280" stroke-width="0.9" stroke-linecap="round"/>
+<line x1="50.00" y1="490.00" x2="28.00" y2="490.00" stroke="#6b7280" stroke-width="0.9" stroke-linecap="round"/>
+<line x1="34.00" y1="362.00" x2="34.00" y2="490.00" stroke="#1b1f24" stroke-width="1" marker-start="url(#arr)" marker-end="url(#arr)"/>
+<text x="29.00" y="430.00" font-size="11.5" text-anchor="end" fill="#1b1f24">80</text>
+<rect x="50.00" y="556.00" width="176.00" height="128.00" rx="0" fill="#f2efe6" stroke="#1b1f24" stroke-width="1.4"/>
+<text x="138.00" y="578.00" font-size="12" text-anchor="middle" fill="#1b1f24" font-weight="700">end 110 × 80 (2×)</text>
+<circle cx="138.00" cy="620.00" r="11.20" fill="#fff" stroke="#1b1f24" stroke-width="1.4"/>
+<text x="138.00" y="649.20" font-size="11.5" text-anchor="middle" fill="#1b1f24">Ø14 in-beam hole (one end only)</text>
+<circle cx="194.00" cy="664.80" r="7.20" fill="#fff" stroke="#1b1f24" stroke-width="1.4"/>
+<line x1="194.00" y1="664.80" x2="242.00" y2="664.80" stroke="#6b7280" stroke-width="1.0" stroke-linecap="round"/>
+<circle cx="194.00" cy="664.80" r="2.2" fill="#6b7280"/>
+<text x="246.00" y="668.80" font-size="11.5" text-anchor="start" fill="#1b1f24">Ø9 SMA cable hole, 90 from the left, 12 from the bottom</text>
+<line x1="50.00" y1="684.00" x2="50.00" y2="716.00" stroke="#6b7280" stroke-width="0.9" stroke-linecap="round"/>
+<line x1="226.00" y1="684.00" x2="226.00" y2="716.00" stroke="#6b7280" stroke-width="0.9" stroke-linecap="round"/>
+<line x1="50.00" y1="710.00" x2="226.00" y2="710.00" stroke="#1b1f24" stroke-width="1" marker-start="url(#arr)" marker-end="url(#arr)"/>
+<text x="138.00" y="706.00" font-size="11.5" text-anchor="middle" fill="#1b1f24">110</text>
+<line x1="50.00" y1="556.00" x2="28.00" y2="556.00" stroke="#6b7280" stroke-width="0.9" stroke-linecap="round"/>
+<line x1="50.00" y1="684.00" x2="28.00" y2="684.00" stroke="#6b7280" stroke-width="0.9" stroke-linecap="round"/>
+<line x1="34.00" y1="556.00" x2="34.00" y2="684.00" stroke="#1b1f24" stroke-width="1" marker-start="url(#arr)" marker-end="url(#arr)"/>
+<text x="29.00" y="624.00" font-size="11.5" text-anchor="end" fill="#1b1f24">80</text>
+<text x="580.00" y="98.00" font-size="13" text-anchor="start" fill="#1b1f24" font-weight="700">Assembled cover (PBS end at the right)</text>
+<polygon points="580.00,290.00 895.00,290.00 895.00,206.00 580.00,206.00" fill="#f2efe6" stroke="#1b1f24" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round"/>
+<polygon points="580.00,206.00 895.00,206.00 935.84,165.16 620.84,165.16" fill="#e6e1d2" stroke="#1b1f24" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round"/>
+<polygon points="895.00,290.00 935.84,249.16 935.84,165.16 895.00,206.00" fill="#d9d4c3" stroke="#1b1f24" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round"/>
+<polygon points="876.10,248.00 875.85,246.10 875.12,244.32 873.95,242.80 872.42,241.63 870.65,240.90 868.75,240.65 866.85,240.90 865.08,241.63 863.55,242.80 862.38,244.32 861.65,246.10 861.40,248.00 861.65,249.90 862.38,251.68 863.55,253.20 865.08,254.37 866.85,255.10 868.75,255.35 870.65,255.10 872.42,254.37 873.95,253.20 875.12,251.68 875.85,249.90" fill="#222" stroke="#1b1f24" stroke-width="1.0" stroke-linejoin="round" stroke-linecap="round"/>
+<polygon points="915.42,220.23 916.09,219.81 916.72,219.92 917.25,220.55 917.67,221.66 917.93,223.17 918.02,224.98 917.93,226.97 917.67,229.01 917.25,230.94 916.72,232.65 916.09,234.01 915.42,234.93 914.74,235.35 914.12,235.25 913.58,234.62 913.17,233.51 912.91,231.99 912.82,230.18 912.91,228.19 913.17,226.16 913.58,224.22 914.12,222.52 914.74,221.16" fill="#222" stroke="#1b1f24" stroke-width="1.0" stroke-linejoin="round" stroke-linecap="round"/>
+<polygon points="902.42,265.25 902.86,264.98 903.26,265.05 903.61,265.45 903.87,266.17 904.04,267.14 904.10,268.30 904.04,269.58 903.87,270.89 903.61,272.14 903.26,273.23 902.86,274.11 902.42,274.70 901.99,274.97 901.59,274.90 901.24,274.50 900.98,273.78 900.81,272.81 900.75,271.65 900.81,270.37 900.98,269.06 901.24,267.82 901.59,266.72 901.99,265.84" fill="#222" stroke="#1b1f24" stroke-width="1.0" stroke-linejoin="round" stroke-linecap="round"/>
+<line x1="975.42" y1="227.58" x2="915.42" y2="227.58" stroke="#c0392b" stroke-width="2.0" stroke-linecap="round"/>
+<line x1="915.42" y1="227.58" x2="626.67" y2="227.58" stroke="#c0392b" stroke-width="1.6" stroke-dasharray="5 4" stroke-linecap="round"/>
+<line x1="889.17" y1="227.58" x2="868.75" y2="248.00" stroke="#c0392b" stroke-width="1.6" stroke-dasharray="5 4" stroke-linecap="round"/>
+<line x1="868.75" y1="248.00" x2="852.04" y2="264.71" stroke="#c0392b" stroke-width="2.0" stroke-linecap="round"/>
+<circle cx="889.17" cy="227.58" r="3.2" fill="#c0392b"/>
+<circle cx="626.67" cy="227.58" r="3.2" fill="#c0392b"/>
+<text x="944.00" y="219.58" font-size="11" text-anchor="start" fill="#c0392b" font-weight="700">beam in</text>
+<text x="848.04" y="282.71" font-size="11.5" text-anchor="end" fill="#c0392b" font-weight="700">beam out</text>
+<text x="914.42" y="291.98" font-size="11" text-anchor="start" fill="#6b7280">SMA</text>
+<text x="580.00" y="326.00" font-size="11.5" text-anchor="start" fill="#6b7280">Dashed red = the beam inside the cover: in through the end</text>
+<text x="580.00" y="342.00" font-size="11.5" text-anchor="start" fill="#6b7280">panel, through the PBS, AOM, QWP and lens to the mirror, and</text>
+<text x="580.00" y="358.00" font-size="11.5" text-anchor="start" fill="#6b7280">back; it leaves through the side hole.</text>
+<rect x="580.00" y="388.00" width="400.00" height="364.00" rx="0" fill="#f7f8fa" stroke="#1b1f24" stroke-width="1.2"/>
+<text x="592.00" y="412.00" font-size="13" text-anchor="start" fill="#1b1f24" font-weight="700">Build rules</text>
+<text x="592.00" y="436.00" font-size="11.5" text-anchor="start" fill="#1b1f24">Material: 3 mm black hardboard (Thorlabs TB4 type) or black</text>
+<text x="592.00" y="452.00" font-size="11.5" text-anchor="start" fill="#1b1f24">foam-core, matte black inside.</text>
+<text x="592.00" y="474.00" font-size="11.5" text-anchor="start" fill="#1b1f24">Joints: black tape or small plastic or aluminium angle</text>
+<text x="592.00" y="490.00" font-size="11.5" text-anchor="start" fill="#1b1f24">brackets; no steel screws near the cell shield.</text>
+<text x="592.00" y="512.00" font-size="11.5" text-anchor="start" fill="#1b1f24">Holes: Ø14 in-beam hole in one end panel and Ø14 out-beam hole</text>
+<text x="592.00" y="528.00" font-size="11.5" text-anchor="start" fill="#1b1f24">in one side panel (both 40 mm high, the beam height), Ø9 hole</text>
+<text x="592.00" y="544.00" font-size="11.5" text-anchor="start" fill="#1b1f24">for the SMA cable.</text>
+<text x="592.00" y="566.00" font-size="11.5" text-anchor="start" fill="#1b1f24">The cover rests on the breadboard around the arm; a strip of</text>
+<text x="592.00" y="582.00" font-size="11.5" text-anchor="start" fill="#1b1f24">foam on the table side closes the gap. The razor blade that</text>
+<text x="592.00" y="598.00" font-size="11.5" text-anchor="start" fill="#1b1f24">stops the 0th order stays inside.</text>
+<text x="592.00" y="620.00" font-size="11.5" text-anchor="start" fill="#1b1f24">A beam never leaves the cover except through a hole closed by</text>
+<text x="592.00" y="636.00" font-size="11.5" text-anchor="start" fill="#1b1f24">an SM1 tube or a black card with a hole.</text>
+<text x="592.00" y="658.00" font-size="11.5" text-anchor="start" fill="#1b1f24">Label every cover "795 nm invisible laser".</text>
+<text x="592.00" y="680.00" font-size="11.5" text-anchor="start" fill="#1b1f24">Detector: a black SM1 tube (50 mm) in front of the photodiode</text>
+<text x="592.00" y="696.00" font-size="11.5" text-anchor="start" fill="#1b1f24">keeps room light off it.</text>
+<text x="592.00" y="718.00" font-size="11.5" text-anchor="start" fill="#1b1f24">The cover also stops draughts, which makes the AOM and the</text>
+<text x="592.00" y="734.00" font-size="11.5" text-anchor="start" fill="#1b1f24">cell more stable under it.</text>
+<rect x="20.00" y="794.00" width="960.00" height="34.00" rx="0" fill="#f7f8fa" stroke="#1b1f24" stroke-width="1.2"/>
+<text x="30.00" y="809.00" font-size="13" text-anchor="start" fill="#1b1f24" font-weight="700">D10  Cover</text>
+<text x="30.00" y="823.00" font-size="11" text-anchor="start" fill="#6b7280">Top 300 × 110, two sides 300 × 80, two ends 110 × 80 with the beam and cable holes. Inner height 80 = twice the beam height.</text>
+</svg>

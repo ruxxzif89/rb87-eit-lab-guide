@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 940" role="img" aria-labelledby="t d" font-family="Segoe UI, Arial, Helvetica, sans-serif">
+<title id="t">D2 cell stack drawing</title><desc id="d">Axial section of the vapour cell with heater foil, thermistor, foam sleeve, the two Delrin tubes and the former.</desc>
+<defs><pattern id="hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="6" stroke="#555" stroke-width="1"/></pattern><pattern id="hatchf" width="4" height="4" patternUnits="userSpaceOnUse" patternTransform="rotate(-45)"><line x1="0" y1="0" x2="0" y2="4" stroke="#888" stroke-width="0.8"/></pattern><pattern id="dots" width="5" height="5" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="0.8" fill="#999"/></pattern><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#1b1f24"/></marker><marker id="arrg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#6b7280"/></marker></defs>
+<rect width="1000" height="940" fill="#ffffff"/>
+<text x="20.00" y="28.00" font-size="17" text-anchor="start" fill="#1b1f24" font-weight="700">D2  Cell stack: cell + heater + thermistor + foam sleeve + two Delrin tubes inside the former</text>
+<text x="20.00" y="48.00" font-size="12" text-anchor="start" fill="#6b7280">Axial section, scale 10 px per mm, drawn cut at ±27 mm. Hatched parts are plastic (PEEK / Delrin). Cell dimensions are from the BOM: confirm them with the vendor drawing.</text>
+<rect x="200.00" y="170.00" width="540.00" height="20.00" rx="0" fill="url(#hatch)" stroke="#1b1f24" stroke-width="1.3"/>
+<rect x="200.00" y="530.00" width="540.00" height="20.00" rx="0" fill="url(#hatch)" stroke="#1b1f24" stroke-width="1.3"/>
+<text x="204.00" y="162.00" font-size="11.5" text-anchor="start" fill="#6b7280">former (D1), bore Ø34</text>
+<rect x="300.00" y="202.00" width="340.00" height="316.00" rx="0" fill="#f3efe3" stroke="#1b1f24" stroke-width="1.2"/>
+<rect x="640.00" y="191.50" width="100.00" height="36.00" rx="0" fill="url(#hatch)" stroke="#1b1f24" stroke-width="1.2"/>
+<rect x="640.00" y="492.50" width="100.00" height="36.00" rx="0" fill="url(#hatch)" stroke="#1b1f24" stroke-width="1.2"/>
+<rect x="200.00" y="191.50" width="100.00" height="36.00" rx="0" fill="url(#hatch)" stroke="#1b1f24" stroke-width="1.2"/>
+<rect x="200.00" y="492.50" width="100.00" height="36.00" rx="0" fill="url(#hatch)" stroke="#1b1f24" stroke-width="1.2"/>
+<rect x="330.00" y="235.00" width="280.00" height="250.00" rx="0" fill="#d6ebf7" stroke="#1b1f24" stroke-width="1.4"/>
+<rect x="330.00" y="235.00" width="16.00" height="250.00" rx="0" fill="#b9d9ee" stroke="#1b1f24" stroke-width="1.0"/>
+<rect x="594.00" y="235.00" width="16.00" height="250.00" rx="0" fill="#b9d9ee" stroke="#1b1f24" stroke-width="1.0"/>
+<rect x="346.00" y="255.00" width="248.00" height="210.00" rx="0" fill="#eef7fc" stroke="none" stroke-width="0"/>
+<rect x="346.00" y="235.00" width="248.00" height="20.00" rx="0" fill="#c8e3f2" stroke="#1b1f24" stroke-width="0.8"/>
+<rect x="346.00" y="465.00" width="248.00" height="20.00" rx="0" fill="#c8e3f2" stroke="#1b1f24" stroke-width="0.8"/>
+<rect x="345.00" y="229.00" width="250.00" height="6.00" rx="0" fill="#d9770a" stroke="#8a4b00" stroke-width="0.8"/>
+<rect x="345.00" y="485.00" width="250.00" height="6.00" rx="0" fill="#d9770a" stroke="#8a4b00" stroke-width="0.8"/>
+<circle cx="410.00" cy="488.00" r="3.40" fill="#2e7d32" stroke="#1b1f24" stroke-width="1.0"/>
+<line x1="346.00" y1="360.00" x2="594.00" y2="360.00" stroke="#c0392b" stroke-width="2.0" stroke-linecap="round"/>
+<text x="470.00" y="352.00" font-size="11.5" text-anchor="middle" fill="#c0392b" font-weight="700">beam along the axis</text>
+<text x="470.00" y="376.00" font-size="11.5" text-anchor="middle" fill="#6b7280">Rb vapour, 25 mm path</text>
+<line x1="200.00" y1="360.00" x2="740.00" y2="360.00" stroke="#b5651d" stroke-width="1.0" stroke-dasharray="14 3 3 3" stroke-linecap="round"/>
+<line x1="330.00" y1="191.50" x2="330.00" y2="122.00" stroke="#6b7280" stroke-width="0.9" stroke-linecap="round"/>
+<line x1="610.00" y1="191.50" x2="610.00" y2="122.00" stroke="#6b7280" stroke-width="0.9" stroke-linecap="round"/>
+<line x1="330.00" y1="128.00" x2="610.00" y2="128.00" stroke="#1b1f24" stroke-width="1" marker-start="url(#arr)" marker-end="url(#arr)"/>
+<text x="470.00" y="124.00" font-size="11.5" text-anchor="middle" fill="#1b1f24">cell 28 (windows 1.6 each)</text>
+<line x1="300.00" y1="191.50" x2="300.00" y2="98.00" stroke="#6b7280" stroke-width="0.9" stroke-linecap="round"/>
+<line x1="640.00" y1="191.50" x2="640.00" y2="98.00" stroke="#6b7280" stroke-width="0.9" stroke-linecap="round"/>
+<line x1="300.00" y1="104.00" x2="640.00" y2="104.00" stroke="#1b1f24" stroke-width="1" marker-start="url(#arr)" marker-end="url(#arr)"/>
+<text x="470.00" y="100.00" font-size="11.5" text-anchor="middle" fill="#1b1f24">foam sleeve 34</text>
+<line x1="200.00" y1="170.00" x2="200.00" y2="74.00" stroke="#6b7280" stroke-width="0.9" stroke-linecap="round"/>
+<line x1="740.00" y1="170.00" x2="740.00" y2="74.00" stroke="#6b7280" stroke-width="0.9" stroke-linecap="round"/>
+<line x1="200.00" y1="80.00" x2="740.00" y2="80.00" stroke="#1b1f24" stroke-width="1" marker-start="url(#arr)" marker-end="url(#arr)"/>
+<text x="470.00" y="76.00" font-size="11.5" text-anchor="middle" fill="#1b1f24">tube 63 | sleeve 34 | tube 63 = 160 = the former (cut here)</text>
+<line x1="345.00" y1="489.00" x2="345.00" y2="586.00" stroke="#6b7280" stroke-width="0.9" stroke-linecap="round"/>
+<line x1="595.00" y1="489.00" x2="595.00" y2="586.00" stroke="#6b7280" stroke-width="0.9" stroke-linecap="round"/>
+<line x1="345.00" y1="580.00" x2="595.00" y2="580.00" stroke="#1b1f24" stroke-width="1" marker-start="url(#arr)" marker-end="url(#arr)"/>
+<text x="470.00" y="576.00" font-size="11.5" text-anchor="middle" fill="#1b1f24">heater 25 wide (80 long, one wrap)</text>
+<line x1="330.00" y1="235.00" x2="284.00" y2="235.00" stroke="#6b7280" stroke-width="0.9" stroke-linecap="round"/>
+<line x1="330.00" y1="485.00" x2="284.00" y2="485.00" stroke="#6b7280" stroke-width="0.9" stroke-linecap="round"/>
+<line x1="290.00" y1="235.00" x2="290.00" y2="485.00" stroke="#1b1f24" stroke-width="1" marker-start="url(#arr)" marker-end="url(#arr)"/>
+<text x="285.00" y="364.00" font-size="11.5" text-anchor="end" fill="#1b1f24"></text>
+<text x="285.00" y="420.00" font-size="11.5" text-anchor="end" fill="#1b1f24">Ø25.0</text>
+<line x1="300.00" y1="202.00" x2="174.00" y2="202.00" stroke="#6b7280" stroke-width="0.9" stroke-linecap="round"/>
+<line x1="300.00" y1="518.00" x2="174.00" y2="518.00" stroke="#6b7280" stroke-width="0.9" stroke-linecap="round"/>
+<line x1="180.00" y1="202.00" x2="180.00" y2="518.00" stroke="#1b1f24" stroke-width="1" marker-start="url(#arr)" marker-end="url(#arr)"/>
+<text x="175.00" y="364.00" font-size="11.5" text-anchor="end" fill="#1b1f24"></text>
+<text x="175.00" y="420.00" font-size="11.5" text-anchor="end" fill="#1b1f24">foam OD Ø31.6</text>
+<line x1="740.00" y1="191.50" x2="776.00" y2="191.50" stroke="#6b7280" stroke-width="0.9" stroke-linecap="round"/>
+<line x1="740.00" y1="528.50" x2="776.00" y2="528.50" stroke="#6b7280" stroke-width="0.9" stroke-linecap="round"/>
+<line x1="770.00" y1="191.50" x2="770.00" y2="528.50" stroke="#1b1f24" stroke-width="1" marker-start="url(#arr)" marker-end="url(#arr)"/>
+<text x="775.00" y="364.00" font-size="11.5" text-anchor="start" fill="#1b1f24"></text>
+<text x="775.00" y="300.00" font-size="11.5" text-anchor="start" fill="#1b1f24">tube OD 33.7</text>
+<line x1="740.00" y1="227.50" x2="886.00" y2="227.50" stroke="#6b7280" stroke-width="0.9" stroke-linecap="round"/>
+<line x1="740.00" y1="492.50" x2="886.00" y2="492.50" stroke="#6b7280" stroke-width="0.9" stroke-linecap="round"/>
+<line x1="880.00" y1="227.50" x2="880.00" y2="492.50" stroke="#1b1f24" stroke-width="1" marker-start="url(#arr)" marker-end="url(#arr)"/>
+<text x="885.00" y="364.00" font-size="11.5" text-anchor="start" fill="#1b1f24"></text>
+<text x="885.00" y="420.00" font-size="11.5" text-anchor="start" fill="#1b1f24">tube ID 26.5</text>
+<line x1="410.00" y1="488.00" x2="390.00" y2="644.00" stroke="#6b7280" stroke-width="1.0" stroke-linecap="round"/>
+<circle cx="410.00" cy="488.00" r="2.2" fill="#6b7280"/>
+<text x="386.00" y="648.00" font-size="11.5" text-anchor="end" fill="#2e7d32" font-weight="700">NTC 10 kΩ under the heater</text>
+<line x1="550.00" y1="487.00" x2="580.00" y2="624.00" stroke="#6b7280" stroke-width="1.0" stroke-linecap="round"/>
+<circle cx="550.00" cy="487.00" r="2.2" fill="#6b7280"/>
+<text x="584.00" y="628.00" font-size="11.5" text-anchor="start" fill="#d9770a" font-weight="700">heater 0.2 thick</text>
+<line x1="700.00" y1="510.00" x2="730.00" y2="624.00" stroke="#6b7280" stroke-width="1.0" stroke-linecap="round"/>
+<circle cx="700.00" cy="510.00" r="2.2" fill="#6b7280"/>
+<text x="734.00" y="628.00" font-size="11.5" text-anchor="start" fill="#1b1f24" font-weight="700">Delrin tube (cut)</text>
+<line x1="390.00" y1="502.00" x2="320.00" y2="624.00" stroke="#6b7280" stroke-width="1.0" stroke-linecap="round"/>
+<circle cx="390.00" cy="502.00" r="2.2" fill="#6b7280"/>
+<text x="316.00" y="628.00" font-size="11.5" text-anchor="end" fill="#1b1f24" font-weight="700">foam 3.0 thick</text>
+<rect x="20.00" y="710.00" width="960.00" height="180.00" rx="0" fill="#f7f8fa" stroke="#1b1f24" stroke-width="1.2"/>
+<text x="34.00" y="732.00" font-size="13" text-anchor="start" fill="#1b1f24" font-weight="700">Assembly order and rules</text>
+<text x="34.00" y="758.00" font-size="11.5" text-anchor="start" fill="#1b1f24">1  NTC bead glued to the glass with thermally conductive epoxy, 5 mm from the end window; its leads run flat under the foil edge.</text>
+<text x="34.00" y="778.00" font-size="11.5" text-anchor="start" fill="#1b1f24">2  Heater 80 × 25 wraps once round the barrel (circumference 78.5, so 1.5 mm overlap), tails towards the cable end. No glue on the windows.</text>
+<text x="34.00" y="798.00" font-size="11.5" text-anchor="start" fill="#1b1f24">3  Foam sleeve (ID 25.6, OD 31.6, length 34) over the heater; heater tails and NTC pair run along the 1.2 mm clearance to the cable end.</text>
+<text x="34.00" y="818.00" font-size="11.5" text-anchor="start" fill="#1b1f24">4  Two Delrin tubes Ø33.7 × Ø26.5 × 63, one on each side, push on the sleeve ends and centre the stack in the 160 mm former (their inner 4 mm act as end rings).</text>
+<text x="48.00" y="838.00" font-size="11.5" text-anchor="start" fill="#1b1f24">A 2 × 2 mm groove along the outside of the cable-side tube carries the leads. The tubes do not touch the glass.</text>
+<text x="34.00" y="858.00" font-size="11.5" text-anchor="start" fill="#1b1f24">5  Side stem on the cell? Cut a 10 × 14 slot in sleeve and former at the mid-plane (the winding wire bridges the slot). Ask for a stem ≤ 15 mm.</text>
+<rect x="20.00" y="894.00" width="960.00" height="34.00" rx="0" fill="#f7f8fa" stroke="#1b1f24" stroke-width="1.2"/>
+<text x="30.00" y="909.00" font-size="13" text-anchor="start" fill="#1b1f24" font-weight="700">D2  Cell stack</text>
+<text x="30.00" y="923.00" font-size="11" text-anchor="start" fill="#6b7280">Cell Ø25 × 28 · heater 80 × 25 × 0.2 · foam Ø31.6 × 34 · two tubes Ø33.7 × 63 · former bore Ø34 (1.2 mm radial clearance for the leads).</text>
+</svg>

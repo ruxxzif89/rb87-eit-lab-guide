@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 960" role="img" aria-labelledby="t d" font-family="Segoe UI, Arial, Helvetica, sans-serif">
+<title id="t">D3 bench test of the cables with dummy loads</title><desc id="d">Dummy-load tests: a 10 ohm resistor and a 10 kilo-ohm resistor for the TEC cable, and a 100 ohm resistor for the coil cable.</desc>
+<defs><pattern id="hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="6" stroke="#555" stroke-width="1"/></pattern><pattern id="hatchf" width="4" height="4" patternUnits="userSpaceOnUse" patternTransform="rotate(-45)"><line x1="0" y1="0" x2="0" y2="4" stroke="#888" stroke-width="0.8"/></pattern><pattern id="dots" width="5" height="5" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="0.8" fill="#999"/></pattern><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#1b1f24"/></marker><marker id="arrg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#6b7280"/></marker></defs>
+<rect width="1000" height="960" fill="#ffffff"/>
+<text x="20.00" y="28.00" font-size="17" text-anchor="start" fill="#1b1f24" font-weight="700">D3  Test every cable on the bench with dummy loads before anything real is connected</text>
+<text x="20.00" y="48.00" font-size="12" text-anchor="start" fill="#6b7280">Dummy loads replace the heater, the thermistor and the coil. Nothing can be damaged: the limits are set low first.</text>
+<rect x="20.00" y="70.00" width="960.00" height="400.00" rx="0" fill="#f7faf7" stroke="#2e7d32" stroke-width="1.4"/>
+<text x="34.00" y="94.00" font-size="14" text-anchor="start" fill="#2e7d32" font-weight="700">A   TEC OUT cable (the diode orientation is decided here)</text>
+<rect x="60.00" y="120.00" width="170.00" height="250.00" rx="6" fill="#e4e8ee" stroke="#1b1f24" stroke-width="1.6"/>
+<text x="145.00" y="142.00" font-size="12.5" text-anchor="middle" fill="#1b1f24" font-weight="700">TEC OUT jack</text>
+<circle cx="230.00" cy="175.00" r="5.00" fill="#fff" stroke="#c0392b" stroke-width="1.8"/>
+<text x="221.00" y="179.00" font-size="12" text-anchor="end" fill="#1b1f24" font-weight="700">pins 5, 6, 7  TEC +</text>
+<circle cx="230.00" cy="255.00" r="5.00" fill="#fff" stroke="#1f5fa8" stroke-width="1.8"/>
+<text x="221.00" y="259.00" font-size="12" text-anchor="end" fill="#1b1f24" font-weight="700">pins 13, 14, 15  TEC −</text>
+<circle cx="230.00" cy="310.00" r="5.00" fill="#fff" stroke="#2e7d32" stroke-width="1.8"/>
+<text x="221.00" y="314.00" font-size="12" text-anchor="end" fill="#1b1f24" font-weight="700">pin 4  thermistor +</text>
+<circle cx="230.00" cy="345.00" r="5.00" fill="#fff" stroke="#2e7d32" stroke-width="1.8"/>
+<text x="221.00" y="349.00" font-size="12" text-anchor="end" fill="#1b1f24" font-weight="700">pin 3  thermistor −</text>
+<line x1="235.00" y1="175.00" x2="420.00" y2="175.00" stroke="#c0392b" stroke-width="2.2" stroke-linecap="round"/>
+<line x1="420.00" y1="175.00" x2="456.00" y2="175.00" stroke="#1b1f24" stroke-width="1.8" stroke-linecap="round"/>
+<line x1="474.00" y1="175.00" x2="510.00" y2="175.00" stroke="#1b1f24" stroke-width="1.8" stroke-linecap="round"/>
+<polygon points="456.00,166.00 456.00,184.00 474.00,175.00" fill="#fff" stroke="#1b1f24" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/>
+<line x1="474.00" y1="165.00" x2="474.00" y2="185.00" stroke="#1b1f24" stroke-width="2.4" stroke-linecap="round"/>
+<text x="465.00" y="159.00" font-size="12" text-anchor="middle" fill="#1b1f24" font-weight="700">diode</text>
+<text x="465.00" y="203.00" font-size="11.5" text-anchor="middle" fill="#1b1f24">1N5400</text>
+<line x1="510.00" y1="175.00" x2="570.00" y2="175.00" stroke="#c0392b" stroke-width="2.2" stroke-linecap="round"/>
+<line x1="570.00" y1="175.00" x2="618.00" y2="175.00" stroke="#1b1f24" stroke-width="1.8" stroke-linecap="round"/>
+<line x1="652.00" y1="175.00" x2="700.00" y2="175.00" stroke="#1b1f24" stroke-width="1.8" stroke-linecap="round"/>
+<rect x="618.00" y="168.00" width="34.00" height="14.00" rx="0" fill="#fff" stroke="#1b1f24" stroke-width="1.8"/>
+<text x="635.00" y="162.00" font-size="12" text-anchor="middle" fill="#1b1f24" font-weight="700">10 Ω, 5 W</text>
+<text x="635.00" y="199.00" font-size="11.5" text-anchor="middle" fill="#1b1f24">dummy heater</text>
+<line x1="700.00" y1="175.00" x2="770.00" y2="175.00" stroke="#c0392b" stroke-width="2.2" stroke-linecap="round"/>
+<line x1="770.00" y1="175.00" x2="770.00" y2="255.00" stroke="#1b1f24" stroke-width="2.2" stroke-linecap="round"/>
+<line x1="770.00" y1="255.00" x2="235.00" y2="255.00" stroke="#1f5fa8" stroke-width="2.2" stroke-linecap="round"/>
+<line x1="235.00" y1="310.00" x2="600.00" y2="310.00" stroke="#2e7d32" stroke-width="2.2" stroke-linecap="round"/>
+<line x1="600.00" y1="310.00" x2="648.00" y2="310.00" stroke="#1b1f24" stroke-width="1.8" stroke-linecap="round"/>
+<line x1="682.00" y1="310.00" x2="730.00" y2="310.00" stroke="#1b1f24" stroke-width="1.8" stroke-linecap="round"/>
+<rect x="648.00" y="303.00" width="34.00" height="14.00" rx="0" fill="#fff" stroke="#1b1f24" stroke-width="1.8"/>
+<text x="665.00" y="297.00" font-size="12" text-anchor="middle" fill="#1b1f24" font-weight="700">10 kΩ, 1 %</text>
+<text x="665.00" y="334.00" font-size="11.5" text-anchor="middle" fill="#1b1f24">dummy thermistor</text>
+<line x1="730.00" y1="310.00" x2="770.00" y2="310.00" stroke="#2e7d32" stroke-width="2.2" stroke-linecap="round"/>
+<line x1="770.00" y1="310.00" x2="770.00" y2="345.00" stroke="#2e7d32" stroke-width="2.2" stroke-linecap="round"/>
+<line x1="770.00" y1="345.00" x2="235.00" y2="345.00" stroke="#2e7d32" stroke-width="2.2" stroke-linecap="round"/>
+<text x="34.00" y="396.00" font-size="12.5" text-anchor="start" fill="#1b1f24" font-weight="700">Settings and what you must see</text>
+<text x="34.00" y="416.00" font-size="11.5" text-anchor="start" fill="#1b1f24">I TEC LIM = 0.30 A, sensor = thermistor (TH &lt; 20 kΩ).  T ACT shows 10.00 kΩ (the dummy).  Set T SET = 5.000 kΩ: the box asks for heat.</text>
+<text x="34.00" y="434.00" font-size="11.5" text-anchor="start" fill="#1b1f24">TEC ON → I TEC ≈ 0.30 A (it sits at the limit) and V ≈ 3.7 V.  If I TEC stays near 0.00 A, the diode is the wrong way round: reverse it and repeat.</text>
+<text x="34.00" y="452.00" font-size="11.5" text-anchor="start" fill="#1b1f24" font-weight="700">Then set T SET = 20.00 kΩ (colder than the dummy): the output must fall to 0 A at once. A resistor cannot be cooled: that is why the diode is there.</text>
+<rect x="20.00" y="490.00" width="960.00" height="400.00" rx="0" fill="#faf7f7" stroke="#c0392b" stroke-width="1.4"/>
+<text x="34.00" y="514.00" font-size="14" text-anchor="start" fill="#c0392b" font-weight="700">B   LD OUT cable (the coil is replaced by 100 Ω)</text>
+<rect x="60.00" y="540.00" width="170.00" height="240.00" rx="6" fill="#e4e8ee" stroke="#1b1f24" stroke-width="1.6"/>
+<text x="145.00" y="562.00" font-size="12.5" text-anchor="middle" fill="#1b1f24" font-weight="700">LD OUT jack</text>
+<circle cx="230.00" cy="595.00" r="5.00" fill="#fff" stroke="#c0392b" stroke-width="1.8"/>
+<text x="221.00" y="599.00" font-size="12" text-anchor="end" fill="#1b1f24" font-weight="700">pin 8  anode</text>
+<circle cx="230.00" cy="665.00" r="5.00" fill="#fff" stroke="#1f5fa8" stroke-width="1.8"/>
+<text x="221.00" y="669.00" font-size="12" text-anchor="end" fill="#1b1f24" font-weight="700">pin 3  ground</text>
+<circle cx="230.00" cy="708.00" r="5.00" fill="#fff" stroke="#6b7280" stroke-width="1.8"/>
+<text x="221.00" y="712.00" font-size="12" text-anchor="end" fill="#1b1f24" font-weight="700">pin 9  sense +</text>
+<circle cx="230.00" cy="742.00" r="5.00" fill="#fff" stroke="#6b7280" stroke-width="1.8"/>
+<text x="221.00" y="746.00" font-size="12" text-anchor="end" fill="#1b1f24" font-weight="700">pin 6  sense −</text>
+<line x1="235.00" y1="595.00" x2="520.00" y2="595.00" stroke="#c0392b" stroke-width="2.2" stroke-linecap="round"/>
+<line x1="520.00" y1="595.00" x2="573.00" y2="595.00" stroke="#1b1f24" stroke-width="1.8" stroke-linecap="round"/>
+<line x1="607.00" y1="595.00" x2="660.00" y2="595.00" stroke="#1b1f24" stroke-width="1.8" stroke-linecap="round"/>
+<rect x="573.00" y="588.00" width="34.00" height="14.00" rx="0" fill="#fff" stroke="#1b1f24" stroke-width="1.8"/>
+<text x="590.00" y="582.00" font-size="12" text-anchor="middle" fill="#1b1f24" font-weight="700">100 Ω</text>
+<text x="590.00" y="619.00" font-size="11.5" text-anchor="middle" fill="#1b1f24">dummy coil</text>
+<line x1="660.00" y1="595.00" x2="740.00" y2="595.00" stroke="#c0392b" stroke-width="2.2" stroke-linecap="round"/>
+<line x1="740.00" y1="595.00" x2="740.00" y2="665.00" stroke="#1b1f24" stroke-width="2.2" stroke-linecap="round"/>
+<line x1="740.00" y1="665.00" x2="235.00" y2="665.00" stroke="#1f5fa8" stroke-width="2.2" stroke-linecap="round"/>
+<line x1="235.00" y1="708.00" x2="480.00" y2="708.00" stroke="#3a7fd0" stroke-width="1.6" stroke-dasharray="5 4" stroke-linecap="round"/>
+<line x1="480.00" y1="708.00" x2="480.00" y2="595.00" stroke="#3a7fd0" stroke-width="1.6" stroke-dasharray="5 4" stroke-linecap="round"/>
+<circle cx="480.00" cy="595.00" r="3.5" fill="#3a7fd0"/>
+<line x1="235.00" y1="742.00" x2="700.00" y2="742.00" stroke="#3a9a4a" stroke-width="1.6" stroke-dasharray="5 4" stroke-linecap="round"/>
+<line x1="700.00" y1="742.00" x2="700.00" y2="665.00" stroke="#3a9a4a" stroke-width="1.6" stroke-dasharray="5 4" stroke-linecap="round"/>
+<circle cx="700.00" cy="665.00" r="3.5" fill="#3a9a4a"/>
+<text x="34.00" y="812.00" font-size="12.5" text-anchor="start" fill="#1b1f24" font-weight="700">Settings and what you must see</text>
+<text x="34.00" y="832.00" font-size="11.5" text-anchor="start" fill="#1b1f24">Interlock link in place (pins 1–5).  LD POL = CG, MODE = constant current, ILD LIM = 20 mA, bias off.</text>
+<text x="34.00" y="850.00" font-size="11.5" text-anchor="start" fill="#1b1f24">Set 5.00 mA and switch the output on: display V_LD = 0.50 V (±0.03 V), a multimeter across the 100 Ω reads 0.50 V.  At 10.00 mA: 1.00 V.</text>
+<text x="34.00" y="868.00" font-size="11.5" text-anchor="start" fill="#1b1f24" font-weight="700">Remove the 1–5 link: the output must NOT switch on.</text>
+<rect x="20.00" y="914.00" width="960.00" height="34.00" rx="0" fill="#f7f8fa" stroke="#1b1f24" stroke-width="1.2"/>
+<text x="30.00" y="929.00" font-size="13" text-anchor="start" fill="#1b1f24" font-weight="700">D3  Dummy-load tests</text>
+<text x="30.00" y="943.00" font-size="11" text-anchor="start" fill="#6b7280">If the readings differ, the cable or the plug is wrong: fix it before the heater, the cell or the coil is connected.</text>
+</svg>

@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 880" role="img" aria-labelledby="t d" font-family="Segoe UI, Arial, Helvetica, sans-serif">
+<title id="t">D3 D9 plug wiring for the LD OUT jack</title><desc id="d">Solder-cup view of the 9-pin plug with the solenoid pair, the sense pair and the interlock link.</desc>
+<defs><pattern id="hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="6" stroke="#555" stroke-width="1"/></pattern><pattern id="hatchf" width="4" height="4" patternUnits="userSpaceOnUse" patternTransform="rotate(-45)"><line x1="0" y1="0" x2="0" y2="4" stroke="#888" stroke-width="0.8"/></pattern><pattern id="dots" width="5" height="5" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="0.8" fill="#999"/></pattern><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#1b1f24"/></marker><marker id="arrg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#6b7280"/></marker></defs>
+<rect width="1000" height="880" fill="#ffffff"/>
+<text x="20.00" y="28.00" font-size="17" text-anchor="start" fill="#1b1f24" font-weight="700">D3  The 9-pin plug for LD OUT (solenoid current): solder-cup side</text>
+<text x="20.00" y="48.00" font-size="12" text-anchor="start" fill="#6b7280">You look at the solder cups from the cable side. Numbers as on the manual (wide row on top). The moulded numbers on your plug win.</text>
+<rect x="139.00" y="188.00" width="382.00" height="124.00" rx="12" fill="#e4e8ee" stroke="#1b1f24" stroke-width="1.8"/>
+<circle cx="161.00" cy="250.00" r="9.00" fill="#fff" stroke="#1b1f24" stroke-width="1.6"/>
+<circle cx="499.00" cy="250.00" r="9.00" fill="#fff" stroke="#1b1f24" stroke-width="1.6"/>
+<polygon points="195.00,204.00 465.00,204.00 445.00,296.00 215.00,296.00" fill="#f7f8fa" stroke="#1b1f24" stroke-width="2.0" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="234.00" cy="228.00" r="17.00" fill="#fff6f0" stroke="#7b4fa3" stroke-width="2.6"/>
+<text x="234.00" y="233.00" font-size="14" text-anchor="middle" fill="#7b4fa3" font-weight="700">5</text>
+<circle cx="282.00" cy="228.00" r="17.00" fill="#ffffff" stroke="#9aa3ad" stroke-width="1.4"/>
+<text x="282.00" y="233.00" font-size="14" text-anchor="middle" fill="#6b7280">4</text>
+<circle cx="330.00" cy="228.00" r="17.00" fill="#fff6f0" stroke="#1f5fa8" stroke-width="2.6"/>
+<text x="330.00" y="233.00" font-size="14" text-anchor="middle" fill="#1f5fa8" font-weight="700">3</text>
+<circle cx="378.00" cy="228.00" r="17.00" fill="#ffffff" stroke="#9aa3ad" stroke-width="1.4"/>
+<text x="378.00" y="233.00" font-size="14" text-anchor="middle" fill="#6b7280">2</text>
+<circle cx="426.00" cy="228.00" r="17.00" fill="#fff6f0" stroke="#7b4fa3" stroke-width="2.6"/>
+<text x="426.00" y="233.00" font-size="14" text-anchor="middle" fill="#7b4fa3" font-weight="700">1</text>
+<circle cx="258.00" cy="272.00" r="17.00" fill="#fff6f0" stroke="#6b7280" stroke-width="2.6"/>
+<text x="258.00" y="277.00" font-size="14" text-anchor="middle" fill="#6b7280" font-weight="700">9</text>
+<circle cx="306.00" cy="272.00" r="17.00" fill="#fff6f0" stroke="#c0392b" stroke-width="2.6"/>
+<text x="306.00" y="277.00" font-size="14" text-anchor="middle" fill="#c0392b" font-weight="700">8</text>
+<circle cx="354.00" cy="272.00" r="17.00" fill="#ffffff" stroke="#9aa3ad" stroke-width="1.4"/>
+<text x="354.00" y="277.00" font-size="14" text-anchor="middle" fill="#6b7280">7</text>
+<circle cx="402.00" cy="272.00" r="17.00" fill="#fff6f0" stroke="#6b7280" stroke-width="2.6"/>
+<text x="402.00" y="277.00" font-size="14" text-anchor="middle" fill="#6b7280" font-weight="700">6</text>
+<polyline points="234.00,211.00 234.00,185.00 318.00,185.00" fill="none" stroke="#7b4fa3" stroke-width="3.0" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 318.0 185.0 a 12 12 0 0 1 24 0" fill="none" stroke="#7b4fa3" stroke-width="3.0" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="342.00,185.00 426.00,185.00 426.00,211.00" fill="none" stroke="#7b4fa3" stroke-width="3.0" stroke-linejoin="round" stroke-linecap="round"/>
+<text x="204.00" y="171.00" font-size="11.5" text-anchor="start" fill="#7b4fa3" font-weight="700">interlock link 1 – 5 (yellow wire, inside the hood)</text>
+<line x1="330.00" y1="211.00" x2="330.00" y2="100.00" stroke="#1f5fa8" stroke-width="4.0" stroke-linecap="round"/>
+<text x="342.00" y="104.00" font-size="12" text-anchor="start" fill="#1f5fa8" font-weight="700">coil − (black, pin 3, ground)</text>
+<line x1="306.00" y1="289.00" x2="306.00" y2="400.00" stroke="#c0392b" stroke-width="4.0" stroke-linecap="round"/>
+<text x="318.00" y="418.00" font-size="12" text-anchor="start" fill="#c0392b" font-weight="700">coil + (red, pin 8, laser anode)</text>
+<line x1="258.00" y1="289.00" x2="258.00" y2="350.00" stroke="#3a7fd0" stroke-width="2.0" stroke-linecap="round"/>
+<text x="250.00" y="368.00" font-size="12" text-anchor="end" fill="#3a7fd0" font-weight="700">sense + (white, pin 9)</text>
+<line x1="402.00" y1="289.00" x2="402.00" y2="350.00" stroke="#3a9a4a" stroke-width="2.0" stroke-linecap="round"/>
+<text x="410.00" y="368.00" font-size="12" text-anchor="start" fill="#3a9a4a" font-weight="700">sense − (green, pin 6)</text>
+<text x="560.00" y="220.00" font-size="12" text-anchor="start" fill="#6b7280">pins 2, 4 (monitor diode), 7 (laser cathode):</text>
+<text x="560.00" y="238.00" font-size="12" text-anchor="start" fill="#6b7280">leave open, no wire, no link.</text>
+<text x="560.00" y="266.00" font-size="12" text-anchor="start" fill="#6b7280">The bias voltage stays off (DIP switch 4 up).</text>
+<rect x="20.00" y="470.00" width="470.00" height="160.00" rx="0" fill="#f7f8fa" stroke="#1b1f24" stroke-width="1.2"/>
+<text x="34.00" y="492.00" font-size="13" text-anchor="start" fill="#1b1f24" font-weight="700">Cable: screened, four conductors</text>
+<text x="34.00" y="514.00" font-size="12" text-anchor="start" fill="#1b1f24">coil pair: 2 × 0.35 mm² (AWG 22), twisted, red + black</text>
+<text x="34.00" y="534.00" font-size="12" text-anchor="start" fill="#1b1f24">sense pair: 2 × 0.14 mm² (AWG 26), twisted, white + green</text>
+<text x="34.00" y="556.00" font-size="12" text-anchor="start" fill="#1b1f24">overall screen with drain wire to the plug, pin 3 only (the manual</text>
+<text x="34.00" y="574.00" font-size="12" text-anchor="start" fill="#6b7280">asks for the shield on ground at the controller). Not connected at the</text>
+<text x="34.00" y="592.00" font-size="12" text-anchor="start" fill="#6b7280">coil end. Length 1–2 m. A 4-core screened microphone cable also works.</text>
+<rect x="510.00" y="470.00" width="470.00" height="160.00" rx="0" fill="#f7f8fa" stroke="#1b1f24" stroke-width="1.2"/>
+<text x="524.00" y="492.00" font-size="13" text-anchor="start" fill="#1b1f24" font-weight="700">Pin table (ITC500 manual, chapter 1.9.1)</text>
+<text x="524.00" y="516.00" font-size="11.5" text-anchor="start" fill="#1b1f24">8    laser diode anode (polarity CG)   → coil +</text>
+<text x="524.00" y="533.00" font-size="11.5" text-anchor="start" fill="#1b1f24">3    ground for the laser diode          → coil −</text>
+<text x="524.00" y="550.00" font-size="11.5" text-anchor="start" fill="#1b1f24">9    laser diode anode, voltage sense   → coil + (optional)</text>
+<text x="524.00" y="567.00" font-size="11.5" text-anchor="start" fill="#1b1f24">6    laser diode cathode, voltage sense → coil − (optional)</text>
+<text x="524.00" y="584.00" font-size="11.5" text-anchor="start" fill="#1b1f24">1, 5 interlock: a link between them is REQUIRED (under 100 Ω)</text>
+<text x="524.00" y="601.00" font-size="11.5" text-anchor="start" fill="#1b1f24">2, 4  monitor diode; 7  laser cathode (polarity AG): open</text>
+<rect x="20.00" y="650.00" width="960.00" height="170.00" rx="0" fill="#fffbe8" stroke="#b58900" stroke-width="1.4"/>
+<text x="34.00" y="672.00" font-size="13" text-anchor="start" fill="#1b1f24" font-weight="700">Soldering the plug</text>
+<text x="34.00" y="696.00" font-size="11.5" text-anchor="start" fill="#1b1f24">1  Slide the hood over the cable first. Tin the six cups. Solder: pin 8 red, pin 3 black + drain wire, pin 9 white, pin 6 green.</text>
+<text x="34.00" y="717.00" font-size="11.5" text-anchor="start" fill="#1b1f24">2  Solder the yellow link between cup 5 and cup 1 and keep it clear of cup 3 (sleeve it). Without the link the output cannot be switched on.</text>
+<text x="34.00" y="738.00" font-size="11.5" text-anchor="start" fill="#1b1f24">3  Continuity check: 5–1 about 0 Ω; 8–3 open; 9–8 about 0 Ω only if you joined them at the coil (otherwise open).</text>
+<text x="34.00" y="759.00" font-size="11.5" text-anchor="start" fill="#1b1f24">4  Plastic hood and clamp on the outer jacket; no steel. Label the plug "LD OUT, solenoid, max 200 mA".</text>
+<text x="34.00" y="780.00" font-size="11.5" text-anchor="start" fill="#1b1f24">5  Never plug a laser diode into this cable: it is wired for a coil and has no monitor-diode connection.</text>
+<rect x="20.00" y="834.00" width="960.00" height="34.00" rx="0" fill="#f7f8fa" stroke="#1b1f24" stroke-width="1.2"/>
+<text x="30.00" y="849.00" font-size="13" text-anchor="start" fill="#1b1f24" font-weight="700">D3  D9 plug</text>
+<text x="30.00" y="863.00" font-size="11" text-anchor="start" fill="#6b7280">Coil on pins 8 and 3 (CG), optional 4-wire sense on 9 and 6, interlock link 1–5. Test it with the dummy loads (next figure).</text>
+</svg>
