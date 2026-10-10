@@ -254,6 +254,9 @@ input[type=range]{width:100%;accent-color:var(--laser);min-width:0}
 .optic-tip{position:absolute;pointer-events:none;font-size:.74rem;background:var(--sim-label-bg);color:var(--sim-label);border:1px solid var(--rule-strong);padding:3px 7px;border-radius:2px;z-index:5;white-space:nowrap}
 .bom-tbl{font-size:.84rem}
 .bom-tbl .grp th{background:var(--surface-2);text-align:left;font-family:var(--font-mono);font-size:.76rem;letter-spacing:.04em}
+.owned-box{margin:26px 0 8px}
+.owned-box td.own{white-space:nowrap}
+.owned-note{font-size:.84rem;color:var(--muted)}
 .bom-tbl td:first-child{font-family:var(--font-mono);white-space:nowrap}
 .bom-tbl .pn{font-family:var(--font-mono);font-size:.72rem;color:var(--muted)}
 .bom-tbl td.num{white-space:nowrap}
@@ -519,6 +522,12 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
 <tr><td>X02</td><td class="look"><span class="p3d" data-p3d="wavemeter" data-p3dp='{}' data-title="Wavemeter (shared instrument)" data-sub="X02"></span></td><td>Wavemeter (shared instrument)</td><td class="num">1 pc</td><td>HighFinesse WS-series or shared<br><span class="pn">WS</span></td><td>Absolute frequency check of the DFB near 795 nm. Borrow rather than buy if possible.</td><td><a href="https://www.highfinesse.com/" target="_blank" rel="noopener">highfinesse.com ↗</a></td><td><span class="tag est">optional</span></td></tr>
 <tr><td>X03</td><td class="look"><span class="p3d" data-p3d="sa" data-p3dp='{}' data-title="Spectrum analyzer or RF power meter for the RF chain" data-sub="X03"></span></td><td>Spectrum analyzer or RF power meter for the RF chain</td><td class="num">1 pc</td><td>Siglent SSA1015X or similar<br><span class="pn">SSA1015X</span></td><td>Verifies the AOM drive frequency, power and spurs.</td><td><a href="https://siglentna.com/" target="_blank" rel="noopener">siglentna.com ↗</a></td><td><span class="tag est">optional</span></td></tr>
 </tbody></table></div><!--BOM-END-->
+  <div class="owned-box" id="ownedBox">
+    <h3 id="p7-owned">Already owned by the lab (working, usable in this bench)</h3>
+    <p>Everything marked “can use” in the <a href="inventory.html">Lab Inventory</a> is listed here with the equipment item it covers. These items are owned: they carry no cost and are not part of the costed bill of materials. The list follows the Lab Inventory (including edits saved in this browser).</p>
+    <div class="scroll-x"><table class="bom-tbl" id="ownedTbl"><thead><tr><th>Look</th><th>Item</th><th>Part</th><th>Qty</th><th>Covers</th><th>Role in this bench</th><th>Status</th></tr></thead><tbody></tbody></table></div>
+    <p class="owned-note" id="ownedNote"></p>
+  </div>
   <div class="gated" id="bomGate">
     <h3 id="p7-cost">Costed BOM (project members only)</h3>
     <p>Prices in MYR with line totals, the owned / borrowed and remove ticks, and a “cheaper alternative found” tick with your own estimated price and product link. The figures are not stored in this page: they are fetched from a private service after you enter the group password.</p>
@@ -560,6 +569,31 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
 <script src="parts3d.js?v=12"></script>
+<script src="inventory-data.js?v=10"></script>
+<script>
+(function () {
+  var body = document.querySelector('#ownedTbl tbody'), note = document.getElementById('ownedNote');
+  if (!body || !window.LAB_INVENTORY) return;
+  function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+  var seed = window.LAB_INVENTORY, items = seed.items.slice();
+  try {
+    var j = JSON.parse(localStorage.getItem('rb87-inventory-v1') || 'null');
+    if (j && Array.isArray(j.items)) {
+      items = j.items;
+      if (j.v !== seed.version) { var have = {}; items.forEach(function (i) { have[i.id] = 1; }); seed.items.forEach(function (s) { if (!have[s.id]) items.push(s); }); }
+    }
+  } catch (e) { }
+  var use = items.filter(function (i) { return i.status === 'use'; });
+  body.innerHTML = use.map(function (i) {
+    return '<tr><td class="look"><span class="p3d" data-p3d="' + esc(i.model || 'generic') + '" data-p3dp="' + esc(JSON.stringify(i.mp || {})) + '" data-title="' + esc(i.name) + '" data-sub="' + esc(i.part || '') + '"></span></td>' +
+      '<td>' + esc(i.name) + '<br><small>' + esc(i.brand || '') + '</small></td><td class="own">' + esc(i.part || '') + '</td><td>' + esc(i.qty || '') + '</td><td>' + esc(i.bom || '') + '</td><td>' + esc(i.role || '') + '</td><td><span class="pill on">Owned</span></td></tr>';
+  }).join('');
+  var chk = items.filter(function (i) { return i.status === 'check'; }).length;
+  note.textContent = use.length + ' owned items can be used now' + (chk ? '; ' + chk + ' more are marked “check” in the Lab Inventory and are not listed until they are confirmed' : '') + '.';
+  function scan() { if (window.Parts3D) window.Parts3D.scan(body); }
+  if (document.readyState === 'complete') scan(); else window.addEventListener('load', scan);
+})();
+</script>
 <script>
 /* Costed BOM: fetched from a private Google Apps Script web app after a password check. No prices or password live in this page.
    Ticks (owned / borrowed, removed, cheaper alternative found) are kept in this browser (localStorage) and synced to the private database (a Google Sheet) as a working copy and named versions. */
