@@ -376,7 +376,7 @@ Source: [Stefan Mayer Instruments](https://etesters.com/catalog/a063869f-1422-08
 |---|---|---|
 | RF amplifiers (+24 V) and RF switches | **yes** | 2 mV ripple is harmless for RF parts; but one channel only, so two supplies are needed for the ± rails |
 | Cell heater | **yes** | constant-current mode, 0.3–0.5 A, controlled over USB; no temperature loop (a thermistor read-out is still needed). A DC heater makes a magnetic field: wind the heater wire as twisted pairs and, if possible, switch it off while measuring |
-| Solenoid | **no** | the solenoid current is only milliamps, and 3 mArms ripple with 1 mA steps and 10 mA accuracy is larger than the current itself; the 5 nT stability needed for a 7–26 kHz line requires a low-noise source (the ITC502 laser section or a dedicated source) |
+| Solenoid | **no** | the solenoid current is only milliamps, and 3 mArms ripple with 1 mA steps and 10 mA accuracy is larger than the current itself; a 7 kHz line is about 5 mG wide (1.4 kHz per mG), so the field must stay stable to about 0.1 mG (0.2 % of 50 mG), which needs a low-noise source (the ITC502 laser section, a battery, or a dedicated source) |
 | Photodiodes, lock electronics | no | millivolts of ripple |
 
 **Verdict:** a good general bench supply at about RM 654, but nothing in the bench needs it today. Buy it only if the PS-3030DD is occupied by the RF chain and the heater needs its own supply.
@@ -390,7 +390,7 @@ Source: [Stefan Mayer Instruments](https://etesters.com/catalog/a063869f-1422-08
 | Job | Which half | Notes |
 |---|---|---|
 | Cell heater with a temperature loop | TEC | needs a 10 kΩ NTC thermistor on the cell (not a Pt100); a foil heater of about 10–20 Ω fits the 8 V and 2 A limit; the output is DC, so use twisted pairs and switch it off while measuring |
-| Solenoid current source | laser | needs about 0.1 % stability (5 nT of 5 µT); at 20 mA that is 20 µA, inside the 1.5 µA noise and 10 µA drift; check that the solenoid resistance is below about 300 Ω at 20 mA and set a low current limit first |
+| Solenoid current source | laser | needs about 0.2 % stability (0.1 mG = 10 nT out of 50 mG = 5 µT, a 140 Hz shift against a 7 kHz line); at 20 mA that is 40 µA, well above the 1.5 µA noise and 10 µA drift; check that the solenoid resistance is below about 300 Ω at 20 mA and set a low current limit first |
 | Spare or second laser | both | for a repump or a backup if the DFB is discontinued |
 
 If both work on the bench, the separate cell-heater controller (BOM C04) and the solenoid current source (C08) could be dropped. This has not been applied to the BOM yet.
@@ -416,7 +416,27 @@ If both work on the bench, the separate cell-heater controller (BOM C04) and the
 
 **Check the field.** With the fluxgate inside the shield, switch the heater on and off: the change should be small compared with 1 mG. If not, twist the leads tighter, or heat first and measure with the heater current as low as possible.
 
-### Q26. Is the Newport AD-300/DC fast detector useful?
+### Q26. What DC supply should drive the solenoid? Is the Rigol DP832A needed?
+
+*Added 10 Oct 2026*
+
+**Not needed. Use the free laser half of the second ITC502; a battery with a resistor is the cheap back-up.**
+
+**Requirement.** The EIT line is about 7 kHz wide, and the field shifts it by 1.4 kHz per mG, so the line is about 5 mG wide. Keeping the field stable to about 0.1 mG (10 nT) shifts the line by only 140 Hz, which is 0.2 % of the 50 mG bias. The solenoid current is small (B = µ0·n·I: about 2 mA for one layer of 0.5 mm wire, tens of mA for several layers), so the allowed noise and drift are only a few to a few tens of microamps.
+
+| Option | Noise and drift | Verdict |
+|---|---|---|
+| **ITC502 laser half (unit 2)** | 1.5 µA rms noise, 10 µA drift per 24 h, 0–200 mA, compliance above 6 V, low-noise by design | **first choice, no cost**: the TEC half of the same unit runs the cell heater; check the solenoid resistance (under about 300 Ω at 20 mA) and set the current limit low |
+| Battery + low-TC resistor (+ trimmer) | microvolt-level noise, no mains pick-up; drift from the battery voltage and the resistor | **cheapest back-up**, a few tens of ringgit; measure the current with a multimeter, and let it settle |
+| Home-built current source (for example an LT3092) | very low noise if built carefully | cheap, needs a little electronics |
+| Rigol DP832A (3 channels) | linear supply with mV-level ripple; the current-mode noise and the 1 mA setting steps were not checked | works, but expensive and coarse (1 mA steps are 5–50 % of a 2–20 mA current) |
+| Multicomp 72-2710 and similar | 3 mArms ripple | no: larger than the current itself |
+
+**Effect on the BOM.** If the ITC502 route works, BOM C08 (Rigol DP832A) and, with the heater on the TEC half, C04 (TC300B) can be dropped. This has not been applied; test the solenoid and the heater on the bench first, with the fluxgate inside the shield.
+
+**Correction.** Two earlier answers (the second ITC502 and the Multicomp supply) quoted 5 nT as the stability needed; the right figure is about 10 nT (0.1 mG), because the 7 kHz line is 5 mG wide. Those answers are corrected.
+
+### Q27. Is the Newport AD-300/DC fast detector useful?
 
 *Added 9 Oct 2026*
 
@@ -427,7 +447,7 @@ If both work on the bench, the separate cell-heater controller (BOM C04) and the
 
 ## The Quantum Spain-style bench
 
-### Q27. Is the Spain-style arrangement correct, in theory and in practice?
+### Q28. Is the Spain-style arrangement correct, in theory and in practice?
 
 *Added 9 Oct 2026*
 
