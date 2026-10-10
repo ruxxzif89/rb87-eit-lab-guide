@@ -240,7 +240,7 @@ Source: [ILX 6700B silicon heads brochure](https://www.newport.com/medias/sys_ma
 | S140C (silicon, 350–1100 nm, 1 µW–500 mW) | **yes** | covers 795 nm; reads the fibre output (5–15 mW) and the control (about 1 mW); polarization and beam shape do not matter |
 | S144C (InGaAs, 800–1700 nm) | **no** | 795 nm is below its 800 nm limit, so the calibration is not valid; keep it for infrared work |
 
-**Limit:** the S140C floor is 1 µW (1 nW resolution), so the probe at about 2 µW is read poorly. Measure the probe before the attenuating optics, or add a low-floor photodiode sensor such as the S120C (50 nW).
+**Limit:** the S140C floor is 1 µW (1 nW resolution), so the probe at about 2 µW is read poorly. Measure the probe before the attenuating optics, or read it with the lab S120VC (50 nW floor).
 
 ### Q14. Which instruments record the result: the power meter or the oscilloscope?
 
@@ -291,7 +291,21 @@ Sources: [Finkelstein et al. 2022](https://arxiv.org/abs/2205.10959), [DeRose et
 
 It appears in the Lab Inventory (item I12), the equipment pictures and the power meter in both 3D benches. To use the exact CAD mesh, export it from SolidWorks as STL or glTF.
 
-### Q18. Is the Newport AD-300/DC fast detector useful?
+### Q18. Is the Thorlabs S120VC head useful?
+
+*Added 10 Oct 2026*
+
+**Yes, and it fills the gap of the S140C.** The S120VC is a silicon photodiode head (200–1100 nm, 50 nW–50 mW, 9.5 mm aperture, 1 nW resolution, uncertainty 3 % from 451 nm). It plugs into the PM100USB like the S140C. Figures are from reseller and catalogue pages (the Thorlabs datasheet was not found; the product is listed as discontinued).
+
+| Head | Range | Use for |
+|---|---|---|
+| S120VC | 50 nW–50 mW | **probe** (about 2 µW), SAS beams, control (about 1 mW) |
+| S140C | 1 µW–500 mW | fibre output (5–15 mW), control; reads independent of beam shape and polarization |
+| S144C | 800–1700 nm | not for 795 nm |
+
+With the PM100USB, the S120VC and the S140C the lab has the complete power-meter set. Keep the beam inside the 9.5 mm aperture and enter 795 nm on the console.
+
+### Q19. Is the Newport AD-300/DC fast detector useful?
 
 *Added 9 Oct 2026*
 
@@ -302,7 +316,7 @@ It appears in the Lab Inventory (item I12), the equipment pictures and the power
 
 ## The Quantum Spain-style bench
 
-### Q19. Is the Spain-style arrangement correct, in theory and in practice?
+### Q20. Is the Spain-style arrangement correct, in theory and in practice?
 
 *Added 9 Oct 2026*
 

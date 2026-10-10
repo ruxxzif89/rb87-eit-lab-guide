@@ -2,7 +2,7 @@
    status: use = can be used in this project, check = identify or measure first, no = not suitable. bom = BOM item(s) it can cover.
    Edits made on the Lab Inventory page are kept in the browser and can be synced to the private database. */
 window.LAB_INVENTORY = {
-  version: 8,
+  version: 9,
   items: [
     { id: 'L01', name: 'Polarizing cube beamsplitter, cage-mounted', part: 'CM1-PBS251', brand: 'Thorlabs', qty: '2', model: 'pbs', mp: {}, status: 'no', bom: 'O03',
       specs: '30 mm cage-cube-mounted polarizing beamsplitter cube, 420–680 nm, 8-32 and M4 adapters. Discontinued 21 Sep 2016.',
@@ -119,9 +119,12 @@ window.LAB_INVENTORY = {
       role: 'With the S140C it is the bench power meter for the power budget: fibre output (about 5 to 15 mW), control (about 1 mW), and the lock arm. Because it logs to a PC it can record the control power during a long scan. Install the Thorlabs software on a PC first.', link: 'https://www.thorlabs.com/thorproduct.cfm?partnumber=PM100USB', loc: '', owner: '', notes: '' },
     { id: 'I13', name: 'Integrating-sphere power sensor, silicon, 350 to 1100 nm', part: 'S140C', brand: 'Thorlabs', qty: '1', model: 'sphere', mp: {}, status: 'use', bom: 'E05',
       specs: 'Silicon photodiode in a PTFE integrating sphere; 350 to 1100 nm; working range 1 uW to 500 mW; resolution 1 nW; uncertainty 3 % from 440 to 980 nm; linearity 0.5 %; aperture 5 mm; reads independent of beam shape and polarization. From the Thorlabs spec sheet.',
-      role: 'Covers 795 nm and the control power (about 1 mW) and the fibre output (5 to 15 mW). Not for the probe: at about 2 uW it is close to the 1 uW floor, so the reading is poor; measure the probe before the attenuating optics, or use a photodiode sensor with a lower floor (S120C, 50 nW).', link: 'https://www.thorlabs.com/thorproduct.cfm?partnumber=S140C', loc: '', owner: '', notes: '' },
+      role: 'Covers 795 nm and the control power (about 1 mW) and the fibre output (5 to 15 mW). Not for the probe: at about 2 uW it is close to the 1 uW floor, so the reading is poor; read the probe with the S120VC (50 nW floor) instead.', link: 'https://www.thorlabs.com/thorproduct.cfm?partnumber=S140C', loc: '', owner: '', notes: '' },
     { id: 'I14', name: 'Integrating-sphere power sensor, InGaAs, 800 to 1700 nm', part: 'S144C', brand: 'Thorlabs', qty: '1', model: 'sphere', mp: {}, status: 'no', bom: '',
       specs: 'InGaAs photodiode in a PTFE integrating sphere; stated range 800 to 1700 nm; working range 1 uW to 500 mW; uncertainty 5 %. From the Thorlabs spec sheet.',
-      role: 'Not suitable: the laser at 795 nm is below the stated 800 nm limit, where the calibration is not valid and the response falls steeply. Keep it for infrared work. Use the S140C for this experiment.', link: 'https://www.thorlabs.com/thorproduct.cfm?partnumber=S144C', loc: '', owner: '', notes: '' }
+      role: 'Not suitable: the laser at 795 nm is below the stated 800 nm limit, where the calibration is not valid and the response falls steeply. Keep it for infrared work. Use the S140C for this experiment.', link: 'https://www.thorlabs.com/thorproduct.cfm?partnumber=S144C', loc: '', owner: '', notes: '' },
+    { id: 'I15', name: 'Standard photodiode power sensor, silicon, 200 to 1100 nm', part: 'S120VC', brand: 'Thorlabs', qty: '1', model: 'phead', mp: {}, status: 'use', bom: 'E05',
+      specs: 'Silicon photodiode head; 200 to 1100 nm; working range 50 nW to 50 mW; resolution 1 nW; uncertainty 3 % from 451 to 1100 nm (5 % below); linearity 0.5 %; aperture 9.5 mm; SM1 thread. Figures from reseller and catalogue pages (the Thorlabs datasheet was not found); the product is listed as discontinued.',
+      role: 'The probe-power sensor: its 50 nW floor covers the probe (about 2 uW) and the weak SAS beams, which the S140C cannot read. It also covers the control (about 1 mW) up to 50 mW. It is a plain photodiode, so keep the beam inside the 9.5 mm aperture and enter 795 nm on the console. With the PM100USB it makes the lab power-meter set complete (BOM E05); recalibrate yearly.', link: 'https://www.thorlabs.com/thorproduct.cfm?partnumber=S120C', loc: '', owner: '', notes: '' }
   ]
 };

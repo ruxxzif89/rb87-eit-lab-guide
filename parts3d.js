@@ -209,6 +209,9 @@
       g.add(tube([[-44, y0 + 1, 0], [-50, y0 + 1, -18], [-52, y0 + 6, -38], [-55, y0 + 8.5, -46]], 1.1, M.black, 24));
       g.add(cy(22.5, 30.5, M.black, -70, y0 + 8.5, -46, 'x', 36)); g.add(cy(23, 2, M.alu, -84, y0 + 8.5, -46, 'x', 36)); g.add(cy(12.7, 5, M.alu, -87, y0 + 8.5, -46, 'x', 28)); g.add(cy(8, 1, M.black, -89.6, y0 + 8.5, -46, 'x', 24)); g.add(cy(5.2, 1, M.glass, -90.2, y0 + 8.5, -46, 'x', 20));
     },
+    phead: function (g) { var M = mats(); stand(g); /* Thorlabs S120-type photodiode head: disc about O30 x 12 mm with SM1 thread, cable at the back */
+      g.add(cy(15.2, 12, M.black, 0, 0, 0, 'x', 32)); g.add(cy(15.6, 1.4, M.alu, 6, 0, 0, 'x', 32)); g.add(cy(12.7, 5, M.alu, 9, 0, 0, 'x', 28)); g.add(cy(9.2, 1, M.black, 11.8, 0, 0, 'x', 24)); g.add(cy(4.75, 0.8, M.glass, 12.4, 0, 0, 'x', 20));
+      g.add(cy(3, 12, M.black, -12, 0, 0, 'x', 12)); g.add(bx(12, 5, 8, M.dark, -20, 0, 0)); },
     sphere: function (g) { var M = mats(); stand(g); /* Thorlabs S14xC integrating-sphere head: disc O45 x 30.5 mm, O5 mm aperture, SM1 thread, cable at the back */
       g.add(cy(22.5, 30.5, M.black, 0, 0, 0, 'x', 36)); g.add(cy(23, 2, M.alu, 14, 0, 0, 'x', 36)); g.add(cy(12.7, 6, M.alu, 18, 0, 0, 'x', 28)); g.add(cy(8, 1, M.black, 21.2, 0, 0, 'x', 24)); g.add(cy(5.2, 1, M.glass, 21.8, 0, 0, 'x', 20));
       g.add(cy(3.2, 14, M.black, -22, 0, 0, 'x', 12)); g.add(bx(14, 6, 10, M.dark, -29, 0, 0)); },
