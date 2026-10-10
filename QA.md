@@ -347,7 +347,24 @@ Identified from five photographs of the lab shelves and added to the Lab Invento
 
 **Rules and limits.** Items marked "check" or "no" are not counted. An item that covers a row only in part is counted only for the units it can supply (for example 6 post holders against 60 post sets). The Credix SG-1710 is **not** counted against the dual-channel RF synthesizer, which needs two phase-locked channels. Mounts whose aperture is not measured yet (the Melles Griot set) are counted as 10 of the 11 mirror mounts; measure them. The prices stay behind the group password; the switch only changes how the totals are computed.
 
-### Q22. Is the Newport AD-300/DC fast detector useful?
+### Q22. Can the Stefan Mayer FLC100 be the fluxgate magnetometer with milligauss resolution?
+
+*Added 10 Oct 2026*
+
+**Yes for the resolution; check the offset and the supplier.** The FLC100 is a small single-axis fluxgate sensor (45 × 14 × 6 mm, 5 V, about 2 mA, analog output). Figures below are from secondary pages quoting the manufacturer's 2012 datasheet (the Alibaba page itself could not be read), so confirm them with Stefan Mayer.
+
+| Need | FLC100 | Verdict |
+|---|---|---|
+| Resolution: 1 mG = 100 nT; the working field is about 50 mG = 5 µT | noise about 150 pT/√Hz at 1 Hz, under 0.5 nT rms (0.1–10 Hz): about 200 times finer than 1 mG | **more than enough** |
+| Range | ±100 µT (±1 G): covers the shield interior and the 50 mG solenoid field, and even the Earth's field outside | fine |
+| Bandwidth | DC to 1 kHz | fine |
+| Axes | one | measure the three axes one after another (or buy three) |
+
+**Cautions.** (1) The zero offset and its drift decide how well you can null the field; flip the sensor by 180° and average the two readings to cancel the offset. (2) The sensor and its leads must be kept clear of the shield and the solenoid while the shield is open; it fits through a port of 14 mm or more. (3) It is a bare sensor: you need a 5 V supply, a stable readout (the oscilloscope or a 6½-digit multimeter) and a calibration against a known coil field. (4) A "new stock" listing on Alibaba is a counterfeit and old-stock risk: order from Stefan Mayer Instruments or an authorised distributor and ask for the calibration sheet.
+
+Source: [Stefan Mayer Instruments](https://etesters.com/catalog/a063869f-1422-08df-aa96-6c5cd8570108)
+
+### Q23. Is the Newport AD-300/DC fast detector useful?
 
 *Added 9 Oct 2026*
 
@@ -358,7 +375,7 @@ Identified from five photographs of the lab shelves and added to the Lab Invento
 
 ## The Quantum Spain-style bench
 
-### Q23. Is the Spain-style arrangement correct, in theory and in practice?
+### Q24. Is the Spain-style arrangement correct, in theory and in practice?
 
 *Added 9 Oct 2026*
 
