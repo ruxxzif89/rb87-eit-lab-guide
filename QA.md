@@ -395,7 +395,28 @@ Source: [Stefan Mayer Instruments](https://etesters.com/catalog/a063869f-1422-08
 
 If both work on the bench, the separate cell-heater controller (BOM C04) and the solenoid current source (C08) could be dropped. This has not been applied to the BOM yet.
 
-### Q25. Is the Newport AD-300/DC fast detector useful?
+### Q25. How do I use the second ITC502 as the cell-heater controller (connection and set-up)?
+
+*Added 10 Oct 2026*
+
+**Assignment:** the first ITC502 with an LDM-4980 mount is reserved for the DFB laser; the second ITC502 runs the cell heater with its TEC half. The laser half of the second unit stays off (current limit 0, nothing connected).
+
+**Connection.**
+1. TEC output (the two TEC terminals on the rear connector; confirm the pin numbers in the ITC500 manual) → a **series power diode** (for example 1N5400, 3 A) → the foil heater. Orient the diode so that the heating polarity conducts.
+2. Thermistor input → a **10 kΩ NTC** glued to the cell wall next to the heater (Kapton tape or thermal epoxy); use a twisted, shielded pair, away from the heater leads.
+3. Twist the two heater leads together along their whole length (and wind the foil bifilar) so that the DC current makes almost no field in the shield.
+
+**Why the diode.** A TEC controller reverses its current when the temperature is above the set-point. A resistor heats for either polarity, so without a diode an overshoot would make it heat more: a thermal runaway. The diode blocks the reverse current; the 0.8 V drop is small against the 8 V available.
+
+**Settings.**
+- Mode: constant temperature; sensor: thermistor; the set-point is a thermistor resistance. For a 10 kΩ NTC with B ≈ 3900 K the cell at 65 °C reads about 2.1 kΩ (R = 10 kΩ · exp[B(1/T − 1/298 K)]; use the B value of your own thermistor).
+- TEC current limit: start at 0.8 A, and check that heater resistance × current stays under about 7 V; a foil heater of 10 Ω gives 0.6 A for about 4 W.
+- PID: start from the factory values, raise the P gain until the temperature oscillates a little, then back off; raise the set-point in steps of 10 °C.
+- Warm-up takes 10–20 minutes. Check the stability on the display before the run.
+
+**Check the field.** With the fluxgate inside the shield, switch the heater on and off: the change should be small compared with 1 mG. If not, twist the leads tighter, or heat first and measure with the heater current as low as possible.
+
+### Q26. Is the Newport AD-300/DC fast detector useful?
 
 *Added 9 Oct 2026*
 
@@ -406,7 +427,7 @@ If both work on the bench, the separate cell-heater controller (BOM C04) and the
 
 ## The Quantum Spain-style bench
 
-### Q26. Is the Spain-style arrangement correct, in theory and in practice?
+### Q27. Is the Spain-style arrangement correct, in theory and in practice?
 
 *Added 9 Oct 2026*
 
