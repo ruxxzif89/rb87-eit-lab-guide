@@ -48,7 +48,7 @@
 <rect x="20.00" y="400.00" width="960.00" height="180.00" rx="0" fill="#f7f8fa" stroke="#1b1f24" stroke-width="1.2"/>
 <text x="34.00" y="424.00" font-size="13" text-anchor="start" fill="#1b1f24" font-weight="700">Why and how</text>
 <text x="34.00" y="448.00" font-size="11.5" text-anchor="start" fill="#1b1f24">The BOM has 12 dumps: 4 AOM zeroth orders, 1 Glan reject, 1 SAS pump, 6 PBS leakage ports. The strongest beam is the AOM zeroth order of the control</text>
-<text x="34.00" y="464.00" font-size="11.5" text-anchor="start" fill="#1b1f24">arm, below about 10 mW.</text>
+<text x="34.00" y="464.00" font-size="11.5" text-anchor="start" fill="#1b1f24">arm: about 10 mW with a 15 mW laser, up to 30 mW with a 40 mW laser.</text>
 <text x="34.00" y="486.00" font-size="11.5" text-anchor="start" fill="#1b1f24">Tilt the block 10° so the reflection off the front face does not return along the beam. Mount it on a post with a 30 mm cage clamp or two M4 screws</text>
 <text x="34.00" y="502.00" font-size="11.5" text-anchor="start" fill="#1b1f24">through the block.</text>
 <text x="34.00" y="524.00" font-size="11.5" text-anchor="start" fill="#1b1f24">Do not polish the bore: a rough, matte black wall scatters the light, the beam meets the wall about 28 mm from the mouth (5 mm / tan 10°) at a grazing</text>

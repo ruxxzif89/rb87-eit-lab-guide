@@ -27,6 +27,24 @@
 - Section 09 of index.html ("Questions and answers", collapsible and searchable) and QA.md are generated from one list in `private/build_qa.py` (markers `<!--QA-START-->` / `<!--QA-END-->`). Add a question: append it to the list (or, if a related entry exists, extend that entry: related answers are merged, 17 entries after the audit of 10 Oct 2026), run `python3 private/build_qa.py`, commit index.html and QA.md. No prices, no grant details.
 - Top bar (all pages, one markup written by `diy_lib.nav_html`): Reading Section, Zeeman EIT, 3D Bench, Spain-style Bench, Equipment, Lab Inventory, DIY Section; secondary words are hidden below 1080 px, a small-phone rule below 400 px keeps it on one row down to 320 px.
 
+## Where we left off (public-safe summary, 10 Oct 2026; the private details are in the git-ignored `CLAUDE.local.md`)
+
+State: seven tabs are live (Reading Section, Zeeman EIT, 3D Bench, Spain-style Bench, Equipment, Lab Inventory, DIY Section). Section 09 of index.html has 18 merged Q&A entries; every answer shows 3D equipment pictures. The DIY Section (parts D1 to D10) was audited: 46 independent numeric checks, datasheet checks (Twinleaf, ITC500 manual, Mini-Circuits, Stefan Mayer, Gooch & Housego, AeroDIODE), every drawing checked for overlapping labels under two font metrics.
+
+Design questions still open (none involves money):
+- Laser: AeroDIODE 795LD-1-SM/PM-NI (30 mW, 200 kHz, no internal isolator) against the Eagleyard BFY12 in the equipment list. The Q&A entry says AeroDIODE is better on paper if the vendor commits in writing to 794.98 nm at 25 to 30 degrees C chip temperature and the PM fibre option; the Eagleyard stays the fallback. Not applied to the equipment list yet. With the AeroDIODE the fibre isolator is mandatory and the lock-box divider changes (33 kohm instead of 91 kohm, DIY part D6).
+- Shield: innermost bore at least 46 mm, inner length at least 250 mm, end-cap feed-through 20 mm; the equipment list gives only "O70 x 250 mm, 3 layers".
+- Lock offset: the double-pass AOMs add 160 MHz but the SAS arm has no AOM, so the laser must be locked 160 MHz away from the line the cell sees; the guide does not yet show how.
+- Cell: stem position and exact size; ITC502 jack gender and TEC polarity (dummy-load test in D3); AOM model, housing size, RF connector and maximum RF power; DC on the RF lines (synthesizer, AOM input).
+- The RF bias and control box (DIY D8) is not an equipment-list row.
+
+How to continue on another machine:
+1. `git pull`; the git-ignored `private/` and `CLAUDE.local.md` arrive through Google Drive: wait until Drive has finished syncing, then read `CLAUDE.local.md` first.
+2. Tools: git, node (v24 used), python 3 (3.14 used) with `pip install pillow numpy scipy pymupdf openpyxl`, Google Chrome (set `CHROME` if it is not in the usual place), a TrueType font for the label check (Segoe UI, Arial or DejaVu Sans is found automatically; `DRAW_FONT_FILE` overrides). Local server: `python3 -m http.server 4180 --bind 127.0.0.1`.
+3. Rebuild the DIY Section: edit numbers in `private/diy/params.py`, run `python3 private/diy/figs_d1.py` ... `figs_d9.py` (d6 and d7 are inside `figs_d5.py`, d10 inside `figs_d9.py`), then `python3 private/diy/build_diy.py`, then `python3 private/diy/audit.py` (expects `0 failed`). `DRAW_FONT=arial` runs the label check with the narrower Arial metrics as a second opinion.
+4. Rebuild Q&A: `python3 private/build_qa.py`. Equipment tables: `python3 private/build_bom.py` and `node private/gs_test.js` (expects ALL PASS).
+5. Before every push: `git ls-files | grep -c private` prints 0; no prices (`grep -c "RM [0-9]"` on edited pages prints 0); no grant details; commit messages end with the Co-Authored-By line given by the session.
+
 ## Resuming on another machine
 
 The folder is on Google Drive and also a git repo (public parts via GitHub). One machine at a time: commit and push before leaving, let Drive finish syncing, then `git pull` on the next machine. Needed: git, node, python3 (`pip install openpyxl` for the xlsx), a static server (`python3 -m http.server 4180 --bind 127.0.0.1`). Bump the `?v=` query on script tags when editing `eitphys.js`, `bench-sim.js`, `parts3d.js` or `inventory*.js` (current: eitphys 6, bench-sim 18, parts3d 13, inventory-data 14, qs-layout 1). Before every push check `git ls-files | grep -c private` prints 0. Private notes for the owner's sessions are in the git-ignored `CLAUDE.local.md` and `private/`.
