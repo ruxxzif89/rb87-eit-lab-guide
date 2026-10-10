@@ -305,7 +305,20 @@ It appears in the Lab Inventory (item I12), the equipment pictures and the power
 
 With the PM100USB, the S120VC and the S140C the lab has the complete power-meter set. Keep the beam inside the 9.5 mm aperture and enter 795 nm on the console.
 
-### Q19. Is the Newport AD-300/DC fast detector useful?
+### Q19. Is the Newport 818-SL photodiode useful, and does its power meter work?
+
+*Added 10 Oct 2026*
+
+**Maybe, once it has a working Newport meter.** The 818-SL is a passive silicon photodiode head (400–1100 nm, 10.3 mm clear aperture, removable OD3 attenuator that adds three decades of range). It covers 795 nm, but it has no display: a Newport power meter has to read it, and the Thorlabs PM100USB cannot (different connector and calibration). Its power limits depend on the meter and the attenuator, so the exact numbers are in the 818-series datasheet.
+
+**Status in the inventory: check.**
+1. Find which Newport meter goes with it, and test whether that meter still works (power on, zero, a known source).
+2. Until it works, the Thorlabs PM100USB with the S120VC (probe) and S140C (control, fibre) is the working power-meter set, so nothing is blocked.
+3. Without a meter it can still be a photodiode: about 0.5 A/W at 795 nm, so 1 mW gives about 0.5 mA. Check whether the head needs a bias first.
+
+Source: [Newport 818-SL/DB](https://np.d1.mks.com/p/818-SL--DB)
+
+### Q20. Is the Newport AD-300/DC fast detector useful?
 
 *Added 9 Oct 2026*
 
@@ -316,7 +329,7 @@ With the PM100USB, the S120VC and the S140C the lab has the complete power-meter
 
 ## The Quantum Spain-style bench
 
-### Q20. Is the Spain-style arrangement correct, in theory and in practice?
+### Q21. Is the Spain-style arrangement correct, in theory and in practice?
 
 *Added 9 Oct 2026*
 

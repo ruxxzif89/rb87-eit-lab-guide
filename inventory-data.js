@@ -2,7 +2,7 @@
    status: use = can be used in this project, check = identify or measure first, no = not suitable. bom = BOM item(s) it can cover.
    Edits made on the Lab Inventory page are kept in the browser and can be synced to the private database. */
 window.LAB_INVENTORY = {
-  version: 9,
+  version: 10,
   items: [
     { id: 'L01', name: 'Polarizing cube beamsplitter, cage-mounted', part: 'CM1-PBS251', brand: 'Thorlabs', qty: '2', model: 'pbs', mp: {}, status: 'no', bom: 'O03',
       specs: '30 mm cage-cube-mounted polarizing beamsplitter cube, 420–680 nm, 8-32 and M4 adapters. Discontinued 21 Sep 2016.',
@@ -125,6 +125,9 @@ window.LAB_INVENTORY = {
       role: 'Not suitable: the laser at 795 nm is below the stated 800 nm limit, where the calibration is not valid and the response falls steeply. Keep it for infrared work. Use the S140C for this experiment.', link: 'https://www.thorlabs.com/thorproduct.cfm?partnumber=S144C', loc: '', owner: '', notes: '' },
     { id: 'I15', name: 'Standard photodiode power sensor, silicon, 200 to 1100 nm', part: 'S120VC', brand: 'Thorlabs', qty: '1', model: 'phead', mp: {}, status: 'use', bom: 'E05',
       specs: 'Silicon photodiode head; 200 to 1100 nm; working range 50 nW to 50 mW; resolution 1 nW; uncertainty 3 % from 451 to 1100 nm (5 % below); linearity 0.5 %; aperture 9.5 mm; SM1 thread. Figures from reseller and catalogue pages (the Thorlabs datasheet was not found); the product is listed as discontinued.',
-      role: 'The probe-power sensor: its 50 nW floor covers the probe (about 2 uW) and the weak SAS beams, which the S140C cannot read. It also covers the control (about 1 mW) up to 50 mW. It is a plain photodiode, so keep the beam inside the 9.5 mm aperture and enter 795 nm on the console. With the PM100USB it makes the lab power-meter set complete (BOM E05); recalibrate yearly.', link: 'https://www.thorlabs.com/thorproduct.cfm?partnumber=S120C', loc: '', owner: '', notes: '' }
+      role: 'The probe-power sensor: its 50 nW floor covers the probe (about 2 uW) and the weak SAS beams, which the S140C cannot read. It also covers the control (about 1 mW) up to 50 mW. It is a plain photodiode, so keep the beam inside the 9.5 mm aperture and enter 795 nm on the console. With the PM100USB it makes the lab power-meter set complete (BOM E05); recalibrate yearly.', link: 'https://www.thorlabs.com/thorproduct.cfm?partnumber=S120C', loc: '', owner: '', notes: '' },
+    { id: 'I16', name: 'Low-power calibrated silicon photodetector (818-SL series)', part: '818-SL', brand: 'Newport', qty: '1', model: 'phead', mp: {}, status: 'check', bom: 'E05',
+      specs: 'Silicon photodiode, 400 to 1100 nm, 10.3 mm clear aperture with a crosshair, removable threaded OD3 attenuator (three decades more range). It is a passive head: it has no display and needs a Newport power meter (handheld or benchtop) to read it, or a photocurrent read-out. Power limits depend on the meter and on the attenuator; the exact figures are in the 818-series datasheet. Whether the version in the lab has the DB15 calibration module (818-SL/DB) is not known.',
+      role: 'Covers 795 nm and can be a spare power head, but only with a Newport meter, and the Thorlabs PM100USB cannot read it (different connector and calibration). First find the Newport meter that goes with it and test that the meter still works; until then the Thorlabs PM100USB with the S120VC and S140C is the working power-meter set. Without a meter it can still be used as a plain photodiode: the photocurrent is about 0.5 A per watt at 795 nm, so a 1 mW beam gives about 0.5 mA (check the head for a bias requirement first).', link: 'https://np.d1.mks.com/p/818-SL--DB', loc: '', owner: '', notes: '' }
   ]
 };
