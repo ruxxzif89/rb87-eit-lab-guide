@@ -7,6 +7,8 @@ Working notes from the project, written 9 Oct 2026. Numbers come from datasheets
 
 *Added 9 Oct 2026*
 
+*Equipment shown in the guide: DFB laser module (BFY12).*
+
 **Yes. It is the manufacturer's Rb D1 spectroscopy part** (Toptica Eagleyard EYP-DFB-0795-00015-1500-BFY12-0005, datasheet revision 0.93, 5 Feb 2025). Nothing in the datasheet rules it out.
 
 | Our need | Datasheet | Fit |
@@ -35,6 +37,8 @@ Sources: [Eagleyard datasheet](https://global-topticaeagleyard.b-cdn.net/wp-cont
 
 *Added 9 Oct 2026*
 
+*Equipment shown in the guide: DFB laser module, PM100USB power meter.*
+
 **About 1 mW of control light at the cell and under 1 µW of probe, which means 5–15 mW at the laser fibre.** The 15 mW part is the right size and a 40 mW laser would be wasted.
 
 | Beam | Intensity in the papers | Power needed at the cell |
@@ -52,6 +56,8 @@ More control power only broadens the line: the EIT width grows by about 4.5 kHz 
 ### Q3. Why not an ECDL?
 
 *Added 9 Oct 2026*
+
+*Equipment shown in the guide: DFB laser module.*
 
 **A DFB is good enough for this experiment and much cheaper and simpler. An ECDL would be a luxury, not a requirement.**
 
@@ -75,6 +81,8 @@ More control power only broadens the line: the EIT width grows by about 4.5 kHz 
 
 *Added 9 Oct 2026*
 
+*Equipment shown in the guide: DFB laser module.*
+
 **No sentence in either paper says why, so this is partly inference.** What they do say: ECDLs have a linewidth of a few hundred kHz, DFBs about 1–2 MHz, and either is fine for EIT.
 
 Likely reasons (my judgment):
@@ -90,6 +98,8 @@ None applies strongly to us: one fixed target line, no existing ECDL, and a budg
 
 *Added 9 Oct 2026*
 
+*Equipment shown in the guide: DFB laser module, Rb vapour cell.*
+
 **No, not the laser's own linewidth.** Two different linewidths get mixed up:
 - **The EIT linewidth** is the narrow one (7.3 kHz at 1.3 mW/cm², 26 kHz at 5.5 mW/cm²). It is set by control intensity, magnetic field, buffer-gas diffusion and coherence time, not by the laser.
 - **The laser linewidth** only has to be well below the optical width of the atoms (Doppler about 500 MHz, wider with buffer gas). Our 0.6–1 MHz is 100× below.
@@ -103,6 +113,8 @@ A narrower laser helps only with a very noisy driver or sub-Doppler spectroscopy
 ### Q6. What linewidths and frequencies do we have to set?
 
 *Added 9 Oct 2026*
+
+*Equipment shown in the guide: DFB laser module, AOM, RF source.*
 
 | Item | Value |
 |---|---|
@@ -126,6 +138,8 @@ Because the offset between the two beams is only kHz, a generator with 1 Hz reso
 
 *Added 9 Oct 2026*
 
+*Equipment shown in the guide: DFB laser module, ITC502 controller, LDM-4980 butterfly mount.*
+
 **Yes, if the current noise is low.** The rule: the laser tunes at about 1.4 GHz per mA, so every 1 µA rms of driver noise can become about 1.4 MHz of linewidth.
 
 | Controller | Noise | Verdict |
@@ -140,6 +154,8 @@ A 5 µA driver does not harm EIT (the optical line is about 100 MHz wide and bot
 ### Q8. Is the Thorlabs ITC502 suitable for our laser?
 
 *Added 9 Oct 2026*
+
+*Equipment shown in the guide: ITC502 controller, DFB laser module.*
 
 **Yes, and it is better than the EM595.**
 
@@ -165,6 +181,8 @@ A 5 µA driver does not harm EIT (the optical line is about 100 MHz wide and bot
 
 *Added 9 Oct 2026*
 
+*Equipment shown in the guide: ITC502 controller, LDM-4980 butterfly mount.*
+
 | Item | Useful? | Why |
 |---|---|---|
 | 2 × ITC502 | yes, both | one drives the laser and its TEC; the second can run a second laser or take over two other jobs (below) |
@@ -182,6 +200,8 @@ Sources: [ILX LDM-4984](https://www.newport.com/p/LDM-4984) · [Thorlabs TCLDM9 
 
 *Added 9 Oct 2026*
 
+*Equipment shown in the guide: SG-1710 generator.*
+
 **Yes, as an AOM driver.** It is a single-channel synthesizer, 200 kHz to 1000 MHz, 1 Hz resolution, 0.5 ppm accuracy, up to +13 dBm, with AM, FM and GPIB (figures from a third-party listing, not a Credix datasheet).
 - It can drive one AOM at 80 MHz through an RF amplifier (+13 dBm alone is not enough), for example the AOM in the SAS arm that moves the lock by 160 MHz.
 - Two independent generators share no phase, which is acceptable for CW EIT because the offset stays within a few Hz, far below the 7–26 kHz EIT width.
@@ -193,6 +213,8 @@ Source: [SG-1710 listing](https://www.radiolocman.com/op/device.html?di=63870)
 ### Q11. Can the Aditeg PS-3030DD dual power supply be used as a main supply?
 
 *Added 9 Oct 2026*
+
+*Equipment shown in the guide: PS-3030DD supply.*
 
 **Yes, as the main supply of the RF chain and, if you wish, of the cell heater. Not for the solenoid or the photodiodes.** From the front panel: two adjustable channels with a tracking switch (independent, series, parallel) and a fixed 5 V / 3 A output; the model name suggests 0–30 V and 0–3 A per channel. No datasheet was found, so the ripple is unverified (similar linear supplies quote about 0.5–1 mV rms in voltage mode and about 3 mA rms in current mode).
 
@@ -208,6 +230,8 @@ It is in the lab inventory with a 3D picture.
 ### Q12. Are the ILX OMM-6810B optical multimeter and the OMH-6745B head useful?
 
 *Added 9 Oct 2026*
+
+*Equipment shown in the guide: OMM-6810B meter, OMH-6745B head.*
 
 **Not with this head. The meter is useful only if a silicon head is found.** The OMM-6810B is ILX's optical power and wavelength meter for the OMH-6700B heads (5-digit LED display, GPIB, no longer sold); its power range, wavelength range and accuracy come from the head.
 
@@ -232,6 +256,8 @@ Source: [ILX 6700B silicon heads brochure](https://www.newport.com/medias/sys_ma
 
 *Added 10 Oct 2026*
 
+*Equipment shown in the guide: PM100USB console, S140C / S144C head.*
+
 **Yes for the PM100USB and the S140C; no for the S144C.** Figures are from the Thorlabs spec sheets.
 
 | Item | Use? | Why |
@@ -245,6 +271,8 @@ Source: [ILX 6700B silicon heads brochure](https://www.newport.com/medias/sys_ma
 ### Q14. Which instruments record the result: the power meter or the oscilloscope?
 
 *Added 10 Oct 2026*
+
+*Equipment shown in the guide: oscilloscope, PDA36A2 detector, PM100USB power meter.*
 
 **The result comes from a photodetector read on the oscilloscope. The power meter is a setup tool.** The EIT signal is the probe transmission while the two-photon detuning is scanned, and the window is only about 7–30 kHz wide. A USB or benchtop power meter updates far too slowly to follow a scan, shows only a number, and the S140C floor (1 µW) is close to the probe power (about 2 µW).
 
@@ -262,6 +290,8 @@ Source: [ILX 6700B silicon heads brochure](https://www.newport.com/medias/sys_ma
 
 *Added 10 Oct 2026*
 
+*Equipment shown in the guide: PDA36A2 detector.*
+
 **Yes: a Thorlabs PDA36A2, an amplified silicon detector (350–1100 nm, 8 switchable gain steps, 0–70 dB, 3.6 × 3.6 mm chip). Two are needed, a third is optional.**
 - One for the probe signal after the Glan-Taylor (the EIT result).
 - One for the SAS lock signal.
@@ -275,6 +305,8 @@ The 3D bench, the Spain-style bench and the equipment table now show the PDA36A2
 
 *Added 10 Oct 2026*
 
+*Equipment shown in the guide: PDA36A2 detector (the one we use).*
+
 **No, it is overkill.** A balanced detector subtracts the laser intensity noise with a second reference beam. The reference papers do without it:
 - Finkelstein et al. 2022: the probe passes a Glan-Taylor and is focused on "a fast photodiode"; the probe is scanned and the EIT spectrum is recorded.
 - DeRose et al.: one New Focus 1621 photodiode on a digital oscilloscope (low detector impedance to avoid cable reflections); the pump leakage was reduced with a Glan polariser, not a better detector.
@@ -287,6 +319,8 @@ Sources: [Finkelstein et al. 2022](https://arxiv.org/abs/2205.10959), [DeRose et
 
 *Added 10 Oct 2026*
 
+*Equipment shown in the guide: PM100USB console.*
+
 **Used as a visual reference, not loaded directly.** The SolidWorks part file (.sldprt) is a closed format and cannot be opened here. The Thorlabs web drawing (an eDrawings page) does open in a browser and shows the real shape: a ribbed aluminium extrusion with black end caps, the Thorlabs label on top, the sensor connector at one end and USB at the other. The guide's three.js model of the PM100USB now follows that look, with the S140C head on its cable beside it; the dimensions are estimated from the drawing, not measured.
 
 It appears in the Lab Inventory (item I12), the equipment pictures and the power meter in both 3D benches. To use the exact CAD mesh, export it from SolidWorks as STL or glTF.
@@ -294,6 +328,8 @@ It appears in the Lab Inventory (item I12), the equipment pictures and the power
 ### Q18. Is the Thorlabs S120VC head useful?
 
 *Added 10 Oct 2026*
+
+*Equipment shown in the guide: S120VC head.*
 
 **Yes, and it fills the gap of the S140C.** The S120VC is a silicon photodiode head (200–1100 nm, 50 nW–50 mW, 9.5 mm aperture, 1 nW resolution, uncertainty 3 % from 451 nm). It plugs into the PM100USB like the S140C. Figures are from reseller and catalogue pages (the Thorlabs datasheet was not found; the product is listed as discontinued).
 
@@ -309,6 +345,8 @@ With the PM100USB, the S120VC and the S140C the lab has the complete power-meter
 
 *Added 10 Oct 2026*
 
+*Equipment shown in the guide: 818-SL type head.*
+
 **Maybe, once it has a working Newport meter.** The 818-SL is a passive silicon photodiode head (400–1100 nm, 10.3 mm clear aperture, removable OD3 attenuator that adds three decades of range). It covers 795 nm, but it has no display: a Newport power meter has to read it, and the Thorlabs PM100USB cannot (different connector and calibration). Its power limits depend on the meter and the attenuator, so the exact numbers are in the 818-series datasheet.
 
 **Status in the inventory: check.**
@@ -321,6 +359,8 @@ Source: [Newport 818-SL/DB](https://np.d1.mks.com/p/818-SL--DB)
 ### Q20. Which of the loose mounts and stages in the photographs are useful?
 
 *Added 10 Oct 2026*
+
+*Equipment shown in the guide: mG kinematic mount, PR01/M rotation stage, XY stage, lens positioner, zoom lens, brass rotator, grid target.*
 
 Identified from five photographs of the lab shelves and added to the Lab Inventory with a drawing of each (the drawings follow the photographs, with the markings that are legible).
 
@@ -340,6 +380,8 @@ Identified from five photographs of the lab shelves and added to the Lab Invento
 
 *Added 10 Oct 2026*
 
+*Equipment shown in the guide: ITC502, oscilloscope, PM100USB, PS-3030DD.*
+
 **A main switch, "Count what the lab already owns", on both cost views (equipment tab and the Spain-style bench).** It is on by default and is kept in the browser. When it is on:
 - every Lab Inventory item with status **use** and a "covers" BOM id is matched to the BOM rows by quantity (an item of 10 covers 10 units);
 - fully covered rows are **green**, partly covered rows are light green with "n of N in the lab", and the covered units are taken off the totals (a separate line shows what the lab inventory covers);
@@ -350,6 +392,8 @@ Identified from five photographs of the lab shelves and added to the Lab Invento
 ### Q22. Can the Stefan Mayer FLC100 be the fluxgate magnetometer with milligauss resolution?
 
 *Added 10 Oct 2026*
+
+*Equipment shown in the guide: FLC100 fluxgate.*
 
 **Yes for the resolution; check the offset and the supplier.** The FLC100 is a small single-axis fluxgate sensor (45 × 14 × 6 mm, 5 V, about 2 mA, analog output). Figures below are the manufacturer's product text (range ±100 µT, 5 V, 2 mA, noise below 5 nT peak-to-peak from 0.1 to 10 Hz, DC to 1 kHz at −3 dB); the Alibaba page itself could not be read. Ask Stefan Mayer for the offset and the calibration sheet.
 
@@ -370,6 +414,8 @@ Source: [Stefan Mayer Instruments](https://etesters.com/catalog/a063869f-1422-08
 
 *Added 10 Oct 2026*
 
+*Equipment shown in the guide: bench supply.*
+
 **Yes for the RF chain and the cell heater; no for the solenoid. It is not needed now, because the lab already has the Aditeg PS-3030DD and a second ITC502.** From the datasheet: one channel, 0–30 V and 0–5 A (150 W), voltage and current ripple at most 2 mVrms and 3 mArms (20 Hz–20 MHz), setting resolution 10 mV and 1 mA, setting accuracy 0.5 % + 20 mV and 0.5 % + 10 mA, USB and RS-232, 110 × 156 × 260 mm. The datasheet does not say whether it is linear or switching.
 
 | Job | Use it? | Why |
@@ -385,6 +431,8 @@ Source: [Stefan Mayer Instruments](https://etesters.com/catalog/a063869f-1422-08
 
 *Added 10 Oct 2026*
 
+*Equipment shown in the guide: ITC502, foil heater, solenoid.*
+
 **Three jobs.** An ITC502 is a laser current source (0–200 mA, noise under 1.5 µA rms, drift under 10 µA per 24 h) plus a TEC controller (±2 A, 16 W, thermistor input), and the two halves are independent. The lab has two units, so after the first runs the DFB the second is free.
 
 | Job | Which half | Notes |
@@ -399,11 +447,15 @@ If both work on the bench, the separate cell-heater controller (BOM C04) and the
 
 *Added 10 Oct 2026*
 
+*Equipment shown in the guide: ITC502, foil heater, Rb cell, µ-metal shield.*
+
 **Assignment:** the first ITC502 with an LDM-4980 mount is reserved for the DFB laser; the second ITC502 runs the cell heater with its TEC half and, if wished, the solenoid with its laser half. Everything below is from the ITC500 operation manual.
 
 **TEC output (15-pin D-sub, rear).** TEC (+) is pins 5, 6 and 7, TEC (−) is pins 13, 14 and 15; **all three pins of each must be connected**. Pins 2 and 9 sense the heater voltage (optional). The output is ±2 A, 16 W, compliance above 8 V, and the (−) side is at ground. Thermistor: pins 3 and 4 (if one lead of the thermistor is grounded, it goes to pin 3). Use shielded cable and connect the shield to pins 13–15. Pin 12 is a supply for Thorlabs mounts: leave it alone.
 
-![ITC502 unit 2: wiring of the cell heater (TEC output and thermistor)](fig-itc502-heater.svg)
+![ITC502 rear panel as seen from behind: A = TEC OUT, B = LD OUT, C = DIP switches](fig-itc502-rear.svg)
+
+![ITC502 unit 2: wiring of the cell heater on the TEC OUT jack, drawn as you look into the jack](fig-itc502-heater.svg)
 
 **Heater wiring.**
 1. TEC (+) → a **series power diode** (for example 1N5400, 3 A) → the foil heater → TEC (−).
@@ -426,6 +478,8 @@ If both work on the bench, the separate cell-heater controller (BOM C04) and the
 
 *Added 10 Oct 2026*
 
+*Equipment shown in the guide: ITC502, solenoid, FLC100 fluxgate, µ-metal shield.*
+
 **Yes, it can drive a coil; wire it like a laser diode with its cathode grounded.** From the ITC500 manual, the laser output is a 9-pin D-sub: pin 8 = laser anode, pin 7 = laser cathode, pin 3 = ground of the laser output, pins 9 and 6 = laser voltage sense (anode, cathode), pins 2 and 4 = monitor diode, pins 1 and 5 = interlock.
 
 | Step | What to do |
@@ -437,7 +491,7 @@ If both work on the bench, the separate cell-heater controller (BOM C04) and the
 | Current limit | set the hardware limit ILD LIM with the 25-turn ADJ pot, a little above the working current; connect the coil with the output off |
 | Cable | twisted pair in a shield, shield grounded |
 
-![ITC502 unit 2: wiring of the solenoid (laser output, interlock link, fluxgate check)](fig-itc502-solenoid.svg)
+![ITC502 unit 2: wiring of the solenoid on the LD OUT jack, drawn as you look into the jack](fig-itc502-solenoid.svg)
 
 **Numbers that matter.** Range 0 to ±200 mA, compliance above 6 V (so the coil must be under about 300 Ω at 20 mA), set-point resolution 10 µA from the front panel (3 µA remote), accuracy ±100 µA, noise and 50/60 Hz ripple under 1.5 µA rms each, drift under 10 µA per 24 h, transients under 0.2 mA.
 
@@ -448,6 +502,8 @@ If both work on the bench, the separate cell-heater controller (BOM C04) and the
 ### Q27. What DC supply should drive the solenoid? Is the Rigol DP832A needed?
 
 *Added 10 Oct 2026*
+
+*Equipment shown in the guide: ITC502, solenoid, bench supply.*
 
 **Not needed. Use the free laser half of the second ITC502; a battery with a resistor is the cheap back-up.**
 
@@ -469,6 +525,8 @@ If both work on the bench, the separate cell-heater controller (BOM C04) and the
 
 *Added 9 Oct 2026*
 
+*Equipment shown in the guide: AD-300/DC detector.*
+
 **A good diagnostic, not the main probe detector.** No datasheet was found for this number; the closest Newport parts are the 818-BB amplified detectors (rise time under 400 ps).
 - Use it to watch AOM switching and pulse shapes on the oscilloscope, the control–probe beat note, or the strong SAS beam.
 - For the weak probe (about 2 µW at the cell) a gain-adjustable low-noise detector such as the Thorlabs PDA36A2 is better: EIT pulses last microseconds, so 300 ps speed only adds noise.
@@ -479,6 +537,8 @@ If both work on the bench, the separate cell-heater controller (BOM C04) and the
 ### Q29. Is the Spain-style arrangement correct, in theory and in practice?
 
 *Added 9 Oct 2026*
+
+*Equipment shown in the guide: DFB laser, AOM, Rb cell, detector.*
 
 **It is a correct Zeeman EIT chain, with three drawing faults (fixed) and several practical cautions.** Everything rests on one photograph, so the real bench may differ.
 
