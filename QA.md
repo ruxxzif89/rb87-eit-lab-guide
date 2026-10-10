@@ -336,7 +336,18 @@ Identified from five photographs of the lab shelves and added to the Lab Invento
 
 **Left out as not needed:** the ball-screw stepper stage, aluminium rails, the V-block, brackets, loose screws and the box of cables.
 
-### Q21. Is the Newport AD-300/DC fast detector useful?
+### Q21. How does the lab inventory enter the costed BOM and the Spain-style cost?
+
+*Added 10 Oct 2026*
+
+**A main switch, "Count what the lab already owns", on both cost views (equipment tab and the Spain-style bench).** It is on by default and is kept in the browser. When it is on:
+- every Lab Inventory item with status **use** and a "covers" BOM id is matched to the BOM rows by quantity (an item of 10 covers 10 units);
+- fully covered rows are **green**, partly covered rows are light green with "n of N in the lab", and the covered units are taken off the totals (a separate line shows what the lab inventory covers);
+- the Spain-style box counts the inventory against its own parts, and our bill of materials against the same inventory, so the comparison stays fair.
+
+**Rules and limits.** Items marked "check" or "no" are not counted. An item that covers a row only in part is counted only for the units it can supply (for example 6 post holders against 60 post sets). The Credix SG-1710 is **not** counted against the dual-channel RF synthesizer, which needs two phase-locked channels. Mounts whose aperture is not measured yet (the Melles Griot set) are counted as 10 of the 11 mirror mounts; measure them. The prices stay behind the group password; the switch only changes how the totals are computed.
+
+### Q22. Is the Newport AD-300/DC fast detector useful?
 
 *Added 9 Oct 2026*
 
@@ -347,7 +358,7 @@ Identified from five photographs of the lab shelves and added to the Lab Invento
 
 ## The Quantum Spain-style bench
 
-### Q22. Is the Spain-style arrangement correct, in theory and in practice?
+### Q23. Is the Spain-style arrangement correct, in theory and in practice?
 
 *Added 9 Oct 2026*
 

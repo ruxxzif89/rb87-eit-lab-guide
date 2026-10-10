@@ -17,6 +17,7 @@
 - eitphys.js: the physics engine and the reference layout (73 parts, scaled by LAYOUT_SCALE onto a 2400x1600 mm table) plus the zone rectangles; bench-sim.js: the three.js simulator UI. Both are shared by index.html and bench.html (bump the ?v= query when editing). quantum.html keeps its own embedded copy of the physics.
 - inventory.html + inventory.js + inventory-data.js: editable Lab Inventory tab (what the lab owns, 3D pictures via parts3d.js, status use/check/no, BOM ids it covers). Edits live in localStorage; the group password lets the page save/load the shared list through the Apps Script actions `invget` / `invset` (second sheet `inventory`). After changing the Apps Script template the user must redeploy.
 - equipment.html: the equipment table on its own tab, a no-cost "Already owned by the lab" table built in the browser from the Lab Inventory items with status use (inventory-data.js + the same localStorage list), plus the password-gated costed BOM (ticks: have it / remove / cheaper alternative found with price and link; saved in the browser and in a Google Sheet through an Apps Script).
+- lab-cover.js: shared by equipment.html (costed BOM) and qs-bench.html (cost box): main switch "Count what the lab already owns" (localStorage `rb87-use-inventory`); matches Lab Inventory items (status use, `bom` ids, qty) to BOM rows, green rows, totals reduced. No prices in it. The Spain-style box needs the Apps Script `qsest` that returns `parts` and `oursRows` (redeploy).
 - quantum.html: Quantum Optics Lectures (primers P0-P5, L1-L13, appendices, bibliography).
 - parts3d.js: three.js models for the equipment pictures (ported from the simulator plus extra items). `Parts3D.scan(root)` renders `.p3d` elements; clicking opens a viewer.
 - lecture-3d.js, lecture-symbols.js: lecture illustrations and the symbol hover help.
@@ -26,7 +27,7 @@
 
 ## Resuming on another machine
 
-The folder is on Google Drive and also a git repo (public parts via GitHub). One machine at a time: commit and push before leaving, let Drive finish syncing, then `git pull` on the next machine. Needed: git, node, python3 (`pip install openpyxl` for the xlsx), a static server (`python3 -m http.server 4180 --bind 127.0.0.1`). Bump the `?v=` query on script tags when editing `eitphys.js`, `bench-sim.js`, `parts3d.js` or `inventory*.js` (current: eitphys 6, bench-sim 16, parts3d 13, inventory-data 11, qs-layout 1). Before every push check `git ls-files | grep -c private` prints 0. Private notes for the owner's sessions are in the git-ignored `CLAUDE.local.md` and `private/`.
+The folder is on Google Drive and also a git repo (public parts via GitHub). One machine at a time: commit and push before leaving, let Drive finish syncing, then `git pull` on the next machine. Needed: git, node, python3 (`pip install openpyxl` for the xlsx), a static server (`python3 -m http.server 4180 --bind 127.0.0.1`). Bump the `?v=` query on script tags when editing `eitphys.js`, `bench-sim.js`, `parts3d.js` or `inventory*.js` (current: eitphys 6, bench-sim 16, parts3d 13, inventory-data 12, qs-layout 1). Before every push check `git ls-files | grep -c private` prints 0. Private notes for the owner's sessions are in the git-ignored `CLAUDE.local.md` and `private/`.
 
 ## BOM pipeline (private)
 

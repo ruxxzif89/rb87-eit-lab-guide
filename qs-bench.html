@@ -456,6 +456,9 @@ body.bench-page .sim-main{height:calc(var(--app-h,100vh) - var(--nav-h,44px) - v
 .qs-cost th{background:var(--surface-2);font-family:var(--font-mono);font-size:.7rem;letter-spacing:.05em;text-transform:uppercase}
 .qs-cost td.num{text-align:right;font-family:var(--font-mono);white-space:nowrap}.qs-cost td.p{color:var(--muted)}
 .qs-cost.unlocked td.p{color:var(--ink)}.qs-cost tr.tot td{background:var(--surface-2)}
+.qs-cost tr.lab td{background:rgba(46,160,67,.20)}.qs-cost tr.labpart td{background:rgba(46,160,67,.09)}
+.qs-cost .invsw{display:block;margin:10px 0;padding:8px 12px;border:1px solid var(--ok);border-radius:3px;background:var(--ok-bg);cursor:pointer;font-size:.92rem}
+.qs-cost .invsw input{width:18px;height:18px;vertical-align:-3px;accent-color:var(--ok)}
 .qs-cost .verdict{font-weight:600;margin:8px 0}
 .qs-info .note{background:var(--warn-bg);border:1px solid var(--warn-rule);padding:10px 14px;border-radius:3px;max-width:78ch}
 </style>
@@ -602,6 +605,7 @@ body.bench-page .sim-main{height:calc(var(--app-h,100vh) - var(--nav-h,44px) - v
     <summary>Cost estimate of this bench (units are public, prices need the group password)</summary>
     <div class="body">
       <p>Every unit in the Quantum Spain-style version (the 63 parts drawn above) is priced with the <b>same unit prices as this guide’s costed bill of materials</b>. Left out on purpose: the laser mount, the laser current and TEC controllers, and the breadboard. Group A is what the photo and the simulator show; group B is what is needed to run the bench but is not visible in the photo.</p>
+      <label class="invsw"><input type="checkbox" id="qsInv"> <b>Count what the lab already owns</b> (rows in green, taken off the totals; from the <a href="inventory.html">Lab Inventory</a>, status “use”)</label>
       <div class="unlock">
         <label for="qsPw">Group password</label>
         <input type="password" id="qsPw" autocomplete="off" aria-describedby="qsMsg">
@@ -664,6 +668,8 @@ body.bench-page .sim-main{height:calc(var(--app-h,100vh) - var(--nav-h,44px) - v
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
 <script src="eitphys.js?v=6"></script>
 <script src="qs-layout.js?v=1"></script>
+<script src="inventory-data.js?v=12"></script>
+<script src="lab-cover.js?v=1"></script>
 <script src="bench-sim.js?v=18"></script>
 <script>
 (function () { var n = document.querySelector('.topnav'); if (!n) return; function s() { document.documentElement.style.setProperty('--nav-h', n.offsetHeight + 'px'); } s(); window.addEventListener('resize', s); window.addEventListener('load', s); if (window.ResizeObserver) new ResizeObserver(s).observe(n); })();
@@ -676,6 +682,25 @@ body.bench-page .sim-main{height:calc(var(--app-h,100vh) - var(--nav-h,44px) - v
   function say(t, cls) { msg.textContent = t; msg.className = 'msg' + (cls ? ' ' + cls : ''); }
   function fmt(n) { return 'RM ' + Number(n).toLocaleString('en-GB'); }
   function set(k, v) { var c = box.querySelector('[data-qs="' + k + '"]'); if (c) c.textContent = v; }
+  var QSD = null, inv = document.getElementById('qsInv');
+  if (inv) { inv.checked = !!(window.LabCover && LabCover.enabled()); inv.addEventListener('change', function () { LabCover.setEnabled(inv.checked); if (QSD) paint(); }); }
+  function paint() {
+    var on = window.LabCover && LabCover.enabled(), al = on ? LabCover.allocator() : null, tot = { A: 0, B: 0 }, saveQ = 0;
+    QSD.rows.forEach(function (r) {
+      var sv = 0; if (al) (r.parts || []).forEach(function (p) { sv += al.take(p.id, r.qty * p.m) * p.u; });
+      var now = Math.max(0, r.line_myr - sv); tot[r.grp] += now; saveQ += r.line_myr - now;
+      var tr = box.querySelector('[data-qs="l' + r.n + '"]'); if (!tr) return; var row = tr.parentNode;
+      set('u' + r.n, fmt(r.unit_myr));
+      tr.innerHTML = sv > 0.5 ? '<s>' + fmt(r.line_myr) + '</s> <b>' + fmt(now) + '</b>' : fmt(r.line_myr);
+      row.className = sv > 0.5 ? (now < 1 ? 'lab' : 'labpart') : '';
+    });
+    var a2 = on ? LabCover.allocator() : null, saveO = 0; if (a2) (QSD.oursRows || []).forEach(function (o) { saveO += a2.take(o.id, o.qty) * o.u; });
+    var ours = Math.round(QSD.ours - saveO), tA = Math.round(tot.A), tB = Math.round(tot.B), tT = tA + tB;
+    set('tA', fmt(tA)); set('tB', fmt(tB)); set('tT', fmt(tT)); set('tO', fmt(ours));
+    var pc = Math.round((1 - tA / ours) * 100), pc2 = Math.round((1 - tT / ours) * 100);
+    ver.textContent = (!QSD.oursRows && on ? 'The price service has not been updated yet (redeploy the Apps Script), so the lab inventory cannot be counted. ' : '') + (on && QSD.oursRows ? 'With the lab inventory counted (green rows; ' + fmt(Math.round(saveQ)) + ' covered on this bench, ' + fmt(Math.round(saveO)) + ' on our bill of materials). ' : 'Lab inventory not counted. ') +
+      'Visible units: ' + fmt(tA) + '. With the items that are needed but not visible: ' + fmt(tT) + ', which is ' + Math.abs(pc2) + ' % ' + (pc2 >= 0 ? 'below' : 'above') + ' our bill of materials (' + fmt(ours) + '); the visible units alone are ' + Math.abs(pc) + ' % ' + (pc >= 0 ? 'below' : 'above') + '.';
+  }
   function run() {
     var p = pw.value; if (!p) { say('Enter the group password.', 'bad'); pw.focus(); return; }
     go.disabled = true; say('Checking…');
@@ -684,11 +709,7 @@ body.bench-page .sim-main{height:calc(var(--app-h,100vh) - var(--nav-h,44px) - v
       .then(function (d) {
         go.disabled = false;
         if (!d.ok) { say(d.error === 'Unknown action' ? 'The price service has not been updated yet (redeploy the Apps Script).' : (d.error || 'Failed'), 'bad'); return; }
-        d.rows.forEach(function (r) { set('u' + r.n, fmt(r.unit_myr)); set('l' + r.n, fmt(r.line_myr)); });
-        set('tA', fmt(d.totalA)); set('tB', fmt(d.totalB)); set('tT', fmt(d.total)); set('tO', fmt(d.ours));
-        var pc = Math.round((1 - d.totalA / d.ours) * 100), pc2 = Math.round((1 - d.total / d.ours) * 100);
-        ver.textContent = 'Visible units: ' + fmt(d.totalA) + '. With the items that are needed but not visible: ' + fmt(d.total) + ', which is ' + pc2 + ' % ' + (pc2 >= 0 ? 'below' : 'above') + ' our bill of materials (' + fmt(d.ours) + '); the visible units alone are ' + pc + ' % ' + (pc >= 0 ? 'below' : 'above') + '.';
-        ver.hidden = false; box.classList.add('unlocked'); say('Prices shown. They disappear when the page is reloaded.', 'ok'); pw.value = '';
+        QSD = d; paint(); ver.hidden = false; box.classList.add('unlocked'); say('Prices shown. They disappear when the page is reloaded.', 'ok'); pw.value = '';
       })
       .catch(function () { go.disabled = false; say('Could not reach the price service.', 'bad'); });
   }

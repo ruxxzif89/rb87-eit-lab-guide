@@ -2,7 +2,7 @@
    status: use = can be used in this project, check = identify or measure first, no = not suitable. bom = BOM item(s) it can cover.
    Edits made on the Lab Inventory page are kept in the browser and can be synced to the private database. */
 window.LAB_INVENTORY = {
-  version: 11,
+  version: 12,
   items: [
     { id: 'L01', name: 'Polarizing cube beamsplitter, cage-mounted', part: 'CM1-PBS251', brand: 'Thorlabs', qty: '2', model: 'pbs', mp: {}, status: 'no', bom: 'O03',
       specs: '30 mm cage-cube-mounted polarizing beamsplitter cube, 420–680 nm, 8-32 and M4 adapters. Discontinued 21 Sep 2016.',
@@ -99,9 +99,9 @@ window.LAB_INVENTORY = {
     { id: 'I06', name: 'Temperature-controlled mount for TO-can laser diodes', part: 'TCLDM9', brand: 'Thorlabs', qty: '2', model: 'generic', mp: {}, status: 'no', bom: '',
       specs: 'For 3- and 4-pin lasers in 5.6 mm (TO-46) and 9 mm (TO-18) cans; integrated TEC and bias-T (RF modulation to 500 MHz); 30 mm cage and SM1 compatible.',
       role: 'Not for the DFB, which is a 14-pin butterfly. Useful as the base of a home-built external-cavity laser or for a practice TO-can diode.', link: 'https://www.thorlabs.com/catalogPages/460.pdf', loc: '', owner: '', notes: '' },
-    { id: 'I07', name: 'Synthesized FM/AM signal generator, 200 kHz to 1000 MHz', part: 'SG-1710', brand: 'Credix', qty: '1', model: 'rfgen', mp: {}, status: 'use', bom: 'R01',
+    { id: 'I07', name: 'Synthesized FM/AM signal generator, 200 kHz to 1000 MHz', part: 'SG-1710', brand: 'Credix', qty: '1', model: 'rfgen', mp: {}, status: 'use', bom: '',
       specs: 'Single channel, 1 Hz resolution, 0.5 ppm accuracy, output -127 to +13 dBm into 50 Ω, harmonics -30 dBc or better, FM to 100 kHz deviation, AM to 100 %, GPIB and RS-232C. Figures from a third-party listing, not a Credix datasheet.',
-      role: 'Can drive one AOM at 80 MHz through an RF amplifier (+13 dBm is not enough alone), for example the AOM of the SAS arm that moves the lock by 160 MHz, or one arm if the second source is another generator; two independent generators share no phase, which is acceptable for CW EIT because the offset stays within a few Hz. Not a gate: switch the RF with a proper RF switch. Cannot reach 6.8 GHz.', link: 'https://www.radiolocman.com/op/device.html?di=63870', loc: '', owner: '', notes: '' },
+      role: 'Not counted against the dual-channel synthesizer of the BOM (R01), which needs two phase-locked channels. Can drive one AOM at 80 MHz through an RF amplifier (+13 dBm is not enough alone), for example the AOM of the SAS arm that moves the lock by 160 MHz, or one arm if the second source is another generator; two independent generators share no phase, which is acceptable for CW EIT because the offset stays within a few Hz. Not a gate: switch the RF with a proper RF switch. Cannot reach 6.8 GHz.', link: 'https://www.radiolocman.com/op/device.html?di=63870', loc: '', owner: '', notes: '' },
     { id: 'I08', name: 'Fast amplified photodetector, DC-coupled (AD-300/DC)', part: 'AD-300/DC', brand: 'Newport', qty: '1', model: 'pdgen', mp: {}, status: 'check', bom: 'E03',
       specs: 'Marked 300 ps response and 400 to 1700 nm. No datasheet was found for this model number; the closest Newport parts are the 818-BB amplified detectors (rise time under 400 ps). Supply, gain and responsivity at 795 nm are not known.',
       role: 'A good diagnostic, not the main probe detector. Use it to watch AOM switching and pulse shapes on the oscilloscope, the control and probe beat note, or the strong SAS beam. For the weak probe (about 2 µW at the cell) a gain-adjustable low-noise detector such as the Thorlabs PDA36A2 is the better choice, because EIT pulses last microseconds and 300 ps speed only adds noise. Check the responsivity at 795 nm, the supply it needs and its output into 50 Ω before using it.', link: '', loc: '', owner: '', notes: '' },

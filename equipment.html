@@ -272,6 +272,11 @@ input[type=range]{width:100%;accent-color:var(--laser);min-width:0}
 .bom-tot{display:flex;flex-wrap:wrap;gap:6px 18px;font-family:var(--font-mono);font-size:.82rem;margin:8px 0;padding:8px 10px;border:2px solid var(--ink);background:var(--surface)}
 .bom-tot .have{color:var(--muted)}
 .bom-tbl tr.have td{opacity:.55}
+.bom-tbl tr.lab td{background:rgba(46,160,67,.20)}.bom-tbl tr.labpart td{background:rgba(46,160,67,.09)}
+.bom-tbl .tag.lab{border-color:var(--ok);color:var(--ok);background:var(--ok-bg)}
+.bom-tot .labtot{color:var(--ok)}
+.invsw{display:block;margin:10px 0;padding:8px 12px;border:1px solid var(--ok);border-radius:3px;background:var(--ok-bg);cursor:pointer;font-size:.92rem}
+.invsw input{width:18px;height:18px;vertical-align:-3px;accent-color:var(--ok)}
 .bom-tbl tr.have td:first-child{opacity:1}
 .bom-tbl tr.removed td{opacity:.45}
 .bom-tbl tr.removed td:nth-child(-n+2){opacity:1}
@@ -569,7 +574,8 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
 <script src="parts3d.js?v=13"></script>
-<script src="inventory-data.js?v=11"></script>
+<script src="inventory-data.js?v=12"></script>
+<script src="lab-cover.js?v=1"></script>
 <script>
 (function () {
   var body = document.querySelector('#ownedTbl tbody'), note = document.getElementById('ownedNote');
@@ -631,23 +637,27 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
   function alt(r) { var a = S.alts[r.id]; return a && a.on ? a : null; }
   function altPrice(r) { var a = alt(r); return a && Number(a.myr) > 0 ? Number(a.myr) : 0; }
   function unitNow(r) { return altPrice(r) || r.unit_myr; }
-  function lineNow(r) { return Math.round(unitNow(r) * r.qty); }
+  function covered(r) { return eff(r) === 'buy' ? (INV[r.id] || 0) : 0; }   /* units of this row that the lab inventory already covers (main switch) */
+  function lineNow(r) { return Math.round(unitNow(r) * (r.qty - covered(r))); }
+  var INV = {};
+  function cover() { INV = {}; if (!window.LabCover || !LabCover.enabled() || !D) return; var al = LabCover.allocator(); D.rows.forEach(function (r) { var t = al.take(r.id, r.qty); if (t > 0) INV[r.id] = t; }); }
   function totals() {
-    var core = 0, opt = 0, have = 0, rem = 0, n = 0, m = 0, save = 0, na = 0;
+    var core = 0, opt = 0, have = 0, rem = 0, n = 0, m = 0, save = 0, na = 0, inv = 0, ni = 0;
     D.rows.forEach(function (r) {
       var e = eff(r);
       if (e === 'have') { have += r.line_myr; n++; } else if (e === 'remove') { rem += r.line_myr; m++; } else {
-        var l = lineNow(r); if (r.status === 'optional') opt += l; else core += l;
-        if (altPrice(r)) { save += r.line_myr - l; na++; }
+        var l = lineNow(r), cv = covered(r); if (r.status === 'optional') opt += l; else core += l;
+        if (cv > 0) { inv += unitNow(r) * cv; ni++; }
+        if (altPrice(r)) { save += (r.unit_myr - altPrice(r)) * (r.qty - cv); na++; }
       }
     });
-    return { core: core, opt: opt, have: have, n: n, rem: rem, m: m, save: save, na: na };
+    return { core: core, opt: opt, have: have, n: n, rem: rem, m: m, save: save, na: na, inv: Math.round(inv), ni: ni };
   }
   function paintTotals() {
     var t = totals(), el = document.getElementById('bomTotals'); if (!el) return;
     el.innerHTML = '<span><b>To purchase (core)</b> MYR ' + fmt(t.core) + '</span><span><b>Optional kept, to purchase</b> MYR ' + fmt(t.opt) + '</span><span><b>Everything to purchase</b> MYR ' + fmt(t.core + t.opt) + '</span>' +
       (t.na ? '<span class="save"><b>Saved by ' + t.na + ' cheaper alternative' + (t.na > 1 ? 's' : '') + '</b> MYR ' + fmt(t.save) + '</span>' : '') +
-      '<span class="have"><b>Not purchased (' + t.n + ' owned / borrowed)</b> MYR ' + fmt(t.have) + '</span><span class="have"><b>Removed from the plan (' + t.m + ' items)</b> MYR ' + fmt(t.rem) + '</span>';
+      (t.ni ? '<span class="labtot"><b>Already in the lab inventory (' + t.ni + ' items, green rows)</b> MYR ' + fmt(t.inv) + '</span>' : '') + '<span class="have"><b>Not purchased (' + t.n + ' owned / borrowed)</b> MYR ' + fmt(t.have) + '</span><span class="have"><b>Removed from the plan (' + t.m + ' items)</b> MYR ' + fmt(t.rem) + '</span>';
   }
 
   /* ---- saving: browser now, database shortly after ---- */
@@ -715,21 +725,23 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
   }
   function lineHtml(r, e) {
     if (e !== 'buy') return '<s>' + fmt(r.line_myr) + '</s> 0';
-    return altPrice(r) ? '<s>' + fmt(r.line_myr) + '</s> <b>' + fmt(lineNow(r)) + '</b>' : fmt(r.line_myr);
+    return (altPrice(r) || covered(r) > 0) ? '<s>' + fmt(r.line_myr) + '</s> <b>' + fmt(lineNow(r)) + '</b>' : fmt(r.line_myr);
   }
   function rowHtml(r) {
     var e = eff(r), a = alt(r), id = esc(r.id), link = a ? safeUrl(a.url) : '';
-    return '<tr class="' + (e === 'have' ? 'have' : e === 'remove' ? 'removed' : '') + (a ? ' hasalt' : '') + '" data-id="' + id + '">' +
+    var cv = covered(r);
+    return '<tr class="' + (e === 'have' ? 'have' : e === 'remove' ? 'removed' : '') + (a ? ' hasalt' : '') + (cv > 0 ? (cv >= r.qty ? ' lab' : ' labpart') : '') + '" data-id="' + id + '">' +
       '<td><input type="checkbox" class="bomTick" data-kind="have" data-id="' + id + '"' + (e === 'have' ? ' checked' : '') + ' aria-label="Owned or borrowed: ' + esc(r.item) + '"></td>' +
       '<td><input type="checkbox" class="bomTick" data-kind="remove" data-id="' + id + '"' + (e === 'remove' ? ' checked' : '') + ' aria-label="Remove from plan: ' + esc(r.item) + '"></td>' +
       '<td><input type="checkbox" class="bomTick" data-kind="alt" data-id="' + id + '"' + (a ? ' checked' : '') + ' aria-label="Found a cheaper alternative: ' + esc(r.item) + '"></td>' +
       '<td>' + id + '</td><td class="look">' + lookHtml(r.id, r.item) + '</td><td>' + esc(r.item) + (r.status === 'optional' ? ' <span class="tag est">optional</span>' : '') + '</td>' +
-      '<td class="num">' + r.qty + ' ' + esc(r.unit) + '</td><td class="num">' + fmt(r.market_myr) + '</td><td class="num">' + fmt(r.unit_myr) + '</td>' +
+      '<td class="num">' + r.qty + ' ' + esc(r.unit) + (cv > 0 ? '<br><span class="tag lab">' + (cv >= r.qty ? 'in the lab' : cv + ' of ' + r.qty + ' in the lab') + '</span>' : '') + '</td><td class="num">' + fmt(r.market_myr) + '</td><td class="num">' + fmt(r.unit_myr) + '</td>' +
       '<td class="alt">' + (a ? '<input type="number" class="altPrice" data-id="' + id + '" min="0" step="any" inputmode="decimal" value="' + (Number(a.myr) > 0 ? esc(a.myr) : '') + '" placeholder="MYR / unit" aria-label="Estimated price of the alternative, MYR per unit: ' + esc(r.item) + '">' : '') + '</td>' +
       '<td class="alt">' + (a ? '<input type="url" class="altUrl" data-id="' + id + '" value="' + esc(a.url || '') + '" placeholder="https://… product link" aria-label="Product link of the alternative: ' + esc(r.item) + '">' + (link ? ' <a class="altGo" href="' + esc(link) + '" target="_blank" rel="noopener">open ↗</a>' : '') : '') + '</td>' +
       '<td class="num line">' + lineHtml(r, e) + '</td><td>' + (r.basis === 'web' ? 'seen on vendor page' : '<span class="tag est">estimate</span>') + '</td></tr>';
   }
   function paintRows() {
+    cover();
     var h = '<thead><tr><th title="Tick if we already own it or can borrow it">Have it?</th><th title="Tick to take it out of the plan (optional items start ticked)">Remove</th><th title="Tick if you found a cheaper alternative: a price and a product link then appear on the row">Cheaper alt. found</th><th>#</th><th>Look (3D)</th><th>Item</th><th>Qty</th><th>Market price (MYR, unit)</th><th>Budget price (MYR, unit)</th><th>Alternative: est. price (MYR, unit)</th><th>Alternative: product link</th><th>Line total (MYR)</th><th>Price basis</th></tr></thead><tbody>', cur = null;
     D.rows.forEach(function (r) {
       if (r.g !== cur) { h += '<tr class="grp"><th colspan="13">' + esc(r.g) + '</th></tr>'; cur = r.g; }
@@ -762,10 +774,10 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
     paintTotals(); paintVer();
   }
   function csv() {
-    var lines = ['id,group,item,qty,unit,market_myr_unit,budget_myr_unit,alt_myr_unit,alt_link,line_myr,owned_or_borrowed,removed,to_purchase_myr,status,basis'];
+    var lines = ['id,group,item,qty,unit,market_myr_unit,budget_myr_unit,alt_myr_unit,alt_link,line_myr,owned_or_borrowed,removed,to_purchase_myr,status,basis,units_in_lab_inventory'];
     D.rows.forEach(function (r) {
       var e = eff(r), a = alt(r), ap = altPrice(r);
-      lines.push([r.id, '"' + r.g.replace(/"/g, '""') + '"', '"' + r.item.replace(/"/g, '""') + '"', r.qty, r.unit, r.market_myr, r.unit_myr, ap || '', a ? '"' + String(a.url || '').replace(/"/g, '""') + '"' : '', r.line_myr, e === 'have' ? 'yes' : 'no', e === 'remove' ? 'yes' : 'no', e === 'buy' ? lineNow(r) : 0, r.status, r.basis].join(','));
+      lines.push([r.id, '"' + r.g.replace(/"/g, '""') + '"', '"' + r.item.replace(/"/g, '""') + '"', r.qty, r.unit, r.market_myr, r.unit_myr, ap || '', a ? '"' + String(a.url || '').replace(/"/g, '""') + '"' : '', r.line_myr, e === 'have' ? 'yes' : 'no', e === 'remove' ? 'yes' : 'no', e === 'buy' ? lineNow(r) : 0, r.status, r.basis, covered(r)].join(','));
     });
     var a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([lines.join('\n')], { type: 'text/csv' })); a.download = 'rb87-eit-bom-costed' + (S.verName ? '-' + S.verName.replace(/[^a-z0-9]+/gi, '_') : '') + '.csv'; document.body.appendChild(a); a.click(); a.remove();
   }
@@ -774,10 +786,12 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
       '<div class="bom-vrow"><select id="bomVer" aria-label="Saved versions"></select><button type="button" class="btn" id="bomLoad">Load</button><button type="button" class="btn" id="bomUpdate">Update this version</button><button type="button" class="btn" id="bomDelete">Delete</button></div>' +
       '<div class="bom-vrow"><input type="text" id="bomVerName" maxlength="80" placeholder="Version name (for save / rename)" aria-label="Version name"><button type="button" class="btn primary" id="bomSaveNew">Save as new version</button><button type="button" class="btn" id="bomRename">Rename current version</button></div>' +
       '<p id="bomStatus" class="bom-status" aria-live="polite"></p></div>' +
+      '<label class="invsw"><input type="checkbox" id="invToggle"' + (window.LabCover && LabCover.enabled() ? ' checked' : '') + '> <b>Count what the lab already owns</b> (rows in green, taken off the totals; from the <a href="inventory.html">Lab Inventory</a>, status “use”)</label>' +
       '<div class="bom-tot" id="bomTotals"></div>' +
       '<div class="scroll-x"><table class="bom-tbl bom-costed" id="bomTable"></table></div>' +
       '<p>' + esc(D.note) + ' “Estimate” prices are catalogue-range estimates: confirm each with a vendor quote. Tick “Have it?” for anything we already own or can borrow, and “Remove” for anything we decide not to buy: both drop out of the purchase totals. Optional items start with Remove ticked. Tick “Cheaper alt. found” when you find the item for less: type the estimated price per unit (MYR) and paste the product link, and the line total and the grand total use your price. <button type="button" class="btn" id="bomCsv">Download CSV</button> <button type="button" class="btn" id="bomClear">Reset ticks to defaults</button> <button type="button" class="btn" id="bomLock">Lock</button></p>';
     bindVer(); paintRows();
+    var tg = document.getElementById('invToggle'); if (tg) tg.addEventListener('change', function () { LabCover.setEnabled(tg.checked); var y = window.scrollY; paintRows(); window.scrollTo(0, y); });
   }
   form.addEventListener('submit', function (e) {
     e.preventDefault();
