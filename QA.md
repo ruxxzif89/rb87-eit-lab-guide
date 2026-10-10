@@ -228,7 +228,21 @@ Until a silicon head turns up, use another power sensor for the power budget. Ch
 
 Source: [ILX 6700B silicon heads brochure](https://www.newport.com/medias/sys_master/images/images/he7/had/9260480790558/6700B-brochure-silicon-REV11.pdf)
 
-### Q13. Is the Newport AD-300/DC fast detector useful?
+### Q13. Can the Thorlabs PM100USB with the S140C and S144C sensors be used?
+
+*Added 10 Oct 2026*
+
+**Yes for the PM100USB and the S140C; no for the S144C.** Figures are from the Thorlabs spec sheets.
+
+| Item | Use? | Why |
+|---|---|---|
+| PM100USB console | **yes** | reads any C-series head; no display, so it needs a PC with the Thorlabs Optical Power Monitor software |
+| S140C (silicon, 350–1100 nm, 1 µW–500 mW) | **yes** | covers 795 nm; reads the fibre output (5–15 mW) and the control (about 1 mW); polarization and beam shape do not matter |
+| S144C (InGaAs, 800–1700 nm) | **no** | 795 nm is below its 800 nm limit, so the calibration is not valid; keep it for infrared work |
+
+**Limit:** the S140C floor is 1 µW (1 nW resolution), so the probe at about 2 µW is read poorly. Measure the probe before the attenuating optics, or add a low-floor photodiode sensor such as the S120C (50 nW).
+
+### Q14. Is the Newport AD-300/DC fast detector useful?
 
 *Added 9 Oct 2026*
 
@@ -239,7 +253,7 @@ Source: [ILX 6700B silicon heads brochure](https://www.newport.com/medias/sys_ma
 
 ## The Quantum Spain-style bench
 
-### Q14. Is the Spain-style arrangement correct, in theory and in practice?
+### Q15. Is the Spain-style arrangement correct, in theory and in practice?
 
 *Added 9 Oct 2026*
 

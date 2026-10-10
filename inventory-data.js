@@ -2,7 +2,7 @@
    status: use = can be used in this project, check = identify or measure first, no = not suitable. bom = BOM item(s) it can cover.
    Edits made on the Lab Inventory page are kept in the browser and can be synced to the private database. */
 window.LAB_INVENTORY = {
-  version: 5,
+  version: 6,
   items: [
     { id: 'L01', name: 'Polarizing cube beamsplitter, cage-mounted', part: 'CM1-PBS251', brand: 'Thorlabs', qty: '2', model: 'pbs', mp: {}, status: 'no', bom: 'O03',
       specs: '30 mm cage-cube-mounted polarizing beamsplitter cube, 420–680 nm, 8-32 and M4 adapters. Discontinued 21 Sep 2016.',
@@ -113,6 +113,15 @@ window.LAB_INVENTORY = {
       role: 'Useful only with a silicon head: the OMH-6745B in the lab covers 950 to 1650 nm and cannot read 795 nm, so check whether a silicon head (OMH-6703B or OMH-6742B) exists. With one it is the bench power meter for the power budget: fibre output (about 5 to 15 mW), control (about 1 mW) and probe (about 2 microwatts) with a silicon head (100 nW to 1 W, 350 or 400 to 1100 nm, integrating sphere so the reading does not depend on polarization). It also reads a power-averaged wavelength to about 1 nm with a power/wavelength head, which only confirms the diode is near 795 nm; it cannot find the Rb line. Check the calibration date on the head.', link: 'https://www.newport.com/medias/sys_master/images/images/he7/had/9260480790558/6700B-brochure-silicon-REV11.pdf', loc: '', owner: '', notes: '' },
     { id: 'I11', name: 'Measurement head for the OMM-6810B (label OMH-6745B)', part: 'OMH-6745B', brand: 'ILX Lightwave (Newport)', qty: '1', model: 'pd', mp: {}, status: 'no', bom: '',
       specs: 'This model number is not in the silicon-head brochure that was found (OMH-6703B power only, 400 to 1100 nm; OMH-6742B power and wavelength, 350 to 1100 nm, about 1 nm; OMH-6790B power and wavelength, 830 to 1100 nm only). The wavelength range read from the head label is 950 to 1650 nm, so it does not cover 795 nm.',
-      role: 'Not suitable for the 795 nm experiment: a 950 to 1650 nm head cannot measure the 795 nm laser (below its range, the response falls off sharply). Keep it for infrared work. For the bench power meter the OMM-6810B needs a silicon head (OMH-6703B or OMH-6742B, 400 or 350 to 1100 nm), or use another sensor.', link: '', loc: '', owner: '', notes: '' }
+      role: 'Not suitable for the 795 nm experiment: a 950 to 1650 nm head cannot measure the 795 nm laser (below its range, the response falls off sharply). Keep it for infrared work. For the bench power meter the OMM-6810B needs a silicon head (OMH-6703B or OMH-6742B, 400 or 350 to 1100 nm), or use another sensor.', link: '', loc: '', owner: '', notes: '' },
+    { id: 'I12', name: 'USB power meter console (no display)', part: 'PM100USB', brand: 'Thorlabs', qty: '1', model: 'pwrmeter', mp: {}, status: 'use', bom: 'E05',
+      specs: 'USB 2.0 console for the Thorlabs C-series sensor heads (S120C, S14xC and others); the sensor memory holds the calibration data. It has no display: readings appear on a PC in the Thorlabs Optical Power Monitor software, or through the driver and the SCPI/VISA commands.',
+      role: 'With the S140C it is the bench power meter for the power budget: fibre output (about 5 to 15 mW), control (about 1 mW), and the lock arm. Because it logs to a PC it can record the control power during a long scan. Install the Thorlabs software on a PC first.', link: 'https://www.thorlabs.com/thorproduct.cfm?partnumber=PM100USB', loc: '', owner: '', notes: '' },
+    { id: 'I13', name: 'Integrating-sphere power sensor, silicon, 350 to 1100 nm', part: 'S140C', brand: 'Thorlabs', qty: '1', model: 'pd', mp: {}, status: 'use', bom: 'E05',
+      specs: 'Silicon photodiode in a PTFE integrating sphere; 350 to 1100 nm; working range 1 uW to 500 mW; resolution 1 nW; uncertainty 3 % from 440 to 980 nm; linearity 0.5 %; aperture 5 mm; reads independent of beam shape and polarization. From the Thorlabs spec sheet.',
+      role: 'Covers 795 nm and the control power (about 1 mW) and the fibre output (5 to 15 mW). Not for the probe: at about 2 uW it is close to the 1 uW floor, so the reading is poor; measure the probe before the attenuating optics, or use a photodiode sensor with a lower floor (S120C, 50 nW).', link: 'https://www.thorlabs.com/thorproduct.cfm?partnumber=S140C', loc: '', owner: '', notes: '' },
+    { id: 'I14', name: 'Integrating-sphere power sensor, InGaAs, 800 to 1700 nm', part: 'S144C', brand: 'Thorlabs', qty: '1', model: 'pd', mp: {}, status: 'no', bom: '',
+      specs: 'InGaAs photodiode in a PTFE integrating sphere; stated range 800 to 1700 nm; working range 1 uW to 500 mW; uncertainty 5 %. From the Thorlabs spec sheet.',
+      role: 'Not suitable: the laser at 795 nm is below the stated 800 nm limit, where the calibration is not valid and the response falls steeply. Keep it for infrared work. Use the S140C for this experiment.', link: 'https://www.thorlabs.com/thorproduct.cfm?partnumber=S144C', loc: '', owner: '', notes: '' }
   ]
 };
