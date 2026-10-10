@@ -351,11 +351,11 @@ Identified from five photographs of the lab shelves and added to the Lab Invento
 
 *Added 10 Oct 2026*
 
-**Yes for the resolution; check the offset and the supplier.** The FLC100 is a small single-axis fluxgate sensor (45 × 14 × 6 mm, 5 V, about 2 mA, analog output). Figures below are from secondary pages quoting the manufacturer's 2012 datasheet (the Alibaba page itself could not be read), so confirm them with Stefan Mayer.
+**Yes for the resolution; check the offset and the supplier.** The FLC100 is a small single-axis fluxgate sensor (45 × 14 × 6 mm, 5 V, about 2 mA, analog output). Figures below are the manufacturer's product text (range ±100 µT, 5 V, 2 mA, noise below 5 nT peak-to-peak from 0.1 to 10 Hz, DC to 1 kHz at −3 dB); the Alibaba page itself could not be read. Ask Stefan Mayer for the offset and the calibration sheet.
 
 | Need | FLC100 | Verdict |
 |---|---|---|
-| Resolution: 1 mG = 100 nT; the working field is about 50 mG = 5 µT | noise about 150 pT/√Hz at 1 Hz, under 0.5 nT rms (0.1–10 Hz): about 200 times finer than 1 mG | **more than enough** |
+| Resolution: 1 mG = 100 nT; the working field is about 50 mG = 5 µT | noise below 5 nT peak-to-peak (0.1–10 Hz) = 0.05 mG: about 20 times finer than 1 mG | **more than enough** |
 | Range | ±100 µT (±1 G): covers the shield interior and the 50 mG solenoid field, and even the Earth's field outside | fine |
 | Bandwidth | DC to 1 kHz | fine |
 | Axes | one | measure the three axes one after another (or buy three) |
