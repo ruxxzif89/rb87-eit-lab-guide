@@ -283,13 +283,13 @@ The EIT window is slow (7–30 kHz), so averaging on the oscilloscope recovers a
 
 Sources: [Finkelstein et al. 2022](https://arxiv.org/abs/2205.10959), [DeRose et al.](https://arxiv.org/abs/2011.09229)
 
-### Q17. Can the SolidWorks file of the PM100USB be used for the 3D pictures?
+### Q17. Can the Thorlabs PM100USB CAD file be used for the 3D pictures?
 
 *Added 10 Oct 2026*
 
-**Not directly.** A SolidWorks part file (.sldprt) is a closed format that only SolidWorks, eDrawings or FreeCAD-class CAD can open, and none of those is installed here, so its true shape could not be read. The PM100USB and the S140C head are drawn in the guide's own three.js style from their known layout (compact console with the sensor connector on the front, USB at the back, a status LED, the sphere head on its cable); the dimensions are approximate.
+**Used as a visual reference, not loaded directly.** The SolidWorks part file (.sldprt) is a closed format and cannot be opened here. The Thorlabs web drawing (an eDrawings page) does open in a browser and shows the real shape: a ribbed silver aluminium extrusion with black end caps, the Thorlabs label on top, the sensor connector at one end and USB at the other. The guide's three.js model of the PM100USB now follows that look, with the S140C head on its cable beside it; the dimensions are estimated from the drawing, not measured.
 
-**To use the real CAD shape:** export it from SolidWorks as an STL or glTF file and add it to the project; it can then be loaded as the 3D model of the PM100USB. The picture appears in the Lab Inventory (item I12), the equipment pictures and the power meter in the 3D benches.
+It appears in the Lab Inventory (item I12), the equipment pictures and the power meter in both 3D benches. To use the exact CAD mesh, export it from SolidWorks as STL or glTF.
 
 ### Q18. Is the Newport AD-300/DC fast detector useful?
 

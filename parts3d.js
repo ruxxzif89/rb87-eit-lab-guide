@@ -197,15 +197,16 @@
     nd: function (g) { var M = mats(); stand(g); g.add(bx(2.5, 24, 24, M.nd)); g.add(bx(5, 3, 26, M.black, 0, -13, 0)); g.add(bx(3, 26, 2, M.black, 0, 0, 13)); g.add(bx(3, 26, 2, M.black, 0, 0, -13)); },
     glan: function (g) { var M = mats(); stand(g); g.add(bx(22, 22, 30, M.glass)); g.add(bx(24, 4, 32, M.alu, 0, -12, 0)); g.add(bx(24, 4, 32, M.alu, 0, 12, 0)); g.add(cy(3, 12, M.black, 0, 0, 18, 'z', 10)); },
     pdgen: function (g) { var M = mats(); stand(g); g.add(bx(18, 26, 22, M.dark)); g.add(cy(7, 4, M.accent, 10, 0, 0)); g.add(cy(5, 1.2, M.glass, 12.4, 0, 0)); g.add(cy(2.4, 8, M.brass, -12, 6, 0, 'x', 10)); g.add(bx(6, 3, 8, M.laser, -2, 14.5, 0)); },
-    pm100usb: function (g) { var M = mats(); /* Thorlabs PM100USB console with an S140C head: approximate outline, not the CAD */
-      var y0 = 14 - H;
-      g.add(bx(62, 28, 52, M.dark, 0, y0, 0)); g.add(bx(64, 2, 54, M.black, 0, y0 + 14, 0)); g.add(bx(64, 2, 54, M.black, 0, y0 - 14, 0));
-      g.add(bx(1.2, 10, 24, M.black, -31.3, y0, 0)); g.add(bx(2, 8, 16, M.alu, -32.4, y0 + 0.5, 0));
-      for (var pn = 0; pn < 2; pn++) g.add(cy(0.7, 2.4, M.black, -33.1, y0 + 0.5 + (pn ? 2.2 : -2.2), -5 + pn * 0.6 + 10 * 0, 'x', 6));
-      g.add(cy(1.4, 1, M.on, -31.6, y0 + 9, 20, 'x', 10));
-      g.add(bx(3, 3.6, 4.4, M.alu, 32.4, y0 - 3, 0));
-      g.add(bx(0.8, 14, 36, M.alu, -0.2, y0 + 14.2, 0));
-      g.add(tube([[-33, y0, -2], [-42, y0, -20], [-50, y0 + 6, -40], [-55, y0 + 8.5, -46]], 1.1, M.black, 24));
+    pm100usb: function (g) { var M = mats(); /* Thorlabs PM100USB console with an S140C head: aluminium extrusion with black end caps, proportions from the Thorlabs 3D drawing */
+            var y0 = 15 - H, ext = new T.MeshStandardMaterial({ color: 0xb9bfdc, metalness: 0.55, roughness: 0.38 });
+      g.add(bx(76, 30, 50, ext, 0, y0, 0));
+      for (var rb = -5; rb <= 5; rb++) { g.add(bx(74, 1, 1.2, M.dark, 0, y0 - 15.2 + 0.4, rb * 4.2)); }
+      for (var sd = -1; sd <= 1; sd += 2) for (var rg = -3; rg <= 3; rg++) g.add(bx(74, 1.2, 1, M.dark, 0, y0 + rg * 3.6, sd * 25.2));
+      g.add(bx(4, 31, 51, M.black, -40, y0, 0)); g.add(bx(4, 31, 51, M.black, 40, y0, 0));
+      g.add(bx(1.4, 3, 36, M.black, 0, y0 + 15.4, 0)); g.add(bx(0.6, 1.6, 22, M.laser, -3, y0 + 15.8, 0)); g.add(bx(0.6, 1, 14, M.alu, 6, y0 + 15.8, 0));
+      g.add(bx(2, 9, 18, M.alu, -42.4, y0 + 1, 0)); g.add(bx(1.4, 5, 12, M.black, -43.6, y0 + 1, 0)); g.add(cy(1.4, 1, M.on, -42.4, y0 + 10, 18, 'x', 10));
+      g.add(bx(2, 8, 12, M.alu, 41.6, y0 - 1, 6)); g.add(bx(1.2, 5, 8, M.black, 42.8, y0 - 1, 6)); g.add(cy(2, 2, M.alu, 42.4, y0 + 7, -14, 'x', 12));
+      g.add(tube([[-44, y0 + 1, 0], [-50, y0 + 1, -18], [-52, y0 + 6, -38], [-55, y0 + 8.5, -46]], 1.1, M.black, 24));
       g.add(cy(22.5, 30.5, M.black, -70, y0 + 8.5, -46, 'x', 36)); g.add(cy(23, 2, M.alu, -84, y0 + 8.5, -46, 'x', 36)); g.add(cy(12.7, 5, M.alu, -87, y0 + 8.5, -46, 'x', 28)); g.add(cy(8, 1, M.black, -89.6, y0 + 8.5, -46, 'x', 24)); g.add(cy(5.2, 1, M.glass, -90.2, y0 + 8.5, -46, 'x', 20));
     },
     sphere: function (g) { var M = mats(); stand(g); /* Thorlabs S14xC integrating-sphere head: disc O45 x 30.5 mm, O5 mm aperture, SM1 thread, cable at the back */
