@@ -47,85 +47,39 @@ More control power only broadens the line: the EIT width grows by about 4.5 kHz 
 
 Sources: [Eagleyard datasheet](https://global-topticaeagleyard.b-cdn.net/wp-content/uploads/data_sheets/EYP-DFB-0795-00015-1500-BFY12-0005.pdf) · [Steck, Rb-87 D line data](https://steck.us/alkalidata/rubidium87numbers.pdf)
 
-### Q2. Is the AeroDIODE 795 nm DFB (30 mW, no isolator) a better choice than our Eagleyard BFY12?
-
-*Added 10 Oct 2026*
-
-*Equipment shown in the guide: DFB laser module, dual-stage fibre isolator, ITC502 controller, 14-pin butterfly mount, lock box.*
-
-**On paper, yes: for this experiment the AeroDIODE 795LD-1-SM/PM-NI is the better laser, and it is also the cheaper quote. Two things must be settled with the vendor first: it has to be ordered for Rb D1 (794.98 nm) at a comfortable chip temperature, and it has no internal isolator, so the fibre isolator in our list becomes mandatory.** Figures are from the two data sheets (AeroDIODE PN_A348, rev 04/26; Eagleyard datasheet revision 0.93).
-
-| | Eagleyard BFY12 (our list) | AeroDIODE 795LD-1-SM/PM-NI | Better for us |
-|---|---|---|---|
-| Output from the fibre | 5–15 mW (15 mW at 160 mA) | 30 mW minimum, 40 typical (about 30 mW at 150 mA in the LIV plot) | AeroDIODE (we need only 5–15 mW; the rest is headroom) |
-| Linewidth | 0.6 MHz typical, 1.0 MHz at 15 mW | 200 kHz typical (FWHM) | AeroDIODE, but not needed (see the ECDL answer) |
-| Wavelength | the Rb D1 spectroscopy part: 794.98 nm reachable at 10–45 °C chip temperature | 794–796 nm, 795 typical, "tunable to Rb D1 by the chip temperature"; the example unit in the plots reaches 794.98 nm only at about 39 °C, the top of its 20–40 °C range | Eagleyard (guaranteed); the AeroDIODE needs a written wavelength specification |
-| Operating current | 160 mA typical, 170 mA absolute maximum | 150 mA typical, 200 mA maximum; 10 to 15 mW needs only about 90 to 105 mA in the plot | AeroDIODE (more headroom, gentler on the laser) |
-| Current tuning | about 1.4 GHz per mA | 1.0 nm/A in the table, about 0.47 GHz per mA (the plots show about 0.85 nm/A) | AeroDIODE for noise; the lock box needs another divider |
-| Temperature tuning | 0.06 nm/K | 0.04 nm/K in the table, about 0.07 nm/K in the plot | equal |
-| Side-mode suppression | 30 dB minimum, 45 typical | 40 dB minimum, 50 typical | AeroDIODE |
-| Internal isolator | micro-isolator (no figure given) | none ("NI") | Eagleyard, but our fibre isolator covers it |
-| Fibre | PM, FC/APC (narrow key), PER 20 dB | PM780-type fibre (order option 1), FC/APC, PER 18 dB | equal; the PM option must be ordered |
-| Pin-out | 14-pin butterfly: laser anode 10, cathode 11, TEC 1 and 14, thermistor 2 and 5, monitor diode 3 and 4 | 14-pin butterfly, "totally floating": laser 10 and 11 (anode, cathode), TEC 1 and 14, thermistor 2 and 5, monitor diode 3 and 4, case on 13 | equal: the same mount and cable fit |
-| Thermistor | 10 kΩ NTC, about 20 kΩ at 10 °C | 10 kΩ at 25 °C (9.5 to 10.5), inside the ITC502 range over 20 to 40 °C | AeroDIODE |
-| Label | Class 4 on the label | warning label "Laser 3B" | treat both as dangerous |
-| Status | listed as about to become obsolete; preliminary data sheet | data sheet dated April 2026 | AeroDIODE |
-
-**Ask AeroDIODE before ordering, and get the answers in the quote**
-- **The wavelength:** 794.98 nm in vacuum at a chip temperature of 25–30 °C and an operating current of 100–120 mA. The data sheet only says "contact AeroDIODE for specific wavelength requirements", and the example plot reaches D1 at about 39 °C, too close to the 40 °C limit.
-- **The fibre:** the PM option (PM780 type), FC/APC, key aligned to the slow axis, and the fibre length.
-- **The test report of the unit:** LIV curve (the table gives a typical threshold of 20 mA and a maximum of 80 mA, but the plotted LIV curve starts near 60 mA), wavelength against temperature, SMSR, and how the linewidth was measured.
-- **The mode-hop-free range** (not stated; the plots show no jumps from 70 to 165 mA at five temperatures).
-- **Other versions:** whether a version with an internal isolator exists, the warranty and the lead time.
-
-**What changes in our design if we switch**
-- **Isolation.** With no isolator in the laser, the dual-stage fibre isolator (BOM L06) is mandatory and must be the first thing after the pigtail, FC/APC to FC/APC. Relying on a micro-isolator inside the laser, as the Eagleyard allows, is not possible with this laser (the next answer explains why one isolator stage is marginal anyway).
-- **Controller.** The ITC502 fits: the laser needs 2.0 to 2.5 V against more than 6 V available. Set the current limit to about 160 mA and run near 100 mA. The TEC is rated 3 A and 4 V at most, so set the ITC502 TEC current limit to 1 A or less.
-- **Lock box.** The laser tunes about three times less per mA, so with the 91 kΩ divider (DIY Section, D6) the Red Pitaya range would be ±0.19 GHz instead of ±0.55 GHz. Use 33 kΩ instead of 91 kΩ to keep about ±0.5 GHz (steps of 0.06 MHz). Current noise does less harm: 1.5 µA rms is about 0.7 MHz instead of 2 MHz.
-- **Power and safety.** At 30 to 40 mW everything from the fibre is a Class 3B hazard, and a beam dump must take up to about 30 mW when an AOM is switched off (DIY Section, D10; about 10 mW with a 15 mW laser). Run the laser near 100 mA for about 15 mW.
-- **Nothing else changes:** the SAS pick-off, the control and probe split, the AOM arms and the detection do not depend on the laser model.
-
-**Verdict**
-- Choose the AeroDIODE if it confirms in writing the Rb D1 wavelength at 25–30 °C and the PM fibre option. It then gives more power than we need, a narrower line, more current headroom and a part that is still supported, at a lower quote.
-- Keep the Eagleyard as the fallback (the safe, D1-binned part) if AeroDIODE will not commit to 794.98 nm, or if the unit needs more than about 35 °C to reach it.
-- More power alone is not a reason to switch: the experiment needs about 1 mW at the cell.
-
-Sources: [AeroDIODE 795 nm laser diode page](https://www.aerodiode.com/product/795-nm-laser-diode) · [Eagleyard datasheet](https://global-topticaeagleyard.b-cdn.net/wp-content/uploads/data_sheets/EYP-DFB-0795-00015-1500-BFY12-0005.pdf)
-
-### Q3. Is an isolator mandatory, even though most of the bench is free space?
+### Q2. Is an isolator mandatory, even though most of the bench is free space?
 
 *Added 10 Oct 2026*
 
 *Equipment shown in the guide: DFB laser module, dual-stage fibre isolator, fibre collimator, double-pass AOM, quarter-wave plate, polarizing beam splitter, Rb vapour cell.*
 
-**Yes. Free space does not remove the need for an isolator: the returning light comes from the free-space part. With the AeroDIODE laser (no isolator inside) it is mandatory; with the Eagleyard (micro-isolator inside) it is still advised. Fibre or free space only decides which kind of isolator you use.**
+**Yes, and we keep it. Free space does not remove the need for an isolator: the returning light comes from the free-space part. Our laser has a micro-isolator inside, and the dual-stage fibre isolator in our list (BOM L06) is the second stage. For a laser with no isolator inside it would be mandatory. Fibre or free space only decides which kind of isolator you use.**
 
 **Why a DFB laser needs one**
-- **It reacts to very little returned light.** In the classic measurements on a DFB laser (Tkach and Chraplyvy, 1986, summarised in [section 2.6 of F. Rogister's thesis](https://arxiv.org/abs/0909.4449)) mode hopping began near −70 dB of returned power, and from −45 dB to −10 dB the line broke up (coherence collapse, 100 MHz to 25 GHz wide). Those figures belong to that laser and are only a guide for ours, but the lesson holds: a 200 kHz line stays 200 kHz only if almost nothing comes back.
+- **It reacts to very little returned light.** In the classic measurements on a DFB laser (Tkach and Chraplyvy, 1986, summarised in [section 2.6 of F. Rogister's thesis](https://arxiv.org/abs/0909.4449)) mode hopping began near −70 dB of returned power, and from −45 dB to −10 dB the line broke up (coherence collapse, 100 MHz to 25 GHz wide). Those figures belong to that laser and are only a guide for ours, but the lesson holds: the line stays as narrow as the data sheet says (about 1 MHz) only if almost nothing comes back.
 - **Our own bench sends light back.** Each double-pass AOM arm ends in a cat's-eye mirror that returns the beam exactly along itself. The wave plate and the PBS cube are meant to steer the returning beam out sideways, but no wave plate is perfect: a retardance error of 2° (a plate designed for 780 nm and used at 795 nm is about 1.7° off) or a plate set 1° off its axis lets about 10⁻³ of the returning light (−29 dB) pass the PBS and travel back towards the laser. With the AOM losses and the share of power in the arm, that is about −33 dB at the laser, far inside the coherence-collapse range if nothing blocks it. The 3D simulator uses perfect wave plates, so it shows almost nothing returning (below −80 dB) and hides this.
 - **Flat surfaces add more, and alignment makes it worse.** An uncoated quartz window returns about 3.4 % per surface (−15 dB), a bare silicon detector about a third of the light, an AR-coated optic about 0.25 %. The collimator and single-mode fibre accept only light coming back within about 0.3 mrad (0.02°) of the beam, so a surface has to be square to the beam within about 0.01° to count. That is rare by accident, but it is exactly what happens when a beam is aligned by watching its back-reflection, or when a mirror or card is left square to the beam.
 
-| Isolation in front of the laser chip | Returned light at the chip (about −33 dB without an isolator) | Against the −70 dB and −45 dB marks |
+| What protects the laser chip | Returned light at the chip (about −33 dB with nothing in front) | Against the −70 dB and −45 dB marks |
 |---|---|---|
-| none (the AeroDIODE alone) | −33 dB | inside coherence collapse |
-| one stage, 30–35 dB (a micro-isolator inside a laser package is typically about 30 dB; the Eagleyard data sheet gives no figure) | −63 to −68 dB | in the mode-hopping band |
-| dual stage, 40 dB (catalogue minimum of the fibre isolator in our list) | −73 dB | just below the mode-hopping mark |
-| dual stage, 50–55 dB (typical) | −83 to −88 dB | clear |
+| nothing | −33 dB | inside coherence collapse |
+| the micro-isolator inside the Eagleyard alone (one stage, typically about 30 dB; its data sheet gives no figure) | about −63 dB | in the mode-hopping band |
+| the fibre isolator alone (dual stage: 40 dB catalogue minimum, 50–55 dB typical) | −73 dB to −88 dB | just clear to clear |
+| both, as in our design | about −100 dB or better | far below |
 
-These are estimates (about ±10 dB), not measurements. They show the order of magnitude and why one stage is marginal.
+These are estimates (about ±10 dB), not measurements. They show the order of magnitude and why the micro-isolator alone is marginal.
 
-**What to do**
-- **Keep the dual-stage fibre isolator (BOM L06) as the first part after the laser's fibre:** PM fibre, FC/APC at both ends, key on the slow axis. It covers everything downstream, needs no alignment and costs about 1 dB.
+**What we do**
+- **Keep the dual-stage fibre isolator (BOM L06) as the first part after the laser's fibre:** PM fibre, FC/APC at both ends, key on the slow axis, nothing between the laser's fibre and the isolator. It covers everything downstream, needs no alignment and costs about 1 dB.
 - **A free-space isolator is the alternative**, placed after the collimator: a Faraday isolator with its input polarizer along the fibre's slow axis. One stage gives about 30 to 40 dB, so by the table you would need two in series to match the fibre part. Isolators sold for 780 nm are often tunable by a few tens of nanometres: check that 794.98 nm is inside the range of the model you buy.
-- **Do not order the optional collimator on the AeroDIODE laser.** It would put the beam into the air before any isolator. Order the PM fibre option with the FC/APC connector.
+- **Check the replacement of the laser.** The vendor lists the Eagleyard part in our list as about to become obsolete. If its replacement has no isolator inside, the fibre isolator becomes the only stage, and then its isolation matters even more.
 - **Habits that cost nothing:** tilt the cell and the detector by a degree or two, dump every unused port, set each double-pass wave plate for the least light in its leak port (not by the scale on the mount), and never leave a mirror or card square to the beam while the laser is on.
-- **With the Eagleyard** the micro-isolator inside is the first stage, so the fibre isolator is the second. By the table one stage alone is marginal, so keep both.
 
-**Verdict:** mandatory with the AeroDIODE, advised with the Eagleyard. The fibre isolator is the simplest way to get dual-stage protection. Its cost is small next to the laser it protects, and a feedback fault shows up as a lock that drifts or a line that is not 200 kHz wide, which is slow to trace afterwards.
+**Verdict:** keep both the micro-isolator inside the laser and the dual-stage fibre isolator. The fibre isolator is the simplest way to get the second stage. Its cost is small next to the laser it protects, and a feedback fault shows up as a lock that drifts or a line that is wider than the data sheet says, which is slow to trace afterwards.
 
-Sources: [Rogister, Nonlinear dynamics of semiconductor lasers subject to optical feedback (thesis, section 2.6)](https://arxiv.org/abs/0909.4449) · [AeroDIODE 795 nm laser diode page](https://www.aerodiode.com/product/795-nm-laser-diode) (no internal isolator; optional collimator)
+Sources: [Rogister, Nonlinear dynamics of semiconductor lasers subject to optical feedback (thesis, section 2.6)](https://arxiv.org/abs/0909.4449) · [Eagleyard data sheet EYP-DFB-0795-00015-1500-BFY12-0005](https://global-topticaeagleyard.b-cdn.net/wp-content/uploads/data_sheets/EYP-DFB-0795-00015-1500-BFY12-0005.pdf) (micro-isolator inside, no isolation figure given)
 
-### Q4. DFB or ECDL? Why not an ECDL, why do the reference papers use one, and is a narrow linewidth crucial?
+### Q3. DFB or ECDL? Why not an ECDL, why do the reference papers use one, and is a narrow linewidth crucial?
 
 *Added 10 Oct 2026*
 
@@ -169,7 +123,7 @@ None applies strongly to us: one fixed target line, no existing ECDL, and a budg
 
 **When an ECDL would be better:** driver current noise turning into linewidth (1 µA is about 1.4 MHz), scanning several GHz or other lines, a replacement if the DFB is no longer available, or an ECDL already in the building.
 
-### Q5. What linewidths and frequencies do we have to set?
+### Q4. What linewidths and frequencies do we have to set?
 
 *Added 9 Oct 2026*
 
@@ -191,7 +145,7 @@ None applies strongly to us: one fixed target line, no existing ECDL, and a budg
 
 Because the offset between the two beams is only kHz, a generator with 1 Hz resolution is far more than precise enough. The control–probe difference must stay steady to well under the EIT width (a few kHz): use one two-channel source, or sources sharing a clock.
 
-### Q6. Is a DFB with a TEC and the Thorlabs ITC502 good enough? How do the controllers compare?
+### Q5. Is a DFB with a TEC and the Thorlabs ITC502 good enough? How do the controllers compare?
 
 *Added 10 Oct 2026*
 
@@ -228,7 +182,7 @@ A 5 µA driver does not harm EIT (the optical line is about 100 MHz wide and bot
 
 ## Equipment found in the lab
 
-### Q7. Are the extra lab items useful? (second ITC502, LDM-4980 mounts, TCLDM9 mounts)
+### Q6. Are the extra lab items useful? (second ITC502, LDM-4980 mounts, TCLDM9 mounts)
 
 *Added 10 Oct 2026*
 
@@ -247,7 +201,7 @@ A 5 µA driver does not harm EIT (the optical line is about 100 MHz wide and bot
 
 Sources: [ILX LDM-4984](https://www.newport.com/p/LDM-4984) · [Thorlabs TCLDM9 catalogue](https://www.thorlabs.com/catalogPages/460.pdf)
 
-### Q8. Which of the loose mounts and stages in the photographs are useful?
+### Q7. Which of the loose mounts and stages in the photographs are useful?
 
 *Added 10 Oct 2026*
 
@@ -267,7 +221,7 @@ Identified from five photographs of the lab shelves and added to the Lab Invento
 
 **Left out as not needed:** the ball-screw stepper stage, aluminium rails, the V-block, brackets, loose screws and the box of cables.
 
-### Q9. Is the Credix SG-1710 signal generator useful?
+### Q8. Is the Credix SG-1710 signal generator useful?
 
 *Added 9 Oct 2026*
 
@@ -281,7 +235,7 @@ Identified from five photographs of the lab shelves and added to the Lab Invento
 
 Source: [SG-1710 listing](https://www.radiolocman.com/op/device.html?di=63870)
 
-### Q10. Which bench power supplies can do which job? (Aditeg PS-3030DD, Multicomp Pro 72-2710)
+### Q9. Which bench power supplies can do which job? (Aditeg PS-3030DD, Multicomp Pro 72-2710)
 
 *Added 10 Oct 2026*
 
@@ -302,7 +256,7 @@ Source: [SG-1710 listing](https://www.radiolocman.com/op/device.html?di=63870)
 
 **Verdict:** the PS-3030DD covers the RF chain and the Multicomp is a good general bench supply that nothing in the bench needs today. Buy it only if the PS-3030DD is occupied by the RF chain and the heater needs its own supply. The small ±5 V and ±3 V rails of the RF switches and attenuators can be made by the home-built bias box (DIY Section, part D8) from a ±12 V supply, so the +24 V for the amplifiers is the only high-current need.
 
-### Q11. Which of our optical power meters and heads can measure 795 nm? (ILX OMM-6810B, PM100USB with S140C, S144C and S120VC, Newport 818-SL)
+### Q10. Which of our optical power meters and heads can measure 795 nm? (ILX OMM-6810B, PM100USB with S140C, S144C and S120VC, Newport 818-SL)
 
 *Added 10 Oct 2026*
 
@@ -345,7 +299,7 @@ Until a silicon head turns up, use the Thorlabs set for the power budget. Check 
 
 Sources: [ILX 6700B silicon heads brochure](https://www.newport.com/medias/sys_master/images/images/he7/had/9260480790558/6700B-brochure-silicon-REV11.pdf) · [Newport 818-SL/DB](https://np.d1.mks.com/p/818-SL--DB)
 
-### Q12. Which instruments record the result, and which photodetectors do we need? (PDA36A2, PDB210A balanced detector, AD-300/DC)
+### Q11. Which instruments record the result, and which photodetectors do we need? (PDA36A2, PDB210A balanced detector, AD-300/DC)
 
 *Added 10 Oct 2026*
 
@@ -385,7 +339,7 @@ Sources: [Finkelstein et al. 2022](https://arxiv.org/abs/2205.10959), [DeRose et
 
 ## Solenoid, heater and fluxgate (the magnetic field)
 
-### Q13. What can the second ITC502 be used for, besides a laser?
+### Q12. What can the second ITC502 be used for, besides a laser?
 
 *Added 10 Oct 2026*
 
@@ -401,7 +355,7 @@ Sources: [Finkelstein et al. 2022](https://arxiv.org/abs/2205.10959), [DeRose et
 
 If both work on the bench, the separate cell-heater controller (BOM C04) and the solenoid current source (C08) could be dropped. This has not been applied to the BOM yet. The next two answers give the wiring; the plugs, the heater and the coil are built step by step in the DIY Section (parts D1 to D3).
 
-### Q14. How do I use the second ITC502 as the cell-heater controller (connection and set-up)?
+### Q13. How do I use the second ITC502 as the cell-heater controller (connection and set-up)?
 
 *Added 10 Oct 2026*
 
@@ -432,7 +386,7 @@ If both work on the bench, the separate cell-heater controller (BOM C04) and the
 
 **Check the field.** With the fluxgate inside the shield, switch the heater on and off: the change should be small compared with 1 mG (the DIY test uses 0.1 mG). If not, twist the leads tighter.
 
-### Q15. Which DC source should drive the solenoid, and how do I wire the second ITC502 laser output for it? (Is the Rigol DP832A needed?)
+### Q14. Which DC source should drive the solenoid, and how do I wire the second ITC502 laser output for it? (Is the Rigol DP832A needed?)
 
 *Added 10 Oct 2026*
 
@@ -471,7 +425,7 @@ If both work on the bench, the separate cell-heater controller (BOM C04) and the
 
 **Effect on the BOM.** If the ITC502 route works, BOM C08 (Rigol DP832A) and, with the heater on the TEC half, C04 (TC300B) can be dropped. This has not been applied; test the solenoid and the heater on the bench first, with the fluxgate inside the shield.
 
-### Q16. Can the Stefan Mayer FLC100 be the fluxgate magnetometer with milligauss resolution?
+### Q15. Can the Stefan Mayer FLC100 be the fluxgate magnetometer with milligauss resolution?
 
 *Added 10 Oct 2026*
 
@@ -495,7 +449,7 @@ Sources: [Stefan Mayer FLC 100 data sheet](https://stefan-mayer.com/images/datas
 
 ## The Quantum Spain-style bench
 
-### Q17. Is the Spain-style arrangement correct, in theory and in practice?
+### Q16. Is the Spain-style arrangement correct, in theory and in practice?
 
 *Added 9 Oct 2026*
 
@@ -521,7 +475,7 @@ Sources: [Stefan Mayer FLC 100 data sheet](https://stefan-mayer.com/images/datas
 
 ## About this guide
 
-### Q18. How does the lab inventory enter the costed BOM and the Spain-style cost?
+### Q17. How does the lab inventory enter the costed BOM and the Spain-style cost?
 
 *Added 10 Oct 2026*
 
@@ -534,7 +488,7 @@ Sources: [Stefan Mayer FLC 100 data sheet](https://stefan-mayer.com/images/datas
 
 **Rules and limits.** Items marked "check" or "no" are not counted. An item that covers a row only in part is counted only for the units it can supply (for example 6 post holders against 60 post sets). The Credix SG-1710 is **not** counted against the dual-channel RF synthesizer, which needs two phase-locked channels. Mounts whose aperture is not measured yet (the Melles Griot set) are counted as 10 of the 11 mirror mounts; measure them. The prices stay behind the group password; the switch only changes how the totals are computed.
 
-### Q19. Can the Thorlabs PM100USB CAD file be used for the 3D pictures?
+### Q18. Can the Thorlabs PM100USB CAD file be used for the 3D pictures?
 
 *Added 10 Oct 2026*
 
