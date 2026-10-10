@@ -425,7 +425,7 @@ Source: [Stefan Mayer Instruments](https://etesters.com/catalog/a063869f-1422-08
 | Solenoid | **no** | the solenoid current is only milliamps, and 3 mArms ripple with 1 mA steps and 10 mA accuracy is larger than the current itself; a 7 kHz line is about 5 mG wide (1.4 kHz per mG), so the field must stay stable to about 0.1 mG (0.2 % of 50 mG), which needs a low-noise source (the ITC502 laser section, a battery, or a dedicated source) |
 | Photodiodes, lock electronics | no | millivolts of ripple |
 
-**Verdict:** a good general bench supply at about RM 654, but nothing in the bench needs it today. Buy it only if the PS-3030DD is occupied by the RF chain and the heater needs its own supply.
+**Verdict:** a good general bench supply, but nothing in the bench needs it today. Buy it only if the PS-3030DD is occupied by the RF chain and the heater needs its own supply.
 
 ### Q24. What can the second ITC502 be used for, besides a laser?
 
