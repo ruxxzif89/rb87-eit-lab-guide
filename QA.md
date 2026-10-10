@@ -399,24 +399,49 @@ If both work on the bench, the separate cell-heater controller (BOM C04) and the
 
 *Added 10 Oct 2026*
 
-**Assignment:** the first ITC502 with an LDM-4980 mount is reserved for the DFB laser; the second ITC502 runs the cell heater with its TEC half. The laser half of the second unit stays off (current limit 0, nothing connected).
+**Assignment:** the first ITC502 with an LDM-4980 mount is reserved for the DFB laser; the second ITC502 runs the cell heater with its TEC half and, if wished, the solenoid with its laser half. Everything below is from the ITC500 operation manual.
 
-**Connection.**
-1. TEC output (the two TEC terminals on the rear connector; confirm the pin numbers in the ITC500 manual) → a **series power diode** (for example 1N5400, 3 A) → the foil heater. Orient the diode so that the heating polarity conducts.
-2. Thermistor input → a **10 kΩ NTC** glued to the cell wall next to the heater (Kapton tape or thermal epoxy); use a twisted, shielded pair, away from the heater leads.
+**TEC output (15-pin D-sub, rear).** TEC (+) is pins 5, 6 and 7, TEC (−) is pins 13, 14 and 15; **all three pins of each must be connected**. Pins 2 and 9 sense the heater voltage (optional). The output is ±2 A, 16 W, compliance above 8 V, and the (−) side is at ground. Thermistor: pins 3 and 4 (if one lead of the thermistor is grounded, it goes to pin 3). Use shielded cable and connect the shield to pins 13–15. Pin 12 is a supply for Thorlabs mounts: leave it alone.
+
+**Heater wiring.**
+1. TEC (+) → a **series power diode** (for example 1N5400, 3 A) → the foil heater → TEC (−).
+2. A **10 kΩ NTC** glued to the cell wall next to the heater, with Kapton tape or thermal epoxy, on a twisted shielded pair away from the heater leads.
 3. Twist the two heater leads together along their whole length (and wind the foil bifilar) so that the DC current makes almost no field in the shield.
 
-**Why the diode.** A TEC controller reverses its current when the temperature is above the set-point. A resistor heats for either polarity, so without a diode an overshoot would make it heat more: a thermal runaway. The diode blocks the reverse current; the 0.8 V drop is small against the 8 V available.
+**Why the diode.** The controller reverses its current when the temperature is above the set-point. A resistor heats for either polarity, so without a diode an overshoot would make it heat more: a thermal runaway (the manual warns that a TEC with wrong polarity can run away and destroy the parts). The diode blocks the reverse current; the 0.8 V drop is small against 8 V.
 
-**Settings.**
-- Mode: constant temperature; sensor: thermistor; the set-point is a thermistor resistance. For a 10 kΩ NTC with B ≈ 3900 K the cell at 65 °C reads about 2.1 kΩ (R = 10 kΩ · exp[B(1/T − 1/298 K)]; use the B value of your own thermistor).
-- TEC current limit: start at 0.8 A, and check that heater resistance × current stays under about 7 V; a foil heater of 10 Ω gives 0.6 A for about 4 W.
-- PID: start from the factory values, raise the P gain until the temperature oscillates a little, then back off; raise the set-point in steps of 10 °C.
-- Warm-up takes 10–20 minutes. Check the stability on the display before the run.
+**Front panel and DIP switches.**
+- Sensor: DIP switches SW7/SW8 to "TH < 20 kΩ" (100 µA measurement current; the setting range is 10 Ω to 19.99 kΩ), and the SENSOR button to thermistor. The display shows the thermistor resistance in ohms, so convert: R = R0·exp[B(1/T − 1/T0)] (temperatures in kelvin; R0 and B from the thermistor datasheet). A 10 kΩ NTC with B ≈ 3900 K reads about 2.1 kΩ at 65 °C. Select the display T SET and dial the value in with the TEC knob.
+- **TEC current limit:** select the display I TEC LIM and set it with the small screwdriver pot beside its LED; start at 0.8 A, and keep heater resistance × current under about 7 V (a 10 Ω heater at 0.6 A gives about 4 W).
+- **Temperature window protection:** select T WIN, set about ±200 Ω (a few degrees), and switch SW5 down (WIN on). If the temperature leaves the window the output switches off.
+- PID: start from the factory values (chapter 2.15.4 of the manual), raise P until the temperature oscillates a little, then back off. Raise the set-point in steps of 10 °C. Warm-up for rated accuracy is up to 10 minutes.
 
-**Check the field.** With the fluxgate inside the shield, switch the heater on and off: the change should be small compared with 1 mG. If not, twist the leads tighter, or heat first and measure with the heater current as low as possible.
+**First switch-on (diode direction).** Start with the cell at room temperature and **T SET warmer than the cell**. Press TEC ON. If I TEC reads a current and T ACT rises towards T SET, the diode is the right way round. If I TEC stays at about 0 mA and nothing heats, reverse the diode. Never start with T SET below the cell temperature, and never remove the diode.
 
-### Q26. What DC supply should drive the solenoid? Is the Rigol DP832A needed?
+**Check the field.** With the fluxgate inside the shield, switch the heater on and off: the change should be small compared with 1 mG. If not, twist the leads tighter.
+
+### Q26. How do I wire the solenoid to the laser output of the second ITC502?
+
+*Added 10 Oct 2026*
+
+**Yes, it can drive a coil; wire it like a laser diode with its cathode grounded.** From the ITC500 manual, the laser output is a 9-pin D-sub: pin 8 = laser anode, pin 7 = laser cathode, pin 3 = ground of the laser output, pins 9 and 6 = laser voltage sense (anode, cathode), pins 2 and 4 = monitor diode, pins 1 and 5 = interlock.
+
+| Step | What to do |
+|---|---|
+| Solenoid | one end to pin 8, the other end to pin 3; set the polarity button LD POL to **CG** (cathode grounded). The 4-wire voltage readout is optional (pin 9 to the + end, pin 6 to the − end of the coil) |
+| Interlock | **link pin 1 to pin 5** (a short is allowed, under 100 Ω); without the link the output cannot be switched on |
+| Monitor diode | leave pins 2 and 4 open, keep the bias voltage **off** (PD POL, SW4 up) |
+| Mode | constant current (SW1 up) |
+| Current limit | set the hardware limit ILD LIM with the 25-turn ADJ pot, a little above the working current; connect the coil with the output off |
+| Cable | twisted pair in a shield, shield grounded |
+
+**Numbers that matter.** Range 0 to ±200 mA, compliance above 6 V (so the coil must be under about 300 Ω at 20 mA), set-point resolution 10 µA from the front panel (3 µA remote), accuracy ±100 µA, noise and 50/60 Hz ripple under 1.5 µA rms each, drift under 10 µA per 24 h, transients under 0.2 mA.
+
+**Design the coil for 10–20 mA, not 2 mA.** B = µ0·n·I, so 50 mG needs n·I of about 4 A·turns per metre. One close-wound layer of 0.5 mm wire (2000 turns per metre) needs only 2 mA, where the 10 µA step and the 10 µA drift are 0.5 % of the current (0.25 mG). At 10–20 mA (200–400 turns per metre, so a winding with gaps between the turns, or thinner wire with fewer turns) the same 10 µA is 0.05–0.1 %, well inside the 0.1 mG target. The displayed current is only accurate to ±100 µA, so calibrate the field against the current with the fluxgate.
+
+**Switching.** Switch the output on and off slowly and not while measuring: the output transients are up to 0.2 mA. Heater (TEC) and solenoid (laser output) are independent sections of the same box.
+
+### Q27. What DC supply should drive the solenoid? Is the Rigol DP832A needed?
 
 *Added 10 Oct 2026*
 
@@ -436,7 +461,7 @@ If both work on the bench, the separate cell-heater controller (BOM C04) and the
 
 **Correction.** Two earlier answers (the second ITC502 and the Multicomp supply) quoted 5 nT as the stability needed; the right figure is about 10 nT (0.1 mG), because the 7 kHz line is 5 mG wide. Those answers are corrected.
 
-### Q27. Is the Newport AD-300/DC fast detector useful?
+### Q28. Is the Newport AD-300/DC fast detector useful?
 
 *Added 9 Oct 2026*
 
@@ -447,7 +472,7 @@ If both work on the bench, the separate cell-heater controller (BOM C04) and the
 
 ## The Quantum Spain-style bench
 
-### Q28. Is the Spain-style arrangement correct, in theory and in practice?
+### Q29. Is the Spain-style arrangement correct, in theory and in practice?
 
 *Added 9 Oct 2026*
 
