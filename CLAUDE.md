@@ -43,7 +43,7 @@ How to continue on another machine:
 2. Tools: git, node (v24 used), python 3 (3.14 used) with `pip install pillow numpy scipy pymupdf openpyxl`, Google Chrome (set `CHROME` if it is not in the usual place), a TrueType font for the label check (Segoe UI, Arial or DejaVu Sans is found automatically; `DRAW_FONT_FILE` overrides). Local server: `python3 -m http.server 4180 --bind 127.0.0.1`.
 3. Rebuild the DIY Section: edit numbers in `private/diy/params.py`, run `python3 private/diy/figs_d1.py` ... `figs_d9.py` (d6 and d7 are inside `figs_d5.py`, d10 inside `figs_d9.py`), then `python3 private/diy/build_diy.py`, then `python3 private/diy/audit.py` (expects `0 failed`). `DRAW_FONT=arial` runs the label check with the narrower Arial metrics as a second opinion.
 4. Rebuild Q&A: `python3 private/build_qa.py`. Equipment tables: `python3 private/build_bom.py` and `node private/gs_test.js` (expects ALL PASS).
-5. Before every push: `git ls-files | grep -c private` prints 0; no prices (`grep -c "RM [0-9]"` on edited pages prints 0); no grant details; commit messages end with the Co-Authored-By line given by the session.
+5. Before every push: `git ls-files | grep -c private` prints 0; no prices (`grep -c "RM [0-9]"` and `grep -ci ringgit` on edited pages print 0; loose wording such as "a few tens of ringgit" counts as a price); no grant details; commit messages end with the Co-Authored-By line given by the session.
 
 ## Resuming on another machine
 

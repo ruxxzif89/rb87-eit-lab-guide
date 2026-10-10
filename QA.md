@@ -412,7 +412,7 @@ If both work on the bench, the separate cell-heater controller (BOM C04) and the
 | Option | Noise and drift | Verdict |
 |---|---|---|
 | **ITC502 laser half (unit 2)** | 1.5 µA rms noise, 10 µA drift per 24 h, 0–200 mA, compliance above 6 V, low-noise by design | **first choice, no cost**: the TEC half of the same unit runs the cell heater; check the solenoid resistance (under about 300 Ω at 20 mA) and set the current limit low |
-| Battery + low-TC resistor (+ trimmer) | microvolt-level noise, no mains pick-up; drift from the battery voltage and the resistor | **cheapest back-up**, a few tens of ringgit; measure the current with a multimeter, and let it settle |
+| Battery + low-TC resistor (+ trimmer) | microvolt-level noise, no mains pick-up; drift from the battery voltage and the resistor | **cheapest back-up**; measure the current with a multimeter, and let it settle |
 | Home-built current source (op-amp and MOSFET, DIY Section part D5, or for example an LT3092) | very low noise if built carefully | cheap, needs a little electronics |
 | Rigol DP832A (3 channels) | linear supply with mV-level ripple; the current-mode noise and the 1 mA setting steps were not checked | works, but expensive and coarse (1 mA steps are 5–50 % of a 2–20 mA current) |
 | Multicomp 72-2710 and similar | 3 mArms ripple | no: larger than the current itself |
