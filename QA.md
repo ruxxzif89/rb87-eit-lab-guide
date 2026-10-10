@@ -366,7 +366,22 @@ Identified from five photographs of the lab shelves and added to the Lab Invento
 
 Source: [Stefan Mayer Instruments](https://etesters.com/catalog/a063869f-1422-08df-aa96-6c5cd8570108)
 
-### Q23. Is the Newport AD-300/DC fast detector useful?
+### Q23. Can the Multicomp Pro 72-2710 programmable supply (0–30 V, 0–5 A) be used?
+
+*Added 10 Oct 2026*
+
+**Yes for the RF chain and the cell heater; no for the solenoid. It is not needed now, because the lab already has the Aditeg PS-3030DD and a second ITC502.** From the datasheet: one channel, 0–30 V and 0–5 A (150 W), voltage and current ripple at most 2 mVrms and 3 mArms (20 Hz–20 MHz), setting resolution 10 mV and 1 mA, setting accuracy 0.5 % + 20 mV and 0.5 % + 10 mA, USB and RS-232, 110 × 156 × 260 mm. The datasheet does not say whether it is linear or switching.
+
+| Job | Use it? | Why |
+|---|---|---|
+| RF amplifiers (+24 V) and RF switches | **yes** | 2 mV ripple is harmless for RF parts; but one channel only, so two supplies are needed for the ± rails |
+| Cell heater | **yes** | constant-current mode, 0.3–0.5 A, controlled over USB; no temperature loop (a thermistor read-out is still needed). A DC heater makes a magnetic field: wind the heater wire as twisted pairs and, if possible, switch it off while measuring |
+| Solenoid | **no** | the solenoid current is only milliamps, and 3 mArms ripple with 1 mA steps and 10 mA accuracy is larger than the current itself; the 5 nT stability needed for a 7–26 kHz line requires a low-noise source (the ITC502 laser section or a dedicated source) |
+| Photodiodes, lock electronics | no | millivolts of ripple |
+
+**Verdict:** a good general bench supply at about RM 654, but nothing in the bench needs it today. Buy it only if the PS-3030DD is occupied by the RF chain and the heater needs its own supply.
+
+### Q24. Is the Newport AD-300/DC fast detector useful?
 
 *Added 9 Oct 2026*
 
@@ -377,7 +392,7 @@ Source: [Stefan Mayer Instruments](https://etesters.com/catalog/a063869f-1422-08
 
 ## The Quantum Spain-style bench
 
-### Q24. Is the Spain-style arrangement correct, in theory and in practice?
+### Q25. Is the Spain-style arrangement correct, in theory and in practice?
 
 *Added 9 Oct 2026*
 
