@@ -614,6 +614,19 @@
   }
   function tr(R, t, m, x, y, z, ry) { var o = new THREE.Mesh(geo('t' + R + '_' + t, function () { return new THREE.TorusGeometry(R, t, 10, 36); }), m); o.rotation.y = ry === undefined ? Math.PI / 2 : ry; o.position.set(x || 0, y || 0, z || 0); return o; }
   function sp(r, m, x, y, z, sx) { var o = new THREE.Mesh(geo('s' + r, function () { return new THREE.SphereGeometry(r, 20, 14); }), m); o.position.set(x || 0, y || 0, z || 0); if (sx) o.scale.set(sx, 1, 1); return o; }
+  function pda(g) {
+    var M = G.M;
+    g.add(bx(25, 52.5, 59.3, M.dark, 0, 1.2, 0));
+    g.add(bx(1, 50, 57, M.black, 12.7, 1.2, 0));
+    g.add(cy(12.7, 10.7, M.black, 18.4, 0, 0, 'x', 28));
+    g.add(cy(13.4, 1.6, M.alu, 23.4, 0, 0, 'x', 28));
+    g.add(cy(8.4, 1.2, M.black, 23.9, 0, 0, 'x', 24));
+    g.add(bx(0.8, 3.6, 3.6, M.accent, 24.3, 0, 0));
+    g.add(cy(7.5, 6, M.alu, -2, 29.6, 14, 'y', 24)); g.add(cy(6.2, 1.2, M.black, -2, 33, 14, 'y', 24)); g.add(bx(1.4, 1.4, 6, M.laser, -2, 33.8, 14));
+    g.add(bx(8, 4, 5, M.alu, 2, 28.4, -14)); g.add(cy(1.6, 1.4, M.on, 8, 28.6, -22, 'y', 10));
+    g.add(cy(4.6, 8, M.alu, -16.5, 6, 0, 'x', 14)); g.add(cy(3, 3, M.alu, -21.5, 6, 0, 'x', 14));
+    g.add(cy(3.2, 6, M.black, -15.5, -12, 18, 'x', 12));
+  }
   function stand(g, kind) { // base plate, post and clamp
     var H = K.beamHeight, M = G.M;
     g.add(bx(30, 3, 22, M.black, 0, -H + 1.5, 0));
@@ -731,7 +744,7 @@
         } else g.add(bx(70, 3, 40, M.black, 0, -H + 1.5, 0));
         break; }
       case 'sas':
-        stand(g, k); g.add(bx(18, 26, 22, M.dark)); g.add(cy(7, 4, M.accent, 10, 0, 0)); g.add(cy(5, 1.2, M.glass, 12.4, 0, 0)); g.add(cy(2.4, 8, M.brass, -12, 6, 0, 'x', 10)); g.add(bx(8, 2, 8, M.laser, -2, 14, 0)); break;
+        stand(g, k); pda(g); break;
       case 'refcell': {
         stand(g, k);
         g.add(cy(9.5, 75, M.glass)); g.add(cy(7.8, 70, own(new THREE.MeshBasicMaterial({ color: 0xb06cff, transparent: true, opacity: 0.14, depthWrite: false })))); g.add(cy(10.1, 2, M.glass, -37.5, 0, 0)); g.add(cy(10.1, 2, M.glass, 37.5, 0, 0));   // Ø19 x 75 mm reference cell
@@ -740,7 +753,7 @@
       case 'glan':
         g.add(bx(22, 22, 30, M.glass)); g.add(bx(24, 4, 32, M.alu, 0, -12, 0)); g.add(bx(24, 4, 32, M.alu, 0, 12, 0)); g.add(cy(3, 12, M.black, 0, 0, 18, 'z', 10)); break;
       case 'pd':
-        g.add(bx(18, 26, 22, M.dark)); g.add(cy(7, 4, M.accent, 10, 0, 0)); g.add(cy(5, 1.2, M.glass, 12.4, 0, 0)); g.add(cy(2.4, 8, M.brass, -12, 6, 0, 'x', 10)); break;
+        pda(g); break;
       case 'dump': {
         g.add(bx(20, 30, 26, M.matte));
         for (var q = -2; q <= 2; q++) g.add(bx(2, 28, 28, M.black, -4 + q * 3.2, 0, 0));
