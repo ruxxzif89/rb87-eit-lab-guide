@@ -403,6 +403,8 @@ If both work on the bench, the separate cell-heater controller (BOM C04) and the
 
 **TEC output (15-pin D-sub, rear).** TEC (+) is pins 5, 6 and 7, TEC (−) is pins 13, 14 and 15; **all three pins of each must be connected**. Pins 2 and 9 sense the heater voltage (optional). The output is ±2 A, 16 W, compliance above 8 V, and the (−) side is at ground. Thermistor: pins 3 and 4 (if one lead of the thermistor is grounded, it goes to pin 3). Use shielded cable and connect the shield to pins 13–15. Pin 12 is a supply for Thorlabs mounts: leave it alone.
 
+![ITC502 unit 2: wiring of the cell heater (TEC output and thermistor)](fig-itc502-heater.svg)
+
 **Heater wiring.**
 1. TEC (+) → a **series power diode** (for example 1N5400, 3 A) → the foil heater → TEC (−).
 2. A **10 kΩ NTC** glued to the cell wall next to the heater, with Kapton tape or thermal epoxy, on a twisted shielded pair away from the heater leads.
@@ -434,6 +436,8 @@ If both work on the bench, the separate cell-heater controller (BOM C04) and the
 | Mode | constant current (SW1 up) |
 | Current limit | set the hardware limit ILD LIM with the 25-turn ADJ pot, a little above the working current; connect the coil with the output off |
 | Cable | twisted pair in a shield, shield grounded |
+
+![ITC502 unit 2: wiring of the solenoid (laser output, interlock link, fluxgate check)](fig-itc502-solenoid.svg)
 
 **Numbers that matter.** Range 0 to ±200 mA, compliance above 6 V (so the coil must be under about 300 Ω at 20 mA), set-point resolution 10 µA from the front panel (3 µA remote), accuracy ±100 µA, noise and 50/60 Hz ripple under 1.5 µA rms each, drift under 10 µA per 24 h, transients under 0.2 mA.
 

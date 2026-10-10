@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 770" role="img" aria-labelledby="t d" font-family="Segoe UI, Arial, sans-serif">
+<title id="t">ITC502 unit 2: solenoid wiring</title><desc id="d">The laser output of the second ITC502 drives the solenoid; the interlock pins are linked; a fluxgate calibrates the field.</desc>
+<rect width="1000" height="770" fill="#ffffff"/>
+<text x="30" y="34" font-size="20" text-anchor="start" fill="#1b1f24" font-weight="bold">ITC502 unit 2 as the solenoid current source (laser output, rear panel)</text>
+<text x="30" y="56" font-size="12.5" text-anchor="start" fill="#6b7280" font-weight="normal">From the ITC500 operation manual, chapters 1.9.1 and 1.9.9. Red = current to the coil, blue = return (ground), gray = voltage sense, purple = shield / interlock link.</text>
+<rect x="30" y="80" width="300" height="470" rx="8" fill="#f3f5f8" stroke="#1b1f24" stroke-width="2.5"/>
+<text x="180" y="106" font-size="15" text-anchor="middle" fill="#1b1f24" font-weight="bold">ITC502 rear panel</text>
+<rect x="48" y="120" width="264" height="410" rx="6" fill="#fff" stroke="#1b1f24" stroke-width="1.8"/>
+<text x="180" y="144" font-size="14" text-anchor="middle" fill="#1b1f24" font-weight="bold">Laser diode output (9-pin D-sub)</text>
+<circle cx="80" cy="190" r="11" fill="#fff" stroke="#c0392b" stroke-width="2"/>
+<text x="80" y="194.5" font-size="12" text-anchor="middle" fill="#c0392b" font-weight="bold">8</text>
+<text x="104" y="178" font-size="12.5" text-anchor="start" fill="#c0392b" font-weight="bold">laser anode  →  coil +</text>
+<circle cx="80" cy="240" r="11" fill="#fff" stroke="#1f5fa8" stroke-width="2"/>
+<text x="80" y="244.5" font-size="12" text-anchor="middle" fill="#1f5fa8" font-weight="bold">3</text>
+<text x="104" y="228" font-size="12.5" text-anchor="start" fill="#1f5fa8" font-weight="bold">ground  →  coil −</text>
+<circle cx="80" cy="300" r="11" fill="#fff" stroke="#6b7280" stroke-width="2"/>
+<text x="80" y="304.5" font-size="12" text-anchor="middle" fill="#6b7280" font-weight="bold">9</text>
+<text x="104" y="288" font-size="12.5" text-anchor="start" fill="#6b7280" font-weight="normal">V sense +  (optional)</text>
+<circle cx="80" cy="340" r="11" fill="#fff" stroke="#6b7280" stroke-width="2"/>
+<text x="80" y="344.5" font-size="12" text-anchor="middle" fill="#6b7280" font-weight="bold">6</text>
+<text x="104" y="328" font-size="12.5" text-anchor="start" fill="#6b7280" font-weight="normal">V sense −  (optional)</text>
+<text x="60" y="388" font-size="12.5" text-anchor="start" fill="#7b4fa3" font-weight="bold">Interlock (required):</text>
+<circle cx="86" cy="416" r="11" fill="#fff" stroke="#7b4fa3" stroke-width="2"/>
+<text x="86" y="420.5" font-size="12" text-anchor="middle" fill="#7b4fa3" font-weight="bold">1</text>
+<circle cx="146" cy="416" r="11" fill="#fff" stroke="#7b4fa3" stroke-width="2"/>
+<text x="146" y="420.5" font-size="12" text-anchor="middle" fill="#7b4fa3" font-weight="bold">5</text>
+<polyline points="86,427 86,440 146,440 146,427" fill="none" stroke="#7b4fa3" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+<text x="180" y="421" font-size="12.5" text-anchor="start" fill="#7b4fa3" font-weight="normal">link with a wire</text>
+<text x="60" y="462" font-size="12" text-anchor="start" fill="#6b7280" font-weight="normal">Monitor diode, pins 2 and 4: leave open.</text>
+<text x="60" y="482" font-size="12" text-anchor="start" fill="#6b7280" font-weight="normal">Bias voltage off. Pin 7 (laser cathode) unused.</text>
+<polyline points="91,190 600,190" fill="none" stroke="#c0392b" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="91,240 860,240" fill="none" stroke="#1f5fa8" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+<rect x="330" y="160" width="220" height="110" rx="10" fill="none" stroke="#7b4fa3" stroke-width="1.8" stroke-dasharray="8 5"/>
+<text x="440" y="288" font-size="12.5" text-anchor="middle" fill="#7b4fa3" font-weight="bold">twisted pair in a shield</text>
+<rect x="560" y="110" width="410" height="340" rx="10" fill="none" stroke="#7b4fa3" stroke-width="2" stroke-dasharray="10 6"/>
+<text x="765" y="132" font-size="12.5" text-anchor="middle" fill="#7b4fa3" font-weight="bold">inside the µ-metal shield</text>
+<polyline points="600,190 600,190" fill="none" stroke="#c0392b" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 600.0 190 a 17.142857142857142 20.57142857142857 0 1 1 34.285714285714285 0" fill="none" stroke="#c0392b" stroke-width="2.5"/>
+<path d="M 634.2857142857143 190 a 17.142857142857142 20.57142857142857 0 1 1 34.285714285714285 0" fill="none" stroke="#c0392b" stroke-width="2.5"/>
+<path d="M 668.5714285714286 190 a 17.142857142857142 20.57142857142857 0 1 1 34.285714285714285 0" fill="none" stroke="#c0392b" stroke-width="2.5"/>
+<path d="M 702.8571428571429 190 a 17.142857142857142 20.57142857142857 0 1 1 34.285714285714285 0" fill="none" stroke="#c0392b" stroke-width="2.5"/>
+<path d="M 737.1428571428571 190 a 17.142857142857142 20.57142857142857 0 1 1 34.285714285714285 0" fill="none" stroke="#c0392b" stroke-width="2.5"/>
+<path d="M 771.4285714285714 190 a 17.142857142857142 20.57142857142857 0 1 1 34.285714285714285 0" fill="none" stroke="#c0392b" stroke-width="2.5"/>
+<path d="M 805.7142857142858 190 a 17.142857142857142 20.57142857142857 0 1 1 34.285714285714285 0" fill="none" stroke="#c0392b" stroke-width="2.5"/>
+<polyline points="840,190 860,190 860,240" fill="none" stroke="#c0392b" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+<text x="720" y="160" font-size="13" text-anchor="middle" fill="#c0392b" font-weight="bold">solenoid: 10–20 mA, under 300 Ω</text>
+<rect x="630" y="262" width="220" height="90" rx="26" fill="#e8f1fb" stroke="#1b1f24" stroke-width="2.5"/>
+<text x="740" y="312" font-size="13" text-anchor="middle" fill="#1b1f24" font-weight="bold">Rb cell inside the solenoid</text>
+<rect x="870" y="300" width="80" height="28" rx="3" fill="#fff7e0" stroke="#d9770a" stroke-width="2.5"/>
+<text x="910" y="319" font-size="12" text-anchor="middle" fill="#1b1f24" font-weight="bold">FLC100</text>
+<text x="910" y="344" font-size="11" text-anchor="middle" fill="#6b7280" font-weight="normal">(calibration)</text>
+<polyline points="91,300 600,300 600,190" fill="none" stroke="#6b7280" stroke-width="1.6" stroke-dasharray="5 4" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="91,340 880,340 880,240 860,240" fill="none" stroke="#6b7280" stroke-width="1.6" stroke-dasharray="5 4" stroke-linejoin="round" stroke-linecap="round"/>
+<text x="104" y="362" font-size="12" text-anchor="start" fill="#6b7280" font-weight="normal">sense wires go to the coil terminals (4-wire)</text>
+<polyline points="950,314 960,314 960,470 900,470" fill="none" stroke="#2e7d32" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+<rect x="590" y="470" width="310" height="74" rx="6" fill="#f6fbf6" stroke="#2e7d32" stroke-width="2"/>
+<text x="745" y="496" font-size="12.5" text-anchor="middle" fill="#2e7d32" font-weight="bold">5 V linear supply, ground, signal output</text>
+<text x="745" y="516" font-size="12.5" text-anchor="middle" fill="#2e7d32" font-weight="normal">to a multimeter or scope (outside the shield)</text>
+<text x="745" y="534" font-size="11.5" text-anchor="middle" fill="#6b7280" font-weight="normal">check the pin order in the FLC100 datasheet</text>
+<rect x="30" y="566" width="940" height="193" rx="6" fill="#fffbe8" stroke="#b58900" stroke-width="1.8"/>
+<text x="48" y="590" font-size="14" text-anchor="start" fill="#1b1f24" font-weight="bold">Front panel and first switch-on</text>
+<text x="48" y="612" font-size="12.5" text-anchor="start" fill="#1b1f24" font-weight="normal">LD POL = CG (cathode grounded); MODE = constant current (SW1 up); monitor-diode bias off (SW4 up). Set the current limit ILD LIM</text>
+<text x="48" y="629" font-size="12.5" text-anchor="start" fill="#1b1f24" font-weight="normal">with the 25-turn ADJ pot, a little above the working current.</text>
+<text x="48" y="646" font-size="12.5" text-anchor="start" fill="#1b1f24" font-weight="normal">Connect the coil with the output off. Raise the current slowly (10 µA steps). Switch on and off outside measurements (output</text>
+<text x="48" y="663" font-size="12.5" text-anchor="start" fill="#1b1f24" font-weight="normal">transients up to 0.2 mA).</text>
+<text x="48" y="680" font-size="12.5" text-anchor="start" fill="#1b1f24" font-weight="normal">Accuracy is ±100 µA, so calibrate the field against the current with the fluxgate. Compliance is above 6 V: coil resistance</text>
+<text x="48" y="697" font-size="12.5" text-anchor="start" fill="#1b1f24" font-weight="normal">under about 300 Ω at 20 mA.</text>
+<text x="48" y="714" font-size="12.5" text-anchor="start" fill="#1b1f24" font-weight="normal">Design the coil for 10–20 mA: B = µ0·n·I, and 50 mG needs n·I of about 4 A·turns per metre (200–400 turns per metre, a winding</text>
+<text x="48" y="731" font-size="12.5" text-anchor="start" fill="#1b1f24" font-weight="normal">with gaps between turns).</text>
+<text x="48" y="748" font-size="12.5" text-anchor="start" fill="#1b1f24" font-weight="normal">The TEC half of the same box (previous drawing) runs the cell heater at the same time; the two sections are independent.</text>
+</svg>
