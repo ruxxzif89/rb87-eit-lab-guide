@@ -242,7 +242,48 @@ Source: [ILX 6700B silicon heads brochure](https://www.newport.com/medias/sys_ma
 
 **Limit:** the S140C floor is 1 µW (1 nW resolution), so the probe at about 2 µW is read poorly. Measure the probe before the attenuating optics, or add a low-floor photodiode sensor such as the S120C (50 nW).
 
-### Q14. Is the Newport AD-300/DC fast detector useful?
+### Q14. Which instruments record the result: the power meter or the oscilloscope?
+
+*Added 10 Oct 2026*
+
+**The result comes from a photodetector read on the oscilloscope. The power meter is a setup tool.** The EIT signal is the probe transmission while the two-photon detuning is scanned, and the window is only about 7–30 kHz wide. A USB or benchtop power meter updates far too slowly to follow a scan, shows only a number, and the S140C floor (1 µW) is close to the probe power (about 2 µW).
+
+| Instrument | Job |
+|---|---|
+| Signal photodetector + oscilloscope | EIT transmission: the result |
+| SAS photodiode (+ ITC502) | laser lock signal |
+| Power meter (PM100USB + S140C) | fibre, control and AOM-efficiency checks before the run |
+| Fabry-Perot or wavemeter | single-mode and mode-hop check (missing from the budget) |
+| Fluxgate or gaussmeter | shield and 50 mG field check (missing) |
+| Beam profiler or camera, IR card | beam size (sets the intensity) and alignment |
+| Fast detector (AD-300/DC) | control and probe beat note, AOM pulse shapes |
+
+### Q15. Is the signal detector the Thorlabs PDA36A2, and how many are needed?
+
+*Added 10 Oct 2026*
+
+**Yes: a Thorlabs PDA36A2, an amplified silicon detector (350–1100 nm, 8 switchable gain steps, 0–70 dB, 3.6 × 3.6 mm chip). Two are needed, a third is optional.**
+- One for the probe signal after the Glan-Taylor (the EIT result).
+- One for the SAS lock signal.
+- Optional third: the control beam monitor or a reference channel. The AD-300/DC we own can serve as a diagnostic channel.
+
+**Gain:** the probe is only about 2 µW, so use about 50–60 dB. At 70 dB the bandwidth falls to a few kHz, which is marginal for a 7–30 kHz window. The SAS detector can use a lower gain. The PDA36A2 normally ships with its ±12 V supply; check before buying a separate LDS12B.
+
+The 3D bench, the Spain-style bench and the equipment table now show the PDA36A2 drawn from the Thorlabs outline drawing (approximate dimensions).
+
+### Q16. Is the Thorlabs PDB210A balanced detector needed?
+
+*Added 10 Oct 2026*
+
+**No, it is overkill.** A balanced detector subtracts the laser intensity noise with a second reference beam. The reference papers do without it:
+- Finkelstein et al. 2022: the probe passes a Glan-Taylor and is focused on "a fast photodiode"; the probe is scanned and the EIT spectrum is recorded.
+- DeRose et al.: one New Focus 1621 photodiode on a digital oscilloscope (low detector impedance to avoid cable reflections); the pump leakage was reduced with a Glan polariser, not a better detector.
+
+The EIT window is slow (7–30 kHz), so averaging on the oscilloscope recovers any noise. Use the two PDA36A2 detectors. Try balanced detection only if the probe is still too noisy after the Glan-Taylor, scope averaging and a lock-in. The PDB210A datasheet could not be retrieved, so its price and bandwidth are unverified.
+
+Sources: [Finkelstein et al. 2022](https://arxiv.org/abs/2205.10959), [DeRose et al.](https://arxiv.org/abs/2011.09229)
+
+### Q17. Is the Newport AD-300/DC fast detector useful?
 
 *Added 9 Oct 2026*
 
@@ -253,7 +294,7 @@ Source: [ILX 6700B silicon heads brochure](https://www.newport.com/medias/sys_ma
 
 ## The Quantum Spain-style bench
 
-### Q15. Is the Spain-style arrangement correct, in theory and in practice?
+### Q18. Is the Spain-style arrangement correct, in theory and in practice?
 
 *Added 9 Oct 2026*
 
