@@ -616,7 +616,7 @@
   function sp(r, m, x, y, z, sx) { var o = new THREE.Mesh(geo('s' + r, function () { return new THREE.SphereGeometry(r, 20, 14); }), m); o.position.set(x || 0, y || 0, z || 0); if (sx) o.scale.set(sx, 1, 1); return o; }
   function pm100(g) {
     var M = G.M;
-        var y0 = 15 - K.beamHeight, ext = new THREE.MeshStandardMaterial({ color: 0xb9bfdc, metalness: 0.55, roughness: 0.38 });
+        var y0 = 15 - K.beamHeight, ext = new THREE.MeshStandardMaterial({ color: 0xc8202a, metalness: 0.4, roughness: 0.42 });
     g.add(bx(76, 30, 50, ext, 0, y0, 0));
     for (var rb = -5; rb <= 5; rb++) { g.add(bx(74, 1, 1.2, M.dark, 0, y0 - 15.2 + 0.4, rb * 4.2)); }
     for (var sd = -1; sd <= 1; sd += 2) for (var rg = -3; rg <= 3; rg++) g.add(bx(74, 1.2, 1, M.dark, 0, y0 + rg * 3.6, sd * 25.2));

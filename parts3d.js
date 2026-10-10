@@ -198,7 +198,7 @@
     glan: function (g) { var M = mats(); stand(g); g.add(bx(22, 22, 30, M.glass)); g.add(bx(24, 4, 32, M.alu, 0, -12, 0)); g.add(bx(24, 4, 32, M.alu, 0, 12, 0)); g.add(cy(3, 12, M.black, 0, 0, 18, 'z', 10)); },
     pdgen: function (g) { var M = mats(); stand(g); g.add(bx(18, 26, 22, M.dark)); g.add(cy(7, 4, M.accent, 10, 0, 0)); g.add(cy(5, 1.2, M.glass, 12.4, 0, 0)); g.add(cy(2.4, 8, M.brass, -12, 6, 0, 'x', 10)); g.add(bx(6, 3, 8, M.laser, -2, 14.5, 0)); },
     pm100usb: function (g) { var M = mats(); /* Thorlabs PM100USB console with an S140C head: aluminium extrusion with black end caps, proportions from the Thorlabs 3D drawing */
-            var y0 = 15 - H, ext = new T.MeshStandardMaterial({ color: 0xb9bfdc, metalness: 0.55, roughness: 0.38 });
+            var y0 = 15 - H, ext = new T.MeshStandardMaterial({ color: 0xc8202a, metalness: 0.4, roughness: 0.42 });
       g.add(bx(76, 30, 50, ext, 0, y0, 0));
       for (var rb = -5; rb <= 5; rb++) { g.add(bx(74, 1, 1.2, M.dark, 0, y0 - 15.2 + 0.4, rb * 4.2)); }
       for (var sd = -1; sd <= 1; sd += 2) for (var rg = -3; rg <= 3; rg++) g.add(bx(74, 1.2, 1, M.dark, 0, y0 + rg * 3.6, sd * 25.2));
