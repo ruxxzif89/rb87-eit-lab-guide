@@ -381,7 +381,21 @@ Source: [Stefan Mayer Instruments](https://etesters.com/catalog/a063869f-1422-08
 
 **Verdict:** a good general bench supply at about RM 654, but nothing in the bench needs it today. Buy it only if the PS-3030DD is occupied by the RF chain and the heater needs its own supply.
 
-### Q24. Is the Newport AD-300/DC fast detector useful?
+### Q24. What can the second ITC502 be used for, besides a laser?
+
+*Added 10 Oct 2026*
+
+**Three jobs.** An ITC502 is a laser current source (0–200 mA, noise under 1.5 µA rms, drift under 10 µA per 24 h) plus a TEC controller (±2 A, 16 W, thermistor input), and the two halves are independent. The lab has two units, so after the first runs the DFB the second is free.
+
+| Job | Which half | Notes |
+|---|---|---|
+| Cell heater with a temperature loop | TEC | needs a 10 kΩ NTC thermistor on the cell (not a Pt100); a foil heater of about 10–20 Ω fits the 8 V and 2 A limit; the output is DC, so use twisted pairs and switch it off while measuring |
+| Solenoid current source | laser | needs about 0.1 % stability (5 nT of 5 µT); at 20 mA that is 20 µA, inside the 1.5 µA noise and 10 µA drift; check that the solenoid resistance is below about 300 Ω at 20 mA and set a low current limit first |
+| Spare or second laser | both | for a repump or a backup if the DFB is discontinued |
+
+If both work on the bench, the separate cell-heater controller (BOM C04) and the solenoid current source (C08) could be dropped. This has not been applied to the BOM yet.
+
+### Q25. Is the Newport AD-300/DC fast detector useful?
 
 *Added 9 Oct 2026*
 
@@ -392,7 +406,7 @@ Source: [Stefan Mayer Instruments](https://etesters.com/catalog/a063869f-1422-08
 
 ## The Quantum Spain-style bench
 
-### Q25. Is the Spain-style arrangement correct, in theory and in practice?
+### Q26. Is the Spain-style arrangement correct, in theory and in practice?
 
 *Added 9 Oct 2026*
 
