@@ -362,6 +362,8 @@ Identified from five photographs of the lab shelves and added to the Lab Invento
 
 **Cautions.** (1) The zero offset and its drift decide how well you can null the field; flip the sensor by 180° and average the two readings to cancel the offset. (2) The sensor and its leads must be kept clear of the shield and the solenoid while the shield is open; it fits through a port of 14 mm or more. (3) It is a bare sensor: you need a 5 V supply, a stable readout (the oscilloscope or a 6½-digit multimeter) and a calibration against a known coil field. (4) A "new stock" listing on Alibaba is a counterfeit and old-stock risk: order from Stefan Mayer Instruments or an authorised distributor and ask for the calibration sheet.
 
+**Wiring (yes, you wire it yourself).** It is a bare sensor with a 5 V supply pin, a ground pin and an analog output pin; the pin order was not in the sources found, so get the pin table from the Stefan Mayer datasheet or the seller before powering it. Use a quiet 5 V (a linear regulator from the ±12 V supply), twisted shielded cable to the readout, grounded at one end, and ask for the output scale (volts per µT) so that the reading can be converted to mG. Keep the cable and the readout outside the shield.
+
 Source: [Stefan Mayer Instruments](https://etesters.com/catalog/a063869f-1422-08df-aa96-6c5cd8570108)
 
 ### Q23. Is the Newport AD-300/DC fast detector useful?
