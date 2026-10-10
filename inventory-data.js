@@ -2,7 +2,7 @@
    status: use = can be used in this project, check = identify or measure first, no = not suitable. bom = BOM item(s) it can cover.
    Edits made on the Lab Inventory page are kept in the browser and can be synced to the private database. */
 window.LAB_INVENTORY = {
-  version: 10,
+  version: 11,
   items: [
     { id: 'L01', name: 'Polarizing cube beamsplitter, cage-mounted', part: 'CM1-PBS251', brand: 'Thorlabs', qty: '2', model: 'pbs', mp: {}, status: 'no', bom: 'O03',
       specs: '30 mm cage-cube-mounted polarizing beamsplitter cube, 420–680 nm, 8-32 and M4 adapters. Discontinued 21 Sep 2016.',
@@ -128,6 +128,27 @@ window.LAB_INVENTORY = {
       role: 'The probe-power sensor: its 50 nW floor covers the probe (about 2 uW) and the weak SAS beams, which the S140C cannot read. It also covers the control (about 1 mW) up to 50 mW. It is a plain photodiode, so keep the beam inside the 9.5 mm aperture and enter 795 nm on the console. With the PM100USB it makes the lab power-meter set complete (BOM E05); recalibrate yearly.', link: 'https://www.thorlabs.com/thorproduct.cfm?partnumber=S120C', loc: '', owner: '', notes: '' },
     { id: 'I16', name: 'Low-power calibrated silicon photodetector (818-SL series)', part: '818-SL', brand: 'Newport', qty: '1', model: 'phead', mp: {}, status: 'check', bom: 'E05',
       specs: 'Silicon photodiode, 400 to 1100 nm, 10.3 mm clear aperture with a crosshair, removable threaded OD3 attenuator (three decades more range). It is a passive head: it has no display and needs a Newport power meter (handheld or benchtop) to read it, or a photocurrent read-out. Power limits depend on the meter and on the attenuator; the exact figures are in the 818-series datasheet. Whether the version in the lab has the DB15 calibration module (818-SL/DB) is not known.',
-      role: 'Covers 795 nm and can be a spare power head, but only with a Newport meter, and the Thorlabs PM100USB cannot read it (different connector and calibration). First find the Newport meter that goes with it and test that the meter still works; until then the Thorlabs PM100USB with the S120VC and S140C is the working power-meter set. Without a meter it can still be used as a plain photodiode: the photocurrent is about 0.5 A per watt at 795 nm, so a 1 mW beam gives about 0.5 mA (check the head for a bias requirement first).', link: 'https://np.d1.mks.com/p/818-SL--DB', loc: '', owner: '', notes: '' }
+      role: 'Covers 795 nm and can be a spare power head, but only with a Newport meter, and the Thorlabs PM100USB cannot read it (different connector and calibration). First find the Newport meter that goes with it and test that the meter still works; until then the Thorlabs PM100USB with the S120VC and S140C is the working power-meter set. Without a meter it can still be used as a plain photodiode: the photocurrent is about 0.5 A per watt at 795 nm, so a 1 mW beam gives about 0.5 mA (check the head for a bias requirement first).', link: 'https://np.d1.mks.com/p/818-SL--DB', loc: '', owner: '', notes: '' },
+    { id: 'I17', name: 'Kinematic optic mount with round aperture (yellow-capped mG knobs)', part: 'mG series', brand: 'Melles Griot', qty: 'about 10 (count them)', model: 'mgmount', mp: {}, status: 'use', bom: 'O02',
+      specs: 'Black square plate with a round aperture and two knobs with yellow caps marked mG, on an L-shaped base. Several sizes appear in the photographs (about 25 mm and larger apertures). Aperture and thread size must be measured.',
+      role: 'Can hold the steering mirrors, the retro mirrors and the beamsplitter cubes in place of new kinematic mounts (BOM O02). Measure the aperture (25.4 mm is needed for the mirrors) and check the base thread against the posts and the table hole pattern.', link: '', loc: '', owner: '', notes: '' },
+    { id: 'I18', name: 'Precision rotation stage, 360 degrees, with degree scale', part: 'PR01/M', brand: 'Thorlabs', qty: '1', model: 'rotmount', mp: {}, status: 'use', bom: 'O07, O16',
+      specs: 'Black rotation stage with a graduated ring, a lock screw and a mounting slot (label PR01/M).',
+      role: 'Rotation mount for the Glan-Taylor analyser or a waveplate: the polarization angle is set to the degree. Check that the central aperture takes the Glan-Taylor holder or a waveplate cell.', link: '', loc: '', owner: '', notes: '' },
+    { id: 'I19', name: 'Micrometer XY translation stage', part: '', brand: '', qty: '2 or more', model: 'xystage', mp: {}, status: 'use', bom: 'M04',
+      specs: 'Black stacked linear stages with micrometer heads (0 to 50 mm scale) and a top plate with a hole grid. Maker and travel not marked; a taller XYZ stack also appears in the photographs.',
+      role: 'Positions the EIT-cell holder, an AOM or the fibre collimator with micrometer steps. For the AOM, fine position and angle matter more than travel. Measure the travel and the hole pattern before use.', link: '', loc: '', owner: '', notes: '' },
+    { id: 'I20', name: 'Lens positioner, XY, with threaded central cell', part: '', brand: 'Newport (probable)', qty: 'several', model: 'lenspos', mp: {}, status: 'check', bom: 'O10',
+      specs: 'Black square plates with a threaded central ring and two side adjusters. The make is not marked; they resemble Newport lens positioners.',
+      role: 'Holds a lens and moves it across the beam by small amounts: suitable for the cat-eye lens, the expander lenses and the detector collecting lens. Check the thread and the lens diameter that it takes.', link: '', loc: '', owner: '', notes: '' },
+    { id: 'I21', name: 'TV zoom lens, C-mount', part: 'TV ZOOM', brand: 'Navitron', qty: '2', model: 'zoomlens', mp: {}, status: 'check', bom: '',
+      specs: 'Black zoom lens barrel with two ribbed rings and a silver C-mount ring. Focal range and aperture not marked.',
+      role: 'With an infrared-sensitive camera it can image the beam profile or the glowing cell for alignment. The lab has no suitable camera on the list yet, and a silicon camera usually needs the IR-cut filter removed to see 795 nm, so keep it as an option for the beam profile.', link: '', loc: '', owner: '', notes: '' },
+    { id: 'I22', name: 'Brass rotation holder with a degree scale (four units)', part: '', brand: '', qty: '4', model: 'brassrot', mp: {}, status: 'check', bom: 'O07',
+      specs: 'Brass cylinders with open windows and a dark graduated ring (0 to 360 degrees). Probably rotating holders for waveplates or polarizers; the optic size is not known.',
+      role: 'If one takes a Ø½ inch or Ø1 inch waveplate or polarizer, it replaces a rotation mount. Open one and measure the bore and the thread first.', link: '', loc: '', owner: '', notes: '' },
+    { id: 'I23', name: 'Alignment target card with a printed grid', part: '', brand: '', qty: '2', model: 'target', mp: {}, status: 'use', bom: '',
+      specs: 'Cream plastic cards with a printed millimetre grid.',
+      role: 'Shows where the beam lands, to centre it on the AOM aperture, the cell and the detector (795 nm is only dimly visible on paper; an IR viewer card is better).', link: '', loc: '', owner: '', notes: '' }
   ]
 };

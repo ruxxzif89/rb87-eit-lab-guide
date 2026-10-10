@@ -46,6 +46,7 @@
   function sp(r, m, x, y, z, sx) { var o = new T.Mesh(geo('s' + r, function () { return new T.SphereGeometry(r, 20, 14); }), m); o.position.set(x || 0, y || 0, z || 0); if (sx) o.scale.set(sx, 1, 1); return o; }
   function tube(pts, r, m, seg) { var c = new T.CatmullRomCurve3(pts.map(function (p) { return new T.Vector3(p[0], p[1], p[2]); })); return new T.Mesh(new T.TubeGeometry(c, seg || 60, r, 8, false), m); }
   function aim(o, from, to) { var d = new T.Vector3(to[0] - from[0], to[1] - from[1], to[2] - from[2]).normalize(); o.quaternion.setFromUnitVectors(new T.Vector3(0, 1, 0), d); return o; }
+  function txtPlane(s, w, h, fg, bg, font) { var tex = canvasTex(256, Math.max(32, Math.round(256 * h / w)), function (x, cw, ch) { x.fillStyle = bg; x.fillRect(0, 0, cw, ch); x.fillStyle = fg; x.font = font; x.textAlign = 'center'; x.textBaseline = 'middle'; x.fillText(s, cw / 2, ch / 2, cw - 8); }); return new T.Mesh(new T.PlaneGeometry(w, h), new T.MeshBasicMaterial({ map: tex })); }
   function stand(g) { // base plate, post and clamp
     var M = mats();
     g.add(bx(30, 3, 22, M.black, 0, -H + 1.5, 0));
@@ -212,6 +213,47 @@
     phead: function (g) { var M = mats(); stand(g); /* Thorlabs S120-type photodiode head: disc about O30 x 12 mm with SM1 thread, cable at the back */
       g.add(cy(15.2, 12, M.black, 0, 0, 0, 'x', 32)); g.add(cy(15.6, 1.4, M.alu, 6, 0, 0, 'x', 32)); g.add(cy(12.7, 5, M.alu, 9, 0, 0, 'x', 28)); g.add(cy(9.2, 1, M.black, 11.8, 0, 0, 'x', 24)); g.add(cy(4.75, 0.8, M.glass, 12.4, 0, 0, 'x', 20));
       g.add(cy(3, 12, M.black, -12, 0, 0, 'x', 12)); g.add(bx(12, 5, 8, M.dark, -20, 0, 0)); },
+    mgmount: function (g) { var M = mats(); /* Melles Griot-type kinematic optic mount: black plate with a round aperture and two black knobs with yellow caps marked mG */
+      var yel = new T.MeshStandardMaterial({ color: 0xf2c200, metalness: 0.2, roughness: 0.5 });
+      g.add(bx(14, 12, 50, M.dark, 0, 19, 0)); g.add(bx(14, 12, 50, M.dark, 0, -19, 0)); g.add(bx(14, 26, 12, M.dark, 0, 0, 19)); g.add(bx(14, 26, 12, M.dark, 0, 0, -19));
+      g.add(tr(13, 1.2, M.alu, 7.4, 0, 0)); g.add(bx(26, 6, 52, M.black, -2, -28, 0));
+      g.add(cy(4.5, H - 31, M.alu, 0, (-H - 31) / 2, 0, 'y', 16)); g.add(bx(30, 3, 24, M.black, 0, -H + 1.5, 0));
+      g.add(cy(3.6, 14, M.black, -2, 20, 32, 'z', 14)); g.add(cy(4.4, 4, yel, -2, 20, 41, 'z', 14)); g.add(cy(3.6, 14, M.black, -2, 32, -20, 'y', 14)); g.add(cy(4.4, 4, yel, -2, 41, -20, 'y', 14));
+      var a = txtPlane('mG', 8, 8, '#1a1a1a', '#f2c200', 'bold 44px sans-serif'); a.position.set(-2, 20, 43.1); g.add(a);
+      var b = txtPlane('mG', 8, 8, '#1a1a1a', '#f2c200', 'bold 44px sans-serif'); b.rotation.x = -Math.PI / 2; b.position.set(-2, 43.1, -20); g.add(b); },
+    rotmount: function (g) { var M = mats(); /* Thorlabs PR01/M-type 360 degree rotation stage: black ring with a degree scale, a lock screw and a post base */
+      g.add(tr(22, 9, M.black, 0, 0, 0)); g.add(tr(29, 1.6, M.alu, 6, 0, 0));
+      for (var k = 0; k < 36; k++) { var an = k * Math.PI / 18; g.add(bx(0.8, k % 3 ? 2 : 3.6, 0.6, M.glass, 7.6, Math.cos(an) * 31, Math.sin(an) * 31)); g.children[g.children.length - 1].rotation.x = an; }
+      g.add(bx(14, 7, 60, M.black, 0, -32, 0)); g.add(cy(4.5, H - 35, M.alu, 0, (-H - 35) / 2, 0, 'y', 16)); g.add(bx(30, 3, 24, M.black, 0, -H + 1.5, 0));
+      g.add(cy(2.4, 12, M.alu, 6, 0, 38, 'z', 10)); g.add(cy(4, 4, M.black, 6, 0, 45, 'z', 12));
+      var lb = txtPlane('PR01/M', 16, 5, '#e8e8e8', '#0d0f12', 'bold 40px sans-serif'); lb.rotation.y = Math.PI / 2; lb.position.set(7.2, -31, 0); g.add(lb); },
+    lenspos: function (g) { var M = mats(); /* XY lens positioner: black square plate with a threaded central cell and two knurled adjusters */
+      g.add(bx(10, 12, 50, M.dark, 0, 19, 0)); g.add(bx(10, 12, 50, M.dark, 0, -19, 0)); g.add(bx(10, 26, 12, M.dark, 0, 0, 19)); g.add(bx(10, 26, 12, M.dark, 0, 0, -19));
+      g.add(tr(10, 3.5, M.black, 6, 0, 0)); g.add(tr(6.5, 1, M.alu, 8, 0, 0));
+      g.add(cy(3.2, 12, M.black, 0, 31, 0, 'y', 12)); g.add(cy(3.2, 12, M.black, 0, 0, 31, 'z', 12)); g.add(cy(2.6, 6, M.dark, 0, 0, -28, 'z', 10)); g.add(cy(2.6, 6, M.dark, 0, -28, 0, 'y', 10));
+      g.add(cy(4.5, H - 28, M.alu, 0, (-H - 28) / 2, 0, 'y', 16)); g.add(bx(30, 3, 24, M.black, 0, -H + 1.5, 0)); },
+    xystage: function (g) { var M = mats(); /* black micrometer XY translation stage: base, two crossed slides, top plate with a hole grid, two micrometer heads */
+      var y = -H;
+      g.add(bx(64, 10, 64, M.dark, 0, y + 5, 0)); g.add(bx(60, 10, 60, M.black, 0, y + 15, 0)); g.add(bx(64, 10, 64, M.dark, 0, y + 25, 0));
+      for (var i = -1; i <= 1; i++) for (var j = -1; j <= 1; j++) g.add(cy(3.2, 0.5, M.black, i * 18, y + 30.2, j * 18, 'y', 12));
+      g.add(cy(5.5, 30, M.alu, 0, y + 15, 46, 'z', 18)); g.add(cy(7, 16, M.glass, 0, y + 15, 66, 'z', 20));
+      g.add(cy(5.5, 30, M.alu, 46, y + 25, 0, 'x', 18)); g.add(cy(7, 16, M.glass, 66, y + 25, 0, 'x', 20));
+      g.add(bx(6, 8, 14, M.black, 0, y + 15, 33)); g.add(bx(14, 8, 6, M.black, 33, y + 25, 0)); },
+    zoomlens: function (g) { var M = mats(); stand(g); /* Navitron TV zoom lens: black barrel with two ribbed rings and a silver C-mount ring */
+      g.add(cy(17, 62, M.black, -4, 0, 0, 'x', 32)); g.add(cy(18.5, 22, M.dark, -26, 0, 0, 'x', 32)); g.add(cy(18.5, 18, M.dark, 6, 0, 0, 'x', 32));
+      for (var r = 0; r < 12; r++) { g.add(cy(19.1, 0.8, M.black, -34 + r * 1.9, 0, 0, 'x', 32)); g.add(cy(19.1, 0.8, M.black, -3 + r * 1.4, 0, 0, 'x', 32)); }
+      g.add(cy(14, 9, M.alu, 31, 0, 0, 'x', 28)); g.add(cy(11, 2, M.glass, 36, 0, 0, 'x', 24)); g.add(cy(15.2, 3, M.black, -36, 0, 0, 'x', 32));
+      var lb = txtPlane('NAVITRON TV ZOOM', 30, 6, '#e8e8e8', '#0d0f12', 'bold 30px sans-serif'); lb.position.set(-4, 0, 17.2); g.add(lb); },
+    brassrot: function (g) { var M = mats(); stand(g); /* old brass rotation holder with open windows and a dark degree-scale ring */
+      var br = new T.MeshStandardMaterial({ color: 0xb48a2c, metalness: 0.75, roughness: 0.35 }), pur = new T.MeshStandardMaterial({ color: 0x3b2a40, metalness: 0.3, roughness: 0.5 });
+      g.add(cy(9.5, 44, br, -6, 0, 0, 'x', 28)); g.add(cy(11, 14, pur, 20, 0, 0, 'x', 32)); g.add(cy(8, 2, M.dark, 27.5, 0, 0, 'x', 24));
+      for (var k = 0; k < 24; k++) { var an = k * Math.PI / 12; g.add(bx(0.6, 1.4, 1.4, M.glass, 20, Math.cos(an) * 11.2, Math.sin(an) * 11.2)); }
+      g.add(bx(18, 3, 11, M.dark, -8, 6, 0)); g.add(bx(18, 3, 11, M.dark, -8, -6, 0)); },
+    target: function (g) { var M = mats(); stand(g); /* alignment target card with a printed grid, on a post */
+      var tex = canvasTex(256, 192, function (x, w, h) { x.fillStyle = '#efe3bd'; x.fillRect(0, 0, w, h); x.strokeStyle = '#3a2f1a'; x.lineWidth = 2;
+        for (var i = 1; i < 8; i++) { x.beginPath(); x.moveTo(i * w / 8, 12); x.lineTo(i * w / 8, h - 12); x.stroke(); } for (var j = 1; j < 6; j++) { x.beginPath(); x.moveTo(12, j * h / 6); x.lineTo(w - 12, j * h / 6); x.stroke(); }
+        x.strokeRect(12, 12, w - 24, h - 24); });
+      g.add(bx(4, 30, 40, M.glass, 0, 6, 0)); var pl = new T.Mesh(new T.PlaneGeometry(40, 30), new T.MeshBasicMaterial({ map: tex })); pl.rotation.y = Math.PI / 2; pl.position.set(2.3, 6, 0); g.add(pl); },
     sphere: function (g) { var M = mats(); stand(g); /* Thorlabs S14xC integrating-sphere head: disc O45 x 30.5 mm, O5 mm aperture, SM1 thread, cable at the back */
       g.add(cy(22.5, 30.5, M.black, 0, 0, 0, 'x', 36)); g.add(cy(23, 2, M.alu, 14, 0, 0, 'x', 36)); g.add(cy(12.7, 6, M.alu, 18, 0, 0, 'x', 28)); g.add(cy(8, 1, M.black, 21.2, 0, 0, 'x', 24)); g.add(cy(5.2, 1, M.glass, 21.8, 0, 0, 'x', 20));
       g.add(cy(3.2, 14, M.black, -22, 0, 0, 'x', 12)); g.add(bx(14, 6, 10, M.dark, -29, 0, 0)); },

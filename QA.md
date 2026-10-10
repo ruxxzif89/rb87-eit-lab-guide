@@ -318,7 +318,25 @@ With the PM100USB, the S120VC and the S140C the lab has the complete power-meter
 
 Source: [Newport 818-SL/DB](https://np.d1.mks.com/p/818-SL--DB)
 
-### Q20. Is the Newport AD-300/DC fast detector useful?
+### Q20. Which of the loose mounts and stages in the photographs are useful?
+
+*Added 10 Oct 2026*
+
+Identified from five photographs of the lab shelves and added to the Lab Inventory with a drawing of each (the drawings follow the photographs, with the markings that are legible).
+
+| Item | Status | Use in the bench |
+|---|---|---|
+| Melles Griot kinematic mounts (yellow mG knobs) | use | mirror and beamsplitter mounts (BOM O02): measure the aperture |
+| Thorlabs PR01/M rotation stage | use | Glan-Taylor analyser or waveplate angle |
+| Micrometer XY stages | use | cell holder, AOM and collimator positioning |
+| XY lens positioners | check | cat-eye and expander lenses |
+| Brass rotation holders, degree scale | check | possible waveplate or polarizer rotators: measure the bore |
+| Navitron TV zoom lenses | check | beam or cell imaging with an IR camera (none listed yet) |
+| Printed grid target cards | use | beam centring |
+
+**Left out as not needed:** the ball-screw stepper stage, aluminium rails, the V-block, brackets, loose screws and the box of cables.
+
+### Q21. Is the Newport AD-300/DC fast detector useful?
 
 *Added 9 Oct 2026*
 
@@ -329,7 +347,7 @@ Source: [Newport 818-SL/DB](https://np.d1.mks.com/p/818-SL--DB)
 
 ## The Quantum Spain-style bench
 
-### Q21. Is the Spain-style arrangement correct, in theory and in practice?
+### Q22. Is the Spain-style arrangement correct, in theory and in practice?
 
 *Added 9 Oct 2026*
 
