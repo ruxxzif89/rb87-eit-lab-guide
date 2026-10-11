@@ -378,7 +378,7 @@ If both work on the bench, the separate cell-heater controller (BOM C04) and the
 
 **Front panel and DIP switches.**
 - Sensor: DIP switches SW7/SW8 to "TH < 20 kΩ" (100 µA measurement current; the setting range is 10 Ω to 19.99 kΩ), and the SENSOR button to thermistor. The display shows the thermistor resistance in ohms, so convert: R = R0·exp[B(1/T − 1/T0)] (temperatures in kelvin; R0 and B from the thermistor datasheet). A 10 kΩ NTC with B ≈ 3900 K reads about 2.1 kΩ at 65 °C. Select the display T SET and dial the value in with the TEC knob.
-- **TEC current limit:** select the display I TEC LIM and set it with the small screwdriver pot beside its LED; use 0.3 A for the dummy-load test and about 0.6 A for the real heater, and keep heater resistance × current under about 7 V (a 12 Ω heater at 0.6 A gives about 4 W).
+- **TEC current limit:** select the display I TEC LIM and set it with the small screwdriver pot beside its LED; use 0.3 A for the dummy-load test and 0.50 A for the real heater on the open bench and 0.33 A once it is inside the closed shield (so even a runaway stays below about 85 °C), and keep heater resistance × current under about 7 V (a 12 Ω heater at 0.6 A gives about 4 W).
 - **Temperature window protection:** select T WIN, set about ±200 Ω (a few degrees), and switch SW5 down (WIN on). If the temperature leaves the window the output switches off.
 - PID: start from the factory values (chapter 2.15.4 of the manual), raise P until the temperature oscillates a little, then back off. Raise the set-point in steps of 10 °C. Warm-up for rated accuracy is up to 10 minutes.
 
@@ -386,7 +386,21 @@ If both work on the bench, the separate cell-heater controller (BOM C04) and the
 
 **Check the field.** With the fluxgate inside the shield, switch the heater on and off: the change should be small compared with 1 mG (the DIY test uses 0.1 mG). If not, twist the leads tighter.
 
-### Q14. Can we heat the cell the Duke way (heaters and insulation wrapped in aluminium foil)?
+### Q14. Is it safe to wrap the bifilar heater directly round the rubidium cell?
+
+*Added 11 Oct 2026*
+
+*Equipment shown in the guide: Rb vapour cell, bifilar heater, ITC502 (TEC OUT), µ-metal shield.*
+
+**Yes, if the heater stays on the barrel and the controller's current limit is set so that even a runaway stays cool.**
+
+- **Glass:** 1 to 2 W spread over 80 × 25 mm is under 0.1 W per cm², so the wire runs only a little warmer than the glass. Quartz takes the slow warm-up easily. The heater never covers a window, and no wire crosses one.
+- **Electrical:** 12 Ω at under 0.42 A is a few volts. The two Kapton films insulate it (check heater to NTC above 10 MΩ), and the diode of D3 stops the controller from driving the heater backwards.
+- **Magnetic:** the bifilar pairing cancels the heater's own field. The on-and-off test in the shield must show less than 0.1 mG.
+- **Rubidium:** keep the windows a little warmer than the stem, so the metal condenses in the stem and not on the windows.
+- **Runaway:** if the NTC comes off the glass, the ITC502 drives its full limit. So set I TEC LIM to **0.50 A on the open bench** (worst case about 84 °C) and **0.33 A inside the closed shield** (also about 84 °C). Both still give the power needed at 65 °C, and both stay below the 100 °C rating of the foam and the epoxy. The earlier figure of 0.6 A was too high for a runaway inside the shield.
+
+### Q15. Can we heat the cell the Duke way (heaters and insulation wrapped in aluminium foil)?
 
 *Added 11 Oct 2026*
 
@@ -412,7 +426,7 @@ If both work on the bench, the separate cell-heater controller (BOM C04) and the
 
 **Verdict:** keep our bifilar heater, foam and tubes (DIY D2); an outer foil layer is allowed and harmless, but it is not a replacement for a non-magnetic heater.
 
-### Q15. Can the solenoid former be 3D-printed in PETG on a Bambu Lab A1 with a 0.2 mm nozzle?
+### Q16. Can the solenoid former be 3D-printed in PETG on a Bambu Lab A1 with a 0.2 mm nozzle?
 
 *Added 11 Oct 2026*
 
@@ -437,7 +451,7 @@ If both work on the bench, the separate cell-heater controller (BOM C04) and the
 
 The STL files: the former, the test coupon, the two spacer rings (with the lead notch and the recess for the degaussing bundle) and the winding as a reference model, not for printing: the wire is wound by hand in the printed groove.
 
-### Q16. Can we make the mu-metal shield ourselves: roll a sheet into a cylinder and close it with (3D-printed) end caps?
+### Q17. Can we make the mu-metal shield ourselves: roll a sheet into a cylinder and close it with (3D-printed) end caps?
 
 *Added 11 Oct 2026*
 
@@ -467,7 +481,7 @@ Three layers multiply these roughly, if the gaps between them are a few millimet
 
 **Check:** after assembly and degaussing (D4), measure the residual field at the cell with the fluxgate plate. Then turn the whole shield in the room and read it again: the reading should change by less than about 0.1 mG.
 
-### Q17. Which DC source should drive the solenoid, and how do I wire the second ITC502 laser output for it? (Is the Rigol DP832A needed?)
+### Q18. Which DC source should drive the solenoid, and how do I wire the second ITC502 laser output for it? (Is the Rigol DP832A needed?)
 
 *Added 10 Oct 2026*
 
@@ -506,7 +520,7 @@ Three layers multiply these roughly, if the gaps between them are a few millimet
 
 **Effect on the BOM.** If the ITC502 route works, BOM C08 (Rigol DP832A) and, with the heater on the TEC half, C04 (TC300B) can be dropped. This has not been applied; test the solenoid and the heater on the bench first, with the fluxgate inside the shield.
 
-### Q18. Can the Stefan Mayer FLC100 be the fluxgate magnetometer with milligauss resolution?
+### Q19. Can the Stefan Mayer FLC100 be the fluxgate magnetometer with milligauss resolution?
 
 *Added 10 Oct 2026*
 
@@ -530,7 +544,7 @@ Sources: [Stefan Mayer FLC 100 data sheet](https://stefan-mayer.com/images/datas
 
 ## The Quantum Spain-style bench
 
-### Q19. Is the Spain-style arrangement correct, in theory and in practice?
+### Q20. Is the Spain-style arrangement correct, in theory and in practice?
 
 *Added 9 Oct 2026*
 
@@ -556,7 +570,7 @@ Sources: [Stefan Mayer FLC 100 data sheet](https://stefan-mayer.com/images/datas
 
 ## About this guide
 
-### Q20. How does the lab inventory enter the costed BOM and the Spain-style cost?
+### Q21. How does the lab inventory enter the costed BOM and the Spain-style cost?
 
 *Added 10 Oct 2026*
 
@@ -569,7 +583,7 @@ Sources: [Stefan Mayer FLC 100 data sheet](https://stefan-mayer.com/images/datas
 
 **Rules and limits.** Items marked "check" or "no" are not counted. An item that covers a row only in part is counted only for the units it can supply (for example 6 post holders against 60 post sets). The Credix SG-1710 is **not** counted against the dual-channel RF synthesizer, which needs two phase-locked channels. Mounts whose aperture is not measured yet (the Melles Griot set) are counted as 10 of the 11 mirror mounts; measure them. The prices stay behind the group password; the switch only changes how the totals are computed.
 
-### Q21. Can the Thorlabs PM100USB CAD file be used for the 3D pictures?
+### Q22. Can the Thorlabs PM100USB CAD file be used for the 3D pictures?
 
 *Added 10 Oct 2026*
 

@@ -592,7 +592,7 @@
       labels: function () { return [{ t: 'cable side, groove for the leads', p: [330 - 48, 22, SZ] }, { t: '63 + 34 + 63 = 160', p: [330, 30, SZ] }]; } },
 
     { ch: 'Cell stack (D2)', t: 'Bench-test the heater',
-      what: 'Heater and NTC on the second ITC502 (TEC OUT, through the diode of D3): I TEC LIM 0.60 A, T SET <b>2.100 kΩ</b> (about 65 °C for this NTC). Watch the NTC reading fall and settle. Before the real cell is used, run the magnetic test of D2 once: heater on a dummy tube in the closed shield, current on and off.',
+      what: 'Heater and NTC on the second ITC502 (TEC OUT, through the diode of D3): I TEC LIM 0.50 A on the open bench (0.33 A once it is inside the shield), T SET <b>2.100 kΩ</b> (about 65 °C for this NTC). Watch the NTC reading fall and settle. Before the real cell is used, run the magnetic test of D2 once: heater on a dummy tube in the closed shield, current on and off.',
       check: 'Settles in about 15 minutes at ' + f(Math.sqrt(P.PlossClosed / 12), 2) + ' to ' + f(Math.sqrt(P.Ploss / 12), 2) + ' A; the magnetic test changes the field by less than 0.1 mG.',
       parts: [], tools: ['ITC502 (second unit)'],
       act: { type: 'auto', label: 'Heat up', dur: 4 }, cam: [-10, 200, 620, 0, -10, 60],
