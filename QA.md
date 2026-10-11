@@ -386,7 +386,33 @@ If both work on the bench, the separate cell-heater controller (BOM C04) and the
 
 **Check the field.** With the fluxgate inside the shield, switch the heater on and off: the change should be small compared with 1 mG (the DIY test uses 0.1 mG). If not, twist the leads tighter.
 
-### Q14. Which DC source should drive the solenoid, and how do I wire the second ITC502 laser output for it? (Is the Rigol DP832A needed?)
+### Q14. Can we heat the cell the Duke way (heaters and insulation wrapped in aluminium foil)?
+
+*Added 11 Oct 2026*
+
+*Equipment shown in the guide: Rb vapour cell, foil heater, solenoid, µ-metal shield, ITC502.*
+
+**Partly. The foil itself is fine and can be added as an outer layer, but the Duke heater cannot be copied as it is: their experiment does not need a milligauss-quiet field, and ours does.** The [Duke page](https://physics.duke.edu/experimental-setup) shows a cell inside "a collection of heating elements and insulation" with aluminium foil wrapped round the outside, held at about 72 °C, inside Helmholtz coils that only cancel the axial part of the Earth's field. No shield, and nothing about how the heater is wound.
+
+| Part of their method | For our Zeeman EIT | Why |
+|---|---|---|
+| Aluminium foil as the outer wrap | yes, optional | aluminium is not magnetic; at DC it makes no field. It reflects heat radiation, but inside our closed stack most heat leaves by conduction, so the gain is small. |
+| Unspecified heating elements | no, use our bifilar heater (DIY D2) | an ordinary heater wire or tape carries about 1 A; one loop of it near the cell makes far more than our 0.1 mG budget. The bifilar winding cancels its own field; we test it with the fluxgate before use. |
+| 72 °C | close to ours (55–65 °C) | the temperature sets the vapour density; the target comes from the paper, not from Duke. |
+| Helmholtz coils only, no shield | no | 1.4 kHz per mG: we need the three-layer shield and the solenoid. |
+
+**If you add foil**
+- One layer (about 20 µm) over the foam sleeve: it fits in the former bore (radial room about 1 mm).
+- Keep it off the beam: leave both window ends open.
+- Insulate it from the heater leads and the thermistor (it conducts) and do not let it touch the solenoid winding.
+- Do not close it into a loop round the cell with a soldered or overlapping conductive joint if the heater is ever driven with AC or PWM: a closed ring is a one-turn coil. With DC from the ITC502 it does not matter, but leave a small gap anyway.
+- Keep the windows a few degrees warmer than the stem, or rubidium condenses on the windows. The foil should not cover the windows more than the heater does.
+
+**Accuracy** does not depend on the foil: it depends on where the thermistor sits (on the glass, near the beam) and on the controller. With the ITC502 and a 10 kΩ NTC the setting is stable to well below 0.1 K.
+
+**Verdict:** keep our bifilar heater, foam and tubes (DIY D2); an outer foil layer is allowed and harmless, but it is not a replacement for a non-magnetic heater.
+
+### Q15. Which DC source should drive the solenoid, and how do I wire the second ITC502 laser output for it? (Is the Rigol DP832A needed?)
 
 *Added 10 Oct 2026*
 
@@ -425,7 +451,7 @@ If both work on the bench, the separate cell-heater controller (BOM C04) and the
 
 **Effect on the BOM.** If the ITC502 route works, BOM C08 (Rigol DP832A) and, with the heater on the TEC half, C04 (TC300B) can be dropped. This has not been applied; test the solenoid and the heater on the bench first, with the fluxgate inside the shield.
 
-### Q15. Can the Stefan Mayer FLC100 be the fluxgate magnetometer with milligauss resolution?
+### Q16. Can the Stefan Mayer FLC100 be the fluxgate magnetometer with milligauss resolution?
 
 *Added 10 Oct 2026*
 
@@ -449,7 +475,7 @@ Sources: [Stefan Mayer FLC 100 data sheet](https://stefan-mayer.com/images/datas
 
 ## The Quantum Spain-style bench
 
-### Q16. Is the Spain-style arrangement correct, in theory and in practice?
+### Q17. Is the Spain-style arrangement correct, in theory and in practice?
 
 *Added 9 Oct 2026*
 
@@ -475,7 +501,7 @@ Sources: [Stefan Mayer FLC 100 data sheet](https://stefan-mayer.com/images/datas
 
 ## About this guide
 
-### Q17. How does the lab inventory enter the costed BOM and the Spain-style cost?
+### Q18. How does the lab inventory enter the costed BOM and the Spain-style cost?
 
 *Added 10 Oct 2026*
 
@@ -488,7 +514,7 @@ Sources: [Stefan Mayer FLC 100 data sheet](https://stefan-mayer.com/images/datas
 
 **Rules and limits.** Items marked "check" or "no" are not counted. An item that covers a row only in part is counted only for the units it can supply (for example 6 post holders against 60 post sets). The Credix SG-1710 is **not** counted against the dual-channel RF synthesizer, which needs two phase-locked channels. Mounts whose aperture is not measured yet (the Melles Griot set) are counted as 10 of the 11 mirror mounts; measure them. The prices stay behind the group password; the switch only changes how the totals are computed.
 
-### Q18. Can the Thorlabs PM100USB CAD file be used for the 3D pictures?
+### Q19. Can the Thorlabs PM100USB CAD file be used for the 3D pictures?
 
 *Added 10 Oct 2026*
 
