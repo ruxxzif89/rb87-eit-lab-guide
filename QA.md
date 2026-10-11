@@ -437,7 +437,37 @@ If both work on the bench, the separate cell-heater controller (BOM C04) and the
 
 The STL files: the former, the test coupon, the two spacer rings (with the lead notch and the recess for the degaussing bundle) and the winding as a reference model, not for printing: the wire is wound by hand in the printed groove.
 
-### Q16. Which DC source should drive the solenoid, and how do I wire the second ITC502 laser output for it? (Is the Rigol DP832A needed?)
+### Q16. Can we make the mu-metal shield ourselves: roll a sheet into a cylinder and close it with (3D-printed) end caps?
+
+*Added 11 Oct 2026*
+
+*Equipment shown in the guide: µ-metal shield, degaussing coil, fluxgate (check), solenoid inside.*
+
+**Rolling works only if the shield is annealed afterwards, and a printed end cap is not a magnetic end cap.** Mu-metal gets its permeability from a hydrogen anneal (about 1100 to 1150 °C). Bending, cutting, punching or welding after the anneal lowers the permeability many times over in the worked metal. A plastic cap only holds things in place: magnetically the end stays open, and the axial field (the field our 50 mG bias adds to) is the one an open end lets in most.
+
+Rough estimate for one closed cylinder, Ø46 mm, against a field across it: S ≈ 1 + μ·t / D (shielding factor S, wall thickness t, diameter D, permeability μ).
+
+| One layer | μ (assumed) | S |
+|---|---|---|
+| 1 mm sheet, formed, then hydrogen-annealed | about 20 000 | about 400 |
+| 1 mm sheet, rolled by hand, not annealed | about 2 000 | about 40 |
+| 0.1 mm annealed foil, wrapped gently, not re-annealed | about 5 000 | about 10 |
+
+Three layers multiply these roughly, if the gaps between them are a few millimetres. The values of μ are typical figures, not data for a particular alloy, so measure the result.
+
+**What works**
+- **Best:** buy the shield annealed and finished (BOM C05), with caps and Ø20 mm feed-throughs. Give the maker the inner bore (at least Ø46), the inner length (at least 250) and the feed-through.
+- **Workshop route:** a sheet-metal shop rolls the layers and caps from mu-metal sheet, overlaps the seam, spot-welds it, and then a heat-treatment service anneals them in hydrogen. After that, do no more cutting or bending, and do not drop the layers.
+- **DIY without annealing:** wrap annealed foil gently (large radius, no creases), overlap the seam by 20 to 25 mm, and hold it with Kapton tape or brass or nylon screws, never steel. It works, but it is much weaker; measure it with the fluxgate (D7) before you trust it.
+
+**Seam and caps**
+- The seam is an overlap, not an end cap: at least 20 × the thickness, pressed flat, magnetically continuous along the whole length.
+- The caps must be mu-metal too: a disc with a collar that overlaps the tube by 10 to 15 mm, with the Ø20 mm feed-through in the middle.
+- **3D-printed parts are fine as holders:** printed rings that keep the three layers concentric with about 4 mm gaps, and printed cap frames that press a mu-metal disc against the tube end. They hold the metal; they do not shield.
+
+**Check:** after assembly and degaussing (D4), measure the residual field at the cell with the fluxgate plate. Then turn the whole shield in the room and read it again: the reading should change by less than about 0.1 mG.
+
+### Q17. Which DC source should drive the solenoid, and how do I wire the second ITC502 laser output for it? (Is the Rigol DP832A needed?)
 
 *Added 10 Oct 2026*
 
@@ -476,7 +506,7 @@ The STL files: the former, the test coupon, the two spacer rings (with the lead 
 
 **Effect on the BOM.** If the ITC502 route works, BOM C08 (Rigol DP832A) and, with the heater on the TEC half, C04 (TC300B) can be dropped. This has not been applied; test the solenoid and the heater on the bench first, with the fluxgate inside the shield.
 
-### Q17. Can the Stefan Mayer FLC100 be the fluxgate magnetometer with milligauss resolution?
+### Q18. Can the Stefan Mayer FLC100 be the fluxgate magnetometer with milligauss resolution?
 
 *Added 10 Oct 2026*
 
@@ -500,7 +530,7 @@ Sources: [Stefan Mayer FLC 100 data sheet](https://stefan-mayer.com/images/datas
 
 ## The Quantum Spain-style bench
 
-### Q18. Is the Spain-style arrangement correct, in theory and in practice?
+### Q19. Is the Spain-style arrangement correct, in theory and in practice?
 
 *Added 9 Oct 2026*
 
@@ -526,7 +556,7 @@ Sources: [Stefan Mayer FLC 100 data sheet](https://stefan-mayer.com/images/datas
 
 ## About this guide
 
-### Q19. How does the lab inventory enter the costed BOM and the Spain-style cost?
+### Q20. How does the lab inventory enter the costed BOM and the Spain-style cost?
 
 *Added 10 Oct 2026*
 
@@ -539,7 +569,7 @@ Sources: [Stefan Mayer FLC 100 data sheet](https://stefan-mayer.com/images/datas
 
 **Rules and limits.** Items marked "check" or "no" are not counted. An item that covers a row only in part is counted only for the units it can supply (for example 6 post holders against 60 post sets). The Credix SG-1710 is **not** counted against the dual-channel RF synthesizer, which needs two phase-locked channels. Mounts whose aperture is not measured yet (the Melles Griot set) are counted as 10 of the 11 mirror mounts; measure them. The prices stay behind the group password; the switch only changes how the totals are computed.
 
-### Q20. Can the Thorlabs PM100USB CAD file be used for the 3D pictures?
+### Q21. Can the Thorlabs PM100USB CAD file be used for the 3D pictures?
 
 *Added 10 Oct 2026*
 
