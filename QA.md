@@ -467,7 +467,34 @@ The STL files: the former, the test coupon, the two spacer rings (with the lead 
 
 **Before printing:** confirm the cell's outside length and the stem (the holder assumes a stem in the middle, pointing up, at most 22 mm). Matte black PETG cuts stray light. Do not use it for the EIT cell: that one is heated to 65 °C inside the shield and has its own stack (D2).
 
-### Q18. How is the magnetic shield of the Spain-style EIT cell probably made? It looks like a small enclosure.
+### Q18. Our shield is bigger than the Spain-style module: what beam height should the whole bench use?
+
+*Added 11 Oct 2026*
+
+*Equipment shown in the guide: µ-metal shield, degaussing coil, posts and holders, SAS cell holder, AOM.*
+
+**Use one beam height for every part, about 100 mm. The 40 mm written in the equipment list (M03) and in DIY D9 does not work with our shield and must be changed.** The 40 mm comes from the illustrative 3D bench.
+
+| Check | Number |
+|---|---|
+| Shield outer radius (outer layer and caps, assumed sizes) | about 35 mm |
+| Degaussing coil groups outside the shield (D4) | out to about 41 mm from the axis |
+| Beam height needed for the shield, its cradle and the coil | at least about 60 mm |
+| At 40 mm | the shield bottom would be 5 mm above the table and the coil groups below it: impossible |
+| At 100 mm | the shield bottom is 65 mm above the table, room for a cradle and the coil |
+
+**The other parts at 100 mm**
+- The ½-inch posts in the list (TR75/M in PH75/M holders) reach about this height with the usual mounts. Check each mount's centre height and cut or choose posts to suit.
+- **SAS cell holder (D11):** post height = 100 − 20 = 80 mm.
+- **AOMs on the D9 platform:** set the aperture to 100 mm with the post, then shim.
+- **Fibre collimator, cubes, wave plates, Glan-Taylor, photodiodes:** all on posts, so any common height works.
+- **Shield:** a cradle 65 mm high (Delrin or printed PETG, wide base, M6 screws into the breadboard), with its contact areas between the three outside degaussing groups.
+
+**A second point the height check turned up: the end-cap holes.** The beam goes along the axis, so the Ø20 mm hole in the middle of each end cap is the beam's hole. The coil leads, the cell cables and the degaussing bundle cannot share it without crossing the beam. Ask the maker for a separate cable hole (about Ø12 mm, about 15 mm off the axis, lined up in all three caps) at the cable end, and one for the degaussing bundle at the far end.
+
+Why the Spain-style bench can be lower: their cell module is a small enclosure, so its axis can sit close to the breadboard.
+
+### Q19. How is the magnetic shield of the Spain-style EIT cell probably made? It looks like a small enclosure.
 
 *Added 11 Oct 2026*
 
@@ -489,7 +516,7 @@ Why a small shield works:
 
 **What this means for our design:** we built for 0.1 mG stability and a cell field error of 0.2 %, which needs the long three-layer shield, the 42-turn solenoid with end turns, and degaussing. A compact module like theirs is simpler and cheaper and gives clear EIT, but with a broader, less reproducible line, and its temperature drifts without a loop. A compact version of ours (for example two layers, inner bore about Ø40 mm, about 120 mm long with caps) is possible, but the field uniformity would have to be recalculated with the end caps included before choosing it.
 
-### Q19. Can we make the mu-metal shield ourselves: roll a sheet into a cylinder and close it with (3D-printed) end caps?
+### Q20. Can we make the mu-metal shield ourselves: roll a sheet into a cylinder and close it with (3D-printed) end caps?
 
 *Added 11 Oct 2026*
 
@@ -519,7 +546,7 @@ Three layers multiply these roughly, if the gaps between them are a few millimet
 
 **Check:** after assembly and degaussing (D4), measure the residual field at the cell with the fluxgate plate. Then turn the whole shield in the room and read it again: the reading should change by less than about 0.1 mG.
 
-### Q20. Which DC source should drive the solenoid, and how do I wire the second ITC502 laser output for it? (Is the Rigol DP832A needed?)
+### Q21. Which DC source should drive the solenoid, and how do I wire the second ITC502 laser output for it? (Is the Rigol DP832A needed?)
 
 *Added 10 Oct 2026*
 
@@ -558,7 +585,7 @@ Three layers multiply these roughly, if the gaps between them are a few millimet
 
 **Effect on the BOM.** If the ITC502 route works, BOM C08 (Rigol DP832A) and, with the heater on the TEC half, C04 (TC300B) can be dropped. This has not been applied; test the solenoid and the heater on the bench first, with the fluxgate inside the shield.
 
-### Q21. Can the Stefan Mayer FLC100 be the fluxgate magnetometer with milligauss resolution?
+### Q22. Can the Stefan Mayer FLC100 be the fluxgate magnetometer with milligauss resolution?
 
 *Added 10 Oct 2026*
 
@@ -582,7 +609,7 @@ Sources: [Stefan Mayer FLC 100 data sheet](https://stefan-mayer.com/images/datas
 
 ## The Quantum Spain-style bench
 
-### Q22. Is the Spain-style arrangement correct, in theory and in practice?
+### Q23. Is the Spain-style arrangement correct, in theory and in practice?
 
 *Added 9 Oct 2026*
 
@@ -608,7 +635,7 @@ Sources: [Stefan Mayer FLC 100 data sheet](https://stefan-mayer.com/images/datas
 
 ## About this guide
 
-### Q23. How does the lab inventory enter the costed BOM and the Spain-style cost?
+### Q24. How does the lab inventory enter the costed BOM and the Spain-style cost?
 
 *Added 10 Oct 2026*
 
@@ -621,7 +648,7 @@ Sources: [Stefan Mayer FLC 100 data sheet](https://stefan-mayer.com/images/datas
 
 **Rules and limits.** Items marked "check" or "no" are not counted. An item that covers a row only in part is counted only for the units it can supply (for example 6 post holders against 60 post sets). The Credix SG-1710 is **not** counted against the dual-channel RF synthesizer, which needs two phase-locked channels. Mounts whose aperture is not measured yet (the Melles Griot set) are counted as 10 of the 11 mirror mounts; measure them. The prices stay behind the group password; the switch only changes how the totals are computed.
 
-### Q24. Can the Thorlabs PM100USB CAD file be used for the 3D pictures?
+### Q25. Can the Thorlabs PM100USB CAD file be used for the 3D pictures?
 
 *Added 10 Oct 2026*
 
