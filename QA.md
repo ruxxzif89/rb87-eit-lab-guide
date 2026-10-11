@@ -431,6 +431,10 @@ If both work on the bench, the separate cell-heater controller (BOM C04) and the
 
 **Accuracy:** PETG shrinks about 0.2 to 0.5 %. A uniform shrinkage changes the field per mA by the same fraction and leaves the uniformity unchanged, and the in-shield calibration takes it out; correct the Z scale from the coupon if ten pitches are off by more than 0.1 mm.
 
+**Is the groove right for the winding?** Yes. Checked on the STL by axial sections at several angles: 42 seats, each 0.600 mm wide at a radius of 18.600 mm (0.40 deep), centred on the design helix to better than 0.01 mm, ten main pitches 36.000 mm. The enamelled wire (Ø0.55) has 0.05 mm of side clearance and its centre lands on the design winding radius of 18.875 mm. Printed slots usually come out a little narrower, so if the wire does not drop into the coupon's seat, print the 0.65 mm seat version (same pitch, same field).
+
+**Slicer:** select the A1 0.2 mm nozzle preset first (the 0.4 mm defaults of 0.2 mm layers and 0.42 mm lines are too coarse), then 0.08 mm layers, 0.22 mm line widths, 10 wall loops, scarf seam off, outer wall 50 mm/s, Precise Z height on, no support, 5 mm brim. The full field-by-field list is in D1.
+
 The STL files: the former, the test coupon, the two spacer rings (with the lead notch and the recess for the degaussing bundle) and the winding as a reference model, not for printing: the wire is wound by hand in the printed groove.
 
 ### Q16. Which DC source should drive the solenoid, and how do I wire the second ITC502 laser output for it? (Is the Rigol DP832A needed?)
