@@ -467,7 +467,29 @@ The STL files: the former, the test coupon, the two spacer rings (with the lead 
 
 **Before printing:** confirm the cell's outside length and the stem (the holder assumes a stem in the middle, pointing up, at most 22 mm). Matte black PETG cuts stray light. Do not use it for the EIT cell: that one is heated to 65 °C inside the shield and has its own stack (D2).
 
-### Q18. Can we make the mu-metal shield ourselves: roll a sheet into a cylinder and close it with (3D-printed) end caps?
+### Q18. How is the magnetic shield of the Spain-style EIT cell probably made? It looks like a small enclosure.
+
+*Added 11 Oct 2026*
+
+*Equipment shown in the guide: µ-metal shield, EIT vapour cell, solenoid, heater, bench supplies (HEATER, COILS).*
+
+**Most likely a compact cell module: a short, small-diameter shield (one or two layers, closed ends) inside the white 3D-printed housing, with the coil and the heater wound round the cell inside it.** This is a reading of one photograph, not a confirmed design: the shield itself is not visible.
+
+What the photo does show:
+- **A white 3D-printed housing** with red leads for the heater and the coil, and nothing larger round it. A long three-layer tube like ours (Ø70 × 250 mm) would be obvious.
+- **A HEATER supply at about 2.40 V and 0.50 A** (about 1.2 W, plain DC, no temperature loop visible).
+- **A COILS supply at about 1.00 V and 80 mA**, so the coil is about 12.5 Ω: many turns of thin wire, a short solenoid.
+
+Why a small shield works:
+- The shielding factor of a closed cylinder grows as μ·t / D (wall thickness over diameter), so a narrow tube shields better for the same metal.
+- Closed mu-metal ends act like mirrors for the coil inside, so a short solenoid in a short closed shield still gives a fairly uniform field. That is how compact vapour-cell modules are built.
+- It is cheap: little mu-metal, and a printed housing that also holds the cell and the windows.
+
+**Plain DC heater current:** a constant heater current makes a constant field, which only adds to the bias. It becomes a problem when a temperature loop changes the current; that is why our heater is bifilar (D2) and runs in a loop.
+
+**What this means for our design:** we built for 0.1 mG stability and a cell field error of 0.2 %, which needs the long three-layer shield, the 42-turn solenoid with end turns, and degaussing. A compact module like theirs is simpler and cheaper and gives clear EIT, but with a broader, less reproducible line, and its temperature drifts without a loop. A compact version of ours (for example two layers, inner bore about Ø40 mm, about 120 mm long with caps) is possible, but the field uniformity would have to be recalculated with the end caps included before choosing it.
+
+### Q19. Can we make the mu-metal shield ourselves: roll a sheet into a cylinder and close it with (3D-printed) end caps?
 
 *Added 11 Oct 2026*
 
@@ -497,7 +519,7 @@ Three layers multiply these roughly, if the gaps between them are a few millimet
 
 **Check:** after assembly and degaussing (D4), measure the residual field at the cell with the fluxgate plate. Then turn the whole shield in the room and read it again: the reading should change by less than about 0.1 mG.
 
-### Q19. Which DC source should drive the solenoid, and how do I wire the second ITC502 laser output for it? (Is the Rigol DP832A needed?)
+### Q20. Which DC source should drive the solenoid, and how do I wire the second ITC502 laser output for it? (Is the Rigol DP832A needed?)
 
 *Added 10 Oct 2026*
 
@@ -536,7 +558,7 @@ Three layers multiply these roughly, if the gaps between them are a few millimet
 
 **Effect on the BOM.** If the ITC502 route works, BOM C08 (Rigol DP832A) and, with the heater on the TEC half, C04 (TC300B) can be dropped. This has not been applied; test the solenoid and the heater on the bench first, with the fluxgate inside the shield.
 
-### Q20. Can the Stefan Mayer FLC100 be the fluxgate magnetometer with milligauss resolution?
+### Q21. Can the Stefan Mayer FLC100 be the fluxgate magnetometer with milligauss resolution?
 
 *Added 10 Oct 2026*
 
@@ -560,7 +582,7 @@ Sources: [Stefan Mayer FLC 100 data sheet](https://stefan-mayer.com/images/datas
 
 ## The Quantum Spain-style bench
 
-### Q21. Is the Spain-style arrangement correct, in theory and in practice?
+### Q22. Is the Spain-style arrangement correct, in theory and in practice?
 
 *Added 9 Oct 2026*
 
@@ -586,7 +608,7 @@ Sources: [Stefan Mayer FLC 100 data sheet](https://stefan-mayer.com/images/datas
 
 ## About this guide
 
-### Q22. How does the lab inventory enter the costed BOM and the Spain-style cost?
+### Q23. How does the lab inventory enter the costed BOM and the Spain-style cost?
 
 *Added 10 Oct 2026*
 
@@ -599,7 +621,7 @@ Sources: [Stefan Mayer FLC 100 data sheet](https://stefan-mayer.com/images/datas
 
 **Rules and limits.** Items marked "check" or "no" are not counted. An item that covers a row only in part is counted only for the units it can supply (for example 6 post holders against 60 post sets). The Credix SG-1710 is **not** counted against the dual-channel RF synthesizer, which needs two phase-locked channels. Mounts whose aperture is not measured yet (the Melles Griot set) are counted as 10 of the 11 mirror mounts; measure them. The prices stay behind the group password; the switch only changes how the totals are computed.
 
-### Q23. Can the Thorlabs PM100USB CAD file be used for the 3D pictures?
+### Q24. Can the Thorlabs PM100USB CAD file be used for the 3D pictures?
 
 *Added 10 Oct 2026*
 
