@@ -473,7 +473,7 @@ The STL files: the former, the test coupon, the two spacer rings (with the lead 
 
 *Equipment shown in the guide: µ-metal shield, degaussing coil, posts and holders, SAS cell holder, AOM.*
 
-**Use one beam height for every part, about 100 mm. The 40 mm written in the equipment list (M03) and in DIY D9 does not work with our shield and must be changed.** The 40 mm comes from the illustrative 3D bench.
+**One beam height for every part: 100 mm (decided and applied everywhere on 11 Oct 2026).** The 40 mm that was written in the equipment list (M03), in DIY D9 and D10 and in the 3D bench came from the illustrative bench and does not work with our shield.
 
 | Check | Number |
 |---|---|
@@ -488,15 +488,15 @@ The STL files: the former, the test coupon, the two spacer rings (with the lead 
 - **SAS cell holder (D11):** post height = 100 − 20 = 80 mm.
 - **AOMs on the D9 platform:** set the aperture to 100 mm with the post, then shim.
 - **Fibre collimator, cubes, wave plates, Glan-Taylor, photodiodes:** all on posts, so any common height works.
-- **Shield:** a cradle 65 mm high (Delrin or printed PETG, wide base, M6 screws into the breadboard), with its contact areas between the three outside degaussing groups.
+- **Shield:** the printed cradle of DIY D1 (d1-shield-cradle.stl, BOM M06), axis at 100 mm, touching the shield only between the three outside degaussing groups.
 
-**A second point the height check turned up: the end-cap holes.** The beam goes along the axis, so the Ø20 mm hole in the middle of each end cap is the beam's hole. The coil leads, the cell cables and the degaussing bundle cannot share it without crossing the beam. Ask the maker for a separate cable hole (about Ø12 mm, about 15 mm off the axis, lined up in all three caps) at the cable end, and one for the degaussing bundle at the far end.
+**A second point the height check turned up: the end-cap holes.** The beam goes along the axis, so the Ø20 mm hole in the middle of each end cap is the beam's hole. The coil leads, the cell cables and the degaussing bundle cannot share it without crossing the beam. The caps now get a Ø14 mm beam hole on the axis and a Ø12 mm cable hole 16 mm off the axis, lined up in all three caps at both ends (cable end: coil leads, cell cables, fluxgate cable and degaussing bundle; far end: degaussing bundle).
 
 Why the Spain-style bench can be lower: their cell module is a small enclosure, so its axis can sit close to the breadboard.
 
 **Does 100 mm cost more?** No. The posts already in the list (TR75/M in PH75/M holders, 60 sets) are the ones for this height; a 40 mm bench would have needed shorter posts and holders instead. The shield cradle is printed or cut from Delrin. ½-inch posts at 100 mm are stiff enough for mirrors, cubes and the AOM platform; the heavy shield sits on its own wide cradle bolted to the breadboard.
 
-**Does the EIT cell need its own enclosure at 100 mm?** No. The shield with its end caps already is the cell's enclosure: it keeps room light out (light enters only through the Ø20 mm beam holes), it holds the heat together with the foam and the former, and it stops air currents at the cell. What is needed:
+**Does the EIT cell need its own enclosure at 100 mm?** No. The shield with its end caps already is the cell's enclosure: it keeps room light out (light enters only through the Ø14 mm beam holes), it holds the heat together with the foam and the former, and it stops air currents at the cell. What is needed:
 - **Short black beam tubes** (SM1 type) from the last optic to the end cap, and from the far cap to the Glan-Taylor and the detector, so no stray light reaches the detector along the beam.
 - **Taller covers over the AOM arms (D10):** they were drawn 80 mm high for a 40 mm beam. At 100 mm the inner height must be about 160 to 200 mm.
 - **An optional draught cover over the shield**, if the room has strong air flow: black hardboard, inner size about 350 × 120 × 170 mm (the shield is 282 mm long plus the caps and the degaussing loops, and its top is about 140 mm above the table). It must contain no steel: no steel screws, brackets or hinges.
@@ -542,13 +542,13 @@ Rough estimate for one closed cylinder, Ø46 mm, against a field across it: S �
 Three layers multiply these roughly, if the gaps between them are a few millimetres. The values of μ are typical figures, not data for a particular alloy, so measure the result.
 
 **What works**
-- **Best:** buy the shield annealed and finished (BOM C05), with caps and Ø20 mm feed-throughs. Give the maker the inner bore (at least Ø46), the inner length (at least 250) and the feed-through.
+- **Best:** buy the shield annealed and finished (BOM C05), with caps, a Ø14 mm beam hole on the axis and a Ø12 mm cable hole 16 mm off it. Give the maker the inner bore (at least Ø46), the inner length (at least 250) and the hole positions.
 - **Workshop route:** a sheet-metal shop rolls the layers and caps from mu-metal sheet, overlaps the seam, spot-welds it, and then a heat-treatment service anneals them in hydrogen. After that, do no more cutting or bending, and do not drop the layers.
 - **DIY without annealing:** wrap annealed foil gently (large radius, no creases), overlap the seam by 20 to 25 mm, and hold it with Kapton tape or brass or nylon screws, never steel. It works, but it is much weaker; measure it with the fluxgate (D7) before you trust it.
 
 **Seam and caps**
 - The seam is an overlap, not an end cap: at least 20 × the thickness, pressed flat, magnetically continuous along the whole length.
-- The caps must be mu-metal too: a disc with a collar that overlaps the tube by 10 to 15 mm, with the Ø20 mm feed-through in the middle.
+- The caps must be mu-metal too: a disc with a collar that overlaps the tube by 10 to 15 mm, with the Ø14 mm beam hole in the middle and the Ø12 mm cable hole beside it.
 - **3D-printed parts are fine as holders:** printed rings that keep the three layers concentric with about 4 mm gaps, and printed cap frames that press a mu-metal disc against the tube end. They hold the metal; they do not shield.
 
 **Check:** after assembly and degaussing (D4), measure the residual field at the cell with the fluxgate plate. Then turn the whole shield in the room and read it again: the reading should change by less than about 0.1 mG.

@@ -31,7 +31,7 @@
     dopplerSigma_MHz: 224,         // 1-D Doppler width sigma/2pi at 60 C (design estimate)
     eitDetuneScale_MHz: 50,        // ILLUSTRATIVE: EIT contrast fades as the one-photon detuning grows
     sasWidth_MHz: 12,              // ILLUSTRATIVE width of a sub-Doppler SAS feature (error-signal plot only)
-    beamHeight: 40,
+    beamHeight: 100,               // mm above the table: the guide's bench height, set by the magnetic shield and its cradle
     aomAngle_deg: 8,               // ILLUSTRATIVE: exaggerated 1st-order deflection so the orders separate on screen (real: tens of mrad)
     table: { w: 2400, d: 1600, pitch: 25 }   // 2.4 m x 1.6 m optical table (drawn generously, for illustration)
   };

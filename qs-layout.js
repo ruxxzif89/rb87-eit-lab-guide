@@ -9,6 +9,7 @@
 (function () {
   'use strict';
   var P = window.EITPhys, K = P.K;
+  K.beamHeight = 40;   // the Spain-style bench uses a compact cell module, so it is drawn with its own low beam height (illustrative)
   var TABLE = { w: 1100, d: 780, pitch: 25 };
   var SHELF_Z = 70, E = [1, 0], W = [-1, 0], S = [0, 1], N = [0, -1];
 

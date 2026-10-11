@@ -4,7 +4,7 @@
    private/diy/build_d1sim.py writes from params.py (the single source of the
    DIY Section), so the simulator and the drawings cannot disagree.
    World axes: the solenoid axis is world X (cable end at -X), Y is up, the
-   bench top is at Y = -60. Coaxial parts are built in a "root" group whose
+   bench top is at Y = -100 (the 100 mm beam height of the optical bench). Coaxial parts are built in a "root" group whose
    local Z is the solenoid axis.
    ========================================================================== */
 (function () {
@@ -121,8 +121,8 @@
   }
 
   /* ---------------- the bench ---------------- */
-  box(1200, 12, 760, M.bench, scene, 0, -66, 60);
-  var grid = new THREE.GridHelper(1200, 48, 0x7b848c, 0x9aa2aa); grid.position.set(0, -59.9, 60); grid.material.transparent = true; grid.material.opacity = 0.35; scene.add(grid);
+  box(1200, 12, 760, M.bench, scene, 0, -106, 60);
+  var grid = new THREE.GridHelper(1200, 48, 0x7b848c, 0x9aa2aa); grid.position.set(0, -99.9, 60); grid.material.transparent = true; grid.material.opacity = 0.35; scene.add(grid);
 
   /* ---------------- coaxial parts (root: local Z = solenoid axis = world X) ---------------- */
   var root = group(scene); root.rotation.y = Math.PI / 2;
@@ -211,31 +211,35 @@
   var ntc = mesh(new THREE.SphereGeometry(1.2, 12, 10), M.ntc, stack, 0, CR + 0.6, P.cellL / 2 - 5);
   var foam = mesh(shellGeo(12.8, 15.8, 34), M.foam, stack);
   var tubeA = group(stack), tubeB = group(stack);
-  mesh(shellGeo(13.25, 16.85, 63), M.delrin, tubeA); box(2.2, 2.2, 63.2, M.notch, tubeA, 16.0, 0, 0);
+  mesh(shellGeo(13.25, 16.85, 63), M.delrin, tubeA); box(2.2, 2.2, 63.2, M.notch, tubeA, 0, 16.0, 0);
   mesh(shellGeo(13.25, 16.85, 63), M.delrin, tubeB);
   var stackLeads = group(stack);
-  segLine(V(16.0, 0.6, -12), V(16.0, 0.6, -80), 0.45, M.red, stackLeads);
-  segLine(V(16.0, -0.6, -6), V(16.0, -0.6, -80), 0.45, M.blue, stackLeads);
-  segLine(V(16.0, 0, -80), V(2, 0, -100), 0.6, M.black, stackLeads);
-  segLine(V(2, 0, -100), V(2, 0, -170), 0.6, M.black, stackLeads);
+  segLine(V(0.6, 16.0, -12), V(0.6, 16.0, -80), 0.45, M.red, stackLeads);
+  segLine(V(-0.6, 16.0, -6), V(-0.6, 16.0, -80), 0.45, M.blue, stackLeads);
+  segLine(V(0, 16.0, -80), V(0, 16.0, -170), 0.6, M.black, stackLeads);
   var cradle = group(scene);
-  [-45, 45].forEach(function (dx) { box(12, 43, 30, M.delrin, cradle, 330 + dx, -38.5, 160); });
+  [-45, 45].forEach(function (dx) { box(12, 83, 30, M.delrin, cradle, 330 + dx, -58.5, 160); });
 
   /* fluxgate plate (D7): Delrin plate with the FLC100 board at the centre */
   var plate = group(root);
   box(28, 3, 150, M.delrin, plate);
   box(14, 5.5, 44.5, M.pcb, plate, 0, 4.2, 0);
   segLine(V(0, 2.5, -22), V(0, 2.5, -75), 0.5, M.black, plate);
-  segLine(V(0, 2.5, -75), V(0, 0, -170), 0.5, M.black, plate);
+  segLine(V(0, 2.5, -75), V(0, 16, -92), 0.5, M.black, plate);
+  segLine(V(0, 16, -92), V(0, 16, -170), 0.5, M.black, plate);
 
-  /* the three shield layers (assumed sizes, see the page note) with end caps that have a 20 mm feed-through */
+  /* the three shield layers (assumed sizes, see the page note); each end cap has a beam hole on the axis and a cable hole 16 mm above it */
   var LAYERS = [[23, 24, 250], [28, 29, 266], [33, 34, 282]];
   var layers = LAYERS.map(function (L) {
     var g = group(root);
     var tube = mesh(shellGeo(L[0], L[1], L[2]), M.shield, g);
     var caps = [-1, 1].map(function (s) {
       var c = group(root);
-      mesh(shellGeo(10, L[1] + 0.6, 1.0), M.cap, c, 0, 0, s * 0.5);
+      var sh = new THREE.Shape(); sh.absarc(0, 0, L[1] + 0.6, 0, TAU, false);
+      var hb = new THREE.Path(); hb.absarc(0, 0, P.beamHole / 2, 0, TAU, true); sh.holes.push(hb);
+      var hc = new THREE.Path(); hc.absarc(0, P.cableR, P.cableHole / 2, 0, TAU, true); sh.holes.push(hc);
+      var dg = new THREE.ExtrudeGeometry(sh, { depth: 1.0, bevelEnabled: false, curveSegments: 48 }); dg.translate(0, 0, -0.5);
+      mesh(dg, M.cap, c, 0, 0, s * 0.5);
       mesh(shellGeo(L[1] + 0.0, L[1] + 0.6, 10), M.cap, c, 0, 0, -s * 4);
       c.userData.home = s * (L[2] / 2);
       c.userData.s = s;
@@ -244,24 +248,31 @@
     return { g: g, tube: tube, caps: caps, L: L };
   });
 
-  /* degaussing coil (D4): flat bundle in the bore, out through the feed-throughs, three return groups outside */
+  /* degaussing coil (D4): flat bundle in the bore, out through the cable holes, three return groups outside */
   var dcoil = group(root);
   (function () {
-    var phc = -Math.PI / 2 + 0.6, w = 39 / 21.9;
+    var phc = 0, w = 39 / 21.9;                       // inner flat bundle at the side of the bore (90 deg from the cable hole)
     var sheet = new THREE.CylinderGeometry(21.9, 21.9, 236, 24, 1, true, phc + Math.PI / 2 - w / 2, w);
     sheet.rotateX(Math.PI / 2);
-    var sm = mesh(sheet, M.orange, dcoil);
+    mesh(sheet, M.orange, dcoil);
     function pt(r, ph, z) { return V(r * Math.cos(ph), r * Math.sin(ph), z); }
+    var top = Math.PI / 2, groups = [top, top + TAU / 3, top + 2 * TAU / 3];
     [-1, 1].forEach(function (s) {
-      segLine(pt(21.9, phc, s * 118), pt(3, phc, s * 118), 1.6, M.orange, dcoil);
-      segLine(pt(3, phc, s * 118), pt(3, phc, s * 152), 3.0, M.orange, dcoil);
-      for (var g = 0; g < 3; g++) {
-        var ph = phc + g * TAU / 3;
-        segLine(pt(3, phc, s * 152), pt(37, ph, s * 152), 1.4, M.orange, dcoil);
-      }
+      segLine(pt(21.9, phc, s * 118), pt(19.5, Math.PI / 4, s * 118), 1.6, M.orange, dcoil);
+      segLine(pt(19.5, Math.PI / 4, s * 118), pt(P.cableR, top, s * 118), 1.6, M.orange, dcoil);
+      segLine(pt(P.cableR, top, s * 118), pt(P.cableR, top, s * 152), 3.0, M.orange, dcoil);     // round bundle through the cable holes
+      segLine(pt(P.cableR, top, s * 152), pt(37, top, s * 152), 2.0, M.orange, dcoil);
+      groups.forEach(function (ph) {                                                         // round the end, outside the cap, to each group
+        var n = 8, prev = pt(37, top, s * 152);
+        for (var i = 1; i <= n; i++) { var a = top + (ph - top) * i / n, q = pt(37, a, s * 152); segLine(prev, q, 1.4, M.orange, dcoil); prev = q; }
+      });
     });
-    for (var g = 0; g < 3; g++) { var ph = phc + g * TAU / 3; segLine(pt(37, ph, -152), pt(37, ph, 152), 1.4, M.orange, dcoil); }
+    groups.forEach(function (ph) { segLine(pt(37, ph, -152), pt(37, ph, 152), 1.4, M.orange, dcoil); });
   })();
+  /* printed shield cradle (BOM M06): two saddles on a base, the shield axis at the 100 mm beam height */
+  var shCradle = group(scene);
+  box(210, 8, 90, M.delrin, shCradle, 0, -96, 0);
+  [-85, 85].forEach(function (x) { box(16, 65, 52, M.delrin, shCradle, x, -67.5, 0); box(16, 1, 40, M.felt, shCradle, x, -34.6, 0); });
 
   /* ---------------- leads, plug and instruments (world) ---------------- */
   function twisted(pts, pitch, sep, colA, colB) {
@@ -280,14 +291,15 @@
     return { g: g, geos: [ta, tb], n: n, set: function (frac) { var c = Math.floor(clamp(frac) * n) * 5 * 6; ta.setDrawRange(0, c); tb.setDrawRange(0, c); } };
   }
   var X0 = P.starts[0];
-  var leads = twisted([[X0, RO + 0.3, 0], [-80, RO + 0.3, 0], [-92, 9, 0], [-108, 0.5, 0], [-150, 0, 0], [-175, -8, 12], [-200, -28, 40], [-212, -34, 52]], 20, 1.1, M.red, M.copper);
-  var plug = group(scene, -219, -36, 56);
+  var leads = twisted([[X0, RO + 0.3, 0], [-80, RO + 0.3, 0], [-92, 17, 0], [-110, 16, 0], [-165, 16, 0], [-185, 0, 15], [-203, -45, 42], [-213, -70, 53]], 20, 1.1, M.red, M.copper);
+  var plug = group(scene, -219, -76, 56);
   box(26, 12, 36, M.plastic, plug); box(31, 4, 18, M.steel, plug, -15, 0, 0);
   var plugTxt = Display(24, 8, '#3a4048', '#ffffff'); plugTxt.set('LD OUT'); plugTxt.mesh.rotation.x = -Math.PI / 2; add(plugTxt.mesh, plug, 0, 6.2, 0);
 
   /* lathe (for the former and the groove) */
   var lathe = group(scene);
   box(400, 24, 80, M.lathe, lathe, 0, -48, -15);
+  box(380, 40, 70, M.dgrey, lathe, 0, -80, -15);
   box(70, 120, 90, M.lathe, lathe, -165, 0, -15);
   cyl(30, 30, 26, 'x', M.steel, lathe, -110, 0, 0);
   [0, 1, 2].forEach(function (i) { var j = box(8, 8, 14, M.steel, lathe, -94, 0, 0); var a = i * TAU / 3; j.position.y = 22 * Math.cos(a); j.position.z = 22 * Math.sin(a); j.rotation.x = -a; });
@@ -301,7 +313,7 @@
 
   /* winding rig */
   var rig = group(scene);
-  [-1, 1].forEach(function (s) { box(14, 60, 50, M.wood, rig, s * 122, -30, 0); });
+  [-1, 1].forEach(function (s) { box(14, 100, 50, M.wood, rig, s * 122, -50, 0); });
   cyl(3, 3, 310, 'x', M.brass, rig, 0, 0, 0);
   [-1, 1].forEach(function (s) { var g = new THREE.CylinderGeometry(6, RI, 12, 32); g.rotateZ(s * Math.PI / 2); mesh(g, M.delrin, rig, s * 86, 0, 0); });
   var crank = group(rig, -145, 0, 0);
@@ -309,7 +321,7 @@
   var spool = group(rig, 0, 140, -95);
   cyl(15, 15, 30, 'x', M.copper, spool); [-1, 1].forEach(function (s) { cyl(23, 23, 3, 'x', M.plastic, spool, s * 16.5, 0, 0); });
   box(10, 7, 20, M.felt, spool, 0, 18.5, 0);
-  box(8, 200, 8, M.wood, rig, 0, 40 - 0.5 * 0 - 0, -95).position.y = 37;
+  box(8, 240, 8, M.wood, rig, 0, 17, -95);
   var weight = box(12, 16, 12, M.steel, rig, 9, 2, -95); weight.visible = false;
   var feed = rod(0.3, M.copper, scene);
 
@@ -324,7 +336,7 @@
 
   /* compass and the tray of items for the magnetic test */
   var tray = group(scene);
-  var compass = group(tray, 0, -55, 300);
+  var compass = group(tray, 0, -95, 300);
   cyl(24, 24, 6, null, M.white, compass); cyl(25, 25, 2, null, M.dgrey, compass, 0, -2, 0);
   var needle = group(compass, 0, 4, 0);
   box(18, 1.5, 3, M.red, needle, 9, 0, 0); box(18, 1.5, 3, M.white, needle, -9, 0, 0);
@@ -339,7 +351,7 @@
     { id: 'hoodPl', name: 'D-sub hood, plastic', mag: false, x: 40, z: 215 },
     { id: 'screws', name: 'Steel M3 screws', mag: true, x: 160, z: 215 }];
   ITEMS.forEach(function (it) {
-    var g = group(tray, it.x, -60, it.z); g.userData.item = it; it.g = g;
+    var g = group(tray, it.x, -100, it.z); g.userData.item = it; it.g = g;
     switch (it.id) {
       case 'screwdriver': cyl(8, 8, 55, 'x', M.red, g, -30, 8, 0); cyl(2.5, 2.5, 70, 'x', M.steel, g, 32, 8, 0); break;
       case 'brassTw': box(70, 2, 5, M.brass, g, 0, 2, -3).rotation.y = 0.06; box(70, 2, 5, M.brass, g, 0, 2, 3).rotation.y = -0.06; break;
@@ -352,7 +364,7 @@
       case 'screws': for (var i = 0; i < 6; i++) cyl(1.5, 1.5, 10, 'x', M.steel, g, (i % 3) * 7 - 7, 2, (i < 3 ? -4 : 4)); break;
     }
   });
-  var bin = group(tray, 260, -60, 300); box(70, 4, 60, M.dgrey, bin, 0, 2, 0);
+  var bin = group(tray, 260, -100, 300); box(70, 4, 60, M.dgrey, bin, 0, 2, 0);
 
   /* soldering iron, marker, glue bottle, tape */
   var iron = group(scene);
@@ -361,21 +373,21 @@
   cyl(4, 4, 70, null, M.black, marker, 0, 38, 0); cyl(1.5, 0.5, 6, null, M.black, marker, 0, 1, 0);
   var bottle = group(scene);
   cyl(6, 6, 20, null, M.white, bottle, 0, 18, 0); (function () { var g = new THREE.ConeGeometry(6, 9, 16); g.rotateX(Math.PI); mesh(g, M.white, bottle, 0, 4, 0); })();
-  var tapeRoll = mesh(new THREE.TorusGeometry(14, 4, 10, 32), M.tape, scene, 60, -53, 120); tapeRoll.rotation.x = Math.PI / 2;
+  var tapeRoll = mesh(new THREE.TorusGeometry(14, 4, 10, 32), M.tape, scene, 60, -93, 120); tapeRoll.rotation.x = Math.PI / 2;
 
   /* multimeter, ITC502, fluxgate meter, stand, B arrows */
-  var dmm = group(scene, -280, 5, 120);
+  var dmm = group(scene, -280, -35, 120);
   box(75, 130, 32, M.yellow, dmm); var dmmDisp = Display(56, 22, '#bfcbb5', '#111'); add(dmmDisp.mesh, dmm, 0, 35, 16.2);
   var probeR = rod(0.8, M.red, scene), probeB = rod(0.8, M.black, scene);
-  var itc = group(scene, -360, -15, -110);
+  var itc = group(scene, -360, -55, -110);
   box(220, 90, 250, M.grey, itc); var itcDisp = Display(110, 26, '#101418', '#ffb347'); add(itcDisp.mesh, itc, -25, 15, 125.2);
   var itcName = Display(60, 12, '#7d858d', '#ffffff'); itcName.set('ITC502'); add(itcName.mesh, itc, 60, 28, 125.2);
   var itcCable = rod(1.2, M.black, scene);
-  var fgm = group(scene, -205, -40, 140);
+  var fgm = group(scene, -205, -80, 140);
   box(80, 40, 46, M.black, fgm); var fgDisp = Display(64, 18, '#bfcbb5', '#111'); add(fgDisp.mesh, fgm, 0, 4, 23.2);
   var fgName = Display(64, 8, '#202428', '#ffffff'); fgName.set('fluxgate (D7)'); add(fgName.mesh, fgm, 0, -12, 23.2);
   var stand = group(scene);
-  [-58, 58].forEach(function (x) { box(26, 41, 44, M.delrin, stand, x, -39.5, 0); });
+  [-58, 58].forEach(function (x) { box(26, 81, 44, M.delrin, stand, x, -59.5, 0); });
   var arrows = group(scene);
   [-7, 0, 7].forEach(function (y) { var a = new THREE.ArrowHelper(V(1, 0, 0), V(-45, y, 0), 90, 0xc0392b, 14, 7); arrows.add(a); });
   var bplus = group(scene, 0, RO + 3, 0);
@@ -389,7 +401,7 @@
       lathe: false, toolX: null, rig: false, feed: false, wound: 0, glue: 0, ret: 0, tapes: 0, jF: false, jC: false,
       leads: 0, plug: false, spacers: 0, stand: false, plate: null, field: 0, bplus: false,
       cell: false, stack: STACK_REST, stackX: -SZ, heater: 0, ntc: false, foam: 0, tubes: 0, glow: 0,
-      lay: [{ z: null, a: 0, b: 0 }, { z: null, a: 0, b: 0 }, { z: null, a: 0, b: 0 }], dcoil: false, dpulse: 0,
+      lay: [{ z: null, a: 0, b: 0 }, { z: null, a: 0, b: 0 }, { z: null, a: 0, b: 0 }], dcoil: false, dpulse: 0, shCradle: false,
       ghost: false, cal: null, tray: false, iron: null, marker: null, bottle: null, tape: false,
       dmm: null, itc: null, fg: null, cut: false, crank: 0
     };
@@ -402,13 +414,13 @@
   var B_RES = 0.6;                            // example residual field after degaussing, mG
   var STEPS = [
     { ch: 'Before you start', t: 'Confirm the shield size',
-      what: 'Ask the maker, or read the drawing, for three numbers: the <b>innermost bore</b>, the <b>inner length</b> and the <b>end-cap feed-through</b>. The former with its winding is Ø' + f(P.formerOD + 2 * P.wireOD, 1) + ' mm; in a Ø' + f(P.boreMin, 0) + ' mm bore that leaves ' + f(P.clearRadial) + ' mm all round. The layers here are drawn with assumed sizes.',
-      check: 'Bore ≥ Ø' + f(P.boreMin, 0) + ' mm, inner length ≥ 250 mm, feed-through Ø20 mm, in writing.',
+      what: 'Ask the maker, or read the drawing, for the <b>innermost bore</b>, the <b>inner length</b> and the <b>end-cap holes</b>: a Ø14 mm beam hole on the axis and a Ø12 mm cable hole 16 mm above it, lined up in all three caps at both ends. The former with its winding is Ø' + f(P.formerOD + 2 * P.wireOD, 1) + ' mm; in a Ø' + f(P.boreMin, 0) + ' mm bore that leaves ' + f(P.clearRadial) + ' mm all round. The layers here are drawn with assumed sizes.',
+      check: 'Bore ≥ Ø' + f(P.boreMin, 0) + ' mm, inner length ≥ 250 mm, beam hole Ø14 and cable hole Ø12, in writing.',
       mistake: 'A smaller bore needs a thinner former and a new field calculation: the winding radius enters the field directly.',
       parts: ['Shield drawing'], tools: ['Calliper'],
       act: { type: 'auto', label: 'Show the fit', dur: 3 }, cut: true, cam: [-200, 170, 360, 0, 0, 0],
       scene: function (S, p) { S.ghost = true; S.cut = true; for (var k = 0; k < 3; k++) { var q = seg(p, k * 0.3, k * 0.3 + 0.3); if (q > 0) { S.lay[k].z = 0; S.lay[k].a = S.lay[k].b = q; } } },
-      labels: function (S, p) { return [{ t: 'bore ≥ Ø46 (inner layer)', p: [60, -23, 0] }, { t: 'inner length ≥ 250', p: [125, 30, 0] }, { t: 'feed-through Ø20', p: [-141, 14, 0] }, { t: 'former + winding Ø' + f(P.formerOD + 2 * P.wireOD, 1), p: [0, 22, 0], c: 'hot' }, { t: 'clearance ' + f(P.clearRadial) + ' mm', p: [-30, -21, 0] }]; },
+      labels: function (S, p) { return [{ t: 'bore ≥ Ø46 (inner layer)', p: [60, -23, 0] }, { t: 'inner length ≥ 250', p: [125, 30, 0] }, { t: 'beam hole Ø14 + cable hole Ø12', p: [-141, 24, 0] }, { t: 'former + winding Ø' + f(P.formerOD + 2 * P.wireOD, 1), p: [0, 22, 0], c: 'hot' }, { t: 'clearance ' + f(P.clearRadial) + ' mm', p: [-30, -21, 0] }]; },
       quiz: { q: 'The maker says the innermost bore is Ø44 mm. What do you do?', o: ['Wind the coil anyway: 1 mm less clearance is fine', 'Make a thinner former and recalculate the field before cutting', 'Sand the spacer rings down until it fits'], a: 1, why: 'Ø' + f(P.formerOD + 2 * P.wireOD, 1) + ' mm of winding plus the spacer rings do not fit in Ø44, and a smaller winding radius changes the field per mA and the uniformity: the design must be recalculated.' } },
 
     { ch: 'Before you start', t: 'Test every part and tool with a compass',
@@ -530,7 +542,7 @@
       scene: function (S, p) { S.dmm = p < 0.2 ? '--.--- Ω' : f(P.Rcoil * lerp(1.4, 1, seg(p, 0.2, 0.7)), 3) + ' Ω'; } },
 
     { ch: 'Winding', t: 'Glue the two spacer rings',
-      what: 'Delrin rings <b>Ø' + f(SP_RO * 2, 1) + ' × Ø' + f(P.formerOD, 1) + ' × 6</b> (outside = real shield bore − 0.5 mm) on the unwound ends, centred 75 mm from the mid-plane, outside the groove (it ends at ' + f(-P.starts[0], 1) + '). The cable-end ring needs a <b>notch 2.5 × 1.5 mm</b> in its bore for the twisted leads, and both rings a <b>recess 1.5 mm deep over 40 mm of the circumference</b> on the outside for the degaussing bundle of D4.',
+      what: 'Delrin rings <b>Ø' + f(SP_RO * 2, 1) + ' × Ø' + f(P.formerOD, 1) + ' × 6</b> (outside = real shield bore − 0.5 mm) on the unwound ends, centred 75 mm from the mid-plane, outside the groove (it ends at ' + f(-P.starts[0], 1) + '). Turn the former so its 0° slot points up (towards the cable holes of the caps); the notch goes over the slot and the recesses then face sideways. The cable-end ring needs a <b>notch 2.5 × 1.5 mm</b> in its bore for the twisted leads, and both rings a <b>recess 1.5 mm deep over 40 mm of the circumference</b> on the outside for the degaussing bundle of D4.',
       check: 'Both rings square and at ±75 mm; the leads pass the notch without being pinched.',
       parts: ['2 spacer rings (Delrin)'], tools: ['Epoxy'],
       act: { type: 'auto', label: 'Fit the rings', dur: 2.5 }, cam: [-150, 90, 220, -40, 0, 0],
@@ -599,20 +611,20 @@
       scene: function (S, p) { S.glow = ease(p); S.itc = 'TEC ' + f(lerp(10.0, 2.1, ease(p)), 3) + ' kΩ'; } },
 
     { ch: 'Into the shield', t: 'Slide the inner layer over the former',
-      what: 'For the calibration the fluxgate plate stays in the former; the cell stack goes in later. Slide the <b>innermost layer</b> over the former from the far end. The spacer rings centre the former; keep the twisted leads and the plate cable coming out of the cable end.',
+      what: 'For the calibration the fluxgate plate stays in the former; the cell stack goes in later. Slide the <b>innermost layer</b> over the former from the far end. The spacer rings centre the former; keep the twisted leads and the plate cable along the top, towards the cable hole. The shield rests on its printed cradle (BOM M06) with its axis at the 100 mm beam height.',
       check: 'The former is centred; the mid-plane ring is at the middle of the layer (± 1 mm).',
       parts: ['Shield, inner layer'], tools: [],
       act: { type: 'auto', label: 'Slide it on', dur: 3 }, cut: true, cam: [-160, 170, 380, 0, 0, 0],
-      apply: function (S, p) { S.stand = false; S.lay[0].z = lerp(430, 0, ease(p)); },
+      apply: function (S, p) { S.stand = false; S.shCradle = true; S.lay[0].z = lerp(430, 0, ease(p)); },
       labels: function () { return [{ t: 'inner layer, bore Ø46 (assumed)', p: [40, 30, 0] }, { t: 'spacer rings centre the former', p: [75, -28, 0] }]; } },
 
     { ch: 'Into the shield', t: 'Fit the inner end caps',
-      what: 'Close both ends. All cables leave through the <b>Ø20 mm feed-through</b> of the cable-end cap as twisted pairs, never as loops.',
+      what: 'Close both ends. All cables leave through the <b>Ø12 mm cable hole</b>, 16 mm above the axis, as twisted pairs, never as loops. The Ø14 mm hole on the axis is for the beam only.',
       check: 'Caps seated all round; no cable pinched under a cap.',
       parts: ['Inner end caps'], tools: [],
       act: { type: 'auto', label: 'Fit the caps', dur: 2.5 }, cut: true, cam: [-240, 140, 330, -60, 0, 0],
       apply: function (S, p) { S.lay[0].a = S.lay[0].b = ease(p); },
-      quiz: { q: 'How do the coil leads leave the shield?', o: ['As a twisted pair through the feed-through', 'Spread apart, so they do not touch', 'Under the edge of the cap'], a: 0, why: 'A twisted pair has no loop area: it neither picks up nor makes a field.' } },
+      quiz: { q: 'How do the coil leads leave the shield?', o: ['As a twisted pair through the cable hole', 'Spread apart, so they do not touch', 'Under the edge of the cap'], a: 0, why: 'A twisted pair has no loop area: it neither picks up nor makes a field.' } },
 
     { ch: 'Into the shield', t: 'Middle layer and its caps',
       what: 'Slide the middle layer over the inner one and close it. The layers must not touch each other.',
@@ -623,13 +635,13 @@
 
     { ch: 'Into the shield', t: 'Outer layer and its caps',
       what: 'Slide the outer layer on and close it. The shield is now complete; from here on keep steel tools and magnets at least a metre away.',
-      check: 'Outer diameter ≤ Ø' + f(P.shieldOD, 0) + ' mm; all six caps seated.',
+      check: 'Outer diameter ≤ Ø' + f(P.shieldOD, 0) + ' mm; all six caps seated; the axis at the 100 mm beam height on the cradle.',
       parts: ['Shield, outer layer + caps'], tools: [],
       act: { type: 'auto', label: 'Fit the outer layer', dur: 3 }, cut: true, cam: [-220, 190, 440, 0, 0, 0],
       apply: function (S, p) { S.lay[2].z = lerp(470, 0, ease(seg(p, 0, 0.65))); S.lay[2].a = S.lay[2].b = ease(seg(p, 0.7, 1)); } },
 
     { ch: 'Into the shield', t: 'Degauss the shield (D4)',
-      what: 'The D4 coil: a flat bundle of 30 wires in the bore (it passes the recesses of the spacer rings), out through the feed-throughs and back outside in three groups at 120°. Raise the 50 Hz drive slowly until the current rises sharply (the knee), go to about 1.5 times the knee (at most 2 A rms), hold 5 s, then ramp down to zero <b>steadily in 100 to 300 s</b>. Unplug the coil afterwards.',
+      what: 'The D4 coil: a flat bundle of 30 wires in the bore (it passes the recesses of the spacer rings), out through the cable holes and back outside in three groups at 120° (one at the top, none at the bottom where the cradle is). Raise the 50 Hz drive slowly until the current rises sharply (the knee), go to about 1.5 times the knee (at most 2 A rms), hold 5 s, then ramp down to zero <b>steadily in 100 to 300 s</b>. Unplug the coil afterwards.',
       check: 'Two runs in a row give the same field to ± 0.1 mG.',
       mistake: 'Stopping or jerking the ramp leaves magnetisation behind.',
       parts: ['Degaussing coil (D4)'], tools: ['Variac + isolating transformer (D4)', 'Ammeter'],
@@ -716,6 +728,7 @@
       l.caps.forEach(function (c) { var q = c.userData.s < 0 ? st.a : st.b; c.visible = st.z !== null && q > 0.001; c.position.z = c.userData.home + (st.z || 0) + c.userData.s * (1 - ease(q)) * 70; });
     });
     dcoil.visible = S.dcoil || S.dpulse > 0;
+    shCradle.visible = S.shCradle;
     var amp = S.dpulse * (0.5 + 0.5 * Math.sin(tNow * 2 * Math.PI * 3));
     M.orange.emissive.setRGB(0.8 * amp, 0.25 * amp, 0);
     // tools
@@ -732,9 +745,9 @@
     bottle.visible = !!S.bottle; if (S.bottle) bottle.position.set(S.bottle[0], S.bottle[1], S.bottle[2]);
     tapeRoll.visible = !!S.tape;
     dmm.visible = !!S.dmm; probeR.visible = probeB.visible = !!S.dmm;
-    if (S.dmm) { dmmDisp.set(S.dmm); stretch(probeR, V(-270, -40, 136), V(-226, -32, 58)); stretch(probeB, V(-290, -40, 136), V(-226, -38, 52)); }
+    if (S.dmm) { dmmDisp.set(S.dmm); stretch(probeR, V(-270, -80, 136), V(-226, -72, 58)); stretch(probeB, V(-290, -80, 136), V(-226, -78, 52)); }
     itc.visible = !!S.itc || S.glow > 0; itcCable.visible = itc.visible; if (S.itc) itcDisp.set(S.itc); else if (S.glow > 0) itcDisp.set('TEC 2.100 kΩ');
-    if (itc.visible) stretch(itcCable, V(-250, -40, 0), V(-226, -34, 52));
+    if (itc.visible) stretch(itcCable, V(-250, -80, 0), V(-226, -74, 52));
     fgm.visible = !!S.fg; if (S.fg) fgDisp.set(S.fg);
     stand.visible = S.stand;
     arrows.visible = Math.abs(S.field) > 0.01;
@@ -927,7 +940,7 @@
     if (it.mag) {
       needleTarget = Math.atan2(-dz, dx);
       if (!u.picked[it.id]) { u.picked[it.id] = true; u.found = (u.found || 0) + 1; }
-      it.g.position.set(bin.position.x + ((u.found - 1) % 2) * 30 - 15, -60, bin.position.z + (u.found > 2 ? 18 : -18));
+      it.g.position.set(bin.position.x + ((u.found - 1) % 2) * 30 - 15, -100, bin.position.z + (u.found > 2 ? 18 : -18));
       if (msg) msg.innerHTML = '<b>' + esc(it.name) + '</b>: the needle swings. Magnetic: set aside.';
     } else {
       needleTarget = 0;
