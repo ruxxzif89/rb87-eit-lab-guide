@@ -451,7 +451,23 @@ If both work on the bench, the separate cell-heater controller (BOM C04) and the
 
 The STL files: the former, the test coupon, the two spacer rings (with the lead notch and the recess for the degaussing bundle) and the winding as a reference model, not for printing: the wire is wound by hand in the printed groove.
 
-### Q17. Can we make the mu-metal shield ourselves: roll a sheet into a cylinder and close it with (3D-printed) end caps?
+### Q17. Can we 3D-print the holder for the SAS reference cell in PETG?
+
+*Added 11 Oct 2026*
+
+*Equipment shown in the guide: SAS reference cell, SAS photodiode, PBS cube.*
+
+**Yes, and it is the right material for this part.** The SAS cell (BOM S01, Ø19 × 75 mm) works at room temperature and sits outside the shield, so PETG is not near its softening point, and the lock does not need a milligauss-quiet field (no metal fillers anyway). The STL files and the steps are in the DIY Section, part D11; the equipment list row S02 now points to them.
+
+| Part | What it does |
+|---|---|
+| Cradle (base 110 × 44 × 6 with two saddles) | holds the cell on its axis 20 mm above the base; M4 hole for a ½-inch post or two M6 slots 75 mm apart; M3 nut traps |
+| Two straps | close over the saddles with nylon M3 screws; 1 mm felt pads take the load, never the bare plastic |
+| Cover | keeps room light and draughts off the cell and the SAS photodiode; Ø10 mm beam holes in both ends, 16 × 16 mm slot for the stem |
+
+**Before printing:** confirm the cell's outside length and the stem (the holder assumes a stem in the middle, pointing up, at most 22 mm). Matte black PETG cuts stray light. Do not use it for the EIT cell: that one is heated to 65 °C inside the shield and has its own stack (D2).
+
+### Q18. Can we make the mu-metal shield ourselves: roll a sheet into a cylinder and close it with (3D-printed) end caps?
 
 *Added 11 Oct 2026*
 
@@ -481,7 +497,7 @@ Three layers multiply these roughly, if the gaps between them are a few millimet
 
 **Check:** after assembly and degaussing (D4), measure the residual field at the cell with the fluxgate plate. Then turn the whole shield in the room and read it again: the reading should change by less than about 0.1 mG.
 
-### Q18. Which DC source should drive the solenoid, and how do I wire the second ITC502 laser output for it? (Is the Rigol DP832A needed?)
+### Q19. Which DC source should drive the solenoid, and how do I wire the second ITC502 laser output for it? (Is the Rigol DP832A needed?)
 
 *Added 10 Oct 2026*
 
@@ -520,7 +536,7 @@ Three layers multiply these roughly, if the gaps between them are a few millimet
 
 **Effect on the BOM.** If the ITC502 route works, BOM C08 (Rigol DP832A) and, with the heater on the TEC half, C04 (TC300B) can be dropped. This has not been applied; test the solenoid and the heater on the bench first, with the fluxgate inside the shield.
 
-### Q19. Can the Stefan Mayer FLC100 be the fluxgate magnetometer with milligauss resolution?
+### Q20. Can the Stefan Mayer FLC100 be the fluxgate magnetometer with milligauss resolution?
 
 *Added 10 Oct 2026*
 
@@ -544,7 +560,7 @@ Sources: [Stefan Mayer FLC 100 data sheet](https://stefan-mayer.com/images/datas
 
 ## The Quantum Spain-style bench
 
-### Q20. Is the Spain-style arrangement correct, in theory and in practice?
+### Q21. Is the Spain-style arrangement correct, in theory and in practice?
 
 *Added 9 Oct 2026*
 
@@ -570,7 +586,7 @@ Sources: [Stefan Mayer FLC 100 data sheet](https://stefan-mayer.com/images/datas
 
 ## About this guide
 
-### Q21. How does the lab inventory enter the costed BOM and the Spain-style cost?
+### Q22. How does the lab inventory enter the costed BOM and the Spain-style cost?
 
 *Added 10 Oct 2026*
 
@@ -583,7 +599,7 @@ Sources: [Stefan Mayer FLC 100 data sheet](https://stefan-mayer.com/images/datas
 
 **Rules and limits.** Items marked "check" or "no" are not counted. An item that covers a row only in part is counted only for the units it can supply (for example 6 post holders against 60 post sets). The Credix SG-1710 is **not** counted against the dual-channel RF synthesizer, which needs two phase-locked channels. Mounts whose aperture is not measured yet (the Melles Griot set) are counted as 10 of the 11 mirror mounts; measure them. The prices stay behind the group password; the switch only changes how the totals are computed.
 
-### Q22. Can the Thorlabs PM100USB CAD file be used for the 3D pictures?
+### Q23. Can the Thorlabs PM100USB CAD file be used for the 3D pictures?
 
 *Added 10 Oct 2026*
 
