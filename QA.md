@@ -494,6 +494,8 @@ The STL files: the former, the test coupon, the two spacer rings (with the lead 
 
 Why the Spain-style bench can be lower: their cell module is a small enclosure, so its axis can sit close to the breadboard.
 
+**Does 100 mm cost more?** No. The posts already in the list (TR75/M in PH75/M holders, 60 sets) are the ones for this height; a 40 mm bench would have needed shorter posts and holders instead. The shield cradle is printed or cut from Delrin. ½-inch posts at 100 mm are stiff enough for mirrors, cubes and the AOM platform; the heavy shield sits on its own wide cradle bolted to the breadboard.
+
 ### Q19. How is the magnetic shield of the Spain-style EIT cell probably made? It looks like a small enclosure.
 
 *Added 11 Oct 2026*
