@@ -530,7 +530,7 @@
       scene: function (S, p) { S.dmm = p < 0.2 ? '--.--- Ω' : f(P.Rcoil * lerp(1.4, 1, seg(p, 0.2, 0.7)), 3) + ' Ω'; } },
 
     { ch: 'Winding', t: 'Glue the two spacer rings',
-      what: 'Delrin rings <b>Ø' + f(SP_RO * 2, 1) + ' × Ø' + f(P.formerOD, 1) + ' × 6</b> (outside = real shield bore − 0.5 mm) on the unwound ends, centred 75 mm from the mid-plane, outside the groove (it ends at ' + f(-P.starts[0], 1) + '). The cable-end ring needs a <b>notch 2.5 × 1.5 mm</b> in its bore for the twisted leads, and both rings a <b>flat 40 mm wide, 1.5 mm deep</b> on the outside for the degaussing bundle of D4.',
+      what: 'Delrin rings <b>Ø' + f(SP_RO * 2, 1) + ' × Ø' + f(P.formerOD, 1) + ' × 6</b> (outside = real shield bore − 0.5 mm) on the unwound ends, centred 75 mm from the mid-plane, outside the groove (it ends at ' + f(-P.starts[0], 1) + '). The cable-end ring needs a <b>notch 2.5 × 1.5 mm</b> in its bore for the twisted leads, and both rings a <b>recess 1.5 mm deep over 40 mm of the circumference</b> on the outside for the degaussing bundle of D4.',
       check: 'Both rings square and at ±75 mm; the leads pass the notch without being pinched.',
       parts: ['2 spacer rings (Delrin)'], tools: ['Epoxy'],
       act: { type: 'auto', label: 'Fit the rings', dur: 2.5 }, cam: [-150, 90, 220, -40, 0, 0],
@@ -629,7 +629,7 @@
       apply: function (S, p) { S.lay[2].z = lerp(470, 0, ease(seg(p, 0, 0.65))); S.lay[2].a = S.lay[2].b = ease(seg(p, 0.7, 1)); } },
 
     { ch: 'Into the shield', t: 'Degauss the shield (D4)',
-      what: 'The D4 coil: a flat bundle of 30 wires in the bore (it passes the flats of the spacer rings), out through the feed-throughs and back outside in three groups at 120°. Raise the 50 Hz drive slowly until the current rises sharply (the knee), go to about 1.5 times the knee (at most 2 A rms), hold 5 s, then ramp down to zero <b>steadily in 100 to 300 s</b>. Unplug the coil afterwards.',
+      what: 'The D4 coil: a flat bundle of 30 wires in the bore (it passes the recesses of the spacer rings), out through the feed-throughs and back outside in three groups at 120°. Raise the 50 Hz drive slowly until the current rises sharply (the knee), go to about 1.5 times the knee (at most 2 A rms), hold 5 s, then ramp down to zero <b>steadily in 100 to 300 s</b>. Unplug the coil afterwards.',
       check: 'Two runs in a row give the same field to ± 0.1 mG.',
       mistake: 'Stopping or jerking the ramp leaves magnetisation behind.',
       parts: ['Degaussing coil (D4)'], tools: ['Variac + isolating transformer (D4)', 'Ammeter'],

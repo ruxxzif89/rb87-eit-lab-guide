@@ -412,7 +412,28 @@ If both work on the bench, the separate cell-heater controller (BOM C04) and the
 
 **Verdict:** keep our bifilar heater, foam and tubes (DIY D2); an outer foil layer is allowed and harmless, but it is not a replacement for a non-magnetic heater.
 
-### Q15. Which DC source should drive the solenoid, and how do I wire the second ITC502 laser output for it? (Is the Rigol DP832A needed?)
+### Q15. Can the solenoid former be 3D-printed in PETG on a Bambu Lab A1 with a 0.2 mm nozzle?
+
+*Added 11 Oct 2026*
+
+*Equipment shown in the guide: solenoid former, µ-metal shield, fluxgate (calibration).*
+
+**Yes. Print it upright, cable end on the plate, and print the 50 mm test coupon first.** The STL files and the slicer settings are in the DIY Section, part D1 (“3D-printed former”).
+
+| Requirement | With the A1 and a 0.2 mm nozzle |
+|---|---|
+| Size Ø38 × 160 mm | fits the 256 mm build height |
+| Ten pitches 36.0 ± 0.2 mm, ± 0.05 per pitch | the helix comes from the Z axis; 0.08 mm layers give steps of ± 0.04 mm |
+| Wire seat 0.60 wide × 0.40 deep | 7 to 8 layers high, about two line widths deep; the upper flank is 45° so no support is needed |
+| Bore Ø34.0 for the Delrin tubes (Ø33.7) | set the X-Y hole compensation from the coupon |
+| Non-magnetic | natural or plain PETG, no metal or “magnetic” filler; check with a compass |
+| Temperature | PETG softens near 75 °C; the former sits outside the foam sleeve of the 55–65 °C cell |
+
+**Accuracy:** PETG shrinks about 0.2 to 0.5 %. A uniform shrinkage changes the field per mA by the same fraction and leaves the uniformity unchanged, and the in-shield calibration takes it out; correct the Z scale from the coupon if ten pitches are off by more than 0.1 mm.
+
+The STL files: the former, the test coupon, the two spacer rings (with the lead notch and the recess for the degaussing bundle) and the winding as a reference model, not for printing: the wire is wound by hand in the printed groove.
+
+### Q16. Which DC source should drive the solenoid, and how do I wire the second ITC502 laser output for it? (Is the Rigol DP832A needed?)
 
 *Added 10 Oct 2026*
 
@@ -451,7 +472,7 @@ If both work on the bench, the separate cell-heater controller (BOM C04) and the
 
 **Effect on the BOM.** If the ITC502 route works, BOM C08 (Rigol DP832A) and, with the heater on the TEC half, C04 (TC300B) can be dropped. This has not been applied; test the solenoid and the heater on the bench first, with the fluxgate inside the shield.
 
-### Q16. Can the Stefan Mayer FLC100 be the fluxgate magnetometer with milligauss resolution?
+### Q17. Can the Stefan Mayer FLC100 be the fluxgate magnetometer with milligauss resolution?
 
 *Added 10 Oct 2026*
 
@@ -475,7 +496,7 @@ Sources: [Stefan Mayer FLC 100 data sheet](https://stefan-mayer.com/images/datas
 
 ## The Quantum Spain-style bench
 
-### Q17. Is the Spain-style arrangement correct, in theory and in practice?
+### Q18. Is the Spain-style arrangement correct, in theory and in practice?
 
 *Added 9 Oct 2026*
 
@@ -501,7 +522,7 @@ Sources: [Stefan Mayer FLC 100 data sheet](https://stefan-mayer.com/images/datas
 
 ## About this guide
 
-### Q18. How does the lab inventory enter the costed BOM and the Spain-style cost?
+### Q19. How does the lab inventory enter the costed BOM and the Spain-style cost?
 
 *Added 10 Oct 2026*
 
@@ -514,7 +535,7 @@ Sources: [Stefan Mayer FLC 100 data sheet](https://stefan-mayer.com/images/datas
 
 **Rules and limits.** Items marked "check" or "no" are not counted. An item that covers a row only in part is counted only for the units it can supply (for example 6 post holders against 60 post sets). The Credix SG-1710 is **not** counted against the dual-channel RF synthesizer, which needs two phase-locked channels. Mounts whose aperture is not measured yet (the Melles Griot set) are counted as 10 of the 11 mirror mounts; measure them. The prices stay behind the group password; the switch only changes how the totals are computed.
 
-### Q19. Can the Thorlabs PM100USB CAD file be used for the 3D pictures?
+### Q20. Can the Thorlabs PM100USB CAD file be used for the 3D pictures?
 
 *Added 10 Oct 2026*
 
