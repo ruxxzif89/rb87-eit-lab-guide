@@ -676,6 +676,21 @@ Sources: [Stefan Mayer FLC 100 data sheet](https://stefan-mayer.com/images/datas
 
 **Verdict for our bench:** keep C01 (the published Ø25 × 25 mm geometry, enriched ⁸⁷Rb, 10 Torr Ne). The buffer gas and pressure match, so nothing about their label argues against ours; a 75 mm cell would force a longer coil and shield and add little for continuous-wave EIT. A long cell would only be worth it for light storage with a stronger delay, or if a cheap natural-Rb cell is the only one available.
 
+**Is their cell specification theoretically correct for Zeeman EIT?** As far as a label allows me to judge: yes, it is a sound choice, with three caveats. It is not a proof: the beam sizes, powers, coil and shield of that bench are not known.
+
+| Point | Their cell | Theory | Verdict |
+|---|---|---|---|
+| Buffer gas | Ne, 10 Torr | the ground-state coherence must outlive the time atoms cross the beam; neon is gentle on it, and 10 Torr is the fill of the published cell. Diffusion limit about 15 to 240 Hz against a line of about 7 kHz | correct |
+| Optical line | broadened by about 100 MHz | the Doppler width is 530 MHz and the excited-state splitting of ⁸⁷Rb D1 is 817 MHz, so the F′ levels stay resolved | correct |
+| Isotope | natural Rb (by Triad's naming) | ⁸⁵Rb takes only 5 to 20 % of the probe at the working line, 1.7 GHz away; spin exchange between the isotopes is small against 7 kHz | works; ⁸⁷Rb density is 28 % |
+| Optical depth | 2 to 4 at 45 to 50 °C (guess) | on resonance T = exp(−OD·(1 − contrast)); for OD 3 and contrast 0.8 about 55 % passes, against about 14 % for OD 10: a brighter, clearer window but a smaller delay | correct for demonstration, weak for storage |
+| Length 75 mm | long | more atoms at lower temperature; but the field must be uniform over 75 mm | the weak point |
+
+**The three caveats**
+- **Field uniformity** over 75 mm is the real limit: a few per cent spread of the 50 mG field broadens the line by kilohertz (1.4 kHz per mG), as large as the line itself. A compact coil would give that.
+- **Natural Rb** needs a higher temperature or a longer path for the same ⁸⁷Rb optical depth; at their heater power the optical depth is low.
+- **Contrast against power:** with a pressure-broadened line a stronger control field is needed for the same transparency, which is why the published cell uses about 1 mW of control light.
+
 **To pin it down:** ask Triad what “TRT” means (they can read it from their order records), and whether the cell is natural or enriched. A screenshot of the label from the video, with its time stamp, would also help.
 
 ## About this guide
