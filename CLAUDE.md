@@ -39,7 +39,7 @@ Decided on 11 Oct 2026 (applied everywhere):
 - **Printed parts (no purchase, status "print" in the equipment list):** SAS cell holder S02 (D11) and the shield cradle M06 (D1, axis at 100 mm). D10 covers are 160 mm high inside.
 - **Heater current limits:** I TEC LIM 0.50 A on the open bench, 0.33 A inside the closed shield (a runaway stays below about 85 °C).
 - **Laser:** Eagleyard BFY12 with the dual-stage fibre isolator (L06); the alternative laser was dropped.
-- **Spain-style EIT cell:** the YouTube videos show the label TRT-Rb/Ne-10T-20x75 (Rb, neon 10 Torr, 20 x 75 mm assumed). No catalogue entry found; maker and isotope unknown. Written on qs-bench.html and in the Q&A; our EIT cell stays C01 (Ø25 x 25 mm, enriched 87Rb, 10 Torr Ne).
+- **Spain-style bench (from the YouTube videos):** the EIT cell is labelled TRT-Rb/Ne-10T-20x75, maker Triad Technology Inc. (given by the owner). "TRT" is not in Triad's public catalogue (TT-RB-75-V-x etc.); read as natural Rb (Triad's plain RB), neon 10 Torr, 20 x 75 mm, probably custom. The two oscilloscopes are Rigol DS1102 (100 MHz, 2 channels). Written on qs-bench.html, in qs-layout.js (v4) and in the Q&A; our EIT cell stays C01 (Ø25 x 25 mm, enriched 87Rb, 10 Torr Ne).
 
 Design questions still open (none involves money):
 - Laser: decided. The Eagleyard EYP-DFB-0795-00015-1500-BFY12-0005 (micro-isolator inside) stays, together with the dual-stage fibre isolator of the equipment list (BOM L06); an alternative laser without an isolator inside was considered and dropped. The vendor lists the BFY12 as about to become obsolete: its replacement must keep the internal isolator, the PM fibre, the FC/APC connector and the 14-pin pin-out (see the isolator answer in section 09).
@@ -57,7 +57,7 @@ How to continue on another machine:
 
 ## Resuming on another machine
 
-The folder is on Google Drive and also a git repo (public parts via GitHub). One machine at a time: commit and push before leaving, let Drive finish syncing, then `git pull` on the next machine. Needed: git, node, python3 (`pip install openpyxl` for the xlsx), a static server (`python3 -m http.server 4180 --bind 127.0.0.1`). Bump the `?v=` query on script tags when editing `eitphys.js`, `bench-sim.js`, `parts3d.js` or `inventory*.js` (current: eitphys 7, bench-sim 18, parts3d 13, inventory-data 14, qs-layout 3, diy-d1-sim 4). Before every push check `git ls-files | grep -c private` prints 0. Private notes for the owner's sessions are in the git-ignored `CLAUDE.local.md` and `private/`.
+The folder is on Google Drive and also a git repo (public parts via GitHub). One machine at a time: commit and push before leaving, let Drive finish syncing, then `git pull` on the next machine. Needed: git, node, python3 (`pip install openpyxl` for the xlsx), a static server (`python3 -m http.server 4180 --bind 127.0.0.1`). Bump the `?v=` query on script tags when editing `eitphys.js`, `bench-sim.js`, `parts3d.js` or `inventory*.js` (current: eitphys 7, bench-sim 18, parts3d 13, inventory-data 14, qs-layout 4, diy-d1-sim 4). Before every push check `git ls-files | grep -c private` prints 0. Private notes for the owner's sessions are in the git-ignored `CLAUDE.local.md` and `private/`.
 
 ## BOM pipeline (private)
 

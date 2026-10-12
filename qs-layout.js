@@ -1,7 +1,7 @@
 /* ==========================================================================
    "Quantum Spain-style bench": a second configuration for the 3D bench simulator (bench-sim.js reads window.BENCH_CFG).
    Arrangement taken from ONE photograph of a Quantum Spain-style EIT bench: two Thorlabs MB4545/M breadboards (450 x 450 mm) side by side,
-   an instrument shelf behind them and a Rigol oscilloscope at each end. Left board = laser input and the saturated-absorption (SAS)
+   an instrument shelf behind them and a Rigol DS1102 oscilloscope at each end. Left board = laser input and the saturated-absorption (SAS)
    lock; right board = the EIT board with two AOMs, the cell and the detector. The optical chain is the guide's own Zeeman-EIT chain
    (same physics as eitphys.js), re-laid on the two boards. Parts marked "assumed" are not visible in the photo.
    Coordinates are table millimetres: x to the right, z towards the front. Board 1 = x 100..550, board 2 = x 550..1000, z 250..700.
@@ -24,7 +24,7 @@
     qwp: 'Waveplates in black rotation mounts with a white angle scale (RSP1 type).',
     lens: 'Lenses in black lens mounts and tubes, some with a blue anti-reflection tint.',
     aom: 'Red-housed modules with a gold SMA connector on top and a white label, two on board 2. They are the two AOMs; the maker is not readable (possibly Thorlabs).',
-    cell: 'White 3D-printed enclosure with red heater and coil leads on board 2: the EIT vapour cell module. The YouTube videos of this bench show the cell label TRT-Rb/Ne-10T-20x75 (read by the owner of this guide, not visible in the photograph): rubidium with a neon buffer gas at 10 Torr, 20 x 75 mm (assumed diameter x length). Isotope and maker not confirmed.',
+    cell: 'White 3D-printed enclosure with red heater and coil leads on board 2: the EIT vapour cell module. The YouTube videos of this bench show the cell label TRT-Rb/Ne-10T-20x75 (read by the owner of this guide, not visible in the photograph); the maker is Triad Technology Inc. Reading: rubidium (natural, by the Triad naming) with neon buffer gas at 10 Torr, 20 x 75 mm (assumed diameter x length), probably a custom size.',
     refcell: 'White 3D-printed enclosure with banana jacks and a small board on board 1: the SAS reference cell module.',
     pd: 'A black box with a round aperture at the right end of board 2 (a detector or a camera) and another beside board 1 with an orange cable.',
     sas: 'A black box with a round aperture at the left end of board 1 with an orange cable to the scope (probably the SAS photodiode).',
@@ -95,7 +95,7 @@
     // recombine, cell, analyser, detector
     B(665, 575, S, E);                                              // control (V) reflects, probe (H) transmits
     mk('iris', 710, 575, 0, { ap: 3 }); mk('qwp', 745, 575, 0, { axis: 45 });
-    var ec = mk('cell', 805, 575, 0); ec.nm = 'EIT cell TRT-Rb/Ne-10T-20x75 (label from the videos)';
+    var ec = mk('cell', 805, 575, 0); ec.nm = 'EIT cell, Triad TRT-Rb/Ne-10T-20x75 (label from the videos)';
     mk('qwp', 865, 575, 0, { axis: -45 }); mk('glan', 905, 575, 0, { axis: 0 }); mk('lens', 940, 575, 0); mk('pd', 975, 575, 0);
     mk('dump', 665, 617, 270); mk('dump', 905, 617, 270);
 
@@ -106,7 +106,7 @@
       comps.push(c); return c;
     }
     var laser = comps.filter(function (c) { return c.kind === 'laser'; })[0];
-    inst('scope', 70, 'DSO1', 'Rigol oscilloscope', 'Blue-grey Rigol digital oscilloscope with a colour screen at the left end of the boards. The model is not readable.');
+    inst('scope', 70, 'DSO1', 'Rigol DS1102 oscilloscope', 'Blue-grey Rigol digital oscilloscope with a colour screen at the left end of the boards. The model DS1102 (100 MHz, 2 channels) is taken from the YouTube videos of this bench; it is not readable in the photograph.');
     inst('lctrl', 190, 'LDC', 'Thorlabs laser diode current controller (LDC200C-series look)', 'Thorlabs benchtop unit whose display reads 146.88, taken to be the laser current in mA. The exact model is not readable.');
     inst('psu', 290, 'TED', 'Thorlabs TEC temperature controller (TED200C-series look)', 'Thorlabs benchtop unit beside it, display 9.021: probably the thermistor reading in kΩ. The exact model is not readable.', { cableTo: [{ to: laser.id, color: 0xd9a441, tray: 'top' }], nocable: true });
     inst('lockbox', 390, 'LOCK?', 'Laser-lock electronics (assumed)', 'Not visible in the photo. Added so the simulator can close the lock loop: a lock-in or scope-based lock fed from the SAS photodiode.');
@@ -114,7 +114,7 @@
     inst('rfgen', 640, 'RFG', 'Rigol dual-channel arbitrary generator (DG4000 look)', 'Larger Rigol generator showing two channels on one screen, two yellow and two blue BNC outputs: the two-channel source for the AOM drive. RF amplifiers are not visible and are assumed to be hidden.');
     inst('tctrl', 770, 'HEAT', 'TENMA DC supply labelled HEATER', 'TENMA linear supply labelled HEATER; the display reads 02.40 and 0.500 (volts and amps, my reading). Plain DC heating, no temperature loop visible.');
     inst('csrc', 880, 'COIL', 'TENMA DC supply labelled COILS', 'TENMA linear supply labelled COILS; the display reads 01.00 and 0.080 (about 80 mA through the solenoid, my reading).');
-    inst('scope', 1020, 'DSO2', 'Rigol oscilloscope', 'Second Rigol oscilloscope at the right end of the boards.');
+    inst('scope', 1020, 'DSO2', 'Rigol DS1102 oscilloscope', 'Second Rigol DS1102 oscilloscope at the right end of the boards (model from the videos).');
     return { mode: 'A', components: comps, state: { locked: true, tau_us: 20, storageRan: false } };
   }
 
@@ -122,7 +122,7 @@
     return [
       { id: 'board1', name: 'BREADBOARD 1 · SAS and laser input', sub: 'Thorlabs MB4545/M, 450 × 450 mm', color: '#7d8a96', lab: [100, 706, 'tl'], rects: [[100, 250, 550, 700]] },
       { id: 'board2', name: 'BREADBOARD 2 · EIT, two AOMs and the cell', sub: 'Thorlabs MB4545/M, 450 × 450 mm', color: '#7d8a96', lab: [550, 706, 'tl'], rects: [[550, 250, 1000, 700]] },
-      { id: 'shelf', name: 'INSTRUMENT SHELF', sub: 'Thorlabs controllers, Rigol generators, TENMA supplies, Rigol scopes', color: '#8fa3b5', lab: [40, 150, 'tl'], rects: [[40, 25, 1060, 130]] }
+      { id: 'shelf', name: 'INSTRUMENT SHELF', sub: 'Thorlabs controllers, Rigol generators, TENMA supplies, Rigol DS1102 scopes', color: '#8fa3b5', lab: [40, 150, 'tl'], rects: [[40, 25, 1060, 130]] }
     ];
   }
 

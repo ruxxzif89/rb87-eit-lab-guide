@@ -646,35 +646,37 @@ Sources: [Stefan Mayer FLC 100 data sheet](https://stefan-mayer.com/images/datas
 
 *Equipment shown in the guide: EIT cell, SAS reference cell, solenoid, heater, HEATER and COILS supplies.*
 
-**It reads as a rubidium cell with 10 Torr of neon buffer gas, 20 mm × 75 mm, but I could not find this part number in any public catalogue, so treat the reading as an interpretation.** The label was read from the YouTube videos of that bench (I cannot watch videos, so I have not seen it). Searches of the Thorlabs, Precision Glassblowing, Triad Technology, Twinleaf and Sacher cell pages and of the literature found no “TRT” cell. The nearest standard cells are the Ø19 × 75 mm quartz reference cells with natural Rb and no buffer gas.
+**It reads as a Triad Technology rubidium cell (natural Rb by Triad's naming) with 10 Torr of neon, 20 mm × 75 mm, most likely a custom order.** The label was read from the YouTube videos of that bench and the maker (Triad Technology Inc.) was given by the owner of this guide; I cannot watch videos. “TRT-…” is not in Triad's public catalogue, which lists cells as **TT-RB-75-V-x** (natural Rb), **TT-RB85-…** and **TT-RB87-…**, in two sizes only (Ø25 × 75 mm Pyrex, Ø19 × 75 mm quartz), with neon and other buffer gases and custom cells available on request ([Triad](https://www.triadtechno.com/wavelength_reference_cells.html), [Sacher brochure of Triad cells](https://docs.sacher-laser.com/broshure_vapor_cell.pdf)). Neither page defines “TRT”, so the reading of that prefix, and of the size, is an interpretation.
 
 | Part | Reading | Confidence |
 |---|---|---|
-| TRT | maker or product code | unknown |
-| Rb | rubidium; natural (72 % ⁸⁵Rb, 28 % ⁸⁷Rb) or enriched ⁸⁷Rb: not stated | unknown |
+| TRT | a Triad series or order code for a custom cell | unknown |
+| Rb | plain “RB” is natural rubidium in Triad's naming (72 % ⁸⁵Rb, 28 % ⁸⁷Rb); isotope cells are RB85 or RB87 | likely natural |
 | Ne | neon buffer gas | clear |
 | 10T | 10 Torr: the same fill as our EIT cell (C01) | likely |
-| 20x75 | Ø20 × 75 mm (diameter × length; maybe outside length) | likely |
+| 20x75 | Ø20 × 75 mm (diameter × length; maybe outside length); Ø20 is not a Triad standard size | likely, probably custom |
 
 **What a cell like this does**
 - **Neon at 10 Torr:** broadens the D1 line by about 100 MHz (10 ± 1 MHz per Torr) and shifts it by about −11 MHz (−1.1 MHz per Torr) ([Optics and Spectroscopy 2021](https://link.springer.com/article/10.1134/S0030400X2108018X)). The shift is small against the 500 MHz Doppler width, but it is one more reason the lock reference (the cell without buffer gas) and the EIT cell differ by about 11 MHz.
 - **Diffusion:** for Rb in Ne, D = 0.214 cm²/s at 1 atm and 24 °C ([Pouliot et al., Phys. Rev. A 111, 033108](https://arxiv.org/abs/2602.12319)). At 10 Torr and 45–60 °C this is about 17 cm²/s, which gives a lowest-mode decay of about 15 Hz for the whole cell and about 240 Hz for atoms leaving a 2.55 mm beam (about 3 kHz for a 0.75 mm beam). All are far below the EIT line (about 7 kHz), so 10 Torr is more than enough, for both cells.
-- **The length:** the optical depth on the ⁸⁷Rb line scales with the path. Taking OD ≈ 10 at 60 °C for our 25 mm enriched cell, a 75 mm path needs OD ≈ 10 at about **47 °C if enriched** or about **62 °C if natural Rb** (only 28 % of it is ⁸⁷Rb).
-- **The heater on the shelf:** the HEATER supply reads about 2.4 V and 0.5 A (1.2 W). Scaling our loss estimate (about 2× the surface of our cell, loss proportional to the temperature excess) gives about 1.1 W at 47 °C and about 1.8 W at 62 °C, so 1.2 W fits an **enriched** cell better. This is weak evidence: the insulation of their housing is unknown.
+- **Natural rubidium is fine for this line.** I summed all the D1 hyperfine lines of both isotopes (Voigt profiles, thermal populations). The ⁸⁷Rb F = 2 → F′ = 1 working line is about 1.7 GHz from the nearest ⁸⁵Rb line, so ⁸⁵Rb takes only about 5 to 20 % of the probe (optical depth 0.05 to 0.2) at 45 to 62 °C. The price of natural Rb is the low ⁸⁷Rb density (28 %).
+- **The length:** the optical depth on the ⁸⁷Rb line scales with the path. Taking OD ≈ 10 at 60 °C for our 25 mm enriched cell, a 75 mm path needs about **62 °C for a natural cell** (about 47 °C if it were enriched).
+- **The heater on the shelf:** the HEATER supply reads about 2.4 V and 0.5 A (1.2 W). Scaling our loss estimate (about 2× the surface of our cell, loss proportional to the temperature excess) gives about 1.1 W at 47 °C and about 1.8 W at 62 °C. So the cell probably runs near 45 to 50 °C, where a natural cell has an optical depth of only about 2 to 4 on the ⁸⁷Rb line: clear EIT, but less contrast than the OD ≈ 10 of the published set-up. This is a guess: the insulation of their housing is unknown.
 
 **What it means for the magnetic field.** A 75 mm cell needs a uniform field over 75 mm. Our 42-turn solenoid (0.2 % over 25 mm) would give 2.4 % over ±37.5 mm, 1.2 mG at 50 mG, which broadens the line by about 1.7 kHz (1.4 kHz per mG) against 7 kHz. To get 0.2 % over 75 mm one needs about 72 main turns (a groove of about 270 mm, a former of about 290 mm and a shield of about 400 mm). A compact Spain-style module probably accepts a broader line.
 
-| | Our cell (C01) | A 20 × 75 cell |
+| | Our cell (C01) | A 20 × 75 cell (natural Rb) |
 |---|---|---|
 | Path | 25 mm (Ø25) | 75 mm (Ø20) |
-| OD ≈ 10 at | 60 °C (enriched) | 47 °C enriched, 62 °C natural |
+| ⁸⁷Rb OD ≈ 10 at | 60 °C (enriched) | 62 °C |
+| ⁸⁷Rb OD at 45–50 °C | about 3 (at 45 °C) | about 2 to 4 |
 | Solenoid | 140 mm winding, shield 282 mm | about 270 mm winding, shield about 400 mm |
 | Heater loss | about 0.9 W in the stack | about 2× the surface |
 | Buffer gas | 10 Torr Ne | the same |
 
 **Verdict for our bench:** keep C01 (the published Ø25 × 25 mm geometry, enriched ⁸⁷Rb, 10 Torr Ne). The buffer gas and pressure match, so nothing about their label argues against ours; a 75 mm cell would force a longer coil and shield and add little for continuous-wave EIT. A long cell would only be worth it for light storage with a stronger delay, or if a cheap natural-Rb cell is the only one available.
 
-**To pin it down:** a screenshot of the label from the video with its time stamp (and the video link) would settle the maker and the isotope; the cell drawing or the maker's e-mail would confirm the dimensions and the stem.
+**To pin it down:** ask Triad what “TRT” means (they can read it from their order records), and whether the cell is natural or enriched. A screenshot of the label from the video, with its time stamp, would also help.
 
 ## About this guide
 
