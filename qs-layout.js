@@ -24,7 +24,7 @@
     qwp: 'Waveplates in black rotation mounts with a white angle scale (RSP1 type).',
     lens: 'Lenses in black lens mounts and tubes, some with a blue anti-reflection tint.',
     aom: 'Red-housed modules with a gold SMA connector on top and a white label, two on board 2. They are the two AOMs; the maker is not readable (possibly Thorlabs).',
-    cell: 'White 3D-printed enclosure with red heater and coil leads on board 2: the EIT vapour cell module.',
+    cell: 'White 3D-printed enclosure with red heater and coil leads on board 2: the EIT vapour cell module. The YouTube videos of this bench show the cell label TRT-Rb/Ne-10T-20x75 (read by the owner of this guide, not visible in the photograph): rubidium with a neon buffer gas at 10 Torr, 20 x 75 mm (assumed diameter x length). Isotope and maker not confirmed.',
     refcell: 'White 3D-printed enclosure with banana jacks and a small board on board 1: the SAS reference cell module.',
     pd: 'A black box with a round aperture at the right end of board 2 (a detector or a camera) and another beside board 1 with an orange cable.',
     sas: 'A black box with a round aperture at the left end of board 1 with an orange cable to the scope (probably the SAS photodiode).',
@@ -95,7 +95,7 @@
     // recombine, cell, analyser, detector
     B(665, 575, S, E);                                              // control (V) reflects, probe (H) transmits
     mk('iris', 710, 575, 0, { ap: 3 }); mk('qwp', 745, 575, 0, { axis: 45 });
-    mk('cell', 805, 575, 0);
+    var ec = mk('cell', 805, 575, 0); ec.nm = 'EIT cell TRT-Rb/Ne-10T-20x75 (label from the videos)';
     mk('qwp', 865, 575, 0, { axis: -45 }); mk('glan', 905, 575, 0, { axis: 0 }); mk('lens', 940, 575, 0); mk('pd', 975, 575, 0);
     mk('dump', 665, 617, 270); mk('dump', 905, 617, 270);
 

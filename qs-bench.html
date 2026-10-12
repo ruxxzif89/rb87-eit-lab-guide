@@ -554,6 +554,25 @@ body.bench-page .sim-main{height:calc(var(--app-h,100vh) - var(--nav-h,44px) - v
 
   <p class="note"><b>Assumption about the lock.</b> The two double-pass AOMs shift the beams by +160 MHz, and the SAS arm has no AOM. The simulator treats the lock point as the atomic resonance, which hides that offset. A real bench needs the lock moved by about 160 MHz (for example with an AOM in the SAS arm), and the photograph does not show how this is done.</p>
 
+  <h3>The EIT cell label: TRT-Rb/Ne-10T-20x75</h3>
+  <p>The videos of this bench show the label <b>TRT-Rb/Ne-10T-20x75</b> on the EIT cell. No data sheet or catalogue entry with this name could be found, and “TRT” is not a maker I could identify, so the reading below is an interpretation, not a specification.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>Part of the label</th><th>Reading</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td>TRT</td><td>maker or product-line code</td><td class="lo">unknown</td></tr>
+      <tr><td>Rb</td><td>rubidium; isotope not stated (natural Rb is 72 % <sup>85</sup>Rb and 28 % <sup>87</sup>Rb; enriched <sup>87</sup>Rb is also sold)</td><td class="lo">unknown</td></tr>
+      <tr><td>Ne</td><td>neon buffer gas</td><td class="hi">clear</td></tr>
+      <tr><td>10T</td><td>10 Torr of neon (the same as the cell of the published Zeeman-EIT set-up that our guide follows)</td><td class="md">likely</td></tr>
+      <tr><td>20x75</td><td>20 mm diameter × 75 mm length (assumed order; may be the outside length including the windows)</td><td class="md">likely</td></tr>
+    </tbody>
+  </table></div>
+  <p><b>What it would mean (calculated for this guide, see the Q&amp;A on this label):</b></p>
+  <ul>
+    <li><b>Long cell, low temperature.</b> A 75 mm path has three times the optical depth of our 25 mm path at the same temperature. For an optical depth of about 10 on the <sup>87</sup>Rb line the cell would run at about <b>47 °C if enriched</b> and about <b>62 °C if natural</b> Rb. The 1.2 W DC heater seen on the shelf (about 2.4 V and 0.5 A) fits the lower value better, which weakly suggests enriched <sup>87</sup>Rb. This is a guess.</li>
+    <li><b>Neon at 10 Torr</b> broadens the D1 line by about 100 MHz and shifts it by about −11 MHz, and slows the diffusion of the atoms so that their coherence lasts much longer than the time they take to cross the beam.</li>
+    <li><b>A 75 mm cell needs a long, uniform magnetic field.</b> The coil of our guide (42 turns, 140 mm) would give a field spread of 2.4 % over 75 mm instead of 0.2 % over 25 mm. How well the Spain-style coil does is not known; a broader line is likely.</li>
+  </ul>
+
   <h3>Instruments identified</h3>
   <div class="tbl"><table>
     <thead><tr><th>Tag / label</th><th>Item</th><th>What is readable</th><th>Confidence</th></tr></thead>
@@ -575,7 +594,7 @@ body.bench-page .sim-main{height:calc(var(--app-h,100vh) - var(--nav-h,44px) - v
     <tbody>
       <tr><td>Breadboards</td><td>Thorlabs MB4545/M, 450 × 450 mm, M6 on 25 mm pitch, black anodised</td><td>2 (label “MB4545/M” readable)</td><td>both</td><td class="hi">high</td></tr>
       <tr><td>Acousto-optic modulators</td><td>Red-housed modules, gold SMA input, white label (maker unreadable; possibly Thorlabs)</td><td>2</td><td>2</td><td class="md">medium</td></tr>
-      <tr><td>Rubidium vapour cell modules</td><td>White 3D-printed housings with heater and coil leads (a shield may be inside)</td><td>2: reference cell (left), EIT cell (right)</td><td>1, 2</td><td class="hi">high</td></tr>
+      <tr><td>Rubidium vapour cell modules</td><td>White 3D-printed housings with heater and coil leads (a shield may be inside). The EIT cell is labelled <b>TRT-Rb/Ne-10T-20x75</b> in the YouTube videos: Rb with neon buffer gas at 10 Torr, 20 × 75 mm (see “The EIT cell label” below)</td><td>2: reference cell (left), EIT cell (right)</td><td>1, 2</td><td class="hi">high (label: read from the videos, maker not identified)</td></tr>
       <tr><td>Kinematic mirror mounts</td><td>Black two-axis mounts with asset labels (Thorlabs KM100 / Polaris class)</td><td>about 20–25</td><td>both</td><td class="md">count rough</td></tr>
       <tr><td>Polarizing beamsplitter cubes</td><td>Clear cubes on kinematic cube mounts with white tags</td><td>about 6–8</td><td>both</td><td class="md">count rough</td></tr>
       <tr><td>Waveplates in rotation mounts</td><td>Black rotation mounts with white angle scale (RSP1 type)</td><td>about 6–8</td><td>both</td><td class="md">count rough</td></tr>
@@ -668,7 +687,7 @@ body.bench-page .sim-main{height:calc(var(--app-h,100vh) - var(--nav-h,44px) - v
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
 <script src="eitphys.js?v=7"></script>
-<script src="qs-layout.js?v=2"></script>
+<script src="qs-layout.js?v=3"></script>
 <script src="inventory-data.js?v=14"></script>
 <script src="lab-cover.js?v=1"></script>
 <script src="bench-sim.js?v=18"></script>
