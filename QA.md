@@ -23,7 +23,7 @@ Working notes from the project, written 9 Oct 2026. Numbers come from datasheets
 
 **What keeps it from perfect**
 - Thin current margin: 15 mW needs 160 mA and the absolute maximum is 170 mA. Set the controller limit to 165–170 mA and run near 10–12 mW for lifetime.
-- The ITC502 thermistor input reads up to 19.9 kΩ and this thermistor is about 20 kΩ at 10 °C: keep the chip at 15 °C or warmer.
+- The ITC502 20 kΩ thermistor range reads up to 19.99 kΩ and this thermistor is about 20 kΩ at 10 °C: keep the chip at 15 °C or warmer, or switch to the 200 kΩ range (coarser, 10 Ω steps).
 - Toptica Eagleyard lists the part as about to become obsolete (replacement "on request"): consider a spare.
 - The datasheet is a preliminary revision (below 1.0), all figures at beginning of life; the individual test protocol that ships with each laser is what counts.
 - The label says Class 4 (20 mW, IEC 60825-1).
@@ -79,7 +79,7 @@ These are estimates (about ±10 dB), not measurements. They show the order of ma
 
 Sources: [Rogister, Nonlinear dynamics of semiconductor lasers subject to optical feedback (thesis, section 2.6)](https://arxiv.org/abs/0909.4449) · [Eagleyard data sheet EYP-DFB-0795-00015-1500-BFY12-0005](https://global-topticaeagleyard.b-cdn.net/wp-content/uploads/data_sheets/EYP-DFB-0795-00015-1500-BFY12-0005.pdf) (micro-isolator inside, no isolation figure given) · [Thorlabs I795P3D](https://www.thorlabs.com/item/I795P3D) and [Thorlabs NIR free-space isolators (specification table)](https://www.thorlabs.com/nir-free-space-isolators-690---1080-nm)
 
-### Q3. Is the Yanban RB-795-DFB-BFW DFB laser (Alibaba listing) suitable for our bench?
+### Q3. Is the Yanban RB-795-DFB-BFW DFB laser (Alibaba listing) suitable for our bench, and can our ITC502 drive it?
 
 *Added 14 Oct 2026*
 
@@ -117,7 +117,28 @@ Sources: [Rogister, Nonlinear dynamics of semiconductor lasers subject to optica
 - **Free-space version only:** L01 becomes the RB-795-DFB-BFW, the fibre collimator L05 is dropped, L06 becomes two I795P3D or one IOT-5-780-VLP, and the butterfly mount is checked for a free-space output.
 - **Either way** the obsolescence problem of the BFY12 goes away.
 
-Sources: RB-795-DFB-BFW data sheet (Yanban Laser, from the vendor) · [Alibaba listing](https://www.alibaba.com/product-detail/795nm-DFB-Laser-Diode_1601867664540.html) · [Thorlabs NIR free-space isolators (I795P3D, IOT-5-780-VLP)](https://www.thorlabs.com/nir-free-space-isolators-690---1080-nm)
+**Can our Thorlabs ITC502 drive it? Yes.** Every figure of the laser is inside the ITC502 ranges (ITC500 operation manual, technical data 1.5.1):
+
+| The laser needs | ITC502 gives | Fit |
+|---|---|---|
+| 150 mA typical, 175 mA maximum | 0 to ±200 mA; hardware limit ILD LIM 0 to ≥ 200 mA | yes: set ILD LIM at about 170 mA before the first switch-on |
+| 2.0 V | compliance above 6 V | yes |
+| Monitor photodiode 5 µA/mW (about 0.5 mA at 100 mW) | monitor current range 5 µA to 2 mA | yes (only needed for constant-power mode; the lock uses constant current) |
+| TEC 0.4 A, 1.3 V at 120 mW | ±2 A, 16 W, compliance above 8 V | yes: start with I TEC LIM at about 0.5 A, because the data sheet gives no TEC maximum |
+| NTC 10 kΩ at 25 °C, B = 3950 K | thermistor ranges 10 Ω–19.99 kΩ (100 µA) and 100 Ω–199.9 kΩ (10 µA) | yes: the 20 kΩ range works down to about 10 °C (20.2 kΩ); the D1 line is expected near 18–25 °C |
+| Current tuning for the lock (0.004 nm/mA, about 1.9 GHz/mA) | modulation input 20 mA/V, DC to 500 kHz | yes; see the divider note below |
+
+**Wiring** (ITC502 9-pin laser jack from the manual, section 1.9.1; the laser floats, so either polarity works):
+- **Polarity CG:** ITC pin 8 → laser anode (butterfly pin 10), ITC pin 3 → laser cathode (pin 11); voltage sense pin 9 to pin 10 and pin 6 to pin 11. (With AG instead: pin 7 → cathode, pin 3 → anode.)
+- **Monitor diode:** ITC pin 4 (input) and pin 2 (ground) to butterfly pins 3 and 4, in the polarity the manual's monitor-diode section asks for.
+- **Interlock:** pins 1 and 5. **TEC jack (15-pin):** TEC+ (pins 5, 6, 7) → butterfly pin 1, TEC− (pins 13, 14, 15) → pin 14, thermistor (pins 3, 4) → pins 2 and 5. Case ground (pin 13) to the shield and ITC ground.
+- In practice the butterfly sits in a mount (the lab's ILX LDM-4980 or a Thorlabs LM14S2), and the cables go to the mount: check the mount's pin table against these before switching on, and run the dummy-load test of DIY part D3 first.
+
+**Lock-box divider (DIY part D6).** The divider was sized for the BFY12 (about 1.4 GHz/mA): 91 kΩ over 1 kΩ gives about 0.28 GHz per volt and a 0.55 GHz swing. With this laser (about 1.9 GHz/mA) the same 91 kΩ gives a 0.75 GHz swing, which still works; about 120 kΩ restores the same scale.
+
+**The 200 kHz line** needs a very low-noise driver: the ITC502 current noise (1.5 µA rms, 10 Hz–10 MHz) times 1.9 GHz/mA is about 3 MHz of frequency noise, so expect a MHz-level line with our controller. That is acceptable for Zeeman EIT (common to control and probe) and for the SAS lock.
+
+Sources: RB-795-DFB-BFW data sheet (Yanban Laser, from the vendor) · [Alibaba listing](https://www.alibaba.com/product-detail/795nm-DFB-Laser-Diode_1601867664540.html) · [Thorlabs NIR free-space isolators (I795P3D, IOT-5-780-VLP)](https://www.thorlabs.com/nir-free-space-isolators-690---1080-nm) · Thorlabs ITC500 operation manual (ITC502 technical data and laser-jack pin assignment)
 
 ### Q4. DFB or ECDL? Why not an ECDL, why do the reference papers use one, and is a narrow linewidth crucial?
 
