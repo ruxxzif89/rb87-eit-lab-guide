@@ -251,7 +251,7 @@ A third AOM in the SAS arm would also work, but it is not needed and is not in t
 - **Recombiner.** Control and probe meet here in orthogonal polarizations. Control light in the probe polarization would reach the detector, because the Glan–Taylor cannot remove light that already has the probe polarization. With clean beams arriving (each from an earlier cube), the leak is of order 10⁻⁶ of the control, a few nW against a probe of about 0.5 µW: acceptable.
 - **Pick-off and splitter.** Here the cube only sets a power ratio with the half-wave plate in front, so the extinction does not matter.
 
-**Cheaper option: unmounted cubes from a general optics supplier.** The cage housing is most of the cost; the cube itself is a standard part. Search terms: "polarizing beam splitter cube 780nm", "PBS cube 12.7mm 700-900nm", "polarization beamsplitter cube extinction ratio 1000:1". What to ask for:
+**Cheaper option: unmounted cubes from a general optics supplier.** The cage housing is most of the cost; the cube itself is a standard part. The Spain-style bench does the same: its videos show uncaged cubes on the boards. Search terms: "polarizing beam splitter cube 780nm", "PBS cube 12.7mm 700-900nm", "polarization beamsplitter cube extinction ratio 1000:1". What to ask for:
 - cemented cube polarizing beamsplitter, 12.7 × 12.7 × 12.7 mm (10 mm or 25.4 mm also fine), N-BK7 or equivalent;
 - design wavelength 795 nm (a 780–800 nm laser-line or a 700–900 nm broadband coating);
 - transmitted extinction Tp:Ts ≥ 1000:1 **measured at 795 nm** (listings often quote the best point of a broad band; reject 500:1 parts);
