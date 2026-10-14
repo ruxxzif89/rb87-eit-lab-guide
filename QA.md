@@ -117,6 +117,21 @@ Sources: [Rogister, Nonlinear dynamics of semiconductor lasers subject to optica
 - **Free-space version only:** L01 becomes the RB-795-DFB-BFW, the fibre collimator L05 is dropped, L06 becomes two I795P3D or one IOT-5-780-VLP, and the butterfly mount is checked for a free-space output.
 - **Either way** the obsolescence problem of the BFY12 goes away.
 
+**Free space or a PM-fibre version? Both work.** If the data sheet is right, the laser itself meets every need of our bench; the choice is about protection and robustness:
+
+| | Free-space RB-795-DFB-BFW (as listed) | PM-fibre version with a built-in isolator (custom, asked) |
+|---|---|---|
+| Isolation | none inside: two stages outside (two I795P3D in series, or one IOT-5-780-VLP tandem) | the built-in stage plus our I795P3D after the collimator |
+| Beam | about 1.0 × 0.8 mm collimated, straight into the isolator; the fibre collimator (L05) is not needed | round, from our FC/APC collimator (L05); fibre coupling costs part of the 100 mW, still far more than the 5–15 mW we need |
+| Pointing | the laser sits on the bench: mount it rigidly on a heat sink, because its pointing drift reaches the SAS and the AOMs (Bragg acceptance about 0.5 mrad) | decoupled by the fibre: the laser can sit off the board, and a replacement does not need realignment |
+| Polarization | 20 dB from the chip | 20 dB or what the vendor guarantees after the fibre |
+| Mount | butterfly mount that leaves the window end open, raised so the beam is at 100 mm | any 14-pin butterfly mount (fibre exit) |
+| Safety | 100 mW open beam right at the package | the beam first appears after the collimator |
+
+**Our view:** if the vendor offers the PM-fibre version with an isolator inside at a similar price and lead time, take it (more robust, less alignment, the internal isolator protects the chip). If only the free-space version is possible, it is manageable: two isolator stages, a rigid heat-sinked mount, and the same alignment as any free-space diode laser.
+
+**Since we cannot fully check the data sheet:** ask for the test report of the actual unit, and test it on arrival before anything else: threshold and power against current (power meter), the four Rb D1 absorption dips and the saturated-absorption features in the reference cell while scanning the current (this proves it reaches the line and stays single-mode across the scan), and the polarization extinction with a polarizer. A laser that shows the SAS features cleanly at a chip temperature inside the 20 kΩ thermistor range is fit for our bench.
+
 **Can our Thorlabs ITC502 drive it? Yes.** Every figure of the laser is inside the ITC502 ranges (ITC500 operation manual, technical data 1.5.1):
 
 | The laser needs | ITC502 gives | Fit |
