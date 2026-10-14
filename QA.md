@@ -252,6 +252,25 @@ A third AOM in the SAS arm would also work, but it is not needed and is not in t
 9. **Size and mounting.** A drawing with the housing, the hole pattern and the height of the aperture above the base.
 10. **The driver.** Buy the AOM alone, or with a driver that accepts an external RF input. A fixed-frequency driver (its own oscillator) cannot be phase-locked to the other arm, so it is no use for the control and the probe.
 
+**Our planned part, the Gooch & Housego AOMO 3080-125, against this list** (G&H outline drawing 97-01598-01, rev D):
+
+| Check | 3080-125 drawing | Verdict |
+|---|---|---|
+| Material, mode | TeO₂, 4.2 mm/µs (longitudinal) | yes |
+| Centre frequency, bandwidth | 80 MHz, 25 MHz | yes |
+| Active aperture | 2.5 mm × 2 mm | yes, takes our 1–1.5 mm beam |
+| Contrast ratio | 1000:1 minimum | yes |
+| Rise time | 23 / 34 / 65 ns for 125 / 200 / 400 µm beams (about 160 ns per mm) | yes, about 160–240 ns for 1–1.5 mm |
+| Saturation RF power | 0.65 W at 515 nm, 1.0 W at 633 nm, so about 1.6 W at 795 nm (λ² scaling, an estimate) | yes, inside our 2 W amplifiers; at our typical 1.05 W about 90 % of the peak efficiency |
+| Wavelength, AR coating | **442–633 nm** on this drawing, reflectivity ≤ 1 % per surface there; the web listing gives 450–850 nm | **check**: ask G&H for the unit to be coated for 795 nm and for the efficiency at 795 nm |
+| Polarization | 90° to the mounting plane (vertical) | set each arm's polarization with a half-wave plate before the AOM, or mount the AOM on its side |
+| RF input | **SMB snap-on** jack | **an SMB-to-SMA cable** to our SMA amplifiers (one per AOM) |
+| Housing | 2.00 × 1.00 × 0.53 in, holes on the base | fits the D9 platform; measure the unit before drilling |
+
+**So it works for our bench**, provided the coating covers 795 nm. With the visible coating it still diffracts, but each surface may reflect a few percent at 795 nm: more loss, and more light back towards the isolator.
+
+**Driver: no G&H driver needed.** The "driver" of our bench is the planned RF chain: the two-channel Windfreak SynthHD (one clock for both arms), then per arm a ZASWA-2-50DR+ switch, a ZX76-31R5-PN-S+ attenuator and a ZHL-1-2W-S+ amplifier (about +30 dBm, up to 2 W), with a ZFDC-20-4-S+ coupler to monitor (BOM R01–R06). A G&H fixed-frequency driver has its own oscillator and cannot be phase-locked to the other arm, so it is not suitable for the control and probe pair.
+
 **Red flags:** efficiency quoted only at another wavelength, no AR coating stated, aperture under 1.5 mm, shear mode, "driver included" with a fixed frequency only, no RF power figure.
 
 **Ask the vendor:** the diffraction efficiency at 795 nm for a 1.0 and a 1.5 mm beam and the RF power for it, the rise time for 1 mm, the input polarization, whether the RF input is DC-blocked, a housing drawing, and the lead time.
