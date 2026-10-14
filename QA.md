@@ -79,7 +79,47 @@ These are estimates (about ±10 dB), not measurements. They show the order of ma
 
 Sources: [Rogister, Nonlinear dynamics of semiconductor lasers subject to optical feedback (thesis, section 2.6)](https://arxiv.org/abs/0909.4449) · [Eagleyard data sheet EYP-DFB-0795-00015-1500-BFY12-0005](https://global-topticaeagleyard.b-cdn.net/wp-content/uploads/data_sheets/EYP-DFB-0795-00015-1500-BFY12-0005.pdf) (micro-isolator inside, no isolation figure given) · [Thorlabs I795P3D](https://www.thorlabs.com/item/I795P3D) and [Thorlabs NIR free-space isolators (specification table)](https://www.thorlabs.com/nir-free-space-isolators-690---1080-nm)
 
-### Q3. DFB or ECDL? Why not an ECDL, why do the reference papers use one, and is a narrow linewidth crucial?
+### Q3. Is the Yanban RB-795-DFB-BFW DFB laser (Alibaba listing) suitable for our bench?
+
+*Added 14 Oct 2026*
+
+*Equipment shown in the guide: DFB laser module (butterfly), free-space isolator (I795P3D), ITC502 controller, butterfly mount.*
+
+**Yes as a laser, on paper, but not in the version listed. The listed RB-795-DFB-BFW is a free-space butterfly with no isolator inside, so we have asked the vendor for a PM-fibre-pigtailed version with a built-in isolator. Until the answer arrives, the Eagleyard BFY12 stays in our plan.** The figures below are from the vendor's data sheet (sent to us, not online) and the [Alibaba listing](https://www.alibaba.com/product-detail/795nm-DFB-Laser-Diode_1601867664540.html).
+
+| Our need | RB-795-DFB-BFW data sheet | Fit |
+|---|---|---|
+| Rb D1 line, 794.978 nm | target 794.97 nm (794–796 nm), 0.06 nm/°C and 0.004 nm/mA; "guaranteed to hit the Rb D1 line" | yes |
+| 5–15 mW usable | 100 mW minimum, 120 mW typical | yes, about 10× margin: turn it down with a half-wave plate and a PBS, or run at a lower current |
+| Narrow line | 200 kHz typical, 500 kHz maximum (over 100 µs, with a very low-noise driver) | yes, narrower than the BFY12 (about 1 MHz) |
+| Single mode | side-mode suppression 40 dB minimum, 45 dB typical; mode-hop free over 20 GHz | yes |
+| Polarization | 20 dB extinction | yes, the first PBS cleans it up |
+| Laser current on the ITC502 (0–200 mA, compliance above 6 V) | 150 mA typical, 175 mA maximum, 2.0 V | yes: set the current limit at 175 mA or below |
+| TEC on the ITC502 (±2 A, 16 W) | 0.4 A, 1.3 V at 120 mW | yes |
+| Thermistor on the ITC502 (reads up to 19.99 kΩ) | 10 kΩ at 25 °C, B = 3950 K, so about 20 kΩ at 10 °C | yes: keep the chip above about 11 °C |
+| Pin-out | 1 TEC+, 2 and 5 thermistor, 3 and 4 photodiode, 10 and 11 laser anode and cathode, 13 ground, 14 TEC−; the laser floats | looks like the usual 14-pin butterfly layout: check it against the LDM-4980 pin table before connecting |
+| **Isolator inside** | **none listed**; the safety notes say "Do not retro-reflect beam! This can cause Catastrophic Optical Damage" | **no** |
+
+**What to watch**
+- **Isolation.** With about −33 dB of light returning from the bench (see the isolator answer), one Thorlabs I795P3D (at least 34 dB) leaves about −67 dB at the chip, at the edge of the mode-hopping band, and at 100 mW a strong return can damage the chip. A free-space version would need two stages: two I795P3D in series (about −100 dB) or one Thorlabs IOT-5-780-VLP tandem isolator (55 dB minimum, tunable 760–800 nm, 4.7 mm aperture; about −88 dB). A built-in isolator in a fibre version removes most of this worry.
+- **Free-space beam.** About 1.0 × 0.8 mm, divergence 0.1° (about 1.7 mrad; the data sheet does not say whether this is the full or half angle). Over a 1.5 m path the beam grows by about 2.5 mm, so the telescopes we already plan for the arms set the beam sizes. The window centre is about 5.1–5.45 mm above the package base; the mount must leave that end open and be raised to the 100 mm beam height.
+- **The 200 kHz needs a very low-noise driver.** With 0.004 nm/mA (about 1.9 GHz/mA) and the ITC502 current noise of 1.5 µA rms, we estimate MHz-level broadening with our controller. That is acceptable: the control and the probe come from the same laser, so most of it cancels in the two-photon detuning, and the SAS lock needs only MHz.
+- **Safety.** 100–140 mW is Class 3B (the label also shows a 0.2 W Class IV sticker): goggles rated for 795 nm, rated beam dumps, and the ITC502 interlock.
+- **Data-sheet quality.** The mode-hop range is printed in "Pm" (the comment says 20 GHz), and the two wavelength plots do not state their test conditions (about 795.3 nm at 25 °C in one, 794.92 nm at 135 mA in the other). Both suggest the D1 line is reached near 18–25 °C, but only the test report of the actual unit counts.
+
+**What we asked the vendor**
+- A PM-fibre-pigtailed version (PM780 fibre, slow axis aligned, FC/APC) with a built-in isolator, its isolation in dB and the power after the fibre and isolator.
+- The test report of the actual unit: temperature and current at 794.978 nm, power, side-mode suppression, polarization extinction.
+- How the linewidth is measured, whether the divergence is a full or half angle, warranty and lead time.
+
+**What it would change**
+- **PM-fibre version with built-in isolator:** it drops into our design in place of the BFY12 (BOM L01). The FC/APC collimator (L05) and the free-space I795P3D (L06) stay as they are, and the two isolators together give about −95 dB or better.
+- **Free-space version only:** L01 becomes the RB-795-DFB-BFW, the fibre collimator L05 is dropped, L06 becomes two I795P3D or one IOT-5-780-VLP, and the butterfly mount is checked for a free-space output.
+- **Either way** the obsolescence problem of the BFY12 goes away.
+
+Sources: RB-795-DFB-BFW data sheet (Yanban Laser, from the vendor) · [Alibaba listing](https://www.alibaba.com/product-detail/795nm-DFB-Laser-Diode_1601867664540.html) · [Thorlabs NIR free-space isolators (I795P3D, IOT-5-780-VLP)](https://www.thorlabs.com/nir-free-space-isolators-690---1080-nm)
+
+### Q4. DFB or ECDL? Why not an ECDL, why do the reference papers use one, and is a narrow linewidth crucial?
 
 *Added 10 Oct 2026*
 
@@ -123,7 +163,7 @@ None applies strongly to us: one fixed target line, no existing ECDL, and a budg
 
 **When an ECDL would be better:** driver current noise turning into linewidth (1 µA is about 1.4 MHz), scanning several GHz or other lines, a replacement if the DFB is no longer available, or an ECDL already in the building.
 
-### Q4. What linewidths and frequencies do we have to set?
+### Q5. What linewidths and frequencies do we have to set?
 
 *Added 9 Oct 2026*
 
@@ -145,7 +185,7 @@ None applies strongly to us: one fixed target line, no existing ECDL, and a budg
 
 Because the offset between the two beams is only kHz, a generator with 1 Hz resolution is far more than precise enough. The control–probe difference must stay steady to well under the EIT width (a few kHz): use one two-channel source, or sources sharing a clock.
 
-### Q5. Is a DFB with a TEC and the Thorlabs ITC502 good enough? How do the controllers compare?
+### Q6. Is a DFB with a TEC and the Thorlabs ITC502 good enough? How do the controllers compare?
 
 *Added 10 Oct 2026*
 
@@ -182,7 +222,7 @@ A 5 µA driver does not harm EIT (the optical line is about 100 MHz wide and bot
 
 ## Equipment found in the lab
 
-### Q6. Are the extra lab items useful? (second ITC502, LDM-4980 mounts, TCLDM9 mounts)
+### Q7. Are the extra lab items useful? (second ITC502, LDM-4980 mounts, TCLDM9 mounts)
 
 *Added 10 Oct 2026*
 
@@ -201,7 +241,7 @@ A 5 µA driver does not harm EIT (the optical line is about 100 MHz wide and bot
 
 Sources: [ILX LDM-4984](https://www.newport.com/p/LDM-4984) · [Thorlabs TCLDM9 catalogue](https://www.thorlabs.com/catalogPages/460.pdf)
 
-### Q7. Which of the loose mounts and stages in the photographs are useful?
+### Q8. Which of the loose mounts and stages in the photographs are useful?
 
 *Added 10 Oct 2026*
 
@@ -221,7 +261,7 @@ Identified from five photographs of the lab shelves and added to the Lab Invento
 
 **Left out as not needed:** the ball-screw stepper stage, aluminium rails, the V-block, brackets, loose screws and the box of cables.
 
-### Q8. Is the Credix SG-1710 signal generator useful?
+### Q9. Is the Credix SG-1710 signal generator useful?
 
 *Added 9 Oct 2026*
 
@@ -235,7 +275,7 @@ Identified from five photographs of the lab shelves and added to the Lab Invento
 
 Source: [SG-1710 listing](https://www.radiolocman.com/op/device.html?di=63870)
 
-### Q9. Which bench power supplies can do which job? (Aditeg PS-3030DD, Multicomp Pro 72-2710)
+### Q10. Which bench power supplies can do which job? (Aditeg PS-3030DD, Multicomp Pro 72-2710)
 
 *Added 10 Oct 2026*
 
@@ -256,7 +296,7 @@ Source: [SG-1710 listing](https://www.radiolocman.com/op/device.html?di=63870)
 
 **Verdict:** the PS-3030DD covers the RF chain and the Multicomp is a good general bench supply that nothing in the bench needs today. Buy it only if the PS-3030DD is occupied by the RF chain and the heater needs its own supply. The small ±5 V and ±3 V rails of the RF switches and attenuators can be made by the home-built bias box (DIY Section, part D8) from a ±12 V supply, so the +24 V for the amplifiers is the only high-current need.
 
-### Q10. Which of our optical power meters and heads can measure 795 nm? (ILX OMM-6810B, PM100USB with S140C, S144C and S120VC, Newport 818-SL)
+### Q11. Which of our optical power meters and heads can measure 795 nm? (ILX OMM-6810B, PM100USB with S140C, S144C and S120VC, Newport 818-SL)
 
 *Added 10 Oct 2026*
 
@@ -299,7 +339,7 @@ Until a silicon head turns up, use the Thorlabs set for the power budget. Check 
 
 Sources: [ILX 6700B silicon heads brochure](https://www.newport.com/medias/sys_master/images/images/he7/had/9260480790558/6700B-brochure-silicon-REV11.pdf) · [Newport 818-SL/DB](https://np.d1.mks.com/p/818-SL--DB)
 
-### Q11. Which instruments record the result, and which photodetectors do we need? (PDA36A2, PDB210A balanced detector, AD-300/DC)
+### Q12. Which instruments record the result, and which photodetectors do we need? (PDA36A2, PDB210A balanced detector, AD-300/DC)
 
 *Added 10 Oct 2026*
 
@@ -339,7 +379,7 @@ Sources: [Finkelstein et al. 2022](https://arxiv.org/abs/2205.10959), [DeRose et
 
 ## Solenoid, heater and fluxgate (the magnetic field)
 
-### Q12. What can the second ITC502 be used for, besides a laser?
+### Q13. What can the second ITC502 be used for, besides a laser?
 
 *Added 10 Oct 2026*
 
@@ -355,7 +395,7 @@ Sources: [Finkelstein et al. 2022](https://arxiv.org/abs/2205.10959), [DeRose et
 
 If both work on the bench, the separate cell-heater controller (BOM C04) and the solenoid current source (C08) could be dropped. This has not been applied to the BOM yet. The next two answers give the wiring; the plugs, the heater and the coil are built step by step in the DIY Section (parts D1 to D3).
 
-### Q13. How do I use the second ITC502 as the cell-heater controller (connection and set-up)?
+### Q14. How do I use the second ITC502 as the cell-heater controller (connection and set-up)?
 
 *Added 10 Oct 2026*
 
@@ -386,7 +426,7 @@ If both work on the bench, the separate cell-heater controller (BOM C04) and the
 
 **Check the field.** With the fluxgate inside the shield, switch the heater on and off: the change should be small compared with 1 mG (the DIY test uses 0.1 mG). If not, twist the leads tighter.
 
-### Q14. Is it safe to wrap the bifilar heater directly round the rubidium cell?
+### Q15. Is it safe to wrap the bifilar heater directly round the rubidium cell?
 
 *Added 11 Oct 2026*
 
@@ -400,7 +440,7 @@ If both work on the bench, the separate cell-heater controller (BOM C04) and the
 - **Rubidium:** keep the windows a little warmer than the stem, so the metal condenses in the stem and not on the windows.
 - **Runaway:** if the NTC comes off the glass, the ITC502 drives its full limit. So set I TEC LIM to **0.50 A on the open bench** (worst case about 84 °C) and **0.33 A inside the closed shield** (also about 84 °C). Both still give the power needed at 65 °C, and both stay below the 100 °C rating of the foam and the epoxy. The earlier figure of 0.6 A was too high for a runaway inside the shield.
 
-### Q15. Can we heat the cell the Duke way (heaters and insulation wrapped in aluminium foil)?
+### Q16. Can we heat the cell the Duke way (heaters and insulation wrapped in aluminium foil)?
 
 *Added 11 Oct 2026*
 
@@ -426,7 +466,7 @@ If both work on the bench, the separate cell-heater controller (BOM C04) and the
 
 **Verdict:** keep our bifilar heater, foam and tubes (DIY D2); an outer foil layer is allowed and harmless, but it is not a replacement for a non-magnetic heater.
 
-### Q16. Can the solenoid former be 3D-printed in PETG on a Bambu Lab A1 with a 0.2 mm nozzle?
+### Q17. Can the solenoid former be 3D-printed in PETG on a Bambu Lab A1 with a 0.2 mm nozzle?
 
 *Added 11 Oct 2026*
 
@@ -451,7 +491,7 @@ If both work on the bench, the separate cell-heater controller (BOM C04) and the
 
 The STL files: the former, the test coupon, the two spacer rings (with the lead notch and the recess for the degaussing bundle) and the winding as a reference model, not for printing: the wire is wound by hand in the printed groove.
 
-### Q17. Can we 3D-print the holder for the SAS reference cell in PETG?
+### Q18. Can we 3D-print the holder for the SAS reference cell in PETG?
 
 *Added 11 Oct 2026*
 
@@ -467,7 +507,7 @@ The STL files: the former, the test coupon, the two spacer rings (with the lead 
 
 **Before printing:** confirm the cell's outside length and the stem (the holder assumes a stem in the middle, pointing up, at most 22 mm). Matte black PETG cuts stray light. Do not use it for the EIT cell: that one is heated to 65 °C inside the shield and has its own stack (D2).
 
-### Q18. Our shield is bigger than the Spain-style module: what beam height should the whole bench use?
+### Q19. Our shield is bigger than the Spain-style module: what beam height should the whole bench use?
 
 *Added 11 Oct 2026*
 
@@ -501,7 +541,7 @@ Why the Spain-style bench can be lower: their cell module is a small enclosure, 
 - **Taller covers over the AOM arms (D10):** they were drawn 80 mm high for a 40 mm beam. At 100 mm the inner height must be about 160 to 200 mm.
 - **An optional draught cover over the shield**, if the room has strong air flow: black hardboard, inner size about 350 × 120 × 170 mm (the shield is 282 mm long plus the caps and the degaussing loops, and its top is about 140 mm above the table). It must contain no steel: no steel screws, brackets or hinges.
 
-### Q19. How is the magnetic shield of the Spain-style EIT cell probably made? It looks like a small enclosure.
+### Q20. How is the magnetic shield of the Spain-style EIT cell probably made? It looks like a small enclosure.
 
 *Added 11 Oct 2026*
 
@@ -523,7 +563,7 @@ Why a small shield works:
 
 **What this means for our design:** we built for 0.1 mG stability and a cell field error of 0.2 %, which needs the long three-layer shield, the 42-turn solenoid with end turns, and degaussing. A compact module like theirs is simpler and cheaper and gives clear EIT, but with a broader, less reproducible line, and its temperature drifts without a loop. A compact version of ours (for example two layers, inner bore about Ø40 mm, about 120 mm long with caps) is possible, but the field uniformity would have to be recalculated with the end caps included before choosing it.
 
-### Q20. Can we make the mu-metal shield ourselves: roll a sheet into a cylinder and close it with (3D-printed) end caps?
+### Q21. Can we make the mu-metal shield ourselves: roll a sheet into a cylinder and close it with (3D-printed) end caps?
 
 *Added 11 Oct 2026*
 
@@ -553,7 +593,7 @@ Three layers multiply these roughly, if the gaps between them are a few millimet
 
 **Check:** after assembly and degaussing (D4), measure the residual field at the cell with the fluxgate plate. Then turn the whole shield in the room and read it again: the reading should change by less than about 0.1 mG.
 
-### Q21. Which DC source should drive the solenoid, and how do I wire the second ITC502 laser output for it? (Is the Rigol DP832A needed?)
+### Q22. Which DC source should drive the solenoid, and how do I wire the second ITC502 laser output for it? (Is the Rigol DP832A needed?)
 
 *Added 10 Oct 2026*
 
@@ -592,7 +632,7 @@ Three layers multiply these roughly, if the gaps between them are a few millimet
 
 **Effect on the BOM.** If the ITC502 route works, BOM C08 (Rigol DP832A) and, with the heater on the TEC half, C04 (TC300B) can be dropped. This has not been applied; test the solenoid and the heater on the bench first, with the fluxgate inside the shield.
 
-### Q22. Can the Stefan Mayer FLC100 be the fluxgate magnetometer with milligauss resolution?
+### Q23. Can the Stefan Mayer FLC100 be the fluxgate magnetometer with milligauss resolution?
 
 *Added 10 Oct 2026*
 
@@ -616,7 +656,7 @@ Sources: [Stefan Mayer FLC 100 data sheet](https://stefan-mayer.com/images/datas
 
 ## The Quantum Spain-style bench
 
-### Q23. Is the Spain-style arrangement correct, in theory and in practice?
+### Q24. Is the Spain-style arrangement correct, in theory and in practice?
 
 *Added 9 Oct 2026*
 
@@ -640,7 +680,7 @@ Sources: [Stefan Mayer FLC 100 data sheet](https://stefan-mayer.com/images/datas
 - No beam dumps or tubes are visible (laser safety).
 - The AOM tilt is exaggerated to 8° in the drawing, hence the 160 mm from separator cube to AOM; a real build can be tighter but needs an iris or block for the zeroth order. Do not use the drawing as a build recipe.
 
-### Q24. What is the cell label TRT-Rb/Ne-10T-20x75 on the Spain-style EIT cell, and would it suit our bench?
+### Q25. What is the cell label TRT-Rb/Ne-10T-20x75 on the Spain-style EIT cell, and would it suit our bench?
 
 *Added 12 Oct 2026*
 
@@ -695,7 +735,7 @@ Sources: [Stefan Mayer FLC 100 data sheet](https://stefan-mayer.com/images/datas
 
 ## About this guide
 
-### Q25. How does the lab inventory enter the costed BOM and the Spain-style cost?
+### Q26. How does the lab inventory enter the costed BOM and the Spain-style cost?
 
 *Added 10 Oct 2026*
 
@@ -708,7 +748,7 @@ Sources: [Stefan Mayer FLC 100 data sheet](https://stefan-mayer.com/images/datas
 
 **Rules and limits.** Items marked "check" or "no" are not counted. An item that covers a row only in part is counted only for the units it can supply (for example 6 post holders against 60 post sets). The Credix SG-1710 is **not** counted against the dual-channel RF synthesizer, which needs two phase-locked channels. Mounts whose aperture is not measured yet (the Melles Griot set) are counted as 10 of the 11 mirror mounts; measure them. The prices stay behind the group password; the switch only changes how the totals are computed.
 
-### Q26. Can the Thorlabs PM100USB CAD file be used for the 3D pictures?
+### Q27. Can the Thorlabs PM100USB CAD file be used for the 3D pictures?
 
 *Added 10 Oct 2026*
 
