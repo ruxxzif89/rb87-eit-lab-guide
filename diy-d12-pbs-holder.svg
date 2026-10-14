@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 860" role="img" aria-labelledby="t d" font-family="Segoe UI, Arial, Helvetica, sans-serif">
+<title id="t">D12 printed cube holder drawing</title><desc id="d">Top view and side view of the 3D-printed PETG holder for a half-inch polarizing beamsplitter cube on a half-inch post, with dimensions in millimetres.</desc>
+<defs><pattern id="hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="6" stroke="#555" stroke-width="1"/></pattern><pattern id="hatchf" width="4" height="4" patternUnits="userSpaceOnUse" patternTransform="rotate(-45)"><line x1="0" y1="0" x2="0" y2="4" stroke="#888" stroke-width="0.8"/></pattern><pattern id="dots" width="5" height="5" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="0.8" fill="#999"/></pattern><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#1b1f24"/></marker><marker id="arrg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#6b7280"/></marker></defs>
+<rect width="1120" height="860" fill="#ffffff"/>
+<text x="20.00" y="28.00" font-size="17" text-anchor="start" fill="#1b1f24" font-weight="700">D12  Printed holder for a ½-inch (12.7 mm) PBS or NPBS cube, PETG, on a ½-inch post</text>
+<text x="20.00" y="48.00" font-size="12" text-anchor="start" fill="#6b7280">All dimensions in mm, both views at 12 px per mm. The cube is held by four corner pillars that touch only the outer 1.5 mm of each face, and by a clamp plate on top.</text>
+<text x="111.40" y="88.00" font-size="13" text-anchor="start" fill="#1b1f24" font-weight="700">Top view (clamp plate removed)</text>
+<rect x="111.40" y="191.40" width="277.20" height="277.20" rx="0" fill="#d7dce2" stroke="#1b1f24" stroke-width="1.4"/>
+<polygon points="189.40,408.60 171.40,408.60 171.40,390.60 111.40,390.60 111.40,468.60 189.40,468.60" fill="#cfdcec" stroke="#1b1f24" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="141.40" cy="438.60" r="15.00" fill="#ffffff" stroke="#1b1f24" stroke-width="1.2"/>
+<polygon points="189.40,251.40 171.40,251.40 171.40,269.40 111.40,269.40 111.40,191.40 189.40,191.40" fill="#cfdcec" stroke="#1b1f24" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="141.40" cy="221.40" r="15.00" fill="#ffffff" stroke="#1b1f24" stroke-width="1.2"/>
+<polygon points="310.60,408.60 328.60,408.60 328.60,390.60 388.60,390.60 388.60,468.60 310.60,468.60" fill="#cfdcec" stroke="#1b1f24" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="358.60" cy="438.60" r="15.00" fill="#ffffff" stroke="#1b1f24" stroke-width="1.2"/>
+<polygon points="310.60,251.40 328.60,251.40 328.60,269.40 388.60,269.40 388.60,191.40 310.60,191.40" fill="#cfdcec" stroke="#1b1f24" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="358.60" cy="221.40" r="15.00" fill="#ffffff" stroke="#1b1f24" stroke-width="1.2"/>
+<rect x="173.80" y="253.80" width="152.40" height="152.40" rx="0" fill="#d6ebf7" stroke="#1f5fa8" stroke-width="1.6"/>
+<line x1="173.80" y1="406.20" x2="326.20" y2="253.80" stroke="#1f5fa8" stroke-width="1.2" stroke-dasharray="6 3" stroke-linecap="round"/>
+<line x1="39.40" y1="330.00" x2="167.80" y2="330.00" stroke="#c0392b" stroke-width="2.2" marker-end="url(#arr)"/>
+<line x1="332.20" y1="330.00" x2="412.60" y2="330.00" stroke="#c0392b" stroke-width="2.2" marker-end="url(#arr)"/>
+<line x1="250.00" y1="247.80" x2="250.00" y2="167.40" stroke="#c0392b" stroke-width="2.2" marker-end="url(#arr)"/>
+<text x="39.40" y="320.00" font-size="11.5" text-anchor="start" fill="#c0392b" font-weight="700">beam in</text>
+<text x="332.20" y="352.00" font-size="11.5" text-anchor="start" fill="#c0392b" font-weight="700">p (transmitted)</text>
+<text x="258.00" y="171.40" font-size="11.5" text-anchor="start" fill="#c0392b" font-weight="700">s (reflected)</text>
+<line x1="111.40" y1="468.60" x2="111.40" y2="508.60" stroke="#6b7280" stroke-width="0.9" stroke-linecap="round"/>
+<line x1="388.60" y1="468.60" x2="388.60" y2="508.60" stroke="#6b7280" stroke-width="0.9" stroke-linecap="round"/>
+<line x1="111.40" y1="502.60" x2="388.60" y2="502.60" stroke="#1b1f24" stroke-width="1" marker-start="url(#arr)" marker-end="url(#arr)"/>
+<text x="250.00" y="517.10" font-size="11.5" text-anchor="middle" fill="#1b1f24">23.1</text>
+<line x1="189.40" y1="408.60" x2="189.40" y2="442.20" stroke="#6b7280" stroke-width="0.9" stroke-linecap="round"/>
+<line x1="310.60" y1="408.60" x2="310.60" y2="442.20" stroke="#6b7280" stroke-width="0.9" stroke-linecap="round"/>
+<line x1="189.40" y1="436.20" x2="310.60" y2="436.20" stroke="#1b1f24" stroke-width="1" marker-start="url(#arr)" marker-end="url(#arr)"/>
+<text x="250.00" y="432.20" font-size="11.5" text-anchor="middle" fill="#1b1f24">10.1 open</text>
+<line x1="141.40" y1="438.60" x2="141.40" y2="544.60" stroke="#6b7280" stroke-width="0.9" stroke-linecap="round"/>
+<line x1="358.60" y1="438.60" x2="358.60" y2="544.60" stroke="#6b7280" stroke-width="0.9" stroke-linecap="round"/>
+<line x1="141.40" y1="538.60" x2="358.60" y2="538.60" stroke="#1b1f24" stroke-width="1" marker-start="url(#arr)" marker-end="url(#arr)"/>
+<text x="250.00" y="534.60" font-size="11.5" text-anchor="middle" fill="#1b1f24">18.1 (screw holes)</text>
+<line x1="328.60" y1="251.40" x2="424.60" y2="251.40" stroke="#6b7280" stroke-width="0.9" stroke-linecap="round"/>
+<line x1="328.60" y1="408.60" x2="424.60" y2="408.60" stroke="#6b7280" stroke-width="0.9" stroke-linecap="round"/>
+<line x1="418.60" y1="251.40" x2="418.60" y2="408.60" stroke="#1b1f24" stroke-width="1" marker-start="url(#arr)" marker-end="url(#arr)"/>
+<text x="423.60" y="334.00" font-size="11.5" text-anchor="start" fill="#1b1f24">pocket 13.1</text>
+<line x1="358.60" y1="438.60" x2="418.60" y2="538.60" stroke="#6b7280" stroke-width="1.0" stroke-linecap="round"/>
+<circle cx="358.60" cy="438.60" r="2.2" fill="#6b7280"/>
+<text x="422.60" y="542.60" font-size="11.5" text-anchor="start" fill="#1b1f24">Ø2.5 pilot, M3 self-tapping</text>
+<line x1="183.80" y1="243.80" x2="131.40" y2="145.40" stroke="#6b7280" stroke-width="1.0" stroke-linecap="round"/>
+<circle cx="183.80" cy="243.80" r="2.2" fill="#6b7280"/>
+<text x="135.40" y="149.40" font-size="11.5" text-anchor="start" fill="#1f5fa8">cube 12.7 (glass)</text>
+<line x1="319.60" y1="203.40" x2="368.60" y2="145.40" stroke="#6b7280" stroke-width="1.0" stroke-linecap="round"/>
+<circle cx="319.60" cy="203.40" r="2.2" fill="#6b7280"/>
+<text x="372.60" y="149.40" font-size="11.5" text-anchor="start" fill="#1b1f24">rib 1.5 covers the face edge only</text>
+<text x="601.40" y="88.00" font-size="13" text-anchor="start" fill="#1b1f24" font-weight="700">Side view (insert variant), beam along x</text>
+<rect x="703.80" y="540.00" width="152.40" height="168.00" rx="0" fill="#c9ced6" stroke="#1b1f24" stroke-width="1.4"/>
+<path d="M 693.8 708.0 l 10 -6 l 10 12 l 10 -6 l 10 12 l 10 -6 l 10 12 l 10 -6 l 10 12 l 10 -6 l 10 12 l 10 -6 l 10 12 l 10 -6 l 10 6" fill="none" stroke="#6b7280" stroke-width="1.0" stroke-linejoin="round" stroke-linecap="round"/>
+<text x="864.20" y="624.00" font-size="11.5" text-anchor="start" fill="#1b1f24">½-inch post (TR/M), Ø12.7</text>
+<rect x="641.40" y="432.00" width="277.20" height="108.00" rx="0" fill="#cfdcec" stroke="#1b1f24" stroke-width="1.4"/>
+<rect x="747.00" y="456.00" width="66.00" height="84.00" rx="0" fill="#ffffff" stroke="#1b1f24" stroke-width="1.0" stroke-dasharray="5 3"/>
+<rect x="749.00" y="468.00" width="62.00" height="72.00" rx="0" fill="#b8892b" stroke="#1b1f24" stroke-width="1.0"/>
+<rect x="756.00" y="474.00" width="48.00" height="66.00" rx="0" fill="#8c96a3" stroke="#1b1f24" stroke-width="0.8"/>
+<rect x="641.40" y="273.60" width="78.00" height="158.40" rx="0" fill="#cfdcec" stroke="#1b1f24" stroke-width="1.4"/>
+<rect x="840.60" y="273.60" width="78.00" height="158.40" rx="0" fill="#cfdcec" stroke="#1b1f24" stroke-width="1.4"/>
+<rect x="703.80" y="279.60" width="152.40" height="152.40" rx="0" fill="#d6ebf7" stroke="#1f5fa8" stroke-width="1.6"/>
+<rect x="641.40" y="225.60" width="277.20" height="48.00" rx="0" fill="#f2dcc7" stroke="#1b1f24" stroke-width="1.4"/>
+<rect x="762.00" y="189.60" width="36.00" height="90.00" rx="0" fill="#ffffff" stroke="#1b1f24" stroke-width="1.0"/>
+<rect x="747.00" y="244.80" width="66.00" height="28.80" rx="0" fill="#9aa5b1" stroke="#1b1f24" stroke-width="0.8"/>
+<line x1="629.40" y1="355.80" x2="978.60" y2="355.80" stroke="#c0392b" stroke-width="2" stroke-dasharray="10 4" marker-end="url(#arr)"/>
+<line x1="641.40" y1="432.00" x2="609.40" y2="432.00" stroke="#6b7280" stroke-width="0.9" stroke-linecap="round"/>
+<line x1="641.40" y1="540.00" x2="609.40" y2="540.00" stroke="#6b7280" stroke-width="0.9" stroke-linecap="round"/>
+<line x1="615.40" y1="432.00" x2="615.40" y2="540.00" stroke="#1b1f24" stroke-width="1" marker-start="url(#arr)" marker-end="url(#arr)"/>
+<text x="610.40" y="490.00" font-size="11.5" text-anchor="end" fill="#1b1f24">9.0</text>
+<line x1="641.40" y1="225.60" x2="609.40" y2="225.60" stroke="#6b7280" stroke-width="0.9" stroke-linecap="round"/>
+<line x1="641.40" y1="273.60" x2="609.40" y2="273.60" stroke="#6b7280" stroke-width="0.9" stroke-linecap="round"/>
+<line x1="615.40" y1="225.60" x2="615.40" y2="273.60" stroke="#1b1f24" stroke-width="1" marker-start="url(#arr)" marker-end="url(#arr)"/>
+<text x="610.40" y="253.60" font-size="11.5" text-anchor="end" fill="#1b1f24">4.0</text>
+<line x1="629.40" y1="355.80" x2="543.40" y2="355.80" stroke="#6b7280" stroke-width="0.9" stroke-linecap="round"/>
+<line x1="629.40" y1="540.00" x2="543.40" y2="540.00" stroke="#6b7280" stroke-width="0.9" stroke-linecap="round"/>
+<line x1="549.40" y1="355.80" x2="549.40" y2="540.00" stroke="#1b1f24" stroke-width="1" marker-start="url(#arr)" marker-end="url(#arr)"/>
+<text x="544.40" y="451.90" font-size="11.5" text-anchor="end" fill="#1b1f24">beam 15.35</text>
+<line x1="795.00" y1="201.60" x2="934.60" y2="165.60" stroke="#6b7280" stroke-width="1.0" stroke-linecap="round"/>
+<circle cx="795.00" cy="201.60" r="2.2" fill="#6b7280"/>
+<text x="938.60" y="169.60" font-size="11" text-anchor="start" fill="#1b1f24">M3 × 8 nylon screw</text>
+<line x1="894.60" y1="249.60" x2="934.60" y2="261.60" stroke="#6b7280" stroke-width="1.0" stroke-linecap="round"/>
+<circle cx="894.60" cy="249.60" r="2.2" fill="#6b7280"/>
+<text x="938.60" y="265.60" font-size="11" text-anchor="start" fill="#1b1f24">clamp plate (0.5 gap)</text>
+<line x1="894.60" y1="312.00" x2="934.60" y2="312.00" stroke="#6b7280" stroke-width="1.0" stroke-linecap="round"/>
+<circle cx="894.60" cy="312.00" r="2.2" fill="#6b7280"/>
+<text x="938.60" y="316.00" font-size="11" text-anchor="start" fill="#1b1f24">pillar</text>
+<line x1="810.00" y1="504.00" x2="934.60" y2="456.00" stroke="#6b7280" stroke-width="1.0" stroke-linecap="round"/>
+<circle cx="810.00" cy="504.00" r="2.2" fill="#6b7280"/>
+<text x="938.60" y="460.00" font-size="11" text-anchor="start" fill="#1b1f24">M4 insert, hole Ø5.5 × 7.0</text>
+<line x1="792.00" y1="528.00" x2="934.60" y2="522.00" stroke="#6b7280" stroke-width="1.0" stroke-linecap="round"/>
+<circle cx="792.00" cy="528.00" r="2.2" fill="#6b7280"/>
+<text x="938.60" y="526.00" font-size="11" text-anchor="start" fill="#1b1f24">M4 stud of the post</text>
+<rect x="20.00" y="728.00" width="1080.00" height="106.00" rx="0" fill="#f7f8fa" stroke="#e4e8ee" stroke-width="1.0"/>
+<text x="32.00" y="750.00" font-size="12" text-anchor="start" fill="#1b1f24">Post top 84.65 mm above the breadboard puts the beam at 100 mm (cube centre 15.35 mm above the post top).</text>
+<text x="32.00" y="769.00" font-size="12" text-anchor="start" fill="#1b1f24">Screw variant: Ø4.5 through hole, counterbore Ø8.0 × 4.2 under the cube, M4 × 10 socket screw into the post (5.2 mm of thread in the post).</text>
+<text x="32.00" y="788.00" font-size="12" text-anchor="start" fill="#1b1f24">Clamp: two M3 × 12 screws into the Ø2.5 pilot holes of two diagonal pillars; the centre M3 nylon screw presses on the top face (a ground face, not an optical one).</text>
+<text x="32.00" y="807.00" font-size="12" text-anchor="start" fill="#1b1f24">Open width of every face between the ribs: 10.1 mm, about twice the widest beam (5.1 mm, the expanded control).</text>
+</svg>
