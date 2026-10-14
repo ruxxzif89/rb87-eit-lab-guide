@@ -190,9 +190,9 @@ None applies strongly to us: one fixed target line, no existing ECDL, and a budg
 
 *Equipment shown in the guide: AOM (double pass), two-channel RF source, RF amplifier, RF attenuator, RF switch, directional coupler.*
 
-**Two identical 80 MHz TeO₂ AOMs for 795 nm (one per arm, each in double pass), driven by one two-channel RF source with a common clock, an amplifier, an attenuator and a fast switch per channel. A third identical AOM in the SAS arm is the simplest way to remove the 160 MHz lock offset.** Our planned parts are BOM O17 (Gooch & Housego 3080-125) and R01–R06; the table is what any alternative must meet.
+**Two identical 80 MHz TeO₂ AOMs for 795 nm (one per arm, each in double pass), driven by one two-channel RF source with a common clock, an amplifier, an attenuator and a fast switch per channel. Two are enough: the 160 MHz lock offset is handled without a third AOM (see the end).** Our planned parts are BOM O17 (Gooch & Housego 3080-125) and R01–R06; the table is what any alternative must meet.
 
-**AOM (2 pieces, optional 3rd)**
+**AOM (2 pieces)**
 
 | Item | Requirement | Why |
 |---|---|---|
@@ -220,7 +220,10 @@ None applies strongly to us: one fixed target line, no existing ECDL, and a budg
 
 Our planned build meets this from separate parts: Windfreak SynthHD (two channels, one clock), two Mini-Circuits ZHL-1-2W-S+ amplifiers (+33 dBm), ZX76-31R5-PN-S+ attenuators, ZASWA-2-50DR+ switches and ZFDC-20-4-S+ couplers. An integrated driver from an AOM maker is fine only if both channels share one clock.
 
-**The optional third AOM (SAS arm).** Both EIT arms add +160 MHz, but the SAS light does not, so the laser would have to be locked 160 MHz away from the line the cell sees. The same AOM in double pass at 80 MHz in the SAS arm adds the same +160 MHz to the lock light, so the laser locks straight on the SAS feature and both EIT beams arrive on resonance. Its frequency need not be phase-locked to the other two (it only sets the lock point), so a stable fixed 80 MHz source such as the lab's Credix SG-1710 plus an amplifier is enough.
+**The 160 MHz lock offset without a third AOM.** Both EIT arms are shifted by 160 MHz (double pass at 80 MHz) and the SAS light is not, and no SAS feature of the F = 2 line lies 160 MHz from F = 2 → F′ = 1 (the nearest, the F′ = 1/F′ = 2 crossover, is 407 MHz away). Two free solutions:
+- **Lock on F = 2 → F′ = 1 and run the EIT beams 160 MHz off the one-photon resonance (recommended).** EIT in Zeeman Λ depends on the two-photon detuning (the kHz difference of the two AOMs), not on the one-photon detuning, and in a warm cell the Doppler profile is wide: about 530 MHz FWHM at 60 °C (σ ≈ 225 MHz). At 160 MHz off the line centre the absorption is about 78 % of the peak, so the cell needs about 3 °C more for the same optical depth (the Rb density rises about 8 % per °C near 60 °C). Use the −1 order in both AOMs (−160 MHz): F′ = 2 is then 974 MHz away instead of 654 MHz, so its contribution becomes negligible. Expect a slightly asymmetric EIT line at this detuning in a buffer-gas cell; contrast and width are still measured the same way.
+- **Take the SAS light from the control arm after its AOM** (a small pick-off after the double pass), so the lock sees the shifted light and the control sits exactly on the line. The catch: when the control is switched off for storage, the lock light disappears too, so the lock box must hold its output during the off time (microseconds, much shorter than the lock response).
+A third AOM in the SAS arm would also work, but it is not needed and is not in the budget.
 
 **Ask the vendor:** the diffraction efficiency at 795 nm for a 1.0 and a 1.5 mm beam and the RF power for it, the rise time for 1 mm, the input polarization, whether the RF input is DC-blocked, a housing drawing, and the lead time.
 

@@ -45,7 +45,7 @@ Decided on 11 Oct 2026 (applied everywhere):
 Design questions still open (none involves money):
 - Laser: decided. The Eagleyard EYP-DFB-0795-00015-1500-BFY12-0005 (micro-isolator inside) stays, together with the free-space isolator of the equipment list (Thorlabs I795P3D, BOM L06); an alternative laser without an isolator inside was considered and dropped. The vendor lists the BFY12 as about to become obsolete: its replacement must keep the internal isolator, the PM fibre, the FC/APC connector and the 14-pin pin-out (see the isolator answer in section 09).
 - Shield: confirm with the maker the innermost bore (at least 46 mm), the inner length (at least 250 mm), the layer sizes (the guide assumes 46/56/66 mm bores, 1 mm walls) and the two end-cap holes above; the equipment list gives only "O70 x 250 mm, 3 layers".
-- Lock offset: the double-pass AOMs add 160 MHz but the SAS arm has no AOM, so the laser must be locked 160 MHz away from the line the cell sees; the guide does not yet show how.
+- Lock offset (answered 14 Oct 2026, Q&A on the AOM spec): only two AOMs. Lock on F=2->F'=1 and run the EIT beams 160 MHz off the one-photon resonance (-1 orders, cell about 3 °C hotter); alternative: SAS light picked off the control arm after its AOM, with the lock held during storage gaps. The 3D simulator still hides the offset.
 - Cell: stem position and exact size; ITC502 jack gender and TEC polarity (dummy-load test in D3); AOM model, housing size, RF connector and maximum RF power; DC on the RF lines (synthesizer, AOM input).
 - The RF bias and control box (DIY D8) is not an equipment-list row.
 
