@@ -240,6 +240,20 @@ Our planned build meets this from separate parts: Windfreak SynthHD (two channel
 - **Take the SAS light from the control arm after its AOM** (a small pick-off after the double pass), so the lock sees the shifted light and the control sits exactly on the line. The catch: when the control is switched off for storage, the lock light disappears too, so the lock box must hold its output during the off time (microseconds, much shorter than the lock response).
 A third AOM in the SAS arm would also work, but it is not needed and is not in the budget.
 
+**Reading an AOM data sheet or listing: check these, in this order.**
+1. **Wavelength and AR coating.** It must cover 795 nm (for example 780–850 nm, or 700–1100 nm). A 633 nm, 532 nm or 1064 nm part is the wrong coating.
+2. **Centre frequency.** 80 MHz is what our RF chain and frequencies are built around. A 110 MHz part also works, but then both AOMs must be 110 MHz and the beams sit 220 MHz off the line instead of 160 MHz.
+3. **Material and mode.** TeO₂ **longitudinal** mode. Avoid **shear-mode** TeO₂ (slow acoustic wave, about 0.6 mm/µs, so switching is several times slower and the angles are large) and quartz or fused-silica parts (much more RF power).
+4. **Active aperture.** At least 1.5 mm; a 1 mm aperture clips our beam.
+5. **Diffraction efficiency at our wavelength.** At least 80 %. Many listings quote it at 633 or 1064 nm only: ask for the figure near 795 nm.
+6. **RF power for that efficiency.** It must be reachable with our amplifiers (up to about 2 W): about 1–2 W at 795 nm is right; a part that needs 3–4 W is not.
+7. **Rise time.** Usually given per mm of beam: about 150 ns per mm (TeO₂ longitudinal). Under 200 ns for a 1 mm beam.
+8. **RF input.** 50 Ω, SMA, VSWR at most 1.5:1, maximum RF power at least 2 W.
+9. **Size and mounting.** A drawing with the housing, the hole pattern and the height of the aperture above the base.
+10. **The driver.** Buy the AOM alone, or with a driver that accepts an external RF input. A fixed-frequency driver (its own oscillator) cannot be phase-locked to the other arm, so it is no use for the control and the probe.
+
+**Red flags:** efficiency quoted only at another wavelength, no AR coating stated, aperture under 1.5 mm, shear mode, "driver included" with a fixed frequency only, no RF power figure.
+
 **Ask the vendor:** the diffraction efficiency at 795 nm for a 1.0 and a 1.5 mm beam and the RF power for it, the rise time for 1 mm, the input polarization, whether the RF input is DC-blocked, a housing drawing, and the lead time.
 
 ### Q6. What specification do the polarizing beamsplitter cubes (PBS) need?
