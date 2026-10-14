@@ -136,5 +136,23 @@
     return fetch(ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(body) }).then(function (r) { return r.json(); });
   }
 
-  items = load(); save(); bind(); paint();
+  function focusBom() {   /* inventory.html?bom=L03 (from the equipment list): highlight the items that cover that BOM row */
+    var m = /[?&]bom=([A-Za-z0-9]+)/.exec(location.search); if (!m) return;
+    var code = m[1].toUpperCase();
+    var hits = items.filter(function (i) { return String(i.bom || '').toUpperCase().split(/[\s,;]+/).indexOf(code) >= 0; });
+    var st = document.createElement('style');
+    st.textContent = '#invBody tr.inv-hit>td{background:var(--accent-soft,#eef3fa)}#invBody tr.inv-hit>td:first-child{box-shadow:inset 4px 0 0 var(--accent,#1f5fa8)}.inv-hitnote{margin:10px 0;padding:8px 12px;border:1px solid var(--rule,#d0d5dc);border-left:4px solid var(--accent,#1f5fa8);border-radius:6px;background:var(--accent-soft,#eef3fa)}';
+    document.head.appendChild(st);
+    var note = document.createElement('p'); note.className = 'inv-hitnote'; note.setAttribute('role', 'status');
+    note.innerHTML = hits.length ? 'Equipment list row <b>' + esc(code) + '</b> is covered by ' + hits.map(function (i) { return '<b>' + esc(i.id) + '</b> ' + esc(i.name); }).join('; ') + ' (highlighted below). <a href="equipment.html#bom">Back to the equipment list</a>'
+      : 'No item in this list covers equipment row <b>' + esc(code) + '</b> (the list in this browser may have been edited). <a href="equipment.html#bom">Back to the equipment list</a>';
+    var tbl = $('invBody').closest('table'); var anchor = tbl.closest('.scroll-x') || tbl; anchor.parentNode.insertBefore(note, anchor);
+    var first = null;
+    hits.forEach(function (i) { var tr = document.querySelector('#invBody tr[data-id="' + i.id + '"]'); if (tr) { tr.classList.add('inv-hit'); first = first || tr; } });
+    var moved = false; window.addEventListener('wheel', function () { moved = true; }, { once: true }); window.addEventListener('touchmove', function () { moved = true; }, { once: true });
+    function go() { if (moved) return; var el = first || note; window.scrollTo({ top: el.getBoundingClientRect().top + window.pageYOffset - 90 }); }
+    setTimeout(go, 60); window.addEventListener('load', function () { go(); setTimeout(go, 600); setTimeout(go, 1500); });   /* the 3D thumbnails change the row heights while they load */
+  }
+
+  items = load(); save(); bind(); paint(); focusBom();
 })();
