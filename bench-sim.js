@@ -195,6 +195,19 @@
     btn.addEventListener('click', function (e) { if (btn._handled) { btn._handled = false; return; } addComp(kind, K.table.w / 2, K.table.d / 2); });
   }
 
+  /* ---- laser option (laser-option.js): texts for the Yanban RB-795-DFB-BFW; the Eagleyard texts above are the default ---- */
+  var INFO_Y = { laser: 'Distributed-feedback diode laser at the Rb D1 line (≈795 nm) in a 14-pin butterfly, option Yanban RB-795-DFB-BFW: 100–120 mW, linewidth 200 kHz typical, target 794.97 nm, about 1.9 GHz per mA of current tuning. Packaging pending the supplier reply: a PM-fibre version with a built-in isolator (asked) or the listed free-space version (collimated about 1.0 × 0.8 mm beam, no isolator inside). The simulated power is what is left after a half-wave plate and PBS have sent the unneeded power into a dump. A DFB has no piezo: it is tuned by current (fast) and chip temperature (slow) from the laser controller, which the lock box steers.', isolator: 'Optical isolation for a laser without (or with only one) isolator inside, option Yanban: with the PM-fibre version, its built-in isolator plus one free-space Thorlabs I795P3D after the FC/APC collimator; with the free-space version, two I795P3D in series (or one IOT-5-780-VLP tandem) straight after the package window, because its notes warn that a retro-reflected beam can damage the chip. Simulated as one element: 90 % forward, backward light blocked by 4 × 10⁻⁴ (one stage, the worst case). The arrow marks the forward direction.' };
+  var INFO2_Y = {
+    laser: ['Single source for the whole experiment: the control, the probe and the SAS reference are all cut from this one beam. It gives about ten times the power the bench needs.', 'The reference bench uses 10 mW after the attenuator. Turn the rest into a rated beam dump right after the isolation, and treat the open 100 mW beam as Class 3B.', 'Raise the power and watch the control intensity and EIT width in the cell readout. Remove the isolator and read the warning.'],
+    isolator: ['Stops light coming back from the AOM double-passes and cell windows from re-entering the DFB, where it would cause mode hops or, for a free-space chip without an isolator, damage.', 'First element after the laser: PM-fibre version: fibre → collimator → I795P3D; free-space version: two isolator stages straight after the package window. Arrows point away from the laser.', 'Rotate it 180° and the forward beam is blocked.']
+  };
+  var TOUR_Y = { laser: 'A single DFB laser at 795 nm (option Yanban RB-795-DFB-BFW, 100 mW class) is the source for the control, the probe and the lock reference. Both EIT fields share it, so its linewidth is common to both and largely cancels in the two-photon detuning; most of its power is dumped right after the isolation.',
+                 isolator: 'The isolation passes light forward and blocks the reflections from the AOM double-passes and cell windows: with the Yanban, its built-in isolator plus one I795P3D (PM-fibre version) or two isolator stages (free-space version).' };
+  function yan() { return !!(window.LaserOpt && window.LaserOpt.get() === 'yanban'); }
+  function info(k) { return (yan() && INFO_Y[k]) || INFO[k]; }
+  var NAME_Y = { laser: 'DFB laser 795 nm (Yanban RB-795-DFB-BFW, packaging pending)', isolator: 'Isolation for the Yanban (1 or 2 stages)' };
+  function info2(k) { return (yan() && INFO2_Y[k]) || INFO2[k]; }
+
   /* ---------------- inspector ---------------- */
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
   function rng(id, label, min, max, step, val, unit) {
@@ -210,8 +223,9 @@
       return;
     }
     var k = c.kind, p = c.params, h = '';
-    h += '<h4>' + esc(c.nm || P.KINDS[k].name) + '</h4>' + (c.photo ? '<p class="what"><b>In the photo:</b> ' + esc(c.photo) + '</p>' : '') + '<p class="what">' + esc(INFO[k]) + '</p>';
-    if (INFO2[k]) h += '<div class="rich"><b>Role in the Zeeman EIT bench</b><p>' + esc(INFO2[k][0]) + '</p><b>On the reference bench</b><p>' + esc(INFO2[k][1]) + '</p><b>Try this</b><p>' + esc(INFO2[k][2]) + '</p></div>';
+    h += '<h4>' + esc(c.nm || (yan() && NAME_Y[k]) || P.KINDS[k].name) + '</h4>' + (c.photo ? '<p class="what"><b>In the photo:</b> ' + esc(c.photo) + '</p>' : '') + '<p class="what">' + esc(info(k)) + '</p>';
+    var i2 = info2(k);
+    if (i2) h += '<div class="rich"><b>Role in the Zeeman EIT bench</b><p>' + esc(i2[0]) + '</p><b>On the reference bench</b><p>' + esc(i2[1]) + '</p><b>Try this</b><p>' + esc(i2[2]) + '</p></div>';
     h += '<div class="row"><button type="button" class="btn" id="inRotL" aria-label="Rotate counter-clockwise">⟲ Rotate</button><button type="button" class="btn" id="inRotR" aria-label="Rotate clockwise">Rotate ⟳</button><button type="button" class="btn danger" id="inDel">Delete</button></div>';
     if (k === 'laser') h += rng('inPow', 'Power', 1, 40, 0.5, p.power, ' mW');
     if (k === 'hwp' || k === 'qwp' || k === 'glan') h += rng('inAxis', (k === 'glan' ? 'Transmission axis' : 'Fast-axis angle') + ' θ', -90, 90, 0.5, p.axis, '°');
@@ -1014,13 +1028,14 @@
     { kind: 'scope', title: 'Record it', text: 'The oscilloscope has three inputs: CH1 the probe photodiode (BNC), CH2 the lock-box monitor, and EXT TRIG the function-generator sync. This is the real-bench counterpart of the scope panel under the 3D view.' }
   ];
   var tourI = -1;
+  if (window.LaserOpt) window.LaserOpt.on(function () { renderInspector(); if (tourI >= 0) tourShow(tourI); });
   function tourComp(st) { var list = S.layout.components.filter(function (c) { return c.kind === st.kind; }); return list[st.nth || 0] || list[0] || null; }
   function tourShow(i) {
     var box = $('tour'); if (!box) return;
     if (i < 0 || i >= TOUR.length) { tourI = -1; box.hidden = true; return; }
     tourI = i; var st = TOUR[i], c = tourComp(st);
     box.hidden = false;
-    box.innerHTML = '<div class="tour-h"><b>Tour ' + (i + 1) + ' / ' + TOUR.length + '</b><button type="button" class="btn" id="tourX" aria-label="Close tour">×</button></div><h5>' + esc(st.title) + '</h5><p>' + esc(st.text) + (c ? '' : ' <em>(this part is not on your bench right now)</em>') + '</p><div class="row"><button type="button" class="btn" id="tourP"' + (i === 0 ? ' disabled' : '') + '>← Back</button><button type="button" class="btn primary" id="tourN">' + (i === TOUR.length - 1 ? 'Finish' : 'Next →') + '</button></div>';
+    box.innerHTML = '<div class="tour-h"><b>Tour ' + (i + 1) + ' / ' + TOUR.length + '</b><button type="button" class="btn" id="tourX" aria-label="Close tour">×</button></div><h5>' + esc(st.title) + '</h5><p>' + esc((yan() && TOUR_Y[st.kind]) || st.text) + (c ? '' : ' <em>(this part is not on your bench right now)</em>') + '</p><div class="row"><button type="button" class="btn" id="tourP"' + (i === 0 ? ' disabled' : '') + '>← Back</button><button type="button" class="btn primary" id="tourN">' + (i === TOUR.length - 1 ? 'Finish' : 'Next →') + '</button></div>';
     $('tourX').onclick = function () { tourShow(-1); }; $('tourP').onclick = function () { tourShow(tourI - 1); }; $('tourN').onclick = function () { tourShow(tourI + 1); };
     if (c) { S.sel = c.id; syncMeshes(); renderInspector(); focusComp(c.id); }
   }

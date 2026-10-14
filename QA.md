@@ -85,7 +85,7 @@ Sources: [Rogister, Nonlinear dynamics of semiconductor lasers subject to optica
 
 *Equipment shown in the guide: DFB laser module (butterfly), free-space isolator (I795P3D), ITC502 controller, butterfly mount.*
 
-**Yes as a laser, on paper, but not in the version listed. The listed RB-795-DFB-BFW is a free-space butterfly with no isolator inside, so we have asked the vendor for a PM-fibre-pigtailed version with a built-in isolator. Until the answer arrives, the Eagleyard BFY12 stays in our plan.** The figures below are from the vendor's data sheet (sent to us, not online) and the [Alibaba listing](https://www.alibaba.com/product-detail/795nm-DFB-Laser-Diode_1601867664540.html).
+**Yes as a laser, on paper, but not in the version listed. The listed RB-795-DFB-BFW is a free-space butterfly with no isolator inside, so we have asked the vendor for a PM-fibre-pigtailed version with a built-in isolator. Until the answer arrives, the Eagleyard BFY12 stays in our plan.** Use the laser switch at the bottom left of the guide, Equipment, 3D Bench and DIY pages to see them with this laser instead (equipment rows L01, L03, L05, L06, the source card and first build steps, the simulator texts, the D6 divider and the D10 dumps). The figures below are from the vendor's data sheet (sent to us, not online) and the [Alibaba listing](https://www.alibaba.com/product-detail/795nm-DFB-Laser-Diode_1601867664540.html).
 
 | Our need | RB-795-DFB-BFW data sheet | Fit |
 |---|---|---|
