@@ -6,7 +6,7 @@ window.LAB_INVENTORY = {
   items: [
     { id: 'L01', name: 'Polarizing cube beamsplitter, cage-mounted', part: 'CM1-PBS251', brand: 'Thorlabs', qty: '2', model: 'pbs', mp: {}, status: 'no', bom: 'O03',
       specs: '30 mm cage-cube-mounted polarizing beamsplitter cube, 420–680 nm, 8-32 and M4 adapters. Discontinued 21 Sep 2016.',
-      role: 'Wrong band for 795 nm (the BOM needs the 620–1000 nm CM1-PBS252). Usable only with a visible alignment laser.', link: 'https://media.thorlabs.com/globalassets/items/c/cm/cm1/cm1-pbs251/cm1-pbs251.pdf?v=0116105842', loc: '', owner: '', notes: '' },
+      role: 'Wrong band for 795 nm (the BOM needs the 620–1000 nm CCM1-PBS252/M). Usable only with a visible alignment laser.', link: 'https://media.thorlabs.com/globalassets/items/c/cm/cm1/cm1-pbs251/cm1-pbs251.pdf?v=0116105842', loc: '', owner: '', notes: '' },
     { id: 'L02', name: 'Fixed lens mount, internally threaded, Ø1″', part: 'LMR1/M', brand: 'Thorlabs', qty: '12', model: 'lens', mp: {}, status: 'use', bom: 'O10, O14',
       specs: 'Holds Ø1″ optics with a retaining ring, internal threads, M4 (8-32) tap for Ø½″ posts, retaining ring included.',
       role: 'Lens mounts (5) and ND-filter holders (2) for the bench.', link: 'https://www.thorlabs.com/fixed-lens-mounts?pn=LMR1%2FM', loc: '', owner: '', notes: '' },
