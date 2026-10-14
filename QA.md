@@ -251,7 +251,17 @@ A third AOM in the SAS arm would also work, but it is not needed and is not in t
 - **Recombiner.** Control and probe meet here in orthogonal polarizations. Control light in the probe polarization would reach the detector, because the Glan–Taylor cannot remove light that already has the probe polarization. With clean beams arriving (each from an earlier cube), the leak is of order 10⁻⁶ of the control, a few nW against a probe of about 0.5 µW: acceptable.
 - **Pick-off and splitter.** Here the cube only sets a power ratio with the half-wave plate in front, so the extinction does not matter.
 
-**Cheaper options** if the budget is tight: unmounted ½″ cubes (any vendor, 620–1000 nm or 780–800 nm coating, Tp:Ts ≥ 1000:1) on kinematic prism platforms. Check that the faces are AR coated and that the vendor states the extinction for the transmitted beam.
+**Cheaper option: unmounted cubes from a general optics supplier.** The cage housing is most of the cost; the cube itself is a standard part. Search terms: "polarizing beam splitter cube 780nm", "PBS cube 12.7mm 700-900nm", "polarization beamsplitter cube extinction ratio 1000:1". What to ask for:
+- cemented cube polarizing beamsplitter, 12.7 × 12.7 × 12.7 mm (10 mm or 25.4 mm also fine), N-BK7 or equivalent;
+- design wavelength 795 nm (a 780–800 nm laser-line or a 700–900 nm broadband coating);
+- transmitted extinction Tp:Ts ≥ 1000:1 **measured at 795 nm** (listings often quote the best point of a broad band; reject 500:1 parts);
+- Tp ≥ 90 %, Rs ≥ 99 %;
+- AR coating on all four faces at 795 nm (R ≤ 0.5 %); cheap cubes are sometimes uncoated;
+- beam deviation ≤ 5 arcmin, flatness λ/4 at 633 nm, scratch-dig 60-40, clear aperture ≥ 85 %;
+- 7 pieces plus 1 spare, with the measured extinction and transmission at 795 nm.
+For the SAS 50:50 cube ask: non-polarizing cube, 12.7 mm, 700–900 nm, R/T = 50/50 ± 5 % for both s and p at 795 nm.
+
+**Mounting an unmounted cube:** a kinematic prism platform on a post, or a 3D-printed PETG cube holder (the same printer as the D11 cell holder) on a Ø12 mm post at the 100 mm beam height. The holder must hold the cube square to the beam (within a degree) and allow rotation about the vertical axis for alignment; fix the cube with a nylon-tipped screw or a drop of removable adhesive, never by clamping the faces.
 
 Sources: [Thorlabs broadband PBS cubes in 30 mm cage cubes (CCM1-PBS252/M)](https://www.thorlabs.com/broadband-polarizing-beamsplitter-cubes-in-30-mm-cage-cubes) · [Thorlabs CM1-PBS252 (discontinued, replaced by CCM1-PBS252)](https://www.thorlabs.com/item/CM1-PBS252)
 
