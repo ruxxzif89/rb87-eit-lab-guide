@@ -271,6 +271,24 @@ A third AOM in the SAS arm would also work, but it is not needed and is not in t
 
 **Driver: no G&H driver needed.** The "driver" of our bench is the planned RF chain: the two-channel Windfreak SynthHD (one clock for both arms), then per arm a ZASWA-2-50DR+ switch, a ZX76-31R5-PN-S+ attenuator and a ZHL-1-2W-S+ amplifier (about +30 dBm, up to 2 W), with a ZFDC-20-4-S+ coupler to monitor (BOM R01–R06). A G&H fixed-frequency driver has its own oscillator and cannot be phase-locked to the other arm, so it is not suitable for the control and probe pair.
 
+**Has the RF chain (BOM R01–R06) been checked against our AOMs? Yes, part by part; one number was corrected on 14 Oct 2026.**
+
+| Part | What its data sheet says | With our AOMs |
+|---|---|---|
+| Windfreak SynthHD (R01) | two channels, 54 MHz–13.6 GHz, about −50 to +20 dBm, 0.1 Hz steps, phase between the channels settable (one reference) | 80.000 and 79.965 MHz from one clock: the 35 kHz difference cannot drift |
+| ZASWA-2-50DR+ switch (R04) | DC–5 GHz, TTL, ±5 V, insertion loss 1.3 dB typ | gates each arm for the storage pulses |
+| ZX76-31R5-PN-S+ attenuator (R03) | DC–2.4 GHz, 0–31.5 dB in 0.5 dB steps, +3 / −3 V | sets each arm's power; 31.5 dB at every power-up |
+| ZHL-1-2W-S+ amplifier (R02) | 5–500 MHz, gain 29 dB min / 32 dB typ, +33 dBm at 1 dB compression, +24 V 0.9 A, at most +10 dBm in, never an open output | with the synthesizer at +1 dBm: about +30 dBm (1.05 W) at the AOM, about 90 % of the peak efficiency of the 3080-125 at 795 nm (saturation about 1.6 W, estimate); a minimum-gain unit gives +27 dBm: raise the synthesizer by up to 3 dB |
+| ZFDC-20-4-S+ coupler (R06) | 19.5 dB coupling, 2 W | reads the drive level on the scope |
+
+**Corrected:** the DIY page gave the amplifier gain as "29 to 34 dB, typical 33"; the data sheet (REV G) gives 29 dB minimum and 32 dB typical, with no maximum. The synthesizer setting is now +1 dBm (never above +5 dBm), which keeps the AOM drive at about +30 dBm.
+
+**Not yet confirmed, and how to close each:**
+- **The harmonics of the SynthHD at 80 MHz** (near the bottom of its range; no figure found). Look at its output on a spectrum analyser or a fast scope first; if the harmonics are strong, put a low-pass filter with a cut-off near 100 MHz after each channel. The AOM's 25 MHz bandwidth already rejects most of them, but the amplifier would still spend power on them.
+- **The AOM connector:** the 3080-125 has an SMB jack: two SMB-to-SMA cables.
+- **DC on the RF lines:** the switch and the attenuator need 0 V; measure the synthesizer output and the AOM input with the multimeter, and add a DC block if needed.
+- **Supplies:** +24 V at about 1.8 A for the two amplifiers (R05), and ±5 V and ±3 V from the DIY bias box (D8), which is not yet a BOM row.
+
 **Red flags:** efficiency quoted only at another wavelength, no AR coating stated, aperture under 1.5 mm, shear mode, "driver included" with a fixed frequency only, no RF power figure.
 
 **Ask the vendor:** the diffraction efficiency at 795 nm for a 1.0 and a 1.5 mm beam and the RF power for it, the rise time for 1 mm, the input polarization, whether the RF input is DC-blocked, a housing drawing, and the lead time.
