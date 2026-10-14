@@ -12,8 +12,8 @@
     lambdaShift_kHz_per_mG: 1.40,  // m_F=2 <-> m_F=0 splitting = 2 x 0.70 kHz/mG
     pbsLeak: 1e-3,                 // typical PBS extinction (paper Sec. V B)
     glanLeak: 1e-5,                // Glan-Taylor extinction (paper Sec. V B)
-    isolatorBack: 1e-4,            // dual-stage fibre isolator, 40 dB = catalogue minimum (typical 50-55 dB), illustrative
-    isolatorFwd: 0.80,             // about 1 dB isolator loss plus connectors, illustrative
+    isolatorBack: 4e-4,            // free-space Thorlabs I795P3D, at least 34 dB at 795 nm, illustrative
+    isolatorFwd: 0.90,             // I795P3D transmission 90 % at 795 nm, illustrative
     mirrorR: 0.98,                 // illustrative protected-silver reflectance
     pickoffR: 0.04,                // ~4 % Fresnel reflection, uncoated glass
     controlWaist_cm: 0.255,        // 1/e^2 radius 2.55 mm (paper Fig. 10c control beam)
@@ -135,7 +135,7 @@
   /* ---------------- component catalogue ---------------- */
   var KINDS = {
     laser:   { name: 'DFB laser 795 nm (PM-fibre pigtail)', short: 'DFB', cap: 14, rotStep: 90 },
-    isolator:{ name: 'Fibre isolator + collimator (dual-stage, PM)', short: 'ISO', cap: 12, rotStep: 90 },
+    isolator:{ name: 'Collimator + free-space isolator (I795P3D)', short: 'ISO', cap: 12, rotStep: 90 },
     mirror:  { name: 'Mirror', short: 'M', cap: 12, rotStep: 45 },
     pbs:     { name: 'PBS cube', short: 'PBS', cap: 12, rotStep: 90 },
     npbs:    { name: 'NPBS 50:50 cube', short: 'BS', cap: 12, rotStep: 90 },
@@ -604,7 +604,7 @@
   var LAYOUT_SCALE = 2.0;
   // Painted zones on the table, in the compact layout's coordinates (scaled on the way out). rects: [x0, z0, x1, z1]; lab: [x, z, align] places the name chip: 'tl' = hangs below-right of the point, 'bl' = sits above-right of it, 'l' / 'r' = beside it.
   var ZONES = [
-    { id: 'source', name: 'SOURCE & MASTER AXIS', sub: 'fibre laser, fibre isolator, mirrors, pick-off, splitter', color: '#f29a38', lab: [20, 266, 'tl'], rects: [[20, 105, 325, 262], [325, 212, 545, 300]] },
+    { id: 'source', name: 'SOURCE & MASTER AXIS', sub: 'fibre laser, collimator, isolator, mirrors, pick-off, splitter', color: '#f29a38', lab: [20, 266, 'tl'], rects: [[20, 105, 325, 262], [325, 212, 545, 300]] },
     { id: 'sas', name: 'SAS REFERENCE (LASER LOCK)', sub: 'pump + probe through the Rb reference cell', color: '#b58cf0', lab: [806, 152, 'r'], rects: [[330, 94, 800, 210]] },
     { id: 'control', name: 'CONTROL ARM', sub: 'double-pass AOM, beam expander', color: '#ff6b6b', lab: [946, 275, 'r'], rects: [[548, 212, 940, 338], [612, 338, 668, 480]] },
     { id: 'probe', name: 'PROBE ARM', sub: 'double-pass AOM, attenuator', color: '#5aa9f2', lab: [219, 441, 'l'], rects: [[225, 335, 610, 548]] },

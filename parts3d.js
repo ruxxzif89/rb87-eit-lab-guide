@@ -152,12 +152,10 @@
       g.add(cy(4.6, 14, M.green, -14, 0, 0)); g.add(cy(5.4, 3, M.knob, -9, 0, 0)); g.add(cy(1.4, 38, M.yellow, -34, 0, 0));
       for (var i = 0; i < 12; i++) { var a = i * Math.PI / 6; g.add(bx(1.4, 3, 1.4, M.knob, 8, Math.sin(a) * 10.6, Math.cos(a) * 10.6)); }
     },
-    isolator: function (g) { // fibre-inline dual-stage isolator (PM fibre, FC/APC) followed by the collimator, as in the simulator
+    isolator: function (g) { // free-space Faraday isolator (Thorlabs I795P3D: black input end, gold output end), as in the simulator
       var M = mats(); stand(g);
-      g.add(cy(1.5, 14, M.yellow, -33, 0, 0, 'x', 8)); g.add(cy(3.6, 9, M.green, -24, 0, 0, 'x', 14)); g.add(cy(4.8, 3, M.knob, -18, 0, 0, 'x', 14));
-      g.add(cy(5.6, 11, M.accent, -10, 0, 0, 'x', 20)); g.add(cy(6.2, 2, M.black, -3.5, 0, 0, 'x', 20)); g.add(cy(5.6, 11, M.accent, 3, 0, 0, 'x', 20));
-      g.add(cy(4.8, 3, M.knob, 10, 0, 0, 'x', 14)); g.add(cy(8, 18, M.black, 20, 0, 0, 'x', 20)); g.add(cy(4.2, 4, M.brass, 31, 0, 0, 'x', 14)); g.add(cy(3.2, 1.2, M.glass, 33.4, 0, 0, 'x', 14));
-      var cone = new T.Mesh(geo('cone', function () { return new T.ConeGeometry(3.4, 9, 12); }), M.laser); cone.rotation.z = -Math.PI / 2; cone.position.set(-2, 10, 0); g.add(cone); g.add(bx(12, 1.8, 1.8, M.laser, -10, 10, 0));
+      g.add(cy(10, 20, M.black, 0, 0, 0, 'x', 24)); g.add(cy(10.2, 3, M.brass, 11.5, 0, 0, 'x', 24)); g.add(cy(3, 1.2, M.glass, 13.6, 0, 0, 'x', 14)); g.add(cy(3, 1.2, M.glass, -10.6, 0, 0, 'x', 14));
+      var cone = new T.Mesh(geo('cone', function () { return new T.ConeGeometry(3.4, 9, 12); }), M.laser); cone.rotation.z = -Math.PI / 2; cone.position.set(4, 14, 0); g.add(cone); g.add(bx(12, 1.8, 1.8, M.laser, -4, 14, 0));
     },
     fibiso: function (g) { // the isolator alone: a short steel tube between two FC/APC boots, two Faraday stages, fibre in and out
       var M = mats(); stand(g);

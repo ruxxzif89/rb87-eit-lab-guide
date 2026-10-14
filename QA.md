@@ -19,7 +19,7 @@ Working notes from the project, written 9 Oct 2026. Numbers come from datasheets
 | Lock range | mode-hop-free over more than 10 GHz; current tuning about 1.4 GHz/mA | yes |
 | Single mode | side-mode suppression 30 dB minimum, 45 typical | yes |
 | Clean polarization | 20 dB extinction, PM fibre, FC/APC narrow key | yes |
-| Protection | built-in micro-isolator (no figure given) plus our fibre isolator | yes |
+| Protection | built-in micro-isolator (no figure given) plus our free-space isolator (Thorlabs I795P3D) | yes |
 
 **What keeps it from perfect**
 - Thin current margin: 15 mW needs 160 mA and the absolute maximum is 170 mA. Set the controller limit to 165–170 mA and run near 10–12 mW for lifetime.
@@ -39,7 +39,7 @@ Working notes from the project, written 9 Oct 2026. Numbers come from datasheets
 
 More control power only broadens the line: the EIT width grows by about 4.5 kHz per extra mW/cm². The DeRose experiment ran with about 7 mW out of its fibre.
 
-**Where the light goes** (10 mW laser): fibre isolator and connectors ×0.8, 5 % pick-off to the SAS, about 88 % to the control arm, then the double-pass AOM and optics. With realistic AOMs (about 70 % per pass) the control at the cell is about 3 mW, so even a 5 mW laser gives about 1.6 mW. The simulator is pessimistic (35 % per pass): 10 mW gives 0.75 mW and 15 mW gives about 1.1 mW, still enough.
+**Where the light goes** (10 mW laser): free-space isolator ×0.9 (Thorlabs I795P3D, 90 % transmission), 5 % pick-off to the SAS, about 88 % to the control arm, then the double-pass AOM and optics. With realistic AOMs (about 70 % per pass) the control at the cell is about 3.4 mW, so even a 5 mW laser gives about 1.8 mW. The simulator is pessimistic (35 % per pass): 10 mW gives about 0.8 mW and 15 mW about 1.2 mW, still enough.
 
 **So:** minimum about 5 mW, comfortable 10–15 mW, not needed 20–40 mW. Measure the double-pass AOM efficiency (the biggest unknown) and the power at the cell with the power meter; turn the control down with the half-wave plate or the AOM RF level if it exceeds about 1 mW.
 
@@ -51,33 +51,33 @@ Sources: [Eagleyard datasheet](https://global-topticaeagleyard.b-cdn.net/wp-cont
 
 *Added 10 Oct 2026*
 
-*Equipment shown in the guide: DFB laser module, dual-stage fibre isolator, fibre collimator, double-pass AOM, quarter-wave plate, polarizing beam splitter, Rb vapour cell.*
+*Equipment shown in the guide: DFB laser module, fibre collimator, free-space isolator (I795P3D), double-pass AOM, quarter-wave plate, polarizing beam splitter, Rb vapour cell.*
 
-**Yes, and we keep it. Free space does not remove the need for an isolator: the returning light comes from the free-space part. Our laser has a micro-isolator inside, and the dual-stage fibre isolator in our list (BOM L06) is the second stage. For a laser with no isolator inside it would be mandatory. Fibre or free space only decides which kind of isolator you use.**
+**Yes. Free space does not remove the need for an isolator: the returning light comes from the free-space part. Our laser has a micro-isolator inside, and a free-space Faraday isolator right after the collimator (Thorlabs I795P3D, BOM L06) is the second stage. For a laser with no isolator inside, a second stage would be mandatory.**
 
 **Why a DFB laser needs one**
 - **It reacts to very little returned light.** In the classic measurements on a DFB laser (Tkach and Chraplyvy, 1986, summarised in [section 2.6 of F. Rogister's thesis](https://arxiv.org/abs/0909.4449)) mode hopping began near −70 dB of returned power, and from −45 dB to −10 dB the line broke up (coherence collapse, 100 MHz to 25 GHz wide). Those figures belong to that laser and are only a guide for ours, but the lesson holds: the line stays as narrow as the data sheet says (about 1 MHz) only if almost nothing comes back.
-- **Our own bench sends light back.** Each double-pass AOM arm ends in a cat's-eye mirror that returns the beam exactly along itself. The wave plate and the PBS cube are meant to steer the returning beam out sideways, but no wave plate is perfect: a retardance error of 2° (a plate designed for 780 nm and used at 795 nm is about 1.7° off) or a plate set 1° off its axis lets about 10⁻³ of the returning light (−29 dB) pass the PBS and travel back towards the laser. With the AOM losses and the share of power in the arm, that is about −33 dB at the laser, far inside the coherence-collapse range if nothing blocks it. The 3D simulator uses perfect wave plates, so it shows almost nothing returning (below −80 dB) and hides this.
+- **Our own bench sends light back.** Each double-pass AOM arm ends in a cat's-eye mirror that returns the beam exactly along itself. The wave plate and the PBS cube are meant to steer the returning beam out sideways, but no wave plate is perfect: a retardance error of 2° (a plate designed for 780 nm and used at 795 nm is about 1.7° off) or a plate set 1° off its axis lets about 10⁻³ of the returning light (−29 dB) pass the PBS and travel back towards the laser. With the AOM losses and the share of power in the arm, that is about −33 dB at the laser, far inside the coherence-collapse range if nothing blocks it. The 3D simulator uses perfect wave plates, so it shows almost nothing returning and hides this.
 - **Flat surfaces add more, and alignment makes it worse.** An uncoated quartz window returns about 3.4 % per surface (−15 dB), a bare silicon detector about a third of the light, an AR-coated optic about 0.25 %. The collimator and single-mode fibre accept only light coming back within about 0.3 mrad (0.02°) of the beam, so a surface has to be square to the beam within about 0.01° to count. That is rare by accident, but it is exactly what happens when a beam is aligned by watching its back-reflection, or when a mirror or card is left square to the beam.
 
 | What protects the laser chip | Returned light at the chip (about −33 dB with nothing in front) | Against the −70 dB and −45 dB marks |
 |---|---|---|
 | nothing | −33 dB | inside coherence collapse |
 | the micro-isolator inside the Eagleyard alone (one stage, typically about 30 dB; its data sheet gives no figure) | about −63 dB | in the mode-hopping band |
-| the fibre isolator alone (dual stage: 40 dB catalogue minimum, 50–55 dB typical) | −73 dB to −88 dB | just clear to clear |
-| both, as in our design | about −100 dB or better | far below |
+| the Thorlabs I795P3D alone (at least 34 dB at 795 nm) | about −67 dB or better | at the edge of the mode-hopping band |
+| both, as in our design | about −97 dB or better | far below |
 
-These are estimates (about ±10 dB), not measurements. They show the order of magnitude and why the micro-isolator alone is marginal.
+These are estimates (about ±10 dB), not measurements. They show the order of magnitude and why either stage alone is marginal.
 
 **What we do**
-- **Keep the dual-stage fibre isolator (BOM L06) as the first part after the laser's fibre:** PM fibre, FC/APC at both ends, key on the slow axis, nothing between the laser's fibre and the isolator. It covers everything downstream, needs no alignment and costs about 1 dB.
-- **A free-space isolator is the alternative**, placed after the collimator: a Faraday isolator with its input polarizer along the fibre's slow axis. One stage gives about 30 to 40 dB, so by the table you would need two in series to match the fibre part. Isolators sold for 780 nm are often tunable by a few tens of nanometres: check that 794.98 nm is inside the range of the model you buy.
-- **Check the replacement of the laser.** The vendor lists the Eagleyard part in our list as about to become obsolete. If its replacement has no isolator inside, the fibre isolator becomes the only stage, and then its isolation matters even more.
+- **Put the I795P3D right after the FC/APC collimator.** Thorlabs lists it as a fixed narrowband isolator centred at 795 nm (operating range 775–815 nm), isolation at least 34 dB and transmission 90 % at the centre wavelength, beams up to Ø2.7 mm (our ~1.5 mm beam fits), 0.7 W maximum. Set its input polarizer along the slow axis of the laser fibre, turn it for the highest forward power, and dump both rejected-beam ports.
+- **Keep the short gap between the collimator and the isolator clear:** nothing in between. The angled FC/APC fibre end and the AR-coated collimator return very little themselves.
+- **Check the replacement of the laser.** The vendor lists the Eagleyard part in our list as about to become obsolete. If its replacement has no isolator inside, the I795P3D alone gives only about −67 dB: then add a second stage (a second isolator in series, or a dual-stage isolator).
 - **Habits that cost nothing:** tilt the cell and the detector by a degree or two, dump every unused port, set each double-pass wave plate for the least light in its leak port (not by the scale on the mount), and never leave a mirror or card square to the beam while the laser is on.
 
-**Verdict:** keep both the micro-isolator inside the laser and the dual-stage fibre isolator. The fibre isolator is the simplest way to get the second stage. Its cost is small next to the laser it protects, and a feedback fault shows up as a lock that drifts or a line that is wider than the data sheet says, which is slow to trace afterwards.
+**Verdict:** keep both the micro-isolator inside the laser and the free-space I795P3D. One free-space stage is enough while the laser has its own isolator. A feedback fault shows up as a lock that drifts or a line that is wider than the data sheet says, which is slow to trace afterwards, so the isolator goes in before the first alignment.
 
-Sources: [Rogister, Nonlinear dynamics of semiconductor lasers subject to optical feedback (thesis, section 2.6)](https://arxiv.org/abs/0909.4449) · [Eagleyard data sheet EYP-DFB-0795-00015-1500-BFY12-0005](https://global-topticaeagleyard.b-cdn.net/wp-content/uploads/data_sheets/EYP-DFB-0795-00015-1500-BFY12-0005.pdf) (micro-isolator inside, no isolation figure given)
+Sources: [Rogister, Nonlinear dynamics of semiconductor lasers subject to optical feedback (thesis, section 2.6)](https://arxiv.org/abs/0909.4449) · [Eagleyard data sheet EYP-DFB-0795-00015-1500-BFY12-0005](https://global-topticaeagleyard.b-cdn.net/wp-content/uploads/data_sheets/EYP-DFB-0795-00015-1500-BFY12-0005.pdf) (micro-isolator inside, no isolation figure given) · [Thorlabs I795P3D](https://www.thorlabs.com/item/I795P3D) and [Thorlabs NIR free-space isolators (specification table)](https://www.thorlabs.com/nir-free-space-isolators-690---1080-nm)
 
 ### Q3. DFB or ECDL? Why not an ECDL, why do the reference papers use one, and is a narrow linewidth crucial?
 

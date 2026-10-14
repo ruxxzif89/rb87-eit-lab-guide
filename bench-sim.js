@@ -20,8 +20,8 @@
   var idn = 1000;
 
   var INFO = {
-    laser: 'PM-fibre-pigtailed distributed-feedback diode laser at the Rb D1 line (≈795 nm) with a micro-isolator inside the module (planned: Eagleyard EYP-DFB-0795-00015-1500-BFY12-0005, up to 15 mW). The collimator is not on the laser: it follows the fibre isolator. It emits a horizontally polarized single-frequency beam. A DFB has no piezo: its frequency is tuned by injection current (fast) and chip temperature (slow), both set by the laser controller, which the lock box steers. The ~1–2 MHz DFB linewidth (paper) is common to probe and control, so it largely cancels in the two-photon detuning.',
-    isolator: 'Fibre-based dual-stage Faraday isolator with PM fibre and FC/APC connectors, followed by the FC/APC collimator (planned: a 780–1100 nm TGG dual-stage isolator such as DK Photonics, or Agiltron PM780; confirm 795 nm and PM-key alignment with the vendor). Catalogue figures: isolation at least 40 dB (typically 50–55 dB), insertion loss about 1–1.5 dB. Simulated: 80 % transmission, output linear at 45° (the PM slow axis fixes the polarization: clock the connector or use the first half-wave plate to get it), backward light blocked by 10⁻⁴ (40 dB). The arrow marks the forward direction.',
+    laser: 'PM-fibre-pigtailed distributed-feedback diode laser at the Rb D1 line (≈795 nm) with a micro-isolator inside the module (planned: Eagleyard EYP-DFB-0795-00015-1500-BFY12-0005, up to 15 mW). The collimator is not on the laser: it plugs onto the fibre, and the free-space isolator follows it. It emits a horizontally polarized single-frequency beam. A DFB has no piezo: its frequency is tuned by injection current (fast) and chip temperature (slow), both set by the laser controller, which the lock box steers. The ~1–2 MHz DFB linewidth (paper) is common to probe and control, so it largely cancels in the two-photon detuning.',
+    isolator: 'FC/APC fibre collimator followed by a free-space Faraday isolator (planned: Thorlabs I795P3D, centre 795 nm, operating range 775–815 nm, isolation at least 34 dB, transmission 90 %, beam up to Ø2.7 mm). Its input polarizer is set along the slow axis of the laser fibre. Simulated: 90 % transmission, output linear at 45° (clock the fibre connector or use the first half-wave plate to set it), backward light blocked by 4 × 10⁻⁴ (34 dB). Together with the micro-isolator inside the laser, the returned light at the chip is estimated at about −95 dB or better. The arrow marks the forward direction.',
     mirror: 'Protected-silver mirror (simulated R = 98 %). Reflects by the law of reflection. Circular handedness flips on reflection. Rotate in 45° steps.',
     pbs: 'Polarizing beamsplitter cube. It transmits horizontal (p) light and reflects vertical (s) light through 90°, and mixed polarization splits by projection. Simulated extinction 10⁻³ in the transmitted port (paper: typical PBS ~10³). The drawn diagonal is the reflecting surface.',
     npbs: 'Non-polarizing 50:50 cube. Splits power equally whatever the polarization.',
@@ -52,7 +52,7 @@
   };
   var INFO2 = {
     laser: ['Single source for the whole experiment: the control, the probe and the SAS reference are all cut from this one beam.', 'The reference bench uses 10 mW. The practical limit is the AOM efficiencies and the control intensity you want in the cell (about 1–6 mW/cm² in the paper).', 'Raise the power and watch the control intensity and EIT width in the cell readout. Remove the isolator and read the warning.'],
-    isolator: ['Stops light coming back from the AOM double-passes and cell windows from re-entering the DFB, where it would cause mode hops and break the lock. It adds to the micro-isolator already inside the laser module.', 'First element after the laser: laser fibre → isolator → collimator, arrow pointing away from the laser.', 'Rotate it 180° and the forward beam is blocked.'],
+    isolator: ['Stops light coming back from the AOM double-passes and cell windows from re-entering the DFB, where it would cause mode hops and break the lock. It adds to the micro-isolator already inside the laser module.', 'First element after the laser: laser fibre → collimator → free-space isolator, arrow pointing away from the laser.', 'Rotate it 180° and the forward beam is blocked.'],
     mirror: ['Folds the beam to fit the table. Each mirror adds two adjustment axes, which is why steering is done with a pair.', 'Eleven on the bench: two set the master axis, three fold the SAS arm, two fold the control arm, two fold the probe arm, and two are the retro mirrors of the double-passes.', 'Rotate in 45° steps: the beam turns 90° and everything downstream loses it. Rotating a retro mirror breaks that double pass: the AOM output disappears.'],
     pbs: ['Seven on the bench: the SAS pick-off, the control/probe splitter, the two SAS injection/extraction cubes, the two double-pass separators and the recombiner.', 'Horizontal light transmits, vertical turns 90°. Extinction 10³ is typical, so ~0.1 % leaks into the wrong port; the leak is caught by a dump.', 'Rotate a separator and see the AOM output stop leaving through the right port.'],
     npbs: ['Divides the SAS beam into a strong pump and a weak probe regardless of polarization.', 'One on the bench, at the start of the SAS arm.', 'Swap it for a PBS and the split now depends on polarization.'],
@@ -92,7 +92,7 @@
     ['Electronics', ['fgen', 'rfgen', 'rfatt', 'rfamp', 'csrc', 'tctrl', 'psu', 'scope', 'pwrmeter']]
   ];
   var OBJ_A = [
-    ['Laser protected by an isolator', 'Put the fibre isolator directly after the laser, arrow pointing away from the laser, so the first thing the beam meets is the isolator going forward.'],
+    ['Laser protected by an isolator', 'Put the collimator and isolator directly after the laser, arrow pointing away from the laser, so the first thing the beam meets is the isolator going forward.'],
     ['SAS signal and closed lock loop', 'Pick off a few percent (λ/2 + PBS, or a glass pick-off) into the SAS module; place a lock box and a laser controller (cables connect SAS → lock box → controller → DFB automatically); press “Lock laser” with a positive slope sign and moderate gain.'],
     ['Beam split into control & probe at a PBS', 'After the pick-off, a λ/2 then a PBS splits the beam. Both outputs must eventually reach the cell.'],
     ['Each arm passes its own AOM with RF on', 'Build a double pass in each arm: PBS → AOM → λ/4 (45°) → lens → retro mirror on the deflected +1 order, with a dump for the 0th order. The returning beam, rotated by 90°, leaves through the PBS. (Or set the AOM to the compact double-pass module.)'],
@@ -699,11 +699,11 @@
         g.add(bx(8, 3, 6, M.accent, -34, -13, 0));
         var led = sp(1.9, M.on, -38, 13, 17); g.add(led); break;
       case 'isolator':
-        // fibre-inline dual-stage isolator (two Faraday stages in one tube, FC/APC boots) followed by the FC/APC collimator
-        g.add(cy(1.5, 14, M.fibre, -33, 0, 0, 'x', 8)); g.add(cy(3.6, 9, M.fcboot, -24, 0, 0, 'x', 14)); g.add(cy(4.8, 3, M.knob, -18, 0, 0, 'x', 14));
-        g.add(cy(5.6, 11, M.accent, -10, 0, 0, 'x', 20)); g.add(cy(6.2, 2, M.black, -3.5, 0, 0, 'x', 20)); g.add(cy(5.6, 11, M.accent, 3, 0, 0, 'x', 20));
-        g.add(cy(4.8, 3, M.knob, 10, 0, 0, 'x', 14)); g.add(cy(8, 18, M.black, 20, 0, 0, 'x', 20)); g.add(cy(4.2, 4, M.brass, 31, 0, 0, 'x', 14)); g.add(cy(3.2, 1.2, M.glass, 33.4, 0, 0, 'x', 14));
-        var cone = new THREE.Mesh(geo('cone', function () { return new THREE.ConeGeometry(3.4, 9, 12); }), M.laser); cone.rotation.z = -Math.PI / 2; cone.position.set(-2, 10, 0); g.add(cone); g.add(bx(12, 1.8, 1.8, M.laser, -10, 10, 0)); break;
+        // PM fibre with FC/APC boot into the collimator, then the free-space Faraday isolator (I795P3D: black input end, gold output end)
+        g.add(cy(1.5, 12, M.fibre, -38, 0, 0, 'x', 8)); g.add(cy(3.6, 8, M.fcboot, -29, 0, 0, 'x', 14)); g.add(cy(4.8, 3, M.knob, -23.5, 0, 0, 'x', 14));
+        g.add(cy(4.6, 10, M.black, -17, 0, 0, 'x', 16)); g.add(cy(3.2, 1.2, M.glass, -11.6, 0, 0, 'x', 14));
+        g.add(cy(10, 20, M.black, 2, 0, 0, 'x', 24)); g.add(cy(10.2, 3, M.brass, 13.5, 0, 0, 'x', 24)); g.add(cy(3, 1.2, M.glass, 15.6, 0, 0, 'x', 14)); g.add(cy(3, 1.2, M.glass, -8.6, 0, 0, 'x', 14));
+        var cone = new THREE.Mesh(geo('cone', function () { return new THREE.ConeGeometry(3.4, 9, 12); }), M.laser); cone.rotation.z = -Math.PI / 2; cone.position.set(6, 14, 0); g.add(cone); g.add(bx(12, 1.8, 1.8, M.laser, -2, 14, 0)); break;
       case 'mirror':
         g.add(bx(8, 30, 30, M.black, -6, 0, 0)); g.add(cy(13.5, 3, M.mirror, 0, 0, 0)); g.add(cy(14.5, 2, M.alu, -2.5, 0, 0));
         g.add(cy(2.6, 9, M.knob, -12, 11, 10)); g.add(cy(2.6, 9, M.knob, -12, -11, 10)); g.add(cy(2.6, 9, M.knob, -12, 11, -10)); break;
@@ -985,7 +985,7 @@
   /* ---- guided tour ---- */
   var TOUR = [
     { kind: 'laser', title: 'One laser feeds everything', text: 'A single PM-fibre-pigtailed DFB laser at 795 nm (Rb D1) is the source for the control, the probe and the lock reference. Because both EIT fields share this laser, its ~MHz linewidth is common to both and largely cancels in the two-photon detuning.' },
-    { kind: 'isolator', title: 'Protect the diode', text: 'The fibre Faraday isolator (dual-stage) passes light forward and blocks the reflections coming back from the AOM double-passes and cell windows. Without it the DFB can mode-hop and the lock fail.' },
+    { kind: 'isolator', title: 'Protect the diode', text: 'The free-space Faraday isolator after the collimator passes light forward and blocks the reflections coming back from the AOM double-passes and cell windows. Without it the DFB can mode-hop and the lock fail.' },
     { kind: 'mirror', nth: 0, title: 'Set the master axis', text: 'Two kinematic steering mirrors and two irises define one repeatable beam axis. Each mirror has two adjustment axes; a small tilt θ moves the beam by 2θ. Centre the beam on both irises before adding any other optic.' },
     { kind: 'pbs', nth: 0, title: 'Pick off the SAS reference', text: 'The first half-wave plate turns the polarization by a small angle, and this PBS reflects the vertical part (about 5 % of the light) north to the SAS arm. The rest, horizontally polarized, carries on along the master axis.' },
     { kind: 'npbs', nth: 0, title: 'SAS: pump and probe', text: 'After one mirror, a non-polarizing cube divides the reference light into a stronger pump (reflected) and a weaker probe (transmitted, further attenuated by an ND filter). A half-wave plate turns the probe’s polarization to horizontal.' },

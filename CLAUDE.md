@@ -38,11 +38,12 @@ Decided on 11 Oct 2026 (applied everywhere):
 - **Shield end caps:** a Ø14 mm beam hole on the axis and a Ø12 mm cable hole 16 mm off the axis, lined up in all three caps at both ends. Cables and the degaussing bundle never use the beam hole. The former's 0° slot and the cable-end ring notch point up, towards the cable holes; the spacer-ring recesses (for the flat degaussing bundle) are 90° from the notch.
 - **Printed parts (no purchase, status "print" in the equipment list):** SAS cell holder S02 (D11) and the shield cradle M06 (D1, axis at 100 mm). D10 covers are 160 mm high inside.
 - **Heater current limits:** I TEC LIM 0.50 A on the open bench, 0.33 A inside the closed shield (a runaway stays below about 85 °C).
-- **Laser:** Eagleyard BFY12 with the dual-stage fibre isolator (L06); the alternative laser was dropped.
+- **Laser:** Eagleyard BFY12; the alternative laser was dropped.
+- **Isolator (14 Oct 2026):** free-space Thorlabs I795P3D (795 nm, at least 34 dB, 90 %) right after the FC/APC collimator (BOM L06); the dual-stage fibre isolator was only a discussion and is no longer in the plan.
 - **Spain-style bench (from the YouTube videos):** the EIT cell is labelled TRT-Rb/Ne-10T-20x75, maker Triad Technology Inc. (given by the owner). "TRT" is not in Triad's public catalogue (TT-RB-75-V-x etc.); read as natural Rb (Triad's plain RB), neon 10 Torr, 20 x 75 mm, probably custom. The two oscilloscopes are Rigol DS1102 (100 MHz, 2 channels). Written on qs-bench.html, in qs-layout.js (v4) and in the Q&A; our EIT cell stays C01 (Ø25 x 25 mm, enriched 87Rb, 10 Torr Ne).
 
 Design questions still open (none involves money):
-- Laser: decided. The Eagleyard EYP-DFB-0795-00015-1500-BFY12-0005 (micro-isolator inside) stays, together with the dual-stage fibre isolator of the equipment list (BOM L06); an alternative laser without an isolator inside was considered and dropped. The vendor lists the BFY12 as about to become obsolete: its replacement must keep the internal isolator, the PM fibre, the FC/APC connector and the 14-pin pin-out (see the isolator answer in section 09).
+- Laser: decided. The Eagleyard EYP-DFB-0795-00015-1500-BFY12-0005 (micro-isolator inside) stays, together with the free-space isolator of the equipment list (Thorlabs I795P3D, BOM L06); an alternative laser without an isolator inside was considered and dropped. The vendor lists the BFY12 as about to become obsolete: its replacement must keep the internal isolator, the PM fibre, the FC/APC connector and the 14-pin pin-out (see the isolator answer in section 09).
 - Shield: confirm with the maker the innermost bore (at least 46 mm), the inner length (at least 250 mm), the layer sizes (the guide assumes 46/56/66 mm bores, 1 mm walls) and the two end-cap holes above; the equipment list gives only "O70 x 250 mm, 3 layers".
 - Lock offset: the double-pass AOMs add 160 MHz but the SAS arm has no AOM, so the laser must be locked 160 MHz away from the line the cell sees; the guide does not yet show how.
 - Cell: stem position and exact size; ITC502 jack gender and TEC polarity (dummy-load test in D3); AOM model, housing size, RF connector and maximum RF power; DC on the RF lines (synthesizer, AOM input).
@@ -57,7 +58,7 @@ How to continue on another machine:
 
 ## Resuming on another machine
 
-The folder is on Google Drive and also a git repo (public parts via GitHub). One machine at a time: commit and push before leaving, let Drive finish syncing, then `git pull` on the next machine. Needed: git, node, python3 (`pip install openpyxl` for the xlsx), a static server (`python3 -m http.server 4180 --bind 127.0.0.1`). Bump the `?v=` query on script tags when editing `eitphys.js`, `bench-sim.js`, `parts3d.js` or `inventory*.js` (current: eitphys 7, bench-sim 18, parts3d 13, inventory-data 14, qs-layout 4, diy-d1-sim 4). Before every push check `git ls-files | grep -c private` prints 0. Private notes for the owner's sessions are in the git-ignored `CLAUDE.local.md` and `private/`.
+The folder is on Google Drive and also a git repo (public parts via GitHub). One machine at a time: commit and push before leaving, let Drive finish syncing, then `git pull` on the next machine. Needed: git, node, python3 (`pip install openpyxl` for the xlsx), a static server (`python3 -m http.server 4180 --bind 127.0.0.1`). Bump the `?v=` query on script tags when editing `eitphys.js`, `bench-sim.js`, `parts3d.js` or `inventory*.js` (current: eitphys 8, bench-sim 19, parts3d 14, inventory-data 15, qs-layout 4, diy-d1-sim 4). Before every push check `git ls-files | grep -c private` prints 0. Private notes for the owner's sessions are in the git-ignored `CLAUDE.local.md` and `private/`.
 
 ## BOM pipeline (private)
 

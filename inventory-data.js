@@ -65,7 +65,7 @@ window.LAB_INVENTORY = {
       role: 'Tilt stage for the Bragg angle of one AOM.', link: 'https://www.dougdeals.com/melles-griot-07-gon-504-goniometer-translation-stage-40x40mm-20-x-12-arcmin/', loc: '', owner: '', notes: '' },
     { id: 'L21', name: 'FiberPort collimator / alignment mount', part: 'PAF2-5B', brand: 'Thorlabs', qty: '', model: 'fibcol', mp: {}, status: 'use', bom: 'L05',
       specs: 'FC/APC and FC/PC, polarization maintaining, effective focal length 4.6 mm, NA 0.53, clear aperture 4.9 mm, output waist Ø1 mm (1/e²), divergence 1.087 mrad, mode field diameter 5 µm, lens H-LAK54, length 17.7 mm.',
-      role: 'Laser collimator after the fibre isolator: a ~1 mm beam suits the AOM aperture.', link: 'https://www.thorlabs.com/item/paf2-5b', loc: '', owner: '', notes: '' },
+      role: 'Laser collimator on the laser fibre, before the free-space isolator: a ~1 mm beam suits the AOM aperture.', link: 'https://www.thorlabs.com/item/paf2-5b', loc: '', owner: '', notes: '' },
     { id: 'L22', name: 'Fibre-to-fibre coupler bench (FiberBench)', part: 'FBP-B-FC', brand: 'Thorlabs', qty: '', model: 'fiberbench', mp: {}, status: 'check', bom: '',
       specs: '600–1050 nm (B coating), FC/PC and FC/APC, two FiberPort apertures with AR-coated aspheric lenses, clear cover, 1/4″-20 (M6) mounting slots, open deck for filters, polarizers or beamsplitters.',
       role: 'Optional: a free-space gap in the fibre where a filter or polarizer can be inserted.', link: '', loc: '', owner: '', notes: '' },
