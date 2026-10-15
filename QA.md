@@ -347,6 +347,7 @@ A third AOM in the SAS arm would also work, but it is not needed and is not in t
 - AR coating on all four faces at 795 nm (R ≤ 0.5 %); cheap cubes are sometimes uncoated;
 - beam deviation ≤ 5 arcmin, flatness λ/4 at 633 nm, scratch-dig 60-40, clear aperture ≥ 85 %;
 - 7 pieces plus 1 spare, with the measured extinction and transmission at 795 nm.
+**K9 or N-BK7? Either.** K9 (CDGM H-K9L) is the Chinese equivalent of Schott N-BK7: the same borosilicate crown glass, refractive index about 1.517 and Abbe number about 64, fully transparent at 795 nm. At our milliwatt powers absorption does not matter. What decides the cube is the coating (made for 795 nm), the extinction measured at 795 nm, and a well-annealed, bubble-free glass (stress in the glass is birefringent and lowers the extinction): ask the supplier for the glass grade or the measured extinction, not for N-BK7 by name. The same holds for the non-polarizing cube.
 **Watch the design wavelength.** A supplier sheet that says "@1064 nm" (or 532, 633 nm) describes a cube whose polarizing and AR coatings are made for that line. Its geometry figures (±0.2 mm, λ/10, beam deviation under 3 arcmin) may be excellent, but at 795 nm the extinction and transmission of a laser-line coating fall off and the faces reflect more: ask for the same cube coated for 795 nm (or 780 nm, or 700–900 nm broadband) with the extinction measured at 795 nm.
 For the SAS 50:50 cube ask: non-polarizing cube, 12.7 mm, 700–900 nm, R/T = 50/50 ± 5 % for both s and p at 795 nm.
 
