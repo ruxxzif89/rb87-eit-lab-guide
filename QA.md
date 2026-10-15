@@ -347,6 +347,7 @@ A third AOM in the SAS arm would also work, but it is not needed and is not in t
 - AR coating on all four faces at 795 nm (R ≤ 0.5 %); cheap cubes are sometimes uncoated;
 - beam deviation ≤ 5 arcmin, flatness λ/4 at 633 nm, scratch-dig 60-40, clear aperture ≥ 85 %;
 - 7 pieces plus 1 spare, with the measured extinction and transmission at 795 nm.
+**Watch the design wavelength.** A supplier sheet that says "@1064 nm" (or 532, 633 nm) describes a cube whose polarizing and AR coatings are made for that line. Its geometry figures (±0.2 mm, λ/10, beam deviation under 3 arcmin) may be excellent, but at 795 nm the extinction and transmission of a laser-line coating fall off and the faces reflect more: ask for the same cube coated for 795 nm (or 780 nm, or 700–900 nm broadband) with the extinction measured at 795 nm.
 For the SAS 50:50 cube ask: non-polarizing cube, 12.7 mm, 700–900 nm, R/T = 50/50 ± 5 % for both s and p at 795 nm.
 
 **Mounting an unmounted cube:** a kinematic prism platform on a post, or a 3D-printed PETG cube holder on a ½″ (Ø12.7 mm) post at the 100 mm beam height: now [DIY part D12](diy.html#d12), with STL files, a drawing and the build steps. The holder must hold the cube square to the beam (within a degree) and allow rotation about the vertical axis for alignment; fix the cube with a nylon-tipped screw or a drop of removable adhesive, never by clamping the faces.
