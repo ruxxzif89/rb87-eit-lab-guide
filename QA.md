@@ -43,6 +43,28 @@ More control power only broadens the line: the EIT width grows by about 4.5 kHz 
 
 **So:** minimum about 5 mW, comfortable 10–15 mW, not needed 20–40 mW. Measure the double-pass AOM efficiency (the biggest unknown) and the power at the cell with the power meter; turn the control down with the half-wave plate or the AOM RF level if it exceeds about 1 mW.
 
+**Specification for any 795 nm DFB we buy (for quotes):**
+
+| Item | Requirement | Why |
+|---|---|---|
+| Type | single-frequency DFB laser diode | narrow, mode-hop free, tuned by current and temperature (no piezo) |
+| Wavelength | must reach 794.978 nm (Rb-87 D1, vacuum) at a chip temperature of about 15–35 °C and a current below the maximum | the lock line; outside the TEC/thermistor range it cannot be reached |
+| Output power | at least 20 mW from the package (at least 10 mW after a fibre and isolator) | we need 5–15 mW at the bench; margin for AOM and polarization losses |
+| Linewidth | ≤ 1 MHz (≤ 2 MHz acceptable) | common to control and probe; the SAS features are 6–12 MHz wide |
+| Side-mode suppression | ≥ 30 dB (≥ 40 dB preferred) | single mode on the Rb line |
+| Mode-hop-free tuning | ≥ 10 GHz around 794.98 nm | scan across the Rb D1 lines (ground splitting 6.8 GHz) |
+| Tuning coefficients | about 0.06 nm/K, 0.003–0.005 nm/mA (state them) | sets the lock-box divider (DIY D6) |
+| Operating current / voltage | ≤ 190 mA, ≤ 5 V | ITC502: 0–200 mA, compliance > 6 V |
+| Package | 14-pin butterfly, built-in TEC, NTC thermistor, monitor photodiode | ITC502 + butterfly mount (LDM-4980 / LM14S2) |
+| TEC | ≤ 1.5 A, ≤ 4 V | ITC502 TEC ±2 A, 16 W |
+| Thermistor | 10 kΩ NTC at 25 °C (state B value) | ITC502 20 kΩ range: chip above about 10 °C |
+| Pin-out | standard type-1 butterfly (1 TEC+, 2/5 thermistor, 3/4 PD, 10 LD anode, 11 LD cathode, 13 case, 14 TEC−); laser floating from the case | ITC502 wiring (AG or CG) |
+| Output (preferred) | PM fibre (PM780, slow axis), FC/APC, about 1 m, built-in isolator ≥ 30 dB | robust pointing, protects the chip |
+| Output (accepted) | free-space collimated, about 1 mm beam, with two external isolator stages | the chip must not see the back-reflections |
+| Polarization extinction | ≥ 20 dB | clean split at the first PBS |
+| Documents | test report of the actual unit: temperature and current at 794.978 nm, P–I curve, spectrum with SMSR, PER; drawing; pin-out | acceptance test on arrival |
+| Other | lead time, warranty, laser class, availability of the part (not near obsolescence) | |
+
 **On arrival check:** the test protocol (wavelength against temperature at 15 mW, operating current, extinction ratio), single-mode operation on the spectrum analyser, that the wavelength lands on the Rb D1 line on the SAS signal, and the fibre key alignment.
 
 Sources: [Eagleyard datasheet](https://global-topticaeagleyard.b-cdn.net/wp-content/uploads/data_sheets/EYP-DFB-0795-00015-1500-BFY12-0005.pdf) · [Steck, Rb-87 D line data](https://steck.us/alkalidata/rubidium87numbers.pdf)
