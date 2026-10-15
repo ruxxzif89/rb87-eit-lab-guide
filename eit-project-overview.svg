@@ -1,0 +1,126 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 800" role="img" aria-labelledby="t d" font-family="Segoe UI, Arial, Helvetica, sans-serif">
+<title id="t">Rb-87 Zeeman EIT project overview</title><desc id="d">Block diagram of the Rb-87 Zeeman EIT bench: a DFB laser locked by saturated absorption spectroscopy, control and probe arms with double-pass AOMs driven by a two-channel RF synthesizer, the vapour cell in a solenoid and a three-layer mu-metal shield, polarization filtering and detection, with an inset of the Lambda level scheme.</desc>
+<defs><pattern id="hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="6" stroke="#555" stroke-width="1"/></pattern><pattern id="hatchf" width="4" height="4" patternUnits="userSpaceOnUse" patternTransform="rotate(-45)"><line x1="0" y1="0" x2="0" y2="4" stroke="#888" stroke-width="0.8"/></pattern><pattern id="dots" width="5" height="5" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="0.8" fill="#999"/></pattern><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#1b1f24"/></marker><marker id="arrg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#6b7280"/></marker></defs>
+<rect width="1400" height="800" fill="#ffffff"/>
+<text x="30.00" y="40.00" font-size="20" text-anchor="start" fill="#1b1f24" font-weight="700">Rb-87 Zeeman EIT testbed at 795 nm: one laser, two phase-locked AOM arms, one shielded vapour cell</text>
+<text x="30.00" y="64.00" font-size="12.5" text-anchor="start" fill="#6b7280">Block diagram of the planned bench. Light paths: laser (brown), control (blue), probe (red), both together (purple); electrical links dashed.</text>
+<rect x="30.00" y="143.00" width="150.00" height="64.00" rx="6" fill="#fdeede" stroke="#b5651d" stroke-width="1.6"/>
+<text x="105.00" y="171.10" font-size="13" text-anchor="middle" fill="#b5651d" font-weight="700">DFB laser</text>
+<text x="105.00" y="188.26" font-size="11.5" text-anchor="middle" fill="#1b1f24">795 nm, 14-pin butterfly</text>
+<path d="M 180.0 175.0 L 212.0 175.0" fill="none" stroke="#b5651d" stroke-width="3.0" stroke-linejoin="round" marker-end="url(#arr)"/>
+<rect x="212.00" y="149.00" width="96.00" height="52.00" rx="6" fill="#ffffff" stroke="#1b1f24" stroke-width="1.6"/>
+<text x="260.00" y="171.25" font-size="12.5" text-anchor="middle" fill="#1b1f24" font-weight="700">Isolator</text>
+<text x="260.00" y="187.75" font-size="11.0" text-anchor="middle" fill="#1b1f24">Faraday, 795 nm</text>
+<path d="M 308.0 175.0 L 352.0 175.0" fill="none" stroke="#b5651d" stroke-width="3.0" stroke-linejoin="round" marker-end="url(#arr)"/>
+<rect x="353.00" y="158.00" width="34.00" height="34.00" rx="0" fill="#d6ebf7" stroke="#1b1f24" stroke-width="1.4"/>
+<line x1="353.00" y1="192.00" x2="387.00" y2="158.00" stroke="#1b1f24" stroke-width="1.0" stroke-linecap="round"/>
+<text x="370.00" y="152.00" font-size="11.5" text-anchor="middle" fill="#1b1f24" font-weight="700">λ/2 + PBS</text>
+<path d="M 370.0 192.0 L 370.0 300.0" fill="none" stroke="#b5651d" stroke-width="2.4" stroke-linejoin="round" marker-end="url(#arr)"/>
+<rect x="290.00" y="300.00" width="160.00" height="64.00" rx="6" fill="#fff8ec" stroke="#b5651d" stroke-width="1.6"/>
+<text x="370.00" y="328.25" font-size="12.5" text-anchor="middle" fill="#b5651d" font-weight="700">SAS</text>
+<text x="370.00" y="344.75" font-size="11.0" text-anchor="middle" fill="#1b1f24">Rb reference cell + photodiode</text>
+<path d="M 370.0 364.0 L 370.0 410.0" fill="none" stroke="#1b1f24" stroke-width="1.6" stroke-linejoin="round" stroke-dasharray="6 4"/>
+<rect x="290.00" y="410.00" width="160.00" height="56.00" rx="6" fill="#f2f4f7" stroke="#1b1f24" stroke-width="1.6"/>
+<text x="370.00" y="434.25" font-size="12.5" text-anchor="middle" fill="#1b1f24" font-weight="700">Lock box</text>
+<text x="370.00" y="450.75" font-size="11.0" text-anchor="middle" fill="#1b1f24">error signal + PID</text>
+<path d="M 290.0 438.0 L 180.0 438.0" fill="none" stroke="#1b1f24" stroke-width="1.6" stroke-linejoin="round" stroke-dasharray="6 4"/>
+<rect x="30.00" y="410.00" width="150.00" height="56.00" rx="6" fill="#f2f4f7" stroke="#1b1f24" stroke-width="1.6"/>
+<text x="105.00" y="434.25" font-size="12.5" text-anchor="middle" fill="#1b1f24" font-weight="700">Laser controller</text>
+<text x="105.00" y="450.75" font-size="11.0" text-anchor="middle" fill="#1b1f24">ITC502: current + TEC</text>
+<path d="M 105.0 410.0 L 105.0 207.0" fill="none" stroke="#1b1f24" stroke-width="1.6" stroke-linejoin="round" stroke-dasharray="6 4"/>
+<text x="116.00" y="290.00" font-size="11.5" text-anchor="start" fill="#6b7280">current and</text>
+<text x="116.00" y="305.00" font-size="11.5" text-anchor="start" fill="#6b7280">temperature</text>
+<text x="190.00" y="502.00" font-size="12" text-anchor="start" fill="#1b1f24" font-weight="700">frequency lock near F = 2 → F′ = 1</text>
+<path d="M 387.0 175.0 L 452.0 175.0" fill="none" stroke="#b5651d" stroke-width="3.0" stroke-linejoin="round" marker-end="url(#arr)"/>
+<rect x="453.00" y="158.00" width="34.00" height="34.00" rx="0" fill="#d6ebf7" stroke="#1b1f24" stroke-width="1.4"/>
+<line x1="453.00" y1="192.00" x2="487.00" y2="158.00" stroke="#1b1f24" stroke-width="1.0" stroke-linecap="round"/>
+<text x="470.00" y="152.00" font-size="11.5" text-anchor="middle" fill="#1b1f24" font-weight="700">λ/2 + PBS</text>
+<path d="M 487.0 175.0 L 560.0 175.0" fill="none" stroke="#1f5fa8" stroke-width="3.0" stroke-linejoin="round" marker-end="url(#arr)"/>
+<rect x="560.00" y="145.00" width="160.00" height="60.00" rx="6" fill="#eef4fc" stroke="#1f5fa8" stroke-width="1.6"/>
+<text x="640.00" y="171.25" font-size="12.5" text-anchor="middle" fill="#1f5fa8" font-weight="700">AOM 1, double pass</text>
+<text x="640.00" y="187.75" font-size="11.0" text-anchor="middle" fill="#1b1f24">control, 80.000 MHz</text>
+<path d="M 470.0 192.0 L 470.0 300.0 L 560.0 300.0" fill="none" stroke="#c0392b" stroke-width="3.0" stroke-linejoin="round" marker-end="url(#arr)"/>
+<rect x="560.00" y="270.00" width="160.00" height="60.00" rx="6" fill="#fdeeee" stroke="#c0392b" stroke-width="1.6"/>
+<text x="640.00" y="296.25" font-size="12.5" text-anchor="middle" fill="#c0392b" font-weight="700">AOM 2, double pass</text>
+<text x="640.00" y="312.75" font-size="11.0" text-anchor="middle" fill="#1b1f24">probe, 79.965 MHz</text>
+<text x="505.00" y="199.00" font-size="12" text-anchor="start" fill="#1f5fa8" font-weight="700">control</text>
+<text x="480.00" y="326.00" font-size="12" text-anchor="start" fill="#c0392b" font-weight="700">probe</text>
+<rect x="560.00" y="410.00" width="160.00" height="56.00" rx="6" fill="#f2f4f7" stroke="#1b1f24" stroke-width="1.6"/>
+<text x="640.00" y="434.25" font-size="12.5" text-anchor="middle" fill="#1b1f24" font-weight="700">RF synthesizer</text>
+<text x="640.00" y="450.75" font-size="11.0" text-anchor="middle" fill="#1b1f24">2 channels, one clock</text>
+<path d="M 600.0 410.0 L 600.0 330.0" fill="none" stroke="#1b1f24" stroke-width="1.6" stroke-linejoin="round" stroke-dasharray="6 4"/>
+<path d="M 680.0 410.0 L 680.0 380.0 L 745.0 380.0 L 745.0 120.0 L 640.0 120.0 L 640.0 145.0" fill="none" stroke="#1b1f24" stroke-width="1.6" stroke-linejoin="round" stroke-dasharray="6 4"/>
+<text x="560.00" y="490.00" font-size="11.5" text-anchor="start" fill="#6b7280">amplifiers, switches and</text>
+<text x="560.00" y="505.00" font-size="11.5" text-anchor="start" fill="#6b7280">attenuators per arm</text>
+<path d="M 720.0 175.0 L 802.0 175.0" fill="none" stroke="#1f5fa8" stroke-width="3.0" stroke-linejoin="round" marker-end="url(#arr)"/>
+<path d="M 720.0 300.0 L 820.0 300.0 L 820.0 194.0" fill="none" stroke="#c0392b" stroke-width="3.0" stroke-linejoin="round" marker-end="url(#arr)"/>
+<rect x="803.00" y="158.00" width="34.00" height="34.00" rx="0" fill="#d6ebf7" stroke="#1b1f24" stroke-width="1.4"/>
+<line x1="803.00" y1="192.00" x2="837.00" y2="158.00" stroke="#1b1f24" stroke-width="1.0" stroke-linecap="round"/>
+<text x="820.00" y="152.00" font-size="11.5" text-anchor="middle" fill="#1b1f24" font-weight="700">PBS</text>
+<path d="M 837.0 175.0 L 868.0 175.0" fill="none" stroke="#7b4fa3" stroke-width="3.0" stroke-linejoin="round" marker-end="url(#arr)"/>
+<rect x="872.00" y="155.00" width="8.00" height="40.00" rx="0" fill="#e8f1fb" stroke="#1b1f24" stroke-width="1.2"/>
+<text x="876.00" y="211.00" font-size="11.5" text-anchor="middle" fill="#1b1f24" font-weight="700">λ/4</text>
+<rect x="900.00" y="115.00" width="190.00" height="120.00" rx="10" fill="#e9ecf0" stroke="#9aa5b1" stroke-width="2.2"/>
+<rect x="910.00" y="125.00" width="170.00" height="100.00" rx="8" fill="#f4f6f8" stroke="#9aa5b1" stroke-width="1.6"/>
+<rect x="920.00" y="135.00" width="150.00" height="80.00" rx="6" fill="#ffffff" stroke="#9aa5b1" stroke-width="1.2"/>
+<line x1="934.00" y1="145.00" x2="939.00" y2="205.00" stroke="#c0703a" stroke-width="2.0" stroke-linecap="round"/>
+<line x1="943.40" y1="145.00" x2="948.40" y2="205.00" stroke="#c0703a" stroke-width="2.0" stroke-linecap="round"/>
+<line x1="952.80" y1="145.00" x2="957.80" y2="205.00" stroke="#c0703a" stroke-width="2.0" stroke-linecap="round"/>
+<line x1="962.20" y1="145.00" x2="967.20" y2="205.00" stroke="#c0703a" stroke-width="2.0" stroke-linecap="round"/>
+<line x1="971.60" y1="145.00" x2="976.60" y2="205.00" stroke="#c0703a" stroke-width="2.0" stroke-linecap="round"/>
+<line x1="981.00" y1="145.00" x2="986.00" y2="205.00" stroke="#c0703a" stroke-width="2.0" stroke-linecap="round"/>
+<line x1="990.40" y1="145.00" x2="995.40" y2="205.00" stroke="#c0703a" stroke-width="2.0" stroke-linecap="round"/>
+<line x1="999.80" y1="145.00" x2="1004.80" y2="205.00" stroke="#c0703a" stroke-width="2.0" stroke-linecap="round"/>
+<line x1="1009.20" y1="145.00" x2="1014.20" y2="205.00" stroke="#c0703a" stroke-width="2.0" stroke-linecap="round"/>
+<line x1="1018.60" y1="145.00" x2="1023.60" y2="205.00" stroke="#c0703a" stroke-width="2.0" stroke-linecap="round"/>
+<line x1="1028.00" y1="145.00" x2="1033.00" y2="205.00" stroke="#c0703a" stroke-width="2.0" stroke-linecap="round"/>
+<line x1="1037.40" y1="145.00" x2="1042.40" y2="205.00" stroke="#c0703a" stroke-width="2.0" stroke-linecap="round"/>
+<line x1="1046.80" y1="145.00" x2="1051.80" y2="205.00" stroke="#c0703a" stroke-width="2.0" stroke-linecap="round"/>
+<line x1="1056.20" y1="145.00" x2="1061.20" y2="205.00" stroke="#c0703a" stroke-width="2.0" stroke-linecap="round"/>
+<rect x="948.00" y="157.00" width="94.00" height="36.00" rx="5" fill="#fde9e9" stroke="#a33" stroke-width="1.6"/>
+<text x="995.00" y="180.00" font-size="12" text-anchor="middle" fill="#8a1f1f" font-weight="700">Rb-87 cell</text>
+<path d="M 880.0 175.0 L 946.0 175.0" fill="none" stroke="#7b4fa3" stroke-width="2.2" stroke-linejoin="round" marker-end="url(#arr)"/>
+<text x="995.00" y="105.00" font-size="12" text-anchor="middle" fill="#1b1f24" font-weight="700">µ-metal shield, 3 layers</text>
+<text x="995.00" y="257.00" font-size="11.5" text-anchor="middle" fill="#6b7280">solenoid (copper) sets the Zeeman splitting;</text>
+<text x="995.00" y="272.00" font-size="11.5" text-anchor="middle" fill="#6b7280">cell heated, 10 Torr neon buffer gas</text>
+<path d="M 1044.0 175.0 L 1112.0 175.0" fill="none" stroke="#7b4fa3" stroke-width="3.0" stroke-linejoin="round" marker-end="url(#arr)"/>
+<rect x="1114.00" y="155.00" width="8.00" height="40.00" rx="0" fill="#e8f1fb" stroke="#1b1f24" stroke-width="1.2"/>
+<text x="1118.00" y="211.00" font-size="11.5" text-anchor="middle" fill="#1b1f24" font-weight="700">λ/4</text>
+<path d="M 1124.0 175.0 L 1150.0 175.0" fill="none" stroke="#7b4fa3" stroke-width="3.0" stroke-linejoin="round" marker-end="url(#arr)"/>
+<rect x="1153.00" y="160.00" width="30.00" height="30.00" rx="0" fill="#d6ebf7" stroke="#1b1f24" stroke-width="1.4"/>
+<line x1="1153.00" y1="190.00" x2="1183.00" y2="160.00" stroke="#1b1f24" stroke-width="1.0" stroke-linecap="round"/>
+<text x="1168.00" y="154.00" font-size="11.5" text-anchor="middle" fill="#1b1f24" font-weight="700">Glan</text>
+<path d="M 1185.0 175.0 L 1222.0 175.0" fill="none" stroke="#c0392b" stroke-width="3.0" stroke-linejoin="round" marker-end="url(#arr)"/>
+<path d="M1222,161.0 L1246,175.0 L1222,189.0 Z" fill="#444"/>
+<text x="1258.00" y="209.00" font-size="11.5" text-anchor="end" fill="#1b1f24" font-weight="700">photodiode</text>
+<path d="M 1168.0 190.0 L 1168.0 237.0" fill="none" stroke="#1f5fa8" stroke-width="2.0" stroke-linejoin="round" marker-end="url(#arr)"/>
+<text x="1160.00" y="241.00" font-size="11.5" text-anchor="end" fill="#6b7280">control to a dump</text>
+<path d="M 1246.0 175.0 L 1272.0 175.0" fill="none" stroke="#1b1f24" stroke-width="1.6" stroke-linejoin="round" stroke-dasharray="6 4"/>
+<rect x="1272.00" y="90.00" width="110.00" height="120.00" rx="6" fill="#1f2a36" stroke="#1b1f24" stroke-width="1.6"/>
+<path d="M 1282.0 163.6 L 1283.5 163.6 L 1285.0 163.6 L 1286.5 163.6 L 1288.0 163.5 L 1289.5 163.5 L 1291.0 163.5 L 1292.5 163.4 L 1294.0 163.3 L 1295.5 163.3 L 1297.0 163.2 L 1298.5 163.1 L 1300.0 163.0 L 1301.5 162.9 L 1303.0 162.8 L 1304.5 162.6 L 1306.0 162.4 L 1307.5 162.2 L 1309.0 161.9 L 1310.5 161.5 L 1312.0 161.0 L 1313.5 160.4 L 1315.0 159.5 L 1316.5 158.3 L 1318.0 156.6 L 1319.5 154.1 L 1321.0 150.2 L 1322.5 144.3 L 1324.0 135.6 L 1325.5 125.3 L 1327.0 120.0 L 1328.5 125.3 L 1330.0 135.6 L 1331.5 144.3 L 1333.0 150.2 L 1334.5 154.1 L 1336.0 156.6 L 1337.5 158.3 L 1339.0 159.5 L 1340.5 160.4 L 1342.0 161.0 L 1343.5 161.5 L 1345.0 161.9 L 1346.5 162.2 L 1348.0 162.4 L 1349.5 162.6 L 1351.0 162.8 L 1352.5 162.9 L 1354.0 163.0 L 1355.5 163.1 L 1357.0 163.2 L 1358.5 163.3 L 1360.0 163.3 L 1361.5 163.4 L 1363.0 163.5 L 1364.5 163.5 L 1366.0 163.5 L 1367.5 163.6 L 1369.0 163.6 L 1370.5 163.6 L 1372.0 163.6" fill="none" stroke="#7ee08a" stroke-width="2"/>
+<text x="1327.00" y="228.00" font-size="11.5" text-anchor="middle" fill="#1b1f24" font-weight="700">oscilloscope:</text>
+<text x="1327.00" y="243.00" font-size="11.5" text-anchor="middle" fill="#6b7280">EIT transmission peak</text>
+<rect x="820.00" y="400.00" width="560.00" height="360.00" rx="8" fill="#fbfbfd" stroke="#e4e8ee" stroke-width="1.2"/>
+<text x="836.00" y="426.00" font-size="14" text-anchor="start" fill="#1b1f24" font-weight="700">The Λ system (Rb-87 D1, F = 2 → F′ = 1)</text>
+<line x1="1030.00" y1="490.00" x2="1170.00" y2="490.00" stroke="#1b1f24" stroke-width="3" stroke-linecap="round"/>
+<text x="1180.00" y="495.00" font-size="12.5" text-anchor="start" fill="#1b1f24" font-weight="700">F′ = 1, m = 0</text>
+<line x1="880.00" y1="670.00" x2="980.00" y2="670.00" stroke="#1b1f24" stroke-width="3" stroke-linecap="round"/>
+<line x1="1220.00" y1="660.00" x2="1320.00" y2="660.00" stroke="#1b1f24" stroke-width="3" stroke-linecap="round"/>
+<text x="930.00" y="696.00" font-size="12.5" text-anchor="middle" fill="#1b1f24" font-weight="700">F = 2, m = −1</text>
+<text x="1270.00" y="686.00" font-size="12.5" text-anchor="middle" fill="#1b1f24" font-weight="700">F = 2, m = +1</text>
+<path d="M 950.0 666.0 L 1082.0 496.0" fill="none" stroke="#1f5fa8" stroke-width="3" stroke-linejoin="round" marker-end="url(#arr)"/>
+<path d="M 1250.0 656.0 L 1118.0 496.0" fill="none" stroke="#c0392b" stroke-width="3" stroke-linejoin="round" marker-end="url(#arr)"/>
+<text x="948.00" y="568.00" font-size="13" text-anchor="start" fill="#1f5fa8" font-weight="700">control σ⁺</text>
+<text x="1172.00" y="568.00" font-size="13" text-anchor="start" fill="#c0392b" font-weight="700">probe σ⁻</text>
+<text x="836.00" y="718.00" font-size="12" text-anchor="start" fill="#1b1f24">The ground states differ by the Zeeman shift (1.4 kHz per mG): about 70 kHz at 50 mG,</text>
+<text x="836.00" y="736.00" font-size="12" text-anchor="start" fill="#1b1f24">matched by the AOM frequency difference. On two-photon resonance the atoms fall into</text>
+<text x="836.00" y="754.00" font-size="12" text-anchor="start" fill="#1b1f24">a dark state: the probe passes (EIT), slows down and can be stored and retrieved.</text>
+<rect x="30.00" y="560.00" width="760.00" height="200.00" rx="8" fill="#f7f8fa" stroke="#e4e8ee" stroke-width="1.2"/>
+<text x="46.00" y="588.00" font-size="14" text-anchor="start" fill="#1b1f24" font-weight="700">Key numbers of the design</text>
+<text x="46.00" y="616.00" font-size="12.5" text-anchor="start" fill="#1b1f24">Wavelength 794.978 nm (Rb-87 D1); laser locked by saturated absorption near F = 2 → F′ = 1.</text>
+<text x="46.00" y="639.00" font-size="12.5" text-anchor="start" fill="#1b1f24">Each beam passes its AOM twice: 2 × 80 MHz. The EIT beams run 160 MHz off the one-photon resonance (−1 orders).</text>
+<text x="46.00" y="662.00" font-size="12.5" text-anchor="start" fill="#1b1f24">Control about 1 mW at the cell, probe under 1 µW; orthogonal circular polarizations from one λ/4 plate.</text>
+<text x="46.00" y="685.00" font-size="12.5" text-anchor="start" fill="#1b1f24">Cell Ø25 mm, 25 mm path, enriched Rb-87 with 10 Torr neon, heated to about 60 °C.</text>
+<text x="46.00" y="708.00" font-size="12.5" text-anchor="start" fill="#1b1f24">Solenoid about 50 mG, uniform to 0.2 % over the cell; shield and degaussing remove the lab field.</text>
+<text x="46.00" y="731.00" font-size="12.5" text-anchor="start" fill="#1b1f24">Beam height 100 mm above the breadboard for every part.</text>
+</svg>
