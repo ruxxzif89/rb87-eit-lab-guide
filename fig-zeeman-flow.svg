@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1460 330" role="img" aria-labelledby="t d" font-family="Segoe UI, Arial, Helvetica, sans-serif">
+<title id="t">From the solenoid current to the two AOM frequencies</title><desc id="d">Flow: solenoid current 14.75 mA times 3.39 mG per mA gives 50 mG; one Zeeman step of F = 2 is 0.7 kHz per mG, 35 kHz; the Lambda ground states m = -1 and m = +1 are two steps apart, 1.4 kHz per mG, 70 kHz between the light beams; the double pass halves it: 35 kHz between the RF channels, 80.000 and 79.965 MHz.</desc>
+<defs><pattern id="hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="6" stroke="#555" stroke-width="1"/></pattern><pattern id="hatchf" width="4" height="4" patternUnits="userSpaceOnUse" patternTransform="rotate(-45)"><line x1="0" y1="0" x2="0" y2="4" stroke="#888" stroke-width="0.8"/></pattern><pattern id="dots" width="5" height="5" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="0.8" fill="#999"/></pattern><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#1b1f24"/></marker><marker id="arrg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#6b7280"/></marker></defs>
+<rect width="1460" height="330" fill="#ffffff"/>
+<text x="24.00" y="36.00" font-size="19" text-anchor="start" fill="#1b1f24" font-weight="700">From the solenoid current to the two AOM frequencies (working point 50 mG)</text>
+<text x="24.00" y="60.00" font-size="12.5" text-anchor="start" fill="#6b7280">Each box is one number; each arrow says what turns it into the next. The atom fixes 0.7 kHz per mG per step; the field is our choice.</text>
+<rect x="24.00" y="120.00" width="172.00" height="104.00" rx="7" fill="#f2f4f7" stroke="#1b1f24" stroke-width="1.8"/>
+<text x="110.00" y="150.00" font-size="13" text-anchor="middle" fill="#1b1f24" font-weight="700">Solenoid current</text>
+<text x="110.00" y="180.00" font-size="18" text-anchor="middle" fill="#1b1f24" font-weight="700">14.75 mA</text>
+<text x="110.00" y="204.00" font-size="11.5" text-anchor="middle" fill="#6b7280">ITC502 LD output</text>
+<rect x="272.00" y="120.00" width="172.00" height="104.00" rx="7" fill="#f2f4f7" stroke="#1b1f24" stroke-width="1.8"/>
+<text x="358.00" y="150.00" font-size="13" text-anchor="middle" fill="#1b1f24" font-weight="700">Magnetic field B</text>
+<text x="358.00" y="180.00" font-size="18" text-anchor="middle" fill="#1b1f24" font-weight="700">50 mG</text>
+<text x="358.00" y="204.00" font-size="11.5" text-anchor="middle" fill="#6b7280">along the beam</text>
+<rect x="520.00" y="120.00" width="172.00" height="104.00" rx="7" fill="#eef7ef" stroke="#2e7d32" stroke-width="1.8"/>
+<text x="606.00" y="150.00" font-size="13" text-anchor="middle" fill="#2e7d32" font-weight="700">One Zeeman step</text>
+<text x="606.00" y="180.00" font-size="18" text-anchor="middle" fill="#1b1f24" font-weight="700">35 kHz</text>
+<text x="606.00" y="204.00" font-size="11.5" text-anchor="middle" fill="#6b7280">neighbours, Δm = 1</text>
+<rect x="768.00" y="120.00" width="172.00" height="104.00" rx="7" fill="#fdeeee" stroke="#c0392b" stroke-width="1.8"/>
+<text x="854.00" y="150.00" font-size="13" text-anchor="middle" fill="#c0392b" font-weight="700">Light difference</text>
+<text x="854.00" y="180.00" font-size="18" text-anchor="middle" fill="#1b1f24" font-weight="700">70 kHz</text>
+<text x="854.00" y="204.00" font-size="11.5" text-anchor="middle" fill="#6b7280">Λ gap, m = −1 to +1</text>
+<rect x="1016.00" y="120.00" width="172.00" height="104.00" rx="7" fill="#eef4fc" stroke="#1f5fa8" stroke-width="1.8"/>
+<text x="1102.00" y="150.00" font-size="13" text-anchor="middle" fill="#1f5fa8" font-weight="700">RF difference</text>
+<text x="1102.00" y="180.00" font-size="18" text-anchor="middle" fill="#1b1f24" font-weight="700">35 kHz</text>
+<text x="1102.00" y="204.00" font-size="11.5" text-anchor="middle" fill="#6b7280">CH1 − CH2</text>
+<rect x="1264.00" y="120.00" width="172.00" height="104.00" rx="7" fill="#eef4fc" stroke="#1f5fa8" stroke-width="1.8"/>
+<text x="1350.00" y="150.00" font-size="13" text-anchor="middle" fill="#1f5fa8" font-weight="700">Two RF channels</text>
+<text x="1350.00" y="180.00" font-size="18" text-anchor="middle" fill="#1b1f24" font-weight="700">CH1 80.000 MHz</text>
+<text x="1350.00" y="204.00" font-size="11.5" text-anchor="middle" fill="#6b7280">CH2 79.965 MHz</text>
+<path d="M 200.0 172.0 L 268.0 172.0" fill="none" stroke="#1b1f24" stroke-width="2.4" marker-end="url(#arr)"/>
+<text x="234.00" y="160.00" font-size="12.5" text-anchor="middle" fill="#1b1f24" font-weight="700">× 3.39 mG/mA</text>
+<text x="234.00" y="194.00" font-size="10.5" text-anchor="middle" fill="#6b7280">solenoid (DIY D1)</text>
+<path d="M 448.0 172.0 L 516.0 172.0" fill="none" stroke="#1b1f24" stroke-width="2.4" marker-end="url(#arr)"/>
+<text x="482.00" y="160.00" font-size="12.5" text-anchor="middle" fill="#1b1f24" font-weight="700">× 0.7 kHz/mG</text>
+<text x="482.00" y="194.00" font-size="10.5" text-anchor="middle" fill="#6b7280">atom: g_F μ_B, g_F = ½</text>
+<path d="M 696.0 172.0 L 764.0 172.0" fill="none" stroke="#1b1f24" stroke-width="2.4" marker-end="url(#arr)"/>
+<text x="730.00" y="160.00" font-size="12.5" text-anchor="middle" fill="#1b1f24" font-weight="700">× 2 (Δm = 2)</text>
+<text x="730.00" y="194.00" font-size="10.5" text-anchor="middle" fill="#6b7280">σ⁺ and σ⁻ meet at m′ = 0</text>
+<path d="M 944.0 172.0 L 1012.0 172.0" fill="none" stroke="#1b1f24" stroke-width="2.4" marker-end="url(#arr)"/>
+<text x="978.00" y="160.00" font-size="12.5" text-anchor="middle" fill="#1b1f24" font-weight="700">÷ 2 (double pass)</text>
+<text x="978.00" y="194.00" font-size="10.5" text-anchor="middle" fill="#6b7280">light = 2 × RF</text>
+<path d="M 1192.0 172.0 L 1260.0 172.0" fill="none" stroke="#1b1f24" stroke-width="2.4" marker-end="url(#arr)"/>
+<text x="1226.00" y="160.00" font-size="12.5" text-anchor="middle" fill="#1b1f24" font-weight="700">80 MHz − 35 kHz</text>
+<text x="1226.00" y="194.00" font-size="10.5" text-anchor="middle" fill="#6b7280">our AOM centre</text>
+<rect x="24.00" y="256.00" width="1412.00" height="56.00" rx="6" fill="#f7f8fa" stroke="#e4e8ee" stroke-width="1.0"/>
+<text x="38.00" y="280.00" font-size="12" text-anchor="start" fill="#1b1f24">The guide’s 0.7 kHz per mG is the step between neighbouring sub-levels. Our Λ spans two steps (1.4 kHz per mG in the light), and the double pass halves it again,</text>
+<text x="38.00" y="300.00" font-size="12" text-anchor="start" fill="#1b1f24">so the RF difference is again 0.7 kHz per mG: 35 kHz at 50 mG. Change the field and only the 35 kHz moves; 80 MHz is the AOM centre frequency, not physics.</text>
+</svg>

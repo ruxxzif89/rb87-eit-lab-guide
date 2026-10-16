@@ -444,6 +444,10 @@ Sources: [Donley et al., Rev. Sci. Instrum. 76, 063112 (2005), NIST PDF](https:/
 | our Λ ground states (Δm = 2): light difference needed | 1.4 kHz | 70 kHz |
 | RF difference between the two AOMs (double pass, ÷ 2) | 0.7 kHz | 35 kHz |
 
+![From the solenoid current to the two AOM frequencies: 14.75 mA, 50 mG, one step 35 kHz, light difference 70 kHz, RF difference 35 kHz, 80.000 and 79.965 MHz](fig-zeeman-flow.svg)
+
+**Try it with sliders:** [the interactive flow page](zeeman-flow.html) moves the solenoid current, redraws the sub-levels and the Λ gap, updates both RF channels, and shows the EIT peak appear only when the RF difference matches the field.
+
 **Why do the two RF channels differ by 35 kHz?**
 - **EIT needs two-photon resonance.** In our Λ system the control (σ⁺) connects F = 2, m = −1 to the excited state F′ = 1, m = 0, and the probe (σ⁻) connects F = 2, m = +1 to the same excited state. The probe passes (EIT) only when the frequency difference of the two beams equals the energy difference of the two lower states.
 - **The lower states are split by the solenoid field.** For F = 2 of Rb-87 the Zeeman shift is g_F μ_B B / h = 0.70 MHz per gauss for each step in m (g_F = 1/2). The two states differ by Δm = 2, so the splitting is 1.40 MHz per gauss, that is 1.4 kHz per mG. At our working field of about 50 mG: 1.4 × 50 = **70 kHz**.
