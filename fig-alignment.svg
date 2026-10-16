@@ -1,0 +1,329 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1460 900" role="img" aria-labelledby="t d" font-family="Segoe UI, Arial, Helvetica, sans-serif">
+<title id="t">How every optic is made square to the beam</title><desc id="d">Four panels. A: top view of beam walking: two steering mirrors and two irises on one row of table holes. B: side view: both irises at 100 mm, so the beam is parallel to the table; a tilt of 1 mrad moves the beam 1 mm per metre. C: back-reflection check: an optic is square when its reflection returns through the iris hole; a tilt theta moves the returning spot by 2 theta L. D: PBS roll check: the reflected beam must stay at 100 mm; a roll of 1 degree lifts it 17 mm per metre.</desc>
+<defs><pattern id="hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="6" stroke="#555" stroke-width="1"/></pattern><pattern id="hatchf" width="4" height="4" patternUnits="userSpaceOnUse" patternTransform="rotate(-45)"><line x1="0" y1="0" x2="0" y2="4" stroke="#888" stroke-width="0.8"/></pattern><pattern id="dots" width="5" height="5" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="0.8" fill="#999"/></pattern><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#1b1f24"/></marker><marker id="arrg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#6b7280"/></marker></defs>
+<rect width="1460" height="900" fill="#ffffff"/>
+<text x="24.00" y="36.00" font-size="19" text-anchor="start" fill="#1b1f24" font-weight="700">How every optic is made square to the beam: the beam is the ruler, not a protractor</text>
+<text x="24.00" y="60.00" font-size="12.5" text-anchor="start" fill="#6b7280">Standard practice: first make one beam parallel to the table at a fixed height (A, B), then square each optic to that beam (C, D). Red: laser beam.</text>
+<rect x="20.00" y="80.00" width="700.00" height="380.00" rx="6" fill="none" stroke="#e4e8ee" stroke-width="1.2"/>
+<text x="34.00" y="104.00" font-size="14" text-anchor="start" fill="#1b1f24" font-weight="700">A. Top view: walk the beam onto a row of holes</text>
+<circle cx="50.00" cy="150.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="50.00" cy="178.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="50.00" cy="206.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="50.00" cy="234.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="50.00" cy="262.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="50.00" cy="290.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="50.00" cy="318.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="50.00" cy="346.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="50.00" cy="374.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="50.00" cy="402.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="78.00" cy="150.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="78.00" cy="178.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="78.00" cy="206.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="78.00" cy="234.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="78.00" cy="262.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="78.00" cy="290.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="78.00" cy="318.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="78.00" cy="346.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="78.00" cy="374.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="78.00" cy="402.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="106.00" cy="150.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="106.00" cy="178.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="106.00" cy="206.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="106.00" cy="234.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="106.00" cy="262.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="106.00" cy="290.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="106.00" cy="318.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="106.00" cy="346.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="106.00" cy="374.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="106.00" cy="402.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="134.00" cy="150.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="134.00" cy="178.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="134.00" cy="206.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="134.00" cy="234.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="134.00" cy="262.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="134.00" cy="290.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="134.00" cy="318.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="134.00" cy="346.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="134.00" cy="374.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="134.00" cy="402.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="162.00" cy="150.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="162.00" cy="178.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="162.00" cy="206.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="162.00" cy="234.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="162.00" cy="262.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="162.00" cy="290.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="162.00" cy="318.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="162.00" cy="346.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="162.00" cy="374.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="162.00" cy="402.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="190.00" cy="150.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="190.00" cy="178.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="190.00" cy="206.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="190.00" cy="234.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="190.00" cy="262.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="190.00" cy="290.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="190.00" cy="318.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="190.00" cy="346.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="190.00" cy="374.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="190.00" cy="402.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="218.00" cy="150.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="218.00" cy="178.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="218.00" cy="206.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="218.00" cy="234.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="218.00" cy="262.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="218.00" cy="290.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="218.00" cy="318.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="218.00" cy="346.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="218.00" cy="374.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="218.00" cy="402.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="246.00" cy="150.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="246.00" cy="178.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="246.00" cy="206.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="246.00" cy="234.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="246.00" cy="262.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="246.00" cy="290.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="246.00" cy="318.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="246.00" cy="346.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="246.00" cy="374.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="246.00" cy="402.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="274.00" cy="150.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="274.00" cy="178.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="274.00" cy="206.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="274.00" cy="234.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="274.00" cy="262.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="274.00" cy="290.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="274.00" cy="318.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="274.00" cy="346.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="274.00" cy="374.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="274.00" cy="402.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="302.00" cy="150.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="302.00" cy="178.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="302.00" cy="206.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="302.00" cy="234.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="302.00" cy="262.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="302.00" cy="290.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="302.00" cy="318.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="302.00" cy="346.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="302.00" cy="374.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="302.00" cy="402.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="330.00" cy="150.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="330.00" cy="178.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="330.00" cy="206.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="330.00" cy="234.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="330.00" cy="262.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="330.00" cy="290.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="330.00" cy="318.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="330.00" cy="346.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="330.00" cy="374.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="330.00" cy="402.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="358.00" cy="150.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="358.00" cy="178.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="358.00" cy="206.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="358.00" cy="234.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="358.00" cy="262.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="358.00" cy="290.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="358.00" cy="318.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="358.00" cy="346.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="358.00" cy="374.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="358.00" cy="402.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="386.00" cy="150.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="386.00" cy="178.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="386.00" cy="206.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="386.00" cy="234.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="386.00" cy="262.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="386.00" cy="290.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="386.00" cy="318.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="386.00" cy="346.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="386.00" cy="374.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="386.00" cy="402.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="414.00" cy="150.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="414.00" cy="178.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="414.00" cy="206.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="414.00" cy="234.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="414.00" cy="262.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="414.00" cy="290.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="414.00" cy="318.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="414.00" cy="346.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="414.00" cy="374.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="414.00" cy="402.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="442.00" cy="150.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="442.00" cy="178.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="442.00" cy="206.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="442.00" cy="234.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="442.00" cy="262.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="442.00" cy="290.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="442.00" cy="318.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="442.00" cy="346.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="442.00" cy="374.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="442.00" cy="402.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="470.00" cy="150.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="470.00" cy="178.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="470.00" cy="206.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="470.00" cy="234.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="470.00" cy="262.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="470.00" cy="290.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="470.00" cy="318.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="470.00" cy="346.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="470.00" cy="374.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="470.00" cy="402.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="498.00" cy="150.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="498.00" cy="178.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="498.00" cy="206.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="498.00" cy="234.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="498.00" cy="262.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="498.00" cy="290.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="498.00" cy="318.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="498.00" cy="346.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="498.00" cy="374.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="498.00" cy="402.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="526.00" cy="150.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="526.00" cy="178.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="526.00" cy="206.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="526.00" cy="234.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="526.00" cy="262.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="526.00" cy="290.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="526.00" cy="318.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="526.00" cy="346.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="526.00" cy="374.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="526.00" cy="402.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="554.00" cy="150.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="554.00" cy="178.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="554.00" cy="206.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="554.00" cy="234.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="554.00" cy="262.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="554.00" cy="290.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="554.00" cy="318.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="554.00" cy="346.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="554.00" cy="374.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="554.00" cy="402.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="582.00" cy="150.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="582.00" cy="178.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="582.00" cy="206.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="582.00" cy="234.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="582.00" cy="262.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="582.00" cy="290.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="582.00" cy="318.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="582.00" cy="346.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="582.00" cy="374.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="582.00" cy="402.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="610.00" cy="150.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="610.00" cy="178.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="610.00" cy="206.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="610.00" cy="234.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="610.00" cy="262.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="610.00" cy="290.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="610.00" cy="318.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="610.00" cy="346.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="610.00" cy="374.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="610.00" cy="402.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="638.00" cy="150.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="638.00" cy="178.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="638.00" cy="206.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="638.00" cy="234.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="638.00" cy="262.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="638.00" cy="290.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="638.00" cy="318.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="638.00" cy="346.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="638.00" cy="374.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="638.00" cy="402.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="666.00" cy="150.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="666.00" cy="178.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="666.00" cy="206.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="666.00" cy="234.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="666.00" cy="262.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="666.00" cy="290.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="666.00" cy="318.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="666.00" cy="346.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="666.00" cy="374.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="666.00" cy="402.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="694.00" cy="150.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="694.00" cy="178.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="694.00" cy="206.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="694.00" cy="234.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="694.00" cy="262.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="694.00" cy="290.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="694.00" cy="318.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="694.00" cy="346.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="694.00" cy="374.00" r="2.2" fill="#c9cfd6"/>
+<circle cx="694.00" cy="402.00" r="2.2" fill="#c9cfd6"/>
+<line x1="46.00" y1="346.00" x2="698.00" y2="346.00" stroke="#9aa5b1" stroke-width="1.0" stroke-dasharray="5 4" stroke-linecap="round"/>
+<text x="580.00" y="390.00" font-size="11.5" text-anchor="middle" fill="#6b7280">beam axis = one row of holes</text>
+<rect x="60.00" y="197.00" width="34.00" height="18.00" rx="3" fill="#f2f4f7" stroke="#1b1f24" stroke-width="1.4"/>
+<text x="77.00" y="190.00" font-size="11.5" text-anchor="middle" fill="#1b1f24">collimator</text>
+<line x1="179.00" y1="195.00" x2="201.00" y2="217.00" stroke="#1b1f24" stroke-width="4" stroke-linecap="round"/>
+<line x1="179.00" y1="357.00" x2="201.00" y2="335.00" stroke="#1b1f24" stroke-width="4" stroke-linecap="round"/>
+<text x="172.00" y="194.00" font-size="13" text-anchor="end" fill="#1b1f24" font-weight="700">M1</text>
+<text x="172.00" y="372.00" font-size="13" text-anchor="end" fill="#1b1f24" font-weight="700">M2</text>
+<path d="M 94.0 206.0 L 190.0 206.0 L 190.0 346.0 L 666.0 346.0" fill="none" stroke="#c0392b" stroke-width="2.6" stroke-linejoin="round" marker-end="url(#arr)"/>
+<rect x="327.00" y="330.00" width="6.00" height="32.00" rx="0" fill="#1b1f24" stroke="#1b1f24" stroke-width="1"/>
+<text x="330.00" y="322.00" font-size="12" text-anchor="middle" fill="#1b1f24" font-weight="700">I1 near</text>
+<rect x="635.00" y="330.00" width="6.00" height="32.00" rx="0" fill="#1b1f24" stroke="#1b1f24" stroke-width="1"/>
+<text x="638.00" y="322.00" font-size="12" text-anchor="middle" fill="#1b1f24" font-weight="700">I2 far</text>
+<text x="270.00" y="176.00" font-size="12.5" text-anchor="start" fill="#1f5fa8" font-weight="700">1. M1 puts the spot on I1</text>
+<text x="270.00" y="194.00" font-size="12.5" text-anchor="start" fill="#1f5fa8" font-weight="700">2. M2 puts the spot on I2</text>
+<text x="270.00" y="212.00" font-size="12.5" text-anchor="start" fill="#1f5fa8" font-weight="700">3. repeat 1–2 until the beam passes both irises</text>
+<text x="270.00" y="230.00" font-size="11.5" text-anchor="start" fill="#6b7280">   (I1 near the mirrors, I2 as far away as possible)</text>
+<text x="34.00" y="446.00" font-size="12" text-anchor="start" fill="#1b1f24">Irises stay screwed to the holes as the permanent reference of this beam axis.</text>
+<rect x="740.00" y="80.00" width="700.00" height="380.00" rx="6" fill="none" stroke="#e4e8ee" stroke-width="1.2"/>
+<text x="754.00" y="104.00" font-size="14" text-anchor="start" fill="#1b1f24" font-weight="700">B. Side view: the same height at both irises</text>
+<rect x="760.00" y="380.00" width="660.00" height="14.00" rx="0" fill="#d7dce2" stroke="#1b1f24" stroke-width="1.2"/>
+<text x="1090.00" y="414.00" font-size="11.5" text-anchor="middle" fill="#6b7280">breadboard top = the reference surface (a bubble level is not needed)</text>
+<rect x="926.00" y="370.00" width="28.00" height="10.00" rx="1" fill="#d7dce2" stroke="#1b1f24" stroke-width="1.2"/>
+<rect x="936.00" y="242.00" width="8.00" height="128.00" rx="0" fill="#9aa5b1" stroke="#1b1f24" stroke-width="1.0"/>
+<rect x="937.00" y="212.00" width="6.00" height="12.00" rx="0" fill="#1b1f24" stroke="#1b1f24" stroke-width="1.0"/>
+<rect x="937.00" y="236.00" width="6.00" height="12.00" rx="0" fill="#1b1f24" stroke="#1b1f24" stroke-width="1.0"/>
+<rect x="1286.00" y="370.00" width="28.00" height="10.00" rx="1" fill="#d7dce2" stroke="#1b1f24" stroke-width="1.2"/>
+<rect x="1296.00" y="242.00" width="8.00" height="128.00" rx="0" fill="#9aa5b1" stroke="#1b1f24" stroke-width="1.0"/>
+<rect x="1297.00" y="212.00" width="6.00" height="12.00" rx="0" fill="#1b1f24" stroke="#1b1f24" stroke-width="1.0"/>
+<rect x="1297.00" y="236.00" width="6.00" height="12.00" rx="0" fill="#1b1f24" stroke="#1b1f24" stroke-width="1.0"/>
+<path d="M 780.0 230.0 L 1410.0 230.0" fill="none" stroke="#c0392b" stroke-width="2.6" stroke-linejoin="round" marker-end="url(#arr)"/>
+<line x1="900.00" y1="230.00" x2="900.00" y2="380.00" stroke="#1b1f24" stroke-width="1" marker-start="url(#arr)" marker-end="url(#arr)"/>
+<text x="895.00" y="309.00" font-size="12" text-anchor="end" fill="#1b1f24">100 mm</text>
+<line x1="1340.00" y1="230.00" x2="1340.00" y2="380.00" stroke="#1b1f24" stroke-width="1" marker-start="url(#arr)" marker-end="url(#arr)"/>
+<text x="1345.00" y="309.00" font-size="12" text-anchor="start" fill="#1b1f24">100 mm</text>
+<line x1="780.00" y1="264.00" x2="1410.00" y2="228.00" stroke="#c0392b" stroke-width="1.6" stroke-dasharray="7 5" stroke-linecap="round"/>
+<text x="1040.00" y="192.00" font-size="12.5" text-anchor="middle" fill="#1f5fa8" font-weight="700">set both irises with one height gauge</text>
+<text x="1040.00" y="208.00" font-size="11.5" text-anchor="middle" fill="#6b7280">(calliper, post collars, same post and holder type)</text>
+<text x="980.00" y="284.00" font-size="12" text-anchor="start" fill="#c0392b" font-weight="700">dashed: beam climbing by θ</text>
+<text x="980.00" y="300.00" font-size="12" text-anchor="start" fill="#1b1f24">height error = θ × distance</text>
+<text x="980.00" y="316.00" font-size="12" text-anchor="start" fill="#1b1f24">1 mrad (0.057°) = 1 mm per metre</text>
+<rect x="20.00" y="480.00" width="700.00" height="400.00" rx="6" fill="none" stroke="#e4e8ee" stroke-width="1.2"/>
+<text x="34.00" y="504.00" font-size="14" text-anchor="start" fill="#1b1f24" font-weight="700">C. Is a plate square to the beam? Look at its reflection</text>
+<rect x="137.00" y="604.00" width="6.00" height="18.00" rx="0" fill="#1b1f24" stroke="#1b1f24" stroke-width="1"/>
+<rect x="137.00" y="638.00" width="6.00" height="18.00" rx="0" fill="#1b1f24" stroke="#1b1f24" stroke-width="1"/>
+<text x="140.00" y="596.00" font-size="12" text-anchor="middle" fill="#1b1f24" font-weight="700">iris</text>
+<path d="M 50.0 630.0 L 574.0 630.0" fill="none" stroke="#c0392b" stroke-width="2.6" stroke-linejoin="round" marker-end="url(#arr)"/>
+<rect x="575.00" y="590.00" width="10.00" height="80.00" rx="1" fill="#d6ebf7" stroke="#1b1f24" stroke-width="1.4"/>
+<text x="580.00" y="582.00" font-size="12" text-anchor="middle" fill="#1b1f24" font-weight="700">wave plate, cube face, cell window</text>
+<path d="M 572.0 634.0 L 150.0 634.0" fill="none" stroke="#e67e6f" stroke-width="1.8" stroke-linejoin="round" stroke-dasharray="6 4" marker-end="url(#arr)"/>
+<text x="360.00" y="654.00" font-size="12" text-anchor="middle" fill="#2e7d32" font-weight="700">square: the weak reflection comes back through the iris hole</text>
+<rect x="137.00" y="724.00" width="6.00" height="18.00" rx="0" fill="#1b1f24" stroke="#1b1f24" stroke-width="1"/>
+<rect x="137.00" y="758.00" width="6.00" height="18.00" rx="0" fill="#1b1f24" stroke="#1b1f24" stroke-width="1"/>
+<path d="M 50.0 750.0 L 574.0 750.0" fill="none" stroke="#c0392b" stroke-width="2.6" stroke-linejoin="round" marker-end="url(#arr)"/>
+<line x1="574.43" y1="710.39" x2="585.57" y2="789.61" stroke="#5b8db8" stroke-width="9" stroke-linecap="round"/>
+<path d="M 572.0 752.0 L 150.0 704.0" fill="none" stroke="#e67e6f" stroke-width="1.8" stroke-linejoin="round" stroke-dasharray="6 4" marker-end="url(#arr)"/>
+<circle cx="142.00" cy="703.00" r="4" fill="#c0392b"/>
+<text x="156.00" y="694.00" font-size="12" text-anchor="start" fill="#c0392b" font-weight="700">spot misses the hole</text>
+<text x="632.00" y="754.00" font-size="12" text-anchor="start" fill="#1b1f24" font-weight="700">tilted by θ</text>
+<line x1="140.00" y1="800.00" x2="580.00" y2="800.00" stroke="#1b1f24" stroke-width="1" marker-start="url(#arr)" marker-end="url(#arr)"/>
+<text x="360.00" y="815.00" font-size="12" text-anchor="middle" fill="#1b1f24">L</text>
+<text x="34.00" y="846.00" font-size="12" text-anchor="start" fill="#1b1f24">Miss on the iris = 2 θ L. At L = 0.5 m a tilt of 1 mrad moves the return spot 1 mm, so the eye sees</text>
+<text x="34.00" y="864.00" font-size="12" text-anchor="start" fill="#1b1f24">far less than 1°. Use the IR card or the camera at 795 nm and turn the laser current down while aligning.</text>
+<rect x="740.00" y="480.00" width="700.00" height="400.00" rx="6" fill="none" stroke="#e4e8ee" stroke-width="1.2"/>
+<text x="754.00" y="504.00" font-size="14" text-anchor="start" fill="#1b1f24" font-weight="700">D. Is a cube upright (no roll)? Follow its reflected beam</text>
+<rect x="910.00" y="650.00" width="60.00" height="60.00" rx="2" fill="#d6ebf7" stroke="#1b1f24" stroke-width="1.6"/>
+<line x1="910.00" y1="710.00" x2="970.00" y2="650.00" stroke="#1b1f24" stroke-width="1.2" stroke-linecap="round"/>
+<text x="940.00" y="732.00" font-size="12" text-anchor="middle" fill="#1b1f24" font-weight="700">PBS (top view)</text>
+<path d="M 780.0 680.0 L 938.0 680.0 L 1240.0 680.0" fill="none" stroke="#c0392b" stroke-width="2.6" stroke-linejoin="round" marker-end="url(#arr)"/>
+<path d="M 940.0 680.0 L 940.0 550.0" fill="none" stroke="#c0392b" stroke-width="2.6" stroke-linejoin="round" marker-end="url(#arr)"/>
+<text x="1240.00" y="670.00" font-size="12" text-anchor="end" fill="#1b1f24">transmitted (p)</text>
+<rect x="924.00" y="562.00" width="32.00" height="6.00" rx="0" fill="#1b1f24" stroke="#1b1f24" stroke-width="1"/>
+<text x="962.00" y="558.00" font-size="12" text-anchor="start" fill="#1b1f24" font-weight="700">iris at 100 mm on the reflected path</text>
+<text x="962.00" y="574.00" font-size="12" text-anchor="start" fill="#1b1f24">reflected (s): must pass at the same 100 mm</text>
+<text x="1120.00" y="740.00" font-size="12.5" text-anchor="start" fill="#1f5fa8" font-weight="700">A roll of the cube by φ tips the reflected</text>
+<text x="1120.00" y="758.00" font-size="12.5" text-anchor="start" fill="#1f5fa8" font-weight="700">beam up or down: 1° = 17 mm per metre.</text>
+<text x="1120.00" y="776.00" font-size="12.5" text-anchor="start" fill="#1b1f24">Turn the cube in its holder until the</text>
+<text x="1120.00" y="794.00" font-size="12.5" text-anchor="start" fill="#1b1f24">reflected beam passes the iris; then square</text>
+<text x="1120.00" y="812.00" font-size="12.5" text-anchor="start" fill="#1b1f24">its entrance face with check C.</text>
+<text x="754.00" y="864.00" font-size="12" text-anchor="start" fill="#1b1f24">Mirrors need no separate check: the irises behind them already fix their angle (panel A).</text>
+</svg>

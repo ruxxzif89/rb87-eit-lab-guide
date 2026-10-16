@@ -815,7 +815,46 @@ Why the Spain-style bench can be lower: their cell module is a small enclosure, 
 - **Taller covers over the AOM arms (D10):** they were drawn 80 mm high for a 40 mm beam. At 100 mm the inner height must be about 160 to 200 mm.
 - **An optional draught cover over the shield**, if the room has strong air flow: black hardboard, inner size about 350 × 120 × 170 mm (the shield is 282 mm long plus the caps and the degaussing loops, and its top is about 140 mm above the table). It must contain no steel: no steel screws, brackets or hinges.
 
-### Q23. How is the magnetic shield of the Spain-style EIT cell probably made? It looks like a small enclosure.
+### Q23. How do we make sure every optical part stands at 90° (vertical and square to the beam)? Is it practically doable?
+
+*Added 16 Oct 2026*
+
+*Equipment shown in the guide: alignment iris, steering mirror, posts and holders, PBS cube, IR viewing card, camera.*
+
+**Yes, and it is routine. Nobody measures 90° with a protractor or a bubble level. The beam itself is the ruler.** The standard practice in optics labs has two stages. First, one beam is made parallel to the table at a fixed height (100 mm on our bench) with two mirrors and two irises ("beam walking"). Then every optic is squared to that beam by looking at where its own reflection goes. Both checks are far more sensitive than any angle you could set by eye.
+
+![How every optic is made square to the beam: beam walking with two irises, constant height, back-reflection check and PBS roll check](fig-alignment.svg)
+
+**Stage 1: one straight, level beam (panels A and B)**
+1. Screw two irises (BOM O11, ID12/M) into one row of table holes, both set to the same 100 mm centre height with one height gauge: the same post and holder type, a calliper and slip-on post collars. Put I1 near the steering mirrors and I2 as far away as the table allows.
+2. Mirror M1 puts the spot on I1, mirror M2 puts it on I2. Repeat until the beam passes both closed-down irises. The first mirror mostly sets the position, the second mostly the angle, so alternating converges.
+3. The beam is now on the hole row and level. The error is simply angle × distance: 1 mrad (0.057°) gives 1 mm per metre, which you see at once on the far iris.
+4. The irises stay in place as the permanent reference of that axis. Each 90° turn (a mirror or the PBS) gets its own pair of irises on the next hole row.
+
+**Stage 2: square each part to the beam**
+
+| Part | How it is set | How it is checked |
+|---|---|---|
+| Posts and holders | same post, holder and collar type for every part, height set with the calliper | the beam passes the reference irises after the part is put in |
+| Steering mirrors | beam walking (stage 1) | no extra check: the two irises fix their angle |
+| Wave plates, Glan-Taylor, cube faces, cell windows | turn the mount until the weak reflection from the face goes back through the iris hole (panel C) | a tilt θ moves the return spot by 2θL: at L = 0.5 m, 1 mrad gives 1 mm |
+| PBS cubes (roll about the beam) | turn the cube in its holder until the reflected beam stays at 100 mm (panel D) | a roll of 1° lifts the reflected beam 17 mm per metre: easy to see |
+| Lenses | centred so the far spot does not move when the lens is put in or taken out | back reflection from the lens surfaces centred on the iris |
+| AOMs | aperture at 100 mm with the post, beam through the 2 mm aperture | Bragg angle by the most first-order power (D9 micrometer), not by a protractor |
+| Detector | spot centred on the diode with the IR card or the camera | signal maximum |
+
+**How exact does it have to be?** Much less exact than the checks can show. Tilting a plate by 1° changes its path length through the glass only by 1 − cos 1° = 0.015 %. The things that matter are that the beam stays centred on the small apertures (2 mm AOM aperture, the irises, the 14 mm beam holes in the shield caps), that the control and probe overlap in the cell, and that no reflection goes straight back to the laser. The back-reflection check reaches about 1 mrad. Wave plate and polarizer axes are set by rotating them for a power minimum or maximum, not mechanically.
+
+**A deliberate exception.** After squaring, the cell windows and some plates are often tilted by a small angle on purpose, so that their reflections miss the beam path and do not form etalons or reach the laser. Our free-space isolator (L06) protects the laser in any case.
+
+**Practical points**
+- 795 nm is only faintly visible. Use the IR viewing card or the camera the lab already owns, wear the laser goggles, and turn the laser current down to a few mW while aligning. Block stray reflections, keep the beam at 100 mm (well below eye level), and take off watches and rings.
+- Start at the laser and work outward, one part at a time. After each part, check that the beam still passes the reference irises.
+- Printed holders (D11, D12) are made square by their datum walls; their acceptance test is the reflected spot drift (less than 0.5 mm at 2 m after a day).
+
+Sources: [Edmund Optics, Laser alignment activity 1 (beam walking with two mirrors and two irises)](https://www.edmundoptics.com/knowledge-center/application-notes/lasers/laser-alignment-activity-1/) · [Stony Brook Laser Teaching Center, Understanding "walking the beam"](https://www.stonybrook.edu/laser/_simone/mini-project/) · [UW Clean Energy Institute, alignment guide (two irises at the same height)](https://www.cei.washington.edu/wp-content/uploads/2017/06/Confocal-Microscope-alignment.pdf) · [KAUST laser alignment guidelines (safety)](https://hse.kaust.edu.sa/wp-content/uploads/pdf/docs/default-source/research-safety/laser_alignment_guidelines.pdf)
+
+### Q24. How is the magnetic shield of the Spain-style EIT cell probably made? It looks like a small enclosure.
 
 *Added 11 Oct 2026*
 
@@ -837,7 +876,7 @@ Why a small shield works:
 
 **What this means for our design:** we built for 0.1 mG stability and a cell field error of 0.2 %, which needs the long three-layer shield, the 42-turn solenoid with end turns, and degaussing. A compact module like theirs is simpler and cheaper and gives clear EIT, but with a broader, less reproducible line, and its temperature drifts without a loop. A compact version of ours (for example two layers, inner bore about Ø40 mm, about 120 mm long with caps) is possible, but the field uniformity would have to be recalculated with the end caps included before choosing it.
 
-### Q24. Can we make the mu-metal shield ourselves: roll a sheet into a cylinder and close it with (3D-printed) end caps?
+### Q25. Can we make the mu-metal shield ourselves: roll a sheet into a cylinder and close it with (3D-printed) end caps?
 
 *Added 11 Oct 2026*
 
@@ -867,7 +906,7 @@ Three layers multiply these roughly, if the gaps between them are a few millimet
 
 **Check:** after assembly and degaussing (D4), measure the residual field at the cell with the fluxgate plate. Then turn the whole shield in the room and read it again: the reading should change by less than about 0.1 mG.
 
-### Q25. Which DC source should drive the solenoid, and how do I wire the second ITC502 laser output for it? (Is the Rigol DP832A needed?)
+### Q26. Which DC source should drive the solenoid, and how do I wire the second ITC502 laser output for it? (Is the Rigol DP832A needed?)
 
 *Added 10 Oct 2026*
 
@@ -906,7 +945,7 @@ Three layers multiply these roughly, if the gaps between them are a few millimet
 
 **Effect on the BOM.** If the ITC502 route works, BOM C08 (Rigol DP832A) and, with the heater on the TEC half, C04 (TC300B) can be dropped. This has not been applied; test the solenoid and the heater on the bench first, with the fluxgate inside the shield.
 
-### Q26. Can a home-wound solenoid really give 3.39 mG per mA, and how and where do we measure it?
+### Q27. Can a home-wound solenoid really give 3.39 mG per mA, and how and where do we measure it?
 
 *Added 16 Oct 2026*
 
@@ -927,7 +966,7 @@ Three layers multiply these roughly, if the gaps between them are a few millimet
 
 **In short:** wind it carefully, measure the slope with the fluxgate in free space and in the shield, and let the atoms give the final number. Whatever value comes out, the current (about 15 mA for 50 mG) or the RF difference is adjusted to it.
 
-### Q27. Can the Stefan Mayer FLC100 be the fluxgate magnetometer with milligauss resolution?
+### Q28. Can the Stefan Mayer FLC100 be the fluxgate magnetometer with milligauss resolution?
 
 *Added 10 Oct 2026*
 
@@ -951,7 +990,7 @@ Sources: [Stefan Mayer FLC 100 data sheet](https://stefan-mayer.com/images/datas
 
 ## The Quantum Spain-style bench
 
-### Q28. Is the Spain-style arrangement correct, in theory and in practice?
+### Q29. Is the Spain-style arrangement correct, in theory and in practice?
 
 *Added 9 Oct 2026*
 
@@ -975,7 +1014,7 @@ Sources: [Stefan Mayer FLC 100 data sheet](https://stefan-mayer.com/images/datas
 - No beam dumps or tubes are visible (laser safety).
 - The AOM tilt is exaggerated to 8° in the drawing, hence the 160 mm from separator cube to AOM; a real build can be tighter but needs an iris or block for the zeroth order. Do not use the drawing as a build recipe.
 
-### Q29. What is the cell label TRT-Rb/Ne-10T-20x75 on the Spain-style EIT cell, and would it suit our bench?
+### Q30. What is the cell label TRT-Rb/Ne-10T-20x75 on the Spain-style EIT cell, and would it suit our bench?
 
 *Added 12 Oct 2026*
 
@@ -1030,7 +1069,7 @@ Sources: [Stefan Mayer FLC 100 data sheet](https://stefan-mayer.com/images/datas
 
 ## About this guide
 
-### Q30. How does the lab inventory enter the costed BOM and the Spain-style cost?
+### Q31. How does the lab inventory enter the costed BOM and the Spain-style cost?
 
 *Added 10 Oct 2026*
 
@@ -1043,7 +1082,7 @@ Sources: [Stefan Mayer FLC 100 data sheet](https://stefan-mayer.com/images/datas
 
 **Rules and limits.** Items marked "check" or "no" are not counted. An item that covers a row only in part is counted only for the units it can supply (for example 6 post holders against 60 post sets). The Credix SG-1710 is **not** counted against the dual-channel RF synthesizer, which needs two phase-locked channels. Mounts whose aperture is not measured yet (the Melles Griot set) are counted as 10 of the 11 mirror mounts; measure them. The prices stay behind the group password; the switch only changes how the totals are computed.
 
-### Q31. Can the Thorlabs PM100USB CAD file be used for the 3D pictures?
+### Q32. Can the Thorlabs PM100USB CAD file be used for the 3D pictures?
 
 *Added 10 Oct 2026*
 
