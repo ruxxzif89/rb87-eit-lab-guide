@@ -394,6 +394,13 @@ Sources: [Thorlabs broadband PBS cubes in 30 mm cage cubes (CCM1-PBS252/M)](http
 | Laser linewidth | 0.6–1.0 MHz (needs only to be below about 100 MHz) |
 | SAS feature width | about 6–12 MHz |
 
+**Why do the two RF channels differ by 35 kHz?**
+- **EIT needs two-photon resonance.** In our Λ system the control (σ⁺) connects F = 2, m = −1 to the excited state F′ = 1, m = 0, and the probe (σ⁻) connects F = 2, m = +1 to the same excited state. The probe passes (EIT) only when the frequency difference of the two beams equals the energy difference of the two lower states.
+- **The lower states are split by the solenoid field.** For F = 2 of Rb-87 the Zeeman shift is g_F μ_B B / h = 0.70 MHz per gauss for each step in m (g_F = 1/2). The two states differ by Δm = 2, so the splitting is 1.40 MHz per gauss, that is 1.4 kHz per mG. At our working field of about 50 mG: 1.4 × 50 = **70 kHz**.
+- **Each AOM is passed twice.** A double pass shifts the light by 2 × f_RF, so the light frequencies differ by 2 × (f₁ − f₂). To get 70 kHz in the light, the RF channels differ by 70 / 2 = **35 kHz**: 80.000 MHz and 79.965 MHz.
+- **Why a field at all, instead of 0 G and equal frequencies?** The solenoid field along the beam sets the quantization axis, so that "σ⁺" and "σ⁻" are well defined, and it is about 50 mG, far above what the shield leaves (well below a milligauss), so stray fields cannot move the resonance. The AOM difference is then simply matched to the splitting that this field produces.
+- **It is not a magic number.** If the field is set differently, the RF difference follows it (35 kHz for 50 mG, 0.7 kHz per mG of RF difference). For the EIT spectrum, the probe channel is swept a little around 79.965 MHz, and the transparency peak appears where the two-photon condition is met. Which channel is higher depends on the field direction and on which beam is σ⁺; if no peak appears, swap the sign of the difference.
+
 Because the offset between the two beams is only kHz, a generator with 1 Hz resolution is far more than precise enough. The control–probe difference must stay steady to well under the EIT width (a few kHz): use one two-channel source, or sources sharing a clock.
 
 ### Q8. Is a DFB with a TEC and the Thorlabs ITC502 good enough? How do the controllers compare?
