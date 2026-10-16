@@ -192,7 +192,7 @@ Sources: RB-795-DFB-BFW data sheet (Yanban Laser, from the vendor) · [Alibaba l
 - **The laser linewidth** only has to be well below the optical width of the atoms (Doppler about 500 MHz, wider with buffer gas). Our 0.6–1 MHz is 100× below.
 
 **What matters more** (my reasoning)
-- **Relative phase of control and probe.** Both come from the same laser through phase-locked RF, so the laser's phase noise is common to both and cancels. A 1 m path difference (about 3 ns) at 1 MHz linewidth gives only about 0.02 rad. What reaches the atoms is noise from the RF source and drift in the arm lengths.
+- **Relative phase of control and probe.** Both come from the same laser through phase-locked RF, so the laser's phase noise is common to both and cancels. A 1 m path difference (about 3 ns) at 1 MHz linewidth gives a relative phase variance of only about 0.02 rad² (0.14 rad rms), so about 98 % of the two-photon drive stays narrow (calculator 4 of the [distance calculator](optics-calc.html)). What reaches the atoms is noise from the RF source and drift in the arm lengths.
 - **Lock stability.** The laser must stay within a fraction of the optical width; the DeRose paper reports drift of about 10 MHz per hour and negligible drift during data taking.
 
 **DFB against ECDL**
@@ -854,7 +854,48 @@ Why the Spain-style bench can be lower: their cell module is a small enclosure, 
 
 Sources: [Edmund Optics, Laser alignment activity 1 (beam walking with two mirrors and two irises)](https://www.edmundoptics.com/knowledge-center/application-notes/lasers/laser-alignment-activity-1/) · [Stony Brook Laser Teaching Center, Understanding "walking the beam"](https://www.stonybrook.edu/laser/_simone/mini-project/) · [UW Clean Energy Institute, alignment guide (two irises at the same height)](https://www.cei.washington.edu/wp-content/uploads/2017/06/Confocal-Microscope-alignment.pdf) · [KAUST laser alignment guidelines (safety)](https://hse.kaust.edu.sa/wp-content/uploads/pdf/docs/default-source/research-safety/laser_alignment_guidelines.pdf)
 
-### Q24. How is the magnetic shield of the Spain-style EIT cell probably made? It looks like a small enclosure.
+### Q24. How do we calculate the distances between the optical parts?
+
+*Added 16 Oct 2026*
+
+*Equipment shown in the guide: fibre collimator, isolator, AOM, lenses, retro mirror, alignment iris.*
+
+**Most distances on our bench are free. Only a few are fixed by optics, and those can be calculated.** After the collimator the beam is collimated with a Rayleigh range of about 4 m (z_R = π w₀² / λ), so over a 2 m bench its diameter grows by less than 10 %. The distances between mirrors, wave plates, cubes and the isolator therefore do not change the physics. They are set by the size of the mounts, the 25 mm hole grid, and the rule that the beam must fit every aperture.
+
+**Try it:** the [distance calculator](optics-calc.html) does all of the steps below with our parts, shows every formula, and lets you change the numbers. Its maths is checked by a test script (32 checks against Thorlabs' worked examples, the G&H rise times, ray traces and a numerical integration).
+
+| Distance | Fixed by | Our value | How exact |
+|---|---|---|---|
+| AOM → cat's-eye lens | lens focal length f | 100 mm | loose: 10 mm off moves the return beam by under 1 µm for our ±200 kHz scan |
+| cat's-eye lens → retro mirror | f (mirror at the focus) | 100 mm | the critical one: 1 mm off makes the return beam converge like a 5 m lens |
+| telescope lens → lens (control expander) | f₁ + f₂ | 50 + 100 = 150 mm | set so the output beam has the same size near and far |
+| collection lens → photodiode | the spot must fit the chip | about 40–50 mm | loose: the 3.6 × 3.6 mm chip takes a spot of a millimetre |
+| control path − probe path (split → cell) | laser linewidth | within about 0.5 m | 1 MHz linewidth: 0.48 m keeps 99 % of the two-photon drive narrow |
+| between flat optics | mounts, holes, apertures | free | the beam must fit each aperture; mounts must not touch |
+| the two alignment irises | accuracy wanted | as far apart as possible | angle error about 2e/L (e = centring error) |
+
+**The calculation, step by step**
+1. **Beam from the fibre collimator:** D = 4 λ f / (π MFD) (Thorlabs). With the planned 11 mm collimator and a PM780 fibre (MFD 5.3 µm): D = 2.1 mm.
+2. **Beam along the path:** w(z) = w₀ √(1 + (z/z_R)²); a lens changes the beam through its ABCD matrix. A round aperture of radius a passes 1 − exp(−2a²/w²) of a beam of radius w: an aperture 1.5 × the beam diameter passes 98.9 %.
+3. **Double-pass cat's eye:** AOM → lens = f and lens → mirror = f. The two orders are f × λ f_RF / v = 1.51 mm apart at the mirror, and a 1 mm beam focuses to about 0.10 mm there, so a razor blade between them blocks the 0th order cleanly. The ABCD matrix of the arm shows why the mirror distance is the critical one. A mirror δ beyond the focus returns a converging beam (like a lens of f²/2δ: 5 m for 1 mm). An AOM-to-lens error only moves the return beam by 2 (f − d) λ Δf / v (0.76 µm for 10 mm and ±200 kHz).
+4. **The two arms:** both beams come from one laser, so its phase noise cancels only if they arrive together. The share of the two-photon drive that stays narrow is exp(−2π Δν ΔL / c) (Lorentzian laser, as in delayed self-heterodyne theory). At 1 MHz that is 99 % for ΔL = 0.48 m.
+5. **Rise time of the AOM pulses:** about 0.64 D / v, that is 150 ns per mm of beam in TeO₂ (G&H drawing: 65 ns at 0.4 mm).
+
+**What the calculator found for our plan: the beam is bigger than the equipment list assumes.** The planned collimator (BOM L05, CFC11A-B) gives about 2.1 mm (Thorlabs' own table also gives 2.1 mm), not 1.5 mm. With the fibre's MFD tolerance (5.3 ± 1.0 µm) it can be anywhere from 1.8 to 2.6 mm. In the AOM's 2.5 × 2.0 mm aperture about 93 % of a 2.1 mm beam passes on each pass (a first-order estimate). The rise time is about 0.32 µs, still fine for microsecond pulses. Options, not yet decided:
+- a collimator with f ≈ 7.5–8 mm (about 1.5 mm beam);
+- a 2:1 telescope in front of the AOM arms;
+- first measure the real beam with the lab camera, then decide.
+
+**Setting the fixed distances on the bench**
+- A focal length is measured from the lens's principal plane, not from the mount face. For an achromatic doublet, use the back focal length from its data sheet (the distance from the last glass surface) for the first placement.
+- Then fine-tune optically:
+  - **Cat's-eye mirror:** move it until the returned beam has the same size far away (2–3 m) as the incoming beam.
+  - **Telescope:** change the lens gap until the output beam has the same size at 0.5 m and at 3 m (IR card or camera).
+- Path lengths: measure with a tape along the beam. A double-pass arm counts twice.
+
+Sources: H. Kogelnik and T. Li, Appl. Opt. 5, 1550 (1966) (Gaussian beams, ABCD) · S. A. Self, Appl. Opt. 22, 658 (1983) (focusing) · [Thorlabs CFC-11X-B sheet (collimator formula and table)](https://www.thorlabs.com/catalogpages/Obsolete/2020/CFC-11X-B.pdf) · [Thorlabs PM fibre table (PM780-HP MFD 5.3 ± 1.0 µm at 850 nm)](https://www.thorlabs.com/catalogpages/obsolete/2019/PM14XX-HP.pdf) · G&H 3080-125 outline drawing 97-01598-01 rev D · [Donley et al., Rev. Sci. Instrum. 76, 063112 (2005)](https://tf.nist.gov/general/pdf/2071.pdf) · T. Okoshi et al., Electron. Lett. 16, 630 (1980) and L. E. Richter et al., IEEE J. Quantum Electron. 22, 2070 (1986) (delayed self-heterodyne)
+
+### Q25. How is the magnetic shield of the Spain-style EIT cell probably made? It looks like a small enclosure.
 
 *Added 11 Oct 2026*
 
@@ -876,7 +917,7 @@ Why a small shield works:
 
 **What this means for our design:** we built for 0.1 mG stability and a cell field error of 0.2 %, which needs the long three-layer shield, the 42-turn solenoid with end turns, and degaussing. A compact module like theirs is simpler and cheaper and gives clear EIT, but with a broader, less reproducible line, and its temperature drifts without a loop. A compact version of ours (for example two layers, inner bore about Ø40 mm, about 120 mm long with caps) is possible, but the field uniformity would have to be recalculated with the end caps included before choosing it.
 
-### Q25. Can we make the mu-metal shield ourselves: roll a sheet into a cylinder and close it with (3D-printed) end caps?
+### Q26. Can we make the mu-metal shield ourselves: roll a sheet into a cylinder and close it with (3D-printed) end caps?
 
 *Added 11 Oct 2026*
 
@@ -906,7 +947,7 @@ Three layers multiply these roughly, if the gaps between them are a few millimet
 
 **Check:** after assembly and degaussing (D4), measure the residual field at the cell with the fluxgate plate. Then turn the whole shield in the room and read it again: the reading should change by less than about 0.1 mG.
 
-### Q26. Which DC source should drive the solenoid, and how do I wire the second ITC502 laser output for it? (Is the Rigol DP832A needed?)
+### Q27. Which DC source should drive the solenoid, and how do I wire the second ITC502 laser output for it? (Is the Rigol DP832A needed?)
 
 *Added 10 Oct 2026*
 
@@ -945,7 +986,7 @@ Three layers multiply these roughly, if the gaps between them are a few millimet
 
 **Effect on the BOM.** If the ITC502 route works, BOM C08 (Rigol DP832A) and, with the heater on the TEC half, C04 (TC300B) can be dropped. This has not been applied; test the solenoid and the heater on the bench first, with the fluxgate inside the shield.
 
-### Q27. Can a home-wound solenoid really give 3.39 mG per mA, and how and where do we measure it?
+### Q28. Can a home-wound solenoid really give 3.39 mG per mA, and how and where do we measure it?
 
 *Added 16 Oct 2026*
 
@@ -966,7 +1007,7 @@ Three layers multiply these roughly, if the gaps between them are a few millimet
 
 **In short:** wind it carefully, measure the slope with the fluxgate in free space and in the shield, and let the atoms give the final number. Whatever value comes out, the current (about 15 mA for 50 mG) or the RF difference is adjusted to it.
 
-### Q28. Can the Stefan Mayer FLC100 be the fluxgate magnetometer with milligauss resolution?
+### Q29. Can the Stefan Mayer FLC100 be the fluxgate magnetometer with milligauss resolution?
 
 *Added 10 Oct 2026*
 
@@ -990,7 +1031,7 @@ Sources: [Stefan Mayer FLC 100 data sheet](https://stefan-mayer.com/images/datas
 
 ## The Quantum Spain-style bench
 
-### Q29. Is the Spain-style arrangement correct, in theory and in practice?
+### Q30. Is the Spain-style arrangement correct, in theory and in practice?
 
 *Added 9 Oct 2026*
 
@@ -1014,7 +1055,7 @@ Sources: [Stefan Mayer FLC 100 data sheet](https://stefan-mayer.com/images/datas
 - No beam dumps or tubes are visible (laser safety).
 - The AOM tilt is exaggerated to 8° in the drawing, hence the 160 mm from separator cube to AOM; a real build can be tighter but needs an iris or block for the zeroth order. Do not use the drawing as a build recipe.
 
-### Q30. What is the cell label TRT-Rb/Ne-10T-20x75 on the Spain-style EIT cell, and would it suit our bench?
+### Q31. What is the cell label TRT-Rb/Ne-10T-20x75 on the Spain-style EIT cell, and would it suit our bench?
 
 *Added 12 Oct 2026*
 
@@ -1069,7 +1110,7 @@ Sources: [Stefan Mayer FLC 100 data sheet](https://stefan-mayer.com/images/datas
 
 ## About this guide
 
-### Q31. How does the lab inventory enter the costed BOM and the Spain-style cost?
+### Q32. How does the lab inventory enter the costed BOM and the Spain-style cost?
 
 *Added 10 Oct 2026*
 
@@ -1082,7 +1123,7 @@ Sources: [Stefan Mayer FLC 100 data sheet](https://stefan-mayer.com/images/datas
 
 **Rules and limits.** Items marked "check" or "no" are not counted. An item that covers a row only in part is counted only for the units it can supply (for example 6 post holders against 60 post sets). The Credix SG-1710 is **not** counted against the dual-channel RF synthesizer, which needs two phase-locked channels. Mounts whose aperture is not measured yet (the Melles Griot set) are counted as 10 of the 11 mirror mounts; measure them. The prices stay behind the group password; the switch only changes how the totals are computed.
 
-### Q32. Can the Thorlabs PM100USB CAD file be used for the 3D pictures?
+### Q33. Can the Thorlabs PM100USB CAD file be used for the 3D pictures?
 
 *Added 10 Oct 2026*
 
