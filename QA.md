@@ -264,6 +264,12 @@ Our planned build meets this from separate parts: Windfreak SynthHD (two channel
 - **Take the SAS light from the control arm after its AOM** (a small pick-off after the double pass), so the lock sees the shifted light and the control sits exactly on the line. The catch: when the control is switched off for storage, the lock light disappears too, so the lock box must hold its output during the off time (microseconds, much shorter than the lock response).
 A third AOM in the SAS arm would also work, but it is not needed and is not in the budget.
 
+**Status and decision path (16 Oct 2026).** An AOM supplier can make the AOM to this specification; the RF driver is the open item. Before confirming the AOM, get in writing: RF connector (SMB or SMA), maximum RF input power, diffraction efficiency at 795 nm and the RF power for it, AR coating covering 795 nm, input polarization, and a drawing. For the driver, three routes are compared:
+- **A, our planned build from parts:** two-channel synthesizer (SynthHD), per channel an RF switch, a step attenuator, a 2 W amplifier and a monitor coupler, plus the DIY D8 bias box.
+- **B, a two-channel box from the AOM supplier** built to our block diagram (two tunable channels from one clock, fast TTL gates, analog amplitude inputs, monitor ports, about 1 W per channel, 2 W maximum, a frequency sweep on the probe channel).
+- **C, a budget fallback:** a four-channel DDS board based on the Analog Devices AD9959 (all channels from one clock, sub-hertz steps) in place of the synthesizer, with the same RF parts, a low-pass filter per channel, and our own control software.
+B is taken if it meets the specification and costs less than A; C only if the budget forces it. Whatever the route, a fixed-frequency driver (its own oscillator per channel) is never accepted: the 35 kHz difference must come from one clock and stay tunable.
+
 **Reading an AOM data sheet or listing: check these, in this order.**
 1. **Wavelength and AR coating.** It must cover 795 nm (for example 780–850 nm, or 700–1100 nm). A 633 nm, 532 nm or 1064 nm part is the wrong coating.
 2. **Centre frequency.** 80 MHz is what our RF chain and frequencies are built around. A 110 MHz part also works, but then both AOMs must be 110 MHz and the beams sit 220 MHz off the line instead of 160 MHz.
@@ -852,7 +858,28 @@ Three layers multiply these roughly, if the gaps between them are a few millimet
 
 **Effect on the BOM.** If the ITC502 route works, BOM C08 (Rigol DP832A) and, with the heater on the TEC half, C04 (TC300B) can be dropped. This has not been applied; test the solenoid and the heater on the bench first, with the fluxgate inside the shield.
 
-### Q25. Can the Stefan Mayer FLC100 be the fluxgate magnetometer with milligauss resolution?
+### Q25. Can a home-wound solenoid really give 3.39 mG per mA, and how and where do we measure it?
+
+*Added 16 Oct 2026*
+
+*Equipment shown in the guide: solenoid (DIY D1), fluxgate FLC100 (DIY D7), µ-metal shield, ITC502 (solenoid current).*
+
+**Yes, close to it, and the exact value does not have to be reached: it has to be measured.** 3.39 mG/mA is the calculated field per milliampere of our 42-turn coil (DIY D1) in free space. It depends only on the number of turns and the coil geometry, so a careful winding gets within a few percent. Inside the µ-metal shield the value changes (the shield carries part of the return flux), which is why D1 says "calibrate in the shield". The experiment never needs exactly 3.39: it needs to know the field, so that the RF difference can be matched to it (or the current to the RF difference).
+
+**What can make it differ, and by how much**
+- Number of turns: counted while winding, so exact.
+- Coil radius and length: the printed former holds them to a fraction of a millimetre, a change of well under 1 %.
+- The shield: can raise the field inside by a larger amount than the winding errors; only a measurement in the shield gives the real value.
+- Uniformity matters more than the absolute value: 0.2 % over the cell, that is about 0.1 mG at 50 mG, which broadens the EIT line by about 0.14 kHz, small against its 10–30 kHz width.
+
+**How and where to measure (three steps, from rough to exact)**
+1. **On the bench, before the shield (D1):** put the fluxgate (FLC100, DIY D7) on the coil axis where the cell will sit. Step the current (for example 0, ±5, ±10, ±15 mA, both directions) and plot the field against the current. The slope is the coil constant in free space; reversing the current cancels the Earth's field and the sensor offset.
+2. **Inside the shield, after degaussing (D1 step 10, D4):** replace the cell by the fluxgate plate (D7) at the cell position and repeat ±5, ±10, ±15 mA. This slope is the working value. The fluxgate reads differences well (noise about 0.03 mG) but its absolute accuracy is only about ±2 % and ±3 mG offset, so it gives the slope, not the absolute zero.
+3. **With the atoms, the final and absolute calibration:** with the cell back in place and EIT running, sweep the probe RF channel and note where the EIT peak sits for several solenoid currents. The two-photon resonance moves by exactly 1.4 kHz of light frequency (0.7 kHz of RF difference) per mG, an atomic constant, so the peak positions give the field directly, and the current at which the peak sits at zero RF difference shows the residual field left by the shield.
+
+**In short:** wind it carefully, measure the slope with the fluxgate in free space and in the shield, and let the atoms give the final number. Whatever value comes out, the current (about 15 mA for 50 mG) or the RF difference is adjusted to it.
+
+### Q26. Can the Stefan Mayer FLC100 be the fluxgate magnetometer with milligauss resolution?
 
 *Added 10 Oct 2026*
 
@@ -876,7 +903,7 @@ Sources: [Stefan Mayer FLC 100 data sheet](https://stefan-mayer.com/images/datas
 
 ## The Quantum Spain-style bench
 
-### Q26. Is the Spain-style arrangement correct, in theory and in practice?
+### Q27. Is the Spain-style arrangement correct, in theory and in practice?
 
 *Added 9 Oct 2026*
 
@@ -900,7 +927,7 @@ Sources: [Stefan Mayer FLC 100 data sheet](https://stefan-mayer.com/images/datas
 - No beam dumps or tubes are visible (laser safety).
 - The AOM tilt is exaggerated to 8° in the drawing, hence the 160 mm from separator cube to AOM; a real build can be tighter but needs an iris or block for the zeroth order. Do not use the drawing as a build recipe.
 
-### Q27. What is the cell label TRT-Rb/Ne-10T-20x75 on the Spain-style EIT cell, and would it suit our bench?
+### Q28. What is the cell label TRT-Rb/Ne-10T-20x75 on the Spain-style EIT cell, and would it suit our bench?
 
 *Added 12 Oct 2026*
 
@@ -955,7 +982,7 @@ Sources: [Stefan Mayer FLC 100 data sheet](https://stefan-mayer.com/images/datas
 
 ## About this guide
 
-### Q28. How does the lab inventory enter the costed BOM and the Spain-style cost?
+### Q29. How does the lab inventory enter the costed BOM and the Spain-style cost?
 
 *Added 10 Oct 2026*
 
@@ -968,7 +995,7 @@ Sources: [Stefan Mayer FLC 100 data sheet](https://stefan-mayer.com/images/datas
 
 **Rules and limits.** Items marked "check" or "no" are not counted. An item that covers a row only in part is counted only for the units it can supply (for example 6 post holders against 60 post sets). The Credix SG-1710 is **not** counted against the dual-channel RF synthesizer, which needs two phase-locked channels. Mounts whose aperture is not measured yet (the Melles Griot set) are counted as 10 of the 11 mirror mounts; measure them. The prices stay behind the group password; the switch only changes how the totals are computed.
 
-### Q29. Can the Thorlabs PM100USB CAD file be used for the 3D pictures?
+### Q30. Can the Thorlabs PM100USB CAD file be used for the 3D pictures?
 
 *Added 10 Oct 2026*
 
