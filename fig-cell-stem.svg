@@ -1,0 +1,137 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1460 820" role="img" aria-labelledby="t d" font-family="Segoe UI, Arial, Helvetica, sans-serif">
+<title id="t">The stem of a real vapour cell and where it has to go</title><desc id="d">Three panels. A: a real reference cell from the Thorlabs drawing: a 19 mm tube, 21 mm windows tilted 11 degrees, and a 6 mm torch-sealed stem up to 10 mm high at mid-length. B: end view of our EIT cell stack inside the solenoid former and the shield: a 4 mm stem fits inside the 34 mm bore; 6 and 10 mm stems would hit the former and the winding. C: what a taller stem would cost: former bore, shield bore and end turns.</desc>
+<defs><pattern id="hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="6" stroke="#555" stroke-width="1"/></pattern><pattern id="hatchf" width="4" height="4" patternUnits="userSpaceOnUse" patternTransform="rotate(-45)"><line x1="0" y1="0" x2="0" y2="4" stroke="#888" stroke-width="0.8"/></pattern><pattern id="dots" width="5" height="5" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="0.8" fill="#999"/></pattern><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#1b1f24"/></marker><marker id="arrg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#6b7280"/></marker></defs>
+<rect width="1460" height="820" fill="#ffffff"/>
+<text x="24.00" y="36.00" font-size="19" text-anchor="start" fill="#1b1f24" font-weight="700">Real cells have a torch-sealed stem (tip-off): where it goes in our holders and in the solenoid</text>
+<text x="24.00" y="60.00" font-size="12.5" text-anchor="start" fill="#6b7280">Dimensions in mm. Panel A is redrawn from Thorlabs’ drawing of its Ø19 × 75 mm rubidium cell (GC19075-RB); the Precision Glassblowing stock cell photo shows the same kind of nub at mid-length.</text>
+<rect x="20.00" y="80.00" width="560.00" height="420.00" rx="6" fill="none" stroke="#e4e8ee" stroke-width="1.2"/>
+<text x="34.00" y="104.00" font-size="14" text-anchor="start" fill="#1b1f24" font-weight="700">A. A real reference cell, side view</text>
+<polygon points="95.00,278.70 500.00,278.70 500.00,381.30 95.00,381.30" fill="#d6ebf7" stroke="#1b1f24" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round"/>
+<polygon points="95.00,386.70 78.80,386.70 56.76,273.30 72.96,273.30" fill="#b9d9ee" stroke="#1b1f24" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round"/>
+<polygon points="500.00,386.70 516.20,386.70 538.24,273.30 522.04,273.30" fill="#b9d9ee" stroke="#1b1f24" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round"/>
+<polygon points="281.30,278.70 281.30,240.90 297.50,224.70 313.70,240.90 313.70,278.70" fill="#d6ebf7" stroke="#1b1f24" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round"/>
+<line x1="51.80" y1="330.00" x2="543.20" y2="330.00" stroke="#c0392b" stroke-width="1.6" stroke-dasharray="8 5" stroke-linecap="round"/>
+<line x1="95.00" y1="386.70" x2="95.00" y2="421.30" stroke="#6b7280" stroke-width="0.9" stroke-linecap="round"/>
+<line x1="500.00" y1="386.70" x2="500.00" y2="421.30" stroke="#6b7280" stroke-width="0.9" stroke-linecap="round"/>
+<line x1="95.00" y1="415.30" x2="500.00" y2="415.30" stroke="#1b1f24" stroke-width="1" marker-start="url(#arr)" marker-end="url(#arr)"/>
+<text x="297.50" y="411.30" font-size="11.5" text-anchor="middle" fill="#1b1f24">75 (between the windows)</text>
+<line x1="500.00" y1="278.70" x2="593.00" y2="278.70" stroke="#6b7280" stroke-width="0.9" stroke-linecap="round"/>
+<line x1="500.00" y1="381.30" x2="593.00" y2="381.30" stroke="#6b7280" stroke-width="0.9" stroke-linecap="round"/>
+<line x1="587.00" y1="278.70" x2="587.00" y2="381.30" stroke="#1b1f24" stroke-width="1" marker-start="url(#arr)" marker-end="url(#arr)"/>
+<text x="592.00" y="334.00" font-size="11.5" text-anchor="start" fill="#1b1f24">tube Ø19</text>
+<line x1="297.50" y1="224.70" x2="375.80" y2="168.00" stroke="#6b7280" stroke-width="1.0" stroke-linecap="round"/>
+<circle cx="297.50" cy="224.70" r="2.2" fill="#6b7280"/>
+<text x="379.80" y="172.00" font-size="12" text-anchor="start" fill="#1b1f24" font-weight="700">stem Ø6, at most 10 high (tip-off)</text>
+<line x1="84.20" y1="286.80" x2="73.40" y2="200.40" stroke="#6b7280" stroke-width="1.0" stroke-linecap="round"/>
+<circle cx="84.20" cy="286.80" r="2.2" fill="#6b7280"/>
+<text x="77.40" y="204.40" font-size="12" text-anchor="start" fill="#1b1f24" font-weight="700">window Ø21 × 3, tilted 11°</text>
+<text x="34.00" y="470.00" font-size="12" text-anchor="start" fill="#1b1f24">The windows stand 1 mm proud of the tube and the stem sits on the side at mid-length:</text>
+<text x="34.00" y="488.00" font-size="12" text-anchor="start" fill="#1b1f24">a holder must leave room for both (our SAS holder D11: stem ≤ 13 mm, windows ≤ Ø23).</text>
+<rect x="600.00" y="80.00" width="420.00" height="720.00" rx="6" fill="none" stroke="#e4e8ee" stroke-width="1.2"/>
+<text x="614.00" y="104.00" font-size="14" text-anchor="start" fill="#1b1f24" font-weight="700">B. Our EIT cell in the solenoid (end view)</text>
+<circle cx="810.00" cy="380.00" r="151.80" fill="none" stroke="#9aa5b1" stroke-width="3.0"/>
+<circle cx="810.00" cy="380.00" r="125.40" fill="#e9dfc5" stroke="#1b1f24" stroke-width="1.2"/>
+<circle cx="810.00" cy="380.00" r="112.20" fill="#ffffff" stroke="#1b1f24" stroke-width="1.2"/>
+<circle cx="934.58" cy="380.00" r="1.6" fill="#c0703a"/>
+<circle cx="933.51" cy="396.26" r="1.6" fill="#c0703a"/>
+<circle cx="930.33" cy="412.24" r="1.6" fill="#c0703a"/>
+<circle cx="925.09" cy="427.67" r="1.6" fill="#c0703a"/>
+<circle cx="917.89" cy="442.29" r="1.6" fill="#c0703a"/>
+<circle cx="908.83" cy="455.84" r="1.6" fill="#c0703a"/>
+<circle cx="898.09" cy="468.09" r="1.6" fill="#c0703a"/>
+<circle cx="885.84" cy="478.83" r="1.6" fill="#c0703a"/>
+<circle cx="872.29" cy="487.89" r="1.6" fill="#c0703a"/>
+<circle cx="857.67" cy="495.09" r="1.6" fill="#c0703a"/>
+<circle cx="842.24" cy="500.33" r="1.6" fill="#c0703a"/>
+<circle cx="826.26" cy="503.51" r="1.6" fill="#c0703a"/>
+<circle cx="810.00" cy="504.57" r="1.6" fill="#c0703a"/>
+<circle cx="793.74" cy="503.51" r="1.6" fill="#c0703a"/>
+<circle cx="777.76" cy="500.33" r="1.6" fill="#c0703a"/>
+<circle cx="762.33" cy="495.09" r="1.6" fill="#c0703a"/>
+<circle cx="747.71" cy="487.89" r="1.6" fill="#c0703a"/>
+<circle cx="734.16" cy="478.83" r="1.6" fill="#c0703a"/>
+<circle cx="721.91" cy="468.09" r="1.6" fill="#c0703a"/>
+<circle cx="711.17" cy="455.84" r="1.6" fill="#c0703a"/>
+<circle cx="702.11" cy="442.29" r="1.6" fill="#c0703a"/>
+<circle cx="694.91" cy="427.67" r="1.6" fill="#c0703a"/>
+<circle cx="689.67" cy="412.24" r="1.6" fill="#c0703a"/>
+<circle cx="686.49" cy="396.26" r="1.6" fill="#c0703a"/>
+<circle cx="685.42" cy="380.00" r="1.6" fill="#c0703a"/>
+<circle cx="686.49" cy="363.74" r="1.6" fill="#c0703a"/>
+<circle cx="689.67" cy="347.76" r="1.6" fill="#c0703a"/>
+<circle cx="694.91" cy="332.33" r="1.6" fill="#c0703a"/>
+<circle cx="702.11" cy="317.71" r="1.6" fill="#c0703a"/>
+<circle cx="711.17" cy="304.16" r="1.6" fill="#c0703a"/>
+<circle cx="721.91" cy="291.91" r="1.6" fill="#c0703a"/>
+<circle cx="734.16" cy="281.17" r="1.6" fill="#c0703a"/>
+<circle cx="747.71" cy="272.11" r="1.6" fill="#c0703a"/>
+<circle cx="762.33" cy="264.91" r="1.6" fill="#c0703a"/>
+<circle cx="777.76" cy="259.67" r="1.6" fill="#c0703a"/>
+<circle cx="793.74" cy="256.49" r="1.6" fill="#c0703a"/>
+<circle cx="810.00" cy="255.43" r="1.6" fill="#c0703a"/>
+<circle cx="826.26" cy="256.49" r="1.6" fill="#c0703a"/>
+<circle cx="842.24" cy="259.67" r="1.6" fill="#c0703a"/>
+<circle cx="857.67" cy="264.91" r="1.6" fill="#c0703a"/>
+<circle cx="872.29" cy="272.11" r="1.6" fill="#c0703a"/>
+<circle cx="885.84" cy="281.17" r="1.6" fill="#c0703a"/>
+<circle cx="898.09" cy="291.91" r="1.6" fill="#c0703a"/>
+<circle cx="908.83" cy="304.16" r="1.6" fill="#c0703a"/>
+<circle cx="917.89" cy="317.71" r="1.6" fill="#c0703a"/>
+<circle cx="925.09" cy="332.33" r="1.6" fill="#c0703a"/>
+<circle cx="930.33" cy="347.76" r="1.6" fill="#c0703a"/>
+<circle cx="933.51" cy="363.74" r="1.6" fill="#c0703a"/>
+<circle cx="810.00" cy="380.00" r="104.28" fill="#f3efe3" stroke="#1b1f24" stroke-width="1.0"/>
+<circle cx="810.00" cy="380.00" r="82.50" fill="#d6ebf7" stroke="#1b1f24" stroke-width="1.4"/>
+<circle cx="810.00" cy="380.00" r="3.00" fill="#c0392b" stroke="#c0392b" stroke-width="1"/>
+<polygon points="790.20,299.50 802.08,237.50 810.00,231.50 817.92,237.50 829.80,299.50" fill="none" stroke="#c0392b" stroke-width="1.6" stroke-dasharray="5 4" stroke-linejoin="round" stroke-linecap="round"/>
+<polygon points="790.20,299.50 802.08,263.90 810.00,257.90 817.92,263.90 829.80,299.50" fill="none" stroke="#d9770a" stroke-width="1.6" stroke-dasharray="5 4" stroke-linejoin="round" stroke-linecap="round"/>
+<polygon points="783.60,299.50 802.08,277.10 810.00,271.10 817.92,277.10 836.40,299.50" fill="#d6ebf7" stroke="#2e7d32" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<line x1="814.00" y1="231.50" x2="830.00" y2="136.00" stroke="#6b7280" stroke-width="1.0" stroke-linecap="round"/>
+<circle cx="814.00" cy="231.50" r="2.2" fill="#6b7280"/>
+<text x="834.00" y="140.00" font-size="12" text-anchor="start" fill="#c0392b" font-weight="700">10 mm stem: through the winding</text>
+<line x1="804.00" y1="261.90" x2="730.00" y2="160.00" stroke="#6b7280" stroke-width="1.0" stroke-linecap="round"/>
+<circle cx="804.00" cy="261.90" r="2.2" fill="#6b7280"/>
+<text x="726.00" y="164.00" font-size="12" text-anchor="end" fill="#d9770a" font-weight="700">6 mm: hits the former</text>
+<line x1="818.00" y1="274.40" x2="920.00" y2="250.00" stroke="#6b7280" stroke-width="1.0" stroke-linecap="round"/>
+<circle cx="818.00" cy="274.40" r="2.2" fill="#6b7280"/>
+<text x="924.00" y="254.00" font-size="12" text-anchor="start" fill="#2e7d32" font-weight="700">4 mm: fits</text>
+<text x="810.00" y="610.00" font-size="12" text-anchor="middle" fill="#1b1f24">shield bore Ø46 · winding Ø37.8 · former Ø34 / Ø38</text>
+<text x="810.00" y="628.00" font-size="12" text-anchor="middle" fill="#1b1f24">foam Ø31.6 · cell Ø25 · beam on the axis</text>
+<text x="614.00" y="672.00" font-size="12" text-anchor="start" fill="#2e7d32" font-weight="700">A 4 mm stem leaves 0.5 mm to the bore.</text>
+<text x="614.00" y="690.00" font-size="12" text-anchor="start" fill="#1b1f24" font-weight="700">The wrapped cell slides into the former after the winding,</text>
+<text x="614.00" y="708.00" font-size="12" text-anchor="start" fill="#1b1f24" font-weight="700">so everything, stem included, must pass the Ø34 bore.</text>
+<text x="614.00" y="730.00" font-size="12" text-anchor="start" fill="#1b1f24">Heater film 68 mm on a 78.5 mm circumference: a 10.5 mm</text>
+<text x="614.00" y="748.00" font-size="12" text-anchor="start" fill="#1b1f24">strip stays free under the stem, the cold spot where the</text>
+<text x="614.00" y="766.00" font-size="12" text-anchor="start" fill="#1b1f24">Rb collects. A second NTC on the stem base reads it.</text>
+<rect x="1040.00" y="80.00" width="400.00" height="720.00" rx="6" fill="none" stroke="#e4e8ee" stroke-width="1.2"/>
+<text x="1054.00" y="104.00" font-size="14" text-anchor="start" fill="#1b1f24" font-weight="700">C. If the vendor’s stem is taller</text>
+<rect x="1054.00" y="122.00" width="372.00" height="112.00" rx="5" fill="#f7f8fa" stroke="#2e7d32" stroke-width="1.6"/>
+<text x="1066.00" y="142.00" font-size="14" text-anchor="start" fill="#2e7d32" font-weight="700">stem up to 4 mm</text>
+<text x="1066.00" y="164.00" font-size="12" text-anchor="start" fill="#1b1f24">former bore Ø34, outside Ø38, winding Ø37.8</text>
+<text x="1066.00" y="184.00" font-size="12" text-anchor="start" fill="#1b1f24">field spread 0.20 % (3 end turns) → 0.15 % (4)</text>
+<text x="1066.00" y="204.00" font-size="12" text-anchor="start" fill="#1b1f24">innermost shield bore Ø46 (now assumed Ø46)</text>
+<text x="1066.00" y="224.00" font-size="12" text-anchor="start" fill="#2e7d32" font-weight="700">our design</text>
+<rect x="1054.00" y="254.00" width="372.00" height="112.00" rx="5" fill="#f7f8fa" stroke="#d9770a" stroke-width="1.6"/>
+<text x="1066.00" y="274.00" font-size="14" text-anchor="start" fill="#d9770a" font-weight="700">stem up to 6 mm</text>
+<text x="1066.00" y="296.00" font-size="12" text-anchor="start" fill="#1b1f24">former bore Ø38, outside Ø42, winding Ø41.8</text>
+<text x="1066.00" y="316.00" font-size="12" text-anchor="start" fill="#1b1f24">field spread 0.24 % (3 end turns) → 0.18 % (4)</text>
+<text x="1066.00" y="336.00" font-size="12" text-anchor="start" fill="#1b1f24">innermost shield bore Ø50 (now assumed Ø46)</text>
+<text x="1066.00" y="356.00" font-size="12" text-anchor="start" fill="#d9770a" font-weight="700">new former, new shield size</text>
+<rect x="1054.00" y="386.00" width="372.00" height="112.00" rx="5" fill="#f7f8fa" stroke="#c0392b" stroke-width="1.6"/>
+<text x="1066.00" y="406.00" font-size="14" text-anchor="start" fill="#c0392b" font-weight="700">stem up to 10 mm</text>
+<text x="1066.00" y="428.00" font-size="12" text-anchor="start" fill="#1b1f24">former bore Ø46, outside Ø50, winding Ø49.8</text>
+<text x="1066.00" y="448.00" font-size="12" text-anchor="start" fill="#1b1f24">field spread 0.33 % (3 end turns) → 0.17 % (5)</text>
+<text x="1066.00" y="468.00" font-size="12" text-anchor="start" fill="#1b1f24">innermost shield bore Ø58 (now assumed Ø46)</text>
+<text x="1066.00" y="488.00" font-size="12" text-anchor="start" fill="#c0392b" font-weight="700">new former, new shield size</text>
+<text x="1054.00" y="548.00" font-size="12.5" text-anchor="start" fill="#1b1f24" font-weight="700">Passing the stem through the winding instead:</text>
+<text x="1054.00" y="570.00" font-size="12" text-anchor="start" fill="#1b1f24">· field in the beam stays at about 0.2 %</text>
+<text x="1054.00" y="589.00" font-size="12" text-anchor="start" fill="#1b1f24">   (Biot–Savart on the true helix, wire bent</text>
+<text x="1054.00" y="608.00" font-size="12" text-anchor="start" fill="#1b1f24">   round a hole of radius 3.5 to 5.5 mm)</text>
+<text x="1054.00" y="627.00" font-size="12" text-anchor="start" fill="#1b1f24">· but the cell can no longer slide in after</text>
+<text x="1054.00" y="646.00" font-size="12" text-anchor="start" fill="#1b1f24">   the winding, and the stem tip leaves the</text>
+<text x="1054.00" y="665.00" font-size="12" text-anchor="start" fill="#1b1f24">   heater: the coldest point sets a lower</text>
+<text x="1054.00" y="684.00" font-size="12" text-anchor="start" fill="#1b1f24">   Rb density. Not used.</text>
+<text x="1054.00" y="720.00" font-size="12.5" text-anchor="start" fill="#2e7d32" font-weight="700">So: order a short stem (≤ 4 mm at mid-length)</text>
+<text x="1054.00" y="740.00" font-size="12" text-anchor="start" fill="#1b1f24">and test-fit the wrapped cell in the 50 mm</text>
+<text x="1054.00" y="758.00" font-size="12" text-anchor="start" fill="#1b1f24">test coupon of the former before installing.</text>
+</svg>

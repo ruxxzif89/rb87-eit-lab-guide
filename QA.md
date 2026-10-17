@@ -777,11 +777,54 @@ The STL files: the former, the test coupon, the two spacer rings (with the lead 
 |---|---|
 | Cradle (base 110 × 44 × 6 with two saddles) | holds the cell on its axis 20 mm above the base; M4 hole for a ½-inch post or two M6 slots 75 mm apart; M3 nut traps |
 | Two straps | close over the saddles with nylon M3 screws; 1 mm felt pads take the load, never the bare plastic |
-| Cover | keeps room light and draughts off the cell and the SAS photodiode; Ø10 mm beam holes in both ends, 16 × 16 mm slot for the stem |
+| Cover | keeps room light and draughts off the cell and the SAS photodiode; Ø10 mm beam holes in both ends, closed top over a stem up to 13 mm |
 
-**Before printing:** confirm the cell's outside length and the stem (the holder assumes a stem in the middle, pointing up, at most 22 mm). Matte black PETG cuts stray light. Do not use it for the EIT cell: that one is heated to 65 °C inside the shield and has its own stack (D2).
+**Before printing:** confirm the cell's length over the windows, the window diameter and the stem (the holder takes a stem at mid-length, pointing up, up to 13 mm high, and windows up to Ø23 mm; see the next question). Matte black PETG cuts stray light. Do not use it for the EIT cell: that one is heated to 65 °C inside the shield and has its own stack (D2).
 
-### Q22. Our shield is bigger than the Spain-style module: what beam height should the whole bench use?
+### Q22. Real cells have a torch-sealed stem (tip-off). Do our printed holders and the solenoid take it into account?
+
+*Added 17 Oct 2026*
+
+*Equipment shown in the guide: SAS reference cell, EIT cell, solenoid, heater, µ-metal shield.*
+
+**Not fully until now: the SAS holder did, the EIT cell stack and the solenoid did not. Both are now designed for a real cell.** A vapour cell is filled through a glass tube on its side, which is then sealed with a torch. What is left is the stem (tip-off), a small glass nub on the side of the tube, usually at mid-length. It is also the coldest point of the cell, where the rubidium metal collects.
+
+![The stem of a real cell: a Thorlabs reference cell, our EIT cell in the solenoid end view with 4, 6 and 10 mm stems, and what a taller stem would cost](fig-cell-stem.svg)
+
+**What real cells look like**
+
+| Source | What it shows |
+|---|---|
+| Thorlabs drawing of the Ø19 × 75 mm rubidium cell (GC19075-RB) | stem Ø6 mm (typical) at mid-length, at most 10 mm high; windows Ø21 mm on the Ø19 mm tube, 3 mm thick, wedged 2° and tilted 11° |
+| Precision Glassblowing stock cell photo (AB-RB-Q-UV-19X75, our SAS cell S01) | a short nub at mid-length on the side; window plates slightly larger than the tube (no dimensions given) |
+
+**SAS reference cell (DIY D11): fits.** The saddles hold the tube 20–30 mm from the centre, so a stem at mid-length points up between them, and the windows sit outside the saddles. The cover was changed to a closed top: it clears a stem up to 13 mm and windows up to Ø23 mm, and it no longer lets light in through the old stem slot. The reference model in the STL folder now has the real shape (Ø21 windows, Ø6 stem 10 mm high).
+
+**EIT cell in the solenoid (DIY D1 and D2): the bore limits the stem.** The wrapped cell slides into the former *after* the winding is done, so everything, stem included, must pass the Ø34 mm bore:
+- bore radius 17 = cell radius 12.5 + stem + 0.5 mm clearance, so **the stem must be at most 4 mm high**;
+- the order specification for the EIT cell (BOM C01) and both quotation requests now ask for a tip-off at mid-length, at most 4 mm above the glass and Ø8 at its base. Earlier text allowed "up to 15 mm" with a slot in the former, which could not work: the cell could not slide past the winding, and the stem would reach the shield.
+- **Heater:** the film is now 68 mm instead of 80 mm on the 78.5 mm circumference, so a 10.5 mm strip stays free under the stem (15 runs at 4.4 mm pitch, the same 12 Ω). The stem stays inside the foam, a little colder than the barrel: it is the cold spot where the rubidium collects, never a window.
+- **Foam sleeve:** a Ø10 mm hole for the stem; wrapped on, not slid.
+- **A second NTC** at the stem base reads the cold spot. The rubidium vapour density follows the temperature of the coldest point, so this is the temperature that sets the optical depth.
+- **Test-fit:** push the wrapped cell, stem up, through the 50 mm test coupon of the former (same Ø34 bore) before it goes into the wound former.
+
+**The winding: unchanged, and the stem must not pass through it.** A stem through a hole in the winding was calculated (Biot–Savart on the true 42-turn helix, the wire bent round a hole of radius 3.5 to 5.5 mm). In the beam (within 3 mm of the axis) the field spread stays about 0.2 %, as without the hole; only near the glass under the stem does it reach 1 to 4 %. So the field is not the problem. The problems are that the cell could no longer be slid in after the winding, and that a stem sticking out of the heater becomes the coldest point and lowers the rubidium density.
+
+**If the vendor can only make a taller stem**
+
+| Stem height | Former bore / outside | Field spread over the cell | Innermost shield bore |
+|---|---|---|---|
+| up to 4 mm (our design) | Ø34 / Ø38 | 0.20 % with 3 end turns (0.15 % with 4) | Ø46 |
+| up to 6 mm | Ø38 / Ø42 | 0.24 % → 0.18 % with 4 end turns | Ø50 |
+| up to 10 mm | Ø46 / Ø50 | 0.33 % → 0.17 % with 5 end turns | Ø58 |
+
+A larger bore means a larger winding radius, a slightly less uniform field (a few more end turns fix it) and a larger shield, because the winding keeps its clearance to the innermost layer. The shield size is still to be confirmed with its maker, so a taller stem is possible but costs a bigger shield.
+
+All numbers come from the DIY build scripts and are re-checked by the DIY audit (75 checks, 0 failed). The D2 drawings, the heater pattern, the 3D build simulator of D1 (stem, rubidium droplet at its base, heater gap) and the SAS STL files are updated.
+
+Sources: [Thorlabs GC19075-RB drawing (24094-E0W)](https://media.thorlabs.com/globalassets/items/g/gc/gc1/gc19075-rb/24094-e0w.pdf) · [Precision Glassblowing, rubidium vapor cell quartz (photo)](https://precisionglassblowing.com/product/rubidium-vapor-cell-quartz/)
+
+### Q23. Our shield is bigger than the Spain-style module: what beam height should the whole bench use?
 
 *Added 11 Oct 2026*
 
@@ -815,7 +858,7 @@ Why the Spain-style bench can be lower: their cell module is a small enclosure, 
 - **Taller covers over the AOM arms (D10):** they were drawn 80 mm high for a 40 mm beam. At 100 mm the inner height must be about 160 to 200 mm.
 - **An optional draught cover over the shield**, if the room has strong air flow: black hardboard, inner size about 350 × 120 × 170 mm (the shield is 282 mm long plus the caps and the degaussing loops, and its top is about 140 mm above the table). It must contain no steel: no steel screws, brackets or hinges.
 
-### Q23. How do we make sure every optical part stands at 90° (vertical and square to the beam)? Is it practically doable?
+### Q24. How do we make sure every optical part stands at 90° (vertical and square to the beam)? Is it practically doable?
 
 *Added 16 Oct 2026*
 
@@ -854,7 +897,7 @@ Why the Spain-style bench can be lower: their cell module is a small enclosure, 
 
 Sources: [Edmund Optics, Laser alignment activity 1 (beam walking with two mirrors and two irises)](https://www.edmundoptics.com/knowledge-center/application-notes/lasers/laser-alignment-activity-1/) · [Stony Brook Laser Teaching Center, Understanding "walking the beam"](https://www.stonybrook.edu/laser/_simone/mini-project/) · [UW Clean Energy Institute, alignment guide (two irises at the same height)](https://www.cei.washington.edu/wp-content/uploads/2017/06/Confocal-Microscope-alignment.pdf) · [KAUST laser alignment guidelines (safety)](https://hse.kaust.edu.sa/wp-content/uploads/pdf/docs/default-source/research-safety/laser_alignment_guidelines.pdf)
 
-### Q24. How do we calculate the distances between the optical parts?
+### Q25. How do we calculate the distances between the optical parts?
 
 *Added 16 Oct 2026*
 
@@ -895,7 +938,7 @@ Sources: [Edmund Optics, Laser alignment activity 1 (beam walking with two mirro
 
 Sources: H. Kogelnik and T. Li, Appl. Opt. 5, 1550 (1966) (Gaussian beams, ABCD) · S. A. Self, Appl. Opt. 22, 658 (1983) (focusing) · [Thorlabs CFC-11X-B sheet (collimator formula and table)](https://www.thorlabs.com/catalogpages/Obsolete/2020/CFC-11X-B.pdf) · [Thorlabs PM fibre table (PM780-HP MFD 5.3 ± 1.0 µm at 850 nm)](https://www.thorlabs.com/catalogpages/obsolete/2019/PM14XX-HP.pdf) · G&H 3080-125 outline drawing 97-01598-01 rev D · [Donley et al., Rev. Sci. Instrum. 76, 063112 (2005)](https://tf.nist.gov/general/pdf/2071.pdf) · T. Okoshi et al., Electron. Lett. 16, 630 (1980) and L. E. Richter et al., IEEE J. Quantum Electron. 22, 2070 (1986) (delayed self-heterodyne)
 
-### Q25. How is the magnetic shield of the Spain-style EIT cell probably made? It looks like a small enclosure.
+### Q26. How is the magnetic shield of the Spain-style EIT cell probably made? It looks like a small enclosure.
 
 *Added 11 Oct 2026*
 
@@ -917,7 +960,7 @@ Why a small shield works:
 
 **What this means for our design:** we built for 0.1 mG stability and a cell field error of 0.2 %, which needs the long three-layer shield, the 42-turn solenoid with end turns, and degaussing. A compact module like theirs is simpler and cheaper and gives clear EIT, but with a broader, less reproducible line, and its temperature drifts without a loop. A compact version of ours (for example two layers, inner bore about Ø40 mm, about 120 mm long with caps) is possible, but the field uniformity would have to be recalculated with the end caps included before choosing it.
 
-### Q26. Can we make the mu-metal shield ourselves: roll a sheet into a cylinder and close it with (3D-printed) end caps?
+### Q27. Can we make the mu-metal shield ourselves: roll a sheet into a cylinder and close it with (3D-printed) end caps?
 
 *Added 11 Oct 2026*
 
@@ -947,7 +990,7 @@ Three layers multiply these roughly, if the gaps between them are a few millimet
 
 **Check:** after assembly and degaussing (D4), measure the residual field at the cell with the fluxgate plate. Then turn the whole shield in the room and read it again: the reading should change by less than about 0.1 mG.
 
-### Q27. Which DC source should drive the solenoid, and how do I wire the second ITC502 laser output for it? (Is the Rigol DP832A needed?)
+### Q28. Which DC source should drive the solenoid, and how do I wire the second ITC502 laser output for it? (Is the Rigol DP832A needed?)
 
 *Added 10 Oct 2026*
 
@@ -986,7 +1029,7 @@ Three layers multiply these roughly, if the gaps between them are a few millimet
 
 **Effect on the BOM.** If the ITC502 route works, BOM C08 (Rigol DP832A) and, with the heater on the TEC half, C04 (TC300B) can be dropped. This has not been applied; test the solenoid and the heater on the bench first, with the fluxgate inside the shield.
 
-### Q28. Can a home-wound solenoid really give 3.39 mG per mA, and how and where do we measure it?
+### Q29. Can a home-wound solenoid really give 3.39 mG per mA, and how and where do we measure it?
 
 *Added 16 Oct 2026*
 
@@ -1007,7 +1050,7 @@ Three layers multiply these roughly, if the gaps between them are a few millimet
 
 **In short:** wind it carefully, measure the slope with the fluxgate in free space and in the shield, and let the atoms give the final number. Whatever value comes out, the current (about 15 mA for 50 mG) or the RF difference is adjusted to it.
 
-### Q29. Can the Stefan Mayer FLC100 be the fluxgate magnetometer with milligauss resolution?
+### Q30. Can the Stefan Mayer FLC100 be the fluxgate magnetometer with milligauss resolution?
 
 *Added 10 Oct 2026*
 
@@ -1031,7 +1074,7 @@ Sources: [Stefan Mayer FLC 100 data sheet](https://stefan-mayer.com/images/datas
 
 ## The Quantum Spain-style bench
 
-### Q30. Is the Spain-style arrangement correct, in theory and in practice?
+### Q31. Is the Spain-style arrangement correct, in theory and in practice?
 
 *Added 9 Oct 2026*
 
@@ -1055,7 +1098,7 @@ Sources: [Stefan Mayer FLC 100 data sheet](https://stefan-mayer.com/images/datas
 - No beam dumps or tubes are visible (laser safety).
 - The AOM tilt is exaggerated to 8° in the drawing, hence the 160 mm from separator cube to AOM; a real build can be tighter but needs an iris or block for the zeroth order. Do not use the drawing as a build recipe.
 
-### Q31. What is the cell label TRT-Rb/Ne-10T-20x75 on the Spain-style EIT cell, and would it suit our bench?
+### Q32. What is the cell label TRT-Rb/Ne-10T-20x75 on the Spain-style EIT cell, and would it suit our bench?
 
 *Added 12 Oct 2026*
 
@@ -1110,7 +1153,7 @@ Sources: [Stefan Mayer FLC 100 data sheet](https://stefan-mayer.com/images/datas
 
 ## About this guide
 
-### Q32. How does the lab inventory enter the costed BOM and the Spain-style cost?
+### Q33. How does the lab inventory enter the costed BOM and the Spain-style cost?
 
 *Added 10 Oct 2026*
 
@@ -1123,7 +1166,7 @@ Sources: [Stefan Mayer FLC 100 data sheet](https://stefan-mayer.com/images/datas
 
 **Rules and limits.** Items marked "check" or "no" are not counted. An item that covers a row only in part is counted only for the units it can supply (for example 6 post holders against 60 post sets). The Credix SG-1710 is **not** counted against the dual-channel RF synthesizer, which needs two phase-locked channels. Mounts whose aperture is not measured yet (the Melles Griot set) are counted as 10 of the 11 mirror mounts; measure them. The prices stay behind the group password; the switch only changes how the totals are computed.
 
-### Q33. Can the Thorlabs PM100USB CAD file be used for the 3D pictures?
+### Q34. Can the Thorlabs PM100USB CAD file be used for the 3D pictures?
 
 *Added 10 Oct 2026*
 

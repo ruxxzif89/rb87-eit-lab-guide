@@ -193,7 +193,9 @@
   var CR = P.cellD / 2;
   mesh(shellGeo(CR - 1.0, CR, P.cellL), M.quartz, cellG);
   [-1, 1].forEach(function (s) { var w = mesh(new THREE.CircleGeometry(CR, 48), M.quartz, cellG, 0, 0, s * P.cellL / 2); });
-  mesh(new THREE.SphereGeometry(1.3, 12, 10), M.rb, cellG, 0, -CR + 2.2, 4);
+  /* torch-sealed stem (tip-off) at mid-length, pointing up; the Rb droplet sits at its base, the cold spot */
+  var stemG = new THREE.CylinderGeometry(0.7, P.stemD / 2, P.stemH, 24); mesh(stemG, M.quartz, cellG, 0, CR + P.stemH / 2 - 0.3, 0);
+  mesh(new THREE.SphereGeometry(1.0, 12, 10), M.rb, cellG, 0, CR + 0.6, 0);
   var heaterTex = (function () {
     var cv = document.createElement('canvas'); cv.width = 512; cv.height = 128; var c = cv.getContext('2d');
     c.fillStyle = '#d4861a'; c.fillRect(0, 0, 512, 128); c.strokeStyle = '#5a3208'; c.lineWidth = 2;
@@ -206,9 +208,10 @@
     var q = Math.round(p * 50) / 50; if (q === heaterLast) return; heaterLast = q;
     heater.geometry.dispose();
     if (q <= 0) { heater.geometry = new THREE.BufferGeometry(); return; }
-    var g = new THREE.CylinderGeometry(CR + 0.2, CR + 0.2, 25, 64, 1, true, 0, TAU * q); g.rotateX(Math.PI / 2); heater.geometry = g;
+    var gapA = TAU * (1 - P.foilW / P.circ);   /* the film leaves a strip free under the stem (+y) */
+    var g = new THREE.CylinderGeometry(CR + 0.2, CR + 0.2, 25, 64, 1, true, Math.PI + gapA / 2, (TAU - gapA) * q); g.rotateX(Math.PI / 2); heater.geometry = g;
   }
-  var ntc = mesh(new THREE.SphereGeometry(1.2, 12, 10), M.ntc, stack, 0, CR + 0.6, P.cellL / 2 - 5);
+  var ntc = mesh(new THREE.SphereGeometry(1.2, 12, 10), M.ntc, stack, 0, -CR - 0.6, P.cellL / 2 - 5);   /* under the heater, opposite the stem */
   var foam = mesh(shellGeo(12.8, 15.8, 34), M.foam, stack);
   var tubeA = group(stack), tubeB = group(stack);
   mesh(shellGeo(13.25, 16.85, 63), M.delrin, tubeA); box(2.2, 2.2, 63.2, M.notch, tubeA, 0, 16.0, 0);
@@ -569,7 +572,7 @@
 
     { ch: 'Cell stack (D2)', t: 'Measure the cell',
       what: 'Keep the cell in its box until the heater is ready and never touch the windows. Measure the diameter, the length, and the position and length of any stem.',
-      check: 'Ø' + f(P.cellD, 1) + ' ± 0.3 mm, length ' + f(P.cellL, 0) + ' ± 0.5 mm; a stem, if any, ≤ 15 mm.',
+      check: 'Ø' + f(P.cellD, 1) + ' ± 0.3 mm, length ' + f(P.cellL, 0) + ' ± 0.5 mm; the stem at mid-length, at most ' + f(P.stemH, 1) + ' mm above the glass (it must fit the Ø' + f(P.formerID, 0) + ' bore of the wound former).',
       parts: ['Rb vapour cell (C01)'], tools: ['Calliper', 'Gloves'],
       act: { type: 'auto', label: 'Measure', dur: 4 }, cam: [330, 70, 300, 330, 0, 160],
       apply: function (S) { S.cell = true; },
@@ -579,17 +582,17 @@
       } },
 
     { ch: 'Cell stack (D2)', t: 'Wrap the bifilar heater and glue the thermistor',
-      what: 'The heater is a <b>bifilar pair</b> of Ø0.20 constantan (12 Ω) between two Kapton films, 80 × 25 mm, 15 paired runs. Wrap it once round the barrel (circumference ' + f(P.circ, 1) + ' mm, so 1.5 mm overlap), tails towards the cable end, two turns of polyimide tape. Glue the <b>10 kΩ NTC</b> to the glass 5 mm from one window with thermally conductive epoxy.',
+      what: 'The heater is a <b>bifilar pair</b> of Ø0.20 constantan (12 Ω) between two Kapton films, ' + f(P.foilW, 0) + ' × 25 mm, 15 paired runs. Wrap it round the barrel (circumference ' + f(P.circ, 1) + ' mm) so that the ' + f(P.circ - P.foilW, 1) + ' mm free strip is centred under the stem, tails towards the cable end, two turns of polyimide tape. Glue the <b>10 kΩ NTC</b> to the glass 5 mm from one window with thermally conductive epoxy, and a second NTC at the stem base (the cold spot that sets the Rb density).',
       check: 'Heater 12 ± 1 Ω; NTC ≈ 10 kΩ at 25 °C; heater to NTC > 10 MΩ; no wire crosses a window.',
       mistake: 'A heater wound as one coil: one unpaired turn of 0.54 A gives about ' + f(unpaired, 0) + ' mG at the cell.',
       parts: ['Bifilar heater (Kapton + constantan)', 'NTC 10 kΩ', 'Conductive epoxy'], tools: ['Plastic tweezers'],
       act: { type: 'auto', label: 'Wrap and glue', dur: 3.5 }, cam: [330, 70, 300, 330, 0, 160],
       apply: function (S, p) { S.heater = seg(p, 0, 0.8); S.ntc = p > 0.85; },
-      labels: function (S) { var a = [{ t: 'bifilar heater 80 × 25, 12 Ω', p: [330, CR + 8, SZ] }]; if (S.ntc) a.push({ t: 'NTC 5 mm from the window', p: [330 + 9, CR + 12, SZ], c: 'hot' }); return a; },
+      labels: function (S) { var a = [{ t: 'bifilar heater ' + f(P.foilW, 0) + ' × 25, 12 Ω', p: [330, -CR - 8, SZ] }, { t: 'stem ≤ ' + f(P.stemH, 0) + ' mm, no heater under it', p: [330, CR + P.stemH + 8, SZ] }]; if (S.ntc) a.push({ t: 'NTC 5 mm from the window', p: [330 + 9, -CR - 16, SZ], c: 'hot' }); return a; },
       quiz: { q: 'Why is the heater wire laid as a bifilar pair (go and return side by side)?', o: ['It heats more evenly', 'The two currents are opposite, so their magnetic fields cancel', 'It needs less wire'], a: 1, why: 'Any unpaired loop of heater current is a coil next to the cell; ours must stay below 0.1 mG.' } },
 
     { ch: 'Cell stack (D2)', t: 'Slide on the foam sleeve',
-      what: 'Foam sleeve <b>ID 25.6, OD 31.6, 34 long</b>, rated to 100 °C. Run the heater tails and the NTC pair in the clearance towards the cable end.',
+      what: 'Foam sleeve <b>ID 25.6, OD 31.6, 34 long</b>, rated to 100 °C, wrapped on with the stem through its Ø10 hole. Run the heater tails and the NTC pairs in the clearance towards the cable end. Then push the stack, stem up, through the 50 mm test coupon of the former: it must pass without touching the stem.',
       check: 'Sleeve ends 3 mm beyond each window; leads not pinched.',
       parts: ['Foam sleeve'], tools: [],
       act: { type: 'auto', label: 'Slide it on', dur: 2.5 }, cam: [330, 70, 300, 330, 0, 160],
