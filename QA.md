@@ -806,7 +806,9 @@ The STL files: the former, the test coupon, the two spacer rings (with the lead 
 - **Heater:** the film is now 68 mm instead of 80 mm on the 78.5 mm circumference, so a 10.5 mm strip stays free under the stem (15 runs at 4.4 mm pitch, the same 12 Ω). The stem stays inside the foam, a little colder than the barrel: it is the cold spot where the rubidium collects, never a window.
 - **Foam sleeve:** a Ø10 mm hole for the stem; wrapped on, not slid.
 - **A second NTC** at the stem base reads the cold spot. The rubidium vapour density follows the temperature of the coldest point, so this is the temperature that sets the optical depth.
-- **Test-fit:** push the wrapped cell, stem up, through the 50 mm test coupon of the former (same Ø34 bore) before it goes into the wound former.
+- **Printed former (STL changed):** a channel 10 mm wide and 0.6 mm deep runs along the top of the bore, over the lead mark, from the cable end to 86 mm (just past the mid-plane). The stem slides along it with 1.1 mm to spare instead of 0.5 mm, which also allows for a printed bore that comes out a little undersize. The wall under the wire seats is still 1.0 mm. Both ends of the bore have a 1 mm entry chamfer. The winding groove is unchanged, so the field is unchanged.
+- **Test-fit:** the 50 mm test coupon has the same channel along its whole length. Push the wrapped cell, stem up, through it before the cell goes into the wound former.
+- **Fit check in the files:** a new view-only model, d1-cell-stack-reference.stl, shows the cell, stem, foam and Delrin tubes inside the former. The build script stops if any part touches the former, also along the stem's whole path from the cable end to the middle (all overlaps 0).
 
 **The winding: unchanged, and the stem must not pass through it.** A stem through a hole in the winding was calculated (Biot–Savart on the true 42-turn helix, the wire bent round a hole of radius 3.5 to 5.5 mm). In the beam (within 3 mm of the axis) the field spread stays about 0.2 %, as without the hole; only near the glass under the stem does it reach 1 to 4 %. So the field is not the problem. The problems are that the cell could no longer be slid in after the winding, and that a stem sticking out of the heater becomes the coldest point and lowers the rubidium density.
 
@@ -820,7 +822,9 @@ The STL files: the former, the test coupon, the two spacer rings (with the lead 
 
 A larger bore means a larger winding radius, a slightly less uniform field (a few more end turns fix it) and a larger shield, because the winding keeps its clearance to the innermost layer. The shield size is still to be confirmed with its maker, so a taller stem is possible but costs a bigger shield.
 
-All numbers come from the DIY build scripts and are re-checked by the DIY audit (75 checks, 0 failed). The D2 drawings, the heater pattern, the 3D build simulator of D1 (stem, rubidium droplet at its base, heater gap) and the SAS STL files are updated.
+**Printed files changed:** d1-former-petg.stl, d1-former-test-coupon.stl and their 0.65 mm seat variants (stem channel, entry chamfers), the new d1-cell-stack-reference.stl, sas-cell-cover.stl (closed top) and sas-cell-assembly-reference.stl (real cell shape). The SAS cradle and straps, the spacer rings and the shield cradle did not need a change.
+
+All numbers come from the DIY build scripts and are re-checked by the DIY audit (80 checks, 0 failed, including sections of the printed former's STL). The D2 drawings, the heater pattern and the 3D build simulator of D1 (stem, rubidium droplet at its base, heater gap) are updated.
 
 Sources: [Thorlabs GC19075-RB drawing (24094-E0W)](https://media.thorlabs.com/globalassets/items/g/gc/gc1/gc19075-rb/24094-e0w.pdf) · [Precision Glassblowing, rubidium vapor cell quartz (photo)](https://precisionglassblowing.com/product/rubidium-vapor-cell-quartz/)
 

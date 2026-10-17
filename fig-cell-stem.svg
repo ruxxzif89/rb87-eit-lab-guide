@@ -32,6 +32,7 @@
 <circle cx="810.00" cy="380.00" r="151.80" fill="none" stroke="#9aa5b1" stroke-width="3.0"/>
 <circle cx="810.00" cy="380.00" r="125.40" fill="#e9dfc5" stroke="#1b1f24" stroke-width="1.2"/>
 <circle cx="810.00" cy="380.00" r="112.20" fill="#ffffff" stroke="#1b1f24" stroke-width="1.2"/>
+<polygon points="777.00,268.63 780.22,267.72 783.47,266.91 786.74,266.19 790.02,265.57 793.33,265.04 796.65,264.61 799.97,264.27 803.31,264.03 806.65,263.89 810.00,263.84 813.35,263.89 816.69,264.03 820.03,264.27 823.35,264.61 826.67,265.04 829.98,265.57 833.26,266.19 836.53,266.91 839.78,267.72 843.00,268.63 841.88,272.42 838.76,271.55 835.63,270.77 832.47,270.07 829.30,269.47 826.10,268.96 822.90,268.54 819.68,268.22 816.46,267.99 813.23,267.85 810.00,267.80 806.77,267.85 803.54,267.99 800.32,268.22 797.10,268.54 793.90,268.96 790.70,269.47 787.53,270.07 784.37,270.77 781.24,271.55 778.12,272.42" fill="#ffffff" stroke="#1b1f24" stroke-width="1.0" stroke-linejoin="round" stroke-linecap="round"/>
 <circle cx="934.58" cy="380.00" r="1.6" fill="#c0703a"/>
 <circle cx="933.51" cy="396.26" r="1.6" fill="#c0703a"/>
 <circle cx="930.33" cy="412.24" r="1.6" fill="#c0703a"/>
@@ -97,7 +98,7 @@
 <text x="924.00" y="254.00" font-size="12" text-anchor="start" fill="#2e7d32" font-weight="700">4 mm: fits</text>
 <text x="810.00" y="610.00" font-size="12" text-anchor="middle" fill="#1b1f24">shield bore Ø46 · winding Ø37.8 · former Ø34 / Ø38</text>
 <text x="810.00" y="628.00" font-size="12" text-anchor="middle" fill="#1b1f24">foam Ø31.6 · cell Ø25 · beam on the axis</text>
-<text x="614.00" y="672.00" font-size="12" text-anchor="start" fill="#2e7d32" font-weight="700">A 4 mm stem leaves 0.5 mm to the bore.</text>
+<text x="614.00" y="672.00" font-size="12" text-anchor="start" fill="#2e7d32" font-weight="700">A 4 mm stem leaves 1.1 mm in the printed stem channel.</text>
 <text x="614.00" y="690.00" font-size="12" text-anchor="start" fill="#1b1f24" font-weight="700">The wrapped cell slides into the former after the winding,</text>
 <text x="614.00" y="708.00" font-size="12" text-anchor="start" fill="#1b1f24" font-weight="700">so everything, stem included, must pass the Ø34 bore.</text>
 <text x="614.00" y="730.00" font-size="12" text-anchor="start" fill="#1b1f24">Heater film 68 mm on a 78.5 mm circumference: a 10.5 mm</text>
