@@ -432,6 +432,8 @@ Sources: [Donley et al., Rev. Sci. Instrum. 76, 063112 (2005), NIST PDF](https:/
 | Laser linewidth | 0.6–1.0 MHz (needs only to be below about 100 MHz) |
 | SAS feature width | about 6–12 MHz |
 
+**80 MHz in the RF, 160 MHz in the light.** 80.000 and 79.965 MHz are the RF frequencies of the two AOMs. Each beam passes its AOM twice (double pass), so its light is shifted by twice the RF: 160.000 MHz for the control and 159.930 MHz for the probe. The two beams differ by 70 kHz, which is what EIT needs. The 160 MHz that both share is the offset from the laser, which is locked to the F = 2 → F′ = 1 line through the SAS cell (no AOM there): both EIT beams therefore sit 160 MHz off that line. We use the −1 order in both AOMs, so they sit 160 MHz below it, away from F′ = 2. EIT depends only on the 70 kHz difference; the common 160 MHz only costs some absorption (the cell runs about 3 °C warmer).
+
 **What the two RF frequencies do (and do not do).** 80.000 MHz drives the control AOM and 79.965 MHz drives the probe AOM (megahertz, not kilohertz). They are our design choice: 80 MHz is the centre frequency of the AOMs, and the 35 kHz between them follows the Zeeman splitting we set. An RF frequency only shifts the light frequency; as long as the RF is on, the light is continuous (CW EIT). Pulses come from switching the RF on and off with the TTL gate of each channel: the probe gate cuts a short probe pulse, and the control gate turns the control off and on for storage. So the frequencies decide where the light sits, the gates decide when it is there.
 
 **Where the numbers come from.** The reference guide (Finkelstein et al., New J. Phys. 25, 035001 (2023), Sec. V) gives the method and the scale, not our RF values: double-pass AOMs "driven by twin phase-locked rf signals from the same dual-output waveform generator", Zeeman shifts of 0.7 kHz per mG between adjacent F = 2 sub-levels, a 50 mG solenoid field as the example (adjacent sub-levels 35 kHz apart), and a probe scan of less than ±100 kHz around a fixed control frequency. It gives no AOM centre frequency. The 80 MHz is the centre frequency of the AOMs we buy, and 79.965 MHz follows from our Λ (m = −1 and m = +1, two steps apart: 70 kHz in the light at 50 mG, halved by the double pass). The Spain-style bench does not show its frequencies.
@@ -708,11 +710,21 @@ If both work on the bench, the separate cell-heater controller (BOM C04) and the
 
 **Yes, if the heater stays on the barrel and the controller's current limit is set so that even a runaway stays cool.**
 
-- **Glass:** 1 to 2 W spread over 80 × 25 mm is under 0.1 W per cm², so the wire runs only a little warmer than the glass. Quartz takes the slow warm-up easily. The heater never covers a window, and no wire crosses one.
+- **Glass:** 1 to 2 W spread over the 68 × 24 mm heater is about 0.1 W per cm², so the wire runs only a little warmer than the glass. Quartz takes the slow warm-up easily. The heater never covers a window, and no wire crosses one: the runs are 22 mm long on the 24.8 mm barrel between the windows (corrected on 19 Oct 2026; the earlier 25 mm runs would have reached the window joints).
 - **Electrical:** 12 Ω at under 0.42 A is a few volts. The two Kapton films insulate it (check heater to NTC above 10 MΩ), and the diode of D3 stops the controller from driving the heater backwards.
 - **Magnetic:** the bifilar pairing cancels the heater's own field. The on-and-off test in the shield must show less than 0.1 mG.
 - **Rubidium:** keep the windows a little warmer than the stem, so the metal condenses in the stem and not on the windows.
 - **Runaway:** if the NTC comes off the glass, the ITC502 drives its full limit. So set I TEC LIM to **0.50 A on the open bench** (worst case about 84 °C) and **0.33 A inside the closed shield** (also about 84 °C). Both still give the power needed at 65 °C, and both stay below the 100 °C rating of the foam and the epoxy. The earlier figure of 0.6 A was too high for a runaway inside the shield.
+
+**What is the foam sleeve made of, and will silicone foam survive the heater?** The sleeve is not printed: it is 3 mm melamine foam or silicone foam, cut from sheet and wrapped on (ID 25.6, OD 31.6, 34 long, a Ø10 hole for the stem). PETG would sit directly on the heater, close to its softening range, and solid plastic insulates several times worse than foam. The rules: no metal at all (no aluminium-foil facing), a temperature rating of at least 100 °C, and exactly 3 mm (the radial room to the former bore is 1.2 mm).
+
+| | Melamine foam | Silicone sponge sheet |
+|---|---|---|
+| Insulation | better | less good: more heat needed |
+| Handling | crumbly, sheds dust: wrap it in polyimide tape | tough, easy to cut, no dust |
+| Temperature | far above our 84 °C worst case | commonly rated to about 200 °C (check the data sheet) |
+
+Silicone does not burn or melt here: the worst case with the current limits is about 84 °C. Buy a sheet that states "silicone" and a temperature rating (some cheap sponge sheets are polyurethane or neoprene), and hold a scrap on the heater during the open-bench test at 0.50 A for an hour: no smell, no darkening, no shrinking. Because silicone insulates less, check that the cell still reaches 65 °C inside the closed shield at 0.33 A; if not, use melamine (a thicker sleeve does not fit).
 
 ### Q19. Can we heat the cell the Duke way (heaters and insulation wrapped in aluminium foil)?
 

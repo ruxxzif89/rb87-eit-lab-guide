@@ -209,7 +209,7 @@
     heater.geometry.dispose();
     if (q <= 0) { heater.geometry = new THREE.BufferGeometry(); return; }
     var gapA = TAU * (1 - P.foilW / P.circ);   /* the film leaves a strip free under the stem (+y) */
-    var g = new THREE.CylinderGeometry(CR + 0.2, CR + 0.2, 25, 64, 1, true, Math.PI + gapA / 2, (TAU - gapA) * q); g.rotateX(Math.PI / 2); heater.geometry = g;
+    var g = new THREE.CylinderGeometry(CR + 0.2, CR + 0.2, P.foilH, 64, 1, true, Math.PI + gapA / 2, (TAU - gapA) * q); g.rotateX(Math.PI / 2); heater.geometry = g;
   }
   var ntc = mesh(new THREE.SphereGeometry(1.2, 12, 10), M.ntc, stack, 0, -CR - 0.6, P.cellL / 2 - 5);   /* under the heater, opposite the stem */
   var foam = mesh(shellGeo(12.8, 15.8, 34), M.foam, stack);
@@ -582,13 +582,13 @@
       } },
 
     { ch: 'Cell stack (D2)', t: 'Wrap the bifilar heater and glue the thermistor',
-      what: 'The heater is a <b>bifilar pair</b> of Ø0.20 constantan (12 Ω) between two Kapton films, ' + f(P.foilW, 0) + ' × 25 mm, 15 paired runs. Wrap it round the barrel (circumference ' + f(P.circ, 1) + ' mm) so that the ' + f(P.circ - P.foilW, 1) + ' mm free strip is centred under the stem, tails towards the cable end, two turns of polyimide tape. Glue the <b>10 kΩ NTC</b> to the glass 5 mm from one window with thermally conductive epoxy, and a second NTC at the stem base (the cold spot that sets the Rb density).',
+      what: 'The heater is a <b>bifilar pair</b> of Ø0.20 constantan (12 Ω) between two Kapton films, ' + f(P.foilW, 0) + ' × ' + f(P.foilH, 0) + ' mm, 15 paired runs of ' + f(P.runL, 0) + ' mm (they stay clear of the window joints). Wrap it round the barrel (circumference ' + f(P.circ, 1) + ' mm) so that the ' + f(P.circ - P.foilW, 1) + ' mm free strip is centred under the stem, tails towards the cable end, two turns of polyimide tape. Glue the <b>10 kΩ NTC</b> to the glass 5 mm from one window with thermally conductive epoxy, and a second NTC at the stem base (the cold spot that sets the Rb density).',
       check: 'Heater 12 ± 1 Ω; NTC ≈ 10 kΩ at 25 °C; heater to NTC > 10 MΩ; no wire crosses a window.',
       mistake: 'A heater wound as one coil: one unpaired turn of 0.54 A gives about ' + f(unpaired, 0) + ' mG at the cell.',
       parts: ['Bifilar heater (Kapton + constantan)', 'NTC 10 kΩ', 'Conductive epoxy'], tools: ['Plastic tweezers'],
       act: { type: 'auto', label: 'Wrap and glue', dur: 3.5 }, cam: [330, 70, 300, 330, 0, 160],
       apply: function (S, p) { S.heater = seg(p, 0, 0.8); S.ntc = p > 0.85; },
-      labels: function (S) { var a = [{ t: 'bifilar heater ' + f(P.foilW, 0) + ' × 25, 12 Ω', p: [330, -CR - 8, SZ] }, { t: 'stem ≤ ' + f(P.stemH, 0) + ' mm, no heater under it', p: [330, CR + P.stemH + 8, SZ] }]; if (S.ntc) a.push({ t: 'NTC 5 mm from the window', p: [330 + 9, -CR - 16, SZ], c: 'hot' }); return a; },
+      labels: function (S) { var a = [{ t: 'bifilar heater ' + f(P.foilW, 0) + ' × ' + f(P.foilH, 0) + ', 12 Ω', p: [330, -CR - 8, SZ] }, { t: 'stem ≤ ' + f(P.stemH, 0) + ' mm, no heater under it', p: [330, CR + P.stemH + 8, SZ] }]; if (S.ntc) a.push({ t: 'NTC 5 mm from the window', p: [330 + 9, -CR - 16, SZ], c: 'hot' }); return a; },
       quiz: { q: 'Why is the heater wire laid as a bifilar pair (go and return side by side)?', o: ['It heats more evenly', 'The two currents are opposite, so their magnetic fields cancel', 'It needs less wire'], a: 1, why: 'Any unpaired loop of heater current is a coil next to the cell; ours must stay below 0.1 mG.' } },
 
     { ch: 'Cell stack (D2)', t: 'Slide on the foam sleeve',
