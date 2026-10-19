@@ -141,7 +141,7 @@
       ['Half-wave plate', 'zero-order, Ø½″, 780 nm design', 'sets the polarization for the PBS (direct) or for the fibre slow axis (fibre)', 'equipment list O05']
     ];
     if (state.mode === 'fibre') rows = rows.concat([
-      ['Mirrors', '2 × Ø1″ in kinematic mounts', 'beam walking into the coupler: the first sets the position, the second the angle', 'standard practice'],
+      ['Mirrors', '2 × Ø1″ silver mirror in a KM100 mount (equipment row L07)', 'OQAg-25.4: Ø25.4 mm, 5 mm thick, 450–2000 nm, reflectivity > 95 %, clear aperture > 90 % (or Thorlabs PF10-03-P01: > 97.5 %, λ/10). Beam walking into the coupler: the first sets the position, the second the angle', 'vendor catalogue table; Thorlabs drawing'],
       ['Coupler', 'Thorlabs PAF2-5B FiberPort (lab)', 'f 4.6 mm, NA 0.53, clear aperture 4.9 mm, made for a Ø1 mm beam and a 5 µm mode; tip, tilt and focus adjustable', 'Thorlabs specifications'],
       ['Fibre', 'PM780 patch cable, FC/APC both ends, 2 m (e.g. P5-780PM-FC-2)', 'PM780-HP: mode field 5.3 ± 1.0 µm at 850 nm, 770–1100 nm', 'Thorlabs fibre table'],
       ['Output', 'second FiberPort (PAF2-5B type)', 'output beam Ø1 mm, divergence 1.087 mrad', 'Thorlabs specifications']
