@@ -200,10 +200,13 @@ Add the fibre (equipment row L05 in the Yanban option) if the AOM efficiency, th
 | Alignment work | the laser-to-bench alignment once | the same plus fibre coupling and the polarization launch (a few hours, a practised skill) |
 | Power at the bench | about 80 mW (two isolators at 90 %) | tens of mW (coupling losses), still far more than the 5–15 mW needed |
 | Beam profile | whatever the chip gives (no M² on the data sheet) | a clean round Gaussian, guaranteed by the fibre |
+| Beam 1 m after the source (at the AOMs) | Ø2.3 mm if the data-sheet 0.1° is the full angle, Ø4.4 mm if it is the half angle: larger than the 2 mm AOM aperture, so a lens or a reducing telescope is needed before the AOMs (the data sheet implies M² ≈ 1.7 or 3.4) | Ø1.5 mm from a Ø1 mm FiberPort output (1.087 mrad) |
 | Polarization | 20 dB from the chip, cleaned by the first PBS | set by the fibre axis; can wander a little with temperature if the launch is off |
 | Pointing on the AOMs, SAS, cell | follows any drift of the laser mount and isolators | fixed by the output collimator; laser-side drift only changes the power |
 | Laser swap or repair | realign the bench | realign only the coupling |
 | Extra maintenance | none | an occasional touch-up of the coupler |
+
+**See both in 3D:** [the laser-source simulation](laser-source-3d.html) shows the two layouts at the 100 mm beam height with the alignment steps, the data-sheet values, and the power, isolation and beam-size budgets.
 
 For EIT itself the two give the same result: the experiment needs a stable single-frequency beam of a few mW in a known polarization, and the PBS and the cell do not care about a slightly non-ideal profile. The fibre buys long-term stability and an ideal beam at the price of one more alignment stage. Start direct; add the fibre if the AOM efficiency or the day-to-day pointing disappoints.
 
