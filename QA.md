@@ -187,6 +187,11 @@ Sources: RB-795-DFB-BFW data sheet (Yanban Laser, from the vendor) · [Alibaba l
 
 **Couple it into a polarization-maintaining single-mode fibre ourselves.** A PM-pigtailed laser is the same chip with an isolator, a lens and a PM fibre built into the package. The fibre is what makes its output a clean round Gaussian with a fixed polarization axis and a fixed pointing, so the only way to get exactly that output from a free-space laser is to put the same fibre in the path. This is also what our reference design does: Finkelstein et al. (New J. Phys. 25, 035001 (2023), Sec. V.1 and Fig. 10) send their free-space laser through an isolator and then into a PM fibre, to clean the beam profile and the polarization. Free-space optics alone (lenses, prisms, a pinhole) only come close.
 
+**Is the fibre needed at all? No: it is optional.** The free-space beam can go straight from the two isolators into the bench (half-wave plate, PBS, AOM arms), and that is how we start. The laser already gives a single-frequency, nearly round 1.0 × 0.8 mm beam (a good size for the AOMs) with 20 dB polarization, and the first PBS cleans the polarization. What the direct beam does not give:
+- **Pointing decoupling:** drift of the laser mount or the isolators (temperature, screws settling) moves the beam on the AOMs (Bragg acceptance about 0.5 mrad), the SAS and the cell; a laser swap means realigning the bench. With the fibre, such drift changes only the coupled power.
+- **A guaranteed clean mode:** the data sheet gives no beam-quality figure (M²); the fibre passes only its own Gaussian mode.
+Add the fibre (equipment row L05 in the Yanban option) if the AOM efficiency, the beam profile or the day-to-day pointing is not good enough. Without it: two isolators right at the laser window, a rigid metal mount, and the same alignment as any free-space diode laser.
+
 **The sequence, from the chip to the bench**
 
 | # | Part | Why there | Our part |
