@@ -192,6 +192,21 @@ Sources: RB-795-DFB-BFW data sheet (Yanban Laser, from the vendor) · [Alibaba l
 - **A guaranteed clean mode:** the data sheet gives no beam-quality figure (M²); the fibre passes only its own Gaussian mode.
 Add the fibre (equipment row L05 in the Yanban option) if the AOM efficiency, the beam profile or the day-to-day pointing is not good enough. Without it: two isolators right at the laser window, a rigid metal mount, and the same alignment as any free-space diode laser.
 
+**Direct or through the fibre: which is better?**
+
+| | Direct into the bench | Through the PM fibre |
+|---|---|---|
+| Parts after the isolators | none extra | half-wave plate, 2 steering mirrors, coupler, patch cable, output collimator |
+| Alignment work | the laser-to-bench alignment once | the same plus fibre coupling and the polarization launch (a few hours, a practised skill) |
+| Power at the bench | about 80 mW (two isolators at 90 %) | tens of mW (coupling losses), still far more than the 5–15 mW needed |
+| Beam profile | whatever the chip gives (no M² on the data sheet) | a clean round Gaussian, guaranteed by the fibre |
+| Polarization | 20 dB from the chip, cleaned by the first PBS | set by the fibre axis; can wander a little with temperature if the launch is off |
+| Pointing on the AOMs, SAS, cell | follows any drift of the laser mount and isolators | fixed by the output collimator; laser-side drift only changes the power |
+| Laser swap or repair | realign the bench | realign only the coupling |
+| Extra maintenance | none | an occasional touch-up of the coupler |
+
+For EIT itself the two give the same result: the experiment needs a stable single-frequency beam of a few mW in a known polarization, and the PBS and the cell do not care about a slightly non-ideal profile. The fibre buys long-term stability and an ideal beam at the price of one more alignment stage. Start direct; add the fibre if the AOM efficiency or the day-to-day pointing disappoints.
+
 **The sequence, from the chip to the bench**
 
 | # | Part | Why there | Our part |
