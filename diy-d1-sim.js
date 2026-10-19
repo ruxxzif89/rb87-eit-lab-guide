@@ -212,7 +212,13 @@
     var g = new THREE.CylinderGeometry(CR + 0.2, CR + 0.2, P.foilH, 64, 1, true, Math.PI + gapA / 2, (TAU - gapA) * q); g.rotateX(Math.PI / 2); heater.geometry = g;
   }
   var ntc = mesh(new THREE.SphereGeometry(1.2, 12, 10), M.ntc, stack, 0, -CR - 0.6, P.cellL / 2 - 5);   /* under the heater, opposite the stem */
-  var foam = mesh(shellGeo(12.8, 15.8, 34), M.foam, stack);
+  /* foam sleeve: 3.0 mm thick (ID 25.6, OD 31.6, 34 long), wrapped on, with a 10 mm hole on top for the stem */
+  var foam = new THREE.Group(); stack.add(foam);
+  function foamPart(len, z, gap) {
+    var pts = [new THREE.Vector2(12.8, -len / 2), new THREE.Vector2(15.8, -len / 2), new THREE.Vector2(15.8, len / 2), new THREE.Vector2(12.8, len / 2), new THREE.Vector2(12.8, -len / 2)];
+    var g = new THREE.LatheGeometry(pts, 72, Math.PI + gap / 2, TAU - gap); g.rotateX(Math.PI / 2); mesh(g, M.foam, foam, 0, 0, z);
+  }
+  foamPart(12, -11, 0); foamPart(12, 11, 0); foamPart(10, 0, 10 / 15.8);
   var tubeA = group(stack), tubeB = group(stack);
   mesh(shellGeo(13.25, 16.85, 63), M.delrin, tubeA); box(2.2, 2.2, 63.2, M.notch, tubeA, 0, 16.0, 0);
   mesh(shellGeo(13.25, 16.85, 63), M.delrin, tubeB);
@@ -591,12 +597,13 @@
       labels: function (S) { var a = [{ t: 'bifilar heater ' + f(P.foilW, 0) + ' × ' + f(P.foilH, 0) + ', 12 Ω', p: [330, -CR - 8, SZ] }, { t: 'stem ≤ ' + f(P.stemH, 0) + ' mm, no heater under it', p: [330, CR + P.stemH + 8, SZ] }]; if (S.ntc) a.push({ t: 'NTC 5 mm from the window', p: [330 + 9, -CR - 16, SZ], c: 'hot' }); return a; },
       quiz: { q: 'Why is the heater wire laid as a bifilar pair (go and return side by side)?', o: ['It heats more evenly', 'The two currents are opposite, so their magnetic fields cancel', 'It needs less wire'], a: 1, why: 'Any unpaired loop of heater current is a coil next to the cell; ours must stay below 0.1 mG.' } },
 
-    { ch: 'Cell stack (D2)', t: 'Slide on the foam sleeve',
+    { ch: 'Cell stack (D2)', t: 'Wrap on the foam sleeve',
       what: 'Foam sleeve <b>ID 25.6, OD 31.6, 34 long</b>, rated to 100 °C, wrapped on with the stem through its Ø10 hole. Run the heater tails and the NTC pairs in the clearance towards the cable end. Then push the stack, stem up, through the 50 mm test coupon of the former: it must pass without touching the stem.',
       check: 'Sleeve ends 3 mm beyond each window; leads not pinched.',
       parts: ['Foam sleeve'], tools: [],
       act: { type: 'auto', label: 'Slide it on', dur: 2.5 }, cam: [330, 70, 300, 330, 0, 160],
-      apply: function (S, p) { S.foam = p; } },
+      apply: function (S, p) { S.foam = p; },
+      labels: function (S) { return S.foam > 0.9 ? [{ t: 'foam 3.0 mm thick: ID 25.6, OD 31.6, 34 long', p: [330, -18, SZ] }, { t: 'Ø10 hole for the stem', p: [330, 24, SZ] }] : []; } },
 
     { ch: 'Cell stack (D2)', t: 'Push on the two Delrin tubes',
       what: 'Two tubes <b>OD 33.7, ID 26.5, 63 long</b>, one on each side: 63 + 34 + 63 = 160 mm, the length of the former. The groove of the cable-side tube carries the leads.',
@@ -719,7 +726,7 @@
     // cell stack
     stack.visible = S.cell; stack.position.set(S.stackX, 0, S.stack); cradle.visible = S.cell && S.stackX < -100;
     setHeater(S.heater); heater.visible = S.heater > 0; ntc.visible = S.ntc;
-    foam.visible = S.foam > 0; foam.position.z = lerp(70, 0, ease(S.foam));
+    foam.visible = S.foam > 0; var fs = lerp(1.6, 1, ease(S.foam)); foam.scale.set(fs, fs, 1);   /* wrapped on: it closes round the cell */
     tubeA.visible = tubeB.visible = S.tubes > 0; tubeA.position.z = -lerp(130, 48.5, ease(S.tubes)); tubeB.position.z = lerp(130, 48.5, ease(S.tubes));
     stackLeads.visible = S.tubes >= 1;
     M.hot.emissive.setRGB(0.55 * S.glow, 0.18 * S.glow, 0);

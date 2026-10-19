@@ -89,7 +89,7 @@
 <text x="734.00" y="668.00" font-size="11.5" text-anchor="start" fill="#1b1f24" font-weight="700">Delrin tube (cut)</text>
 <line x1="390.00" y1="542.00" x2="320.00" y2="664.00" stroke="#6b7280" stroke-width="1.0" stroke-linecap="round"/>
 <circle cx="390.00" cy="542.00" r="2.2" fill="#6b7280"/>
-<text x="316.00" y="668.00" font-size="11.5" text-anchor="end" fill="#1b1f24" font-weight="700">foam 3.0 thick</text>
+<text x="316.00" y="668.00" font-size="11.5" text-anchor="end" fill="#1b1f24" font-weight="700">foam 3.0 mm thick</text>
 <rect x="20.00" y="700.00" width="960.00" height="194.00" rx="0" fill="#f7f8fa" stroke="#1b1f24" stroke-width="1.2"/>
 <text x="34.00" y="722.00" font-size="13" text-anchor="start" fill="#1b1f24" font-weight="700">Assembly order and rules</text>
 <text x="34.00" y="748.00" font-size="11.5" text-anchor="start" fill="#1b1f24">1  NTC bead glued to the glass with thermally conductive epoxy, 5 mm from the end window; its leads run flat under the foil edge.</text>
