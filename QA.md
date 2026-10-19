@@ -410,6 +410,8 @@ B is taken if it meets the specification and costs less than A; C only if the bu
 - **Losses add up:** about seven mirrors in a path at 97.5 % each leave about 84 %. That is fine with milliwatts to spare. A broadband dielectric mirror (for example Thorlabs BB1-E03, 750–1100 nm) reflects more but costs more and is more sensitive to the angle and polarization: check its data sheet if a path is short of power.
 - **A cheaper supplier is fine** if the data sheet gives the same: Ø25.4 mm, protected silver (or a dielectric coating covering 795 nm), reflectance at 795 nm, λ/10 (or λ/4 for steering only), 0–45° incidence.
 
+**A cheaper catalogue (silver mirror table, part "OQAg"): which one?** The **OQAg-25.4** (Ø25.4 mm, 5 mm thick, 450–2000 nm, reflectivity > 95 %, clear aperture > 90 %) is the one that matches: the right diameter for the Ø1″ mounts and thick enough to stay flat. Not the OQAg-25 (Ø25.0 mm sits loose in a Ø1″ mount) and not the 3 mm versions if the thicker one is available. Its > 95 % against > 97.5 % costs about 2.5 % more per mirror: seven mirrors leave about 70 % instead of 84 %, still far more than we need. Before ordering, ask what the table does not give: flatness (λ/10 at 633 nm wanted, λ/4 the least for steering), surface quality (60-40 or better), whether the silver is protected (overcoated, so it does not tarnish), the reflectance at 795 nm at 45° for s and p, and the substrate.
+
 Sources: [Thorlabs PF10-03-P01 specification (GoPhotonics listing)](https://www.gophotonics.com/products/mirrors/thorlabs-inc/40-46-pf10-03-p01) · Thorlabs drawing of the PF10-03-P01
 
 ### Q8. What specification do the polarizing beamsplitter cubes (PBS) need?
