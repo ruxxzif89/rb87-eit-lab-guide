@@ -227,6 +227,6 @@
   window.addEventListener('resize', resize); resize();
   var last = 0;
   function frame(t) { ctl.update(); R.render(scene, cam); if (t - last > 60) { labels(); last = t; } requestAnimationFrame(frame); }
-  setMode('direct'); requestAnimationFrame(frame);
+  setMode('fibre'); requestAnimationFrame(frame);   /* our setup (19 Oct 2026): through the PM fibre */
   window.LSIM = { setMode: setMode, setStep: setStep, state: state, dDirect: dDirect, dFibre: dFibre };
 })();

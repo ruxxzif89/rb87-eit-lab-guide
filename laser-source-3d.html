@@ -446,15 +446,15 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
   <div class="ls-head">
     <a class="back" href="index.html#p9">← Questions and answers (section 09)</a>
     <h1>Free-space laser source in 3D: direct, or through a PM fibre</h1>
-    <p>The Yanban RB-795-DFB-BFW is a free-space butterfly laser with no isolator inside. Switch between the two ways of feeding the bench, step through the alignment, and read the data-sheet numbers and the budgets on the right. The part shapes are the symbolic models of the equipment list, at the 100 mm beam height on a 25 mm grid; the positions are an example layout. The beam is drawn three times wider than it is; its sizes in the tables are computed from the data sheets.</p>
+    <p>The Yanban RB-795-DFB-BFW is a free-space butterfly laser with no isolator inside. Our setup (decided 19 Oct 2026) feeds the bench through a PM fibre; the direct way is shown as the fallback. Switch between them, step through the alignment, and read the data-sheet numbers and the budgets on the right. The part shapes are the symbolic models of the equipment list, at the 100 mm beam height on a 25 mm grid; the positions are an example layout. The beam is drawn three times wider than it is; its sizes in the tables are computed from the data sheets.</p>
   </div>
   <div class="ls-grid">
     <div class="ls-view" id="ls3d">
       <canvas id="lscv" aria-label="3D view of the laser source"></canvas>
       <div id="lslabels" aria-hidden="true"></div>
       <div class="ls-hud">
-        <button type="button" class="ls-btn" data-mode="direct" aria-pressed="true">Direct to the bench</button>
-        <button type="button" class="ls-btn" data-mode="fibre" aria-pressed="false">Through a PM fibre</button>
+        <button type="button" class="ls-btn" data-mode="fibre" aria-pressed="true">Through a PM fibre (our setup)</button>
+        <button type="button" class="ls-btn" data-mode="direct" aria-pressed="false">Direct (fallback)</button>
         <button type="button" class="ls-btn" id="lsLab" aria-pressed="true">Labels</button>
         <button type="button" class="ls-btn" id="lsReset">Reset view</button>
       </div>
@@ -487,6 +487,6 @@ window.LS = {"beamH": 100.0, "lam": 795.0, "d0": 1.0, "divDeg": 0.1, "Pmin": 100
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
 <script src="parts3d.js?v=14"></script>
-<script src="laser-source-3d.js?v=2"></script>
+<script src="laser-source-3d.js?v=3"></script>
 </body>
 </html>

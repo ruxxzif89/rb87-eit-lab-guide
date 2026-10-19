@@ -187,10 +187,10 @@ Sources: RB-795-DFB-BFW data sheet (Yanban Laser, from the vendor) · [Alibaba l
 
 **Couple it into a polarization-maintaining single-mode fibre ourselves.** A PM-pigtailed laser is the same chip with an isolator, a lens and a PM fibre built into the package. The fibre is what makes its output a clean round Gaussian with a fixed polarization axis and a fixed pointing, so the only way to get exactly that output from a free-space laser is to put the same fibre in the path. This is also what our reference design does: Finkelstein et al. (New J. Phys. 25, 035001 (2023), Sec. V.1 and Fig. 10) send their free-space laser through an isolator and then into a PM fibre, to clean the beam profile and the polarization. Free-space optics alone (lenses, prisms, a pinhole) only come close.
 
-**Is the fibre needed at all? No: it is optional.** The free-space beam can go straight from the two isolators into the bench (half-wave plate, PBS, AOM arms), and that is how we start. The laser already gives a single-frequency, nearly round 1.0 × 0.8 mm beam (a good size for the AOMs) with 20 dB polarization, and the first PBS cleans the polarization. What the direct beam does not give:
+**Our setup: through the PM fibre (decided 19 Oct 2026).** The equipment list (Yanban option) now has the fibre link (row L05) and its two steering mirrors (row L07) as parts to buy. **Was the fibre strictly needed? No.** The free-space beam could go straight from the two isolators into the bench (half-wave plate, PBS, AOM arms). The laser already gives a single-frequency, nearly round 1.0 × 0.8 mm beam (a good size for the AOMs) with 20 dB polarization, and the first PBS cleans the polarization. What the direct beam does not give:
 - **Pointing decoupling:** drift of the laser mount or the isolators (temperature, screws settling) moves the beam on the AOMs (Bragg acceptance about 0.5 mrad), the SAS and the cell; a laser swap means realigning the bench. With the fibre, such drift changes only the coupled power.
 - **A guaranteed clean mode:** the data sheet gives no beam-quality figure (M²); the fibre passes only its own Gaussian mode.
-Add the fibre (equipment row L05 in the Yanban option) if the AOM efficiency, the beam profile or the day-to-day pointing is not good enough. Without it: two isolators right at the laser window, a rigid metal mount, and the same alignment as any free-space diode laser.
+We chose the fibre for exactly these reasons: a guaranteed clean Ø1 mm beam at the AOMs (the direct beam would need a reducing telescope), and a bench that stays aligned whatever happens on the laser side.
 
 **Direct or through the fibre: which is better?**
 
@@ -208,7 +208,7 @@ Add the fibre (equipment row L05 in the Yanban option) if the AOM efficiency, th
 
 **See both in 3D:** [the laser-source simulation](laser-source-3d.html) shows the two layouts at the 100 mm beam height with the alignment steps, the data-sheet values, and the power, isolation and beam-size budgets.
 
-For EIT itself the two give the same result: the experiment needs a stable single-frequency beam of a few mW in a known polarization, and the PBS and the cell do not care about a slightly non-ideal profile. The fibre buys long-term stability and an ideal beam at the price of one more alignment stage. Start direct; add the fibre if the AOM efficiency or the day-to-day pointing disappoints.
+For EIT itself the two give the same result: the experiment needs a stable single-frequency beam of a few mW in a known polarization, and the PBS and the cell do not care about a slightly non-ideal profile. The fibre buys long-term stability and an ideal beam at the price of one more alignment stage. We chose the fibre (19 Oct 2026); the direct beam remains the fallback if the fibre coupling ever becomes a problem.
 
 **The sequence, from the chip to the bench**
 
