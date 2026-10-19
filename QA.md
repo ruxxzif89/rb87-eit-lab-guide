@@ -1074,6 +1074,13 @@ Three layers multiply these roughly, if the gaps between them are a few millimet
 - **What survives the swap and what does not.** The coil constant (mG per mA) depends only on the winding, so it stays valid. The residual field does not: opening the caps to swap lets the Earth's field magnetise the layers again, which is why the stack goes in and the shield is degaussed a second time.
 - **The atoms are the final judge.** The fluxgate offset is about ±3 mG, so the absolute zero and the final constant come from the EIT peak itself (1.4 kHz per mG, an atomic constant); the fluxgate gives the quick, independent first numbers and checks each later degauss when the cell is out.
 
+**Could it stay inside during the whole experiment?** Not at the cell position: that place belongs to the cell. It could stay as a drift monitor a little away from the cell, with four conditions:
+- **Where:** in the far-end Delrin tube, about 60 mm from the cell centre, off the axis so it stays clear of the beam (the 14 mm wide board fits beside the beam inside the Ø26.5 mm bore of the tube). It then reads the field there, not at the atoms: good for changes (drift), not for the absolute value.
+- **Test with the atoms first:** a fluxgate drives its core into saturation at kHz, so it makes a small AC field of its own. Record the EIT line with the sensor powered and unpowered; if the position or the width changes, power it only between measurements.
+- **The cable:** it adds about 7 mm² to the cable hole of the end caps, which is already close to full (see the DIY audit); with the thinner degaussing wire there is room.
+- **Temperature:** the tube near the heated cell runs warm, and the sensor zero drifts with temperature (data sheet: below 2 nT per kelvin, 0.02 mG/K), so read it as a relative monitor.
+During EIT the best field monitor is the atoms themselves: the EIT peak moves 1.4 kHz per mG, far more sensitively than the fluxgate.
+
 ### Q30. Can the Stefan Mayer FLC100 be the fluxgate magnetometer with milligauss resolution?
 
 *Added 10 Oct 2026*
