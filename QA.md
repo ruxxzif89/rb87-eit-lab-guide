@@ -1068,6 +1068,12 @@ Three layers multiply these roughly, if the gaps between them are a few millimet
 
 **In short:** wind it carefully, measure the slope with the fluxgate in free space and in the shield, and let the atoms give the final number. Whatever value comes out, the current (about 15 mA for 50 mG) or the RF difference is adjusted to it.
 
+**Why the fluxgate goes in first and then comes out.** The order on the bench (and in the D1 build simulator) is: shield closed, degauss, fluxgate plate at the cell position, calibrate mG per mA, then swap the plate for the cell stack, degauss again, heat the cell, and do the final calibration with the atoms. This is the usual practice for a magnetometer and a vapour cell that need the same spot:
+- **They need the same place.** The sensor must sit where the atoms will be (centre of the solenoid, on the axis), and our bore holds either the cell stack or the sensor plate, not both.
+- **The sensor would disturb the measurement.** A fluxgate drives its permalloy core with a kHz excitation current: a small AC field and a piece of magnetic metal next to the cell. It is fine for a calibration, not next to the atoms during EIT.
+- **What survives the swap and what does not.** The coil constant (mG per mA) depends only on the winding, so it stays valid. The residual field does not: opening the caps to swap lets the Earth's field magnetise the layers again, which is why the stack goes in and the shield is degaussed a second time.
+- **The atoms are the final judge.** The fluxgate offset is about ±3 mG, so the absolute zero and the final constant come from the EIT peak itself (1.4 kHz per mG, an atomic constant); the fluxgate gives the quick, independent first numbers and checks each later degauss when the cell is out.
+
 ### Q30. Can the Stefan Mayer FLC100 be the fluxgate magnetometer with milligauss resolution?
 
 *Added 10 Oct 2026*
