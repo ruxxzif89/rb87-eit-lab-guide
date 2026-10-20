@@ -218,8 +218,8 @@ For EIT itself the two give the same result: the experiment needs a stable singl
 | 2 | No extra lens | the data sheet gives a collimated beam of about 1.0 × 0.8 mm (check it on arrival: same size at 0.2 m and 2 m) | none |
 | 3 | Isolator, stage 1, right at the laser window | no isolator inside the laser; nothing reflective may come before it | Thorlabs I795P3D (≥ 34 dB) |
 | 4 | Isolator, stage 2 | one stage leaves about −67 dB at the chip; two give about −100 dB | a second I795P3D, or one IOT-5-780-VLP tandem (55 dB) |
-| 5 | Half-wave plate | the isolator output is linear at 45° to its input; this plate turns it onto the slow axis of the fibre | Ø½″ zero-order HWP in a rotation mount |
-| 6 | Two steering mirrors | the two degrees of freedom of beam walking into the coupler | mirrors in kinematic mounts |
+| 5 | Two steering mirrors | the two degrees of freedom of beam walking into the coupler. They come BEFORE the half-wave plate: a silver mirror at 45° keeps a linear polarization unchanged only if it is horizontal or vertical (s or p); the isolator output is at 45°, and the mirrors must not see any other angle | mirrors in kinematic mounts (row O01/O02) |
+| 6 | Half-wave plate, right before the coupler | turns the polarization onto the slow axis of the fibre; with the mirrors already behind it, nothing between the plate and the fibre can change it | Ø½″ zero-order HWP in a rotation mount |
 | 7 | Fibre coupler (input) | focuses the beam onto the fibre core; its tip, tilt and focus are adjustable | lab Thorlabs PAF2-5B FiberPort (f 4.6 mm, made for a Ø1 mm beam with a 5 µm mode, so it matches our 1.0 × 0.8 mm beam) |
 | 8 | PM single-mode fibre | the mode and polarization filter: everything after it behaves like a pigtail | PM780 patch cable, FC/APC both ends (for example Thorlabs P5-780PM-FC-2) |
 | 9 | Output collimator | the bench beam starts here, at 100 mm, exactly as with a pigtailed laser | a second FiberPort (about Ø1 mm beam, good for the AOMs) or the planned FC/APC collimator |
@@ -229,7 +229,7 @@ After step 9 the bench is the one already designed (wave plate, PBS, AOM arms, c
 **Alignment, in order**
 1. **Laser on, low power:** set the ITC502 current limit and the TEC first; check that the laser reaches the Rb line (absorption and saturated-absorption features in the reference cell while scanning the current).
 2. **Isolators:** turn each isolator about the beam until the transmitted power is maximum (its input polarizer is then along the laser polarization); keep the beam centred in the aperture.
-3. **Wave plate:** set roughly at first; it is fixed in step 5.
+3. **Order of mirrors and wave plate:** the two isolator-side mirrors see the 45° output of the isolator, so first turn the second isolator (or the beam path) so that the beam is horizontal or vertical at the mirrors if the plate is to come after them; the half-wave plate sits just before the coupler and is set in step 5.
 4. **Fibre coupling:** with both mirrors, walk the beam into the coupler while reading the power at the fibre output with the power meter (first mirror for position, second for angle, alternately), then optimise the focus of the coupler, and repeat. Expect a good part of the power to be coupled when the modes match; measure it rather than assume it.
 5. **Polarization:** put a polarizer and the power meter after the output collimator. Turn the half-wave plate for the deepest minimum (the input is then on a fibre axis). Then warm or gently bend the fibre: if the output power through the polarizer changes, the input is not on the axis yet; turn the plate until warming and bending change nothing. That is the standard way to launch into a PM fibre.
 6. **Lock it down:** tighten the locking screws of the mounts and the coupler, write down the coupled power, and check it again the next day.
@@ -415,6 +415,19 @@ B is taken if it meets the specification and costs less than A; C only if the bu
 - **A cheaper supplier is fine** if the data sheet gives the same: Ø25.4 mm, protected silver (or a dielectric coating covering 795 nm), reflectance at 795 nm, λ/10 (or λ/4 for steering only), 0–45° incidence.
 
 **A cheaper catalogue (silver mirror table, part "OQAg"): which one?** The **OQAg-25.4** (Ø25.4 mm, 5 mm thick, 450–2000 nm, reflectivity > 95 %, clear aperture > 90 %) is the one that matches: the right diameter for the Ø1″ mounts and thick enough to stay flat. Not the OQAg-25 (Ø25.0 mm sits loose in a Ø1″ mount) and not the 3 mm versions if the thicker one is available. Its > 95 % against > 97.5 % costs about 2.5 % more per mirror: seven mirrors leave about 70 % instead of 84 %, still far more than we need. Before ordering, ask what the table does not give: flatness (λ/10 at 633 nm wanted, λ/4 the least for steering), surface quality (60-40 or better), whether the silver is protected (overcoated, so it does not tarnish), the reflectance at 795 nm at 45° for s and p, and the substrate.
+
+**Is the OQAg-25.4 suitable for every mirror on our table? Yes, for all 13, if the vendor confirms the four open points.** What each role asks of a mirror:
+
+| Where | What matters | OQAg-25.4 |
+|---|---|---|
+| Steering mirrors (master axis, SAS, control and probe arms, fibre coupling) | reflectance at 795 nm, no polarization change, no scatter; power is low (milliwatts; the two fibre mirrors see about 80 mW) | fine: > 95 % (typical silver at 795 nm is higher); 80 mW heats the coating by about 4 mW, far below any limit |
+| Retro mirrors of the double pass | the beam is focused to about 0.1 mm on the mirror, so flatness hardly matters; centring and a stable mount matter | fine: surface quality and a good mount decide, not λ/10 |
+| Mirrors in the arms, in the master path | the polarization there is horizontal or vertical (s or p), which a silver mirror at 45° leaves unchanged | fine |
+| The two mirrors before the fibre coupler | same rule, so the half-wave plate comes after them (see the sequence above); a flat mirror is not needed over a Ø1 mm beam | fine, with the plate after them |
+
+**Where it would not be fine:** a 45° mirror between the half-wave or quarter-wave plate and the cell (it would turn a pure polarization into an elliptical one), and any path that needs the last percent of power (a dielectric mirror gives about 99.5 % at its design wavelength).
+
+**Four open points to put in writing with the vendor** (the table gives none of them): the silver must be protected (overcoated), or it tarnishes in months; reflectance at 795 nm at 45° for s and p; flatness (λ/4 is enough for steering, and nothing here needs better); surface quality 60-40 or better. The 5 mm thickness is thinner than the Thorlabs 6 mm and fits the KM100 the same way (check that the retaining ring still clamps it).
 
 Sources: [Thorlabs PF10-03-P01 specification (GoPhotonics listing)](https://www.gophotonics.com/products/mirrors/thorlabs-inc/40-46-pf10-03-p01) · Thorlabs drawing of the PF10-03-P01
 

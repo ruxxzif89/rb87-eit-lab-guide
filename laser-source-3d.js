@@ -58,12 +58,13 @@
   part('ld', 'mount14', {}, 0, 0, 0, 'laser (Yanban, free space)', 'both');
   part('iso1', 'isolator', {}, L.x.iso1, 0, 0, 'isolator 1', 'both');
   part('iso2', 'isolator', {}, L.x.iso2, 0, 0, 'isolator 2', 'both');
-  part('hwp', 'wp', { axis: 22.5 }, L.x.hwp, 0, 0, 'λ/2 plate', 'both');
+  part('hwpD', 'wp', { axis: 22.5 }, L.x.hwp, 0, 0, 'λ/2 plate', 'direct');
   // direct: the bench starts at the PBS
   part('pbsD', 'pbs', {}, L.x.pbsD, 0, 0, 'PBS: bench starts', 'direct');
   // fibre: two mirrors, coupler, fibre, output collimator, then the bench PBS
   part('m1', 'mirror', {}, L.x.m1, 0, -Math.PI * 3 / 4, 'mirror 1', 'fibre');
   part('m2', 'mirror', {}, L.x.m1, L.z.m2, Math.PI / 4, 'mirror 2', 'fibre');
+  part('hwpF', 'wp', { axis: 22.5 }, L.x.m1 + 38, L.z.m2, 0, 'λ/2 plate (after the mirrors)', 'fibre');
   part('cpl', 'fibcol', {}, L.x.cpl, L.z.m2, Math.PI, 'coupler PAF2-5B', 'fibre');
   part('col', 'fibcol', {}, L.x.col, L.z.out, 0, 'output collimator', 'fibre');
   part('pbsF', 'pbs', {}, L.x.pbsF, L.z.out, 0, 'PBS: bench starts', 'fibre');
@@ -138,7 +139,7 @@
       ['Laser', 'Yanban RB-795-DFB-BFW, free space', '100 mW min, 120 typ; 794.97 nm target; 200 kHz typ; SMSR ≥ 40 dB; PER 20 dB; 150 mA typ, 175 max; beam about 1.0 × 0.8 mm, divergence 0.1° (full or half angle not stated); window centre 5.1–5.45 mm above the package base; no isolator inside', 'vendor data sheet'],
       ['Mount', 'ILX LDM-4980 (lab, 2 units)', '14-pin butterfly, metal, heat-sinked; check its pin table against the laser (anode 10, cathode 11, TEC 1/14, NTC 2/5, PD 3/4)', 'lab inventory, data sheet'],
       ['Isolators', '2 × Thorlabs I795P3D', 'each ≥ 34 dB, 90 % at 795 nm (775–815 nm), max beam Ø2.7 mm, 0.7 W; output polarization at 45° to the input. Alternative: one IOT-5-780-VLP, 55 dB, Ø4.7 mm', 'Thorlabs specifications'],
-      ['Half-wave plate', 'zero-order, Ø½″, 780 nm design', 'sets the polarization for the PBS (direct) or for the fibre slow axis (fibre)', 'equipment list O05']
+      ['Half-wave plate', 'zero-order, Ø½″, 780 nm design', 'sets the polarization for the PBS (direct), or for the fibre slow axis (fibre: placed after the two mirrors, right before the coupler)', 'equipment list O05']
     ];
     if (state.mode === 'fibre') rows = rows.concat([
       ['Mirrors', '2 × Ø1″ silver mirror in a KM100 mount (counted in equipment rows O01 and O02)', 'OQAg-25.4: Ø25.4 mm, 5 mm thick, 450–2000 nm, reflectivity > 95 %, clear aperture > 90 % (or Thorlabs PF10-03-P01: > 97.5 %, λ/10). Beam walking into the coupler: the first sets the position, the second the angle', 'vendor catalogue table; Thorlabs drawing'],
@@ -176,15 +177,15 @@
       { t: 'Mount and power', on: ['ld'], d: 'Laser in the metal butterfly mount on the aluminium plate (not PETG: the chip cooler dumps its heat into the mount). ITC502: current limit 170 mA and the TEC first, then the current. Check the Rb absorption and saturated-absorption features in the reference cell.' },
       { t: 'Isolator 1 at the window', on: ['iso1'], d: 'First element after the laser, nothing reflective before it. Turn it about the beam for maximum transmission: its input polarizer then lies along the laser polarization. Keep the beam centred in the Ø2.7 mm aperture.' },
       { t: 'Isolator 2', on: ['iso2'], d: 'Same procedure. Its input must take the 45° output of stage 1: turn it to maximum transmission. Two stages give about −100 dB at the chip.' },
-      { t: 'Half-wave plate', on: ['hwp'], d: 'Turns the 45° output polarization so that the PBS splits the power as wanted between control and probe.' },
+      { t: 'Half-wave plate', on: ['hwpD'], d: 'Turns the 45° output polarization so that the PBS splits the power as wanted between control and probe.' },
       { t: 'Into the bench', on: ['pbsD'], d: 'The PBS is the first part of the bench. Walk the beam onto the bench irises with the mounts (two-iris method). From here the bench is built as designed.' }
     ],
     fibre: [
       { t: 'Mount and power', on: ['ld'], d: 'As in the direct version: metal mount, current limit 170 mA, TEC first, check the Rb lines.' },
       { t: 'Two isolators', on: ['iso1', 'iso2'], d: 'Both right after the window, each turned for maximum transmission. Returns from the bench now come back through the fibre and are stopped here.' },
-      { t: 'Half-wave plate to the slow axis', on: ['hwp'], d: 'Set it roughly now; it is fixed in the polarization step.' },
       { t: 'Beam walking into the coupler', on: ['m1', 'm2', 'cpl'], d: 'Read the power at the fibre output. Mirror 1 sets the position on the coupler, mirror 2 the angle: alternate, then optimise the coupler focus and repeat. Measure the coupling efficiency and enter it in the slider.' },
-      { t: 'Polarization launch', on: ['hwp', 'col'], d: 'Polarizer and power meter after the output collimator. Turn the half-wave plate for the deepest minimum, then warm or gently bend the fibre: turn the plate until warming and bending change nothing.' },
+      { t: 'Half-wave plate to the slow axis', on: ['hwpF'], d: 'Placed after the mirrors on purpose: a silver mirror at 45° keeps only a horizontal or vertical polarization clean, so nothing may turn the polarization before the last mirror. Set the plate roughly now; it is fixed in the next step.' },
+      { t: 'Polarization launch', on: ['hwpF', 'col'], d: 'Polarizer and power meter after the output collimator. Turn the half-wave plate for the deepest minimum, then warm or gently bend the fibre: turn the plate until warming and bending change nothing.' },
       { t: 'Lock down', on: ['cpl', 'm1', 'm2'], d: 'Tighten all locking screws, write down the coupled power, check it the next day. A later touch-up of the coupler changes the power only, never the beam on the bench.' },
       { t: 'Into the bench', on: ['col', 'pbsF'], d: 'The output collimator is the start of the bench, at 100 mm. Everything after it is aligned once and stays aligned.' }
     ]
