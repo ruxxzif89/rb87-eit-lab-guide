@@ -586,7 +586,7 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
 <script src="parts3d.js?v=15"></script>
 <script src="inventory-data.js?v=16"></script>
-<script src="lab-cover.js?v=1"></script>
+<script src="lab-cover.js?v=2"></script>
 <script>
 (function () {
   var body = document.querySelector('#ownedTbl tbody'), note = document.getElementById('ownedNote');
@@ -657,6 +657,7 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
     D.rows.forEach(function (r) { if (r.alt && !S.seen[r.id]) { S.seen[r.id] = 1; if (!S.alts[r.id]) S.alts[r.id] = { on: true, myr: r.alt.myr, url: r.alt.url }; any = true; } });
     if (any) local();
   }
+  function invNames(id) { var l = window.LabCover && LabCover.coverers ? LabCover.coverers(id) : []; return l.length ? '<br><a class="pn" href="inventory.html?bom=' + encodeURIComponent(id) + '#invBody">' + l.map(function (i) { return esc('inv. ' + i.id + ' ' + (i.part || i.name) + (i.qty ? ' ×' + String(i.qty).replace(/\s+/g, ' ') : '')); }).join('; ') + '</a>' : ''; }
   function cover() { INV = {}; if (!window.LabCover || !LabCover.enabled() || !D) return; var al = LabCover.allocator(); D.rows.forEach(function (r) { var t = al.take(r.id, r.qty); if (t > 0) INV[r.id] = t; }); }
   function totals() {
     var core = 0, opt = 0, have = 0, rem = 0, n = 0, m = 0, save = 0, na = 0, inv = 0, ni = 0;
@@ -752,7 +753,7 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
       '<td><input type="checkbox" class="bomTick" data-kind="remove" data-id="' + id + '"' + (e === 'remove' ? ' checked' : '') + ' aria-label="Remove from plan: ' + esc(r.item) + '"></td>' +
       '<td><input type="checkbox" class="bomTick" data-kind="alt" data-id="' + id + '"' + (a ? ' checked' : '') + ' aria-label="Found a cheaper alternative: ' + esc(r.item) + '"></td>' +
       '<td>' + id + '</td><td class="look">' + lookHtml(r.id, r.item) + '</td><td>' + esc(r.item) + (r.status === 'optional' ? ' <span class="tag est">optional</span>' : '') + '</td>' +
-      '<td class="num">' + r.qty + ' ' + esc(r.unit) + (cv > 0 ? '<br><span class="tag lab">' + (cv >= r.qty ? 'in the lab' : cv + ' of ' + r.qty + ' in the lab') + '</span>' : '') + '</td><td class="num">' + fmt(r.market_myr) + '</td><td class="num">' + fmt(r.unit_myr) + '</td>' +
+      '<td class="num">' + r.qty + ' ' + esc(r.unit) + (cv > 0 ? '<br><a class="tag lab" href="inventory.html?bom=' + encodeURIComponent(r.id) + '#invBody" title="Show the Lab Inventory items that cover ' + esc(r.id) + '">' + (cv >= r.qty ? 'in the lab' : cv + ' of ' + r.qty + ' in the lab') + ' ↗</a>' + invNames(r.id) : '') + '</td><td class="num">' + fmt(r.market_myr) + '</td><td class="num">' + fmt(r.unit_myr) + '</td>' +
       '<td class="alt">' + (a ? '<input type="number" class="altPrice" data-id="' + id + '" min="0" step="any" inputmode="decimal" value="' + (Number(a.myr) > 0 ? esc(a.myr) : '') + '" placeholder="MYR / unit" aria-label="Estimated price of the alternative, MYR per unit: ' + esc(r.item) + '">' : '') + '</td>' +
       '<td class="alt">' + (a ? '<input type="url" class="altUrl" data-id="' + id + '" value="' + esc(a.url || '') + '" placeholder="https://… product link" aria-label="Product link of the alternative: ' + esc(r.item) + '">' + (link ? ' <a class="altGo" href="' + esc(link) + '" target="_blank" rel="noopener">open ↗</a>' : '') : '') + '</td>' +
       '<td class="num line">' + lineHtml(r, e) + '</td><td>' + (r.basis === 'web' ? 'seen on vendor page' : r.basis === 'quote' ? 'vendor offer' : '<span class="tag est">estimate</span>') + '</td></tr>';
@@ -822,7 +823,7 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
         if (hadLocal) { status('Using the ticks saved in this browser.'); clearTimeout(timer); timer = setTimeout(sync, 400); return; }
         return api({ action: 'load', id: 'current' }).then(function (c) { if (c && c.ok && c.found) { S.states = c.states; S.alts = c.alts || {}; local(); paintRows(); status('Restored your last working copy from the database.'); } else status('Tick items you already own or can borrow.'); });
       });
-    }).catch(function () { PW = ''; out.innerHTML = '<div class="note"><span class="t">Error</span>Could not reach the service.</div>'; })
+    }).catch(function (err) { if (window.console) console.error(err); PW = ''; out.innerHTML = '<div class="note"><span class="t">Error</span>Could not reach the service.</div>'; })
       .then(function () { btn.disabled = false; });
   });
 })();

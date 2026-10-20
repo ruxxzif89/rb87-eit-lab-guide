@@ -27,7 +27,10 @@
       }
     };
   }
+  function coverers(bomId) {   /* the Lab Inventory items (status use) that name this BOM row, from the same list the inventory page shows */
+    return items().filter(function (i) { return i.status === 'use' && i.bom && String(i.bom).split(/[,;\s]+/).indexOf(bomId) >= 0; });
+  }
   function enabled() { try { return localStorage.getItem(PREF) !== '0'; } catch (e) { return true; } }
   function setEnabled(v) { try { localStorage.setItem(PREF, v ? '1' : '0'); } catch (e) { } }
-  window.LabCover = { items: items, allocator: allocator, enabled: enabled, setEnabled: setEnabled };
+  window.LabCover = { items: items, coverers: coverers, allocator: allocator, enabled: enabled, setEnabled: setEnabled };
 })();
