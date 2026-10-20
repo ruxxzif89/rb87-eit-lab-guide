@@ -661,16 +661,28 @@ Identified from five photographs of the lab shelves and added to the Lab Invento
 
 **Left out as not needed:** the ball-screw stepper stage, aluminium rails, the V-block, brackets, loose screws and the box of cables.
 
-### Q14. Is the Credix SG-1710 signal generator useful?
+### Q14. Is the Credix SG-1710 signal generator useful? Can it drive the AOMs, and both of them?
 
-*Added 9 Oct 2026*
+*Added 20 Oct 2026*
 
-*Equipment shown in the guide: SG-1710 generator.*
+*Equipment shown in the guide: SG-1710 generator, RF amplifier, RF switch, AOM.*
 
-**Yes, as an AOM driver.** It is a single-channel synthesizer, 200 kHz to 1000 MHz, 1 Hz resolution, 0.5 ppm accuracy, up to +13 dBm, with AM, FM and GPIB (figures from a third-party listing, not a Credix datasheet).
-- It can drive one AOM at 80 MHz through an RF amplifier (+13 dBm alone is not enough), for example the AOM in the SAS arm that moves the lock by 160 MHz.
-- Two independent generators share no phase, which is acceptable for CW EIT because the offset stays within a few Hz, far below the 7–26 kHz EIT width.
-- It is not a gate: switch the RF with a proper RF switch (AM is not a clean off).
+**It can drive one AOM, through an RF amplifier. It cannot drive both on its own, because it has one output and the two arms need two different frequencies (80.000 and 79.965 MHz).** Audit of 20 Oct 2026, from the third-party listing (not a Credix data sheet; no phase-noise figure is given): single channel, 200 kHz to 1000 MHz, 1 Hz resolution, 0.5 ppm accuracy, output −127 to +13 dBm in 0.1 dB steps (±1.0 dB above −37 dBm), flatness ±1.2 dB, 50 Ω, harmonics −30 dBc or better, spurious −60 dBc or better from 137.5 MHz (−50 dBc below), AM, FM, GPIB and RS-232C, reverse-power protection 25 W.
+
+| Check | Result |
+|---|---|
+| Frequency | 80 MHz is well inside 200 kHz to 1000 MHz; 1 Hz steps allow 79.965 MHz exactly. **Pass** |
+| Level | The AOM needs about 1 W (+30 dBm, limit 2 W); the SG-1710 gives at most +13 dBm (20 mW). It needs the amplifier of the chain (R02, 29–32 dB gain, +10 dBm maximum input): set the SG-1710 to about +1 dBm and **never above +10 dBm** at the amplifier input, because the SG-1710 can go to +13 dBm. **Pass with the amplifier** |
+| Level setting | 0.1 dB steps from the front panel, so the step attenuator (R03) is not needed with this source |
+| Gating | AM is not a clean off. Use the RF switch (R04) with a TTL gate. **Needs a switch** |
+| Harmonics | −30 dBc at about 1 W is about 1 mW at 160 MHz. The AOM transducer is narrow (about 80 MHz), so it diffracts little of it, but a low-pass filter of about 100 MHz after the amplifier is cheap insurance (the same remark as for the SynthHD). **Add a filter** |
+| Phase noise | Not given. For CW EIT it only matters through the difference of the two generators within the 7–26 kHz EIT width; measure the beat of the two RF outputs or look at the EIT line width. **Unknown, measurable** |
+| Both AOMs | One output = one frequency. A power splitter would give both AOMs 80.000 MHz, hence no 35 kHz difference and no Zeeman EIT. **Not possible alone** |
+
+**What it is good for.**
+- **Control arm** at 80.000 MHz, with a second, independent source for the probe at 79.965 MHz. Two independent generators share no phase. For CW EIT, and for storage measured as intensity, that is acceptable: the frequency error of each is 0.5 ppm of 80 MHz, 40 Hz (80 Hz in the light after the double pass), against an EIT width of 7–26 kHz. It is not acceptable for any phase-sensitive measurement (a beat-note heterodyne, phase-dependent retrieval). If the SG-1710 has a 10 MHz reference output and the second source a reference input, tie them together; check the rear panel, the listing does not say.
+- **Commissioning source** for the AOM alignment (DIY D9): SG-1710 → switch → amplifier → AOM while the full chain is still being built.
+- It does **not** replace R01 (the dual-channel SynthHD, one clock for both arms). It would only help if a cheaper single-channel 80 MHz source were bought for the probe instead; compare that price before deciding. The BOM row R01 therefore stays as it is, and the equipment list names this instrument in the R01 note so it is easy to find; in the Lab Inventory it is item I07 and it is not counted against R01.
 - It cannot reach 6.8 GHz.
 
 Source: [SG-1710 listing](https://www.radiolocman.com/op/device.html?di=63870)
