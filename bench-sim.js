@@ -205,7 +205,7 @@
                  isolator: 'The isolation passes light forward and blocks the reflections from the AOM double-passes and cell windows: with the Yanban, its built-in isolator plus one I795P3D (PM-fibre version) or two isolator stages (free-space version).' };
   function yan() { return !!(window.LaserOpt && window.LaserOpt.get() === 'yanban'); }
   function info(k) { return (yan() && INFO_Y[k]) || INFO[k]; }
-  var NAME_Y = { laser: 'DFB laser 795 nm (Yanban RB-795-DFB-BFW, packaging pending)', isolator: 'Isolation for the Yanban (1 or 2 stages)' };
+  var NAME_Y = { laser: 'DFB laser 795 nm (Yanban RB-795-DFB-BFW, free space)', isolator: 'Isolation for the Yanban (1 or 2 stages)' };
   function info2(k) { return (yan() && INFO2_Y[k]) || INFO2[k]; }
 
   /* ---------------- inspector ---------------- */

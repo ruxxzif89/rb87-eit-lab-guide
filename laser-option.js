@@ -7,9 +7,9 @@
   var KEY = 'rb87-laser';
   var OPTS = {
     eagleyard: { label: 'Eagleyard BFY12', title: 'Toptica Eagleyard EYP-DFB-0795-00015-1500-BFY12-0005: PM fibre, micro-isolator inside, 5–15 mW' },
-    yanban: { label: 'Yanban RB-795-DFB-BFW', title: 'Yanban RB-795-DFB-BFW: 100–120 mW, 200 kHz; packaging pending the supplier reply (PM fibre with built-in isolator asked, free space listed)' }
+    yanban: { label: 'Yanban RB-795-DFB-BFW', title: 'Yanban RB-795-DFB-BFW, free space: 100–120 mW, 200 kHz, two isolators and a PM-fibre link (current plan)' }
   };
-  var DEF = 'eagleyard';
+  var DEF = 'yanban';   /* current plan since 20 Oct 2026; Eagleyard stays selectable */
   function get() {
     try { var v = localStorage.getItem(KEY); return OPTS[v] ? v : DEF; } catch (e) { return DEF; }
   }
@@ -57,7 +57,7 @@
       var p = document.createElement('div'); p.className = 'laser-pill';
       var k = document.createElement('span'); k.className = 'lp-k'; k.textContent = 'Laser';
       p.appendChild(k); p.appendChild(switchEl());
-      var n = document.createElement('span'); n.className = 'laser-pend'; n.textContent = 'packaging pending supplier reply';
+      var n = document.createElement('span'); n.className = 'laser-pend'; n.textContent = 'free space + PM fibre';
       p.appendChild(n);
       document.body.appendChild(p);
     }
