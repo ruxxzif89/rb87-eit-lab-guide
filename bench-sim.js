@@ -20,6 +20,7 @@
   var idn = 1000;
 
   var INFO = {
+    fibport: 'One end of the polarization-maintaining fibre link (Thorlabs PAF2-5B FiberPort type: f 4.6 mm, made for a Ø1 mm beam and a 5 µm mode; PM780 patch cable, FC/APC at both ends). Light that enters the input end leaves the output end: the coupling efficiency (about 50 % is typical, measure it) sets the power, the angle between the light polarization and the connector slow axis sets how much is kept (cos²), and the output is linear along the output connector slow axis, with a round Gaussian beam of about Ø1 mm. Light returning from the bench enters the output end and comes back through the fibre towards the isolators.',
     laser: 'PM-fibre-pigtailed distributed-feedback diode laser at the Rb D1 line (≈795 nm) with a micro-isolator inside the module (planned: Eagleyard EYP-DFB-0795-00015-1500-BFY12-0005, up to 15 mW). The collimator is not on the laser: it plugs onto the fibre, and the free-space isolator follows it. It emits a horizontally polarized single-frequency beam. A DFB has no piezo: its frequency is tuned by injection current (fast) and chip temperature (slow), both set by the laser controller, which the lock box steers. The ~1–2 MHz DFB linewidth (paper) is common to probe and control, so it largely cancels in the two-photon detuning.',
     isolator: 'FC/APC fibre collimator followed by a free-space Faraday isolator (planned: Thorlabs I795P3D, centre 795 nm, operating range 775–815 nm, isolation at least 34 dB, transmission 90 %, beam up to Ø2.7 mm). Its input polarizer is set along the slow axis of the laser fibre. Simulated: 90 % transmission, output linear at 45° (clock the fibre connector or use the first half-wave plate to set it), backward light blocked by 4 × 10⁻⁴ (34 dB). Together with the micro-isolator inside the laser, the returned light at the chip is estimated at about −95 dB or better. The arrow marks the forward direction.',
     mirror: 'Protected-silver mirror (simulated R = 98 %). Reflects by the law of reflection. Circular handedness flips on reflection. Rotate in 45° steps.',
@@ -51,13 +52,14 @@
     fgen: 'Dual-channel function generator in burst mode (project plan). It gates both AOM RF channels to slice probe pulses and switch the control off and on. Required for the pulsed-storage sequence. Off-beam: place it anywhere.'
   };
   var INFO2 = {
+    fibport: ['Cleans the beam: whatever the laser beam looks like, the output is a clean round Gaussian with fixed polarization and pointing, so a laser change or drift only changes the coupled power, never the alignment of the bench.', 'Input end after the two steering mirrors and the half-wave plate; output end where the bench axis starts, followed by the irises and the pick-off PBS. The fibre is drawn as a yellow cable between the two ends.', 'Select the input end and lower the coupling efficiency, or turn its slow-axis angle away from the light polarization, and watch the control power in the cell readout fall.'],
     laser: ['Single source for the whole experiment: the control, the probe and the SAS reference are all cut from this one beam.', 'The reference bench uses 10 mW. The practical limit is the AOM efficiencies and the control intensity you want in the cell (about 1–6 mW/cm² in the paper).', 'Raise the power and watch the control intensity and EIT width in the cell readout. Remove the isolator and read the warning.'],
     isolator: ['Stops light coming back from the AOM double-passes and cell windows from re-entering the DFB, where it would cause mode hops and break the lock. It adds to the micro-isolator already inside the laser module.', 'First element after the laser: laser fibre → collimator → free-space isolator, arrow pointing away from the laser.', 'Rotate it 180° and the forward beam is blocked.'],
     mirror: ['Folds the beam to fit the table. Each mirror adds two adjustment axes, which is why steering is done with a pair.', 'Eleven on the bench: two set the master axis, three fold the SAS arm, two fold the control arm, two fold the probe arm, and two are the retro mirrors of the double-passes.', 'Rotate in 45° steps: the beam turns 90° and everything downstream loses it. Rotating a retro mirror breaks that double pass: the AOM output disappears.'],
     pbs: ['Seven on the bench: the SAS pick-off, the control/probe splitter, the two SAS injection/extraction cubes, the two double-pass separators and the recombiner.', 'Horizontal light transmits, vertical turns 90°. Extinction 10³ is typical, so ~0.1 % leaks into the wrong port; the leak is caught by a dump.', 'Rotate a separator and see the AOM output stop leaving through the right port.'],
     npbs: ['Divides the SAS beam into a strong pump and a weak probe regardless of polarization.', 'One on the bench, at the start of the SAS arm.', 'Swap it for a PBS and the split now depends on polarization.'],
     pickoff: ['Samples a few percent of the beam (about 4 % per surface).', 'Not on the reference bench: it uses λ/2 + PBS, which is adjustable.', 'Place one after the laser and compare the SAS power with the λ/2 + PBS version.'],
-    hwp: ['Four on the bench: the first (θ ≈ 29°) sends about 5 % of the light to the SAS; the second (θ ≈ 10°) sets the probe/control split, about 12 % to the probe; one in the SAS probe path (45°) turns V into H so it crosses the PBSs; one trims the control polarization before the combiner.', 'A rotation of θ turns the polarization by 2θ. Setting a split by plate angle is far finer than swapping optics.', 'Select the second one and drag its angle slider: the two arms trade brightness through the PBS.'],
+    hwp: ['Four on the bench: the first (θ = 45°, after the two steering mirrors) turns the light of the second isolator onto the fibre slow axis; the second (θ ≈ 6.5°) sends about 5 % of the light to the SAS; the third (θ ≈ 10°) sets the probe/control split, about 12 % to the probe; the fourth, in the SAS probe path (45°), turns V into H so it crosses the PBSs.', 'A rotation of θ turns the polarization by 2θ. Setting a split by plate angle is far finer than swapping optics.', 'Select the third one and drag its angle slider: the two arms trade brightness through the PBS.'],
     qwp: ['Four on the bench: one in each double-pass (so the returning beam is polarized 90° from the input) and one each side of the cell (linear → σ⁺/σ⁻ going in, back to linear going out).', 'The double-pass plates sit on the deflected 1st order, 45° to the input polarization.', 'Set one of the cell plates to 0° and the cell sees linear light: the EIT objective drops out. Rotate a double-pass plate and the return polarization stops matching the PBS.'],
     aom: ['Two on the bench, one per arm, each in a double pass: PBS → AOM → λ/4 → lens → retro mirror. The beam direction on the way out does not change with RF frequency, and the shift doubles.', 'Control AOM at 80.000 MHz, probe AOM at 79.965 MHz: a 35 kHz RF difference gives 70 kHz at the atoms, which matches 50 mG. The undiffracted 0th orders go to four dumps.', 'Change the probe AOM frequency by a few kHz and the scope shows the EIT peak moving. Turn the RF off and the arm goes dark.'],
     lens: ['Five on the bench: two cat’s-eye lenses (one per double-pass, between the AOM and the retro mirror), two forming the control-beam expander, and one collecting the probe onto the photodiode.', 'The cat’s-eye lens focuses the diffracted beam onto the mirror, so small angle changes (from changing the RF frequency) do not walk the returning beam.', 'No effect on the trace (the tracer keeps beams collimated), but each one belongs where it is on a real bench.'],
@@ -196,10 +198,11 @@
   }
 
   /* ---- laser option (laser-option.js): texts for the Yanban RB-795-DFB-BFW; the Eagleyard texts above are the default ---- */
-  var INFO_Y = { laser: 'Distributed-feedback diode laser at the Rb D1 line (≈795 nm): Yanban RB-795-DFB-BFW in a 14-pin butterfly, free space, 100–120 mW, linewidth 200 kHz typical, target 794.97 nm, about 1.9 GHz per mA of current tuning. It has no isolator inside. Its collimated beam (about 1.0 × 0.8 mm) goes through two isolators and then a PM-fibre link (not drawn here: its two steering mirrors are counted with the bench mirrors, its coupler, patch cable and output FiberPort are in the equipment list), which hands a clean Ø1 mm beam to the bench. The simulated power is what is left after a half-wave plate and PBS have sent the unneeded power into a dump. A DFB has no piezo: it is tuned by current (fast) and chip temperature (slow) from the laser controller, which the lock box steers.',
-    isolator: 'Free-space Faraday isolator, Thorlabs I795P3D (centre 795 nm, range 775–815 nm, isolation at least 34 dB, transmission 90 %, beam up to Ø2.7 mm). The laser has no isolator inside and its notes warn that a retro-reflected beam can damage the chip, so two stand in series straight behind the package window (about −100 dB at the chip, an estimate). The first has its input polarizer along the laser polarization; the second is turned 45° about the beam to match the light leaving the first, and its output is at 90°, which the half-wave plate after the steering mirrors turns back to 45°. Each is simulated with 90 % forward transmission and backward light blocked by 4 × 10⁻⁴. The arrow marks the forward direction.' };
+  var INFO_Y = { laser: 'Distributed-feedback diode laser at the Rb D1 line (≈795 nm): Yanban RB-795-DFB-BFW in a 14-pin butterfly, free space, 100–120 mW, linewidth 200 kHz typical, target 794.97 nm, about 1.9 GHz per mA of current tuning. It has no isolator inside. Its collimated beam (about 1.0 × 0.8 mm) goes through two isolators and then the PM-fibre link (two steering mirrors, a half-wave plate, the FiberPort coupler, the PM780 fibre and the output FiberPort), which hands a clean Ø1 mm beam to the bench. The simulated power is what is left after a half-wave plate and PBS have sent the unneeded power into a dump. A DFB has no piezo: it is tuned by current (fast) and chip temperature (slow) from the laser controller, which the lock box steers.',
+    isolator: 'Free-space Faraday isolator, Thorlabs I795P3D (centre 795 nm, range 775–815 nm, isolation at least 34 dB, transmission 90 %, beam up to Ø2.7 mm). The laser has no isolator inside and its notes warn that a retro-reflected beam can damage the chip, so two stand in series straight behind the package window (about −100 dB at the chip, an estimate). The first has its input polarizer along the laser polarization; the second is turned 45° about the beam to match the light leaving the first, and its output is at 90°, which the half-wave plate after the steering mirrors turns onto the slow axis of the fibre. Each is simulated with 90 % forward transmission and backward light blocked by 4 × 10⁻⁴. The arrow marks the forward direction.' };
   var INFO2_Y = {
-    laser: ['Single source for the whole experiment: the control, the probe and the SAS reference are all cut from this one beam. It gives about ten times the power the bench needs.', 'The reference bench uses 10 mW after the attenuator. Turn the rest into a rated beam dump right after the isolation, and treat the open 100 mW beam as Class 3B.', 'Raise the power and watch the control intensity and EIT width in the cell readout. Remove the isolators and read the warning.'],
+    mirror: ['Folds the beam to fit the table. Each mirror adds two adjustment axes, which is why steering is done with a pair.', 'Eleven on the bench: two walk the beam into the PM-fibre coupler (after the output FiberPort the port itself sets the bench axis, so there is no separate master-axis pair), three fold the SAS arm, two fold the control arm, two fold the probe arm, and two are the retro mirrors of the double-passes.', 'Rotate in 45° steps: the beam turns 90° and everything downstream loses it. Rotating a retro mirror breaks that double pass: the AOM output disappears.'],
+    laser: ['Single source for the whole experiment: the control, the probe and the SAS reference are all cut from this one beam. It gives about ten times the power the bench needs.', 'The reference bench uses 10 mW after the attenuator. Turn the rest into a rated beam dump right after the isolation, and treat the open 100 mW beam as Class 3B.', 'The simulated power is the 20 mW left at the window; about half of it survives the isolators and the fibre. Raise the power and watch the control intensity and EIT width in the cell readout.'],
     isolator: ['Stops light coming back from the AOM double-passes and cell windows from re-entering the DFB, where it would cause mode hops or, for a free-space chip without an isolator, damage.', 'The first two elements after the laser: two isolators in series, arrows pointing away from the laser. The second is turned 45° about the beam.', 'Rotate one by 180° and the forward beam is blocked.']
   };
   function yan() { return !window.BENCH_CFG; }   /* the free-space Yanban is the plan; the Spain-style bench (BENCH_CFG) keeps its own texts */
@@ -228,6 +231,7 @@
     if (i2) h += '<div class="rich"><b>Role in the Zeeman EIT bench</b><p>' + esc(i2[0]) + '</p><b>On the reference bench</b><p>' + esc(i2[1]) + '</p><b>Try this</b><p>' + esc(i2[2]) + '</p></div>';
     h += '<div class="row"><button type="button" class="btn" id="inRotL" aria-label="Rotate counter-clockwise">⟲ Rotate</button><button type="button" class="btn" id="inRotR" aria-label="Rotate clockwise">Rotate ⟳</button><button type="button" class="btn danger" id="inDel">Delete</button></div>';
     if (k === 'laser') h += rng('inPow', 'Power', 1, 40, 0.5, p.power, ' mW');
+    if (k === 'fibport') h += (p.role === 'in' ? rng('inEta', 'Coupling efficiency (measured on the real bench)', 0.05, 0.9, 0.01, p.eta, '') : '') + rng('inFax', 'Slow axis of this connector (lab angle)', -90, 90, 0.5, p.ax, '°');
     if (k === 'hwp' || k === 'qwp' || k === 'glan') h += rng('inAxis', (k === 'glan' ? 'Transmission axis' : 'Fast-axis angle') + ' θ', -90, 90, 0.5, p.axis, '°');
     if (k === 'aom') {
       h += chk('inRF', 'RF on', p.rf);
@@ -264,6 +268,7 @@
     on('inDel', 'click', function () { delComp(c.id); });
     function slider(id, key, unit, conv) { on(id, 'input', function (e) { p[key] = conv ? conv(e.target.value) : +e.target.value; var o = $(id + 'o'); if (o) o.textContent = p[key] + (unit || ''); changed(key === 'axis', true); }); }
     slider('inPow', 'power', ' mW'); slider('inAxis', 'axis', '°'); slider('inEff', 'eff', ''); slider('inAp', 'ap', ' mm');
+    slider('inEta', 'eta', ''); slider('inFax', 'ax', '°');
     slider('inT', 'T_C', ' °C'); slider('inB', 'B_mG', ' mG');
     on('inF', 'change', function (e) { var v = Math.min(110, Math.max(80, +e.target.value || 80)); p.fMHz = Math.round(v * 1000) / 1000; e.target.value = p.fMHz.toFixed(3); changed(true, true); });
     on('inRF', 'change', function (e) { p.rf = e.target.checked; changed(true); });
@@ -435,9 +440,10 @@
   function niceT(a, b) { var span = b - a, st = Math.pow(10, Math.floor(Math.log10(span / 6))); if (span / st > 30) st *= 5; else if (span / st > 12) st *= 2; var o = []; for (var v = Math.ceil(a / st) * st; v <= b; v += st) o.push(v); return o; }
 
   /* ======================= THREE.js part ======================= */
+  if (yan()) { GROUPS[0][1].splice(2, 0, 'fibport'); }
   var G = { ok: false, opt: { cutaway: true, cables: true, zones: true, info: false, flow: true, filter: 'all' }, prevRot: {}, known: {}, tween: null, fade: 1, old: null };
   var FILTERS = {
-    source: ['laser', 'isolator', 'sas', 'refcell', 'lockbox', 'lctrl'],
+    source: ['laser', 'isolator', 'fibport', 'sas', 'refcell', 'lockbox', 'lctrl'],
     electronics: ['fgen', 'rfgen', 'rfatt', 'rfamp', 'csrc', 'tctrl', 'psu', 'scope', 'pwrmeter', 'lctrl', 'lockbox'],
     path: ['mirror', 'pbs', 'npbs', 'pickoff', 'hwp', 'qwp', 'aom', 'lens', 'iris', 'nd', 'glan'],
     cell: ['cell'],
@@ -721,6 +727,11 @@
         }
         g.add(cy(10, 20, M.black, 2, 0, 0, 'x', 24)); g.add(cy(10.2, 3, M.brass, 13.5, 0, 0, 'x', 24)); g.add(cy(3, 1.2, M.glass, 15.6, 0, 0, 'x', 14)); g.add(cy(3, 1.2, M.glass, -8.6, 0, 0, 'x', 14));
         var cone = new THREE.Mesh(geo('cone', function () { return new THREE.ConeGeometry(3.4, 9, 12); }), M.laser); cone.rotation.z = -Math.PI / 2; cone.position.set(6, 14, 0); g.add(cone); g.add(bx(12, 1.8, 1.8, M.laser, -2, 14, 0)); break;
+      case 'fibport': {   // FiberPort: black body, aluminium barrel with the window at the free-space side, FC/APC boot and the yellow fibre on the back (input end faces the incoming light, output end emits along +x)
+        var fs = p.role === 'in' ? -1 : 1;
+        g.add(cy(10, 22, M.black, 4 * fs, 0, 0, 'x', 24)); g.add(cy(11.2, 6, M.alu, -2 * fs, 0, 0, 'x', 24)); g.add(cy(8, 16, M.alu, 22 * fs, 0, 0, 'x', 24)); g.add(cy(5.6, 2, M.glass, 30.5 * fs, 0, 0, 'x', 20));
+        g.add(cy(4.6, 14, M.fcboot, -14 * fs, 0, 0, 'x', 16)); g.add(cy(5.4, 3, M.knob, -9 * fs, 0, 0, 'x', 16)); g.add(cy(1.4, 12, M.fibre, -26 * fs, 0, 0, 'x', 8));
+        break; }
       case 'mirror':
         g.add(bx(8, 30, 30, M.black, -6, 0, 0)); g.add(cy(13.5, 3, M.mirror, 0, 0, 0)); g.add(cy(14.5, 2, M.alu, -2.5, 0, 0));
         g.add(cy(2.6, 9, M.knob, -12, 11, 10)); g.add(cy(2.6, 9, M.knob, -12, -11, 10)); g.add(cy(2.6, 9, M.knob, -12, 11, -10)); break;
@@ -908,6 +919,17 @@
       var dot = new THREE.Mesh(geo('cdot', function () { return new THREE.SphereGeometry(2.4, 10, 8); }), new THREE.MeshBasicMaterial({ color: 0xffffff })); dot.userData.ownMat = true; dot.userData.noPick = true; G.cableGroup.add(dot);
       G.dots.push({ m: dot, segs: segs, len: len, ph: (li * 0.37) % 1 });
     });
+    comps.forEach(function (c) {   // the PM fibre between the two FiberPorts: a loose coil on the table, the yellow cable
+      if (c.kind !== 'fibport' || c.params.role !== 'in') return;
+      var o = comp(c.params.pair); if (!o) return;
+      var fa = P.dirOf(c.rot), fo = P.dirOf(o.rot), pp = [-fa[1], fa[0]];
+      var A = new THREE.Vector3(c.x - tw + fa[0] * 36, K.beamHeight, c.z - td + fa[1] * 36), B = new THREE.Vector3(o.x - tw - fo[0] * 36, K.beamHeight, o.z - td - fo[1] * 36);
+      var mid = A.clone().add(B).multiplyScalar(0.5), C0 = new THREE.Vector3(mid.x + pp[0] * 75, 0, mid.z + pp[1] * 75), pts = [A, new THREE.Vector3(A.x + pp[0] * 14, K.beamHeight - 24, A.z + pp[1] * 14), new THREE.Vector3(mid.x + pp[0] * 36, 20, mid.z + pp[1] * 36)];
+      for (var q = 0; q <= 16; q++) { var an = -Math.PI / 2 + q / 16 * 2 * Math.PI; pts.push(new THREE.Vector3(C0.x + 34 * (Math.cos(an) * fa[0] + Math.sin(an) * pp[0]), 3 + q * 0.4, C0.z + 34 * (Math.cos(an) * fa[1] + Math.sin(an) * pp[1]))); }
+      pts.push(new THREE.Vector3(mid.x + pp[0] * 36, 20, mid.z + pp[1] * 36), new THREE.Vector3(B.x + pp[0] * 14, K.beamHeight - 24, B.z + pp[1] * 14), B);
+      var fm = new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts), 200, 1.5, 8, false), new THREE.MeshStandardMaterial({ color: 0xe8c33a, roughness: 0.5 }));
+      fm.userData.ownGeo = true; fm.userData.ownMat = true; fm.userData.noPick = true; fm.castShadow = true; G.cableGroup.add(fm);
+    });
     G.cableGroup.visible = G.opt.cables;
   }
   function beamMats(group, k) { group.traverse(function (o) { if (o.material && o.userData.baseOp !== undefined) o.material.opacity = o.userData.baseOp * k; }); }
@@ -1035,6 +1057,8 @@
       if (t.kind === 'laser') t.text = 'A single DFB laser at 795 nm (Yanban RB-795-DFB-BFW, 100 mW class, free space) is the source for the control, the probe and the lock reference. Because both EIT fields share this laser, its linewidth is common to both and largely cancels in the two-photon detuning. Most of its power is dumped right after the isolation; the PM-fibre link that follows it is not drawn.';
       if (t.kind === 'isolator') t.text = 'Two free-space Faraday isolators in series, straight behind the laser window, pass light forward and block the reflections coming back from the AOM double-passes and cell windows. The laser has no isolator inside: without them the DFB can mode-hop, the lock fail, or the chip be damaged.';
     });
+    TOUR.splice(2, 0, { kind: 'fibport', title: 'PM-fibre link', text: 'The two steering mirrors walk the beam into the FiberPort coupler; a half-wave plate before it sets the polarization onto the fibre slow axis. The PM fibre carries the light to the output FiberPort, which delivers a clean round Ø1 mm beam with fixed polarization and pointing: this is where the bench axis starts.' });
+    TOUR.forEach(function (t) { if (t.kind === 'mirror' && t.nth === 0) { t.title = 'Walk the beam into the fibre'; t.text = 'Two kinematic steering mirrors walk the beam into the coupler: the first sets the position, the second the angle. Each mirror has two adjustment axes; a small tilt θ moves the beam by 2θ. The two irises after the output FiberPort then check the bench axis.'; } });
     OBJ_A[0][1] = 'Put the two isolators directly after the laser, arrows pointing away from it, so the first thing the beam meets is an isolator going forward.';
   }
 

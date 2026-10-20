@@ -136,6 +136,7 @@
   var KINDS = {
     laser:   { name: 'DFB laser 795 nm (PM-fibre pigtail)', short: 'DFB', cap: 14, rotStep: 90 },
     isolator:{ name: 'Collimator + free-space isolator (I795P3D)', short: 'ISO', cap: 12, rotStep: 90 },
+    fibport: { name: 'FiberPort for the PM fibre (input or output end)', short: 'FP', cap: 12, rotStep: 90 },
     mirror:  { name: 'Mirror', short: 'M', cap: 12, rotStep: 45 },
     pbs:     { name: 'PBS cube', short: 'PBS', cap: 12, rotStep: 90 },
     npbs:    { name: 'NPBS 50:50 cube', short: 'BS', cap: 12, rotStep: 90 },
@@ -169,6 +170,7 @@
   function defaultParams(kind) {
     switch (kind) {
       case 'laser': return { power: 10 };
+      case 'fibport': return { role: 'in', pair: null, ax: 0, eta: 0.5 };
       case 'hwp': return { axis: 0 };
       case 'qwp': return { axis: 45 };
       case 'aom': return { rf: true, fMHz: 80, eff: 0.6, mode: 'single', order: 1 };
@@ -263,6 +265,7 @@
       r.lastId = c.id; r.fromLaser = c.id; r.isPrimary = true;
       queue.push(r);
     });
+    var byId = {}; comps.forEach(function (c) { byId[c.id] = c; }); res.byId = byId;
     var MIN_P = 1e-7, MAX_DEPTH = 40, MAX_SEG = 900;
     while (queue.length && res.segments.length < MAX_SEG) {
       var ray = queue.shift(); res.rays++;
@@ -280,7 +283,7 @@
       var c = hit.comp;
       if (ray.isPrimary && !res.laserFirst) res.laserFirst = { kind: c.kind, forward: c.kind === 'isolator' ? dot(ray.d, dirOf(c.rot)) > 0.5 : false, id: c.id };
       var outs = interact(c, ray, hit, res, cellT, fgen);
-      for (var i = 0; i < outs.length; i++) { outs[i].o = hp; if (outs[i].P >= MIN_P) queue.push(outs[i]); }
+      for (var i = 0; i < outs.length; i++) { if (!outs[i].o) outs[i].o = hp; if (outs[i].P >= MIN_P) queue.push(outs[i]); }
     }
     if (res.backToLaser > 1e-3) res.warnings.push('Back-reflection into laser (' + fmtP(res.backToLaser) + ') — add an isolator');
     return res;
@@ -295,6 +298,14 @@
       case 'laser':
         if (fd < -0.5) res.backToLaser += ray.P;
         return out;
+      case 'fibport': {   // the two ends of one PM fibre: light that enters one end leaves the other end (slow-axis launch, coupling efficiency p.eta, output along the other connector's axis)
+        var pt = res.byId[p.pair]; if (!pt) return out;
+        var enters = p.role === 'out' ? fd < -0.5 : fd > 0.5; if (!enters) return out;
+        var ia2 = rad(p.ax || 0), pr2 = cadd(cscale(j.h, Math.cos(ia2)), cscale(j.v, Math.sin(ia2))), oa2 = rad(pt.params.ax || 0);
+        var pf = dirOf(pt.rot), dOut = p.role === 'out' ? [-pf[0], -pf[1]] : pf;
+        var r2 = child(ray, dOut, J(C(Math.cos(oa2)), C(Math.sin(oa2))), ray.P * cabs2(pr2) * (p.eta == null ? 0.5 : p.eta), 0, pt);
+        r2.o = [pt.x + dOut[0] * 15, pt.z + dOut[1] * 15];
+        out.push(r2); return out; }
       case 'isolator':
         if (fd > 0.5) {   // input polarizer at p.inPol degrees (0 = H, turned about the beam to match the light), output polarization 45 degrees further on
           var ia = (p.inPol || 0) * Math.PI / 180, pr = cadd(cscale(j.h, Math.cos(ia)), cscale(j.v, Math.sin(ia)));
@@ -549,18 +560,21 @@
     }
     var comps = [];
     function add() { for (var i = 0; i < arguments.length; i++) { if (Array.isArray(arguments[i])) comps.push.apply(comps, arguments[i]); else comps.push(arguments[i]); } }
-    // --- source, isolation and master axis ---
-    add(mk('laser', 40, 150, 0, { power: 10, free: 1 }),   // free-space Yanban RB-795-DFB-BFW (no isolator inside), turned down to 10 mW
+    // --- source, isolation, PM-fibre link and master axis ---
+    var fin, fout;
+    add(mk('laser', 40, 150, 0, { power: 20, free: 1 }),   // free-space Yanban RB-795-DFB-BFW (no isolator inside), turned down to 20 mW at the window
       mk('isolator', 90, 150, 0, { free: 1 }),               // I795P3D no. 1 (input polarizer along the laser polarization)
       mk('isolator', 130, 150, 0, { free: 1, inPol: 45 }),   // I795P3D no. 2, turned 45 degrees about the beam: its input polarizer lies along the light leaving no. 1
-      M(170, 150, E, S), M(170, 225, S, E),            // two steering mirrors set the master axis (the PM-fibre coupling is not drawn: counted in the equipment list)
-      mk('hwp', 200, 225, 0, { axis: 67.5 }),          // half-wave plate after the mirrors: turns the 90-degree light of isolator no. 2 back to 45 degrees
-      mk('iris', 230, 225, 0, { ap: 3 }),
-      mk('hwp', 290, 225, 0, { axis: 29 }),            // ~5 % to the SAS reference
+      M(170, 150, E, S), M(170, 225, S, E),            // the two steering mirrors walk the beam into the fibre coupler
+      mk('hwp', 200, 225, 0, { axis: 45 }),            // half-wave plate after the mirrors: turns the 90-degree light of isolator no. 2 onto the fibre slow axis
+      fin = mk('fibport', 235, 225, 0, { role: 'in', ax: 0, eta: 0.5 }), fout = mk('fibport', 275, 225, 0, { role: 'out', ax: 0 }),   // PM fibre: FiberPort coupler (about 50 % coupling) and the output FiberPort that starts the bench axis
+      mk('iris', 300, 225, 0, { ap: 3 }),
+      mk('hwp', 325, 225, 0, { axis: 6.5 }),           // ~5 % to the SAS reference
       B(350, 225, E, N),                               // pick-off: V reflected north to the SAS arm
       mk('iris', 410, 225, 0, { ap: 3 }),
       mk('hwp', 460, 225, 0, { axis: 10 }),            // sets the probe/control split (~12 % probe)
       B(520, 225, E, S));                              // splitter: H -> control (east), V -> probe (south)
+    fin.params.pair = fout.id; fout.params.pair = fin.id;
     // --- SAS reference: counter-propagating pump and probe through a Rb reference cell ---
     add(M(350, 150, N, E),
       B(420, 150, E, N, 'npbs'),                       // pump / probe division
@@ -577,7 +591,6 @@
     add(M(570, 225, E, S), M(570, 300, S, E),
       B(630, 300, Wd, S),                              // double-pass input / return separator
       dp(730, 300, true, 80.000, 0.35),
-      mk('hwp', 630, 350, 0, { axis: 0 }),             // control output polarization trim
       mk('lens', 630, 400, 0), mk('lens', 630, 450, 0), // beam expander
       mk('dump', 630, 255, 90));
     // --- probe arm: double-pass AOM, folds, attenuator ---
@@ -610,7 +623,7 @@
   var LAYOUT_SCALE = 2.0;
   // Painted zones on the table, in the compact layout's coordinates (scaled on the way out). rects: [x0, z0, x1, z1]; lab: [x, z, align] places the name chip: 'tl' = hangs below-right of the point, 'bl' = sits above-right of it, 'l' / 'r' = beside it.
   var ZONES = [
-    { id: 'source', name: 'SOURCE & MASTER AXIS', sub: 'free-space laser, two isolators, mirrors, half-wave plate, pick-off, splitter', color: '#f29a38', lab: [20, 266, 'tl'], rects: [[20, 105, 325, 262], [325, 212, 545, 300]] },
+    { id: 'source', name: 'SOURCE & MASTER AXIS', sub: 'free-space laser, two isolators, PM-fibre link, pick-off, splitter', color: '#f29a38', lab: [20, 266, 'tl'], rects: [[20, 105, 325, 262], [325, 212, 545, 300]] },
     { id: 'sas', name: 'SAS REFERENCE (LASER LOCK)', sub: 'pump + probe through the Rb reference cell', color: '#b58cf0', lab: [806, 152, 'r'], rects: [[330, 94, 800, 210]] },
     { id: 'control', name: 'CONTROL ARM', sub: 'double-pass AOM, beam expander', color: '#ff6b6b', lab: [946, 275, 'r'], rects: [[548, 212, 940, 338], [612, 338, 668, 480]] },
     { id: 'probe', name: 'PROBE ARM', sub: 'double-pass AOM, attenuator', color: '#5aa9f2', lab: [219, 441, 'l'], rects: [[225, 335, 610, 548]] },

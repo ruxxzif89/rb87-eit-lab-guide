@@ -193,7 +193,7 @@ Sources: RB-795-DFB-BFW data sheet (Yanban Laser, from the vendor) · [Alibaba l
 
 **Couple it into a polarization-maintaining single-mode fibre ourselves.** A PM-pigtailed laser is the same chip with an isolator, a lens and a PM fibre built into the package. The fibre is what makes its output a clean round Gaussian with a fixed polarization axis and a fixed pointing, so the only way to get exactly that output from a free-space laser is to put the same fibre in the path. This is also what our reference design does: Finkelstein et al. (New J. Phys. 25, 035001 (2023), Sec. V.1 and Fig. 10) send their free-space laser through an isolator and then into a PM fibre, to clean the beam profile and the polarization. Free-space optics alone (lenses, prisms, a pinhole) only come close.
 
-**Our setup: through the PM fibre (decided 19 Oct 2026).** The equipment list (Yanban option) now has the fibre link (row L05) to buy; its two steering mirrors and mounts are counted in the mirror rows O01 and O02 (13 = 11 on the bench + 2). **Was the fibre strictly needed? No.** The free-space beam could go straight from the two isolators into the bench (half-wave plate, PBS, AOM arms). The laser already gives a single-frequency, nearly round 1.0 × 0.8 mm beam (a good size for the AOMs) with 20 dB polarization, and the first PBS cleans the polarization. What the direct beam does not give:
+**Our setup: through the PM fibre (decided 19 Oct 2026).** The equipment list (Yanban option) now has the fibre link (row L05) to buy; its two steering mirrors and mounts are counted in the mirror rows O01 and O02 (11 in all: the 3D bench draws the whole link, and with the fibre no separate master-axis mirror pair is needed after the output FiberPort). The 3D bench (3D Bench tab) now shows the link: two isolators, steering mirrors, half-wave plate, FiberPort coupler, the yellow PM fibre and the output FiberPort. **Was the fibre strictly needed? No.** The free-space beam could go straight from the two isolators into the bench (half-wave plate, PBS, AOM arms). The laser already gives a single-frequency, nearly round 1.0 × 0.8 mm beam (a good size for the AOMs) with 20 dB polarization, and the first PBS cleans the polarization. What the direct beam does not give:
 - **Pointing decoupling:** drift of the laser mount or the isolators (temperature, screws settling) moves the beam on the AOMs (Bragg acceptance about 0.5 mrad), the SAS and the cell; a laser swap means realigning the bench. With the fibre, such drift changes only the coupled power.
 - **A guaranteed clean mode:** the data sheet gives no beam-quality figure (M²); the fibre passes only its own Gaussian mode.
 We chose the fibre for exactly these reasons: a guaranteed clean Ø1 mm beam at the AOMs (the direct beam would need a reducing telescope), and a bench that stays aligned whatever happens on the laser side.
@@ -412,7 +412,7 @@ So: reasonable to adopt after a bench test with a 50 Ω load and an oscilloscope
 
 *Equipment shown in the guide: Ø1″ mirror in a KM100 mount.*
 
-**Equipment row O01: 11 Thorlabs PF10-03-P01 protected-silver mirrors, Ø1″, in KM100 kinematic mounts (row O02).** Two on the master axis, three in the SAS, two per EIT arm, and one retro mirror in each double pass. The laser-source fibre option adds two more (the steering pair before the coupler).
+**Equipment row O01: 11 Thorlabs PF10-03-P01 protected-silver mirrors, Ø1″, in KM100 kinematic mounts (row O02).** Two steer the beam into the PM-fibre coupler (they are the former master-axis pair: after the output FiberPort the port itself sets the bench axis, so no separate pair is needed), three are in the SAS, two per EIT arm, and one retro mirror in each double pass.
 
 | Item | PF10-03-P01 (Thorlabs drawing) | What we need |
 |---|---|---|
@@ -430,11 +430,11 @@ So: reasonable to adopt after a bench test with a 50 Ω load and an oscilloscope
 
 **A cheaper catalogue (silver mirror table, part "OQAg"): which one?** The **OQAg-25.4** (Ø25.4 mm, 5 mm thick, 450–2000 nm, reflectivity > 95 %, clear aperture > 90 %) is the one that matches: the right diameter for the Ø1″ mounts and thick enough to stay flat. Not the OQAg-25 (Ø25.0 mm sits loose in a Ø1″ mount) and not the 3 mm versions if the thicker one is available. Its > 95 % against > 97.5 % costs about 2.5 % more per mirror: seven mirrors leave about 70 % instead of 84 %, still far more than we need. Before ordering, ask what the table does not give: flatness (λ/10 at 633 nm wanted, λ/4 the least for steering), surface quality (60-40 or better), whether the silver is protected (overcoated, so it does not tarnish), the reflectance at 795 nm at 45° for s and p, and the substrate.
 
-**Is the OQAg-25.4 suitable for every mirror on our table? Yes, for all 13, if the vendor confirms the four open points.** What each role asks of a mirror:
+**Is the OQAg-25.4 suitable for every mirror on our table? Yes, for all 11, if the vendor confirms the four open points.** What each role asks of a mirror:
 
 | Where | What matters | OQAg-25.4 |
 |---|---|---|
-| Steering mirrors (master axis, SAS, control and probe arms, fibre coupling) | reflectance at 795 nm, no polarization change, no scatter; power is low (milliwatts; the two fibre mirrors see about 80 mW) | fine: > 95 % (typical silver at 795 nm is higher); 80 mW heats the coating by about 4 mW, far below any limit |
+| Steering mirrors (fibre coupling, SAS, control and probe arms) | reflectance at 795 nm, no polarization change, no scatter; power is low (milliwatts; the two fibre mirrors see about 80 mW) | fine: > 95 % (typical silver at 795 nm is higher); 80 mW heats the coating by about 4 mW, far below any limit |
 | Retro mirrors of the double pass | the beam is focused to about 0.1 mm on the mirror, so flatness hardly matters; centring and a stable mount matter | fine: surface quality and a good mount decide, not λ/10 |
 | Mirrors in the arms, in the master path | the polarization there is horizontal or vertical (s or p), which a silver mirror at 45° leaves unchanged | fine |
 | The two mirrors before the fibre coupler | same rule, so the half-wave plate comes after them (see the sequence above); a flat mirror is not needed over a Ø1 mm beam | fine, with the plate after them |
