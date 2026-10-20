@@ -7,7 +7,9 @@ Working notes from the project, written 9 Oct 2026. Numbers come from datasheets
 
 *Added 10 Oct 2026*
 
-*Equipment shown in the guide: DFB laser module (BFY12), PM100USB power meter.*
+*Equipment shown in the guide: DFB laser module, PM100USB power meter.*
+
+**Update (20 Oct 2026): the Eagleyard BFY12 is no longer in the plan.** The laser is the free-space Yanban RB-795-DFB-BFW with two I795P3D isolators and a PM-fibre link (equipment rows L01, L05, L06). Read this answer as the method and the history; the Yanban numbers are in the entry on the Yanban laser.
 
 **Yes on both counts. It is the manufacturer's Rb D1 spectroscopy part, and its 5–15 mW is the right size: about 1 mW of control light at the cell and under 1 µW of probe need only 5–15 mW at the laser fibre.** The part is the Toptica Eagleyard EYP-DFB-0795-00015-1500-BFY12-0005 (datasheet revision 0.93, 5 Feb 2025). Nothing in the datasheet rules it out, and a 40 mW laser would be wasted.
 
@@ -75,6 +77,8 @@ Sources: [Eagleyard datasheet](https://global-topticaeagleyard.b-cdn.net/wp-cont
 
 *Equipment shown in the guide: DFB laser module, fibre collimator, free-space isolator (I795P3D), double-pass AOM, quarter-wave plate, polarizing beam splitter, Rb vapour cell.*
 
+**Update (20 Oct 2026): the plan now uses the Yanban laser, which has no isolator inside, so two free-space I795P3D isolators stand in series straight behind its window (equipment row L06, quantity 2; about −100 dB at the chip, an estimate). The reasoning below, the feedback budget and the thresholds, still holds.**
+
 **Yes. Free space does not remove the need for an isolator: the returning light comes from the free-space part. Our laser has a micro-isolator inside, and a free-space Faraday isolator right after the collimator (Thorlabs I795P3D, BOM L06) is the second stage. For a laser with no isolator inside, a second stage would be mandatory.**
 
 **Why a DFB laser needs one**
@@ -107,7 +111,9 @@ Sources: [Rogister, Nonlinear dynamics of semiconductor lasers subject to optica
 
 *Equipment shown in the guide: DFB laser module (butterfly), free-space isolator (I795P3D), ITC502 controller, butterfly mount.*
 
-**Yes as a laser, on paper, but not in the version listed. The listed RB-795-DFB-BFW is a free-space butterfly with no isolator inside, so we have asked the vendor for a PM-fibre-pigtailed version with a built-in isolator. Until the answer arrives, the Eagleyard BFY12 stays in our plan.** Use the laser switch at the bottom left of the guide, Equipment, 3D Bench and DIY pages to see them with this laser instead (equipment rows L01, L03, L05, L06, the source card and first build steps, the simulator texts, the D6 divider and the D10 dumps). The figures below are from the vendor's data sheet (sent to us, not online) and the [Alibaba listing](https://www.alibaba.com/product-detail/795nm-DFB-Laser-Diode_1601867664540.html).
+**Update (20 Oct 2026): decided. The free-space Yanban is our laser (priced from the offer received), with two isolators and the PM-fibre link; the Eagleyard BFY12 was removed from the equipment list, the 3D bench and the DIY pages.**
+
+**Yes as a laser, on paper, but not in the version listed. The listed RB-795-DFB-BFW is a free-space butterfly with no isolator inside, so we have asked the vendor for a PM-fibre-pigtailed version with a built-in isolator. Until then the Eagleyard BFY12 was kept in the plan (history; see the update above).** The figures below are from the vendor's data sheet (sent to us, not online) and the [Alibaba listing](https://www.alibaba.com/product-detail/795nm-DFB-Laser-Diode_1601867664540.html).
 
 | Our need | RB-795-DFB-BFW data sheet | Fit |
 |---|---|---|
@@ -338,6 +344,14 @@ A third AOM in the SAS arm would also work, but it is not needed and is not in t
 - **B, a two-channel box from the AOM supplier** built to our block diagram (two tunable channels from one clock, fast TTL gates, analog amplitude inputs, monitor ports, about 1 W per channel, 2 W maximum, a frequency sweep on the probe channel).
 - **C, a budget fallback:** a four-channel DDS board based on the Analog Devices AD9959 (all channels from one clock, sub-hertz steps) in place of the synthesizer, with the same RF parts, a low-pass filter per channel, and our own control software.
 B is taken if it meets the specification and costs less than A; C only if the budget forces it. Whatever the route, a fixed-frequency driver (its own oscillator per channel) is never accepted: the 35 kHz difference must come from one clock and stay tunable.
+
+**Can route A be simplified: no step attenuators, switches powered from the bench supply? (answer of 20 Oct 2026)** Possible, and a smaller build, but not proven on this bench, and the guide has no step-by-step version of it yet (DIY D8 describes the full chain with attenuators). What the data sheets and the parts say:
+- **What the attenuators (R03) do.** They set each arm's RF level in 0.5 dB steps and, with the DIP switches at 31.5 dB, give a safe state at power-up. The SynthHD can set its own level in software (public listings give roughly −40 to +20 dBm; the exact range at 80 MHz must be read from the data sheet of our unit), so the steps are not needed for tuning.
+- **What replaces the safe state.** (1) The RF switch (R04) keeps its gate input pulled low, so the AOM gets no RF until the gate goes high. (2) Set the synthesizer level before enabling its output, and keep it at +1 dBm (never above +2 dBm for the 2 W AOM). (3) The amplifier takes at most +10 dBm at its input, so a fixed SMA attenuator of 6 dB in front of it, an inexpensive part, caps the worst case if the synthesizer ever powers up at a high stored level. This pad is my suggestion, not a Mini-Circuits requirement.
+- **Switch supply.** The ZASWA-2-50DR+ needs +5 V and −5 V and a TTL gate (D8 records the pin numbers from its data sheet). A bench supply with two floating outputs can give ±5 V by joining the minus of one channel to the plus of the other as the common; check in the supply's manual that its channels float, and tie the common to the RF ground at one point only. The separate +24 V for the amplifiers stays.
+- **What it removes.** Two ZX76 attenuators with their DIP banks, pull-downs and 10-pin cables, and the LM317/LM337 cells for ±3 V in the bias box; the ±5 V cells can go too if the bench supply gives them.
+- **What it does not remove.** The DC-block requirement on the RF lines, the commissioning order of D8 (bias, +24 V, synthesizer; the amplifier into a 50 Ω load first, the AOM last), and the open question of the SynthHD harmonics at 80 MHz.
+So: reasonable to adopt after a bench test with a 50 Ω load and an oscilloscope, following the commissioning order of D8 without the attenuator steps. It is not yet written up as a DIY part.
 
 **Reading an AOM data sheet or listing: check these, in this order.**
 1. **Wavelength and AR coating.** It must cover 795 nm (for example 780–850 nm, or 700–1100 nm). A 633 nm, 532 nm or 1064 nm part is the wrong coating.
@@ -1211,9 +1225,32 @@ During EIT the best field monitor is the atoms themselves: the EIT peak moves 1.
 
 Sources: [Stefan Mayer FLC 100 data sheet](https://stefan-mayer.com/images/datasheets/Data-sheet_FLC-100.pdf) · [Stefan Mayer Instruments](https://etesters.com/catalog/a063869f-1422-08df-aa96-6c5cd8570108)
 
+### Q33. Can the degaussing coil use 0.25 mm² wire instead of 0.5 mm²? Will it still degauss properly?
+
+*Added 20 Oct 2026*
+
+*Equipment shown in the guide: degaussing coil + variac, µ-metal shield, fluxgate FLC100 (DIY D7).*
+
+**Yes. Degaussing needs enough ampere-turns to saturate the shield layers and a slow, smooth ramp-down; it does not need an accurate current, and the wire cross-section changes only the resistance and the heating, not the field.** The field in the wall comes from the turns and the current: H = N·√2·I / (2π r), which for our 30 turns is about 190 A/m peak per ampere rms in the outer layer, far above the few tens of A/m that saturate mu-metal. With 0.25 mm² wire nothing in that formula changes.
+
+| | 0.5 mm² (design now) | 0.25 mm² |
+|---|---|---|
+| Coil resistance (24 m of copper) | 0.83 Ω | 1.65 Ω |
+| Voltage for 2 A rms with the 4.7 Ω series resistor | 11.1 V | 12.7 V |
+| Variac setting for 2 A (24 V secondary of 230 V) | about 106 V | about 122 V |
+| Heat in the coil at 2 A | 3.3 W | 6.6 W |
+| Worst-case temperature rise of the wire (no heat loss, 20 s search at full current + 100 s ramp) | about 4 K | about 17 K |
+| Field in the wall at 1 A rms | 190 A/m | 190 A/m |
+
+**What to watch.** The rise above is an upper bound for a bundle of 30 wires in the bore; with PTFE or silicone insulation it is harmless, but keep the 2 A rms limit and use a 2.5 A slow-blow fuse on the 24 V side instead of 3.15 A, because the thin wire is the weak link in a fault. The 24 V secondary still has margin (12.7 V used). The thinner wire is easier to thread and takes less of the Ø12 mm cable hole in the end caps (about 34 % full instead of about 48 %). Use stranded flexible wire, not enamelled solid wire, and keep the bundle from kinking.
+
+**Measure it anyway.** After the first degauss, check the result with the fluxgate (D7) as for any coil: the resistance of the finished coil, the current reading at a given variac setting, and the remanent field before and after.
+
+Source: the formulas and the 30-turn layout are those of DIY D4; the heating figures are my arithmetic with copper at 8960 kg/m³ and 385 J/(kg K), not a measurement.
+
 ## The Quantum Spain-style bench
 
-### Q33. Is the Spain-style arrangement correct, in theory and in practice?
+### Q34. Is the Spain-style arrangement correct, in theory and in practice?
 
 *Added 9 Oct 2026*
 
@@ -1237,7 +1274,7 @@ Sources: [Stefan Mayer FLC 100 data sheet](https://stefan-mayer.com/images/datas
 - No beam dumps or tubes are visible (laser safety).
 - The AOM tilt is exaggerated to 8° in the drawing, hence the 160 mm from separator cube to AOM; a real build can be tighter but needs an iris or block for the zeroth order. Do not use the drawing as a build recipe.
 
-### Q34. What is the cell label TRT-Rb/Ne-10T-20x75 on the Spain-style EIT cell, and would it suit our bench?
+### Q35. What is the cell label TRT-Rb/Ne-10T-20x75 on the Spain-style EIT cell, and would it suit our bench?
 
 *Added 12 Oct 2026*
 
@@ -1292,7 +1329,7 @@ Sources: [Stefan Mayer FLC 100 data sheet](https://stefan-mayer.com/images/datas
 
 ## About this guide
 
-### Q35. How does the lab inventory enter the costed BOM and the Spain-style cost?
+### Q36. How does the lab inventory enter the costed BOM and the Spain-style cost?
 
 *Added 10 Oct 2026*
 
@@ -1305,7 +1342,7 @@ Sources: [Stefan Mayer FLC 100 data sheet](https://stefan-mayer.com/images/datas
 
 **Rules and limits.** Items marked "check" or "no" are not counted. An item that covers a row only in part is counted only for the units it can supply (for example 6 post holders against 60 post sets). The Credix SG-1710 is **not** counted against the dual-channel RF synthesizer, which needs two phase-locked channels. Mounts whose aperture is not measured yet (the Melles Griot set) are counted as 10 of the 11 mirror mounts; measure them. The prices stay behind the group password; the switch only changes how the totals are computed.
 
-### Q36. Can the Thorlabs PM100USB CAD file be used for the 3D pictures?
+### Q37. Can the Thorlabs PM100USB CAD file be used for the 3D pictures?
 
 *Added 10 Oct 2026*
 

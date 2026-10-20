@@ -164,8 +164,8 @@
       var h = document.createElement('h4'); h.textContent = g[0]; pal.appendChild(h);
       g[1].forEach(function (k) {
         var b = document.createElement('button'); b.type = 'button'; b.className = 'pal-item'; b.id = 'pal-' + k;
-        b.innerHTML = '<span class="ic">' + P.KINDS[k].short + '</span><span>' + P.KINDS[k].name + '</span>';
-        b.setAttribute('aria-label', 'Add ' + P.KINDS[k].name);
+        b.innerHTML = '<span class="ic">' + P.KINDS[k].short + '</span><span>' + kname(k) + '</span>';
+        b.setAttribute('aria-label', 'Add ' + kname(k));
         palDrag(b, k);
         pal.appendChild(b);
       });
@@ -196,16 +196,16 @@
   }
 
   /* ---- laser option (laser-option.js): texts for the Yanban RB-795-DFB-BFW; the Eagleyard texts above are the default ---- */
-  var INFO_Y = { laser: 'Distributed-feedback diode laser at the Rb D1 line (≈795 nm) in a 14-pin butterfly, option Yanban RB-795-DFB-BFW: 100–120 mW, linewidth 200 kHz typical, target 794.97 nm, about 1.9 GHz per mA of current tuning. Packaging pending the supplier reply: a PM-fibre version with a built-in isolator (asked) or the listed free-space version (collimated about 1.0 × 0.8 mm beam, no isolator inside). The simulated power is what is left after a half-wave plate and PBS have sent the unneeded power into a dump. A DFB has no piezo: it is tuned by current (fast) and chip temperature (slow) from the laser controller, which the lock box steers.', isolator: 'Optical isolation for a laser without (or with only one) isolator inside, option Yanban: with the PM-fibre version, its built-in isolator plus one free-space Thorlabs I795P3D after the FC/APC collimator; with the free-space version, two I795P3D in series (or one IOT-5-780-VLP tandem) straight after the package window, because its notes warn that a retro-reflected beam can damage the chip. Simulated as one element: 90 % forward, backward light blocked by 4 × 10⁻⁴ (one stage, the worst case). The arrow marks the forward direction.' };
+  var INFO_Y = { laser: 'Distributed-feedback diode laser at the Rb D1 line (≈795 nm): Yanban RB-795-DFB-BFW in a 14-pin butterfly, free space, 100–120 mW, linewidth 200 kHz typical, target 794.97 nm, about 1.9 GHz per mA of current tuning. It has no isolator inside. Its collimated beam (about 1.0 × 0.8 mm) goes through two isolators and then a PM-fibre link (not drawn here: its two steering mirrors are counted with the bench mirrors, its coupler, patch cable and output FiberPort are in the equipment list), which hands a clean Ø1 mm beam to the bench. The simulated power is what is left after a half-wave plate and PBS have sent the unneeded power into a dump. A DFB has no piezo: it is tuned by current (fast) and chip temperature (slow) from the laser controller, which the lock box steers.',
+    isolator: 'Free-space Faraday isolator, Thorlabs I795P3D (centre 795 nm, range 775–815 nm, isolation at least 34 dB, transmission 90 %, beam up to Ø2.7 mm). The laser has no isolator inside and its notes warn that a retro-reflected beam can damage the chip, so two stand in series straight behind the package window (about −100 dB at the chip, an estimate). The first has its input polarizer along the laser polarization; the second is turned 45° about the beam to match the light leaving the first, and its output is at 90°, which the half-wave plate after the steering mirrors turns back to 45°. Each is simulated with 90 % forward transmission and backward light blocked by 4 × 10⁻⁴. The arrow marks the forward direction.' };
   var INFO2_Y = {
-    laser: ['Single source for the whole experiment: the control, the probe and the SAS reference are all cut from this one beam. It gives about ten times the power the bench needs.', 'The reference bench uses 10 mW after the attenuator. Turn the rest into a rated beam dump right after the isolation, and treat the open 100 mW beam as Class 3B.', 'Raise the power and watch the control intensity and EIT width in the cell readout. Remove the isolator and read the warning.'],
-    isolator: ['Stops light coming back from the AOM double-passes and cell windows from re-entering the DFB, where it would cause mode hops or, for a free-space chip without an isolator, damage.', 'First element after the laser: PM-fibre version: fibre → collimator → I795P3D; free-space version: two isolator stages straight after the package window. Arrows point away from the laser.', 'Rotate it 180° and the forward beam is blocked.']
+    laser: ['Single source for the whole experiment: the control, the probe and the SAS reference are all cut from this one beam. It gives about ten times the power the bench needs.', 'The reference bench uses 10 mW after the attenuator. Turn the rest into a rated beam dump right after the isolation, and treat the open 100 mW beam as Class 3B.', 'Raise the power and watch the control intensity and EIT width in the cell readout. Remove the isolators and read the warning.'],
+    isolator: ['Stops light coming back from the AOM double-passes and cell windows from re-entering the DFB, where it would cause mode hops or, for a free-space chip without an isolator, damage.', 'The first two elements after the laser: two isolators in series, arrows pointing away from the laser. The second is turned 45° about the beam.', 'Rotate one by 180° and the forward beam is blocked.']
   };
-  var TOUR_Y = { laser: 'A single DFB laser at 795 nm (option Yanban RB-795-DFB-BFW, 100 mW class) is the source for the control, the probe and the lock reference. Both EIT fields share it, so its linewidth is common to both and largely cancels in the two-photon detuning; most of its power is dumped right after the isolation.',
-                 isolator: 'The isolation passes light forward and blocks the reflections from the AOM double-passes and cell windows: with the Yanban, its built-in isolator plus one I795P3D (PM-fibre version) or two isolator stages (free-space version).' };
-  function yan() { return !!(window.LaserOpt && window.LaserOpt.get() === 'yanban'); }
+  function yan() { return !window.BENCH_CFG; }   /* the free-space Yanban is the plan; the Spain-style bench (BENCH_CFG) keeps its own texts */
+  function kname(k) { return (yan() && typeof NAME_Y !== 'undefined' && NAME_Y[k]) || P.KINDS[k].name; }
   function info(k) { return (yan() && INFO_Y[k]) || INFO[k]; }
-  var NAME_Y = { laser: 'DFB laser 795 nm (Yanban RB-795-DFB-BFW, free space)', isolator: 'Isolation for the Yanban (1 or 2 stages)' };
+  var NAME_Y = { laser: 'DFB laser 795 nm (Yanban RB-795-DFB-BFW, free space)', isolator: 'Free-space isolator I795P3D (one of two in series)' };
   function info2(k) { return (yan() && INFO2_Y[k]) || INFO2[k]; }
 
   /* ---------------- inspector ---------------- */
@@ -223,7 +223,7 @@
       return;
     }
     var k = c.kind, p = c.params, h = '';
-    h += '<h4>' + esc(c.nm || (yan() && NAME_Y[k]) || P.KINDS[k].name) + '</h4>' + (c.photo ? '<p class="what"><b>In the photo:</b> ' + esc(c.photo) + '</p>' : '') + '<p class="what">' + esc(info(k)) + '</p>';
+    h += '<h4>' + esc(c.nm || kname(k)) + '</h4>' + (c.photo ? '<p class="what"><b>In the photo:</b> ' + esc(c.photo) + '</p>' : '') + '<p class="what">' + esc(info(k)) + '</p>';
     var i2 = info2(k);
     if (i2) h += '<div class="rich"><b>Role in the Zeeman EIT bench</b><p>' + esc(i2[0]) + '</p><b>On the reference bench</b><p>' + esc(i2[1]) + '</p><b>Try this</b><p>' + esc(i2[2]) + '</p></div>';
     h += '<div class="row"><button type="button" class="btn" id="inRotL" aria-label="Rotate counter-clockwise">⟲ Rotate</button><button type="button" class="btn" id="inRotR" aria-label="Rotate clockwise">Rotate ⟳</button><button type="button" class="btn danger" id="inDel">Delete</button></div>';
@@ -709,13 +709,16 @@
       case 'laser':
         g.add(bx(46, 28, 32, M.alu, -18, 0, 0)); g.add(bx(46, 4, 33, M.laser, -18, 15, 0));
         for (var f = 0; f < 6; f++) g.add(bx(2.2, 8, 34, M.black, -34 + f * 6, 19, 0));
-        g.add(cy(3.6, 12, M.fcboot, 12, 0, 0, 'x', 14)); g.add(cy(4.8, 3, M.knob, 19, 0, 0, 'x', 14)); g.add(cy(1.5, 12, M.fibre, 26, 0, 0, 'x', 8));  // PM fibre pigtail with FC/APC (no collimator on the laser)
+        if (p.free) { g.add(cy(3.4, 10, M.black, 10, 0, 0, 'x', 14)); g.add(cy(2.6, 1.2, M.glass, 15.4, 0, 0, 'x', 12)); }   // free-space butterfly: collimating tube behind the window, no fibre
+        else { g.add(cy(3.6, 12, M.fcboot, 12, 0, 0, 'x', 14)); g.add(cy(4.8, 3, M.knob, 19, 0, 0, 'x', 14)); g.add(cy(1.5, 12, M.fibre, 26, 0, 0, 'x', 8)); }  // PM fibre pigtail with FC/APC (no collimator on the laser)
         g.add(bx(8, 3, 6, M.accent, -34, -13, 0));
         var led = sp(1.9, M.on, -38, 13, 17); g.add(led); break;
       case 'isolator':
         // PM fibre with FC/APC boot into the collimator, then the free-space Faraday isolator (I795P3D: black input end, gold output end)
-        g.add(cy(1.5, 12, M.fibre, -38, 0, 0, 'x', 8)); g.add(cy(3.6, 8, M.fcboot, -29, 0, 0, 'x', 14)); g.add(cy(4.8, 3, M.knob, -23.5, 0, 0, 'x', 14));
-        g.add(cy(4.6, 10, M.black, -17, 0, 0, 'x', 16)); g.add(cy(3.2, 1.2, M.glass, -11.6, 0, 0, 'x', 14));
+        if (!p.free) {   // the free-space Yanban has no fibre: the isolators stand directly behind the laser window
+          g.add(cy(1.5, 12, M.fibre, -38, 0, 0, 'x', 8)); g.add(cy(3.6, 8, M.fcboot, -29, 0, 0, 'x', 14)); g.add(cy(4.8, 3, M.knob, -23.5, 0, 0, 'x', 14));
+          g.add(cy(4.6, 10, M.black, -17, 0, 0, 'x', 16)); g.add(cy(3.2, 1.2, M.glass, -11.6, 0, 0, 'x', 14));
+        }
         g.add(cy(10, 20, M.black, 2, 0, 0, 'x', 24)); g.add(cy(10.2, 3, M.brass, 13.5, 0, 0, 'x', 24)); g.add(cy(3, 1.2, M.glass, 15.6, 0, 0, 'x', 14)); g.add(cy(3, 1.2, M.glass, -8.6, 0, 0, 'x', 14));
         var cone = new THREE.Mesh(geo('cone', function () { return new THREE.ConeGeometry(3.4, 9, 12); }), M.laser); cone.rotation.z = -Math.PI / 2; cone.position.set(6, 14, 0); g.add(cone); g.add(bx(12, 1.8, 1.8, M.laser, -2, 14, 0)); break;
       case 'mirror':
@@ -866,7 +869,7 @@
     if (!S.labels) return;
     S.layout.components.forEach(function (c) {
       var b = document.createElement('button'); b.type = 'button'; b.className = 'optic-label' + (c.id === S.sel ? ' sel' : '') + (compFilterOK(c.kind) ? '' : ' dim'); b.textContent = labelText(c); b.tabIndex = -1;
-      b.setAttribute('aria-label', c.nm || P.KINDS[c.kind].name);
+      b.setAttribute('aria-label', c.nm || kname(c.kind));
       b.addEventListener('click', function () { selectComp(c.id, true); });
       G.layer.appendChild(b); G.labels[c.id] = { minor: /^(mirror|iris|dump|lens)$/.test(c.kind), el: b, pos: wp(c).add(new THREE.Vector3(0, ({ fgen: 20, rfgen: 6, rfatt: 6, rfamp: 10, csrc: 8, tctrl: 8, lctrl: 8, lockbox: 8, scope: 30, psu: 8, pwrmeter: 8 })[c.kind] || 34, 0)) };
     });
@@ -983,7 +986,7 @@
       if (e.pointerType === 'mouse' && !e.buttons) {
         var id = pickComp(e.clientX, e.clientY); cv.style.cursor = id ? 'grab' : '';
         var c2 = id && comp(id), r = G.stage.getBoundingClientRect();
-        if (c2) { G.tip.hidden = false; G.tip.textContent = (c2.nm || P.KINDS[c2.kind].name) + ' · ' + labelText(c2); G.tip.style.left = (e.clientX - r.left + 14) + 'px'; G.tip.style.top = (e.clientY - r.top + 12) + 'px'; } else G.tip.hidden = true;
+        if (c2) { G.tip.hidden = false; G.tip.textContent = (c2.nm || kname(c2.kind)) + ' · ' + labelText(c2); G.tip.style.left = (e.clientX - r.left + 14) + 'px'; G.tip.style.top = (e.clientY - r.top + 12) + 'px'; } else G.tip.hidden = true;
       }
     });
     cv.addEventListener('pointerleave', function () { G.tip.hidden = true; });
@@ -1027,8 +1030,15 @@
     { kind: 'pwrmeter', title: 'Know your powers', text: 'The optical power meter measures the beam after the isolator, at the pick-off, in each arm and before the cell. The split ratios and the control intensity are then measured, not assumed.' },
     { kind: 'scope', title: 'Record it', text: 'The oscilloscope has three inputs: CH1 the probe photodiode (BNC), CH2 the lock-box monitor, and EXT TRIG the function-generator sync. This is the real-bench counterpart of the scope panel under the 3D view.' }
   ];
+  if (yan()) {   /* reference bench: free-space Yanban with two isolators */
+    TOUR.forEach(function (t) {
+      if (t.kind === 'laser') t.text = 'A single DFB laser at 795 nm (Yanban RB-795-DFB-BFW, 100 mW class, free space) is the source for the control, the probe and the lock reference. Because both EIT fields share this laser, its linewidth is common to both and largely cancels in the two-photon detuning. Most of its power is dumped right after the isolation; the PM-fibre link that follows it is not drawn.';
+      if (t.kind === 'isolator') t.text = 'Two free-space Faraday isolators in series, straight behind the laser window, pass light forward and block the reflections coming back from the AOM double-passes and cell windows. The laser has no isolator inside: without them the DFB can mode-hop, the lock fail, or the chip be damaged.';
+    });
+    OBJ_A[0][1] = 'Put the two isolators directly after the laser, arrows pointing away from it, so the first thing the beam meets is an isolator going forward.';
+  }
+
   var tourI = -1;
-  if (window.LaserOpt) window.LaserOpt.on(function () { renderInspector(); if (tourI >= 0) tourShow(tourI); });
   function tourComp(st) { var list = S.layout.components.filter(function (c) { return c.kind === st.kind; }); return list[st.nth || 0] || list[0] || null; }
   function tourShow(i) {
     var box = $('tour'); if (!box) return;

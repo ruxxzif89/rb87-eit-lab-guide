@@ -132,11 +132,12 @@
 
   /* ------------------------------------------------------------------ models */
   var MODELS = {
-    laser: function (g) {
+    laser: function (g, p) {
       var M = mats(); stand(g);
       g.add(bx(46, 28, 32, M.alu, -18, 0, 0)); g.add(bx(46, 4, 33, M.laser, -18, 15, 0));
       for (var f = 0; f < 6; f++) g.add(bx(2.2, 8, 34, M.black, -34 + f * 6, 19, 0));
-      g.add(cy(3.6, 12, M.green, 12, 0, 0, 'x', 14)); g.add(cy(4.8, 3, M.knob, 19, 0, 0, 'x', 14)); g.add(cy(1.5, 20, M.yellow, 30, 0, 0, 'x', 8));
+      if (p && p.free) { g.add(cy(3.4, 10, M.black, 10, 0, 0, 'x', 14)); g.add(cy(2.6, 1.2, M.glass, 15.4, 0, 0, 'x', 12)); }   // free-space butterfly (Yanban): collimating tube, no fibre
+      else { g.add(cy(3.6, 12, M.green, 12, 0, 0, 'x', 14)); g.add(cy(4.8, 3, M.knob, 19, 0, 0, 'x', 14)); g.add(cy(1.5, 20, M.yellow, 30, 0, 0, 'x', 8)); }
       g.add(bx(8, 3, 6, M.accent, -34, -13, 0)); g.add(sp(1.9, M.on, -38, 13, 17));
     },
     mount14: function (g, p) { // 14-pin butterfly laser mount

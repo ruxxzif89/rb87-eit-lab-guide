@@ -296,7 +296,10 @@
         if (fd < -0.5) res.backToLaser += ray.P;
         return out;
       case 'isolator':
-        if (fd > 0.5) { var ph = cabs2(j.h); out.push(child(ray, d, J(C(Math.SQRT1_2), C(Math.SQRT1_2)), ray.P * ph * K.isolatorFwd, 0, c)); }
+        if (fd > 0.5) {   // input polarizer at p.inPol degrees (0 = H, turned about the beam to match the light), output polarization 45 degrees further on
+          var ia = (p.inPol || 0) * Math.PI / 180, pr = cadd(cscale(j.h, Math.cos(ia)), cscale(j.v, Math.sin(ia)));
+          out.push(child(ray, d, J(C(Math.cos(ia + Math.PI / 4)), C(Math.sin(ia + Math.PI / 4))), ray.P * cabs2(pr) * K.isolatorFwd, 0, c));
+        }
         else if (fd < -0.5) { out.push(child(ray, d, j, ray.P * K.isolatorBack, 0, c)); }
         return out;
       case 'mirror': {
@@ -547,8 +550,11 @@
     var comps = [];
     function add() { for (var i = 0; i < arguments.length; i++) { if (Array.isArray(arguments[i])) comps.push.apply(comps, arguments[i]); else comps.push(arguments[i]); } }
     // --- source, isolation and master axis ---
-    add(mk('laser', 50, 150, 0, { power: 10 }), mk('isolator', 110, 150, 0),
-      M(170, 150, E, S), M(170, 225, S, E),            // two steering mirrors set the master axis
+    add(mk('laser', 40, 150, 0, { power: 10, free: 1 }),   // free-space Yanban RB-795-DFB-BFW (no isolator inside), turned down to 10 mW
+      mk('isolator', 90, 150, 0, { free: 1 }),               // I795P3D no. 1 (input polarizer along the laser polarization)
+      mk('isolator', 130, 150, 0, { free: 1, inPol: 45 }),   // I795P3D no. 2, turned 45 degrees about the beam: its input polarizer lies along the light leaving no. 1
+      M(170, 150, E, S), M(170, 225, S, E),            // two steering mirrors set the master axis (the PM-fibre coupling is not drawn: counted in the equipment list)
+      mk('hwp', 200, 225, 0, { axis: 67.5 }),          // half-wave plate after the mirrors: turns the 90-degree light of isolator no. 2 back to 45 degrees
       mk('iris', 230, 225, 0, { ap: 3 }),
       mk('hwp', 290, 225, 0, { axis: 29 }),            // ~5 % to the SAS reference
       B(350, 225, E, N),                               // pick-off: V reflected north to the SAS arm
@@ -604,7 +610,7 @@
   var LAYOUT_SCALE = 2.0;
   // Painted zones on the table, in the compact layout's coordinates (scaled on the way out). rects: [x0, z0, x1, z1]; lab: [x, z, align] places the name chip: 'tl' = hangs below-right of the point, 'bl' = sits above-right of it, 'l' / 'r' = beside it.
   var ZONES = [
-    { id: 'source', name: 'SOURCE & MASTER AXIS', sub: 'fibre laser, collimator, isolator, mirrors, pick-off, splitter', color: '#f29a38', lab: [20, 266, 'tl'], rects: [[20, 105, 325, 262], [325, 212, 545, 300]] },
+    { id: 'source', name: 'SOURCE & MASTER AXIS', sub: 'free-space laser, two isolators, mirrors, half-wave plate, pick-off, splitter', color: '#f29a38', lab: [20, 266, 'tl'], rects: [[20, 105, 325, 262], [325, 212, 545, 300]] },
     { id: 'sas', name: 'SAS REFERENCE (LASER LOCK)', sub: 'pump + probe through the Rb reference cell', color: '#b58cf0', lab: [806, 152, 'r'], rects: [[330, 94, 800, 210]] },
     { id: 'control', name: 'CONTROL ARM', sub: 'double-pass AOM, beam expander', color: '#ff6b6b', lab: [946, 275, 'r'], rects: [[548, 212, 940, 338], [612, 338, 668, 480]] },
     { id: 'probe', name: 'PROBE ARM', sub: 'double-pass AOM, attenuator', color: '#5aa9f2', lab: [219, 441, 'l'], rects: [[225, 335, 610, 548]] },
