@@ -95,15 +95,15 @@
 <text x="34.00" y="682.00" font-size="11.5" text-anchor="start" fill="#6b7280">P(dBm) = 10·log10( Vpp² / (8 × 50 Ω × 1 mW) ) + 19.5</text>
 <rect x="560.00" y="430.00" width="420.00" height="270.00" rx="0" fill="#fff7f7" stroke="#c0392b" stroke-width="1.4"/>
 <text x="574.00" y="452.00" font-size="13" text-anchor="start" fill="#c0392b" font-weight="700">Rules that protect the AOM and the amplifier</text>
-<text x="574.00" y="474.00" font-size="11.5" text-anchor="start" fill="#1b1f24">1  Synthesizer at +1 dBm, never above: the AOM takes 1 W (+30 dBm).</text>
-<text x="574.00" y="492.00" font-size="11.5" text-anchor="start" fill="#1b1f24">    +1 dBm with the attenuator at 0 dB gives about +30 dBm at the amplifier.</text>
+<text x="574.00" y="474.00" font-size="11.5" text-anchor="start" fill="#1b1f24">1  Synthesizer at +1 dBm, never above +2 dBm: the AOM takes at most</text>
+<text x="574.00" y="492.00" font-size="11.5" text-anchor="start" fill="#1b1f24">    2 W (+33 dBm); +1 dBm gives about +30 dBm, +2 dBm about +31 dBm.</text>
 <text x="574.00" y="510.00" font-size="11.5" text-anchor="start" fill="#1b1f24">2  Start with the attenuator at 31.5 dB; lower it in steps while</text>
 <text x="574.00" y="528.00" font-size="11.5" text-anchor="start" fill="#1b1f24">    watching the diffracted power, and stop at the efficiency plateau.</text>
 <text x="574.00" y="546.00" font-size="11.5" text-anchor="start" fill="#1b1f24">3  Never run the amplifier without the AOM (a 50 Ω load) connected:</text>
 <text x="574.00" y="564.00" font-size="11.5" text-anchor="start" fill="#1b1f24">    an open output can destroy it.</text>
-<text x="574.00" y="582.00" font-size="11.5" text-anchor="start" fill="#1b1f24">4  FAOM-780-80-1-L-T-A-K: SMA input, RF power 1 W, efficiency 85 %</text>
-<text x="574.00" y="600.00" font-size="11.5" text-anchor="start" fill="#1b1f24">    (vendor: best at the highest RF power). Stop at +30 dBm on the coupler;</text>
-<text x="574.00" y="618.00" font-size="11.5" text-anchor="start" fill="#1b1f24">    without the attenuators set the synthesizer to about -2 dBm.</text>
+<text x="574.00" y="582.00" font-size="11.5" text-anchor="start" fill="#1b1f24">4  FAOM-780-80-2-L-T-A-K: SMA input, RF power 2 W, efficiency 85 %</text>
+<text x="574.00" y="600.00" font-size="11.5" text-anchor="start" fill="#1b1f24">    (vendor: best at the highest RF power; our 1 W gives about half).</text>
+<text x="574.00" y="618.00" font-size="11.5" text-anchor="start" fill="#1b1f24">    Stop at +32 dBm on the coupler; heat sink at 2 W for long.</text>
 <text x="574.00" y="636.00" font-size="11.5" text-anchor="start" fill="#1b1f24">5  Amplifier on its heatsink, 50 mm free air all round.</text>
 <rect x="20.00" y="720.00" width="960.00" height="120.00" rx="0" fill="#fffbe8" stroke="#b58900" stroke-width="1.4"/>
 <text x="34.00" y="742.00" font-size="13" text-anchor="start" fill="#1b1f24" font-weight="700">Frequencies</text>
