@@ -3,7 +3,7 @@
 <defs><pattern id="hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="6" stroke="#555" stroke-width="1"/></pattern><pattern id="hatchf" width="4" height="4" patternUnits="userSpaceOnUse" patternTransform="rotate(-45)"><line x1="0" y1="0" x2="0" y2="4" stroke="#888" stroke-width="0.8"/></pattern><pattern id="dots" width="5" height="5" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="0.8" fill="#999"/></pattern><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#1b1f24"/></marker><marker id="arrg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#6b7280"/></marker></defs>
 <rect width="1000" height="910" fill="#ffffff"/>
 <text x="20.00" y="28.00" font-size="17" text-anchor="start" fill="#1b1f24" font-weight="700">D9  Bragg angle and the double pass (angles exaggerated, distances to scale along the beam)</text>
-<text x="20.00" y="48.00" font-size="12" text-anchor="start" fill="#6b7280">Light of 795 nm in a TeO₂ AOM at 80 MHz: sound speed 4.2 mm/µs (G&amp;H data for the 3080 family).</text>
+<text x="20.00" y="48.00" font-size="12" text-anchor="start" fill="#6b7280">Light of 795 nm in a TeO₂ AOM at 80 MHz: sound speed 4.2 mm/µs (vendor data sheet of the FAOM).</text>
 <text x="40.00" y="92.00" font-size="13" text-anchor="start" fill="#1b1f24" font-weight="700">Single pass (top view)</text>
 <rect x="240.00" y="150.00" width="120.00" height="80.00" rx="2" fill="#e8f1fb" stroke="#1f5fa8" stroke-width="1.6"/>
 <text x="300.00" y="144.00" font-size="11.5" text-anchor="middle" fill="#1f5fa8" font-weight="700">AOM crystal</text>
@@ -55,11 +55,11 @@
 <text x="34.00" y="604.00" font-size="13" text-anchor="start" fill="#1b1f24" font-weight="700">Design numbers for the arm</text>
 <text x="34.00" y="630.00" font-size="11.5" text-anchor="start" fill="#1b1f24">Separation of the 0th and 1st order foci at the mirror = f × 15.14 mrad:   f = 100 mm (the BOM lens, AC254-100-B) → 1.51 mm;   f = 150 mm → 2.27 mm;</text>
 <text x="34.00" y="646.00" font-size="11.5" text-anchor="start" fill="#1b1f24">f = 200 mm → 3.03 mm.</text>
-<text x="34.00" y="666.00" font-size="11.5" text-anchor="start" fill="#1b1f24">The focus of a 1.5 mm beam has a radius of only w₀ = λf/πw = 34 µm for f = 100 mm, so the two foci are 45 radii apart. A razor-blade edge 0.75 mm from</text>
+<text x="34.00" y="666.00" font-size="11.5" text-anchor="start" fill="#1b1f24">The focus of a 0.9 mm beam has a radius of only w₀ = λf/πw = 56 µm for f = 100 mm, so the two foci are 27 radii apart. A razor-blade edge 0.75 mm from</text>
 <text x="34.00" y="682.00" font-size="11.5" text-anchor="start" fill="#1b1f24">each focus, on a small translation stage, stops the 0th order and passes the 1st. If that is too tight, use an f = 200 mm lens (3.0 mm).</text>
-<text x="34.00" y="702.00" font-size="11.5" text-anchor="start" fill="#1b1f24">Beam into the AOM: collimated, 1–1.5 mm. The aperture height is 2 mm for the 3080-125 (fits) and 1 mm for the 3080-122 (a 1.5 mm beam would be</text>
-<text x="34.00" y="718.00" font-size="11.5" text-anchor="start" fill="#1b1f24">clipped: use ≤ 0.8 mm). Read the aperture on the data sheet of the unit you buy.</text>
-<text x="34.00" y="738.00" font-size="11.5" text-anchor="start" fill="#1b1f24">Rise time ≈ 159 ns per mm of beam diameter: 238 ns for 1.5 mm, fast enough for the µs pulses of the storage experiment.</text>
+<text x="34.00" y="702.00" font-size="11.5" text-anchor="start" fill="#1b1f24">Beam into the AOM: the FiberPort output, about 0.9 mm and collimated. The clear aperture is 3 × 1 mm (the 1 mm is the sound width): a 0.9 mm beam</text>
+<text x="34.00" y="718.00" font-size="11.5" text-anchor="start" fill="#1b1f24">loses about 2 % per pass, a 1 mm beam 5 %.</text>
+<text x="34.00" y="738.00" font-size="11.5" text-anchor="start" fill="#1b1f24">Rise time 160 ns for a 1 mm beam (data sheet), about 144 ns for 0.9 mm: fast enough for the µs pulses of the storage experiment.</text>
 <text x="34.00" y="758.00" font-size="11.5" text-anchor="start" fill="#1b1f24">Frequency: each pass adds the RF frequency, so the double pass shifts the light by 2 × 80 MHz = 160 MHz (and the two arms differ by 2 × 35 kHz = 70</text>
 <text x="34.00" y="774.00" font-size="11.5" text-anchor="start" fill="#1b1f24">kHz).</text>
 <text x="34.00" y="794.00" font-size="11.5" text-anchor="start" fill="#1b1f24">The lock offset: the SAS has no AOM, so the laser must be locked 160 MHz away from the line the cell sees (open item in the guide).</text>
