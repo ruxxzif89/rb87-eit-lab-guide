@@ -406,7 +406,40 @@ So: reasonable to adopt after a bench test with a 50 Ω load and an oscilloscope
 
 **Ask the vendor:** the diffraction efficiency at 795 nm for a 1.0 and a 1.5 mm beam and the RF power for it, the rise time for 1 mm, the input polarization, whether the RF input is DC-blocked, a housing drawing, and the lead time.
 
-### Q7. What mirrors do we use, and what is their specification?
+### Q7. Is the FAOM-780-80-1-L-T-A-K (780 nm design, 80 MHz, 1 mm free-space AOM) good for our bench? Would it still work if the EIT part is adjusted?
+
+*Added 21 Oct 2026*
+
+*Equipment shown in the guide: AOM (double pass), RF amplifier, RF source, f = 100 mm lens (cat’s eye).*
+
+**Workable for the planned bench, but not good to go as it stands: its data sheet leaves out the figures that decide it (maximum RF power, the conditions of the 85 %, both polarizations), and its 1 mm aperture needs a beam smaller than the Ø1 mm we planned.** Data sheet read on 21 Oct 2026 (one page, Free-Space Acousto-Optic Modulator, TeO2, longitudinal wave, SMA, metal shell): wavelength 750–860 nm (typical 795), centre 80 MHz, 3 dB bandwidth ±20 MHz, diffraction efficiency 85 % (typical), clear aperture 3 × 1 mm, RF power 1 W, rise time 150–200 ns (160 typical), VSWR 1.2:1, 50 Ω, deflection 14.85 mrad, average optical power 10 W, housing about 41.8 × 25 × 13.5 mm.
+
+| Check | Our need | Data sheet | Verdict |
+|---|---|---|---|
+| Wavelength | 794.98 nm | 750–860 nm, centre-wavelength code 780 | Pass. The Bragg-matched RF is about 78.5 MHz at 795 nm if the mount is set for 780; the ±20 MHz bandwidth and the rotation platform (DIY D9) cover it |
+| Frequency | 80.000 and 79.965 MHz | 80 MHz, ±20 MHz | Pass, with room to move |
+| Deflection | cat's-eye geometry: 15.14 mrad at 795 nm, 1.51 mm between orders at f = 100 mm | 14.85 mrad, which is the 780 nm value (λf/v) | Consistent; use 15.1 mrad at 795 nm |
+| Aperture | beam Ø1 mm from the output FiberPort | 3 × 1 mm; the 1 mm is the acoustic width, and 1 mm is the largest option in the ordering code | **Marginal.** A Gaussian of Ø1 mm (1/e²) loses about 5 % per pass in a 1 mm slit (about 9 % over the double pass), and more as the pointing drifts. A beam of about Ø0.6 mm or less loses under 0.2 %. The old collimator beam of about Ø2 mm does not fit at all |
+| Rise time | µs pulses and gates | 160 ns for 1 mm; 0.65·d/v gives 155 ns, so the sheet is consistent | Pass; a smaller beam is faster (about 80 ns at Ø0.5 mm) |
+| RF power | the chain gives +31 dBm (1.4 W) at the AOM with the synthesizer at +1 dBm and 32 dB of amplifier gain | "RF power 1 W" in the typical column; no maximum given | **Unclear.** If 1 W is the limit, lower the synthesizer to about −2 dBm (0.7 W) and set the level by measurement, not by arithmetic |
+| Efficiency | double pass, both passes | 85 % typical; no wavelength, RF power, beam size or polarization stated | **Unknown.** Two passes at 85 % give at best about 72 %; the second pass has the orthogonal polarization (the plates turn it 90°), so ask for the efficiency in both |
+| Bragg regime | clean first order | interaction length not defined | If the 3 mm is the interaction length, the Klein–Cook parameter is Q ≈ 2.4 (n ≈ 2.26, Λ = 52.5 µm): the intermediate regime, where 85 % is a best case at the best angle, with no margin |
+| Mechanical | mount at the 100 mm beam height | drawing without the optical-axis height; four M2 holes | Needs the vendor drawing before the mount is drawn |
+
+**Questions for the vendor, before paying:** (1) maximum RF power and the RF power of the 85 %; (2) wavelength, polarization and beam size of that 85 %, and the efficiency for both linear polarizations; (3) interaction length and optical-axis height above the base, with a dimensioned drawing and the hole pattern; (4) AR coating reflectance at 795 nm; (5) price per unit and lead time; (6) the test report of the units sent; (7) is a 2 mm aperture version available.
+
+**If the EIT part is adjusted slightly, does it still work?** Mostly yes:
+- **Zeeman splitting, field or lock offset changed by up to a few MHz:** yes, the ±20 MHz bandwidth is far larger than the kHz to MHz differences we use. The 160 MHz double-pass offset can be moved by roughly ±30 MHz (RF 65–95 MHz) at falling efficiency near the edges.
+- **Another line or isotope in the 750–860 nm range (the D2 line at 780 nm, ⁸⁵Rb):** yes, the centre wavelength code is 780 nm.
+- **Longer or shorter pulses:** fine from a few hundred nanoseconds upwards; not for pulses under about 100 ns.
+- **More control light:** the laser has plenty; the AOM handles 10 W.
+- **A larger beam at the AOM** (the direct free-space beam, the old Ø2 mm collimator, a second laser): **no**, not without a reducing telescope. This part ties the bench to the fibre-output beam, or to a beam reduced to about Ø0.6 mm.
+- **The hyperfine scheme with an EOM:** the AOM only gates; no problem.
+- **Higher RF drive for more efficiency:** not available, the sheet gives 1 W.
+
+Source: the vendor data sheet (FAOM-780-80-1-L-T-A-K, one page); the numbers marked as ours are arithmetic from it.
+
+### Q8. What mirrors do we use, and what is their specification?
 
 *Added 19 Oct 2026*
 
@@ -445,7 +478,7 @@ So: reasonable to adopt after a bench test with a 50 Ω load and an oscilloscope
 
 Sources: [Thorlabs PF10-03-P01 specification (GoPhotonics listing)](https://www.gophotonics.com/products/mirrors/thorlabs-inc/40-46-pf10-03-p01) · Thorlabs drawing of the PF10-03-P01
 
-### Q8. What specification do the polarizing beamsplitter cubes (PBS) need?
+### Q9. What specification do the polarizing beamsplitter cubes (PBS) need?
 
 *Added 14 Oct 2026*
 
@@ -502,7 +535,7 @@ For the SAS 50:50 cube ask: non-polarizing cube, 12.7 mm, 700–900 nm, R/T = 50
 
 Sources: [Thorlabs broadband PBS cubes in 30 mm cage cubes (CCM1-PBS252/M)](https://www.thorlabs.com/broadband-polarizing-beamsplitter-cubes-in-30-mm-cage-cubes) · [Thorlabs CM1-PBS252 (discontinued, replaced by CCM1-PBS252)](https://www.thorlabs.com/item/CM1-PBS252)
 
-### Q9. Is a double-pass AOM practical on our table, how is it arranged, and who uses it?
+### Q10. Is a double-pass AOM practical on our table, how is it arranged, and who uses it?
 
 *Added 16 Oct 2026*
 
@@ -534,7 +567,7 @@ All parts are in the equipment list (AOMs O17, lenses O08, mirrors and mounts O0
 
 Sources: [Donley et al., Rev. Sci. Instrum. 76, 063112 (2005), NIST PDF](https://tf.nist.gov/general/pdf/2071.pdf) · [Finkelstein et al., arXiv:2205.10959](https://arxiv.org/html/2205.10959)
 
-### Q10. What linewidths and frequencies do we have to set?
+### Q11. What linewidths and frequencies do we have to set?
 
 *Added 9 Oct 2026*
 
@@ -585,7 +618,7 @@ Sources: [Donley et al., Rev. Sci. Instrum. 76, 063112 (2005), NIST PDF](https:/
 
 Because the offset between the two beams is only kHz, a generator with 1 Hz resolution is far more than precise enough. The control–probe difference must stay steady to well under the EIT width (a few kHz): use one two-channel source, or sources sharing a clock.
 
-### Q11. Is a DFB with a TEC and the Thorlabs ITC502 good enough? How do the controllers compare?
+### Q12. Is a DFB with a TEC and the Thorlabs ITC502 good enough? How do the controllers compare?
 
 *Added 10 Oct 2026*
 
@@ -622,7 +655,7 @@ A 5 µA driver does not harm EIT (the optical line is about 100 MHz wide and bot
 
 ## Equipment found in the lab
 
-### Q12. Are the extra lab items useful? (second ITC502, LDM-4980 mounts, TCLDM9 mounts)
+### Q13. Are the extra lab items useful? (second ITC502, LDM-4980 mounts, TCLDM9 mounts)
 
 *Added 10 Oct 2026*
 
@@ -641,7 +674,7 @@ A 5 µA driver does not harm EIT (the optical line is about 100 MHz wide and bot
 
 Sources: [ILX LDM-4984](https://www.newport.com/p/LDM-4984) · [Thorlabs TCLDM9 catalogue](https://www.thorlabs.com/catalogPages/460.pdf)
 
-### Q13. Which of the loose mounts and stages in the photographs are useful?
+### Q14. Which of the loose mounts and stages in the photographs are useful?
 
 *Added 10 Oct 2026*
 
@@ -661,7 +694,7 @@ Identified from five photographs of the lab shelves and added to the Lab Invento
 
 **Left out as not needed:** the ball-screw stepper stage, aluminium rails, the V-block, brackets, loose screws and the box of cables.
 
-### Q14. Is the Credix SG-1710 signal generator useful? Can it drive the AOMs, and both of them?
+### Q15. Is the Credix SG-1710 signal generator useful? Can it drive the AOMs, and both of them?
 
 *Added 20 Oct 2026*
 
@@ -687,7 +720,7 @@ Identified from five photographs of the lab shelves and added to the Lab Invento
 
 Source: [SG-1710 listing](https://www.radiolocman.com/op/device.html?di=63870)
 
-### Q15. Which bench power supplies can do which job? (Aditeg PS-3030DD, Multicomp Pro 72-2710)
+### Q16. Which bench power supplies can do which job? (Aditeg PS-3030DD, Multicomp Pro 72-2710)
 
 *Added 10 Oct 2026*
 
@@ -708,7 +741,7 @@ Source: [SG-1710 listing](https://www.radiolocman.com/op/device.html?di=63870)
 
 **Verdict:** the PS-3030DD covers the RF chain and the Multicomp is a good general bench supply that nothing in the bench needs today. Buy it only if the PS-3030DD is occupied by the RF chain and the heater needs its own supply. The small ±5 V and ±3 V rails of the RF switches and attenuators can be made by the home-built bias box (DIY Section, part D8) from a ±12 V supply, so the +24 V for the amplifiers is the only high-current need.
 
-### Q16. Which of our optical power meters and heads can measure 795 nm? (ILX OMM-6810B, PM100USB with S140C, S144C and S120VC, Newport 818-SL)
+### Q17. Which of our optical power meters and heads can measure 795 nm? (ILX OMM-6810B, PM100USB with S140C, S144C and S120VC, Newport 818-SL)
 
 *Added 10 Oct 2026*
 
@@ -751,7 +784,7 @@ Until a silicon head turns up, use the Thorlabs set for the power budget. Check 
 
 Sources: [ILX 6700B silicon heads brochure](https://www.newport.com/medias/sys_master/images/images/he7/had/9260480790558/6700B-brochure-silicon-REV11.pdf) · [Newport 818-SL/DB](https://np.d1.mks.com/p/818-SL--DB)
 
-### Q17. Which instruments record the result, and which photodetectors do we need? (PDA36A2, PDB210A balanced detector, AD-300/DC)
+### Q18. Which instruments record the result, and which photodetectors do we need? (PDA36A2, PDB210A balanced detector, AD-300/DC)
 
 *Added 10 Oct 2026*
 
@@ -791,7 +824,7 @@ Sources: [Finkelstein et al. 2022](https://arxiv.org/abs/2205.10959), [DeRose et
 
 ## Solenoid, heater and fluxgate (the magnetic field)
 
-### Q18. What can the second ITC502 be used for, besides a laser?
+### Q19. What can the second ITC502 be used for, besides a laser?
 
 *Added 10 Oct 2026*
 
@@ -807,7 +840,7 @@ Sources: [Finkelstein et al. 2022](https://arxiv.org/abs/2205.10959), [DeRose et
 
 If both work on the bench, the separate cell-heater controller (BOM C04) and the solenoid current source (C08) could be dropped. This has not been applied to the BOM yet. The next two answers give the wiring; the plugs, the heater and the coil are built step by step in the DIY Section (parts D1 to D3).
 
-### Q19. How do I use the second ITC502 as the cell-heater controller (connection and set-up)?
+### Q20. How do I use the second ITC502 as the cell-heater controller (connection and set-up)?
 
 *Added 10 Oct 2026*
 
@@ -838,7 +871,7 @@ If both work on the bench, the separate cell-heater controller (BOM C04) and the
 
 **Check the field.** With the fluxgate inside the shield, switch the heater on and off: the change should be small compared with 1 mG (the DIY test uses 0.1 mG). If not, twist the leads tighter.
 
-### Q20. Is it safe to wrap the bifilar heater directly round the rubidium cell?
+### Q21. Is it safe to wrap the bifilar heater directly round the rubidium cell?
 
 *Added 11 Oct 2026*
 
@@ -862,7 +895,7 @@ If both work on the bench, the separate cell-heater controller (BOM C04) and the
 
 Silicone does not burn or melt here: the worst case with the current limits is about 84 °C. Buy a sheet that states "silicone" and a temperature rating (some cheap sponge sheets are polyurethane or neoprene), and hold a scrap on the heater during the open-bench test at 0.50 A for an hour: no smell, no darkening, no shrinking. Because silicone insulates less, check that the cell still reaches 65 °C inside the closed shield at 0.33 A; if not, use melamine (a thicker sleeve does not fit).
 
-### Q21. Can we heat the cell the Duke way (heaters and insulation wrapped in aluminium foil)?
+### Q22. Can we heat the cell the Duke way (heaters and insulation wrapped in aluminium foil)?
 
 *Added 11 Oct 2026*
 
@@ -888,7 +921,7 @@ Silicone does not burn or melt here: the worst case with the current limits is a
 
 **Verdict:** keep our bifilar heater, foam and tubes (DIY D2); an outer foil layer is allowed and harmless, but it is not a replacement for a non-magnetic heater.
 
-### Q22. Can the solenoid former be 3D-printed in PETG on a Bambu Lab A1 with a 0.2 mm nozzle?
+### Q23. Can the solenoid former be 3D-printed in PETG on a Bambu Lab A1 with a 0.2 mm nozzle?
 
 *Added 11 Oct 2026*
 
@@ -913,7 +946,7 @@ Silicone does not burn or melt here: the worst case with the current limits is a
 
 The STL files: the former, the test coupon, the two spacer rings (with the lead notch and the recess for the degaussing bundle) and the winding as a reference model, not for printing: the wire is wound by hand in the printed groove.
 
-### Q23. Can we 3D-print the holder for the SAS reference cell in PETG?
+### Q24. Can we 3D-print the holder for the SAS reference cell in PETG?
 
 *Added 11 Oct 2026*
 
@@ -929,7 +962,7 @@ The STL files: the former, the test coupon, the two spacer rings (with the lead 
 
 **Before printing:** confirm the cell's length over the windows, the window diameter and the stem (the holder takes a stem at mid-length, pointing up, up to 13 mm high, and windows up to Ø23 mm; see the next question). Matte black PETG cuts stray light. Do not use it for the EIT cell: that one is heated to 65 °C inside the shield and has its own stack (D2).
 
-### Q24. Real cells have a torch-sealed stem (tip-off). Do our printed holders and the solenoid take it into account?
+### Q25. Real cells have a torch-sealed stem (tip-off). Do our printed holders and the solenoid take it into account?
 
 *Added 17 Oct 2026*
 
@@ -976,7 +1009,7 @@ All numbers come from the DIY build scripts and are re-checked by the DIY audit 
 
 Sources: [Thorlabs GC19075-RB drawing (24094-E0W)](https://media.thorlabs.com/globalassets/items/g/gc/gc1/gc19075-rb/24094-e0w.pdf) · [Precision Glassblowing, rubidium vapor cell quartz (photo)](https://precisionglassblowing.com/product/rubidium-vapor-cell-quartz/)
 
-### Q25. Our shield is bigger than the Spain-style module: what beam height should the whole bench use?
+### Q26. Our shield is bigger than the Spain-style module: what beam height should the whole bench use?
 
 *Added 11 Oct 2026*
 
@@ -1010,7 +1043,7 @@ Why the Spain-style bench can be lower: their cell module is a small enclosure, 
 - **Taller covers over the AOM arms (D10):** they were drawn 80 mm high for a 40 mm beam. At 100 mm the inner height must be about 160 to 200 mm.
 - **An optional draught cover over the shield**, if the room has strong air flow: black hardboard, inner size about 350 × 120 × 170 mm (the shield is 282 mm long plus the caps and the degaussing loops, and its top is about 140 mm above the table). It must contain no steel: no steel screws, brackets or hinges.
 
-### Q26. How do we make sure every optical part stands at 90° (vertical and square to the beam)? Is it practically doable?
+### Q27. How do we make sure every optical part stands at 90° (vertical and square to the beam)? Is it practically doable?
 
 *Added 16 Oct 2026*
 
@@ -1049,7 +1082,7 @@ Why the Spain-style bench can be lower: their cell module is a small enclosure, 
 
 Sources: [Edmund Optics, Laser alignment activity 1 (beam walking with two mirrors and two irises)](https://www.edmundoptics.com/knowledge-center/application-notes/lasers/laser-alignment-activity-1/) · [Stony Brook Laser Teaching Center, Understanding "walking the beam"](https://www.stonybrook.edu/laser/_simone/mini-project/) · [UW Clean Energy Institute, alignment guide (two irises at the same height)](https://www.cei.washington.edu/wp-content/uploads/2017/06/Confocal-Microscope-alignment.pdf) · [KAUST laser alignment guidelines (safety)](https://hse.kaust.edu.sa/wp-content/uploads/pdf/docs/default-source/research-safety/laser_alignment_guidelines.pdf)
 
-### Q27. How do we calculate the distances between the optical parts?
+### Q28. How do we calculate the distances between the optical parts?
 
 *Added 16 Oct 2026*
 
@@ -1090,7 +1123,7 @@ Sources: [Edmund Optics, Laser alignment activity 1 (beam walking with two mirro
 
 Sources: H. Kogelnik and T. Li, Appl. Opt. 5, 1550 (1966) (Gaussian beams, ABCD) · S. A. Self, Appl. Opt. 22, 658 (1983) (focusing) · [Thorlabs CFC-11X-B sheet (collimator formula and table)](https://www.thorlabs.com/catalogpages/Obsolete/2020/CFC-11X-B.pdf) · [Thorlabs PM fibre table (PM780-HP MFD 5.3 ± 1.0 µm at 850 nm)](https://www.thorlabs.com/catalogpages/obsolete/2019/PM14XX-HP.pdf) · G&H 3080-125 outline drawing 97-01598-01 rev D · [Donley et al., Rev. Sci. Instrum. 76, 063112 (2005)](https://tf.nist.gov/general/pdf/2071.pdf) · T. Okoshi et al., Electron. Lett. 16, 630 (1980) and L. E. Richter et al., IEEE J. Quantum Electron. 22, 2070 (1986) (delayed self-heterodyne)
 
-### Q28. How is the magnetic shield of the Spain-style EIT cell probably made? It looks like a small enclosure.
+### Q29. How is the magnetic shield of the Spain-style EIT cell probably made? It looks like a small enclosure.
 
 *Added 11 Oct 2026*
 
@@ -1112,7 +1145,7 @@ Why a small shield works:
 
 **What this means for our design:** we built for 0.1 mG stability and a cell field error of 0.2 %, which needs the long three-layer shield, the 42-turn solenoid with end turns, and degaussing. A compact module like theirs is simpler and cheaper and gives clear EIT, but with a broader, less reproducible line, and its temperature drifts without a loop. A compact version of ours (for example two layers, inner bore about Ø40 mm, about 120 mm long with caps) is possible, but the field uniformity would have to be recalculated with the end caps included before choosing it.
 
-### Q29. Can we make the mu-metal shield ourselves: roll a sheet into a cylinder and close it with (3D-printed) end caps?
+### Q30. Can we make the mu-metal shield ourselves: roll a sheet into a cylinder and close it with (3D-printed) end caps?
 
 *Added 11 Oct 2026*
 
@@ -1142,7 +1175,7 @@ Three layers multiply these roughly, if the gaps between them are a few millimet
 
 **Check:** after assembly and degaussing (D4), measure the residual field at the cell with the fluxgate plate. Then turn the whole shield in the room and read it again: the reading should change by less than about 0.1 mG.
 
-### Q30. Which DC source should drive the solenoid, and how do I wire the second ITC502 laser output for it? (Is the Rigol DP832A needed?)
+### Q31. Which DC source should drive the solenoid, and how do I wire the second ITC502 laser output for it? (Is the Rigol DP832A needed?)
 
 *Added 10 Oct 2026*
 
@@ -1181,7 +1214,7 @@ Three layers multiply these roughly, if the gaps between them are a few millimet
 
 **Effect on the BOM.** If the ITC502 route works, BOM C08 (Rigol DP832A) and, with the heater on the TEC half, C04 (TC300B) can be dropped. This has not been applied; test the solenoid and the heater on the bench first, with the fluxgate inside the shield.
 
-### Q31. Can a home-wound solenoid really give 3.39 mG per mA, and how and where do we measure it?
+### Q32. Can a home-wound solenoid really give 3.39 mG per mA, and how and where do we measure it?
 
 *Added 16 Oct 2026*
 
@@ -1215,7 +1248,7 @@ Three layers multiply these roughly, if the gaps between them are a few millimet
 - **Temperature:** the tube near the heated cell runs warm, and the sensor zero drifts with temperature (data sheet: below 2 nT per kelvin, 0.02 mG/K), so read it as a relative monitor.
 During EIT the best field monitor is the atoms themselves: the EIT peak moves 1.4 kHz per mG, far more sensitively than the fluxgate.
 
-### Q32. Can the Stefan Mayer FLC100 be the fluxgate magnetometer with milligauss resolution?
+### Q33. Can the Stefan Mayer FLC100 be the fluxgate magnetometer with milligauss resolution?
 
 *Added 10 Oct 2026*
 
@@ -1237,7 +1270,7 @@ During EIT the best field monitor is the atoms themselves: the EIT peak moves 1.
 
 Sources: [Stefan Mayer FLC 100 data sheet](https://stefan-mayer.com/images/datasheets/Data-sheet_FLC-100.pdf) · [Stefan Mayer Instruments](https://etesters.com/catalog/a063869f-1422-08df-aa96-6c5cd8570108)
 
-### Q33. Can the degaussing coil use 0.25 mm² wire instead of 0.5 mm²? Will it still degauss properly?
+### Q34. Can the degaussing coil use 0.25 mm² wire instead of 0.5 mm²? Will it still degauss properly?
 
 *Added 20 Oct 2026*
 
@@ -1262,7 +1295,7 @@ Source: the formulas and the 30-turn layout are those of DIY D4; the heating fig
 
 ## The Quantum Spain-style bench
 
-### Q34. Is the Spain-style arrangement correct, in theory and in practice?
+### Q35. Is the Spain-style arrangement correct, in theory and in practice?
 
 *Added 9 Oct 2026*
 
@@ -1286,7 +1319,7 @@ Source: the formulas and the 30-turn layout are those of DIY D4; the heating fig
 - No beam dumps or tubes are visible (laser safety).
 - The AOM tilt is exaggerated to 8° in the drawing, hence the 160 mm from separator cube to AOM; a real build can be tighter but needs an iris or block for the zeroth order. Do not use the drawing as a build recipe.
 
-### Q35. What is the cell label TRT-Rb/Ne-10T-20x75 on the Spain-style EIT cell, and would it suit our bench?
+### Q36. What is the cell label TRT-Rb/Ne-10T-20x75 on the Spain-style EIT cell, and would it suit our bench?
 
 *Added 12 Oct 2026*
 
@@ -1341,7 +1374,7 @@ Source: the formulas and the 30-turn layout are those of DIY D4; the heating fig
 
 ## About this guide
 
-### Q36. How does the lab inventory enter the costed BOM and the Spain-style cost?
+### Q37. How does the lab inventory enter the costed BOM and the Spain-style cost?
 
 *Added 10 Oct 2026*
 
@@ -1354,7 +1387,7 @@ Source: the formulas and the 30-turn layout are those of DIY D4; the heating fig
 
 **Rules and limits.** Items marked "check" or "no" are not counted. An item that covers a row only in part is counted only for the units it can supply (for example 6 post holders against 60 post sets). The Credix SG-1710 is **not** counted against the dual-channel RF synthesizer, which needs two phase-locked channels. Mounts whose aperture is not measured yet (the Melles Griot set) are counted as 10 of the 11 mirror mounts; measure them. The prices stay behind the group password; the switch only changes how the totals are computed.
 
-### Q37. Can the Thorlabs PM100USB CAD file be used for the 3D pictures?
+### Q38. Can the Thorlabs PM100USB CAD file be used for the 3D pictures?
 
 *Added 10 Oct 2026*
 
