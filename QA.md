@@ -438,11 +438,26 @@ So: reasonable to adopt after a bench test with a 50 Ω load and an oscilloscope
 - **Higher RF drive for more efficiency:** not available, the sheet gives 1 W.
 
 **Vendor reply of 21 Oct 2026 (to our eleven questions).**
-- **Answered:** the price is per unit and includes express shipping to Malaysia (the same for both units); delivery 4 weeks after payment; warranty 12 months from shipping; TeO₂ in longitudinal mode; it works in CW; the AR coating covers the data-sheet range; the on/off extinction can reach 50 dB with a suitable RF driver (our RF switch adds its own isolation); a heat sink is advised if it runs long at maximum RF power; a test report comes with the delivery.
+- **Answered:** the price is per unit and includes express shipping to Malaysia (the same for both models they sent data sheets for, the 1 mm and the 2 mm aperture version: I first misread this as "the same for both units"); delivery 4 weeks after payment; warranty 12 months from shipping; TeO₂ in longitudinal mode; it works in CW; the AR coating covers the data-sheet range; the on/off extinction can reach 50 dB with a suitable RF driver (our RF switch adds its own isolation); a heat sink is advised if it runs long at maximum RF power; a test report comes with the delivery.
 - **Read between the lines:** "the maximum diffraction efficiency is at the highest RF power" means the 85 % belongs to the data-sheet RF power of 1 W, so treat **1 W (+30 dBm) as the limit**, not the 2 W we had assumed for the earlier supplier.
 - **Not answered (sent back to the data sheet):** the input polarization and the efficiency for both polarizations, the beam diameter of the 85 %, the reflectance per surface, the optical-axis height and hole positions, whether the input is DC-blocked. **The polarization is the one that can break our design:** the double pass sends the second pass through with crossed polarization.
 - **What that means:** the unit can be bought on the strength of the data sheet, price and warranty, but the first job on arrival is to measure the efficiency for both polarizations (a half-wave plate before the AOM) and the axis height. If the crossed polarization is weak, use the single-pass fallback (80 MHz lock offset instead of 160 MHz).
 - **Beam:** the clear aperture of 3 × 1 mm fits the output of our FiberPort (about Ø0.9 mm) with about 2 % loss per pass; the earlier Ø0.6 mm advice was a margin, not a requirement, because the part is sold for a 1 mm beam.
+
+**The second data sheet: FAOM-780-80-2-L-T-A-K (2 mm aperture), same vendor, same price.** Same crystal, wavelength range, 80 MHz, ±20 MHz, 85 %, SMA, 50 Ω, VSWR 1.2:1 and the same outline drawing (41.8 × 25 × 13.5 mm). The differences:
+
+| | 1 mm version | 2 mm version |
+|---|---|---|
+| Clear aperture (interaction length × sound width) | 3 × 1 mm | 3 × 2 mm |
+| RF power | 1 W | 2 W (this is the earlier supplier offer: 2 mm, 2 W, SMA, 85 %) |
+| Rise time | 160 ns (150–200) for a 1 mm beam | 350 ns maximum (the beam sets it: about 140 ns for our Ø0.9 mm in either) |
+| Deflection | 14.85 mrad | 15 mrad (rounded) |
+| Our Ø0.9 mm FiberPort beam | about 2 % loss per pass, more if the pointing drifts | no clipping |
+| What our RF chain gives (+30 dBm, 1 W) | the rated power | half the rated power |
+
+**My estimate of what that means (an assumption, not a vendor figure).** A taller sound column needs about twice the RF power for the same efficiency, so the 85 % of the 2 mm version is probably at 2 W. If the efficiency follows the usual sin² law, it would be about 54 % per pass at 1 W and about 69 % at 1.4 W, against 85 % for the 1 mm version at its 1 W. In the double pass that is about 30 % against about 72 % overall. We can afford it: the laser gives about ten times the power the cell needs, so the 2 mm version only costs light we do not need.
+
+**Which to buy.** The 2 mm version is the more robust choice at the same price: no clipping, a larger alignment tolerance, room for a larger beam if the optics change later, and an RF rating (2 W) that our +30 dBm chain does not strain; its cost is lower efficiency at 1 W and a need for a heat sink if it is driven at 2 W for long. The 1 mm version matches the chain's power and is more efficient but clips a little and ties the bench to a beam of about Ø1 mm or less. Ask the vendor for the **efficiency of the 2 mm version at 1 W** and for the same polarization answers before choosing. The polarization question is the same for both.
 
 Source: the vendor data sheet (FAOM-780-80-1-L-T-A-K, one page); the numbers marked as ours are arithmetic from it.
 
