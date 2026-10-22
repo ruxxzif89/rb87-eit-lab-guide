@@ -67,7 +67,7 @@ How to continue on another machine:
 
 ## Resuming on another machine
 
-The folder is on Google Drive and also a git repo (public parts via GitHub). One machine at a time: commit and push before leaving, let Drive finish syncing, then `git pull` on the next machine. Needed: git, node, python3 (`pip install openpyxl` for the xlsx), a static server (`python3 -m http.server 4180 --bind 127.0.0.1`). Bump the `?v=` query on script tags when editing `eitphys.js`, `bench-sim.js`, `parts3d.js` or `inventory*.js` (current: eitphys 10, bench-sim 27, parts3d 15, inventory-data 16, inventory 4, qs-layout 4, diy-d1-sim 7). Before every push check `git ls-files | grep -c private` prints 0. Private notes for the owner's sessions are in the git-ignored `CLAUDE.local.md` and `private/`.
+The folder is on Google Drive and also a git repo (public parts via GitHub). One machine at a time: commit and push before leaving, let Drive finish syncing, then `git pull` on the next machine. Needed: git, node, python3 (`pip install openpyxl` for the xlsx), a static server (`python3 -m http.server 4180 --bind 127.0.0.1`). Bump the `?v=` query on script tags when editing `eitphys.js`, `bench-sim.js`, `parts3d.js` or `inventory*.js` (current: eitphys 10, bench-sim 27, parts3d 15, inventory-data 18, inventory 4, qs-layout 4, diy-d1-sim 7). Before every push check `git ls-files | grep -c private` prints 0. Private notes for the owner's sessions are in the git-ignored `CLAUDE.local.md` and `private/`.
 
 ## BOM pipeline (private)
 
