@@ -408,6 +408,7 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
 <style>
 .bom-tbl td.look,.bom-tbl th:nth-child(2){padding:4px 6px}
 .bom-tbl td.look{width:124px}
+.bom-tbl td.qty,.bom-tbl th.qty,#bomPublic th:nth-child(4),#bomPublic td:nth-child(4),#ownedTbl th:nth-child(4),#ownedTbl td:nth-child(4){width:3.6rem;max-width:4.6rem;padding-left:6px;padding-right:6px;text-align:center}
 .bom-tot .save{color:var(--ok)}
 .bom-costed td.alt{min-width:150px}
 .bom-costed td.alt input{border:1px solid var(--rule-strong);background:var(--surface);color:var(--ink);padding:4px 6px;border-radius:2px;width:100%;min-width:130px;font:inherit;font-size:.82rem}
@@ -752,15 +753,15 @@ details.q .ans{border-top:1px dashed var(--rule);padding-top:6px;color:var(--ink
       '<td><input type="checkbox" class="bomTick" data-kind="have" data-id="' + id + '"' + (e === 'have' ? ' checked' : '') + ' aria-label="Owned or borrowed: ' + esc(r.item) + '"></td>' +
       '<td><input type="checkbox" class="bomTick" data-kind="remove" data-id="' + id + '"' + (e === 'remove' ? ' checked' : '') + ' aria-label="Remove from plan: ' + esc(r.item) + '"></td>' +
       '<td><input type="checkbox" class="bomTick" data-kind="alt" data-id="' + id + '"' + (a ? ' checked' : '') + ' aria-label="Found a cheaper alternative: ' + esc(r.item) + '"></td>' +
-      '<td>' + id + '</td><td class="look">' + lookHtml(r.id, r.item) + '</td><td>' + esc(r.item) + (r.status === 'optional' ? ' <span class="tag est">optional</span>' : '') + '</td>' +
-      '<td class="num">' + r.qty + ' ' + esc(r.unit) + (cv > 0 ? '<br><a class="tag lab" href="inventory.html?bom=' + encodeURIComponent(r.id) + '#invBody" title="Show the Lab Inventory items that cover ' + esc(r.id) + '">' + (cv >= r.qty ? 'in the lab' : cv + ' of ' + r.qty + ' in the lab') + ' ↗</a>' + invNames(r.id) : '') + '</td><td class="num">' + fmt(r.market_myr) + '</td><td class="num">' + fmt(r.unit_myr) + '</td>' +
+      '<td>' + id + '</td><td class="look">' + lookHtml(r.id, r.item) + '</td><td>' + esc(r.item) + (r.status === 'optional' ? ' <span class="tag est">optional</span>' : '') + (cv > 0 ? '<br><a class="tag lab" href="inventory.html?bom=' + encodeURIComponent(r.id) + '#invBody" title="Show the Lab Inventory items that cover ' + esc(r.id) + '">' + (cv >= r.qty ? 'in the lab' : cv + ' of ' + r.qty + ' in the lab') + ' ↗</a>' + invNames(r.id) : '') + '</td>' +
+      '<td class="num qty">' + r.qty + ' ' + esc(r.unit) + '</td><td class="num">' + fmt(r.market_myr) + '</td><td class="num">' + fmt(r.unit_myr) + '</td>' +
       '<td class="alt">' + (a ? '<input type="number" class="altPrice" data-id="' + id + '" min="0" step="any" inputmode="decimal" value="' + (Number(a.myr) > 0 ? esc(a.myr) : '') + '" placeholder="MYR / unit" aria-label="Estimated price of the alternative, MYR per unit: ' + esc(r.item) + '">' : '') + '</td>' +
       '<td class="alt">' + (a ? '<input type="url" class="altUrl" data-id="' + id + '" value="' + esc(a.url || '') + '" placeholder="https://… product link" aria-label="Product link of the alternative: ' + esc(r.item) + '">' + (link ? ' <a class="altGo" href="' + esc(link) + '" target="_blank" rel="noopener">open ↗</a>' : '') : '') + '</td>' +
       '<td class="num line">' + lineHtml(r, e) + '</td><td>' + (r.basis === 'web' ? 'seen on vendor page' : r.basis === 'quote' ? 'vendor offer' : '<span class="tag est">estimate</span>') + '</td></tr>';
   }
   function paintRows() {
     presetAlts(); cover();
-    var h = '<thead><tr><th title="Tick if we already own it or can borrow it">Have it?</th><th title="Tick to take it out of the plan (optional items start ticked)">Remove</th><th title="Tick if you found a cheaper alternative: a price and a product link then appear on the row">Cheaper alt. found</th><th>#</th><th>Look (3D)</th><th>Item</th><th>Qty</th><th>Market price (MYR, unit)</th><th>Budget price (MYR, unit)</th><th>Alternative: est. price (MYR, unit)</th><th>Alternative: product link</th><th>Line total (MYR)</th><th>Price basis</th></tr></thead><tbody>', cur = null;
+    var h = '<thead><tr><th title="Tick if we already own it or can borrow it">Have it?</th><th title="Tick to take it out of the plan (optional items start ticked)">Remove</th><th title="Tick if you found a cheaper alternative: a price and a product link then appear on the row">Cheaper alt. found</th><th>#</th><th>Look (3D)</th><th>Item</th><th class="qty">Qty</th><th>Market price (MYR, unit)</th><th>Budget price (MYR, unit)</th><th>Alternative: est. price (MYR, unit)</th><th>Alternative: product link</th><th>Line total (MYR)</th><th>Price basis</th></tr></thead><tbody>', cur = null;
     D.rows.forEach(function (r) {
       if (r.g !== cur) { h += '<tr class="grp"><th colspan="13">' + esc(r.g) + '</th></tr>'; cur = r.g; }
       h += rowHtml(r);
