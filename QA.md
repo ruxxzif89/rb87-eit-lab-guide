@@ -461,6 +461,18 @@ So: reasonable to adopt after a bench test with a 50 Ω load and an oscilloscope
 
 **Which to buy.** The 2 mm version is the more robust choice at the same price: no clipping, a larger alignment tolerance, room for a larger beam if the optics change later, and an RF rating (2 W) that our +30 dBm chain does not strain; its cost is lower efficiency at 1 W and a need for a heat sink if it is driven at 2 W for long. The 1 mm version matches the chain's power and is more efficient but clips a little and ties the bench to a beam of about Ø1 mm or less. Ask the vendor for the **efficiency of the 2 mm version at 1 W** and for the same polarization answers before choosing. The polarization question is the same for both.
 
+**Vendor answers to our follow-up questions (22 Oct 2026).**
+- **Polarization: "random".** The vendor says the AOM does not depend on the input polarization, so both linear polarizations should diffract about equally. That removes the main worry about the double pass (the second pass has the crossed polarization). It is a statement, not a measurement for each polarization: we still measure both on arrival (turn a half-wave plate before the AOM).
+- **RF power.** They did not measure efficiency against RF power: they only found the power for the highest efficiency, **2 W (the 85 %)**. So the efficiency at our 1 W is unknown (my estimate: about 54 % per pass). The **maximum safe RF power is 4 W**.
+- **Cooling.** No heat sink or fan: mount the AOM on a metal plate that conducts the heat away (our aluminium carrier plate does this).
+- **RF input.** 50 Ω, sine wave, VSWR below 1.2:1. Whether it is DC-blocked was not answered.
+- **Coating and damage.** Reflectance below 0.3 % per surface; damage threshold 100 MW/cm² (probably a pulsed value, far above our power).
+- **Beam size.** The 85 % was measured with a beam of about 0.8–0.9 mm: the same as ours.
+- **Drawing.** The axis height, the holes, the SMA position and the side of the +1 order are on a drawing the vendor sent separately.
+- **Testing.** No pre-shipment measurement. They guarantee the data-sheet parameters and ship a test report with the units. The return terms were not answered.
+
+**What this means for us.** The risk we worried about most, the polarization, is answered favourably. To get the full 85 % the AOM needs 2 W (+33 dBm), which our chain only reaches with the synthesizer at about +4 dBm and the attenuator at 0 dB: the amplifier is then at its 1 dB compression point, so read the level on the coupler and check the harmonics; at 1 to 1.5 W the efficiency is lower, which the surplus laser power affords. Because they will not test before shipping, order through a protected payment (for example Alibaba Trade Assurance) and write the acceptance test into the order: at least 80 % at 2 W for both polarizations at 795 nm, otherwise return or refund.
+
 Source: the vendor data sheet (FAOM-780-80-1-L-T-A-K, one page); the numbers marked as ours are arithmetic from it.
 
 ### Q8. What mirrors do we use, and what is their specification?
