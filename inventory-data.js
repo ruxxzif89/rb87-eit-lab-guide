@@ -48,7 +48,7 @@ window.LAB_INVENTORY = {
       role: 'Unidentified; check the glass and its coating.', link: '', loc: '', owner: '', notes: '' },
     { id: 'L15', name: 'Self-centering lens mount', part: 'LCM-1', brand: 'Newport', qty: '', model: 'lens', mp: {}, status: 'check', bom: 'O10',
       specs: 'Variable-size lens mount for optic diameters 3.2–27 mm, edge thickness 3.00–9.58 mm, optical axis height 37.8 mm, fixed, 8-32 and 1/4-20 threads.',
-      role: 'Usable for small lenses (axis height 37.8 mm vs our 40 mm beam height; shim the post).', link: 'https://www.newport.com/p/LCM-1', loc: '', owner: '', notes: '' },
+      role: 'Usable for small lenses (axis height 37.8 mm vs our 100 mm beam height; shim the post).', link: 'https://www.newport.com/p/LCM-1', loc: '', owner: '', notes: '' },
     { id: 'L16', name: 'Precision manual rotation stage, vertical mounting', part: 'PRO1/M', brand: 'Thorlabs', qty: '', model: 'rotstage', mp: {}, status: 'use', bom: 'O16, O07',
       specs: '360° continuous rotation with degree scale, micrometer fine adjustment, locking knob, vertical mounting bracket, through-hole, black anodised base.',
       role: 'Rotation mount for the Glan–Taylor or a waveplate.', link: '', loc: '', owner: '', notes: '' },

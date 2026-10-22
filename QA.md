@@ -365,7 +365,7 @@ So: reasonable to adopt after a bench test with a 50 Ω load and an oscilloscope
 9. **Size and mounting.** A drawing with the housing, the hole pattern and the height of the aperture above the base.
 10. **The driver.** Buy the AOM alone, or with a driver that accepts an external RF input. A fixed-frequency driver (its own oscillator) cannot be phase-locked to the other arm, so it is no use for the control and the probe.
 
-**Our planned part, the Gooch & Housego AOMO 3080-125, against this list** (G&H outline drawing 97-01598-01, rev D):
+**The earlier planned part (superseded on 21 Oct 2026 by the FAOM-780-80-2), the Gooch & Housego AOMO 3080-125, against this list** (G&H outline drawing 97-01598-01, rev D):
 
 | Check | 3080-125 drawing | Verdict |
 |---|---|---|
@@ -394,11 +394,11 @@ So: reasonable to adopt after a bench test with a 50 Ω load and an oscilloscope
 | ZHL-1-2W-S+ amplifier (R02) | 5–500 MHz, gain 29 dB min / 32 dB typ, +33 dBm at 1 dB compression, +24 V 0.9 A, at most +10 dBm in, never an open output | with the synthesizer at +1 dBm: about +30 dBm (1.05 W) at the AOM, about 90 % of the peak efficiency of the 3080-125 at 795 nm (saturation about 1.6 W, estimate); a minimum-gain unit gives +27 dBm: raise the synthesizer by up to 3 dB |
 | ZFDC-20-4-S+ coupler (R06) | 19.5 dB coupling, 2 W | reads the drive level on the scope |
 
-**Corrected:** the DIY page gave the amplifier gain as "29 to 34 dB, typical 33"; the data sheet (REV G) gives 29 dB minimum and 32 dB typical, with no maximum. The synthesizer setting is now +1 dBm (never above +5 dBm), which keeps the AOM drive at about +30 dBm.
+**Corrected:** the DIY page gave the amplifier gain as "29 to 34 dB, typical 33"; the data sheet (REV G) gives 29 dB minimum and 32 dB typical, with no maximum. The synthesizer setting is now +1 dBm (never above +2 dBm), which keeps the AOM drive at about +30 dBm.
 
 **Not yet confirmed, and how to close each:**
 - **The harmonics of the SynthHD at 80 MHz** (near the bottom of its range; no figure found). Look at its output on a spectrum analyser or a fast scope first; if the harmonics are strong, put a low-pass filter with a cut-off near 100 MHz after each channel. The AOM's 25 MHz bandwidth already rejects most of them, but the amplifier would still spend power on them.
-- **The AOM connector:** the 3080-125 has an SMB jack: two SMB-to-SMA cables.
+- **The AOM connector:** the earlier 3080-125 had an SMB jack; the FAOM-780-80-2 has an SMA jack, so no adapter cable is needed.
 - **DC on the RF lines:** the switch and the attenuator need 0 V; measure the synthesizer output and the AOM input with the multimeter, and add a DC block if needed.
 - **Supplies:** +24 V at about 1.8 A for the two amplifiers (R05), and ±5 V and ±3 V from the DIY bias box (D8), which is not yet a BOM row.
 
@@ -471,7 +471,7 @@ So: reasonable to adopt after a bench test with a 50 Ω load and an oscilloscope
 - **Drawing.** The axis height, the holes, the SMA position and the side of the +1 order are on a drawing the vendor sent separately.
 - **Testing.** No pre-shipment measurement. They guarantee the data-sheet parameters and ship a test report with the units. The return terms were not answered.
 
-**What this means for us.** The risk we worried about most, the polarization, is answered favourably. To get the full 85 % the AOM needs 2 W (+33 dBm), which our chain only reaches with the synthesizer at about +4 dBm and the attenuator at 0 dB: the amplifier is then at its 1 dB compression point, so read the level on the coupler and check the harmonics; at 1 to 1.5 W the efficiency is lower, which the surplus laser power affords. Because they will not test before shipping, order through a protected payment (for example Alibaba Trade Assurance) and write the acceptance test into the order: at least 80 % at 2 W for both polarizations at 795 nm, otherwise return or refund.
+**What this means for us.** The risk we worried about most, the polarization, is answered favourably. The full 85 % needs 2 W (+33 dBm), which is the compression point of our amplifier, so we do not chase it: the rule stays at synthesizer +1 dBm, never above +2 dBm (about 1 W at the AOM, about 54 % per pass if the 85 % at 2 W is right, an assumption), and the surplus laser power affords the lower efficiency. Because they will not test before shipping, write the acceptance test into the order: at least 80 % at 2 W for both polarizations at 795 nm, otherwise return or replacement. The order goes through our local vendor.
 
 Source: the vendor data sheet (FAOM-780-80-1-L-T-A-K, one page); the numbers marked as ours are arithmetic from it.
 
