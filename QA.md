@@ -471,7 +471,15 @@ So: reasonable to adopt after a bench test with a 50 Ω load and an oscilloscope
 - **Drawing.** The axis height, the holes, the SMA position and the side of the +1 order are on a drawing the vendor sent separately.
 - **Testing.** No pre-shipment measurement. They guarantee the data-sheet parameters and ship a test report with the units. The return terms were not answered.
 
-**What this means for us.** The risk we worried about most, the polarization, is answered favourably. The full 85 % needs 2 W (+33 dBm), which is the compression point of our amplifier, so we do not chase it: the rule stays at synthesizer +1 dBm, never above +2 dBm (about 1 W at the AOM, about 54 % per pass if the 85 % at 2 W is right, an assumption), and the surplus laser power affords the lower efficiency. Because they will not test before shipping, write the acceptance test into the order: at least 80 % at 2 W for both polarizations at 795 nm, otherwise return or replacement. The order goes through our local vendor.
+**Second reply (23 Oct 2026): testing before delivery, efficiency at 1 W, and the order route.**
+- **Testing:** their standard test is only at the best point (2 W). On our request they will also test each unit at **1 W and at 2 W** before delivery.
+- **Efficiency:** above **80 % at 2 W** is confirmed. At 1 W they *estimate* above 70 % from experience but do not guarantee it, because they have not tested it that way. That is better than my own estimate (about 54 % per pass), but it is still their estimate.
+- **Polarization:** they will not test in set polarizations, since the AOM is "random polarization". We should expect a small rotation of the output polarization and trim it with the wave plates (the double-pass arrangement has a quarter-wave plate in front of the retro mirror, so a small angle error only leaks a little light back to the polarizing cube).
+- **Returns:** if the unit does not meet the data sheet, they pay the return cost.
+- **Order route:** they keep the offered price to our local vendor but cannot add a commission for the vendor. The purchase order, the payment and the shipping go through a sister company (Zhejiang Shengqi Technology), so our local vendor should ask for a pro-forma invoice and check that the company name and the bank account name are the same before paying.
+- **Isolators:** they have a 795 nm free-space isolator and asked for the technical requirements in a separate email.
+
+**What this means for us.** The risk we worried about most, the polarization, is answered favourably. The full 85 % needs 2 W (+33 dBm), which is the compression point of our amplifier, so we do not chase it: the rule stays at synthesizer +1 dBm, never above +2 dBm (about 1 W at the AOM, about 54 % per pass if the 85 % at 2 W is right, an assumption), and the surplus laser power affords the lower efficiency. They now test at 1 W and 2 W before delivery; still write the acceptance test into the order and repeat it on arrival: at least 80 % at 2 W at 795 nm, otherwise return at their cost. The order goes through our local vendor.
 
 Source: the vendor data sheet (FAOM-780-80-1-L-T-A-K, one page); the numbers marked as ours are arithmetic from it.
 
