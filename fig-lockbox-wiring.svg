@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1320 600" width="1320" height="600">
+<defs><marker id="m1f6fd1" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#1f6fd1"/></marker><marker id="m2c9a4f" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#2c9a4f"/></marker><marker id="me0791a" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#e0791a"/></marker><marker id="m444a50" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#444a50"/></marker><marker id="m7b4bc2" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#7b4bc2"/></marker><marker id="mc23a2e" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#c23a2e"/></marker><marker id="m2b2b2b" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#2b2b2b"/></marker><marker id="me9edf0" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#e9edf0"/></marker><marker id="md23a2e" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#d23a2e"/></marker></defs>
+<rect width="1320" height="600" fill="#ffffff"/>
+<text x="24" y="34" font-family="Arial, Helvetica, sans-serif" font-size="21" text-anchor="start" fill="#1f2d3d" font-weight="bold">The laser lock: who is connected to whom</text>
+<text x="24" y="58" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="start" fill="#7b8794">Numbers ① to ⑥ are the same as in the 3D wiring page. Coloured arrows show the signal direction. Orange dots are the connectors to use.</text>
+<rect x="20" y="140" width="170" height="120" rx="8" fill="#eaf2fb" stroke="#1f5f9f" stroke-width="2"/>
+<text x="105.0" y="164" font-family="Arial, Helvetica, sans-serif" font-size="15" text-anchor="middle" fill="#1f2d3d" font-weight="bold">Rb reference cell</text>
+<text x="105.0" y="186" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" fill="#333">(S01) with the SAS</text>
+<text x="105.0" y="204" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" fill="#333">probe beam, 795 nm</text>
+<rect x="250" y="140" width="190" height="120" rx="8" fill="#eaf2fb" stroke="#1f5f9f" stroke-width="2"/>
+<text x="345.0" y="164" font-family="Arial, Helvetica, sans-serif" font-size="15" text-anchor="middle" fill="#1f2d3d" font-weight="bold">PDA36A2 photodiode</text>
+<text x="345.0" y="186" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" fill="#333">(E03), Si detector</text>
+<text x="345.0" y="204" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" fill="#333">3.6 x 3.6 mm</text>
+<rect x="250" y="330" width="190" height="76" rx="8" fill="#f4f4f4" stroke="#555" stroke-width="2"/>
+<text x="345.0" y="354" font-family="Arial, Helvetica, sans-serif" font-size="15" text-anchor="middle" fill="#1f2d3d" font-weight="bold">LDS12B supply</text>
+<text x="345.0" y="376" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" fill="#333">+-12 V linear (E04)</text>
+<rect x="520" y="105" width="230" height="190" rx="8" fill="#eaf2fb" stroke="#1f5f9f" stroke-width="2"/>
+<text x="635.0" y="129" font-family="Arial, Helvetica, sans-serif" font-size="15" text-anchor="middle" fill="#1f2d3d" font-weight="bold">Red Pitaya STEMlab 125-14</text>
+<text x="635.0" y="151" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" fill="#333">running Linien (L04)</text>
+<text x="635.0" y="169" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" fill="#333">lock-in + PID inside</text>
+<text x="635.0" y="187" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" fill="#333">microSD card inside</text>
+<rect x="470" y="380" width="160" height="70" rx="8" fill="#f4f4f4" stroke="#555" stroke-width="2"/>
+<text x="550.0" y="404" font-family="Arial, Helvetica, sans-serif" font-size="15" text-anchor="middle" fill="#1f2d3d" font-weight="bold">5 V / 2 A supply</text>
+<text x="550.0" y="426" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" fill="#333">(L07), micro-USB PWR</text>
+<rect x="665" y="380" width="190" height="70" rx="8" fill="#f4f4f4" stroke="#555" stroke-width="2"/>
+<text x="760.0" y="404" font-family="Arial, Helvetica, sans-serif" font-size="15" text-anchor="middle" fill="#1f2d3d" font-weight="bold">Laptop with Linien</text>
+<text x="760.0" y="426" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" fill="#333">Ethernet to the board</text>
+<rect x="860" y="140" width="160" height="120" rx="8" fill="#eef7ee" stroke="#2c9a4f" stroke-width="2"/>
+<text x="940.0" y="164" font-family="Arial, Helvetica, sans-serif" font-size="15" text-anchor="middle" fill="#1f2d3d" font-weight="bold">Divider box D6</text>
+<text x="940.0" y="186" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" fill="#333">(L08) 120 k + 1 k</text>
+<text x="940.0" y="204" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" fill="#333">ratio 1 / 133</text>
+<rect x="1070" y="105" width="180" height="190" rx="8" fill="#eaf2fb" stroke="#1f5f9f" stroke-width="2"/>
+<text x="1160.0" y="129" font-family="Arial, Helvetica, sans-serif" font-size="15" text-anchor="middle" fill="#1f2d3d" font-weight="bold">Thorlabs ITC502</text>
+<text x="1160.0" y="151" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" fill="#333">laser controller (L03)</text>
+<text x="1160.0" y="169" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" fill="#333">front: MOD IN</text>
+<text x="1160.0" y="187" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" fill="#333">rear: LD OUT, TEC OUT</text>
+<rect x="1070" y="400" width="180" height="110" rx="8" fill="#fdf1e6" stroke="#c0701a" stroke-width="2"/>
+<text x="1160.0" y="424" font-family="Arial, Helvetica, sans-serif" font-size="15" text-anchor="middle" fill="#1f2d3d" font-weight="bold">Laser butterfly mount</text>
+<text x="1160.0" y="446" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" fill="#333">(source plate)</text>
+<text x="1160.0" y="464" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" fill="#333">Yanban laser, 795 nm</text>
+<circle cx="520" cy="200" r="6" fill="#ffb020" stroke="#7a4a00" stroke-width="1.5"/>
+<text x="532" y="204" font-family="Arial, Helvetica, sans-serif" font-size="12" text-anchor="start" fill="#7a4a00" font-weight="bold">IN1</text>
+<circle cx="750" cy="200" r="6" fill="#ffb020" stroke="#7a4a00" stroke-width="1.5"/>
+<text x="738" y="204" font-family="Arial, Helvetica, sans-serif" font-size="12" text-anchor="end" fill="#7a4a00" font-weight="bold">OUT1</text>
+<circle cx="1070" cy="200" r="6" fill="#ffb020" stroke="#7a4a00" stroke-width="1.5"/>
+<text x="1082" y="204" font-family="Arial, Helvetica, sans-serif" font-size="12" text-anchor="start" fill="#7a4a00" font-weight="bold">MOD IN</text>
+<circle cx="545" cy="295" r="6" fill="#ffb020" stroke="#7a4a00" stroke-width="1.5"/>
+<text x="545" y="282" font-family="Arial, Helvetica, sans-serif" font-size="12" text-anchor="middle" fill="#7a4a00" font-weight="bold">PWR</text>
+<circle cx="700" cy="295" r="6" fill="#ffb020" stroke="#7a4a00" stroke-width="1.5"/>
+<text x="700" y="282" font-family="Arial, Helvetica, sans-serif" font-size="12" text-anchor="middle" fill="#7a4a00" font-weight="bold">RJ45</text>
+<circle cx="1130" cy="295" r="6" fill="#ffb020" stroke="#7a4a00" stroke-width="1.5"/>
+<text x="1130" y="282" font-family="Arial, Helvetica, sans-serif" font-size="12" text-anchor="middle" fill="#7a4a00" font-weight="bold">LD OUT</text>
+<circle cx="1190" cy="295" r="6" fill="#ffb020" stroke="#7a4a00" stroke-width="1.5"/>
+<text x="1196" y="282" font-family="Arial, Helvetica, sans-serif" font-size="12" text-anchor="middle" fill="#7a4a00" font-weight="bold">TEC OUT</text>
+<path d="M190,200 L250,200" fill="none" stroke="#c23a2e" stroke-width="5"/>
+<polygon points="250.0,200.0 238.3,205.7 238.3,194.3" fill="#c23a2e"/>
+<text x="220" y="186" font-family="Arial, Helvetica, sans-serif" font-size="12" text-anchor="middle" fill="#c23a2e" font-weight="bold">795 nm</text>
+<circle cx="220" cy="225" r="14" fill="#14181c" stroke="#fff" stroke-width="2"/>
+<text x="220" y="230" font-family="Arial, Helvetica, sans-serif" font-size="15" text-anchor="middle" fill="#fff" font-weight="bold">1</text>
+<path d="M345,330 L345,262" fill="none" stroke="#2b2b2b" stroke-width="4"/>
+<polygon points="345.0,262.0 350.7,273.7 339.3,273.7" fill="#2b2b2b"/>
+<circle cx="366" cy="300" r="14" fill="#14181c" stroke="#fff" stroke-width="2"/>
+<text x="366" y="305" font-family="Arial, Helvetica, sans-serif" font-size="15" text-anchor="middle" fill="#fff" font-weight="bold">2</text>
+<text x="385" y="304" font-family="Arial, Helvetica, sans-serif" font-size="12" text-anchor="start" fill="#444">+-12 V</text>
+<path d="M440,200 L514,200" fill="none" stroke="#1f6fd1" stroke-width="4"/>
+<polygon points="514.0,200.0 502.3,205.7 502.3,194.3" fill="#1f6fd1"/>
+<circle cx="477" cy="172" r="14" fill="#14181c" stroke="#fff" stroke-width="2"/>
+<text x="477" y="177" font-family="Arial, Helvetica, sans-serif" font-size="15" text-anchor="middle" fill="#fff" font-weight="bold">3</text>
+<text x="477" y="232" font-family="Arial, Helvetica, sans-serif" font-size="11" text-anchor="middle" fill="#1f6fd1" font-weight="bold">BNC + adapter</text>
+<path d="M545,380 L545,302" fill="none" stroke="#c23a2e" stroke-width="4"/>
+<polygon points="545.0,302.0 550.7,313.7 539.3,313.7" fill="#c23a2e"/>
+<circle cx="520" cy="345" r="14" fill="#14181c" stroke="#fff" stroke-width="2"/>
+<text x="520" y="350" font-family="Arial, Helvetica, sans-serif" font-size="15" text-anchor="middle" fill="#fff" font-weight="bold">4</text>
+<text x="500" y="368" font-family="Arial, Helvetica, sans-serif" font-size="11" text-anchor="end" fill="#c23a2e" font-weight="bold">5 V</text>
+<path d="M740,380 L705,302" fill="none" stroke="#7b8794" stroke-width="4"/>
+<polygon points="705.0,302.0 715.0,310.4 704.6,315.0" fill="#7b8794"/>
+<circle cx="742" cy="342" r="14" fill="#14181c" stroke="#fff" stroke-width="2"/>
+<text x="742" y="347" font-family="Arial, Helvetica, sans-serif" font-size="15" text-anchor="middle" fill="#fff" font-weight="bold">4</text>
+<text x="762" y="330" font-family="Arial, Helvetica, sans-serif" font-size="11" text-anchor="start" fill="#555" font-weight="bold">Ethernet</text>
+<path d="M756,200 L860,200" fill="none" stroke="#2c9a4f" stroke-width="4"/>
+<polygon points="860.0,200.0 848.3,205.7 848.3,194.3" fill="#2c9a4f"/>
+<circle cx="808" cy="172" r="14" fill="#14181c" stroke="#fff" stroke-width="2"/>
+<text x="808" y="177" font-family="Arial, Helvetica, sans-serif" font-size="15" text-anchor="middle" fill="#fff" font-weight="bold">5</text>
+<text x="808" y="232" font-family="Arial, Helvetica, sans-serif" font-size="11" text-anchor="middle" fill="#2c9a4f" font-weight="bold">adapter + BNC</text>
+<path d="M1020,200 L1064,200" fill="none" stroke="#e0791a" stroke-width="4"/>
+<polygon points="1064.0,200.0 1052.3,205.7 1052.3,194.3" fill="#e0791a"/>
+<circle cx="1042" cy="172" r="14" fill="#14181c" stroke="#fff" stroke-width="2"/>
+<text x="1042" y="177" font-family="Arial, Helvetica, sans-serif" font-size="15" text-anchor="middle" fill="#fff" font-weight="bold">5</text>
+<text x="1042" y="232" font-family="Arial, Helvetica, sans-serif" font-size="11" text-anchor="middle" fill="#e0791a" font-weight="bold">BNC</text>
+<path d="M1130,300 L1130,400" fill="none" stroke="#444a50" stroke-width="4"/>
+<polygon points="1130.0,400.0 1124.3,388.3 1135.7,388.3" fill="#444a50"/>
+<circle cx="1115" cy="350" r="14" fill="#14181c" stroke="#fff" stroke-width="2"/>
+<text x="1115" y="355" font-family="Arial, Helvetica, sans-serif" font-size="15" text-anchor="middle" fill="#fff" font-weight="bold">6</text>
+<path d="M1190,300 L1190,400" fill="none" stroke="#7b4bc2" stroke-width="4"/>
+<polygon points="1190.0,400.0 1184.3,388.3 1195.7,388.3" fill="#7b4bc2"/>
+<circle cx="1205" cy="350" r="14" fill="#14181c" stroke="#fff" stroke-width="2"/>
+<text x="1205" y="355" font-family="Arial, Helvetica, sans-serif" font-size="15" text-anchor="middle" fill="#fff" font-weight="bold">6</text>
+<text x="1103" y="372" font-family="Arial, Helvetica, sans-serif" font-size="11" text-anchor="end" fill="#444a50" font-weight="bold">laser current</text>
+<text x="1222" y="372" font-family="Arial, Helvetica, sans-serif" font-size="11" text-anchor="start" fill="#7b4bc2" font-weight="bold">Peltier + NTC</text>
+<path d="M1070,455 L105,455 L105,266" fill="none" stroke="#d23a2e" stroke-width="3" stroke-dasharray="9 6"/>
+<polygon points="105.0,266.0 110.7,277.7 99.3,277.7" fill="#d23a2e"/>
+<text x="570" y="478" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" fill="#d23a2e" font-weight="bold">the laser current sets the laser frequency, which changes the SAS signal: the loop is closed</text>
+<text x="500" y="560" font-family="Arial, Helvetica, sans-serif" font-size="12" text-anchor="middle" fill="#7b8794">Levels: PDA output 0 to 10 V (keep it below +1 V at IN1) · OUT1 +-1 V into 50 ohm (+-2 V open) · divider 1/133: 1 V gives about 285 MHz at the laser · MOD IN 20 mA per volt</text>
+</svg>
