@@ -23,7 +23,7 @@
     hwp: 'Waveplates in black rotation mounts with a white angle scale (RSP1 type).',
     qwp: 'Waveplates in black rotation mounts with a white angle scale (RSP1 type).',
     lens: 'Lenses in black lens mounts and tubes, some with a blue anti-reflection tint.',
-    aom: 'Red-housed modules with a gold SMA connector on top and a white label, two on board 2. They are the two AOMs; the maker is not readable (possibly Thorlabs).',
+    aom: 'Red-housed modules with a gold SMA connector on top and a white label, two on board 2. They are the two AOMs: AA Opto-Electronic MT80-B30A1,5-IR (80 MHz, 1.5 mm aperture), run in double pass at about 30 dBm with about 70 % efficiency per pass (confirmed by the builders, Oct 2026).',
     cell: 'White 3D-printed enclosure with red heater and coil leads on board 2: the EIT vapour cell module. The YouTube videos of this bench show the cell label TRT-Rb/Ne-10T-20x75 (read by the owner of this guide, not visible in the photograph); the maker is Triad Technology Inc. Reading: rubidium (natural, by the Triad naming) with neon buffer gas at 10 Torr, 20 x 75 mm (assumed diameter x length), probably a custom size.',
     refcell: 'White 3D-printed enclosure with banana jacks and a small board on board 1: the SAS reference cell module.',
     pd: 'A black box with a round aperture at the right end of board 2 (a detector or a camera) and another beside board 1 with an orange cable.',
@@ -111,7 +111,7 @@
     inst('psu', 290, 'TED', 'Thorlabs TEC temperature controller (TED200C-series look)', 'Thorlabs benchtop unit beside it, display 9.021: probably the thermistor reading in kΩ. The exact model is not readable.', { cableTo: [{ to: laser.id, color: 0xd9a441, tray: 'top' }], nocable: true });
     inst('lockbox', 390, 'LOCK?', 'Laser-lock electronics (assumed)', 'Not visible in the photo. Added so the simulator can close the lock loop: a lock-in or scope-based lock fed from the SAS photodiode.');
     inst('fgen', 500, 'FG', 'Rigol function generator', 'Small Rigol generator with a colour screen and three BNC outputs (DG800 look): pulse, burst or dither source.');
-    inst('rfgen', 640, 'RFG', 'Rigol dual-channel arbitrary generator (DG4000 look)', 'Larger Rigol generator showing two channels on one screen, two yellow and two blue BNC outputs: the two-channel source for the AOM drive. RF amplifiers are not visible and are assumed to be hidden.');
+    inst('rfgen', 640, 'RFG', 'Rigol dual-channel arbitrary generator (DG4102)', 'Larger Rigol generator showing two channels on one screen, two yellow and two blue BNC outputs: the two-channel source for the AOM drive (a Rigol DG4102 at 80 MHz, its FM option scans the control-probe difference; confirmed by the builders, Oct 2026). RF amplifiers are not visible and are assumed to be hidden.');
     inst('tctrl', 770, 'HEAT', 'TENMA DC supply labelled HEATER', 'TENMA linear supply labelled HEATER; the display reads 02.40 and 0.500 (volts and amps, my reading). Plain DC heating, no temperature loop visible.');
     inst('csrc', 880, 'COIL', 'TENMA DC supply labelled COILS', 'TENMA linear supply labelled COILS; the display reads 01.00 and 0.080 (about 80 mA through the solenoid, my reading).');
     inst('scope', 1020, 'DSO2', 'Rigol DS1102 oscilloscope', 'Second Rigol DS1102 oscilloscope at the right end of the boards (model from the videos).');

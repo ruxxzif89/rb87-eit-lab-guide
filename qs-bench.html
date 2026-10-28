@@ -563,10 +563,10 @@ body.bench-page .sim-main{height:calc(var(--app-h,100vh) - var(--nav-h,44px) - v
     <thead><tr><th>Part of the label</th><th>Reading</th><th>Status</th></tr></thead>
     <tbody>
       <tr><td>TRT</td><td>a Triad series or order code for a custom cell; not defined in the public catalogue or in the Sacher brochure of Triad cells</td><td class="lo">unknown</td></tr>
-      <tr><td>Rb</td><td>rubidium. In Triad’s naming plain “RB” is <b>natural</b> rubidium (72 % <sup>85</sup>Rb, 28 % <sup>87</sup>Rb); isotope cells are written RB85 or RB87</td><td class="md">likely natural</td></tr>
+      <tr><td>Rb</td><td>rubidium. In Triad’s naming plain “RB” is <b>natural</b> rubidium (72 % <sup>85</sup>Rb, 28 % <sup>87</sup>Rb); isotope cells are written RB85 or RB87</td><td class="hi">confirmed natural (builders, Oct 2026)</td></tr>
       <tr><td>Ne</td><td>neon buffer gas</td><td class="hi">clear</td></tr>
-      <tr><td>10T</td><td>10 Torr of neon (the same fill as the cell of the published Zeeman-EIT set-up that our guide follows)</td><td class="md">likely</td></tr>
-      <tr><td>20x75</td><td>20 mm diameter × 75 mm length (assumed order). Ø20 is not a Triad standard size (their standard cells are Ø25 or Ø19), so probably a custom size</td><td class="md">likely</td></tr>
+      <tr><td>10T</td><td>10 Torr of neon (the same fill as the cell of the published Zeeman-EIT set-up that our guide follows)</td><td class="hi">confirmed (builders, Oct 2026)</td></tr>
+      <tr><td>20x75</td><td>20 mm diameter × 75 mm length (assumed order). Ø20 is not a Triad standard size (their standard cells are Ø25 or Ø19), so probably a custom size. The builders confirm the size and say it is Pyrex with flat windows, the smallest cell Triad offers</td><td class="hi">confirmed (builders, Oct 2026)</td></tr>
     </tbody>
   </table></div>
   <p><b>What it would mean (calculated for this guide, see the Q&amp;A on this label):</b></p>
@@ -577,6 +577,20 @@ body.bench-page .sim-main{height:calc(var(--app-h,100vh) - var(--nav-h,44px) - v
     <li><b>A 75 mm cell needs a long, uniform magnetic field.</b> The coil of our guide (42 turns, 140 mm) would give a field spread of 2.4 % over 75 mm instead of 0.2 % over 25 mm. How well the Spain-style coil does is not known; a broader line is likely.</li>
   </ul>
 
+  <h3>What the builders confirmed (October 2026)</h3>
+  <p>One of the people who built this bench answered our questions. Their answers replace the guesses above where they overlap.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>Item</th><th>Answer</th></tr></thead>
+    <tbody>
+      <tr><td>AOMs</td><td>AA Opto-Electronic MT80-B30A1,5-IR, 80 MHz, 1.5 mm aperture, run in <b>double pass</b>, as in the published Zeeman-EIT work (New J. Phys. 25, 035001)</td></tr>
+      <tr><td>RF drive</td><td>One <b>Rigol DG4102</b> two-channel generator at 80 MHz (both channels from one clock). Its <b>FM option</b> scans the small control-probe difference. Power about <b>30 dBm</b> (the level the AOM is rated for)</td></tr>
+      <tr><td>AOM efficiency</td><td>About <b>70 % per pass</b>, so about 50 % through a double pass</td></tr>
+      <tr><td>EIT cell</td><td>Triad TRT-Rb/Ne-10T-20x75: <b>Pyrex</b>, Ø20 × 75 mm (the smallest cell Triad offers), <b>natural Rb</b>, <b>neon 10 Torr</b>, flat windows. They stress that the buffer gas is needed for the experiment to work</td></tr>
+      <tr><td>Cell unit</td><td>The Teflon box was <b>built in-house</b>; the heater is a Thorlabs film heater; the solenoid was <b>wound in-house</b>. They say its exact values do not strongly affect the result</td></tr>
+      <tr><td>Not given</td><td>Operating temperature, magnetic shield, laser powers</td></tr>
+    </tbody>
+  </table></div>
+
   <h3>Instruments identified</h3>
   <div class="tbl"><table>
     <thead><tr><th>Tag / label</th><th>Item</th><th>What is readable</th><th>Confidence</th></tr></thead>
@@ -584,7 +598,7 @@ body.bench-page .sim-main{height:calc(var(--app-h,100vh) - var(--nav-h,44px) - v
       <tr><td class="c">LDC</td><td>Thorlabs benchtop laser diode current controller (LDC200C-series look)</td><td>Thorlabs logo; display 146.88, taken as laser current in mA (close to the 160 mA of a 795 nm DFB at 15 mW)</td><td class="md">brand high, model low</td></tr>
       <tr><td class="c">TED</td><td>Thorlabs benchtop TEC controller (TED200C-series look)</td><td>Thorlabs logo; display 9.021, probably the thermistor reading in kΩ</td><td class="md">brand high, model low</td></tr>
       <tr><td class="c">FG</td><td>Rigol function / arbitrary generator, small, colour screen, 3 BNC outputs (DG800 look)</td><td>Rigol logo</td><td class="md">brand high, model low</td></tr>
-      <tr><td class="c">(none)</td><td>Rigol two-channel arbitrary generator, larger, split screen (DG4000 look)</td><td>Rigol logo; two yellow and two blue BNC outputs. Likely the two-channel source for the AOMs</td><td class="md">brand high, model low</td></tr>
+      <tr><td class="c">(none)</td><td>Rigol two-channel arbitrary generator <b>DG4102</b>, larger, split screen</td><td>Rigol logo; two yellow and two blue BNC outputs. The two-channel source for the AOMs at 80 MHz; the FM option scans the control-probe difference (model confirmed by the builders, Oct 2026)</td><td class="hi">high (confirmed)</td></tr>
       <tr><td class="c">HEATER</td><td>TENMA linear DC power supply</td><td>Label HEATER; display about 02.40 and 0.500 (V and A, my reading)</td><td class="hi">high</td></tr>
       <tr><td class="c">COILS</td><td>TENMA linear DC power supply</td><td>Label COILS; display about 01.00 and 0.080 (about 80 mA through the solenoid, my reading)</td><td class="hi">high</td></tr>
       <tr><td class="c">DSO1, DSO2</td><td>Rigol <b>DS1102</b> digital oscilloscopes (two): 100 MHz, 2 analogue channels, up to 1 GSa/s (the suffix E or Z-E is not stated)</td><td>Rigol logo, colour screens; the model DS1102 is taken from the YouTube videos</td><td class="hi">high (model from the videos)</td></tr>
@@ -597,7 +611,7 @@ body.bench-page .sim-main{height:calc(var(--app-h,100vh) - var(--nav-h,44px) - v
     <thead><tr><th>Item</th><th>Likely class</th><th>Seen / est. qty</th><th>Board</th><th>Confidence</th></tr></thead>
     <tbody>
       <tr><td>Breadboards</td><td>Thorlabs MB4545/M, 450 × 450 mm, M6 on 25 mm pitch, black anodised</td><td>2 (label “MB4545/M” readable)</td><td>both</td><td class="hi">high</td></tr>
-      <tr><td>Acousto-optic modulators</td><td>Red-housed modules, gold SMA input, white label (maker unreadable; possibly Thorlabs)</td><td>2</td><td>2</td><td class="md">medium</td></tr>
+      <tr><td>Acousto-optic modulators</td><td>Red-housed modules, gold SMA input, white label: <b>AA Opto-Electronic MT80-B30A1,5-IR</b> (80 MHz, 1.5 mm aperture), double pass</td><td>2</td><td>2</td><td class="hi">high (model confirmed by the builders, Oct 2026)</td></tr>
       <tr><td>Rubidium vapour cell modules</td><td>White 3D-printed housings with heater and coil leads (a shield may be inside). The EIT cell is labelled <b>TRT-Rb/Ne-10T-20x75</b> in the YouTube videos (maker Triad Technology Inc.): Rb (natural, by Triad’s naming) with neon buffer gas at 10 Torr, 20 × 75 mm (see “The EIT cell label” below)</td><td>2: reference cell (left), EIT cell (right)</td><td>1, 2</td><td class="hi">high (label read from the videos; maker given by the owner)</td></tr>
       <tr><td>Kinematic mirror mounts</td><td>Black two-axis mounts with asset labels (Thorlabs KM100 / Polaris class)</td><td>about 20–25</td><td>both</td><td class="md">count rough</td></tr>
       <tr><td>Polarizing beamsplitter cubes</td><td>Clear cubes on kinematic cube mounts with white tags</td><td>about 6–8</td><td>both</td><td class="md">count rough</td></tr>
@@ -692,7 +706,7 @@ body.bench-page .sim-main{height:calc(var(--app-h,100vh) - var(--nav-h,44px) - v
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
 <script src="eitphys.js?v=8"></script>
-<script src="qs-layout.js?v=4"></script>
+<script src="qs-layout.js?v=5"></script>
 <script src="inventory-data.js?v=18"></script>
 <script src="lab-cover.js?v=1"></script>
 <script src="bench-sim.js?v=21"></script>
