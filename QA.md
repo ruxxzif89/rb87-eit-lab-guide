@@ -445,26 +445,6 @@ So: reasonable to adopt after a bench test with a 50 Ω load and an oscilloscope
 - **The hyperfine scheme with an EOM:** the AOM only gates; no problem.
 - **Higher RF drive for more efficiency:** not available, the sheet gives 1 W (1 mm version; the 2 mm version we chose is rated 2 W, see the next section).
 
-**Update (29 Oct 2026): compared with the AOM of the Spain-style bench (AA MT80-B30A1.5-IR).** The builder's AOM is a French-made TeO₂ longitudinal modulator, data sheet read in full. Our FAOM-780-80-2 against it:
-
-| | AA MT80-B30A1.5-IR (Spain-style bench) | FAOM-780-80-2-L-T-A-K (ours) |
-|---|---|---|
-| Material, mode | TeO₂, longitudinal, 4200 m/s | TeO₂, longitudinal |
-| Frequency | 80 ± 15 MHz (variable version) | 80 MHz |
-| Wavelength | 700–1100 nm, so 795 nm is inside | model code 780; **795 nm to be confirmed** |
-| Aperture | 1.5 × 2 mm² | 2 mm (3 × 2 mm) |
-| Efficiency | typical above 65 % (the fixed-frequency MT80-A1.5-IR: above 85 %) | 85 % at 2 W (vendor, 0.8–0.9 mm beam, not yet measured by us) |
-| RF power | at most 2.2 W | 2 W rated, 4 W stated safe |
-| Separation angle | above 13.3 mrad (15.1 mrad at 795 nm and 80 MHz) | 15 mrad |
-| Rise time | 160 ns per mm of beam | 350 ns or less |
-| Transmission, extinction | at least 95 %, above 33 dB | AR under 0.3 % per surface; extinction depends on the driver |
-| Polarization | linear | "random" (vendor) |
-| Housing | 59.5 × 22.4 × 17.3 mm | about 41.8 × 25 × 13.5 mm |
-
-**Will ours work, compared with theirs? On paper yes.** It is the same physics (TeO₂ longitudinal, 80 MHz, 15 mrad), so the double-pass cat's-eye layout, the angle geometry and the rise time per millimetre are the same. The 2 mm aperture suits our Ø0.9 mm to Ø2 mm beam at least as well as their 1.5 mm, and the stated efficiency is that of the *fixed-frequency* AA version, above that of their variable-frequency one. Their builder measured about 70 % per pass at about 30 dBm (1 W) and plans on about 0.5 through the double pass; ours should do no worse if the vendor figures hold.
-- **What is still only a claim:** the efficiency (a 2 W figure; at 1 W a sin² law from 85 % at 2 W gives about 54 %, while the AA unit reaches about 70 % at 1 W, so the 2 W end of the range may be needed: the amplifier R02 delivers up to about 2 W); the 795 nm performance of a 780 nm model and its AR coating; the polarization behaviour (AA states linear input; "random" must be shown by measuring both polarizations); the optical-axis height and the +1 side (drawing awaited).
-- **Acceptance test on arrival:** with a 1 mm beam and the synthesizer swept, measure the first-order efficiency against RF power (1 W, 1.5 W, 2 W) for both linear polarizations, then the double-pass throughput. Fall-back if it is far below the claim: ask for a replacement or look at the AA fixed-frequency MT80-A1.5-IR (above 85 %, 2.2 W) as the benchmark part.
-
 **Vendor reply of 21 Oct 2026 (to our eleven questions).**
 - **Answered:** the price is per unit and includes express shipping to Malaysia (the same for both models they sent data sheets for, the 1 mm and the 2 mm aperture version: I first misread this as "the same for both units"); delivery 4 weeks after payment; warranty 12 months from shipping; TeO₂ in longitudinal mode; it works in CW; the AR coating covers the data-sheet range; the on/off extinction can reach 50 dB with a suitable RF driver (our RF switch adds its own isolation); a heat sink is advised if it runs long at maximum RF power; a test report comes with the delivery.
 - **Read between the lines:** "the maximum diffraction efficiency is at the highest RF power" means the 85 % belongs to the data-sheet RF power of 1 W, so treat **1 W (+30 dBm) as the limit**, not the 2 W we had assumed for the earlier supplier.
